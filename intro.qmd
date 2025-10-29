@@ -1,0 +1,5 @@
+# Introducción
+
+Éste es un libro creado con mardown y con código ejecutable
+
+Ésta es una referencia @wickham_r_2023

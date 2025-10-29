@@ -1,0 +1,5 @@
+# Prefacio {.unnumbered}
+
+Este es un libro generado en Quarto.
+
+Para aprender más acerca de cómo generar libros en Quarto consultar <https://quarto.org/docs/books>.

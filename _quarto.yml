@@ -1,0 +1,37 @@
+project:
+  type: book
+
+book:
+  title: R para análisis de datos
+  subtitle: Aplicación en la comunidad CLIO (Coopera, Lidera, Innova y Orienta)
+  author: 
+    - name: 
+        given: Luis Francisco 
+        family: Gomez Lopez
+      affiliations:
+        id: umng
+        name: Universidad Militar Nueva Granada
+      orcid: 0000-0002-2877-9015
+  date: 2025-10-29
+  date-format: iso
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references/r-clio.bib
+csl: references/apa.csl
+lang: es
+editor: source
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+  pdf:
+    documentclass: scrbook
+
+
+
