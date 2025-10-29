@@ -2,6 +2,7 @@ project:
   type: book
 
 book:
+  # book
   title: R para análisis de datos
   subtitle: Aplicación en la comunidad CLIO (Coopera, Lidera, Innova y Orienta)
   author: 
@@ -14,6 +15,11 @@ book:
       orcid: 0000-0002-2877-9015
   date: 2025-10-29
   date-format: iso
+  downloads: [pdf]
+  site-url: https://luifrancgom.github.io/r-clio/
+  repo-url: https://github.com/luifrancgom/r-clio
+  issue-url: https://github.com/luifrancgom/r-clio/issues
+  repo-actions: [edit, source, issue]
   chapters:
     - index.qmd
     - intro.qmd
@@ -31,7 +37,18 @@ format:
       - cosmo
       - brand
   pdf:
+    # colors
+    linkcolor: blue
+    filecolor: blue
+    citecolor: blue
+    urlcolor: blue
+    toccolor: blue
+    colorlinks: true
+    # layout
     documentclass: scrbook
+    # references
+    link-citations: true
+    link-bibliography: true
 
 
 
