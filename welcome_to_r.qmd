@@ -1,6 +1,12 @@
-# Bienvenidos a R
+# Bienvenidos a R [^chap-1_footnote-1]
+
+
+[^chap-1_footnote-1]: Éste capítulo se encuentra basado en [@ismay_statistical_2025, chap. 1]
 
 ## ¿Qué es R y Positron?
+
+En términos simples R es un entorno gratuito para realizar análisis estadísticos y crear gráficos. A lo largo del libro utilizaremos R a través de Positron. R se puede pensar como el motor de un automóvil y Positron el tablero de control del automovil.  
+
 
 ## ¿Cómo instalar R y Positron?
 
