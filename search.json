@@ -32,34 +32,34 @@
   {
     "objectID": "welcome_to_r.html",
     "href": "welcome_to_r.html",
-    "title": "2  Bienvenidos a R",
+    "title": "2  Bienvenidos a R [^chap-1_footnote-1]",
     "section": "",
-    "text": "2.1 ¿Qué es R y Positron?",
+    "text": "2.1 ¿Qué es R y Positron?\nEn términos simples R es un entorno gratuito para realizar análisis estadísticos y crear gráficos. A lo largo del libro utilizaremos R a través de Positron. R se puede pensar como el motor de un automóvil y Positron el tablero de control del automovil.",
     "crumbs": [
       "Primeros pasos con R",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Bienvenidos a R</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Bienvenidos a R [^chap-1_footnote-1]</span>"
     ]
   },
   {
     "objectID": "welcome_to_r.html#cómo-instalar-r-y-positron",
     "href": "welcome_to_r.html#cómo-instalar-r-y-positron",
-    "title": "2  Bienvenidos a R",
+    "title": "2  Bienvenidos a R [^chap-1_footnote-1]",
     "section": "2.2 ¿Cómo instalar R y Positron?",
     "text": "2.2 ¿Cómo instalar R y Positron?\n\n2.2.1 rig\n\n\n2.2.2 Posit Workbench",
     "crumbs": [
       "Primeros pasos con R",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Bienvenidos a R</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Bienvenidos a R [^chap-1_footnote-1]</span>"
     ]
   },
   {
     "objectID": "welcome_to_r.html#uso-de-r-a-través-de-positron",
     "href": "welcome_to_r.html#uso-de-r-a-través-de-positron",
-    "title": "2  Bienvenidos a R",
+    "title": "2  Bienvenidos a R [^chap-1_footnote-1]",
     "section": "2.3 Uso de R a través de Positron",
     "text": "2.3 Uso de R a través de Positron",
     "crumbs": [
       "Primeros pasos con R",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Bienvenidos a R</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Bienvenidos a R [^chap-1_footnote-1]</span>"
     ]
   },
   {
