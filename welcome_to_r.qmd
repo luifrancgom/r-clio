@@ -1,0 +1,12 @@
+# Bienvenidos a R
+
+## ¿Qué es R y Positron?
+
+## ¿Cómo instalar R y Positron?
+
+### rig
+
+### Posit Workbench
+
+## Uso de R a través de Positron
+

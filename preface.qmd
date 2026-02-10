@@ -1,4 +1,4 @@
-# Introducción
+# Prefacio
 
 Éste es un libro creado con mardown y con código ejecutable
 
