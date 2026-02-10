@@ -10,23 +10,138 @@
     ]
   },
   {
-    "objectID": "intro.html",
-    "href": "intro.html",
-    "title": "1  Introducción",
+    "objectID": "preface.html",
+    "href": "preface.html",
+    "title": "1  Prefacio",
     "section": "",
     "text": "Éste es un libro creado con mardown y con código ejecutable\nÉsta es una referencia Wickham (2023)\n\n\n\n\nWickham, H. (2023). R for Data Science (2.ª ed.). O’Reilly Media, Incorporated. https://r4ds.hadley.nz/",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introducción</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Prefacio</span>"
     ]
   },
   {
-    "objectID": "summary.html",
-    "href": "summary.html",
-    "title": "2  Resumen",
+    "objectID": "first_steps_r.html",
+    "href": "first_steps_r.html",
+    "title": "Primeros pasos con R",
     "section": "",
-    "text": "En resumen, este libro no tiene ningún contenido por ahora",
+    "text": "Pendiente",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Resumen</span>"
+      "Primeros pasos con R"
+    ]
+  },
+  {
+    "objectID": "welcome_to_r.html",
+    "href": "welcome_to_r.html",
+    "title": "2  Bienvenidos a R",
+    "section": "",
+    "text": "2.1 ¿Qué es R y Positron?",
+    "crumbs": [
+      "Primeros pasos con R",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Bienvenidos a R</span>"
+    ]
+  },
+  {
+    "objectID": "welcome_to_r.html#cómo-instalar-r-y-positron",
+    "href": "welcome_to_r.html#cómo-instalar-r-y-positron",
+    "title": "2  Bienvenidos a R",
+    "section": "2.2 ¿Cómo instalar R y Positron?",
+    "text": "2.2 ¿Cómo instalar R y Positron?\n\n2.2.1 rig\n\n\n2.2.2 Posit Workbench",
+    "crumbs": [
+      "Primeros pasos con R",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Bienvenidos a R</span>"
+    ]
+  },
+  {
+    "objectID": "welcome_to_r.html#uso-de-r-a-través-de-positron",
+    "href": "welcome_to_r.html#uso-de-r-a-través-de-positron",
+    "title": "2  Bienvenidos a R",
+    "section": "2.3 Uso de R a través de Positron",
+    "text": "2.3 Uso de R a través de Positron",
+    "crumbs": [
+      "Primeros pasos con R",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Bienvenidos a R</span>"
+    ]
+  },
+  {
+    "objectID": "r_packages.html",
+    "href": "r_packages.html",
+    "title": "3  Paquetes de R",
+    "section": "",
+    "text": "3.1 ¿Qué son los paquetes de R?",
+    "crumbs": [
+      "Primeros pasos con R",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Paquetes de R</span>"
+    ]
+  },
+  {
+    "objectID": "r_packages.html#instalación-de-paquetes",
+    "href": "r_packages.html#instalación-de-paquetes",
+    "title": "3  Paquetes de R",
+    "section": "3.2 Instalación de paquetes",
+    "text": "3.2 Instalación de paquetes\n\n3.2.1 Carga de paquetes\n\n\n3.2.2 Uso de paquetes\nIn this part show a data set",
+    "crumbs": [
+      "Primeros pasos con R",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Paquetes de R</span>"
+    ]
+  },
+  {
+    "objectID": "data_visualization.html",
+    "href": "data_visualization.html",
+    "title": "Visualización de datos",
+    "section": "",
+    "text": "Pendiente",
+    "crumbs": [
+      "Visualización de datos"
+    ]
+  },
+  {
+    "objectID": "data_wrangling.html",
+    "href": "data_wrangling.html",
+    "title": "Manipulación de datos",
+    "section": "",
+    "text": "Pendiente",
+    "crumbs": [
+      "Manipulación de datos"
+    ]
+  },
+  {
+    "objectID": "data_tidy.html",
+    "href": "data_tidy.html",
+    "title": "Organización y limpieza de datos",
+    "section": "",
+    "text": "Pendiente",
+    "crumbs": [
+      "Organización y limpieza de datos"
+    ]
+  },
+  {
+    "objectID": "data_import.html",
+    "href": "data_import.html",
+    "title": "Importación de datos",
+    "section": "",
+    "text": "Pendiente",
+    "crumbs": [
+      "Importación de datos"
+    ]
+  },
+  {
+    "objectID": "programming.html",
+    "href": "programming.html",
+    "title": "Programación",
+    "section": "",
+    "text": "Pendiente",
+    "crumbs": [
+      "Programación"
+    ]
+  },
+  {
+    "objectID": "data_communication.html",
+    "href": "data_communication.html",
+    "title": "Comunicación con Quarto",
+    "section": "",
+    "text": "Pendiente",
+    "crumbs": [
+      "Comunicación con Quarto"
     ]
   },
   {

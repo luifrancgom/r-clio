@@ -2,22 +2,54 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://luifrancgom.github.io/r-clio/index.html</loc>
-    <lastmod>2025-10-29T21:00:48.203Z</lastmod>
+    <lastmod>2026-02-10T01:14:50.172Z</lastmod>
   </url>
   <url>
-    <loc>https://luifrancgom.github.io/r-clio/intro.html</loc>
-    <lastmod>2025-10-29T21:00:48.203Z</lastmod>
+    <loc>https://luifrancgom.github.io/r-clio/preface.html</loc>
+    <lastmod>2026-02-10T01:14:50.172Z</lastmod>
   </url>
   <url>
-    <loc>https://luifrancgom.github.io/r-clio/summary.html</loc>
-    <lastmod>2025-10-29T21:00:48.204Z</lastmod>
+    <loc>https://luifrancgom.github.io/r-clio/first_steps_r.html</loc>
+    <lastmod>2026-02-10T01:14:50.172Z</lastmod>
+  </url>
+  <url>
+    <loc>https://luifrancgom.github.io/r-clio/welcome_to_r.html</loc>
+    <lastmod>2026-02-10T01:14:50.173Z</lastmod>
+  </url>
+  <url>
+    <loc>https://luifrancgom.github.io/r-clio/r_packages.html</loc>
+    <lastmod>2026-02-10T01:14:50.172Z</lastmod>
+  </url>
+  <url>
+    <loc>https://luifrancgom.github.io/r-clio/data_visualization.html</loc>
+    <lastmod>2026-02-10T01:14:50.172Z</lastmod>
+  </url>
+  <url>
+    <loc>https://luifrancgom.github.io/r-clio/data_wrangling.html</loc>
+    <lastmod>2026-02-10T01:14:50.172Z</lastmod>
+  </url>
+  <url>
+    <loc>https://luifrancgom.github.io/r-clio/data_tidy.html</loc>
+    <lastmod>2026-02-10T01:14:50.171Z</lastmod>
+  </url>
+  <url>
+    <loc>https://luifrancgom.github.io/r-clio/data_import.html</loc>
+    <lastmod>2026-02-10T01:14:50.171Z</lastmod>
+  </url>
+  <url>
+    <loc>https://luifrancgom.github.io/r-clio/programming.html</loc>
+    <lastmod>2026-02-10T01:14:50.172Z</lastmod>
+  </url>
+  <url>
+    <loc>https://luifrancgom.github.io/r-clio/data_communication.html</loc>
+    <lastmod>2026-02-10T01:14:50.171Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/references.html</loc>
-    <lastmod>2025-10-29T21:00:48.203Z</lastmod>
+    <lastmod>2026-02-10T01:14:50.172Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/R-para-análisis-de-datos.pdf</loc>
-    <lastmod>2025-10-29T21:03:01.093Z</lastmod>
+    <lastmod>2026-02-10T01:17:37.038Z</lastmod>
   </url>
 </urlset>
