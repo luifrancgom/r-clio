@@ -4,9 +4,9 @@
     "href": "index.html",
     "title": "R para análisis de datos",
     "section": "",
-    "text": "Prefacio\nEste es un libro generado en Quarto.\nPara aprender más acerca de cómo generar libros en Quarto consultar https://quarto.org/docs/books.",
+    "text": "Bienvenidos\nPending",
     "crumbs": [
-      "Prefacio"
+      "Bienvenidos"
     ]
   },
   {
@@ -32,34 +32,45 @@
   {
     "objectID": "welcome_to_r.html",
     "href": "welcome_to_r.html",
-    "title": "2  Bienvenidos a R [^chap-1_footnote-1]",
+    "title": "2  Bienvenidos a R",
     "section": "",
-    "text": "2.1 ¿Qué es R y Positron?\nEn términos simples R es un entorno gratuito para realizar análisis estadísticos y crear gráficos. A lo largo del libro utilizaremos R a través de Positron. R se puede pensar como el motor de un automóvil y Positron el tablero de control del automovil.",
+    "text": "2.1 ¿Qué es R y Positron?\nÉste capítulo se encuentra basado en (Ismay, 2025, chap. 1)\nEn términos simples R es un entorno gratuito para realizar análisis estadísticos y crear gráficos. A lo largo del libro utilizaremos R a través de Positron. R se puede entender como el motor de un automóvil y Positron el tablero de control del automovil que queremos manejar (Ver Figura 2.1).\nSi abandonamos la analogía y sómos más específicos, R es un lenguaje de programación y Positron es un Entorno Integrado de Desarrollo que incluye un conjunto de elementos en su interfaz para utilizar de manera mucho más fácil R cuando queremos llevar a cabo análisis estadísticos y explorar datos.",
     "crumbs": [
       "Primeros pasos con R",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Bienvenidos a R [^chap-1_footnote-1]</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Bienvenidos a R</span>"
+    ]
+  },
+  {
+    "objectID": "welcome_to_r.html#qué-es-r-y-positron",
+    "href": "welcome_to_r.html#qué-es-r-y-positron",
+    "title": "2  Bienvenidos a R",
+    "section": "",
+    "text": "R: Motor\n\n\n\n\n \n\n\n\n\n\nPositron: Tablero de control\n\n\n\n\n\n\nFigura 2.1: Analogía para entender la diferencia entre R y Positron",
+    "crumbs": [
+      "Primeros pasos con R",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Bienvenidos a R</span>"
     ]
   },
   {
     "objectID": "welcome_to_r.html#cómo-instalar-r-y-positron",
     "href": "welcome_to_r.html#cómo-instalar-r-y-positron",
-    "title": "2  Bienvenidos a R [^chap-1_footnote-1]",
+    "title": "2  Bienvenidos a R",
     "section": "2.2 ¿Cómo instalar R y Positron?",
-    "text": "2.2 ¿Cómo instalar R y Positron?\n\n2.2.1 rig\n\n\n2.2.2 Posit Workbench",
+    "text": "2.2 ¿Cómo instalar R y Positron?\n\n2.2.1 R\nPara utilizar R con Positron es necesario primero tener instalado la versión 4.2 de R o una superior. Para instalar R, puedes seguir las instrucciones que aplican para tu sistema operativo en la página de descarga oficial de CRAN.\n\n2.2.1.1 Windows\nSelecciona el enlace Download R for Windows, haz clic en base y, finalmente, pulsa en el enlace Download R X.X.X for Windows. Ten en cuenta que X.X.X representa la versión más reciente disponible al momento de la descarga. Una vez que el archivo .exe se haya descargado, haz doble clic en él para ejecutarlo; esto abrirá un asistente con instrucciones en pantalla que te guiará paso a paso hasta completar la instalación.\n\n\n2.2.1.2 Mac\nSelecciona el enlace Download R for macOS y dirígete a la sección Latest release. Haz clic en el paquete adecuado para la arquitectura de tu Mac (por ejemplo, R-X.X.X-arm64.pkg para chips Apple M1/M2/M3, o R-X.X.X-x86_64.pkg para procesadores Intel) para descargar el archivo .pkg. Ten en cuenta que X.X.X representa la versión más reciente disponible al momento de la descarga. Una vez que el archivo se haya descargado, haz doble clic en él para ejecutarlo; esto abrirá un asistente con instrucciones en pantalla que te guiará paso a paso hasta completar la instalación.\n\n\n2.2.1.3 Linux\nSelecciona el enlace Download R for Linux y elige la distribución que utilizas (como Ubuntu, Debian, Fedora o Red Hat). A diferencia de otros sistemas operativos, la instalación en Linux se realiza generalmente a través de la terminal siguiendo las instrucciones específicas de cada página.\n\n\n2.2.1.4 Verificando la instalación de R\nUna vez instales R es importante que verifiques la instalación. La forma más fácil de hacerlo es dar doble click en el ícono de R, , para el caso de Windows o Mac o en Linux abrir el terminal e ingresa R en la línea de comandos.\nSi observas que se abre una ventana con la consola de R (en los casos de Windows y Mac) o que en la terminal aparece el texto de bienvenida de la versión 4.2 o superior (en el caso de Linux), la instalación ha sido exitosa. Para finalizar la verificación, simplemente cierra la ventana de la aplicación en Windows o Mac, o en el caso de Linux, escribe el comando q() y presiona EnterEnter para salir de la sesión de R en el terminal.\n\n\n\n2.2.2 Positron\nPara utilizar R con Positron, es necesario que primero revises los requisitos de instalación para asegurar que el programa funcione bien en tu computador. Luego, dirígete a la página de descarga oficial de Positron, acepta el contrato de licencia, descarga el instalador que corresponda a tu sistema operativo (Windows, Mac o Linux) y completa la instalación.\n\n\n2.2.3 Posit Workbench",
     "crumbs": [
       "Primeros pasos con R",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Bienvenidos a R [^chap-1_footnote-1]</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Bienvenidos a R</span>"
     ]
   },
   {
     "objectID": "welcome_to_r.html#uso-de-r-a-través-de-positron",
     "href": "welcome_to_r.html#uso-de-r-a-través-de-positron",
-    "title": "2  Bienvenidos a R [^chap-1_footnote-1]",
+    "title": "2  Bienvenidos a R",
     "section": "2.3 Uso de R a través de Positron",
-    "text": "2.3 Uso de R a través de Positron",
+    "text": "2.3 Uso de R a través de Positron\n\n\n\n\nIsmay, C. (2025). Statistical inference via data science: a moderndive into r and the tidyverse (Second edition). CRC Press. https://moderndive.com/v2/index.html",
     "crumbs": [
       "Primeros pasos con R",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Bienvenidos a R [^chap-1_footnote-1]</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Bienvenidos a R</span>"
     ]
   },
   {
@@ -78,7 +89,29 @@
     "href": "r_packages.html#instalación-de-paquetes",
     "title": "3  Paquetes de R",
     "section": "3.2 Instalación de paquetes",
-    "text": "3.2 Instalación de paquetes\n\n3.2.1 Carga de paquetes\n\n\n3.2.2 Uso de paquetes\nIn this part show a data set",
+    "text": "3.2 Instalación de paquetes",
+    "crumbs": [
+      "Primeros pasos con R",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Paquetes de R</span>"
+    ]
+  },
+  {
+    "objectID": "r_packages.html#carga-de-paquetes",
+    "href": "r_packages.html#carga-de-paquetes",
+    "title": "3  Paquetes de R",
+    "section": "3.3 Carga de paquetes",
+    "text": "3.3 Carga de paquetes",
+    "crumbs": [
+      "Primeros pasos con R",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Paquetes de R</span>"
+    ]
+  },
+  {
+    "objectID": "r_packages.html#uso-de-paquetes",
+    "href": "r_packages.html#uso-de-paquetes",
+    "title": "3  Paquetes de R",
+    "section": "3.4 Uso de paquetes",
+    "text": "3.4 Uso de paquetes\nIn this part show a data set",
     "crumbs": [
       "Primeros pasos con R",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Paquetes de R</span>"
@@ -149,7 +182,7 @@
     "href": "references.html",
     "title": "Referencias",
     "section": "",
-    "text": "Wickham, H. (2023). R for Data\nScience (2nd ed.). O’Reilly Media, Incorporated. https://r4ds.hadley.nz/",
+    "text": "Ismay, C. (2025). Statistical inference via data science: A\nmoderndive into r and the tidyverse (Second edition). CRC Press. https://moderndive.com/v2/index.html\n\n\nWickham, H. (2023). R for Data\nScience (2nd ed.). O’Reilly Media, Incorporated. https://r4ds.hadley.nz/",
     "crumbs": [
       "Referencias"
     ]

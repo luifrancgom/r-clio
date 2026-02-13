@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; Bienvenidos a R [^chap-1_footnote-1] – R para análisis de datos</title>
+<title>2&nbsp; Bienvenidos a R – R para análisis de datos</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -42,7 +62,11 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-0dd2bd5de344125cf763a379ddc3eb04.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-fc99ff288d4bfb5c05f4377e099a16b1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/fontawesome6-6.7.2/all.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/fontawesome6-6.7.2/latex-fontsize.css" rel="stylesheet">
+<script src="site_libs/quarto-contrib/kbd/kbd.js"></script>
+<link href="site_libs/quarto-contrib/kbd/kbd.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -83,7 +107,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./first_steps_r.html">Primeros pasos con R</a></li><li class="breadcrumb-item"><a href="./welcome_to_r.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Bienvenidos a R </span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./first_steps_r.html">Primeros pasos con R</a></li><li class="breadcrumb-item"><a href="./welcome_to_r.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Bienvenidos a R</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -115,7 +139,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Prefacio</span></a>
+ <span class="menu-text">Bienvenidos</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -136,7 +160,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./welcome_to_r.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Bienvenidos a R </span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Bienvenidos a R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -190,8 +214,9 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#qué-es-r-y-positron" id="toc-qué-es-r-y-positron" class="nav-link active" data-scroll-target="#qué-es-r-y-positron"><span class="header-section-number">2.1</span> ¿Qué es R y Positron?</a></li>
   <li><a href="#cómo-instalar-r-y-positron" id="toc-cómo-instalar-r-y-positron" class="nav-link" data-scroll-target="#cómo-instalar-r-y-positron"><span class="header-section-number">2.2</span> ¿Cómo instalar R y Positron?</a>
   <ul class="collapse">
-  <li><a href="#rig" id="toc-rig" class="nav-link" data-scroll-target="#rig"><span class="header-section-number">2.2.1</span> rig</a></li>
-  <li><a href="#posit-workbench" id="toc-posit-workbench" class="nav-link" data-scroll-target="#posit-workbench"><span class="header-section-number">2.2.2</span> Posit Workbench</a></li>
+  <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r"><span class="header-section-number">2.2.1</span> R</a></li>
+  <li><a href="#positron" id="toc-positron" class="nav-link" data-scroll-target="#positron"><span class="header-section-number">2.2.2</span> Positron</a></li>
+  <li><a href="#posit-workbench" id="toc-posit-workbench" class="nav-link" data-scroll-target="#posit-workbench"><span class="header-section-number">2.2.3</span> Posit Workbench</a></li>
   </ul></li>
   <li><a href="#uso-de-r-a-través-de-positron" id="toc-uso-de-r-a-través-de-positron" class="nav-link" data-scroll-target="#uso-de-r-a-través-de-positron"><span class="header-section-number">2.3</span> Uso de R a través de Positron</a></li>
   </ul>
@@ -200,9 +225,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./first_steps_r.html">Primeros pasos con R</a></li><li class="breadcrumb-item"><a href="./welcome_to_r.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Bienvenidos a R </span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./first_steps_r.html">Primeros pasos con R</a></li><li class="breadcrumb-item"><a href="./welcome_to_r.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Bienvenidos a R</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Bienvenidos a R [^chap-1_footnote-1]</span></h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Bienvenidos a R</span></h1>
 </div>
 
 
@@ -219,23 +244,82 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>Éste capítulo se encuentra basado en <span class="citation" data-cites="ismay_statistical_2025">(<a href="references.html#ref-ismay_statistical_2025" role="doc-biblioref">Ismay, 2025</a>, chap.&nbsp;1)</span></p>
 <section id="qué-es-r-y-positron" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="qué-es-r-y-positron"><span class="header-section-number">2.1</span> ¿Qué es R y Positron?</h2>
-<p>En términos simples R es un entorno gratuito para realizar análisis estadísticos y crear gráficos. A lo largo del libro utilizaremos R a través de Positron. R se puede pensar como el motor de un automóvil y Positron el tablero de control del automovil.</p>
+<p>En términos simples R es un entorno gratuito para realizar análisis estadísticos y crear gráficos. A lo largo del libro utilizaremos R a través de Positron. R se puede entender como el motor de un automóvil y Positron el tablero de control del automovil que queremos manejar (Ver <a href="#fig-1-chap-1" class="quarto-xref">Figura&nbsp;<span>2.1</span></a>).</p>
+<div id="fig-1-chap-1" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-1-chap-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 48.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/chap-1-fig-1-1.png" class="img-fluid figure-img"></p>
+<figcaption>R: Motor</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-figure-spacer quarto-layout-cell" style="flex-basis: 4.0%;justify-content: flex-start;">
+<p>&nbsp;</p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 48.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/chap-1-fig-1-2.png" class="img-fluid figure-img"></p>
+<figcaption>Positron: Tablero de control</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-chap-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;2.1: Analogía para entender la diferencia entre R y Positron
+</figcaption>
+</figure>
+</div>
+<p>Si abandonamos la analogía y sómos más específicos, R es un lenguaje de programación y Positron es un <em>Entorno Integrado de Desarrollo</em> que incluye un conjunto de elementos en su interfaz para utilizar de manera mucho más fácil R cuando queremos llevar a cabo análisis estadísticos y explorar datos.</p>
 </section>
 <section id="cómo-instalar-r-y-positron" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="cómo-instalar-r-y-positron"><span class="header-section-number">2.2</span> ¿Cómo instalar R y Positron?</h2>
-<section id="rig" class="level3" data-number="2.2.1">
-<h3 data-number="2.2.1" class="anchored" data-anchor-id="rig"><span class="header-section-number">2.2.1</span> rig</h3>
+<section id="r" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="r"><span class="header-section-number">2.2.1</span> R</h3>
+<p>Para utilizar R con Positron es necesario primero tener instalado la versión 4.2 de R o una superior. Para instalar R, puedes seguir las instrucciones que aplican para tu sistema operativo en la <a href="https://cloud.r-project.org/">página de descarga oficial de CRAN</a>.</p>
+<section id="windows" class="level4" data-number="2.2.1.1">
+<h4 data-number="2.2.1.1" class="anchored" data-anchor-id="windows"><span class="header-section-number">2.2.1.1</span> Windows</h4>
+<p>Selecciona el enlace <strong>Download R for Windows</strong>, haz clic en <strong>base</strong> y, finalmente, pulsa en el enlace <strong>Download R X.X.X for Windows</strong>. Ten en cuenta que <strong>X.X.X</strong> representa la versión más reciente disponible al momento de la descarga. Una vez que el archivo <code>.exe</code> se haya descargado, haz doble clic en él para ejecutarlo; esto abrirá un asistente con instrucciones en pantalla que te guiará paso a paso hasta completar la instalación.</p>
 </section>
-<section id="posit-workbench" class="level3" data-number="2.2.2">
-<h3 data-number="2.2.2" class="anchored" data-anchor-id="posit-workbench"><span class="header-section-number">2.2.2</span> Posit Workbench</h3>
+<section id="mac" class="level4" data-number="2.2.1.2">
+<h4 data-number="2.2.1.2" class="anchored" data-anchor-id="mac"><span class="header-section-number">2.2.1.2</span> Mac</h4>
+<p>Selecciona el enlace <strong>Download R for macOS</strong> y dirígete a la sección <strong>Latest release</strong>. Haz clic en el paquete adecuado para la arquitectura de tu Mac (por ejemplo, <strong>R-X.X.X-arm64.pkg</strong> para chips Apple M1/M2/M3, o <strong>R-X.X.X-x86_64.pkg</strong> para procesadores Intel) para descargar el archivo <code>.pkg</code>. Ten en cuenta que <strong>X.X.X</strong> representa la versión más reciente disponible al momento de la descarga. Una vez que el archivo se haya descargado, haz doble clic en él para ejecutarlo; esto abrirá un asistente con instrucciones en pantalla que te guiará paso a paso hasta completar la instalación.</p>
+</section>
+<section id="linux" class="level4" data-number="2.2.1.3">
+<h4 data-number="2.2.1.3" class="anchored" data-anchor-id="linux"><span class="header-section-number">2.2.1.3</span> Linux</h4>
+<p>Selecciona el enlace <strong>Download R for Linux</strong> y elige la distribución que utilizas (como Ubuntu, Debian, Fedora o Red Hat). A diferencia de otros sistemas operativos, la instalación en Linux se realiza generalmente a través de la terminal siguiendo las instrucciones específicas de cada página.</p>
+</section>
+<section id="verificando-la-instalación-de-r" class="level4" data-number="2.2.1.4">
+<h4 data-number="2.2.1.4" class="anchored" data-anchor-id="verificando-la-instalación-de-r"><span class="header-section-number">2.2.1.4</span> Verificando la instalación de R</h4>
+<p>Una vez instales R es importante que verifiques la instalación. La forma más fácil de hacerlo es dar doble click en el ícono de R, <i class="fa-brands fa-r-project fa-lg" title="logo del proyecto R" aria-label="r-project"></i>, para el caso de Windows o Mac o en Linux abrir el terminal e ingresa <code>R</code> en la línea de comandos.</p>
+<p>Si observas que se abre una ventana con la consola de R (en los casos de Windows y Mac) o que en la terminal aparece el texto de bienvenida de la versión 4.2 o superior (en el caso de Linux), la instalación ha sido exitosa. Para finalizar la verificación, simplemente cierra la ventana de la aplicación en Windows o Mac, o en el caso de Linux, escribe el comando <code>q()</code> y presiona <kbd title="Enter" aria-hidden="true">Enter</kbd><span class="visually-hidden">Enter</span> para salir de la sesión de R en el terminal.</p>
+</section>
+</section>
+<section id="positron" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="positron"><span class="header-section-number">2.2.2</span> Positron</h3>
+<p>Para utilizar R con Positron, es necesario que primero revises los <a href="https://positron.posit.co/install.html">requisitos de instalación</a> para asegurar que el programa funcione bien en tu computador. Luego, dirígete a la <a href="https://positron.posit.co/download.html">página de descarga oficial de Positron</a>, acepta el contrato de licencia, descarga el instalador que corresponda a tu sistema operativo (Windows, Mac o Linux) y completa la instalación.</p>
+</section>
+<section id="posit-workbench" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="posit-workbench"><span class="header-section-number">2.2.3</span> Posit Workbench</h3>
 </section>
 </section>
 <section id="uso-de-r-a-través-de-positron" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="uso-de-r-a-través-de-positron"><span class="header-section-number">2.3</span> Uso de R a través de Positron</h2>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-ismay_statistical_2025" class="csl-entry" role="listitem">
+Ismay, C. (2025). <em>Statistical inference via data science: a moderndive into r and the tidyverse</em> (Second edition). CRC Press. <a href="https://moderndive.com/v2/index.html">https://moderndive.com/v2/index.html</a>
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
