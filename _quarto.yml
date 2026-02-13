@@ -45,7 +45,7 @@ format:
   html:
     theme:
       - cosmo
-      - brand
+      - scss/custom.scss
   pdf:
     # colors
     linkcolor: blue

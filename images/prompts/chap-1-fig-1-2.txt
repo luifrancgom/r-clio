@@ -1,0 +1,14 @@
+{
+  "image_request": {
+    "prompt": "A direct frontal view of a modern car dashboard from the driver's perspective, featuring a clean digital display, a sleek steering wheel in the foreground, and minimalist buttons, centered composition, bright natural daylight, photorealistic style.",
+    "parameters": {
+      "aspect_ratio": "16:9",
+      "guidance_scale": 7.5,
+      "style": "photorealistic"
+    },
+    "metadata": {
+      "subject": "car dashboard",
+      "focus": "detail items"
+    }
+  }
+}  
