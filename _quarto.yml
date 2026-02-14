@@ -47,6 +47,8 @@ format:
       - cosmo
       - scss/custom.scss
   pdf:
+    # format options
+    pdf-engine: lualatex
     # colors
     linkcolor: blue
     filecolor: blue
@@ -59,6 +61,8 @@ format:
     # references
     link-citations: true
     link-bibliography: true
+    # rendering
+    keep-tex: false
 
 
 
