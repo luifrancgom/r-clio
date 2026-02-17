@@ -14,11 +14,17 @@ En términos simples R es un entorno gratuito para realizar análisis estadísti
 Analogía para entender la diferencia entre R y Positron
 :::
 
-Si abandonamos la analogía y sómos más específicos, R es un lenguaje de programación y Positron es un *Entorno Integrado de Desarrollo* que incluye un conjunto de elementos en su interfaz para utilizar de manera mucho más fácil R cuando queremos llevar a cabo análisis estadísticos y explorar datos.
+Si abandonamos la analogía anterior y sómos más específicos, R es un lenguaje de programación y Positron es un *Entorno Integrado de Desarrollo (IDE)* que incluye un conjunto de elementos en su interfaz para utilizar de manera mucho más fácil R cuando queremos llevar a cabo análisis estadísticos y explorar datos.
 
 ## ¿Cómo instalar R y Positron?
 
-### R
+::: {.callout-important}
+Si formas parte de una institución educativa, te recomendamos verificar si tienes acceso a **Positron Pro** a través de **Posit Workbench** (ver @sec-posit-workbench). En caso de contar con este acceso, no es necesario realizar una instalación local. Por lo tanto, puedes saltarte los pasos de la @sec-install-r y la @sec-install-positron, ya que tendras acceso directo a estas herramientas.
+
+Sin embargo, una vez que te sientas familiarizado con estas herramientas, te recomendamos consultar esas secciones para instalar R y Positron en tu propio computador personal.
+:::
+
+### R {#sec-install-r}
 
 Para utilizar R con Positron es necesario primero tener instalado la versión 4.2 de R o una superior. Para instalar R, puedes seguir las instrucciones que aplican para tu sistema operativo en la [página de descarga oficial de CRAN](https://cloud.r-project.org/).
 
@@ -36,15 +42,24 @@ Selecciona el enlace **Download R for Linux** y elige la distribución que utili
 
 #### Verificando la instalación de R
 
-Una vez instales R es importante que verifiques la instalación. La forma más fácil de hacerlo es dar doble click en el ícono de R, {{< fa brands r-project size=lg title="logo del proyecto R" >}}, para el caso de Windows o Mac o en Linux abrir el terminal e ingresa `R` en la línea de comandos. 
+Una vez instales R es importante que verifiques la instalación. La forma más fácil de hacerlo es dar doble click en el ícono de R (Ver @fig-r-logo) para el caso de Windows o Mac o en Linux abrir el terminal e ingresa `R` en la línea de comandos.
 
-Si observas que se abre una ventana con la consola de R (en los casos de Windows y Mac) o que en la terminal aparece el texto de bienvenida de la versión 4.2 o superior (en el caso de Linux), la instalación ha sido exitosa. Para finalizar la verificación, simplemente cierra la ventana de la aplicación en Windows o Mac, o en el caso de Linux, escribe el comando `q()` y presiona {{< kbd Enter >}} para salir de la sesión de R en el terminal.
+![Ícono de R](images/r-project-logo.png){#fig-r-logo width=20%}
 
-### Positron
+Si observas que se abre una ventana con la consola de R (en los casos de Windows y Mac) o que en el terminal aparece el texto de bienvenida de la versión 4.2 o superior (en el caso de Linux), la instalación ha sido exitosa. Para finalizar la verificación, simplemente cierra la ventana de la aplicación en Windows o Mac, o en el caso de Linux, escribe el comando `q()` y presiona {{< kbd Enter >}} para salir de la sesión de R en el terminal.
+
+### Positron {#sec-install-positron}
 
 Para utilizar R con Positron, es necesario que primero revises los [requisitos de instalación](https://positron.posit.co/install.html) para asegurar que el programa funcione bien en tu computador. Luego, dirígete a la [página de descarga oficial de Positron](https://positron.posit.co/download.html), acepta el contrato de licencia, descarga el instalador que corresponda a tu sistema operativo (Windows, Mac o Linux) y completa la instalación.
 
-### Posit Workbench
+## Posit Workbench {#sec-posit-workbench}
+
+::: {.callout-important}
+Si realizaste una instalación local de acuerdo a los pasos descritos en la @sec-install-r y la @sec-install-positron puedes saltarte esta sección.
+:::
+
+Posit Workbench es un entorno de desarrollo basado en la nube diseñado para profesionales en ciencia de datos que puede ser utilizado por las instituciones educativas para enseñanza.
+
 
 
 

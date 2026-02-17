@@ -17,10 +17,14 @@ book:
   date: 2025-10-29
   date-format: iso
   downloads: [pdf]
+  # favicon: pending
   site-url: https://luifrancgom.github.io/r-clio/
   repo-url: https://github.com/luifrancgom/r-clio
   issue-url: https://github.com/luifrancgom/r-clio/issues
   repo-actions: [edit, source, issue]
+  sidebar: 
+    logo: images/zona-clio-logo.png
+
   chapters:
     - index.qmd
     - preface.qmd
