@@ -63,8 +63,6 @@ div.csl-indent {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-fc99ff288d4bfb5c05f4377e099a16b1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/fontawesome6-6.7.2/all.min.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/fontawesome6-6.7.2/latex-fontsize.css" rel="stylesheet">
 <script src="site_libs/quarto-contrib/kbd/kbd.js"></script>
 <link href="site_libs/quarto-contrib/kbd/kbd.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -120,7 +118,11 @@ div.csl-indent {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/zona-clio-logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./images/zona-clio-logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">R para análisis de datos</a> 
         <div class="sidebar-tools-main">
@@ -214,11 +216,11 @@ div.csl-indent {
   <li><a href="#qué-es-r-y-positron" id="toc-qué-es-r-y-positron" class="nav-link active" data-scroll-target="#qué-es-r-y-positron"><span class="header-section-number">2.1</span> ¿Qué es R y Positron?</a></li>
   <li><a href="#cómo-instalar-r-y-positron" id="toc-cómo-instalar-r-y-positron" class="nav-link" data-scroll-target="#cómo-instalar-r-y-positron"><span class="header-section-number">2.2</span> ¿Cómo instalar R y Positron?</a>
   <ul class="collapse">
-  <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r"><span class="header-section-number">2.2.1</span> R</a></li>
-  <li><a href="#positron" id="toc-positron" class="nav-link" data-scroll-target="#positron"><span class="header-section-number">2.2.2</span> Positron</a></li>
-  <li><a href="#posit-workbench" id="toc-posit-workbench" class="nav-link" data-scroll-target="#posit-workbench"><span class="header-section-number">2.2.3</span> Posit Workbench</a></li>
+  <li><a href="#sec-install-r" id="toc-sec-install-r" class="nav-link" data-scroll-target="#sec-install-r"><span class="header-section-number">2.2.1</span> R</a></li>
+  <li><a href="#sec-install-positron" id="toc-sec-install-positron" class="nav-link" data-scroll-target="#sec-install-positron"><span class="header-section-number">2.2.2</span> Positron</a></li>
   </ul></li>
-  <li><a href="#uso-de-r-a-través-de-positron" id="toc-uso-de-r-a-través-de-positron" class="nav-link" data-scroll-target="#uso-de-r-a-través-de-positron"><span class="header-section-number">2.3</span> Uso de R a través de Positron</a></li>
+  <li><a href="#sec-posit-workbench" id="toc-sec-posit-workbench" class="nav-link" data-scroll-target="#sec-posit-workbench"><span class="header-section-number">2.3</span> Posit Workbench</a></li>
+  <li><a href="#uso-de-r-a-través-de-positron" id="toc-uso-de-r-a-través-de-positron" class="nav-link" data-scroll-target="#uso-de-r-a-través-de-positron"><span class="header-section-number">2.4</span> Uso de R a través de Positron</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/welcome_to_r.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/welcome_to_r.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
@@ -278,12 +280,26 @@ Figura&nbsp;2.1: Analogía para entender la diferencia entre R y Positron
 </figcaption>
 </figure>
 </div>
-<p>Si abandonamos la analogía y sómos más específicos, R es un lenguaje de programación y Positron es un <em>Entorno Integrado de Desarrollo</em> que incluye un conjunto de elementos en su interfaz para utilizar de manera mucho más fácil R cuando queremos llevar a cabo análisis estadísticos y explorar datos.</p>
+<p>Si abandonamos la analogía anterior y sómos más específicos, R es un lenguaje de programación y Positron es un <em>Entorno Integrado de Desarrollo (IDE)</em> que incluye un conjunto de elementos en su interfaz para utilizar de manera mucho más fácil R cuando queremos llevar a cabo análisis estadísticos y explorar datos.</p>
 </section>
 <section id="cómo-instalar-r-y-positron" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="cómo-instalar-r-y-positron"><span class="header-section-number">2.2</span> ¿Cómo instalar R y Positron?</h2>
-<section id="r" class="level3" data-number="2.2.1">
-<h3 data-number="2.2.1" class="anchored" data-anchor-id="r"><span class="header-section-number">2.2.1</span> R</h3>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si formas parte de una institución educativa, te recomendamos verificar si tienes acceso a <strong>Positron Pro</strong> a través de <strong>Posit Workbench</strong> (ver <a href="#sec-posit-workbench" class="quarto-xref"><span>Sección 2.3</span></a>). En caso de contar con este acceso, no es necesario realizar una instalación local. Por lo tanto, puedes saltarte los pasos de la <a href="#sec-install-r" class="quarto-xref"><span>Sección 2.2.1</span></a> y la <a href="#sec-install-positron" class="quarto-xref"><span>Sección 2.2.2</span></a>, ya que tendras acceso directo a estas herramientas.</p>
+<p>Sin embargo, una vez que te sientas familiarizado con estas herramientas, te recomendamos consultar esas secciones para instalar R y Positron en tu propio computador personal.</p>
+</div>
+</div>
+<section id="sec-install-r" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="sec-install-r"><span class="header-section-number">2.2.1</span> R</h3>
 <p>Para utilizar R con Positron es necesario primero tener instalado la versión 4.2 de R o una superior. Para instalar R, puedes seguir las instrucciones que aplican para tu sistema operativo en la <a href="https://cloud.r-project.org/">página de descarga oficial de CRAN</a>.</p>
 <section id="windows" class="level4" data-number="2.2.1.1">
 <h4 data-number="2.2.1.1" class="anchored" data-anchor-id="windows"><span class="header-section-number">2.2.1.1</span> Windows</h4>
@@ -299,20 +315,44 @@ Figura&nbsp;2.1: Analogía para entender la diferencia entre R y Positron
 </section>
 <section id="verificando-la-instalación-de-r" class="level4" data-number="2.2.1.4">
 <h4 data-number="2.2.1.4" class="anchored" data-anchor-id="verificando-la-instalación-de-r"><span class="header-section-number">2.2.1.4</span> Verificando la instalación de R</h4>
-<p>Una vez instales R es importante que verifiques la instalación. La forma más fácil de hacerlo es dar doble click en el ícono de R, <i class="fa-brands fa-r-project fa-lg" title="logo del proyecto R" aria-label="r-project"></i>, para el caso de Windows o Mac o en Linux abrir el terminal e ingresa <code>R</code> en la línea de comandos.</p>
-<p>Si observas que se abre una ventana con la consola de R (en los casos de Windows y Mac) o que en la terminal aparece el texto de bienvenida de la versión 4.2 o superior (en el caso de Linux), la instalación ha sido exitosa. Para finalizar la verificación, simplemente cierra la ventana de la aplicación en Windows o Mac, o en el caso de Linux, escribe el comando <code>q()</code> y presiona <kbd title="Enter" aria-hidden="true">Enter</kbd><span class="visually-hidden">Enter</span> para salir de la sesión de R en el terminal.</p>
+<p>Una vez instales R es importante que verifiques la instalación. La forma más fácil de hacerlo es dar doble click en el ícono de R (Ver <a href="#fig-r-logo" class="quarto-xref">Figura&nbsp;<span>2.2</span></a>) para el caso de Windows o Mac o en Linux abrir el terminal e ingresa <code>R</code> en la línea de comandos.</p>
+<div id="fig-r-logo" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-r-logo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/r-project-logo.png" class="img-fluid figure-img" style="width:20.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-r-logo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;2.2: Ícono de R
+</figcaption>
+</figure>
+</div>
+<p>Si observas que se abre una ventana con la consola de R (en los casos de Windows y Mac) o que en el terminal aparece el texto de bienvenida de la versión 4.2 o superior (en el caso de Linux), la instalación ha sido exitosa. Para finalizar la verificación, simplemente cierra la ventana de la aplicación en Windows o Mac, o en el caso de Linux, escribe el comando <code>q()</code> y presiona <kbd title="Enter" aria-hidden="true">Enter</kbd><span class="visually-hidden">Enter</span> para salir de la sesión de R en el terminal.</p>
 </section>
 </section>
-<section id="positron" class="level3" data-number="2.2.2">
-<h3 data-number="2.2.2" class="anchored" data-anchor-id="positron"><span class="header-section-number">2.2.2</span> Positron</h3>
+<section id="sec-install-positron" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="sec-install-positron"><span class="header-section-number">2.2.2</span> Positron</h3>
 <p>Para utilizar R con Positron, es necesario que primero revises los <a href="https://positron.posit.co/install.html">requisitos de instalación</a> para asegurar que el programa funcione bien en tu computador. Luego, dirígete a la <a href="https://positron.posit.co/download.html">página de descarga oficial de Positron</a>, acepta el contrato de licencia, descarga el instalador que corresponda a tu sistema operativo (Windows, Mac o Linux) y completa la instalación.</p>
 </section>
-<section id="posit-workbench" class="level3" data-number="2.2.3">
-<h3 data-number="2.2.3" class="anchored" data-anchor-id="posit-workbench"><span class="header-section-number">2.2.3</span> Posit Workbench</h3>
 </section>
+<section id="sec-posit-workbench" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="sec-posit-workbench"><span class="header-section-number">2.3</span> Posit Workbench</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si realizaste una instalación local de acuerdo a los pasos descritos en la <a href="#sec-install-r" class="quarto-xref"><span>Sección 2.2.1</span></a> y la <a href="#sec-install-positron" class="quarto-xref"><span>Sección 2.2.2</span></a> puedes saltarte esta sección.</p>
+</div>
+</div>
+<p>Posit Workbench es un entorno de desarrollo basado en la nube diseñado para profesionales en ciencia de datos que puede ser utilizado por las instituciones educativas para enseñanza.</p>
 </section>
-<section id="uso-de-r-a-través-de-positron" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="uso-de-r-a-través-de-positron"><span class="header-section-number">2.3</span> Uso de R a través de Positron</h2>
+<section id="uso-de-r-a-través-de-positron" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="uso-de-r-a-través-de-positron"><span class="header-section-number">2.4</span> Uso de R a través de Positron</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
