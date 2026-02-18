@@ -7,9 +7,9 @@
 En términos simples R es un entorno gratuito para realizar análisis estadísticos y crear gráficos. A lo largo del libro utilizaremos R a través de Positron. R se puede entender como el motor de un automóvil y Positron el tablero de control del automovil que queremos manejar (Ver @fig-1-chap-1).
 
 ::: {#fig-1-chap-1 layout="[[48,-4,48]]"}
-![R: Motor](images/chap-1-fig-1-1.png)
+![R: Motor](images/chap-1-fig-1-1.png){fig-alt="Un motor de un automóvil representando a R como el núcleo de procesamiento de datos."}
 
-![Positron: Tablero de control](images/chap-1-fig-1-2.png)
+![Positron: Tablero de control](images/chap-1-fig-1-2.png){fig-alt="Un tablero de control de un automóvil representando a Positron como la interfaz para controlar el motor."}
 
 Analogía para entender la diferencia entre R y Positron
 :::
@@ -44,7 +44,7 @@ Selecciona el enlace **Download R for Linux** y elige la distribución que utili
 
 Una vez instales R es importante que verifiques la instalación. La forma más fácil de hacerlo es dar doble click en el ícono de R (Ver @fig-r-logo) para el caso de Windows o Mac o en Linux abrir el terminal e ingresa `R` en la línea de comandos.
 
-![Ícono de R](images/r-project-logo.png){#fig-r-logo width=20%}
+![Ícono de R](images/r-project-logo.png){#fig-r-logo width=20% fig-alt="Ícono del proyecto R"}
 
 Si observas que se abre una ventana con la consola de R (en los casos de Windows y Mac) o que en el terminal aparece el texto de bienvenida de la versión 4.2 o superior (en el caso de Linux), la instalación ha sido exitosa. Para finalizar la verificación, simplemente cierra la ventana de la aplicación en Windows o Mac, o en el caso de Linux, escribe el comando `q()` y presiona {{< kbd Enter >}} para salir de la sesión de R en el terminal.
 
@@ -60,7 +60,7 @@ Si realizaste una instalación local de acuerdo a los pasos descritos en la @sec
 
 Posit Workbench es un entorno de desarrollo basado en la nube diseñado para ciencia de datos que puede ser utilizado por las instituciones educativas para enseñanza. Posit Workbench reúne en un solo lugar las herramientas de trabajo más populares para ciencia de datos incluído Positron, ofreciendo un entorno seguro y listo para usar.
 
-Para utilizar esta herramienta, es indispensable contar con una cuenta activa que incluya un usuario y una contraseña proporcionados por tu institución. Una vez que tengas tus credenciales, debes ingresar a la dirección web asignada por tu entidad educativa para acceder a la plataforma. Por ejemplo, en la Universidad Militar Nueva Granada, el acceso se realiza a través del [portal de ingreso de Posit Workbench de la UMNG](https://positworkbench.umng.edu.co), donde podrás visualizar la interfaz típica para iniciar sesión y comenzar a trabajar.
+Para utilizar esta herramienta, es indispensable contar con una cuenta activa que incluya un usuario y una contraseña proporcionados por tu institución. Una vez que tengas tus credenciales, debes ingresar a la dirección web asignada por tu institución educativa para acceder a la plataforma. Por ejemplo, en la Universidad Militar Nueva Granada, el acceso se realiza a través del [portal de ingreso de Posit Workbench de la UMNG](https://positworkbench.umng.edu.co), donde podrás visualizar la interfaz típica para iniciar sesión y comenzar a trabajar.
 
 Antes de comenzar a utilizar R con Positron a través de este entorno, se recomienda revisar los [requisitos del sistema](https://docs.posit.co/ide/server-pro/user/posit-workbench/guide/requirements.html). Esta verificación previa te permitirá asegurar que tu computador cumplen con las especificaciones necesarias para tener una experiencia adecuada.
 
@@ -69,13 +69,33 @@ Antes de comenzar a utilizar R con Positron a través de este entorno, se recomi
 Si realizaste una instalación local siguiendo los pasos de la @sec-install-r y la @sec-install-positron podras abrir 2 programas. Sin embargo, a lo largo del libro siempre utilizaremos Positron y no la aplicación de R directamente. En la @fig-2-chap-1 se indica que ícono debes dar doble click o que programa abrir en tu computador.  
 
 ::: {#fig-2-chap-1 layout="[[48,-4,48]]"}
-![R: **No** dar click sobre este ícono](images/r-project-logo.png){#fig-r-icon width=26%}
+![R: **No** dar click sobre este ícono](images/r-project-logo.png){#fig-r-icon width=26% fig-alt="Ícono del proyecto R"}
 
-![Positron: Dar click sobre este ícono](images/positron-logo.png){#fig-positron-icon width=20%}
+![Positron: Dar click sobre este ícono](images/positron-logo.png){#fig-positron-icon width=20% fig-alt="Ícono del proyecto Positron"}
 
 Íconos de R y Positron en tu computador
 :::
 
 En caso que tengas acceso a Posit Workbench, de acuerdo a lo señalado en la @sec-posit-workbench, sigue los pasos descritos en [Primeros pasos con Positron Pro](https://docs.posit.co/ide/server-pro/user/positron/getting-started/) para abrir de manera directa Positron.
 
-Al abrir Positron, veraz algo similar a lo presentado en la **pending**. No te preocupes si encuentras pequeñas diferencias o un entorno visual con diferente color dado que los desarrolladores de Positron ésta constantemente actualizando la aplicación o puede que tengas una configuración por defecto diferente en cuanto al entorno visual de la interfaz.  
+Al utilizar Positron, encontrarás la interfaz organizada como se muestra en la @fig-positron-layout-outline, donde se resalta cada sección de la interfaz. No te preocupes si encuentras pequeñas diferencias o un entorno visual con diferente color dado que los desarrolladores de Positron ésta constantemente actualizando la aplicación o puede que tengas una configuración por defecto diferente en cuanto al entorno visual de la interfaz.
+
+::: {.callout-note}
+Si abres Positron por primera vez, verás una pantalla de bienvenida en lugar del **Editor**. Esto es normal, ya que este espacio se activará automáticamente una vez que abras tu primer archivo de R, un proceso que se señalará más adelante.
+:::
+
+![Interfaz de Positron resaltando cada sección](images/positron-layout-outline.png){#fig-positron-layout-outline fig-alt="Interfaz de Positron resaltando la barra de actividades, barra lateral primaria, el editor, el panel y la barra lateral secundaria"}
+
+1. **Barra de actividades**: Es tu menú principal. Funciona como un selector de herramientas mediante diferentes iconos. Al hacer clic en cada icono, eliges qué contenido deseas ver en la columna de al lado, permitiéndote cambiar rápidamente entre tus archivos, el buscador, el asistente o cualquier otra funcionalidad que se añada al instalar nuevas extensiones.
+
+2. **Barra lateral primaria**: Es tu ventana de navegación principal y su contenido cambia según el icono que hayas pulsado en la **Barra de actividades**. Por ejemplo, al seleccionar el icono de archivos, este espacio te permitirá abrir una carpeta desde tu computador para visualizar y gestionar todos los documentos y datos con los que vas a trabajar.
+
+3. **Editor**: Es el área central donde abres, escribes y modificas tus archivos. Aquí es donde principalmente redactarás instrucciones en el lenguaje R, permitiéndote crear y organizar el código necesario para tus análisis antes de ejecutarlo.
+
+4. **Panel**: Es el espacio donde se encuentra la consola, que actúa como la vía de comunicación directa con el lenguaje R. Aquí es donde el *"motor"* procesa las instrucciones que envías desde el editor tras ejecutar tu código.
+
+5. **Barra lateral secundaria**: Es tu panel de apoyo y consulta. En este espacio puedes examinar la lista de variables que has creado, visualizar los gráficos generados y acceder a los manuales de ayuda. También sirve para mostrar visualizaciones interactivas o conexiones externas que complementan tu trabajo sin interferir con el código que estás escribiendo.
+
+::: {.callout-tip}
+Positron dispone de una [guía oficial](https://positron.posit.co/welcome.html) que detalla cada aspecto de la aplicación. Sin embargo, dominar una aplicación es un proceso gradual que se logra con la práctica constante. En esta etapa inicial, no es necesario conocer todas sus funciones; conforme ganes confianza con la interfaz y según lo requieran tus análisis, podrás consultarla para profundizar en aspectos específicos que requieras.
+:::
