@@ -19,9 +19,9 @@ Si abandonamos la analogía anterior y sómos más específicos, R es un lenguaj
 ## ¿Cómo instalar R y Positron?
 
 ::: {.callout-important}
-Si formas parte de una institución educativa, te recomendamos verificar si tienes acceso a **Positron Pro** a través de **Posit Workbench** (ver @sec-posit-workbench). En caso de contar con este acceso, no es necesario realizar una instalación local. Por lo tanto, puedes saltarte los pasos de la @sec-install-r y la @sec-install-positron, ya que tendras acceso directo a estas herramientas.
+Si formas parte de una institución educativa, verifica si tienes acceso a **Positron Pro** a través de **Posit Workbench** (ver @sec-posit-workbench). En caso de contar con este acceso, no es necesario realizar una instalación local. Por lo tanto, puedes saltarte los pasos de la @sec-install-r y la @sec-install-positron, ya que tendras acceso directo a estas herramientas.
 
-Sin embargo, una vez que te sientas familiarizado con estas herramientas, te recomendamos consultar esas secciones para instalar R y Positron en tu propio computador personal.
+Sin embargo, una vez que te sientas familiarizado con estas herramientas, te recomiendo consultar esas secciones para instalar R y Positron en tu propio computador personal.
 :::
 
 ### R {#sec-install-r}
@@ -38,7 +38,7 @@ Selecciona el enlace **Download R for macOS** y dirígete a la sección **Latest
 
 #### Linux
 
-Selecciona el enlace **Download R for Linux** y elige la distribución que utilizas (como Ubuntu, Debian, Fedora o Red Hat). A diferencia de otros sistemas operativos, la instalación en Linux se realiza generalmente a través de la terminal siguiendo las instrucciones específicas de cada página.
+Selecciona el enlace **Download R for Linux** y elige la distribución que utilizas (como Ubuntu, Debian, Fedora o Red Hat). A diferencia de otros sistemas operativos, la instalación en Linux se realiza generalmente a través del terminal siguiendo las instrucciones específicas de cada página.
 
 #### Verificando la instalación de R
 
@@ -58,10 +58,24 @@ Para utilizar R con Positron, es necesario que primero revises los [requisitos d
 Si realizaste una instalación local de acuerdo a los pasos descritos en la @sec-install-r y la @sec-install-positron puedes saltarte esta sección.
 :::
 
-Posit Workbench es un entorno de desarrollo basado en la nube diseñado para profesionales en ciencia de datos que puede ser utilizado por las instituciones educativas para enseñanza.
+Posit Workbench es un entorno de desarrollo basado en la nube diseñado para ciencia de datos que puede ser utilizado por las instituciones educativas para enseñanza. Posit Workbench reúne en un solo lugar las herramientas de trabajo más populares para ciencia de datos incluído Positron, ofreciendo un entorno seguro y listo para usar.
 
+Para utilizar esta herramienta, es indispensable contar con una cuenta activa que incluya un usuario y una contraseña proporcionados por tu institución. Una vez que tengas tus credenciales, debes ingresar a la dirección web asignada por tu entidad educativa para acceder a la plataforma. Por ejemplo, en la Universidad Militar Nueva Granada, el acceso se realiza a través del [portal de ingreso de Posit Workbench de la UMNG](https://positworkbench.umng.edu.co), donde podrás visualizar la interfaz típica para iniciar sesión y comenzar a trabajar.
 
-
+Antes de comenzar a utilizar R con Positron a través de este entorno, se recomienda revisar los [requisitos del sistema](https://docs.posit.co/ide/server-pro/user/posit-workbench/guide/requirements.html). Esta verificación previa te permitirá asegurar que tu computador cumplen con las especificaciones necesarias para tener una experiencia adecuada.
 
 ## Uso de R a través de Positron
 
+Si realizaste una instalación local siguiendo los pasos de la @sec-install-r y la @sec-install-positron podras abrir 2 programas. Sin embargo, a lo largo del libro siempre utilizaremos Positron y no la aplicación de R directamente. En la @fig-2-chap-1 se indica que ícono debes dar doble click o que programa abrir en tu computador.  
+
+::: {#fig-2-chap-1 layout="[[48,-4,48]]"}
+![R: **No** dar click sobre este ícono](images/r-project-logo.png){#fig-r-icon width=26%}
+
+![Positron: Dar click sobre este ícono](images/positron-logo.png){#fig-positron-icon width=20%}
+
+Íconos de R y Positron en tu computador
+:::
+
+En caso que tengas acceso a Posit Workbench, de acuerdo a lo señalado en la @sec-posit-workbench, sigue los pasos descritos en [Primeros pasos con Positron Pro](https://docs.posit.co/ide/server-pro/user/positron/getting-started/) para abrir de manera directa Positron.
+
+Al abrir Positron, veraz algo similar a lo presentado en la **pending**. No te preocupes si encuentras pequeñas diferencias o un entorno visual con diferente color dado que los desarrolladores de Positron ésta constantemente actualizando la aplicación o puede que tengas una configuración por defecto diferente en cuanto al entorno visual de la interfaz.  
