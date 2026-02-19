@@ -115,7 +115,7 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="0.50575046"
      inkscape:cx="759.26773"
-     inkscape:cy="378.64523"
+     inkscape:cy="602.07558"
      inkscape:window-width="1854"
      inkscape:window-height="1011"
      inkscape:window-x="0"
@@ -243,7 +243,7 @@
     <text
        xml:space="preserve"
        id="text17"
-       style="font-size:26.6667px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect17);fill:none;fill-opacity:1;stroke:#004225;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
+       style="font-size:26.6667px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect17);display:inline;fill:none;fill-opacity:1;stroke:#004225;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
        transform="translate(4.3463443,-16)"><tspan
          x="7.9082031"
          y="691.90823"
@@ -251,7 +251,7 @@
     <text
        xml:space="preserve"
        id="text18"
-       style="font-size:26.6667px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect18);fill:none;fill-opacity:1;stroke:#f4c430;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
+       style="font-size:26.6667px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect18);display:inline;fill:none;fill-opacity:1;stroke:#f4c430;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
        transform="translate(13.353521,-30)"><tspan
          x="158.18164"
          y="612.81644"
@@ -259,7 +259,7 @@
     <text
        xml:space="preserve"
        id="text19"
-       style="font-size:26.6667px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect19);fill:none;fill-opacity:1;stroke:#800080;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
+       style="font-size:26.6667px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect19);display:inline;fill:none;fill-opacity:1;stroke:#800080;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
        transform="translate(5.6878657,-6)"><tspan
          x="751.35938"
          y="399.27347"
@@ -267,7 +267,7 @@
     <text
        xml:space="preserve"
        id="text20"
-       style="font-size:26.6667px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect20);fill:none;fill-opacity:1;stroke:#0000ff;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
+       style="font-size:26.6667px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect20);display:inline;fill:none;fill-opacity:1;stroke:#0000ff;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
        transform="translate(-0.19823244,-10)"><tspan
          x="757.29102"
          y="840.2012"
@@ -275,7 +275,7 @@
     <text
        xml:space="preserve"
        id="text21"
-       style="font-size:26.6667px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect21);fill:none;fill-opacity:1;stroke:#cd3232;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
+       style="font-size:26.6667px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect21);display:inline;fill:none;fill-opacity:1;stroke:#cd3232;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
        transform="translate(3.2951452,-10)"><tspan
          x="1494.8086"
          y="563.3848"
