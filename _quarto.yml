@@ -31,6 +31,7 @@ book:
     - part: first_steps_r.qmd
       chapters: 
         - welcome_to_r.qmd
+        - project-oriented_workflow.qmd
         - r_packages.qmd
     - part: data_visualization.qmd
     - part: data_wrangling.qmd

@@ -3,3 +3,6 @@
 Éste es un libro creado con mardown y con código ejecutable
 
 Ésta es una referencia @wickham_r_2023
+
+Remember do add how this book was write: how to write mathematics in relation to the chapter by Paul Halmos
+and  Head First Networking: A Brain-Friendly Guide  by Al Anderson, Ryan Benedetti

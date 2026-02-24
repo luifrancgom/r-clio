@@ -1,0 +1,25 @@
+# Flujo de trabajo orientado a proyectos
+
+## Flujo de trabajo por proyectos en Positron para R
+
+Imagina que eres un carpintero profesional y quieres construir una silla y una cama. Tienes 2 formas de trabajar (Ver @fig-1-chap-3):
+
+**1. El taller del caos**
+
+Trabajas con ambos proyectos mezclados sobre la misma mesa de trabajo. Las piezas de la silla están amontonadas sobre las de la cama y los tornillos están revueltos. Para avanzar en la silla, primero debes apartar lo que te estorba de la cama. Si decides mudarte de taller, tienes que identificar y recoger cada pieza una por una, con el riesgo de olvidar algo o llevarte una parte que no corresponde.
+
+**2. El taller por proyectos**
+
+Utilizas una caja independiente para cada mueble. Sobre la mesa de trabajo solo pones la caja de la silla o la de la cama, según lo que necesites. Cada caja contiene únicamente las piezas y los planos de ese proyecto. Si decides trabajar en la silla, la mesa queda libre de cualquier parte de la cama. Si tienes que mudarte de taller, simplemente cierras la caja y te la llevas: cada proyecto es autónomo, listo para continuar en cualquier otro lugar.
+
+::: {#fig-1-chap-3 layout="[[48,-4,48]]"}
+![El taller del caos: sin un flujo de trabajo definido](images/chaotic-workshop.png){fig-alt="Una mesa de trabajo de carpintería desordenada donde las piezas de madera de una silla y una cama están mezcladas y amontonadas, ilustrando la falta de un flujo de trabajo organizado."}
+
+![El taller por proyectos: flujo de trabajo orientado a proyectos](images/project-workshop.png){fig-alt="Una mesa de trabajo de carpintería organizada donde las piezas de una silla y una cama están separadas en cajas independientes, ilustrando un flujo de trabajo basado en proyectos."}
+
+Analogía para entender la importancia de adoptar un flujo de trabajo orientado a proyectos
+:::
+
+Cuando utilices R para realizar un análisis de datos, es importante adoptar un flujo de trabajo orientado a proyectos. Esto significa organizar cada análisis en una carpeta específica que contenga todos los archivos relevantes para esa tarea en particular. Esta práctica garantiza que el proyecto se pueda mover de un lugar a otro en tu computador, o incluso a otros computadores, y que este simplemente "funcione" [@bryan_project-oriented_2017].
+
+En Positron, un proyecto es una carpeta que la aplicación reconoce como tu centro de operaciones. Al abrirla, Positron asume automáticamente que todo lo que necesitas buscar o guardar se encuentra dentro de esa ubicación.

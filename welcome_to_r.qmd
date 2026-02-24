@@ -1,15 +1,19 @@
 # Bienvenidos a R
 
-Éste capítulo se encuentra basado en [@ismay_statistical_2025, chap. 1]
+Este capítulo se basa en [@ismay_statistical_2025, cap. 1] y tiene como propósito introducir las herramientas fundamentales para el análisis de datos con R. Exploraremos los siguientes aspectos:
+
+1. ¿Qué es R y Positron?
+2. ¿Cómo instalar R y Positron o utilizar Posit Workbench?
+3. Interfaz de Positron 
 
 ## ¿Qué es R y Positron?
 
-En términos simples R es un entorno gratuito para realizar análisis estadísticos y crear gráficos. A lo largo del libro utilizaremos R a través de Positron. R se puede entender como el motor de un automóvil y Positron el tablero de control del automovil que queremos manejar (Ver @fig-1-chap-1).
+En términos simples R es un entorno gratuito para realizar análisis estadísticos y crear gráficos. A lo largo del libro utilizaremos R a través de Positron. R se puede entender como el motor de un automóvil y Positron el tablero de control del automovil que queremos manejar (Ver @fig-1-chap-2).
 
-::: {#fig-1-chap-1 layout="[[48,-4,48]]"}
-![R: Motor](images/chap-1-fig-1-1.png){fig-alt="Un motor de un automóvil representando a R como el núcleo de procesamiento de datos."}
+::: {#fig-1-chap-2 layout="[[48,-4,48]]"}
+![R: Motor](images/r-engine.png){fig-alt="Un motor de un automóvil representando a R como el núcleo de procesamiento de datos."}
 
-![Positron: Tablero de control](images/chap-1-fig-1-2.png){fig-alt="Un tablero de control de un automóvil representando a Positron como la interfaz para controlar el motor."}
+![Positron: Tablero de control](images/positron-dashboard.png){fig-alt="Un tablero de control de un automóvil representando a Positron como la interfaz para controlar el motor."}
 
 Analogía para entender la diferencia entre R y Positron
 :::
@@ -46,7 +50,7 @@ Una vez instales R es importante que verifiques la instalación. La forma más f
 
 ![Ícono de R](images/r-project-logo.png){#fig-r-logo width=20% fig-alt="Ícono del proyecto R"}
 
-Si observas que se abre una ventana con la consola de R (en los casos de Windows y Mac) o que en el terminal aparece el texto de bienvenida de la versión 4.2 o superior (en el caso de Linux), la instalación ha sido exitosa. Para finalizar la verificación, simplemente cierra la ventana de la aplicación en Windows o Mac, o en el caso de Linux, escribe el comando `q()` y presiona {{< kbd Enter >}} para salir de la sesión de R en el terminal.
+Si observas que se abre una ventana con la consola de R (en los casos de Windows y Mac) o que en el terminal aparece el texto de bienvenida de la versión 4.2 o superior (en el caso de Linux), la instalación ha sido exitosa. Para finalizar la verificación, simplemente cierra la ventana de la aplicación en Windows/Mac, o en el caso de Linux, escribe el comando `q()` y presiona {{< kbd Enter >}} para salir de la sesión de R en el terminal.
 
 ### Positron {#sec-install-positron}
 
@@ -64,11 +68,11 @@ Para utilizar esta herramienta, es indispensable contar con una cuenta activa qu
 
 Antes de comenzar a utilizar R con Positron a través de este entorno, se recomienda revisar los [requisitos del sistema](https://docs.posit.co/ide/server-pro/user/posit-workbench/guide/requirements.html). Esta verificación previa te permitirá asegurar que tu computador cumplen con las especificaciones necesarias para tener una experiencia adecuada.
 
-## Uso de R a través de Positron
+## Interfaz de Positron
 
-Si realizaste una instalación local siguiendo los pasos de la @sec-install-r y la @sec-install-positron podras abrir 2 programas. Sin embargo, a lo largo del libro siempre utilizaremos Positron y no la aplicación de R directamente. En la @fig-2-chap-1 se indica que ícono debes dar doble click o que programa abrir en tu computador.  
+Si realizaste una instalación local siguiendo los pasos de la @sec-install-r y la @sec-install-positron podras abrir 2 programas. Sin embargo, a lo largo del libro siempre utilizaremos Positron y no la aplicación de R directamente. En la @fig-2-chap-2 se indica que ícono debes dar doble click o que programa abrir en tu computador.  
 
-::: {#fig-2-chap-1 layout="[[48,-4,48]]"}
+::: {#fig-2-chap-2 layout="[[48,-4,48]]"}
 ![R: **No** dar click sobre este ícono](images/r-project-logo.png){#fig-r-icon width=26% fig-alt="Ícono del proyecto R"}
 
 ![Positron: Dar click sobre este ícono](images/positron-logo.png){#fig-positron-icon width=20% fig-alt="Ícono del proyecto Positron"}
@@ -99,3 +103,13 @@ Si abres Positron por primera vez, verás una pantalla de bienvenida en lugar de
 ::: {.callout-tip}
 Positron dispone de una [guía oficial](https://positron.posit.co/welcome.html) que detalla cada aspecto de la aplicación. Sin embargo, dominar una aplicación es un proceso gradual que se logra con la práctica constante. En esta etapa inicial, no es necesario conocer todas sus funciones; conforme ganes confianza con la interfaz y según lo requieran tus análisis, podrás consultarla para profundizar en aspectos específicos que requieras.
 :::
+
+### Configuración recomendada para principiantes
+
+**Pending**
+
+Recommended Positron settings for beginners? #7527
+
+https://posit-dev.github.io/air/editor-vscode.html#format-on-save
+
+Add also changing to dark theme for readibility
