@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; Paquetes de R – R para análisis de datos</title>
+<title>4&nbsp; Paquetes de R – R para análisis de datos</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./data_visualization.html" rel="next">
-<link href="./welcome_to_r.html" rel="prev">
+<link href="./project-oriented_workflow.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-fc99ff288d4bfb5c05f4377e099a16b1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-9873cf03da25065e942f1a9fa5540f47.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -83,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./first_steps_r.html">Primeros pasos con R</a></li><li class="breadcrumb-item"><a href="./r_packages.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Paquetes de R</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./first_steps_r.html">Primeros pasos con R</a></li><li class="breadcrumb-item"><a href="./r_packages.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Paquetes de R</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -145,8 +145,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./project-oriented_workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Flujo de trabajo orientado a proyectos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./r_packages.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Paquetes de R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Paquetes de R</span></span></a>
   </div>
 </li>
       </ul>
@@ -191,19 +197,19 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#qué-son-los-paquetes-de-r" id="toc-qué-son-los-paquetes-de-r" class="nav-link active" data-scroll-target="#qué-son-los-paquetes-de-r"><span class="header-section-number">3.1</span> ¿Qué son los paquetes de R?</a></li>
-  <li><a href="#instalación-de-paquetes" id="toc-instalación-de-paquetes" class="nav-link" data-scroll-target="#instalación-de-paquetes"><span class="header-section-number">3.2</span> Instalación de paquetes</a></li>
-  <li><a href="#carga-de-paquetes" id="toc-carga-de-paquetes" class="nav-link" data-scroll-target="#carga-de-paquetes"><span class="header-section-number">3.3</span> Carga de paquetes</a></li>
-  <li><a href="#uso-de-paquetes" id="toc-uso-de-paquetes" class="nav-link" data-scroll-target="#uso-de-paquetes"><span class="header-section-number">3.4</span> Uso de paquetes</a></li>
+  <li><a href="#qué-son-los-paquetes-de-r" id="toc-qué-son-los-paquetes-de-r" class="nav-link active" data-scroll-target="#qué-son-los-paquetes-de-r"><span class="header-section-number">4.1</span> ¿Qué son los paquetes de R?</a></li>
+  <li><a href="#instalación-de-paquetes" id="toc-instalación-de-paquetes" class="nav-link" data-scroll-target="#instalación-de-paquetes"><span class="header-section-number">4.2</span> Instalación de paquetes</a></li>
+  <li><a href="#carga-de-paquetes" id="toc-carga-de-paquetes" class="nav-link" data-scroll-target="#carga-de-paquetes"><span class="header-section-number">4.3</span> Carga de paquetes</a></li>
+  <li><a href="#uso-de-paquetes" id="toc-uso-de-paquetes" class="nav-link" data-scroll-target="#uso-de-paquetes"><span class="header-section-number">4.4</span> Uso de paquetes</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/r_packages.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/r_packages.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./first_steps_r.html">Primeros pasos con R</a></li><li class="breadcrumb-item"><a href="./r_packages.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Paquetes de R</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./first_steps_r.html">Primeros pasos con R</a></li><li class="breadcrumb-item"><a href="./r_packages.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Paquetes de R</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Paquetes de R</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Paquetes de R</span></h1>
 </div>
 
 
@@ -220,17 +226,17 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="qué-son-los-paquetes-de-r" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="qué-son-los-paquetes-de-r"><span class="header-section-number">3.1</span> ¿Qué son los paquetes de R?</h2>
+<section id="qué-son-los-paquetes-de-r" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="qué-son-los-paquetes-de-r"><span class="header-section-number">4.1</span> ¿Qué son los paquetes de R?</h2>
 </section>
-<section id="instalación-de-paquetes" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="instalación-de-paquetes"><span class="header-section-number">3.2</span> Instalación de paquetes</h2>
+<section id="instalación-de-paquetes" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="instalación-de-paquetes"><span class="header-section-number">4.2</span> Instalación de paquetes</h2>
 </section>
-<section id="carga-de-paquetes" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="carga-de-paquetes"><span class="header-section-number">3.3</span> Carga de paquetes</h2>
+<section id="carga-de-paquetes" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="carga-de-paquetes"><span class="header-section-number">4.3</span> Carga de paquetes</h2>
 </section>
-<section id="uso-de-paquetes" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="uso-de-paquetes"><span class="header-section-number">3.4</span> Uso de paquetes</h2>
+<section id="uso-de-paquetes" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="uso-de-paquetes"><span class="header-section-number">4.4</span> Uso de paquetes</h2>
 <p>In this part show a data set</p>
 
 
@@ -639,8 +645,8 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./welcome_to_r.html" class="pagination-link" aria-label="Bienvenidos a R">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Bienvenidos a R</span></span>
+      <a href="./project-oriented_workflow.html" class="pagination-link" aria-label="Flujo de trabajo orientado a proyectos">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Flujo de trabajo orientado a proyectos</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

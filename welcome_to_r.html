@@ -50,7 +50,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./r_packages.html" rel="next">
+<link href="./project-oriented_workflow.html" rel="next">
 <link href="./first_steps_r.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -62,7 +62,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-fc99ff288d4bfb5c05f4377e099a16b1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-9873cf03da25065e942f1a9fa5540f47.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/kbd/kbd.js"></script>
 <link href="site_libs/quarto-contrib/kbd/kbd.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -167,8 +167,14 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./project-oriented_workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Flujo de trabajo orientado a proyectos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./r_packages.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Paquetes de R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Paquetes de R</span></span></a>
   </div>
 </li>
       </ul>
@@ -220,7 +226,10 @@ div.csl-indent {
   <li><a href="#sec-install-positron" id="toc-sec-install-positron" class="nav-link" data-scroll-target="#sec-install-positron"><span class="header-section-number">2.2.2</span> Positron</a></li>
   </ul></li>
   <li><a href="#sec-posit-workbench" id="toc-sec-posit-workbench" class="nav-link" data-scroll-target="#sec-posit-workbench"><span class="header-section-number">2.3</span> Posit Workbench</a></li>
-  <li><a href="#uso-de-r-a-través-de-positron" id="toc-uso-de-r-a-través-de-positron" class="nav-link" data-scroll-target="#uso-de-r-a-través-de-positron"><span class="header-section-number">2.4</span> Uso de R a través de Positron</a></li>
+  <li><a href="#interfaz-de-positron" id="toc-interfaz-de-positron" class="nav-link" data-scroll-target="#interfaz-de-positron"><span class="header-section-number">2.4</span> Interfaz de Positron</a>
+  <ul class="collapse">
+  <li><a href="#configuración-recomendada-para-principiantes" id="toc-configuración-recomendada-para-principiantes" class="nav-link" data-scroll-target="#configuración-recomendada-para-principiantes"><span class="header-section-number">2.4.1</span> Configuración recomendada para principiantes</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/welcome_to_r.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/welcome_to_r.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
@@ -246,18 +255,23 @@ div.csl-indent {
 </header>
 
 
-<p>Éste capítulo se encuentra basado en <span class="citation" data-cites="ismay_statistical_2025">(<a href="references.html#ref-ismay_statistical_2025" role="doc-biblioref">Ismay, 2025</a>, chap.&nbsp;1)</span></p>
+<p>Este capítulo se basa en <span class="citation" data-cites="ismay_statistical_2025">(<a href="references.html#ref-ismay_statistical_2025" role="doc-biblioref">Ismay, 2025, Capítulo 1</a>)</span> y tiene como propósito introducir las herramientas fundamentales para el análisis de datos con R. Exploraremos los siguientes aspectos:</p>
+<ol type="1">
+<li>¿Qué es R y Positron?</li>
+<li>¿Cómo instalar R y Positron o utilizar Posit Workbench?</li>
+<li>Interfaz de Positron</li>
+</ol>
 <section id="qué-es-r-y-positron" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="qué-es-r-y-positron"><span class="header-section-number">2.1</span> ¿Qué es R y Positron?</h2>
-<p>En términos simples R es un entorno gratuito para realizar análisis estadísticos y crear gráficos. A lo largo del libro utilizaremos R a través de Positron. R se puede entender como el motor de un automóvil y Positron el tablero de control del automovil que queremos manejar (Ver <a href="#fig-1-chap-1" class="quarto-xref">Figura&nbsp;<span>2.1</span></a>).</p>
-<div id="fig-1-chap-1" class="quarto-layout-panel">
+<p>En términos simples R es un entorno gratuito para realizar análisis estadísticos y crear gráficos. A lo largo del libro utilizaremos R a través de Positron. R se puede entender como el motor de un automóvil y Positron el tablero de control del automovil que queremos manejar (Ver <a href="#fig-1-chap-2" class="quarto-xref">Figura&nbsp;<span>2.1</span></a>).</p>
+<div id="fig-1-chap-2" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-1-chap-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="fig-1-chap-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 48.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/chap-1-fig-1-1.png" class="img-fluid figure-img" alt="Un motor de un automóvil representando a R como el núcleo de procesamiento de datos."></p>
+<p><img src="images/r-engine.png" class="img-fluid figure-img" alt="Un motor de un automóvil representando a R como el núcleo de procesamiento de datos."></p>
 <figcaption>R: Motor</figcaption>
 </figure>
 </div>
@@ -268,14 +282,14 @@ div.csl-indent {
 <div class="quarto-layout-cell" style="flex-basis: 48.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/chap-1-fig-1-2.png" class="img-fluid figure-img" alt="Un tablero de control de un automóvil representando a Positron como la interfaz para controlar el motor."></p>
+<p><img src="images/positron-dashboard.png" class="img-fluid figure-img" alt="Un tablero de control de un automóvil representando a Positron como la interfaz para controlar el motor."></p>
 <figcaption>Positron: Tablero de control</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-chap-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-chap-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;2.1: Analogía para entender la diferencia entre R y Positron
 </figcaption>
 </figure>
@@ -326,7 +340,7 @@ Figura&nbsp;2.2: Ícono de R
 </figcaption>
 </figure>
 </div>
-<p>Si observas que se abre una ventana con la consola de R (en los casos de Windows y Mac) o que en el terminal aparece el texto de bienvenida de la versión 4.2 o superior (en el caso de Linux), la instalación ha sido exitosa. Para finalizar la verificación, simplemente cierra la ventana de la aplicación en Windows o Mac, o en el caso de Linux, escribe el comando <code>q()</code> y presiona <kbd title="Enter" aria-hidden="true">Enter</kbd><span class="visually-hidden">Enter</span> para salir de la sesión de R en el terminal.</p>
+<p>Si observas que se abre una ventana con la consola de R (en los casos de Windows y Mac) o que en el terminal aparece el texto de bienvenida de la versión 4.2 o superior (en el caso de Linux), la instalación ha sido exitosa. Para finalizar la verificación, simplemente cierra la ventana de la aplicación en Windows/Mac, o en el caso de Linux, escribe el comando <code>q()</code> y presiona <kbd title="Enter" aria-hidden="true">Enter</kbd><span class="visually-hidden">Enter</span> para salir de la sesión de R en el terminal.</p>
 </section>
 </section>
 <section id="sec-install-positron" class="level3" data-number="2.2.2">
@@ -353,18 +367,18 @@ Importante
 <p>Para utilizar esta herramienta, es indispensable contar con una cuenta activa que incluya un usuario y una contraseña proporcionados por tu institución. Una vez que tengas tus credenciales, debes ingresar a la dirección web asignada por tu institución educativa para acceder a la plataforma. Por ejemplo, en la Universidad Militar Nueva Granada, el acceso se realiza a través del <a href="https://positworkbench.umng.edu.co">portal de ingreso de Posit Workbench de la UMNG</a>, donde podrás visualizar la interfaz típica para iniciar sesión y comenzar a trabajar.</p>
 <p>Antes de comenzar a utilizar R con Positron a través de este entorno, se recomienda revisar los <a href="https://docs.posit.co/ide/server-pro/user/posit-workbench/guide/requirements.html">requisitos del sistema</a>. Esta verificación previa te permitirá asegurar que tu computador cumplen con las especificaciones necesarias para tener una experiencia adecuada.</p>
 </section>
-<section id="uso-de-r-a-través-de-positron" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="uso-de-r-a-través-de-positron"><span class="header-section-number">2.4</span> Uso de R a través de Positron</h2>
-<p>Si realizaste una instalación local siguiendo los pasos de la <a href="#sec-install-r" class="quarto-xref"><span>Sección 2.2.1</span></a> y la <a href="#sec-install-positron" class="quarto-xref"><span>Sección 2.2.2</span></a> podras abrir 2 programas. Sin embargo, a lo largo del libro siempre utilizaremos Positron y no la aplicación de R directamente. En la <a href="#fig-2-chap-1" class="quarto-xref">Figura&nbsp;<span>2.3</span></a> se indica que ícono debes dar doble click o que programa abrir en tu computador.</p>
-<div id="fig-2-chap-1" class="quarto-layout-panel">
+<section id="interfaz-de-positron" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="interfaz-de-positron"><span class="header-section-number">2.4</span> Interfaz de Positron</h2>
+<p>Si realizaste una instalación local siguiendo los pasos de la <a href="#sec-install-r" class="quarto-xref"><span>Sección 2.2.1</span></a> y la <a href="#sec-install-positron" class="quarto-xref"><span>Sección 2.2.2</span></a> podras abrir 2 programas. Sin embargo, a lo largo del libro siempre utilizaremos Positron y no la aplicación de R directamente. En la <a href="#fig-2-chap-2" class="quarto-xref">Figura&nbsp;<span>2.3</span></a> se indica que ícono debes dar doble click o que programa abrir en tu computador.</p>
+<div id="fig-2-chap-2" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-2-chap-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="fig-2-chap-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
-<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-2-chap-1" style="flex-basis: 48.0%;justify-content: flex-start;">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-2-chap-2" style="flex-basis: 48.0%;justify-content: flex-start;">
 <div id="fig-r-icon" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Ícono del proyecto R">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-r-icon-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/r-project-logo.png" class="img-fluid figure-img" style="width:26.0%" data-ref-parent="fig-2-chap-1" alt="Ícono del proyecto R">
+<img src="images/r-project-logo.png" class="img-fluid figure-img" style="width:26.0%" data-ref-parent="fig-2-chap-2" alt="Ícono del proyecto R">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-r-icon-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) R: <strong>No</strong> dar click sobre este ícono
@@ -375,11 +389,11 @@ Importante
 <div class="quarto-figure-spacer quarto-layout-cell" style="flex-basis: 4.0%;justify-content: flex-start;">
 <p>&nbsp;</p>
 </div>
-<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-2-chap-1" style="flex-basis: 48.0%;justify-content: flex-start;">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-2-chap-2" style="flex-basis: 48.0%;justify-content: flex-start;">
 <div id="fig-positron-icon" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Ícono del proyecto Positron">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-positron-icon-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/positron-logo.png" class="img-fluid figure-img" style="width:20.0%" data-ref-parent="fig-2-chap-1" alt="Ícono del proyecto Positron">
+<img src="images/positron-logo.png" class="img-fluid figure-img" style="width:20.0%" data-ref-parent="fig-2-chap-2" alt="Ícono del proyecto Positron">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-positron-icon-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Positron: Dar click sobre este ícono
@@ -389,7 +403,7 @@ Importante
 </div>
 </div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-chap-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-chap-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;2.3: Íconos de R y Positron en tu computador
 </figcaption>
 </figure>
@@ -439,6 +453,12 @@ Tip
 <p>Positron dispone de una <a href="https://positron.posit.co/welcome.html">guía oficial</a> que detalla cada aspecto de la aplicación. Sin embargo, dominar una aplicación es un proceso gradual que se logra con la práctica constante. En esta etapa inicial, no es necesario conocer todas sus funciones; conforme ganes confianza con la interfaz y según lo requieran tus análisis, podrás consultarla para profundizar en aspectos específicos que requieras.</p>
 </div>
 </div>
+<section id="configuración-recomendada-para-principiantes" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="configuración-recomendada-para-principiantes"><span class="header-section-number">2.4.1</span> Configuración recomendada para principiantes</h3>
+<p><strong>Pending</strong></p>
+<p>Recommended Positron settings for beginners? #7527</p>
+<p>https://posit-dev.github.io/air/editor-vscode.html#format-on-save</p>
+<p>Add also changing to dark theme for readibility</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
@@ -446,6 +466,7 @@ Tip
 Ismay, C. (2025). <em>Statistical inference via data science: a moderndive into r and the tidyverse</em> (Second edition). CRC Press. <a href="https://moderndive.com/v2/index.html">https://moderndive.com/v2/index.html</a>
 </div>
 </div>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -856,8 +877,8 @@ Ismay, C. (2025). <em>Statistical inference via data science: a moderndive into 
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./r_packages.html" class="pagination-link" aria-label="Paquetes de R">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Paquetes de R</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./project-oriented_workflow.html" class="pagination-link" aria-label="Flujo de trabajo orientado a proyectos">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Flujo de trabajo orientado a proyectos</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
