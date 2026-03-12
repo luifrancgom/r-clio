@@ -18,7 +18,7 @@ En términos simples R es un entorno gratuito para realizar análisis estadísti
 Analogía para entender la diferencia entre R y Positron
 :::
 
-Si abandonamos la analogía anterior y sómos más específicos, R es un lenguaje de programación y Positron es un *Entorno Integrado de Desarrollo (IDE)* que incluye un conjunto de elementos en su interfaz para utilizar de manera mucho más fácil R cuando queremos llevar a cabo análisis estadísticos y explorar datos.
+Si abandonamos la analogía anterior y sómos más específicos, R es un lenguaje de programación y Positron es un [*Entorno Integrado de Desarrollo (IDE)*](https://es.wikipedia.org/wiki/Entorno_de_desarrollo_integrado) que incluye un conjunto de elementos en su interfaz para utilizar de manera mucho más fácil R cuando queremos llevar a cabo análisis estadísticos y explorar datos.
 
 ## ¿Cómo instalar R y Positron?
 
@@ -85,7 +85,7 @@ En caso que tengas acceso a Posit Workbench, de acuerdo a lo señalado en la @se
 Al utilizar Positron, encontrarás la interfaz organizada como se muestra en la @fig-positron-layout-outline, donde se resalta cada sección de la interfaz. No te preocupes si encuentras pequeñas diferencias o un entorno visual con diferente color dado que los desarrolladores de Positron ésta constantemente actualizando la aplicación o puede que tengas una configuración por defecto diferente en cuanto al entorno visual de la interfaz.
 
 ::: {.callout-note}
-Si abres Positron por primera vez, verás una pantalla de bienvenida en lugar del **Editor**. Esto es normal, ya que este espacio se activará automáticamente una vez que abras tu primer archivo de R, un proceso que se señalará más adelante.
+Si abres Positron por primera vez, verás una pantalla de bienvenida en lugar del **Editor** (Ver @fig-positron-layout-outline). Esto es normal, ya que este espacio se activará automáticamente una vez que abras tu primer archivo de R, un proceso que se señalará más adelante.
 :::
 
 ![Interfaz de Positron resaltando cada sección](images/positron-layout-outline.png){#fig-positron-layout-outline fig-alt="Interfaz de Positron resaltando la barra de actividades, barra lateral primaria, el editor, el panel y la barra lateral secundaria"}
