@@ -106,6 +106,11 @@ Positron dispone de una [guía oficial](https://positron.posit.co/welcome.html) 
 
 ### Configuración recomendada para principiantes
 
+Existen [diferentes recomendaciones](https://github.com/posit-dev/positron/discussions/7527) para configurar Positron enfocadas a principiantes. Sin embargo, se recomienda que adoptes la siguiente configuración para Positron:
+
+- Utilizar un tema de color oscuro
+- Utilizar la opción dar formato al guardar
+
 **Pending**
 
 Recommended Positron settings for beginners? #7527
