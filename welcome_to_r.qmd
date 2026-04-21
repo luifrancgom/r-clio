@@ -106,6 +106,7 @@ Positron dispone de una [guía oficial](https://positron.posit.co/welcome.html) 
 
 ### Configuración recomendada para principiantes
 
+<<<<<<< HEAD
 Existen [diferentes recomendaciones para principiantes](https://github.com/posit-dev/positron/discussions/7527) respecto a cómo configurar Positron. Para configurar Positron es necesario modificar el archivo de configuración de usuario `settings.json` abriendo la paleta de comandos con {{< kbd Ctrl-Shift-P >}} y escribiendo la opción **Preferences: Open User Settings (JSON)**. A lo largo del libro agregaremos las siguientes opciones en `settings.json`: 
 
 ```json
@@ -124,6 +125,12 @@ Existen [diferentes recomendaciones para principiantes](https://github.com/posit
 
 En caso que hayas seguido las instrucciones descritas en @sec-posit-workbench es posible que el administrador de la herramienta previamente haya fijado por defecto éstos aspectos. En caso contrario, puedes agregar ésta configuración. 
  
+=======
+Existen [diferentes recomendaciones](https://github.com/posit-dev/positron/discussions/7527) para configurar Positron enfocadas a principiantes. Sin embargo, se recomienda que adoptes la siguiente configuración para Positron:
+
+- Utilizar un tema de color oscuro
+- Utilizar la opción dar formato al guardar
+>>>>>>> c191b80830555dfc3fb45625d889118888f3a335
 
 **Pending**
 
