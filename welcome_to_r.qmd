@@ -18,7 +18,7 @@ En términos simples R es un entorno gratuito para realizar análisis estadísti
 Analogía para entender la diferencia entre R y Positron
 :::
 
-Si abandonamos la analogía anterior y sómos más específicos, R es un lenguaje de programación y Positron es un [*Entorno Integrado de Desarrollo (IDE)*](https://es.wikipedia.org/wiki/Entorno_de_desarrollo_integrado) que incluye un conjunto de elementos en su interfaz para utilizar de manera mucho más fácil R cuando queremos llevar a cabo análisis estadísticos y explorar datos.
+Si abandonamos la analogía anterior y sómos más específicos, R es un lenguaje de programación y Positron es un [*Entorno de Desarrollo Integrado (IDE)*](https://es.wikipedia.org/wiki/Entorno_de_desarrollo_integrado) que incluye un conjunto de elementos en su interfaz para utilizar de manera mucho más fácil R cuando queremos llevar a cabo análisis estadísticos y explorar datos.
 
 ## ¿Cómo instalar R y Positron?
 
@@ -64,7 +64,7 @@ Si realizaste una instalación local de acuerdo a los pasos descritos en la @sec
 
 Posit Workbench es un entorno de desarrollo basado en la nube diseñado para ciencia de datos que puede ser utilizado por las instituciones educativas para enseñanza. Posit Workbench reúne en un solo lugar las herramientas de trabajo más populares para ciencia de datos incluído Positron, ofreciendo un entorno seguro y listo para usar.
 
-Para utilizar esta herramienta, es indispensable contar con una cuenta activa que incluya un usuario y una contraseña proporcionados por tu institución. Una vez que tengas tus credenciales, debes ingresar a la dirección web asignada por tu institución educativa para acceder a la plataforma. Por ejemplo, en la Universidad Militar Nueva Granada, el acceso se realiza a través del [portal de ingreso de Posit Workbench de la UMNG](https://positworkbench.umng.edu.co), donde podrás visualizar la interfaz típica para iniciar sesión y comenzar a trabajar.
+Para utilizar esta herramienta, es indispensable contar con una cuenta activa que incluya un usuario y una contraseña proporcionados por tu institución. Una vez que tengas tus credenciales, debes ingresar a la dirección web asignada por tu institución educativa para acceder a la plataforma. Por ejemplo, en la [Universidad Militar Nueva Granada - UMNG](https://umng.edu.co/), el acceso se realiza a través del [portal de ingreso de Posit Workbench de la UMNG](https://positworkbench.umng.edu.co), donde podrás visualizar la interfaz típica para iniciar sesión y comenzar a trabajar.
 
 Antes de comenzar a utilizar R con Positron a través de este entorno, se recomienda revisar los [requisitos del sistema](https://docs.posit.co/ide/server-pro/user/posit-workbench/guide/requirements.html). Esta verificación previa te permitirá asegurar que tu computador cumplen con las especificaciones necesarias para tener una experiencia adecuada.
 
@@ -105,6 +105,25 @@ Positron dispone de una [guía oficial](https://positron.posit.co/welcome.html) 
 :::
 
 ### Configuración recomendada para principiantes
+
+Existen [diferentes recomendaciones para principiantes](https://github.com/posit-dev/positron/discussions/7527) respecto a cómo configurar Positron. Para configurar Positron es necesario modificar el archivo de configuración de usuario `settings.json` abriendo la paleta de comandos con {{< kbd Ctrl-Shift-P >}} y escribiendo la opción **Preferences: Open User Settings (JSON)**. A lo largo del libro agregaremos las siguientes opciones en `settings.json`: 
+
+```json
+{
+    "workbench.colorTheme": "Default Positron Dark",
+    "[r]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "Posit.air-vscode"
+    },
+    "[quarto]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "quarto.quarto"
+    }
+}
+```
+
+En caso que hayas seguido las instrucciones descritas en @sec-posit-workbench es posible que el administrador de la herramienta previamente haya fijado por defecto éstos aspectos. En caso contrario, puedes agregar ésta configuración. 
+ 
 
 **Pending**
 
