@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.36">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,6 +22,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 /* CSS for citations */
 div.csl-bib-body { }
@@ -61,10 +96,10 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e6376574e63d1bfcfd8ced6c718d9408.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-8f778af39809923a09fbe4bc854691ee.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/kbd/kbd.js"></script>
 <link href="site_libs/quarto-contrib/kbd/kbd.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -296,7 +331,7 @@ Figura&nbsp;2.1: Analogía para entender la diferencia entre R y Positron
 </figcaption>
 </figure>
 </div>
-<p>Si abandonamos la analogía anterior y sómos más específicos, R es un lenguaje de programación y Positron es un <a href="https://es.wikipedia.org/wiki/Entorno_de_desarrollo_integrado"><em>Entorno Integrado de Desarrollo (IDE)</em></a> que incluye un conjunto de elementos en su interfaz para utilizar de manera mucho más fácil R cuando queremos llevar a cabo análisis estadísticos y explorar datos.</p>
+<p>Si abandonamos la analogía anterior y sómos más específicos, R es un lenguaje de programación y Positron es un <a href="https://es.wikipedia.org/wiki/Entorno_de_desarrollo_integrado"><em>Entorno de Desarrollo Integrado (IDE)</em></a> que incluye un conjunto de elementos en su interfaz para utilizar de manera mucho más fácil R cuando queremos llevar a cabo análisis estadísticos y explorar datos.</p>
 </section>
 <section id="cómo-instalar-r-y-positron" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="cómo-instalar-r-y-positron"><span class="header-section-number">2.2</span> ¿Cómo instalar R y Positron?</h2>
@@ -366,7 +401,7 @@ Importante
 </div>
 </div>
 <p>Posit Workbench es un entorno de desarrollo basado en la nube diseñado para ciencia de datos que puede ser utilizado por las instituciones educativas para enseñanza. Posit Workbench reúne en un solo lugar las herramientas de trabajo más populares para ciencia de datos incluído Positron, ofreciendo un entorno seguro y listo para usar.</p>
-<p>Para utilizar esta herramienta, es indispensable contar con una cuenta activa que incluya un usuario y una contraseña proporcionados por tu institución. Una vez que tengas tus credenciales, debes ingresar a la dirección web asignada por tu institución educativa para acceder a la plataforma. Por ejemplo, en la Universidad Militar Nueva Granada, el acceso se realiza a través del <a href="https://positworkbench.umng.edu.co">portal de ingreso de Posit Workbench de la UMNG</a>, donde podrás visualizar la interfaz típica para iniciar sesión y comenzar a trabajar.</p>
+<p>Para utilizar esta herramienta, es indispensable contar con una cuenta activa que incluya un usuario y una contraseña proporcionados por tu institución. Una vez que tengas tus credenciales, debes ingresar a la dirección web asignada por tu institución educativa para acceder a la plataforma. Por ejemplo, en la <a href="https://umng.edu.co/">Universidad Militar Nueva Granada - UMNG</a>, el acceso se realiza a través del <a href="https://positworkbench.umng.edu.co">portal de ingreso de Posit Workbench de la UMNG</a>, donde podrás visualizar la interfaz típica para iniciar sesión y comenzar a trabajar.</p>
 <p>Antes de comenzar a utilizar R con Positron a través de este entorno, se recomienda revisar los <a href="https://docs.posit.co/ide/server-pro/user/posit-workbench/guide/requirements.html">requisitos del sistema</a>. Esta verificación previa te permitirá asegurar que tu computador cumplen con las especificaciones necesarias para tener una experiencia adecuada.</p>
 </section>
 <section id="interfaz-de-positron" class="level2" data-number="2.4">
@@ -457,10 +492,23 @@ Tip
 </div>
 <section id="configuración-recomendada-para-principiantes" class="level3" data-number="2.4.1">
 <h3 data-number="2.4.1" class="anchored" data-anchor-id="configuración-recomendada-para-principiantes"><span class="header-section-number">2.4.1</span> Configuración recomendada para principiantes</h3>
-<p>Existen <a href="https://github.com/posit-dev/positron/discussions/7527">diferentes recomendaciones</a> para configurar Positron enfocadas a principiantes. Sin embargo, se recomienda que adoptes la siguiente configuración para Positron:</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD Existen <a href="https://github.com/posit-dev/positron/discussions/7527">diferentes recomendaciones para principiantes</a> respecto a cómo configurar Positron. Para configurar Positron es necesario modificar el archivo de configuración de usuario <code>settings.json</code> abriendo la paleta de comandos con <kbd title="Ctrl-Shift-P" aria-hidden="true">Ctrl-Shift-P</kbd><span class="visually-hidden">Ctrl-Shift-P</span> y escribiendo la opción <strong>Preferences: Open User Settings (JSON)</strong>. A lo largo del libro agregaremos las siguientes opciones en <code>settings.json</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"workbench.colorTheme"</span><span class="fu">:</span> <span class="st">"Default Positron Dark"</span><span class="fu">,</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"[r]"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"editor.formatOnSave"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"editor.defaultFormatter"</span><span class="fu">:</span> <span class="st">"Posit.air-vscode"</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">},</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"[quarto]"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"editor.formatOnSave"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"editor.defaultFormatter"</span><span class="fu">:</span> <span class="st">"quarto.quarto"</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>En caso que hayas seguido las instrucciones descritas en <a href="#sec-posit-workbench" class="quarto-xref"><span>Sección 2.3</span></a> es posible que el administrador de la herramienta previamente haya fijado por defecto éstos aspectos. En caso contrario, puedes agregar ésta configuración.</p>
+<p>======= Existen <a href="https://github.com/posit-dev/positron/discussions/7527">diferentes recomendaciones</a> para configurar Positron enfocadas a principiantes. Sin embargo, se recomienda que adoptes la siguiente configuración para Positron:</p>
 <ul>
 <li>Utilizar un tema de color oscuro</li>
-<li>Utilizar la opción dar formato al guardar</li>
+<li>Utilizar la opción dar formato al guardar &gt;&gt;&gt;&gt;&gt;&gt;&gt; c191b80830555dfc3fb45625d889118888f3a335</li>
 </ul>
 <p><strong>Pending</strong></p>
 <p>Recommended Positron settings for beginners? #7527</p>
