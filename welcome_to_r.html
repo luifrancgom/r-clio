@@ -263,9 +263,10 @@ div.csl-indent {
   <li><a href="#sec-install-positron" id="toc-sec-install-positron" class="nav-link" data-scroll-target="#sec-install-positron"><span class="header-section-number">2.2.2</span> Positron</a></li>
   </ul></li>
   <li><a href="#sec-posit-workbench" id="toc-sec-posit-workbench" class="nav-link" data-scroll-target="#sec-posit-workbench"><span class="header-section-number">2.3</span> Posit Workbench</a></li>
-  <li><a href="#interfaz-de-positron" id="toc-interfaz-de-positron" class="nav-link" data-scroll-target="#interfaz-de-positron"><span class="header-section-number">2.4</span> Interfaz de Positron</a>
+  <li><a href="#qué-es-quarto" id="toc-qué-es-quarto" class="nav-link" data-scroll-target="#qué-es-quarto"><span class="header-section-number">2.4</span> ¿Qué es Quarto?</a></li>
+  <li><a href="#sec-user-interface-layout" id="toc-sec-user-interface-layout" class="nav-link" data-scroll-target="#sec-user-interface-layout"><span class="header-section-number">2.5</span> Interfaz de Positron</a>
   <ul class="collapse">
-  <li><a href="#configuración-recomendada-para-principiantes" id="toc-configuración-recomendada-para-principiantes" class="nav-link" data-scroll-target="#configuración-recomendada-para-principiantes"><span class="header-section-number">2.4.1</span> Configuración recomendada para principiantes</a></li>
+  <li><a href="#configuración-recomendada-para-principiantes" id="toc-configuración-recomendada-para-principiantes" class="nav-link" data-scroll-target="#configuración-recomendada-para-principiantes"><span class="header-section-number">2.5.1</span> Configuración recomendada para principiantes</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/welcome_to_r.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/welcome_to_r.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
@@ -296,6 +297,7 @@ div.csl-indent {
 <ol type="1">
 <li>¿Qué es R y Positron?</li>
 <li>¿Cómo instalar R y Positron o utilizar Posit Workbench?</li>
+<li>¿Qué es Quarto?</li>
 <li>Interfaz de Positron</li>
 </ol>
 <section id="qué-es-r-y-positron" class="level2" data-number="2.1">
@@ -346,7 +348,7 @@ Importante
 </div>
 <div class="callout-body-container callout-body">
 <p>Si formas parte de una institución educativa, verifica si tienes acceso a <strong>Positron Pro</strong> a través de <strong>Posit Workbench</strong> (ver <a href="#sec-posit-workbench" class="quarto-xref"><span>Sección 2.3</span></a>). En caso de contar con este acceso, no es necesario realizar una instalación local. Por lo tanto, puedes saltarte los pasos de la <a href="#sec-install-r" class="quarto-xref"><span>Sección 2.2.1</span></a> y la <a href="#sec-install-positron" class="quarto-xref"><span>Sección 2.2.2</span></a>, ya que tendras acceso directo a estas herramientas.</p>
-<p>Sin embargo, una vez que te sientas familiarizado con estas herramientas, te recomiendo consultar esas secciones para instalar R y Positron en tu propio computador personal.</p>
+<p>Sin embargo, una vez que te sientas familiarizado con estas herramientas, te recomendamos consultar esas secciones para instalar R y Positron en tu propio computador personal.</p>
 </div>
 </div>
 <section id="sec-install-r" class="level3" data-number="2.2.1">
@@ -377,7 +379,7 @@ Figura&nbsp;2.2: Ícono de R
 </figcaption>
 </figure>
 </div>
-<p>Si observas que se abre una ventana con la consola de R (en los casos de Windows y Mac) o que en el terminal aparece el texto de bienvenida de la versión 4.2 o superior (en el caso de Linux), la instalación ha sido exitosa. Para finalizar la verificación, simplemente cierra la ventana de la aplicación en Windows/Mac, o en el caso de Linux, escribe el comando <code>q()</code> y presiona <kbd title="Enter" aria-hidden="true">Enter</kbd><span class="visually-hidden">Enter</span> para salir de la sesión de R en el terminal.</p>
+<p>Si observas que se abre una ventana con la consola de R (en los casos de Windows y Mac) o que en el terminal aparece el texto de bienvenida de la versión 4.2 o superior (en el caso de Linux), la instalación ha sido exitosa. Para finalizar la verificación, simplemente cierra la ventana de la aplicación en Windows/Mac, o en el caso de Linux, escribe el comando <code>q()</code> y presiona la tecla <kbd title="Enter" aria-hidden="true">Enter</kbd><span class="visually-hidden">Enter</span> para salir de la sesión de R en el terminal.</p>
 </section>
 </section>
 <section id="sec-install-positron" class="level3" data-number="2.2.2">
@@ -402,10 +404,32 @@ Importante
 </div>
 <p>Posit Workbench es un entorno de desarrollo basado en la nube diseñado para ciencia de datos que puede ser utilizado por las instituciones educativas para enseñanza. Posit Workbench reúne en un solo lugar las herramientas de trabajo más populares para ciencia de datos incluído Positron, ofreciendo un entorno seguro y listo para usar.</p>
 <p>Para utilizar esta herramienta, es indispensable contar con una cuenta activa que incluya un usuario y una contraseña proporcionados por tu institución. Una vez que tengas tus credenciales, debes ingresar a la dirección web asignada por tu institución educativa para acceder a la plataforma. Por ejemplo, en la <a href="https://umng.edu.co/">Universidad Militar Nueva Granada - UMNG</a>, el acceso se realiza a través del <a href="https://positworkbench.umng.edu.co">portal de ingreso de Posit Workbench de la UMNG</a>, donde podrás visualizar la interfaz típica para iniciar sesión y comenzar a trabajar.</p>
-<p>Antes de comenzar a utilizar R con Positron a través de este entorno, se recomienda revisar los <a href="https://docs.posit.co/ide/server-pro/user/posit-workbench/guide/requirements.html">requisitos del sistema</a>. Esta verificación previa te permitirá asegurar que tu computador cumplen con las especificaciones necesarias para tener una experiencia adecuada.</p>
+<p>Antes de comenzar a utilizar R con Positron a través de este entorno, te recomendamos revisar los <a href="https://docs.posit.co/ide/server-pro/user/posit-workbench/guide/requirements.html">requisitos del sistema</a>. Esta verificación previa te permitirá asegurar que tu computador cumplen con las especificaciones necesarias para tener una experiencia adecuada.</p>
 </section>
-<section id="interfaz-de-positron" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="interfaz-de-positron"><span class="header-section-number">2.4</span> Interfaz de Positron</h2>
+<section id="qué-es-quarto" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="qué-es-quarto"><span class="header-section-number">2.4</span> ¿Qué es Quarto?</h2>
+<p><a href="https://quarto.org/">Quarto</a> es un sistema de publicación técnica y científica de código abierto que combina código, resultados y narrativa para generar documentos reproducibles en diferentes formatos (p.&nbsp;ej., HTML, PDF, MS Word), presentaciones, sitios web y proyectos como libros o manuscritos.</p>
+<p>Al utilizar Positron, no es necesario instalar Quarto por separado, ya que se integra automáticamente de dos formas:</p>
+<ol type="1">
+<li>Como <em>“motor”</em> de procesamiento (<a href="https://quarto.org/docs/cli/index.html">Interfaz de línea de comandos</a>): es la herramienta interna que transforma tus archivos de texto y código en los reportes y documentos finales.</li>
+<li>Como asistente de edición (Extensión denominada <a href="https://open-vsx.org/extension/quarto/quarto">quarto-vscode</a>): proporciona las herramientas visuales para trabajar cómodamente, incluyendo el autocompletado de comandos, el resaltado de colores, la ejecución interactiva de código y una vista previa en tiempo real de tus resultados.</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Más adelante profundizaremos en el uso de Quarto utilizando R y Positron. Por ahora te recomendamos familiarizarte primero con la interfaz de Positron (Ver <a href="#sec-user-interface-layout" class="quarto-xref"><span>Sección 2.5</span></a>) y R. No obstante, si tienes experiencia previa, puedes consultar la <a href="https://quarto.org/docs/get-started/hello/positron.html">Guía de inicio rápido de Quarto con Positron</a> en la documentación oficial.</p>
+</div>
+</div>
+</section>
+<section id="sec-user-interface-layout" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="sec-user-interface-layout"><span class="header-section-number">2.5</span> Interfaz de Positron</h2>
 <p>Si realizaste una instalación local siguiendo los pasos de la <a href="#sec-install-r" class="quarto-xref"><span>Sección 2.2.1</span></a> y la <a href="#sec-install-positron" class="quarto-xref"><span>Sección 2.2.2</span></a> podras abrir 2 programas. Sin embargo, a lo largo del libro siempre utilizaremos Positron y no la aplicación de R directamente. En la <a href="#fig-2-chap-2" class="quarto-xref">Figura&nbsp;<span>2.3</span></a> se indica que ícono debes dar doble click o que programa abrir en tu computador.</p>
 <div id="fig-2-chap-2" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
@@ -490,9 +514,9 @@ Tip
 <p>Positron dispone de una <a href="https://positron.posit.co/welcome.html">guía oficial</a> que detalla cada aspecto de la aplicación. Sin embargo, dominar una aplicación es un proceso gradual que se logra con la práctica constante. En esta etapa inicial, no es necesario conocer todas sus funciones; conforme ganes confianza con la interfaz y según lo requieran tus análisis, podrás consultarla para profundizar en aspectos específicos que requieras.</p>
 </div>
 </div>
-<section id="configuración-recomendada-para-principiantes" class="level3" data-number="2.4.1">
-<h3 data-number="2.4.1" class="anchored" data-anchor-id="configuración-recomendada-para-principiantes"><span class="header-section-number">2.4.1</span> Configuración recomendada para principiantes</h3>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD Existen <a href="https://github.com/posit-dev/positron/discussions/7527">diferentes recomendaciones para principiantes</a> respecto a cómo configurar Positron. Para configurar Positron es necesario modificar el archivo de configuración de usuario <code>settings.json</code> abriendo la paleta de comandos con <kbd title="Ctrl-Shift-P" aria-hidden="true">Ctrl-Shift-P</kbd><span class="visually-hidden">Ctrl-Shift-P</span> y escribiendo la opción <strong>Preferences: Open User Settings (JSON)</strong>. A lo largo del libro agregaremos las siguientes opciones en <code>settings.json</code>:</p>
+<section id="configuración-recomendada-para-principiantes" class="level3" data-number="2.5.1">
+<h3 data-number="2.5.1" class="anchored" data-anchor-id="configuración-recomendada-para-principiantes"><span class="header-section-number">2.5.1</span> Configuración recomendada para principiantes</h3>
+<p>Existen <a href="https://github.com/posit-dev/positron/discussions/7527">diferentes recomendaciones para principiantes</a> sobre cómo configurar Positron. Para personalizar tu entorno, debes modificar el archivo de configuración de usuario <code>settings.json</code>. Para abrirlo, utiliza la combinación de teclas <kbd title="Ctrl+Shift+P" aria-hidden="true">Ctrl+Shift+P</kbd><span class="visually-hidden">Ctrl+Shift+P</span> dentro de Positron para desplagar la paleta de comandos y escribe: <strong>Preferences: Open User Settings (JSON)</strong>. Luego podras seleccionar ésta opción para abrir el archivo <code>settings.json</code>. En este libro, te recomendamos añadir y guardar las siguientes opciones dentro de este archivo:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"workbench.colorTheme"</span><span class="fu">:</span> <span class="st">"Default Positron Dark"</span><span class="fu">,</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"[r]"</span><span class="fu">:</span> <span class="fu">{</span></span>
@@ -504,16 +528,12 @@ Tip
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"editor.defaultFormatter"</span><span class="fu">:</span> <span class="st">"quarto.quarto"</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Con estos ajustes lograrás 2 objetivos:</p>
+<ol type="1">
+<li><p><strong>Tema de color:</strong> aplicar la interfaz oscura <code>Default Positron Dark</code> para reducir la fatiga visual.</p></li>
+<li><p><strong>Autoformateo al guardar:</strong> aplicar automáticamente un estilo visual uniforme a tus archivos de R y Quarto utilizando las extensiones <a href="https://open-vsx.org/extension/posit/air-vscode">Air</a> y <a href="https://open-vsx.org/extension/quarto/quarto">quarto-vscode</a>. Esto permite que el código se reorganice solo, manteniendo una estructura limpia y profesional sin aplicar un esfuerzo manual.</p></li>
+</ol>
 <p>En caso que hayas seguido las instrucciones descritas en <a href="#sec-posit-workbench" class="quarto-xref"><span>Sección 2.3</span></a> es posible que el administrador de la herramienta previamente haya fijado por defecto éstos aspectos. En caso contrario, puedes agregar ésta configuración.</p>
-<p>======= Existen <a href="https://github.com/posit-dev/positron/discussions/7527">diferentes recomendaciones</a> para configurar Positron enfocadas a principiantes. Sin embargo, se recomienda que adoptes la siguiente configuración para Positron:</p>
-<ul>
-<li>Utilizar un tema de color oscuro</li>
-<li>Utilizar la opción dar formato al guardar &gt;&gt;&gt;&gt;&gt;&gt;&gt; c191b80830555dfc3fb45625d889118888f3a335</li>
-</ul>
-<p><strong>Pending</strong></p>
-<p>Recommended Positron settings for beginners? #7527</p>
-<p>https://posit-dev.github.io/air/editor-vscode.html#format-on-save</p>
-<p>Add also changing to dark theme for readibility</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
