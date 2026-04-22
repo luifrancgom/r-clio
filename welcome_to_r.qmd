@@ -4,7 +4,8 @@ Este capítulo se basa en [@ismay_statistical_2025, cap. 1] y tiene como propós
 
 1. ¿Qué es R y Positron?
 2. ¿Cómo instalar R y Positron o utilizar Posit Workbench?
-3. Interfaz de Positron 
+3. ¿Qué es Quarto?
+4. Interfaz de Positron 
 
 ## ¿Qué es R y Positron?
 
@@ -25,7 +26,7 @@ Si abandonamos la analogía anterior y sómos más específicos, R es un lenguaj
 ::: {.callout-important}
 Si formas parte de una institución educativa, verifica si tienes acceso a **Positron Pro** a través de **Posit Workbench** (ver @sec-posit-workbench). En caso de contar con este acceso, no es necesario realizar una instalación local. Por lo tanto, puedes saltarte los pasos de la @sec-install-r y la @sec-install-positron, ya que tendras acceso directo a estas herramientas.
 
-Sin embargo, una vez que te sientas familiarizado con estas herramientas, te recomiendo consultar esas secciones para instalar R y Positron en tu propio computador personal.
+Sin embargo, una vez que te sientas familiarizado con estas herramientas, te recomendamos consultar esas secciones para instalar R y Positron en tu propio computador personal.
 :::
 
 ### R {#sec-install-r}
@@ -50,7 +51,7 @@ Una vez instales R es importante que verifiques la instalación. La forma más f
 
 ![Ícono de R](images/r-project-logo.png){#fig-r-logo width=20% fig-alt="Ícono del proyecto R"}
 
-Si observas que se abre una ventana con la consola de R (en los casos de Windows y Mac) o que en el terminal aparece el texto de bienvenida de la versión 4.2 o superior (en el caso de Linux), la instalación ha sido exitosa. Para finalizar la verificación, simplemente cierra la ventana de la aplicación en Windows/Mac, o en el caso de Linux, escribe el comando `q()` y presiona {{< kbd Enter >}} para salir de la sesión de R en el terminal.
+Si observas que se abre una ventana con la consola de R (en los casos de Windows y Mac) o que en el terminal aparece el texto de bienvenida de la versión 4.2 o superior (en el caso de Linux), la instalación ha sido exitosa. Para finalizar la verificación, simplemente cierra la ventana de la aplicación en Windows/Mac, o en el caso de Linux, escribe el comando `q()` y presiona la tecla {{< kbd Enter >}} para salir de la sesión de R en el terminal.
 
 ### Positron {#sec-install-positron}
 
@@ -66,9 +67,22 @@ Posit Workbench es un entorno de desarrollo basado en la nube diseñado para cie
 
 Para utilizar esta herramienta, es indispensable contar con una cuenta activa que incluya un usuario y una contraseña proporcionados por tu institución. Una vez que tengas tus credenciales, debes ingresar a la dirección web asignada por tu institución educativa para acceder a la plataforma. Por ejemplo, en la [Universidad Militar Nueva Granada - UMNG](https://umng.edu.co/), el acceso se realiza a través del [portal de ingreso de Posit Workbench de la UMNG](https://positworkbench.umng.edu.co), donde podrás visualizar la interfaz típica para iniciar sesión y comenzar a trabajar.
 
-Antes de comenzar a utilizar R con Positron a través de este entorno, se recomienda revisar los [requisitos del sistema](https://docs.posit.co/ide/server-pro/user/posit-workbench/guide/requirements.html). Esta verificación previa te permitirá asegurar que tu computador cumplen con las especificaciones necesarias para tener una experiencia adecuada.
+Antes de comenzar a utilizar R con Positron a través de este entorno, te recomendamos revisar los [requisitos del sistema](https://docs.posit.co/ide/server-pro/user/posit-workbench/guide/requirements.html). Esta verificación previa te permitirá asegurar que tu computador cumplen con las especificaciones necesarias para tener una experiencia adecuada.
 
-## Interfaz de Positron
+## ¿Qué es Quarto?
+
+[Quarto](https://quarto.org/) es un sistema de publicación técnica y científica de código abierto que combina código, resultados y narrativa para generar documentos reproducibles en diferentes formatos (p. ej., HTML, PDF, MS Word), presentaciones, sitios web y proyectos como libros o manuscritos.
+
+Al utilizar Positron, no es necesario instalar Quarto por separado, ya que se integra automáticamente de dos formas:
+
+1. Como *"motor"* de procesamiento ([Interfaz de línea de comandos](https://quarto.org/docs/cli/index.html)): es la herramienta interna que transforma tus archivos de texto y código en los reportes y documentos finales. 
+2. Como asistente de edición (Extensión denominada [quarto-vscode](https://open-vsx.org/extension/quarto/quarto)): proporciona las herramientas visuales para trabajar cómodamente, incluyendo el autocompletado de comandos, el resaltado de colores, la ejecución interactiva de código y una vista previa en tiempo real de tus resultados.
+
+::: {.callout-note}
+Más adelante profundizaremos en el uso de Quarto utilizando R y Positron. Por ahora te recomendamos familiarizarte primero con la interfaz de Positron (Ver @sec-user-interface-layout) y R. No obstante, si tienes experiencia previa, puedes consultar la [Guía de inicio rápido de Quarto con Positron](https://quarto.org/docs/get-started/hello/positron.html) en la documentación oficial. 
+:::
+
+## Interfaz de Positron {#sec-user-interface-layout} 
 
 Si realizaste una instalación local siguiendo los pasos de la @sec-install-r y la @sec-install-positron podras abrir 2 programas. Sin embargo, a lo largo del libro siempre utilizaremos Positron y no la aplicación de R directamente. En la @fig-2-chap-2 se indica que ícono debes dar doble click o que programa abrir en tu computador.  
 
@@ -106,8 +120,7 @@ Positron dispone de una [guía oficial](https://positron.posit.co/welcome.html) 
 
 ### Configuración recomendada para principiantes
 
-<<<<<<< HEAD
-Existen [diferentes recomendaciones para principiantes](https://github.com/posit-dev/positron/discussions/7527) respecto a cómo configurar Positron. Para configurar Positron es necesario modificar el archivo de configuración de usuario `settings.json` abriendo la paleta de comandos con {{< kbd Ctrl-Shift-P >}} y escribiendo la opción **Preferences: Open User Settings (JSON)**. A lo largo del libro agregaremos las siguientes opciones en `settings.json`: 
+Existen [diferentes recomendaciones para principiantes](https://github.com/posit-dev/positron/discussions/7527) sobre cómo configurar Positron. Para personalizar tu entorno, debes modificar el archivo de configuración de usuario `settings.json`. Para abrirlo, utiliza la combinación de teclas {{< kbd Ctrl+Shift+P >}} dentro de Positron para desplagar la paleta de comandos y escribe: **Preferences: Open User Settings (JSON)**. Luego podras seleccionar ésta opción para abrir el archivo `settings.json`. En este libro, te recomendamos añadir y guardar las siguientes opciones dentro de este archivo:
 
 ```json
 {
@@ -123,19 +136,10 @@ Existen [diferentes recomendaciones para principiantes](https://github.com/posit
 }
 ```
 
-En caso que hayas seguido las instrucciones descritas en @sec-posit-workbench es posible que el administrador de la herramienta previamente haya fijado por defecto éstos aspectos. En caso contrario, puedes agregar ésta configuración. 
- 
-=======
-Existen [diferentes recomendaciones](https://github.com/posit-dev/positron/discussions/7527) para configurar Positron enfocadas a principiantes. Sin embargo, se recomienda que adoptes la siguiente configuración para Positron:
+Con estos ajustes lograrás 2 objetivos:
 
-- Utilizar un tema de color oscuro
-- Utilizar la opción dar formato al guardar
->>>>>>> c191b80830555dfc3fb45625d889118888f3a335
+1. **Tema de color:** aplicar la interfaz oscura `Default Positron Dark` para reducir la fatiga visual.
 
-**Pending**
+2. **Autoformateo al guardar:** aplicar automáticamente un estilo visual uniforme a tus archivos de R y Quarto utilizando las extensiones [Air](https://open-vsx.org/extension/posit/air-vscode) y [quarto-vscode](https://open-vsx.org/extension/quarto/quarto). Esto permite que el código se reorganice solo, manteniendo una estructura limpia y profesional sin aplicar un esfuerzo manual.
 
-Recommended Positron settings for beginners? #7527
-
-https://posit-dev.github.io/air/editor-vscode.html#format-on-save
-
-Add also changing to dark theme for readibility
+En caso que hayas seguido las instrucciones descritas en @sec-posit-workbench es posible que el administrador de la herramienta previamente haya fijado por defecto éstos aspectos. En caso contrario, puedes agregar ésta configuración.
