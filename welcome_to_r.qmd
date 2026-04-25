@@ -75,8 +75,9 @@ Antes de comenzar a utilizar R con Positron a través de este entorno, te recome
 
 Al utilizar Positron, no es necesario instalar Quarto por separado, ya que se integra automáticamente de dos formas:
 
-1. Como *"motor"* de procesamiento ([Interfaz de línea de comandos](https://quarto.org/docs/cli/index.html)): es la herramienta interna que transforma tus archivos de texto y código en los reportes y documentos finales. 
-2. Como asistente de edición (Extensión denominada [quarto-vscode](https://open-vsx.org/extension/quarto/quarto)): proporciona las herramientas visuales para trabajar cómodamente, incluyendo el autocompletado de comandos, el resaltado de colores, la ejecución interactiva de código y una vista previa en tiempo real de tus resultados.
+1. **Como *"motor"* de procesamiento ([Interfaz de línea de comandos](https://quarto.org/docs/cli/index.html))**: es la herramienta interna que transforma tus archivos de texto y código en los reportes y documentos finales.
+
+2. **Como asistente de edición (Extensión denominada [quarto-vscode](https://open-vsx.org/extension/quarto/quarto))**: proporciona las herramientas visuales para trabajar cómodamente, incluyendo el autocompletado de comandos, el resaltado de colores, la ejecución interactiva de código y una vista previa en tiempo real de tus resultados.
 
 ::: {.callout-note}
 Más adelante profundizaremos en el uso de Quarto utilizando R y Positron. Por ahora te recomendamos familiarizarte primero con la interfaz de Positron (Ver @sec-user-interface-layout) y R. No obstante, si tienes experiencia previa, puedes consultar la [Guía de inicio rápido de Quarto con Positron](https://quarto.org/docs/get-started/hello/positron.html) en la documentación oficial. 
