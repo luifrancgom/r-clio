@@ -77,6 +77,6 @@ Existen 3 principios para nombrar archivos y carpetas [@bryan_what_2025, cap. 5]
 
    - **Priorizar el uso de números al inicio:** colocar un identificador numérico al comienzo del nombre garantiza que los archivos o carpetas se listen siguiendo una jerarquía del proyecto, en lugar de un orden alfabético aleatorio.
 
-   - **Utilizar el estándar ISO 8601 para fechas:** si el nombre incluye fechas utilizar el formato **AAAA-MM-DD** (Año-Mes-Día).
+   - **Utilizar el estándar [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) para fechas:** si el nombre incluye fechas utilizar el formato **AAAA-MM-DD** (Año-Mes-Día).
 
    - **Rellenar números con ceros a la izquierda:** para mantener el orden se deben usar ceros (p. ej., `000`, `001`,  `002`, ... , `010`, ...) en lugar de números simples (`0`, `1`, `2`, ... , `10`, ...). Sin los ceros iniciales, un sistema operativo situará el `10` inmediatamente después del `1`, rompiendo la secuencia lógica.
