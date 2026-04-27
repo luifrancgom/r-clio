@@ -65,6 +65,8 @@ div.csl-indent {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-8f778af39809923a09fbe4bc854691ee.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/kbd/kbd.js"></script>
+<link href="site_libs/quarto-contrib/kbd/kbd.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -219,7 +221,9 @@ div.csl-indent {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#flujo-de-trabajo-por-proyectos-en-positron-para-r" id="toc-flujo-de-trabajo-por-proyectos-en-positron-para-r" class="nav-link active" data-scroll-target="#flujo-de-trabajo-por-proyectos-en-positron-para-r"><span class="header-section-number">3.1</span> Flujo de trabajo por proyectos en Positron para R</a></li>
+  <li><a href="#organizar-tu-trabajo-por-proyectos" id="toc-organizar-tu-trabajo-por-proyectos" class="nav-link active" data-scroll-target="#organizar-tu-trabajo-por-proyectos"><span class="header-section-number">3.1</span> Organizar tu trabajo por proyectos</a></li>
+  <li><a href="#sec-project-oriented-workflow-positron-r" id="toc-sec-project-oriented-workflow-positron-r" class="nav-link" data-scroll-target="#sec-project-oriented-workflow-positron-r"><span class="header-section-number">3.2</span> Flujo de trabajo por proyectos en Positron para R</a></li>
+  <li><a href="#sec-how-to-name-files-folders" id="toc-sec-how-to-name-files-folders" class="nav-link" data-scroll-target="#sec-how-to-name-files-folders"><span class="header-section-number">3.3</span> ¿Cómo nombrar archivos y carpetas?</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/project-oriented_workflow.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/project-oriented_workflow.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
@@ -245,8 +249,13 @@ div.csl-indent {
 </header>
 
 
-<section id="flujo-de-trabajo-por-proyectos-en-positron-para-r" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="flujo-de-trabajo-por-proyectos-en-positron-para-r"><span class="header-section-number">3.1</span> Flujo de trabajo por proyectos en Positron para R</h2>
+<p>Este capítulo se basa en <span class="citation" data-cites="bryan_what_2025">(<a href="references.html#ref-bryan_what_2025" role="doc-biblioref">Bryan et&nbsp;al., 2025, Capítulos 3, 5</a>)</span> y tiene como propósito … Exploraremos los siguientes aspectos:</p>
+<ol type="1">
+<li>¿Qué significa organizar tu trabajo por proyectos?</li>
+<li></li>
+</ol>
+<section id="organizar-tu-trabajo-por-proyectos" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="organizar-tu-trabajo-por-proyectos"><span class="header-section-number">3.1</span> Organizar tu trabajo por proyectos</h2>
 <p>Imagina que eres un carpintero profesional y quieres construir una silla y una cama. Tienes 2 formas de trabajar (Ver <a href="#fig-1-chap-3" class="quarto-xref">Figura&nbsp;<span>3.1</span></a>):</p>
 <p><strong>1. El taller del caos</strong></p>
 <p>Trabajas con ambos proyectos mezclados sobre la misma mesa de trabajo. Las piezas de la silla están amontonadas sobre las de la cama y los tornillos están revueltos. Para avanzar en la silla, primero debes apartar lo que te estorba de la cama. Si decides mudarte de taller, tienes que identificar y recoger cada pieza una por una, con el riesgo de olvidar algo o llevarte una parte que no corresponde.</p>
@@ -282,13 +291,92 @@ Figura&nbsp;3.1: Analogía para entender la importancia de adoptar un flujo de t
 </figcaption>
 </figure>
 </div>
-<p>Cuando utilices R para realizar un análisis de datos, es importante adoptar un flujo de trabajo orientado a proyectos. Esto significa organizar cada análisis en una carpeta específica que contenga todos los archivos relevantes para esa tarea en particular. Esta práctica garantiza que el proyecto se pueda mover de un lugar a otro en tu computador, o incluso a otros computadores, y que este simplemente “funcione” <span class="citation" data-cites="bryan_project-oriented_2017">(<a href="references.html#ref-bryan_project-oriented_2017" role="doc-biblioref">Bryan, 2017</a>)</span>.</p>
-<p>En Positron, un proyecto es una carpeta que la aplicación reconoce como tu centro de operaciones. Al abrirla, Positron asume automáticamente que todo lo que necesitas buscar o guardar se encuentra dentro de esa ubicación.</p>
+<p>Cuando utilices R con Positron para realizar un análisis de datos, es importante adoptar un flujo de trabajo orientado a proyectos. Esto significa:</p>
+<ul>
+<li><p><strong>Establecer un orden y estructura</strong>: consiste en que coloques todos los archivos relacionados con un mismo proyecto en una carpeta específica. Si el proyecto crece en complejidad, utiliza subcarpetas para mantener la claridad. Asimismo, adopta un sistema coherente para nombrar tanto tus carpetas como los archivos.</p></li>
+<li><p><strong>Saber dónde estás parado</strong>: Al trabajar en un proyecto, Positron debe estar situado exactamente en la carpeta específica del proyecto. Esto se conoce como <a href="https://es.wikipedia.org/wiki/Directorio_de_trabajo">directorio de trabajo</a>. Si Positron intenta buscar tus archivos en el lugar equivocado, no podrá abrirlos. Lo ideal es que Positron se sitúe en la carpeta correcta al abrir tu proyecto.</p></li>
+<li><p><strong>Adoptar una disciplina de rutas</strong>: todas las rutas de tus archivos deben ser en lo posible relativas. Esto significa que, como ya sabes dónde estás parado, solo necesitas indicar el camino desde la carpeta del proyecto hacia el archivo que quieres usar. De esta forma, evitas escribir rutas largas y fijas que solo funcionan en tu computador.</p></li>
+</ul>
+<p>Estas prácticas permiten que el proyecto sea portátil y comprensible. Al implementarlas, podrás mover la carpeta del proyecto de un lugar a otro en tu computador, e incluso enviarla a otras personas y que el proyecto simplemente “funcione” <span class="citation" data-cites="bryan_project-oriented_2017">(<a href="references.html#ref-bryan_project-oriented_2017" role="doc-biblioref">Bryan, 2017</a>)</span>. Además, permites que otra persona pueda explorar el proyecto y entender la estructura de tu trabajo.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En la <a href="#sec-project-oriented-workflow-positron-r" class="quarto-xref"><span>Sección 3.2</span></a> abordaremos de manera práctica en Positron como se materializan los aspectos mencionados en ésta sección. Si algunos elementos no se entienden a profundidad con la generación de un proyecto de R en Positron quedarán más claros estos aspectos.</p>
+</div>
+</div>
+</section>
+<section id="sec-project-oriented-workflow-positron-r" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="sec-project-oriented-workflow-positron-r"><span class="header-section-number">3.2</span> Flujo de trabajo por proyectos en Positron para R</h2>
+<p>En Positron, un proyecto es un conjunto de archivos que se encuentran en una carpeta específica así como un conjunto de configuraciones que se aplican por defecto para realizar una tarea determinada. Al abrir esta carpeta, Positron asume automáticamente que todo lo que necesitas buscar o guardar se encuentra dentro de ella. Organizar tu trabajo de esta manera permite la reproducibilidad, eficiencia, automatización y colaboración con otras personas.</p>
+<p>Para generar un proyecto de R en Positron, utiliza la combinación de teclas <kbd title="Ctrl+Shift+P" aria-hidden="true">Ctrl+Shift+P</kbd><span class="visually-hidden">Ctrl+Shift+P</span> para desplegar la paleta de comandos y escribe: <strong>Workspaces: New Folder from Template…</strong>. Luego, podrás presionar esta opción y elegir a continuación <strong>R project</strong> para realizar las configuraciones respectivas de tu proyecto.</p>
+<p>Primero, deberás definir el nombre de la carpeta donde estará tu proyecto y la ubicación dentro de tu computador o equipo. En el caso del nombre, para que sigas el contenido del libro te recomendamos utilizar <code>r-analisis-datos</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En la <a href="#sec-how-to-name-files-folders" class="quarto-xref"><span>Sección 3.3</span></a> abarcaremos con más detalle la forma recomendada de nombrar archivos y carpetas adoptando un conjunto de principios, de modo que puedas mantener tu proyecto organizado.</p>
+</div>
+</div>
+<p>Segundo, aunque es posible aplicar ajustes avanzados, te sugerimos mantener la configuración inicial lo más simple posible. Para el desarrollo de este libro, solo es necesario que selecciones la versión de R que utilizarás. Otras opciones como <strong>Initialize Git repository</strong> o <strong>Use <code>renv</code> to create a reproducible environment</strong> no las abarcaremos.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si deseas profundizar en éstas opciones más adelante, cuando estes familiarizado con R y Positron, puedes consultar <span class="citation" data-cites="bryan_happy_2024">(<a href="references.html#ref-bryan_happy_2024" role="doc-biblioref">Bryan, 2024</a>)</span> y la <a href="https://rstudio.github.io/renv/index.html">documentación oficial</a> de <code>renv</code></p>
+</div>
+</div>
+</section>
+<section id="sec-how-to-name-files-folders" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="sec-how-to-name-files-folders"><span class="header-section-number">3.3</span> ¿Cómo nombrar archivos y carpetas?</h2>
+<p>Existen 3 principios para nombrar archivos y carpetas <span class="citation" data-cites="bryan_what_2025">(<a href="references.html#ref-bryan_what_2025" role="doc-biblioref">Bryan et&nbsp;al., 2025, Capítulo 5</a>)</span>:</p>
+<ol type="1">
+<li><p><strong>Legible por máquinas:</strong> los nombres deben estar optimizados para el procesamiento automatizado, basándose en 2 pilares.</p>
+<ul>
+<li><p><strong>Compatibilidad con búsquedas y automatización</strong>: un nombre debe prescindir de espacios en blanco, signos de puntuación (p.&nbsp;ej., <code>.</code>, <code>,</code>, <code>;</code>, <code>:</code>) a excepción del punto que precede a la extensión de un archivo (p.&nbsp;ej., <code>.html</code>, <code>.pdf</code>, <code>.docx</code>) y caractéres acentuados (p.&nbsp;ej., <code>á</code>, <code>ñ</code>, <code>ü</code>) así como usar preferiblemente minúsculas.</p></li>
+<li><p><strong>Facilidad de cómputo</strong>: es necesario utilizar de manera deliberada delimitadores como <code>_</code> o <code>-</code>, facilitando que el sistema operativo o R fragmente el nombre y recupere datos automáticamente.</p></li>
+</ul></li>
+<li><p><strong>Legible por humanos:</strong> un nombre debe permitir deducir el contenido de un archivo o carpeta sin tener que abrirlo, basándose en 2 pilares.</p>
+<ul>
+<li><p><strong>Nombres con carga informativa</strong>: el nombre debe funcionar como un resumen del contenido mediante el uso de palabras claves.</p></li>
+<li><p><strong>Semántica del slug</strong>: este concepto proviene de las <a href="https://es.wikipedia.org/wiki/URL_sem%C3%A1ntica">URLs semánticas</a>, que reemplazan códigos ilegibles por palabras que explican la jerarquía y el tema de una página (p.&nbsp;ej., <code>dominio.com/cursos/r-basico</code> en lugar de <code>dominio.com/?id=123</code>). Al aplicar esta lógica a tus archivos, transformas un nombre genérico en una ruta con significado (p.&nbsp;ej., <code>001_limpieza-datos.R</code> en lugar de <code>documento_v1.R</code> donde el primero comunica qué contiene y en qué etapa del proyecto se encuentra).</p></li>
+</ul></li>
+<li><p><strong>Compatible con el ordenamiento por defecto:</strong> un nombre debe permitir que aparezca en la secuencia lógica deseada de forma automática, basándose en 3 pilares.</p>
+<ul>
+<li><p><strong>Priorizar el uso de números al inicio:</strong> colocar un identificador numérico al comienzo del nombre garantiza que los archivos o carpetas se listen siguiendo una jerarquía del proyecto, en lugar de un orden alfabético aleatorio.</p></li>
+<li><p><strong>Utilizar el estándar <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> para fechas:</strong> si el nombre incluye fechas utilizar el formato <strong>AAAA-MM-DD</strong> (Año-Mes-Día).</p></li>
+<li><p><strong>Rellenar números con ceros a la izquierda:</strong> para mantener el orden se deben usar ceros (p.&nbsp;ej., <code>000</code>, <code>001</code>, <code>002</code>, … , <code>010</code>, …) en lugar de números simples (<code>0</code>, <code>1</code>, <code>2</code>, … , <code>10</code>, …). Sin los ceros iniciales, un sistema operativo situará el <code>10</code> inmediatamente después del <code>1</code>, rompiendo la secuencia lógica.</p></li>
+</ul></li>
+</ol>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
 <div id="ref-bryan_project-oriented_2017" class="csl-entry" role="listitem">
 Bryan, J. (2017). <em>Project-oriented workflow</em>. <a href="https://www.tidyverse.org/blog/2017/12/workflow-vs-script/">https://www.tidyverse.org/blog/2017/12/workflow-vs-script/</a>
+</div>
+<div id="ref-bryan_happy_2024" class="csl-entry" role="listitem">
+Bryan, J. (2024). <em>Happy <span>Git</span> and <span>GitHub</span> for the <span>useR</span></em>. <a href="https://happygitwithr.com/">https://happygitwithr.com/</a>
+</div>
+<div id="ref-bryan_what_2025" class="csl-entry" role="listitem">
+Bryan, J., Hester, J., Pileggi, S., &amp; Aja, E. D. (2025). <em>What <span>They</span> <span>Forgot</span> to <span>Teach</span> <span>You</span> <span>About</span> <span>R</span></em>. <a href="https://rstats.wtf/">https://rstats.wtf/</a>
 </div>
 </div>
 </section>
