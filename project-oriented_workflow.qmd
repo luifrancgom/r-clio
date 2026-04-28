@@ -1,9 +1,10 @@
 # Flujo de trabajo orientado a proyectos
 
-Este capítulo se basa en [@bryan_what_2025, cap. 3, 5] y tiene como propósito ... Exploraremos los siguientes aspectos:
+Este capítulo se basa en [@bryan_what_2025, cap. 3, 5] y tiene como propósito introducir los elementos básicos para trabajar por proyectos en Positron para R. Exploraremos los siguientes aspectos:
 
 1. ¿Qué significa organizar tu trabajo por proyectos?
-2.
+2. ¿Cómo adoptar un flujo de trabajo por proyectos en Positron para R?
+3. ¿Qué recomendaciones adoptar para nombrar archivos y carpetas para mantener un proyecto organizado?
 
 ## Organizar tu trabajo por proyectos
 
@@ -43,7 +44,7 @@ En la @sec-project-oriented-workflow-positron-r abordaremos de manera práctica 
 
 En Positron, un proyecto es un conjunto de archivos que se encuentran en una carpeta específica así como un conjunto de configuraciones que se aplican por defecto para realizar una tarea determinada. Al abrir esta carpeta, Positron asume automáticamente que todo lo que necesitas buscar o guardar se encuentra dentro de ella. Organizar tu trabajo de esta manera permite la reproducibilidad, eficiencia, automatización y colaboración con otras personas.
 
-Para generar un proyecto de R en Positron, utiliza la combinación de teclas {{< kbd Ctrl+Shift+P >}} para desplegar la paleta de comandos y escribe: **Workspaces: New Folder from Template...**. Luego, podrás presionar esta opción y elegir a continuación **R project** para realizar las configuraciones respectivas de tu proyecto.
+Para generar un proyecto de R en Positron, utiliza la combinación de teclas {{< kbd mac=Command-Shift-P win=Ctrl-Shift-P linux=Ctrl-Shift-P >}} para desplegar la paleta de comandos y escribe: **Workspaces: New Folder from Template...**. Luego, podrás presionar esta opción y elegir a continuación **R project** para realizar las configuraciones respectivas de tu proyecto.
 
 Primero, deberás definir el nombre de la carpeta donde estará tu proyecto y la ubicación dentro de tu computador o equipo. En el caso del nombre, para que sigas el contenido del libro te recomendamos utilizar `r-analisis-datos`. 
 
@@ -80,3 +81,15 @@ Existen 3 principios para nombrar archivos y carpetas [@bryan_what_2025, cap. 5]
    - **Utilizar el estándar [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) para fechas:** si el nombre incluye fechas utilizar el formato **AAAA-MM-DD** (Año-Mes-Día).
 
    - **Rellenar números con ceros a la izquierda:** para mantener el orden se deben usar ceros (p. ej., `000`, `001`,  `002`, ... , `010`, ...) en lugar de números simples (`0`, `1`, `2`, ... , `10`, ...). Sin los ceros iniciales, un sistema operativo situará el `10` inmediatamente después del `1`, rompiendo la secuencia lógica.
+
+::: {.callout-tip}
+¿Cuándo usar guión bajo (`_`) vs guión medio (`-`) para nombrar archivos y carpetas?
+
+Para que tus archivos sean fáciles de fragmentar por R o el sistema operativo, utiliza esta regla sencilla:
+
+- **Guion bajo (`_`) para separar "metadatos"**: Úsalo para dividir bloques de información distinta, como el número de orden del tema.
+- **Guion medio (`-`) para separar palabras**: Úsalo para unir palabras que pertenecen a un mismo concepto o sección.
+
+Por ejemplo, en `001_limpieza-datos.R` el `_` separa el orden (`001`) del tema (`limpieza-datos`). El `-` simplemente une las palabras `limpieza` y `datos` para que se lean como una sola idea.
+:::
+
