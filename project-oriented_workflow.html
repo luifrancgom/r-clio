@@ -249,10 +249,11 @@ div.csl-indent {
 </header>
 
 
-<p>Este capítulo se basa en <span class="citation" data-cites="bryan_what_2025">(<a href="references.html#ref-bryan_what_2025" role="doc-biblioref">Bryan et&nbsp;al., 2025, Capítulos 3, 5</a>)</span> y tiene como propósito … Exploraremos los siguientes aspectos:</p>
+<p>Este capítulo se basa en <span class="citation" data-cites="bryan_what_2025">(<a href="references.html#ref-bryan_what_2025" role="doc-biblioref">Bryan et&nbsp;al., 2025, Capítulos 3, 5</a>)</span> y tiene como propósito introducir los elementos básicos para trabajar por proyectos en Positron para R. Exploraremos los siguientes aspectos:</p>
 <ol type="1">
 <li>¿Qué significa organizar tu trabajo por proyectos?</li>
-<li></li>
+<li>¿Cómo adoptar un flujo de trabajo por proyectos en Positron para R?</li>
+<li>¿Qué recomendaciones adoptar para nombrar archivos y carpetas para mantener un proyecto organizado?</li>
 </ol>
 <section id="organizar-tu-trabajo-por-proyectos" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="organizar-tu-trabajo-por-proyectos"><span class="header-section-number">3.1</span> Organizar tu trabajo por proyectos</h2>
@@ -315,7 +316,7 @@ Nota
 <section id="sec-project-oriented-workflow-positron-r" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="sec-project-oriented-workflow-positron-r"><span class="header-section-number">3.2</span> Flujo de trabajo por proyectos en Positron para R</h2>
 <p>En Positron, un proyecto es un conjunto de archivos que se encuentran en una carpeta específica así como un conjunto de configuraciones que se aplican por defecto para realizar una tarea determinada. Al abrir esta carpeta, Positron asume automáticamente que todo lo que necesitas buscar o guardar se encuentra dentro de ella. Organizar tu trabajo de esta manera permite la reproducibilidad, eficiencia, automatización y colaboración con otras personas.</p>
-<p>Para generar un proyecto de R en Positron, utiliza la combinación de teclas <kbd title="Ctrl+Shift+P" aria-hidden="true">Ctrl+Shift+P</kbd><span class="visually-hidden">Ctrl+Shift+P</span> para desplegar la paleta de comandos y escribe: <strong>Workspaces: New Folder from Template…</strong>. Luego, podrás presionar esta opción y elegir a continuación <strong>R project</strong> para realizar las configuraciones respectivas de tu proyecto.</p>
+<p>Para generar un proyecto de R en Positron, utiliza la combinación de teclas <kbd title="linux: Ctrl-Shift-P, mac: Command-Shift-P, windows: Ctrl-Shift-P" aria-hidden="true" data-linux="Ctrl-Shift-P" data-mac="Command-Shift-P" data-windows="Ctrl-Shift-P"></kbd><span class="visually-hidden"></span> para desplegar la paleta de comandos y escribe: <strong>Workspaces: New Folder from Template…</strong>. Luego, podrás presionar esta opción y elegir a continuación <strong>R project</strong> para realizar las configuraciones respectivas de tu proyecto.</p>
 <p>Primero, deberás definir el nombre de la carpeta donde estará tu proyecto y la ubicación dentro de tu computador o equipo. En el caso del nombre, para que sigas el contenido del libro te recomendamos utilizar <code>r-analisis-datos</code>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -366,6 +367,25 @@ Nota
 <li><p><strong>Rellenar números con ceros a la izquierda:</strong> para mantener el orden se deben usar ceros (p.&nbsp;ej., <code>000</code>, <code>001</code>, <code>002</code>, … , <code>010</code>, …) en lugar de números simples (<code>0</code>, <code>1</code>, <code>2</code>, … , <code>10</code>, …). Sin los ceros iniciales, un sistema operativo situará el <code>10</code> inmediatamente después del <code>1</code>, rompiendo la secuencia lógica.</p></li>
 </ul></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>¿Cuándo usar guión bajo (<code>_</code>) vs guión medio (<code>-</code>) para nombrar archivos y carpetas?</p>
+<p>Para que tus archivos sean fáciles de fragmentar por R o el sistema operativo, utiliza esta regla sencilla:</p>
+<ul>
+<li><strong>Guion bajo (<code>_</code>) para separar “metadatos”</strong>: Úsalo para dividir bloques de información distinta, como el número de orden del tema.</li>
+<li><strong>Guion medio (<code>-</code>) para separar palabras</strong>: Úsalo para unir palabras que pertenecen a un mismo concepto o sección.</li>
+</ul>
+<p>Por ejemplo, en <code>001_limpieza-datos.R</code> el <code>_</code> separa el orden (<code>001</code>) del tema (<code>limpieza-datos</code>). El <code>-</code> simplemente une las palabras <code>limpieza</code> y <code>datos</code> para que se lean como una sola idea.</p>
+</div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
