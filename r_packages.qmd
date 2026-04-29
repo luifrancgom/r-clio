@@ -1,16 +1,82 @@
 # Paquetes de R
 
-## ¿Qué son los paquetes de R?
+Este capítulo se basa en [@ismay_statistical_2025, cap. 1] y tiene como propósito ...
 
+Exploraremos los siguientes aspectos:
 
+1. 
+2. 
+
+## ¿Qué son los paquetes de R? {#sec-what-are-r-packages}
+
+En R un paquete, en términos simples, es una carpeta organizada de cierta forma que alguién más creó que te brinda herramientas listas para usar con el objetivo de realizar una tarea específica o extender la funcionalidad base de R. De hecho, cuando instalas R por primera vez, este ya viene con un grupo de paquetes estandar (o de base) por defecto que le permiten funcionar y realizar ciertas tareas. Independientemente de si un paquete esta incluido en R por defecto o tiene como proposito extender su funcionalidad, su estructura siempre consta de 3 elementos [@wickham_r_2023-1]:
+
+- **Funciones**: son instrucciones predefinidas que reciben una información, la procesan y entregan un resultado para realizar una tarea específica de manera automática.
+
+- **Documentación**: es la guía que explica que hace cada función, que requiere para funcionar y que resultado genera.
+
+- **Datos de muestra**: son conjuntos de datos para ilustrar el funcionamiento de las funciones.
+
+Para entender cómo funcionan los paquetes en R se puede utilizar una analogía con las aplicaciones de un celular [@ismay_statistical_2025, cap. 1]. Cuando compras un celular nuevo, este viene por defecto con aplicaciones para que se pueda utilizar. Sin embargo, de acuerdo a las necesidades de cada usuario se instalan otras aplicaciones adicionales para extender la funcionalidad del celular de tal manera que se cubran los requerimientos que cada individuo necesita (Ver @fig-1-chap-4).
+
+::: {#fig-1-chap-4 layout="[[48,-4,48]]"}
+![Paquetes por defecto en R: Celular nuevo](images/r-package-cellphone.png){fig-alt="pending"}
+
+![Paquetes que extienden la funcionalidad de R: Tienda de aplicaciones](images/r-package-store-app.png){fig-alt=""}
+
+Analogía para entender la diferencia entre paquetes que vienen incorporados por defecto en R y aquellos que se pueden instalar para extender su funcionalidad base
+:::
 
 ## Instalación de paquetes
 
+Para instalar un paquete que no vienen por defecto en R, retomaremos la analogía de la @sec-what-are-r-packages. En un celular, primero es necesario descargar la aplicación de una tienda una sola vez. Luego, basta con abrirla cada vez que se requiera. Aunque ocasionalmente deba actualizarse, no es necesario reinstalarla nuevamente.
 
+En R, el proceso es semejante. Primero instalas el paquete desde un repositorio (equivalente a la tienda de aplicaciones) y luego lo cargas, un paso análogo a abrir la aplicación en tu celular.
+
+Para practicar este proceso, instalaremos el paquete [`tidyverse`](https://tidyverse.org/). Este paquete es una colección de herramientas diseñadas para ciencia de datos que utilizaremos constantemente a lo largo del libro. Para iniciar la instalación, ubica la pestaña **Console** en el **Panel 4** (Ver la @fig-positron-layout-outline) y, tras el símbolo `>`, escribe el siguiente comando:
+
+```r
+install.packages("tidyverse")
+```
+
+Luego, presiona {{< kbd Enter >}}. Ten paciencia hasta que el proceso finalice y no te preocupes por los mensajes que aparezcan en la consola. Al ser un conjunto robusto de herramientas, la instalación puede tardar. Sabrás que ha terminado el proceso cuando veas aparecer nuevamente el símbolo `>`.
+
+::: {.callout-important}
+Al instalar un paquete en R, asegúrate de escribir su nombre entre comillas (`""`). De lo contrario, la instalación fallará. Por ahora, no te preocupes por la razón detrás de éste aspecto. Lo importante por ahora es que te asegures que puedas saber cómo instalar un paquete en R.
+:::
 
 ## Carga de paquetes
 
+Cuando instalas una aplicación en tu celular es necesario abrirla para poder usarla, no basta con simplemente instalarla. En R para poder utilizar un paquete que se encuentre instalado previamente es necesario cargarlo (equivalente a abrir una aplicación que se encuentra instalada en un celular). En R para cargar un paquete se utiliza el comando `library()`.
 
+Por ejemplo, si deseas cargar el paquete `tidyverse` escribe el siguiente comando en la consola:
+
+```r
+library(tidyverse)
+```
+
+Luego, presiona {{< kbd Enter >}}. Si el paquete `tidyverse` fue instalado de manera correcta se generará un texto (ver el @lst-load-tidyverse-message) igual o similar al que se muestra a continuación en la consola:
+
+::: {#lst-load-tidyverse-message}
+
+```r
+── Attaching core tidyverse packages ── tidyverse 2.0.0 ──
+✔ dplyr     1.2.0     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.2     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.1     
+── Conflicts ──────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package to force all conflicts 
+ to become errors
+```
+:::
+
+::: {.callout-note}
+En el @sec-how-do-i-code-in-r podrás conocer más acerca de los tipos de texto que la consola puede generar y cómo interpretarlos cuando se genere algún contenido. Allí explicaremos en particular el texto del @lst-load-tidyverse-message. 
+:::
 
 ## Uso de paquetes
 

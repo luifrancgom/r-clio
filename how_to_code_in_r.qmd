@@ -1,0 +1,8 @@
+# ¿Cómo escribir código en R? {#sec-how-do-i-code-in-r}
+
+Este capítulo se basa en [@ismay_statistical_2025, cap. 1] y tiene como propósito ...
+
+Exploraremos los siguientes aspectos:
+
+1. 
+2. 

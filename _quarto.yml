@@ -33,6 +33,7 @@ book:
         - welcome_to_r.qmd
         - project-oriented_workflow.qmd
         - r_packages.qmd
+        - how_to_code_in_r.qmd
     - part: data_visualization.qmd
     - part: data_wrangling.qmd
     - part: data_tidy.qmd
