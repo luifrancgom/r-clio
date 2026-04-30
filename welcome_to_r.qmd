@@ -21,7 +21,7 @@ Analogía para entender la diferencia entre R y Positron
 
 Si abandonamos la analogía anterior y sómos más específicos, R es un lenguaje de programación y Positron es un [*Entorno de Desarrollo Integrado (IDE)*](https://es.wikipedia.org/wiki/Entorno_de_desarrollo_integrado) que incluye un conjunto de elementos en su interfaz para utilizar de manera mucho más fácil R cuando queremos llevar a cabo análisis estadísticos y explorar datos.
 
-## ¿Cómo instalar R y Positron?
+## ¿Cómo instalar R y Positron? {#sec-how-to-install-r-positron}
 
 ::: {.callout-important}
 Si formas parte de una institución educativa, verifica si tienes acceso a **Positron Pro** a través de **Posit Workbench** (ver @sec-posit-workbench). En caso de contar con este acceso, no es necesario realizar una instalación local. Por lo tanto, puedes saltarte los pasos de la @sec-install-r y la @sec-install-positron, ya que tendras acceso directo a estas herramientas.
@@ -121,7 +121,7 @@ Positron dispone de una [guía oficial](https://positron.posit.co/welcome.html) 
 
 ### Configuración recomendada para principiantes
 
-Existen [diferentes recomendaciones para principiantes](https://github.com/posit-dev/positron/discussions/7527) sobre cómo configurar Positron. Para personalizar tu entorno, debes modificar el archivo de configuración de usuario `settings.json`. Para abrirlo, utiliza la combinación de teclas {{< kbd Ctrl+Shift+P >}} dentro de Positron para desplagar la paleta de comandos y escribe: **Preferences: Open User Settings (JSON)**. Luego podras seleccionar ésta opción para abrir el archivo `settings.json`. En este libro, te recomendamos añadir y guardar las siguientes opciones dentro de este archivo:
+Existen [diferentes recomendaciones para principiantes](https://github.com/posit-dev/positron/discussions/7527) sobre cómo configurar Positron. Para personalizar tu entorno, debes modificar el archivo de configuración de usuario `settings.json`. Para abrirlo, utiliza la combinación de teclas {{< kbd mac=Command-Shift-P win=Ctrl-Shift-P linux=Ctrl-Shift-P >}} dentro de Positron para desplagar la paleta de comandos y escribe: **Preferences: Open User Settings (JSON)**. Luego podras seleccionar ésta opción para abrir el archivo `settings.json`. En este libro, te recomendamos añadir y guardar las siguientes opciones dentro de este archivo:
 
 ```json
 {

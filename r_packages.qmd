@@ -1,11 +1,11 @@
 # Paquetes de R
 
-Este capítulo se basa en [@ismay_statistical_2025, cap. 1] y tiene como propósito ...
+Este capítulo se basa en [@ismay_statistical_2025, cap. 1] y tiene como propósito introducir el concepto de paquetes de R. Exploraremos los siguientes aspectos:
 
-Exploraremos los siguientes aspectos:
-
-1. 
-2. 
+1. ¿Qué son los paquetes de R?
+2. ¿Cómo instalar paquetes?
+3. ¿Cómo cargar paquetes?
+4. Una demostración de cómo utilizar un paquete
 
 ## ¿Qué son los paquetes de R? {#sec-what-are-r-packages}
 
@@ -20,9 +20,9 @@ En R un paquete, en términos simples, es una carpeta organizada de cierta forma
 Para entender cómo funcionan los paquetes en R se puede utilizar una analogía con las aplicaciones de un celular [@ismay_statistical_2025, cap. 1]. Cuando compras un celular nuevo, este viene por defecto con aplicaciones para que se pueda utilizar. Sin embargo, de acuerdo a las necesidades de cada usuario se instalan otras aplicaciones adicionales para extender la funcionalidad del celular de tal manera que se cubran los requerimientos que cada individuo necesita (Ver @fig-1-chap-4).
 
 ::: {#fig-1-chap-4 layout="[[48,-4,48]]"}
-![Paquetes por defecto en R: Celular nuevo](images/r-package-cellphone.png){fig-alt="pending"}
+![Paquetes por defecto en R: Celular nuevo](images/r-package-cellphone.png){fig-alt="Ilustración de un celular con aplicaciones básicas como calculadora y calendario, representando los paquetes que R incluye por defecto."}
 
-![Paquetes que extienden la funcionalidad de R: Tienda de aplicaciones](images/r-package-store-app.png){fig-alt=""}
+![Paquetes que extienden la funcionalidad de R: Tienda de aplicaciones](images/r-package-store-app.png){fig-alt="Interfaz de una tienda de aplicaciones digitales con diversos íconos de herramientas especializadas, simbolizando paquetes no instalados por defecto en R que extienden su funcionalidad base."}
 
 Analogía para entender la diferencia entre paquetes que vienen incorporados por defecto en R y aquellos que se pueden instalar para extender su funcionalidad base
 :::
@@ -33,7 +33,7 @@ Para instalar un paquete que no vienen por defecto en R, retomaremos la analogí
 
 En R, el proceso es semejante. Primero instalas el paquete desde un repositorio (equivalente a la tienda de aplicaciones) y luego lo cargas, un paso análogo a abrir la aplicación en tu celular.
 
-Para practicar este proceso, instalaremos el paquete [`tidyverse`](https://tidyverse.org/). Este paquete es una colección de herramientas diseñadas para ciencia de datos que utilizaremos constantemente a lo largo del libro. Para iniciar la instalación, ubica la pestaña **Console** en el **Panel 4** (Ver la @fig-positron-layout-outline) y, tras el símbolo `>`, escribe el siguiente comando:
+Para practicar este proceso, instalaremos el paquete [`tidyverse`](https://tidyverse.org/). Este paquete es una colección de herramientas diseñadas para ciencia de datos que utilizaremos constantemente a lo largo del libro. Para iniciar la instalación, ubica la pestaña **Console** en el **Panel** (Ver la @fig-positron-layout-outline) y, tras el símbolo `>`, escribe el siguiente comando:
 
 ```r
 install.packages("tidyverse")
@@ -75,9 +75,23 @@ Luego, presiona {{< kbd Enter >}}. Si el paquete `tidyverse` fue instalado de ma
 :::
 
 ::: {.callout-note}
-En el @sec-how-do-i-code-in-r podrás conocer más acerca de los tipos de texto que la consola puede generar y cómo interpretarlos cuando se genere algún contenido. Allí explicaremos en particular el texto del @lst-load-tidyverse-message. 
+En el @sec-how-do-i-code-in-r podrás explorar más acerca de los tipos de texto que la consola puede generar y cómo interpretarlos cuando se genere algún contenido. Allí explicaremos en particular el texto del @lst-load-tidyverse-message. 
 :::
 
 ## Uso de paquetes
 
-In this part show a data set
+Para entender cómo utilizar un paquete, explorarás tu primera base de datos utilizando el paquete `tidyverse`. Primero, cierra la ventana de Positron si seguiste las instrucciones descritas en la @sec-how-to-install-r-positron y abre la carpeta `r-analisis-datos` (Ver @@sec-project-oriented-workflow-positron-r) utilizando las opciones **File > Open Folder...** que podrás encontrar en el menú superior izquierdo de la interfaz. En caso que estes utilizando Posit Workbench (Ver @sec-posit-workbench) abre una sesión con el proyecto `r-analisis-datos`, creado de acuerdo a lo señalado en la @sec-project-oriented-workflow-positron-r.
+
+Luego, en la **Barra de actividades** (ver @fig-positron-layout-outline) selecciona el ícono ![](images/file-regular-full.png){fig-alt="Ícono del explorador de archivos" height=25} y párate con el puntero del ratón en la **Barra lateral primaria** (ver @fig-positron-layout-outline) donde al lado izquierdo de la etiqueta `R-ANALISIS-DATOS` podrás encontrar en el segundo ícono de izquierda a derecha la opción de crear una carpeta. Crea la carpeta con el nombre `004_paquetes-r` y dentro de la carpeta también en la **Barra lateral primaria** utiliza el primer ícono de izquierda a derecha para crear un archivo con el nombre `001_uso-paquetes.R`. De esa manera podras abrilo en el **Editor** (ver @fig-positron-layout-outline) tal como se muestra en la @fig-2-chap-4: 
+
+![Estructura de carpetas y archivos para explorar tu primera base de datos](images/fig-2-chap-4.png){#fig-2-chap-4}
+
+En el archivo `001_uso-paquetes.R` carga el paquete `tidyverse` escribiendo el contenido que se menciona a continuación. Para que R procese la instrucción, sitúa el cursor (`|`) sobre la línea de código y presiona la combinación de teclas {{< kbd mac=Command-Enter win=Ctrl-Enter linux=Ctrl-Enter >}}:
+
+```{r}
+#| message: false
+# Cargar librerias ----
+library(tidyverse)
+```
+
+El símbolo `#` permite agregar comentarios para entender los comandos que escribimos y `----` genera secciones para mantener organizado el contenido dentro de un archivo con extensión `.R`, como por ejemplo `001_uso-paquetes.R`. Un archivo de este tipo por si sólo no genera ningún resultado. Por ello, empleamos la combinación de teclas mencionada anteriormente para ejecutar los comandos en el **Editor** y mostrar el resultado señalado en el @lst-load-tidyverse-message en el **Panel** (ver @fig-positron-layout-outline) dentro de la pestaña **CONSOLE**.
