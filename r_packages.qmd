@@ -1,5 +1,10 @@
 # Paquetes de R
 
+```{r}
+#| echo: false
+source("_common.R")
+```
+
 Este capítulo se basa en [@ismay_statistical_2025, cap. 1] y tiene como propósito introducir el concepto de paquetes de R. Exploraremos los siguientes aspectos:
 
 1. ¿Qué son los paquetes de R?
@@ -80,18 +85,65 @@ En el @sec-how-do-i-code-in-r podrás explorar más acerca de los tipos de texto
 
 ## Uso de paquetes
 
-Para entender cómo utilizar un paquete, explorarás tu primera base de datos utilizando el paquete `tidyverse`. Primero, cierra la ventana de Positron si seguiste las instrucciones descritas en la @sec-how-to-install-r-positron y abre la carpeta `r-analisis-datos` (Ver @@sec-project-oriented-workflow-positron-r) utilizando las opciones **File > Open Folder...** que podrás encontrar en el menú superior izquierdo de la interfaz. En caso que estes utilizando Posit Workbench (Ver @sec-posit-workbench) abre una sesión con el proyecto `r-analisis-datos`, creado de acuerdo a lo señalado en la @sec-project-oriented-workflow-positron-r.
+Para entender cómo utilizar un paquete, explorarás tu primera base de datos en R utilizando el paquete `tidyverse`. Primero, cierra la ventana de Positron si seguiste las instrucciones descritas en la @sec-how-to-install-r-positron y abre la carpeta `r-analisis-datos` (Ver @sec-project-oriented-workflow-positron-r) utilizando las opciones **File > Open Folder...** que podrás encontrar en el menú superior izquierdo de la interfaz. En caso que estes utilizando Posit Workbench (Ver @sec-posit-workbench) abre una sesión con el proyecto `r-analisis-datos`, creado de acuerdo a lo señalado en la @sec-project-oriented-workflow-positron-r.
 
-Luego, en la **Barra de actividades** (ver @fig-positron-layout-outline) selecciona el ícono ![](images/file-regular-full.png){fig-alt="Ícono del explorador de archivos" height=25} y párate con el puntero del ratón en la **Barra lateral primaria** (ver @fig-positron-layout-outline) donde al lado izquierdo de la etiqueta `R-ANALISIS-DATOS` podrás encontrar en el segundo ícono de izquierda a derecha la opción de crear una carpeta. Crea la carpeta con el nombre `004_paquetes-r` y dentro de la carpeta también en la **Barra lateral primaria** utiliza el primer ícono de izquierda a derecha para crear un archivo con el nombre `001_uso-paquetes.R`. De esa manera podras abrilo en el **Editor** (ver @fig-positron-layout-outline) tal como se muestra en la @fig-2-chap-4: 
+Luego, en la **Barra de actividades** (ver @fig-positron-layout-outline) selecciona el ícono ![](images/file-regular-full.png){fig-alt="Ícono del explorador de archivos" height=25} y párate con el puntero del ratón en la **Barra lateral primaria** (ver @fig-positron-layout-outline) donde al lado izquierdo de la etiqueta `R-ANALISIS-DATOS` podrás encontrar en el segundo ícono de izquierda a derecha la opción de crear una carpeta. Crea la carpeta con el nombre `004_paquetes-r` y dentro de la carpeta también en la **Barra lateral primaria** utiliza el primer ícono de izquierda a derecha para crear un archivo con el nombre `001_uso-paquetes.R`. De esa manera podras abrirlo en el **Editor** (ver @fig-positron-layout-outline) tal como se muestra en la @fig-2-chap-4: 
 
-![Estructura de carpetas y archivos para explorar tu primera base de datos](images/fig-2-chap-4.png){#fig-2-chap-4}
+![Estructura de carpetas y archivos para explorar tu primera base de datos](images/fig-2-chap-4.png){#fig-2-chap-4 fig-alt="Captura de pantalla de Positron que muestra la carpeta 004_paquetes-r dentro del proyecto R-ANALISIS-DATOS, conteniendo el archivo 001_uso-paquetes.R abierto en el editor"}
 
 En el archivo `001_uso-paquetes.R` carga el paquete `tidyverse` escribiendo el contenido que se menciona a continuación. Para que R procese la instrucción, sitúa el cursor (`|`) sobre la línea de código y presiona la combinación de teclas {{< kbd mac=Command-Enter win=Ctrl-Enter linux=Ctrl-Enter >}}:
 
 ```{r}
 #| message: false
+#| lst-label: lst-load-tidyverse
+#| lst-cap: Línea de código para cargar el paquete tidyverse
 # Cargar librerias ----
 library(tidyverse)
 ```
 
-El símbolo `#` permite agregar comentarios para entender los comandos que escribimos y `----` genera secciones para mantener organizado el contenido dentro de un archivo con extensión `.R`, como por ejemplo `001_uso-paquetes.R`. Un archivo de este tipo por si sólo no genera ningún resultado. Por ello, empleamos la combinación de teclas mencionada anteriormente para ejecutar los comandos en el **Editor** y mostrar el resultado señalado en el @lst-load-tidyverse-message en el **Panel** (ver @fig-positron-layout-outline) dentro de la pestaña **CONSOLE**.
+::: {#nte-execute-code .callout-note}
+Cada vez que requieras ver el resultado de una línea de código que se encuentra dentro de un archivo con extensión `.R` sitúa el cursor (`|`) sobre la línea de código y presiona la combinación de teclas {{< kbd mac=Command-Enter win=Ctrl-Enter linux=Ctrl-Enter >}}. De ahora en adelante nos referimos a éste proceso como **ejecutar el código**. 
+:::
+
+En el @lst-load-tidyverse el símbolo `#` permite agregar comentarios para entender los comandos que escribimos y `----` genera secciones para mantener organizado el contenido dentro de un archivo con extensión `.R` donde las señala en la **Barra lateral primaria** en la sección **OUTLINE** (Ver @fig-3-chap-4) en Positron. Un archivo de este tipo por si sólo no genera ningún resultado. Por ello, debes utilizar la combinación de teclas mencionada anteriormente para ejecutar los comandos en el **Editor** y mostrar el resultado señalado en el @lst-load-tidyverse-message en el **Panel** (ver @fig-positron-layout-outline) dentro de la pestaña **CONSOLE**.
+
+![Sección OUTLINE dentro de la Barra laterla primaria de Positron](images/fig-3-chap-4.png){#fig-3-chap-4 fig-alt="Vista de la barra lateral primaria de Positron donde se observa la sección OUTLINE mostrando la etiqueta 'Cargar librerías', la cual se genera automáticamente a partir de los guiones en en el archivo '001_uso-paquetes.R'"}
+
+Una vez cargado el paquete `tidyverse` puedes explorar la base de datos `mpg` que contiene información de economía de combustible desde 1999 hasta 2008 para 38 modelos populares de automóviles. Agrega al archivo `001_uso-paquetes.R` el siguiente contenido y ejecuta el código (Ver @nte-execute-code) para que puedas visualizar parte de los datos en la consola donde el resultado puede variar dependiendo del tamaño de la pantalla de tu equipo:
+
+```{r}
+#| lst-label: lst-mpg-database
+#| lst-cap: Base de datos `mpg`
+# Explorar base de datos mpg ----
+mpg
+```
+
+En el resultado del @lst-mpg-database se incluye información para entender aspectos de la base de datos `mpg`:
+
+- `# A tibble: 234 × 11` indica en primera instancia el tipo de objeto en R denominado [`tibble`](https://tibble.tidyverse.org/articles/tibble.html) donde se compone de `234` filas y `11` columnas.
+
+- Una `tibble` solo muestra la cantidad de columnas que caben en tu pantalla. Por ese motivo se señalan en la parte superior los nombres de las columnas `manufacturer`, `model`, `displ`, `year`, `cyl`, `trans`, `drv`, `cty` y luego en la parte inferior las variables restantes `hwy`, `fl` y `class` en el mensaje `# ℹ 3 more variables: hwy <int>, fl <chr>, class <chr>`.
+
+- Debajo de los nombres de las columnas se indica el tipo de dato que corresponde a cada variable (p. ej., `<chr>`, `<dbl>`, `<int>`). En caso que no se puedan mostrar todas las columnas en la pantalla, en la parte inferior se señalan los tipos restantes de las demás columnas. Las diferentes opciones de tipos de columnas se pueden consultar en la documentación oficial en [Column types](https://tibble.tidyverse.org/articles/types.html).
+
+- Por defecto una `tibble` solo muestra las primeras 10 filas pero señala en la parte inferior con el mensaje `# ℹ 224 more rows` el número de filas restantes que componen la base de datos.
+
+Si la base de datos pertenece a un paquete, como en el caso de `mpg`, es posible consultar documentación acerca de la misma utilizando el símbolo `?` mas su nombre tal como se muestra a continuación:
+
+```{r}
+# Documentación base de datos mpg ----
+?mpg
+```
+
+Si ejecutas éste código en la **Barra lateral secundaria** dentro de la pestaña **HELP** se desplegará la documentación relacionada con `mpg`.
+
+En Positron también se puede utilizar una herramienta denominada [Explorador de Datos](https://positron.posit.co/data-explorer.html) para visualizar la información en una cuadrícula similar a una hoja de cálculo, así como filtar y ordenar los datos temporalmente y obtener estadísticas de cada variable. Para utilizar ésta herramienta ejecuta el siguiente código:
+
+```{r}
+# Uso del explorador de datos
+View(mpg)
+```
+
+De esa manera podrás utilizar el explorador de datos y examinar los elementos indicados anteriormente para `mpg` tal como se muestra en la @fig-4-chap-4.
+
+![Interfaz del explorador de datos aplicado a `mpg`](images/fig-4-chap-4.png){#fig-4-chap-4 fig-alt="Interfaz del Explorador de Datos en Positron mostrando el conjunto de datos mpg. A la izquierda se observa un panel con la lista de variables e histogramas de distribución para cada variable. A la derecha, una cuadrícula interactiva con los datos de los vehículos organizados en filas y columnas."}

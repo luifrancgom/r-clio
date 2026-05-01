@@ -1,5 +1,10 @@
 # Bienvenidos a R
 
+```{r}
+#| echo: false
+source("_common.R")
+```
+
 Este capítulo se basa en [@ismay_statistical_2025, cap. 1] y tiene como propósito introducir las herramientas fundamentales para el análisis de datos con R. Exploraremos los siguientes aspectos:
 
 1. ¿Qué es R y Positron?

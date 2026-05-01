@@ -1,5 +1,10 @@
 # Flujo de trabajo orientado a proyectos
 
+```{r}
+#| echo: false
+source("_common.R")
+```
+
 Este capítulo se basa en [@bryan_what_2025, cap. 3, 5] y tiene como propósito introducir los elementos básicos para trabajar por proyectos en Positron para R. Exploraremos los siguientes aspectos:
 
 1. ¿Qué significa organizar tu trabajo por proyectos?
