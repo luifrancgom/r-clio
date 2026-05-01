@@ -401,12 +401,12 @@ Nota
 </section>
 <section id="uso-de-paquetes" class="level2" data-number="4.4">
 <h2 data-number="4.4" class="anchored" data-anchor-id="uso-de-paquetes"><span class="header-section-number">4.4</span> Uso de paquetes</h2>
-<p>Para entender cómo utilizar un paquete, explorarás tu primera base de datos utilizando el paquete <code>tidyverse</code>. Primero, cierra la ventana de Positron si seguiste las instrucciones descritas en la <a href="welcome_to_r.html#sec-how-to-install-r-positron" class="quarto-xref"><span>Sección 2.2</span></a> y abre la carpeta <code>r-analisis-datos</code> (Ver @<a href="project-oriented_workflow.html#sec-project-oriented-workflow-positron-r" class="quarto-xref"><span>Sección 3.2</span></a>) utilizando las opciones <strong>File &gt; Open Folder…</strong> que podrás encontrar en el menú superior izquierdo de la interfaz. En caso que estes utilizando Posit Workbench (Ver <a href="welcome_to_r.html#sec-posit-workbench" class="quarto-xref"><span>Sección 2.3</span></a>) abre una sesión con el proyecto <code>r-analisis-datos</code>, creado de acuerdo a lo señalado en la <a href="project-oriented_workflow.html#sec-project-oriented-workflow-positron-r" class="quarto-xref"><span>Sección 3.2</span></a>.</p>
-<p>Luego, en la <strong>Barra de actividades</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) selecciona el ícono <img src="images/file-regular-full.png" alt="Ícono del explorador de archivos" height="25"> y párate con el puntero del ratón en la <strong>Barra lateral primaria</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) donde al lado izquierdo de la etiqueta <code>R-ANALISIS-DATOS</code> podrás encontrar en el segundo ícono de izquierda a derecha la opción de crear una carpeta. Crea la carpeta con el nombre <code>004_paquetes-r</code> y dentro de la carpeta también en la <strong>Barra lateral primaria</strong> utiliza el primer ícono de izquierda a derecha para crear un archivo con el nombre <code>001_uso-paquetes.R</code>. De esa manera podras abrilo en el <strong>Editor</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) tal como se muestra en la <a href="#fig-2-chap-4" class="quarto-xref">Figura&nbsp;<span>4.2</span></a>:</p>
-<div id="fig-2-chap-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<p>Para entender cómo utilizar un paquete, explorarás tu primera base de datos en R utilizando el paquete <code>tidyverse</code>. Primero, cierra la ventana de Positron si seguiste las instrucciones descritas en la <a href="welcome_to_r.html#sec-how-to-install-r-positron" class="quarto-xref"><span>Sección 2.2</span></a> y abre la carpeta <code>r-analisis-datos</code> (Ver <a href="project-oriented_workflow.html#sec-project-oriented-workflow-positron-r" class="quarto-xref"><span>Sección 3.2</span></a>) utilizando las opciones <strong>File &gt; Open Folder…</strong> que podrás encontrar en el menú superior izquierdo de la interfaz. En caso que estes utilizando Posit Workbench (Ver <a href="welcome_to_r.html#sec-posit-workbench" class="quarto-xref"><span>Sección 2.3</span></a>) abre una sesión con el proyecto <code>r-analisis-datos</code>, creado de acuerdo a lo señalado en la <a href="project-oriented_workflow.html#sec-project-oriented-workflow-positron-r" class="quarto-xref"><span>Sección 3.2</span></a>.</p>
+<p>Luego, en la <strong>Barra de actividades</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) selecciona el ícono <img src="images/file-regular-full.png" alt="Ícono del explorador de archivos" height="25"> y párate con el puntero del ratón en la <strong>Barra lateral primaria</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) donde al lado izquierdo de la etiqueta <code>R-ANALISIS-DATOS</code> podrás encontrar en el segundo ícono de izquierda a derecha la opción de crear una carpeta. Crea la carpeta con el nombre <code>004_paquetes-r</code> y dentro de la carpeta también en la <strong>Barra lateral primaria</strong> utiliza el primer ícono de izquierda a derecha para crear un archivo con el nombre <code>001_uso-paquetes.R</code>. De esa manera podras abrirlo en el <strong>Editor</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) tal como se muestra en la <a href="#fig-2-chap-4" class="quarto-xref">Figura&nbsp;<span>4.2</span></a>:</p>
+<div id="fig-2-chap-4" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Captura de pantalla de Positron que muestra la carpeta 004_paquetes-r dentro del proyecto R-ANALISIS-DATOS, conteniendo el archivo 001_uso-paquetes.R abierto en el editor">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-2-chap-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/fig-2-chap-4.png" class="img-fluid figure-img">
+<img src="images/fig-2-chap-4.png" class="img-fluid figure-img" alt="Captura de pantalla de Positron que muestra la carpeta 004_paquetes-r dentro del proyecto R-ANALISIS-DATOS, conteniendo el archivo 001_uso-paquetes.R abierto en el editor">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-chap-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;4.2: Estructura de carpetas y archivos para explorar tu primera base de datos
@@ -415,10 +415,102 @@ Figura&nbsp;4.2: Estructura de carpetas y archivos para explorar tu primera base
 </div>
 <p>En el archivo <code>001_uso-paquetes.R</code> carga el paquete <code>tidyverse</code> escribiendo el contenido que se menciona a continuación. Para que R procese la instrucción, sitúa el cursor (<code>|</code>) sobre la línea de código y presiona la combinación de teclas <kbd title="linux: Ctrl-Enter, mac: Command-Enter, windows: Ctrl-Enter" aria-hidden="true" data-linux="Ctrl-Enter" data-mac="Command-Enter" data-windows="Ctrl-Enter"></kbd><span class="visually-hidden"></span>:</p>
 <div class="cell">
+<div id="lst-load-tidyverse" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-load-tidyverse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;4.2: Línea de código para cargar el paquete tidyverse
+</figcaption>
+<div aria-describedby="lst-load-tidyverse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar librerias ----</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>El símbolo <code>#</code> permite agregar comentarios para entender los comandos que escribimos y <code>----</code> genera secciones para mantener organizado el contenido dentro de un archivo con extensión <code>.R</code>, como por ejemplo <code>001_uso-paquetes.R</code>. Un archivo de este tipo por si sólo no genera ningún resultado. Por ello, empleamos la combinación de teclas mencionada anteriormente para ejecutar los comandos en el <strong>Editor</strong> y mostrar el resultado señalado en el <a href="#lst-load-tidyverse-message" class="quarto-xref">Listado&nbsp;<span>4.1</span></a> en el <strong>Panel</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) dentro de la pestaña <strong>CONSOLE</strong>.</p>
+</figure>
+</div>
+</div>
+<div id="nte-execute-code" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota&nbsp;4.1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Cada vez que requieras ver el resultado de una línea de código que se encuentra dentro de un archivo con extensión <code>.R</code> sitúa el cursor (<code>|</code>) sobre la línea de código y presiona la combinación de teclas <kbd title="linux: Ctrl-Enter, mac: Command-Enter, windows: Ctrl-Enter" aria-hidden="true" data-linux="Ctrl-Enter" data-mac="Command-Enter" data-windows="Ctrl-Enter"></kbd><span class="visually-hidden"></span>. De ahora en adelante nos referimos a éste proceso como <strong>ejecutar el código</strong>.</p>
+</div>
+</div>
+<p>En el <a href="#lst-load-tidyverse" class="quarto-xref">Listado&nbsp;<span>4.2</span></a> el símbolo <code>#</code> permite agregar comentarios para entender los comandos que escribimos y <code>----</code> genera secciones para mantener organizado el contenido dentro de un archivo con extensión <code>.R</code> donde las señala en la <strong>Barra lateral primaria</strong> en la sección <strong>OUTLINE</strong> (Ver <a href="#fig-3-chap-4" class="quarto-xref">Figura&nbsp;<span>4.3</span></a>) en Positron. Un archivo de este tipo por si sólo no genera ningún resultado. Por ello, debes utilizar la combinación de teclas mencionada anteriormente para ejecutar los comandos en el <strong>Editor</strong> y mostrar el resultado señalado en el <a href="#lst-load-tidyverse-message" class="quarto-xref">Listado&nbsp;<span>4.1</span></a> en el <strong>Panel</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) dentro de la pestaña <strong>CONSOLE</strong>.</p>
+<div id="fig-3-chap-4" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Vista de la barra lateral primaria de Positron donde se observa la sección OUTLINE mostrando la etiqueta 'Cargar librerías', la cual se genera automáticamente a partir de los guiones en en el archivo '001_uso-paquetes.R'">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-chap-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig-3-chap-4.png" class="img-fluid figure-img" alt="Vista de la barra lateral primaria de Positron donde se observa la sección OUTLINE mostrando la etiqueta 'Cargar librerías', la cual se genera automáticamente a partir de los guiones en en el archivo '001_uso-paquetes.R'">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-chap-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;4.3: Sección OUTLINE dentro de la Barra laterla primaria de Positron
+</figcaption>
+</figure>
+</div>
+<p>Una vez cargado el paquete <code>tidyverse</code> puedes explorar la base de datos <code>mpg</code> que contiene información de economía de combustible desde 1999 hasta 2008 para 38 modelos populares de automóviles. Agrega al archivo <code>001_uso-paquetes.R</code> el siguiente contenido y ejecuta el código (Ver <a href="#nte-execute-code" class="quarto-xref">Note&nbsp;<span>4.1</span></a>) para que puedas visualizar parte de los datos en la consola donde el resultado puede variar dependiendo del tamaño de la pantalla de tu equipo:</p>
+<div class="cell">
+<div id="lst-mpg-database" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-mpg-database-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;4.3: Base de datos <code>mpg</code>
+</figcaption>
+<div aria-describedby="lst-mpg-database-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Explorar base de datos mpg ----</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>mpg</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 234 × 11
+   manufacturer model    displ  year   cyl trans drv     cty
+   &lt;chr&gt;        &lt;chr&gt;    &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt;
+ 1 audi         a4         1.8  1999     4 auto… f        18
+ 2 audi         a4         1.8  1999     4 manu… f        21
+ 3 audi         a4         2    2008     4 manu… f        20
+ 4 audi         a4         2    2008     4 auto… f        21
+ 5 audi         a4         2.8  1999     6 auto… f        16
+ 6 audi         a4         2.8  1999     6 manu… f        18
+ 7 audi         a4         3.1  2008     6 auto… f        18
+ 8 audi         a4 quat…   1.8  1999     4 manu… 4        18
+ 9 audi         a4 quat…   1.8  1999     4 auto… 4        16
+10 audi         a4 quat…   2    2008     4 manu… 4        20
+# ℹ 224 more rows
+# ℹ 3 more variables: hwy &lt;int&gt;, fl &lt;chr&gt;, class &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>En el resultado del <a href="#lst-mpg-database" class="quarto-xref">Listado&nbsp;<span>4.3</span></a> se incluye información para entender aspectos de la base de datos <code>mpg</code>:</p>
+<ul>
+<li><p><code># A tibble: 234 × 11</code> indica en primera instancia el tipo de objeto en R denominado <a href="https://tibble.tidyverse.org/articles/tibble.html"><code>tibble</code></a> donde se compone de <code>234</code> filas y <code>11</code> columnas.</p></li>
+<li><p>Una <code>tibble</code> solo muestra la cantidad de columnas que caben en tu pantalla. Por ese motivo se señalan en la parte superior los nombres de las columnas <code>manufacturer</code>, <code>model</code>, <code>displ</code>, <code>year</code>, <code>cyl</code>, <code>trans</code>, <code>drv</code>, <code>cty</code> y luego en la parte inferior las variables restantes <code>hwy</code>, <code>fl</code> y <code>class</code> en el mensaje <code># ℹ 3 more variables: hwy &lt;int&gt;, fl &lt;chr&gt;, class &lt;chr&gt;</code>.</p></li>
+<li><p>Debajo de los nombres de las columnas se indica el tipo de dato que corresponde a cada variable (p.&nbsp;ej., <code>&lt;chr&gt;</code>, <code>&lt;dbl&gt;</code>, <code>&lt;int&gt;</code>). En caso que no se puedan mostrar todas las columnas en la pantalla, en la parte inferior se señalan los tipos restantes de las demás columnas. Las diferentes opciones de tipos de columnas se pueden consultar en la documentación oficial en <a href="https://tibble.tidyverse.org/articles/types.html">Column types</a>.</p></li>
+<li><p>Por defecto una <code>tibble</code> solo muestra las primeras 10 filas pero señala en la parte inferior con el mensaje <code># ℹ 224 more rows</code> el número de filas restantes que componen la base de datos.</p></li>
+</ul>
+<p>Si la base de datos pertenece a un paquete, como en el caso de <code>mpg</code>, es posible consultar documentación acerca de la misma utilizando el símbolo <code>?</code> mas su nombre tal como se muestra a continuación:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Documentación base de datos mpg ----</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>?mpg</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Si ejecutas éste código en la <strong>Barra lateral secundaria</strong> dentro de la pestaña <strong>HELP</strong> se desplegará la documentación relacionada con <code>mpg</code>.</p>
+<p>En Positron también se puede utilizar una herramienta denominada <a href="https://positron.posit.co/data-explorer.html">Explorador de Datos</a> para visualizar la información en una cuadrícula similar a una hoja de cálculo, así como filtar y ordenar los datos temporalmente y obtener estadísticas de cada variable. Para utilizar ésta herramienta ejecuta el siguiente código:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Uso del explorador de datos</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(mpg)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>De esa manera podrás utilizar el explorador de datos y examinar los elementos indicados anteriormente para <code>mpg</code> tal como se muestra en la <a href="#fig-4-chap-4" class="quarto-xref">Figura&nbsp;<span>4.4</span></a>.</p>
+<div id="fig-4-chap-4" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Interfaz del Explorador de Datos en Positron mostrando el conjunto de datos mpg. A la izquierda se observa un panel con la lista de variables e histogramas de distribución para cada variable. A la derecha, una cuadrícula interactiva con los datos de los vehículos organizados en filas y columnas.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-4-chap-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig-4-chap-4.png" class="img-fluid figure-img" alt="Interfaz del Explorador de Datos en Positron mostrando el conjunto de datos mpg. A la izquierda se observa un panel con la lista de variables e histogramas de distribución para cada variable. A la derecha, una cuadrícula interactiva con los datos de los vehículos organizados en filas y columnas.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-4-chap-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;4.4: Interfaz del explorador de datos aplicado a <code>mpg</code>
+</figcaption>
+</figure>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
