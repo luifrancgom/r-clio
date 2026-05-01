@@ -131,6 +131,7 @@ En el resultado del @lst-mpg-database se incluye información para entender aspe
 Si la base de datos pertenece a un paquete, como en el caso de `mpg`, es posible consultar documentación acerca de la misma utilizando el símbolo `?` mas su nombre tal como se muestra a continuación:
 
 ```{r}
+#| eval: false
 # Documentación base de datos mpg ----
 ?mpg
 ```
@@ -140,6 +141,7 @@ Si ejecutas éste código en la **Barra lateral secundaria** dentro de la pesta�
 En Positron también se puede utilizar una herramienta denominada [Explorador de Datos](https://positron.posit.co/data-explorer.html) para visualizar la información en una cuadrícula similar a una hoja de cálculo, así como filtar y ordenar los datos temporalmente y obtener estadísticas de cada variable. Para utilizar ésta herramienta ejecuta el siguiente código:
 
 ```{r}
+#| eval: false
 # Uso del explorador de datos
 View(mpg)
 ```
