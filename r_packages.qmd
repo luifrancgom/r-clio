@@ -85,11 +85,11 @@ En el @sec-how-do-i-code-in-r podrás explorar más acerca de los tipos de texto
 
 ## Uso de paquetes
 
-Para entender cómo utilizar un paquete, explorarás tu primera base de datos en R utilizando el paquete `tidyverse`. Primero, cierra la ventana de Positron si seguiste las instrucciones descritas en la @sec-how-to-install-r-positron y abre la carpeta `r-analisis-datos` (Ver @sec-project-oriented-workflow-positron-r) utilizando las opciones **File > Open Folder...** que podrás encontrar en el menú superior izquierdo de la interfaz. En caso que estes utilizando Posit Workbench (Ver @sec-posit-workbench) abre una sesión con el proyecto `r-analisis-datos`, creado de acuerdo a lo señalado en la @sec-project-oriented-workflow-positron-r.
+Para entender cómo utilizar un paquete, explorarás tu primer conjuntos de datos en R utilizando el paquete `tidyverse`. Primero, cierra la ventana de Positron si seguiste las instrucciones descritas en la @sec-how-to-install-r-positron y abre la carpeta `r-analisis-datos` (Ver @sec-project-oriented-workflow-positron-r) utilizando las opciones **File > Open Folder...** que podrás encontrar en el menú superior izquierdo de la interfaz. En caso que estes utilizando Posit Workbench (Ver @sec-posit-workbench) abre una sesión con el proyecto `r-analisis-datos`, creado de acuerdo a lo señalado en la @sec-project-oriented-workflow-positron-r.
 
 Luego, en la **Barra de actividades** (ver @fig-positron-layout-outline) selecciona el ícono ![](images/file-regular-full.png){fig-alt="Ícono del explorador de archivos" height=25} y párate con el puntero del ratón en la **Barra lateral primaria** (ver @fig-positron-layout-outline) donde al lado izquierdo de la etiqueta `R-ANALISIS-DATOS` podrás encontrar en el segundo ícono de izquierda a derecha la opción de crear una carpeta. Crea la carpeta con el nombre `004_paquetes-r` y dentro de la carpeta también en la **Barra lateral primaria** utiliza el primer ícono de izquierda a derecha para crear un archivo con el nombre `001_uso-paquetes.R`. De esa manera podras abrirlo en el **Editor** (ver @fig-positron-layout-outline) tal como se muestra en la @fig-2-chap-4: 
 
-![Estructura de carpetas y archivos para explorar tu primera base de datos](images/fig-2-chap-4.png){#fig-2-chap-4 fig-alt="Captura de pantalla de Positron que muestra la carpeta 004_paquetes-r dentro del proyecto R-ANALISIS-DATOS, conteniendo el archivo 001_uso-paquetes.R abierto en el editor"}
+![Estructura de carpetas y archivos para explorar tu primer conjuntos de datos](images/fig-2-chap-4.png){#fig-2-chap-4 fig-alt="Captura de pantalla de Positron que muestra la carpeta 004_paquetes-r dentro del proyecto R-ANALISIS-DATOS, conteniendo el archivo 001_uso-paquetes.R abierto en el editor"}
 
 En el archivo `001_uso-paquetes.R` carga el paquete `tidyverse` escribiendo el contenido que se menciona a continuación. Para que R procese la instrucción, sitúa el cursor (`|`) sobre la línea de código y presiona la combinación de teclas {{< kbd mac=Command-Enter win=Ctrl-Enter linux=Ctrl-Enter >}}:
 
@@ -111,16 +111,16 @@ Un archivo con extensión `.R` por si sólo no genera ningún resultado. Por ell
 
 ![Sección OUTLINE dentro de la Barra laterla primaria de Positron](images/fig-3-chap-4.png){#fig-3-chap-4 fig-alt="Vista de la barra lateral primaria de Positron donde se observa la sección OUTLINE mostrando la etiqueta 'Cargar librerías', la cual se genera automáticamente a partir de los guiones en en el archivo '001_uso-paquetes.R'"}
 
-Una vez cargado el paquete `tidyverse` puedes explorar la base de datos `mpg` que contiene información de economía de combustible desde 1999 hasta 2008 para 38 modelos populares de automóviles. Agrega al archivo `001_uso-paquetes.R` el siguiente contenido y ejecuta el código (Ver @nte-execute-code) para que puedas visualizar parte de los datos en la consola donde el resultado puede variar dependiendo del tamaño de la pantalla de tu equipo:
+Una vez cargado el paquete `tidyverse` puedes explorar el conjunto de datos `mpg` que contiene información de economía de combustible desde 1999 hasta 2008 para 38 modelos populares de automóviles. Agrega al archivo `001_uso-paquetes.R` el siguiente contenido y ejecuta el código (Ver @nte-execute-code) para que puedas visualizar parte de los datos en la consola donde el resultado puede variar dependiendo del tamaño de la pantalla de tu equipo:
 
 ```{r}
 #| lst-label: lst-mpg-database
-#| lst-cap: Base de datos `mpg`
-# Explorar base de datos mpg ----
+#| lst-cap: Conjunto de datos `mpg`
+# Explorar el conjunto de datos mpg ----
 mpg
 ```
 
-En el resultado del @lst-mpg-database se incluye información para entender aspectos de la base de datos `mpg`:
+En el resultado del @lst-mpg-database se incluye información para entender aspectos del conjunto de datos `mpg`:
 
 - `# A tibble: 234 × 11` indica en primera instancia el tipo de objeto en R denominado [`tibble`](https://tibble.tidyverse.org/articles/tibble.html) donde se compone de `234` filas y `11` columnas.
 
@@ -128,13 +128,13 @@ En el resultado del @lst-mpg-database se incluye información para entender aspe
 
 - Debajo de los nombres de las columnas se indica el tipo de dato que corresponde a cada variable (p. ej., `<chr>`, `<dbl>`, `<int>`). En caso que no se puedan mostrar todas las columnas en la pantalla, en la parte inferior se señalan los tipos restantes de las demás columnas. Las diferentes opciones de tipos de columnas se pueden consultar en la documentación oficial del paquete `tibble`, que hace parte del paquete `tidyverse`, en [Column types](https://tibble.tidyverse.org/articles/types.html).
 
-- Por defecto una `tibble` solo muestra las primeras 10 filas pero señala en la parte inferior con el mensaje `# ℹ 224 more rows` el número de filas restantes que componen la base de datos.
+- Por defecto una `tibble` solo muestra las primeras 10 filas pero señala en la parte inferior con el mensaje `# ℹ 224 more rows` el número de filas restantes que componen el conjunto de datos.
 
-Si la base de datos pertenece a un paquete, como en el caso de `mpg`, es posible consultar documentación acerca de la misma utilizando el símbolo `?` más su nombre tal como se muestra a continuación:
+Si el conjunto de datosß pertenece a un paquete, como en el caso de `mpg`, es posible consultar documentación acerca de la misma utilizando el símbolo `?` más su nombre tal como se muestra a continuación:
 
 ```{r}
 #| eval: false
-# Documentación base de datos mpg ----
+# Documentación del conjunto de datos mpg ----
 ?mpg
 ```
 
@@ -152,10 +152,10 @@ De esa manera podrás utilizar el explorador de datos y examinar los elementos i
 
 ![Interfaz del explorador de datos aplicado a `mpg`](images/fig-4-chap-4.png){#fig-4-chap-4 fig-alt="Interfaz del Explorador de Datos en Positron mostrando el conjunto de datos mpg. A la izquierda se observa un panel con la lista de variables e histogramas de distribución para cada variable. A la derecha, una cuadrícula interactiva con los datos de los vehículos organizados en filas y columnas."}
 
-En ocasiones se hace necesario poder dar un "vistazo" a un conjunto de datos cuando se tiene un número considerable de columnas. En ese sentido, otra forma adicional de explorar una base de datos es utilizar la función `glimpse()`, donde permite visualizar los nombres de las columnas verticalmente hacia abajo y los datos correspondientes a cada varaible de manera horizontal. Para utilizar ésta herramienta ejecuta el siguiente código:
+En ocasiones se hace necesario poder dar un "vistazo" a un conjunto de datos cuando se tiene un número considerable de columnas. En ese sentido, otra forma adicional de explorar un conjunto de datos, es mediante el uso de la función `glimpse()`. Esta función permite visualizar los nombres de las columnas verticalmente hacia abajo y los datos correspondientes a cada varaible de manera horizontal. Para utilizar ésta herramienta ejecuta el siguiente código:
 
 ```{r}
-# "Vistazo" de la base de datos ----
+# "Vistazo" del conjunto de datos ----
 glimpse(mpg)
 ```
 
