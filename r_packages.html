@@ -262,7 +262,7 @@ div.csl-indent {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#sec-what-are-r-packages" id="toc-sec-what-are-r-packages" class="nav-link active" data-scroll-target="#sec-what-are-r-packages"><span class="header-section-number">4.1</span> ¿Qué son los paquetes de R?</a></li>
+  <li><a href="#sec-what-are-r-packages" id="toc-sec-what-are-r-packages" class="nav-link active" data-scroll-target="#sec-what-are-r-packages"><span class="header-section-number">4.1</span> ¿Qué son los paquetes en R?</a></li>
   <li><a href="#instalación-de-paquetes" id="toc-instalación-de-paquetes" class="nav-link" data-scroll-target="#instalación-de-paquetes"><span class="header-section-number">4.2</span> Instalación de paquetes</a></li>
   <li><a href="#carga-de-paquetes" id="toc-carga-de-paquetes" class="nav-link" data-scroll-target="#carga-de-paquetes"><span class="header-section-number">4.3</span> Carga de paquetes</a></li>
   <li><a href="#uso-de-paquetes" id="toc-uso-de-paquetes" class="nav-link" data-scroll-target="#uso-de-paquetes"><span class="header-section-number">4.4</span> Uso de paquetes</a></li>
@@ -293,13 +293,13 @@ div.csl-indent {
 
 <p>Este capítulo se basa en <span class="citation" data-cites="ismay_statistical_2025">(<a href="references.html#ref-ismay_statistical_2025" role="doc-biblioref">Ismay, 2025, Capítulo 1</a>)</span> y tiene como propósito introducir el concepto de paquetes de R. Exploraremos los siguientes aspectos:</p>
 <ol type="1">
-<li>¿Qué son los paquetes de R?</li>
+<li>¿Qué son los paquetes en R?</li>
 <li>¿Cómo instalar paquetes?</li>
 <li>¿Cómo cargar paquetes?</li>
 <li>Una demostración de cómo utilizar un paquete</li>
 </ol>
 <section id="sec-what-are-r-packages" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="sec-what-are-r-packages"><span class="header-section-number">4.1</span> ¿Qué son los paquetes de R?</h2>
+<h2 data-number="4.1" class="anchored" data-anchor-id="sec-what-are-r-packages"><span class="header-section-number">4.1</span> ¿Qué son los paquetes en R?</h2>
 <p>En R un paquete, en términos simples, es una carpeta organizada de cierta forma que alguién más creó que te brinda herramientas listas para usar con el objetivo de realizar una tarea específica o extender la funcionalidad base de R. De hecho, cuando instalas R por primera vez, este ya viene con un grupo de paquetes estandar (o de base) por defecto que le permiten funcionar y realizar ciertas tareas. Independientemente de si un paquete esta incluido en R por defecto o tiene como proposito extender su funcionalidad, su estructura siempre consta de 3 elementos <span class="citation" data-cites="wickham_r_2023-1">(<a href="references.html#ref-wickham_r_2023-1" role="doc-biblioref">Wickham &amp; Bryan, 2023</a>)</span>:</p>
 <ul>
 <li><p><strong>Funciones</strong>: son instrucciones predefinidas que reciben una información, la procesan y entregan un resultado para realizar una tarea específica de manera automática.</p></li>
@@ -355,13 +355,13 @@ Importante
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Al instalar un paquete en R, asegúrate de escribir su nombre entre comillas (<code>""</code>). De lo contrario, la instalación fallará. Por ahora, no te preocupes por la razón detrás de éste aspecto. Lo importante por ahora es que te asegures que puedas saber cómo instalar un paquete en R.</p>
+<p>Al instalar un paquete en R, asegúrate de escribir su nombre entre comillas (<code>""</code>). De lo contrario, la instalación fallará. Por ahora, no te preocupes por la razón detrás de éste aspecto. Lo importante es que te asegures que puedas saber cómo instalar un paquete en R.</p>
 </div>
 </div>
 </section>
 <section id="carga-de-paquetes" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="carga-de-paquetes"><span class="header-section-number">4.3</span> Carga de paquetes</h2>
-<p>Cuando instalas una aplicación en tu celular es necesario abrirla para poder usarla, no basta con simplemente instalarla. En R para poder utilizar un paquete que se encuentre instalado previamente es necesario cargarlo (equivalente a abrir una aplicación que se encuentra instalada en un celular). En R para cargar un paquete se utiliza el comando <code>library()</code>.</p>
+<p>Cuando instalas una aplicación en tu celular es necesario abrirla para poder usarla, no basta con simplemente instalarla. En R para poder utilizar un paquete que se encuentre instalado previamente es necesario cargarlo (equivalente a abrir una aplicación que se encuentra instalada en un celular). En R para cargar un paquete se utiliza la función <code>library()</code>.</p>
 <p>Por ejemplo, si deseas cargar el paquete <code>tidyverse</code> escribe el siguiente comando en la consola:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Luego, presiona <kbd title="Enter" aria-hidden="true">Enter</kbd><span class="visually-hidden">Enter</span>. Si el paquete <code>tidyverse</code> fue instalado de manera correcta se generará un texto (ver el <a href="#lst-load-tidyverse-message" class="quarto-xref">Listado&nbsp;<span>4.1</span></a>) igual o similar al que se muestra a continuación en la consola:</p>
@@ -401,7 +401,7 @@ Nota
 </section>
 <section id="uso-de-paquetes" class="level2" data-number="4.4">
 <h2 data-number="4.4" class="anchored" data-anchor-id="uso-de-paquetes"><span class="header-section-number">4.4</span> Uso de paquetes</h2>
-<p>Para entender cómo utilizar un paquete, explorarás tu primera base de datos en R utilizando el paquete <code>tidyverse</code>. Primero, cierra la ventana de Positron si seguiste las instrucciones descritas en la <a href="welcome_to_r.html#sec-how-to-install-r-positron" class="quarto-xref"><span>Sección 2.2</span></a> y abre la carpeta <code>r-analisis-datos</code> (Ver <a href="project-oriented_workflow.html#sec-project-oriented-workflow-positron-r" class="quarto-xref"><span>Sección 3.2</span></a>) utilizando las opciones <strong>File &gt; Open Folder…</strong> que podrás encontrar en el menú superior izquierdo de la interfaz. En caso que estes utilizando Posit Workbench (Ver <a href="welcome_to_r.html#sec-posit-workbench" class="quarto-xref"><span>Sección 2.3</span></a>) abre una sesión con el proyecto <code>r-analisis-datos</code>, creado de acuerdo a lo señalado en la <a href="project-oriented_workflow.html#sec-project-oriented-workflow-positron-r" class="quarto-xref"><span>Sección 3.2</span></a>.</p>
+<p>Para entender cómo utilizar un paquete, explorarás tu primer conjuntos de datos en R utilizando el paquete <code>tidyverse</code>. Primero, cierra la ventana de Positron si seguiste las instrucciones descritas en la <a href="welcome_to_r.html#sec-how-to-install-r-positron" class="quarto-xref"><span>Sección 2.2</span></a> y abre la carpeta <code>r-analisis-datos</code> (Ver <a href="project-oriented_workflow.html#sec-project-oriented-workflow-positron-r" class="quarto-xref"><span>Sección 3.2</span></a>) utilizando las opciones <strong>File &gt; Open Folder…</strong> que podrás encontrar en el menú superior izquierdo de la interfaz. En caso que estes utilizando Posit Workbench (Ver <a href="welcome_to_r.html#sec-posit-workbench" class="quarto-xref"><span>Sección 2.3</span></a>) abre una sesión con el proyecto <code>r-analisis-datos</code>, creado de acuerdo a lo señalado en la <a href="project-oriented_workflow.html#sec-project-oriented-workflow-positron-r" class="quarto-xref"><span>Sección 3.2</span></a>.</p>
 <p>Luego, en la <strong>Barra de actividades</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) selecciona el ícono <img src="images/file-regular-full.png" alt="Ícono del explorador de archivos" height="25"> y párate con el puntero del ratón en la <strong>Barra lateral primaria</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) donde al lado izquierdo de la etiqueta <code>R-ANALISIS-DATOS</code> podrás encontrar en el segundo ícono de izquierda a derecha la opción de crear una carpeta. Crea la carpeta con el nombre <code>004_paquetes-r</code> y dentro de la carpeta también en la <strong>Barra lateral primaria</strong> utiliza el primer ícono de izquierda a derecha para crear un archivo con el nombre <code>001_uso-paquetes.R</code>. De esa manera podras abrirlo en el <strong>Editor</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) tal como se muestra en la <a href="#fig-2-chap-4" class="quarto-xref">Figura&nbsp;<span>4.2</span></a>:</p>
 <div id="fig-2-chap-4" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Captura de pantalla de Positron que muestra la carpeta 004_paquetes-r dentro del proyecto R-ANALISIS-DATOS, conteniendo el archivo 001_uso-paquetes.R abierto en el editor">
 <figure class="quarto-float quarto-float-fig figure">
@@ -409,7 +409,7 @@ Nota
 <img src="images/fig-2-chap-4.png" class="img-fluid figure-img" alt="Captura de pantalla de Positron que muestra la carpeta 004_paquetes-r dentro del proyecto R-ANALISIS-DATOS, conteniendo el archivo 001_uso-paquetes.R abierto en el editor">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-chap-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.2: Estructura de carpetas y archivos para explorar tu primera base de datos
+Figura&nbsp;4.2: Estructura de carpetas y archivos para explorar tu primer conjuntos de datos
 </figcaption>
 </figure>
 </div>
@@ -440,7 +440,8 @@ Nota&nbsp;4.1
 <p>Cada vez que requieras ver el resultado de una línea de código que se encuentra dentro de un archivo con extensión <code>.R</code> sitúa el cursor (<code>|</code>) sobre la línea de código y presiona la combinación de teclas <kbd title="linux: Ctrl-Enter, mac: Command-Enter, windows: Ctrl-Enter" aria-hidden="true" data-linux="Ctrl-Enter" data-mac="Command-Enter" data-windows="Ctrl-Enter"></kbd><span class="visually-hidden"></span>. De ahora en adelante nos referimos a éste proceso como <strong>ejecutar el código</strong>.</p>
 </div>
 </div>
-<p>En el <a href="#lst-load-tidyverse" class="quarto-xref">Listado&nbsp;<span>4.2</span></a> el símbolo <code>#</code> permite agregar comentarios para entender los comandos que escribimos y <code>----</code> genera secciones para mantener organizado el contenido dentro de un archivo con extensión <code>.R</code> donde las señala en la <strong>Barra lateral primaria</strong> en la sección <strong>OUTLINE</strong> (Ver <a href="#fig-3-chap-4" class="quarto-xref">Figura&nbsp;<span>4.3</span></a>) en Positron. Un archivo de este tipo por si sólo no genera ningún resultado. Por ello, debes utilizar la combinación de teclas mencionada anteriormente para ejecutar los comandos en el <strong>Editor</strong> y mostrar el resultado señalado en el <a href="#lst-load-tidyverse-message" class="quarto-xref">Listado&nbsp;<span>4.1</span></a> en el <strong>Panel</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) dentro de la pestaña <strong>CONSOLE</strong>.</p>
+<p>En el <a href="#lst-load-tidyverse" class="quarto-xref">Listado&nbsp;<span>4.2</span></a> el símbolo <code>#</code> permite agregar comentarios para entender los comandos que escribimos y <code>----</code> genera secciones para mantener organizado el contenido dentro de un archivo con extensión <code>.R</code> donde las señala en la <strong>Barra lateral primaria</strong> en la sección <strong>OUTLINE</strong> (Ver <a href="#fig-3-chap-4" class="quarto-xref">Figura&nbsp;<span>4.3</span></a>) en Positron.</p>
+<p>Un archivo con extensión <code>.R</code> por si sólo no genera ningún resultado. Por ello, debes utilizar la combinación de teclas mencionada anteriormente para ejecutar los comandos en el <strong>Editor</strong> y mostrar el resultado señalado en el <a href="#lst-load-tidyverse-message" class="quarto-xref">Listado&nbsp;<span>4.1</span></a> en el <strong>Panel</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) dentro de la pestaña <strong>CONSOLE</strong>.</p>
 <div id="fig-3-chap-4" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Vista de la barra lateral primaria de Positron donde se observa la sección OUTLINE mostrando la etiqueta 'Cargar librerías', la cual se genera automáticamente a partir de los guiones en en el archivo '001_uso-paquetes.R'">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-3-chap-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -451,15 +452,15 @@ Figura&nbsp;4.3: Sección OUTLINE dentro de la Barra laterla primaria de Positro
 </figcaption>
 </figure>
 </div>
-<p>Una vez cargado el paquete <code>tidyverse</code> puedes explorar la base de datos <code>mpg</code> que contiene información de economía de combustible desde 1999 hasta 2008 para 38 modelos populares de automóviles. Agrega al archivo <code>001_uso-paquetes.R</code> el siguiente contenido y ejecuta el código (Ver <a href="#nte-execute-code" class="quarto-xref">Note&nbsp;<span>4.1</span></a>) para que puedas visualizar parte de los datos en la consola donde el resultado puede variar dependiendo del tamaño de la pantalla de tu equipo:</p>
+<p>Una vez cargado el paquete <code>tidyverse</code> puedes explorar el conjunto de datos <code>mpg</code> que contiene información de economía de combustible desde 1999 hasta 2008 para 38 modelos populares de automóviles. Agrega al archivo <code>001_uso-paquetes.R</code> el siguiente contenido y ejecuta el código (Ver <a href="#nte-execute-code" class="quarto-xref">Nota&nbsp;<span>4.1</span></a>) para que puedas visualizar parte de los datos en la consola donde el resultado puede variar dependiendo del tamaño de la pantalla de tu equipo:</p>
 <div class="cell">
 <div id="lst-mpg-database" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-mpg-database-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listado&nbsp;4.3: Base de datos <code>mpg</code>
+Listado&nbsp;4.3: Conjunto de datos <code>mpg</code>
 </figcaption>
 <div aria-describedby="lst-mpg-database-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Explorar base de datos mpg ----</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Explorar el conjunto de datos mpg ----</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>mpg</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
@@ -482,22 +483,22 @@ Listado&nbsp;4.3: Base de datos <code>mpg</code>
 # ℹ 3 more variables: hwy &lt;int&gt;, fl &lt;chr&gt;, class &lt;chr&gt;</code></pre>
 </div>
 </div>
-<p>En el resultado del <a href="#lst-mpg-database" class="quarto-xref">Listado&nbsp;<span>4.3</span></a> se incluye información para entender aspectos de la base de datos <code>mpg</code>:</p>
+<p>En el resultado del <a href="#lst-mpg-database" class="quarto-xref">Listado&nbsp;<span>4.3</span></a> se incluye información para entender aspectos del conjunto de datos <code>mpg</code>:</p>
 <ul>
 <li><p><code># A tibble: 234 × 11</code> indica en primera instancia el tipo de objeto en R denominado <a href="https://tibble.tidyverse.org/articles/tibble.html"><code>tibble</code></a> donde se compone de <code>234</code> filas y <code>11</code> columnas.</p></li>
 <li><p>Una <code>tibble</code> solo muestra la cantidad de columnas que caben en tu pantalla. Por ese motivo se señalan en la parte superior los nombres de las columnas <code>manufacturer</code>, <code>model</code>, <code>displ</code>, <code>year</code>, <code>cyl</code>, <code>trans</code>, <code>drv</code>, <code>cty</code> y luego en la parte inferior las variables restantes <code>hwy</code>, <code>fl</code> y <code>class</code> en el mensaje <code># ℹ 3 more variables: hwy &lt;int&gt;, fl &lt;chr&gt;, class &lt;chr&gt;</code>.</p></li>
-<li><p>Debajo de los nombres de las columnas se indica el tipo de dato que corresponde a cada variable (p.&nbsp;ej., <code>&lt;chr&gt;</code>, <code>&lt;dbl&gt;</code>, <code>&lt;int&gt;</code>). En caso que no se puedan mostrar todas las columnas en la pantalla, en la parte inferior se señalan los tipos restantes de las demás columnas. Las diferentes opciones de tipos de columnas se pueden consultar en la documentación oficial en <a href="https://tibble.tidyverse.org/articles/types.html">Column types</a>.</p></li>
-<li><p>Por defecto una <code>tibble</code> solo muestra las primeras 10 filas pero señala en la parte inferior con el mensaje <code># ℹ 224 more rows</code> el número de filas restantes que componen la base de datos.</p></li>
+<li><p>Debajo de los nombres de las columnas se indica el tipo de dato que corresponde a cada variable (p.&nbsp;ej., <code>&lt;chr&gt;</code>, <code>&lt;dbl&gt;</code>, <code>&lt;int&gt;</code>). En caso que no se puedan mostrar todas las columnas en la pantalla, en la parte inferior se señalan los tipos restantes de las demás columnas. Las diferentes opciones de tipos de columnas se pueden consultar en la documentación oficial del paquete <code>tibble</code>, que hace parte del paquete <code>tidyverse</code>, en <a href="https://tibble.tidyverse.org/articles/types.html">Column types</a>.</p></li>
+<li><p>Por defecto una <code>tibble</code> solo muestra las primeras 10 filas pero señala en la parte inferior con el mensaje <code># ℹ 224 more rows</code> el número de filas restantes que componen el conjunto de datos.</p></li>
 </ul>
-<p>Si la base de datos pertenece a un paquete, como en el caso de <code>mpg</code>, es posible consultar documentación acerca de la misma utilizando el símbolo <code>?</code> mas su nombre tal como se muestra a continuación:</p>
+<p>Si el conjunto de datosß pertenece a un paquete, como en el caso de <code>mpg</code>, es posible consultar documentación acerca de la misma utilizando el símbolo <code>?</code> más su nombre tal como se muestra a continuación:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Documentación base de datos mpg ----</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Documentación del conjunto de datos mpg ----</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>?mpg</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Si ejecutas éste código en la <strong>Barra lateral secundaria</strong> dentro de la pestaña <strong>HELP</strong> se desplegará la documentación relacionada con <code>mpg</code>.</p>
+<p>Si ejecutas éste código, en la <strong>Barra lateral secundaria</strong> dentro de la pestaña <strong>HELP</strong> se desplegará la documentación relacionada con <code>mpg</code>.</p>
 <p>En Positron también se puede utilizar una herramienta denominada <a href="https://positron.posit.co/data-explorer.html">Explorador de Datos</a> para visualizar la información en una cuadrícula similar a una hoja de cálculo, así como filtar y ordenar los datos temporalmente y obtener estadísticas de cada variable. Para utilizar ésta herramienta ejecuta el siguiente código:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Uso del explorador de datos</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Uso del explorador de datos ----</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(mpg)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>De esa manera podrás utilizar el explorador de datos y examinar los elementos indicados anteriormente para <code>mpg</code> tal como se muestra en la <a href="#fig-4-chap-4" class="quarto-xref">Figura&nbsp;<span>4.4</span></a>.</p>
@@ -510,6 +511,37 @@ Listado&nbsp;4.3: Base de datos <code>mpg</code>
 Figura&nbsp;4.4: Interfaz del explorador de datos aplicado a <code>mpg</code>
 </figcaption>
 </figure>
+</div>
+<p>En ocasiones se hace necesario poder dar un “vistazo” a un conjunto de datos cuando se tiene un número considerable de columnas. En ese sentido, otra forma adicional de explorar un conjunto de datos, es mediante el uso de la función <code>glimpse()</code>. Esta función permite visualizar los nombres de las columnas verticalmente hacia abajo y los datos correspondientes a cada varaible de manera horizontal. Para utilizar ésta herramienta ejecuta el siguiente código:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># "Vistazo" del conjunto de datos ----</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mpg)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 234
+Columns: 11
+$ manufacturer &lt;chr&gt; "audi", "audi", "audi", "audi", "audi…
+$ model        &lt;chr&gt; "a4", "a4", "a4", "a4", "a4", "a4", "…
+$ displ        &lt;dbl&gt; 1.8, 1.8, 2.0, 2.0, 2.8, 2.8, 3.1, 1.…
+$ year         &lt;int&gt; 1999, 1999, 2008, 2008, 1999, 1999, 2…
+$ cyl          &lt;int&gt; 4, 4, 4, 4, 6, 6, 6, 4, 4, 4, 4, 6, 6…
+$ trans        &lt;chr&gt; "auto(l5)", "manual(m5)", "manual(m6)…
+$ drv          &lt;chr&gt; "f", "f", "f", "f", "f", "f", "f", "4…
+$ cty          &lt;int&gt; 18, 21, 20, 21, 16, 18, 18, 18, 16, 2…
+$ hwy          &lt;int&gt; 29, 29, 31, 30, 26, 26, 27, 26, 25, 2…
+$ fl           &lt;chr&gt; "p", "p", "p", "p", "p", "p", "p", "p…
+$ class        &lt;chr&gt; "compact", "compact", "compact", "com…</code></pre>
+</div>
+</div>
+<p>De esa manera tal como se muestra anteriormente es posible visualizar en su totalidad los nombres de las columnas sin importar el ancho de la pantalla de tu equipo, así como el tipo de cada columna y una parte de los datos asociados a cada variable. Este aspecto es útil, particularmente cuando se tiene un conjunto de datos con una cantidad considerable de columnas.</p>
+<p>Por último, en ciertos contextos puede ser útil extrar y explorar sólo una variable dentro de un conjunto de datos. En R existen diversas formas de lograr esto. Sin embargo, señalaremos sólo 2 alternativas, enfocándonos en el uso del operador <code>$</code>, que está incluído por defecto en R, y la función <code>pull()</code> del paquete <code>dplyr</code>, que hace parte del paquete <code>tidyverse</code>. Explora las 2 alternativas, agregando el contenido señalado a continuación en tu archivo <code>001_uso-paquetes.R</code> para que al ejecutar el código puedas ver los resultados equivalentes que se generan en la consola.</p>
+<p>Si se buscara, por ejemplo, extraer la variable <code>manufacturer</code> de <code>mpg</code> con el operador <code>$</code> puedes ejecutar el siguiente código:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracción de columnas ----</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>mpg<span class="sc">$</span>manufacturer</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>De manera alternativa puedes utilizar la función <code>pull()</code> del paquete <code>dplyr</code>, ejecutando el siguiente código:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pull</span>(mpg, manufacturer)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
