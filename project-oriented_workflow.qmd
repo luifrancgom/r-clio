@@ -21,7 +21,7 @@ Trabajas con ambos proyectos mezclados sobre la misma mesa de trabajo. Las pieza
 
 **2. El taller por proyectos**
 
-Utilizas una caja independiente para cada mueble. Sobre la mesa de trabajo solo pones la caja de la silla o la de la cama, según lo que necesites. Cada caja contiene únicamente las piezas y los planos de ese proyecto. Si decides trabajar en la silla, la mesa queda libre de cualquier parte de la cama. Si tienes que mudarte de taller, simplemente cierras la caja y te la llevas: cada proyecto es autónomo, listo para continuar en cualquier otro lugar.
+Utilizas una caja independiente para cada mueble. Sobre la mesa de trabajo solo pones la caja de la silla o la de la cama, según lo que necesites. Cada caja contiene únicamente las piezas y los planos de ese proyecto. Si decides trabajar en la silla, la mesa queda libre de cualquier parte de la cama. Si tienes que mudarte de taller, simplemente cierras la caja y te la llevas: cada proyecto es autónomo y esta listo para continuar en cualquier otro lugar.
 
 ::: {#fig-1-chap-3 layout="[[48,-4,48]]"}
 ![El taller del caos: sin un flujo de trabajo definido](images/chaotic-workshop.png){fig-alt="Una mesa de trabajo de carpintería desordenada donde las piezas de madera de una silla y una cama están mezcladas y amontonadas, ilustrando la falta de un flujo de trabajo organizado."}
@@ -39,7 +39,7 @@ Cuando utilices R con Positron para realizar un análisis de datos, es important
 
 - **Adoptar una disciplina de rutas**: todas las rutas de tus archivos deben ser en lo posible relativas. Esto significa que, como ya sabes dónde estás parado, solo necesitas indicar el camino desde la carpeta del proyecto hacia el archivo que quieres usar. De esta forma, evitas escribir rutas largas y fijas que solo funcionan en tu computador. 
 
-Estas prácticas permiten que el proyecto sea portátil y comprensible. Al implementarlas, podrás mover la carpeta del proyecto de un lugar a otro en tu computador, e incluso enviarla a otras personas y que el proyecto simplemente "funcione" [@bryan_project-oriented_2017]. Además, permites que otra persona pueda explorar el proyecto y entender la estructura de tu trabajo.
+Estas prácticas permiten que el proyecto sea portátil y comprensible. Al implementarlas, podrás mover la carpeta del proyecto de un lugar a otro en tu computador, e incluso enviarla a otras personas y que el proyecto simplemente "funcione" [@bryan_project-oriented_2017]. Además, permites que otras personas puedan explorar el proyecto y entender la estructura de tu trabajo.
 
 ::: {.callout-note}
 En la @sec-project-oriented-workflow-positron-r abordaremos de manera práctica en Positron como se materializan los aspectos mencionados en ésta sección. Si algunos elementos no se entienden a profundidad con la generación de un proyecto de R en Positron quedarán más claros estos aspectos.

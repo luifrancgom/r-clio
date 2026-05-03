@@ -40,11 +40,11 @@ Para utilizar R con Positron es necesario primero tener instalado la versión 4.
 
 #### Windows
 
-Selecciona el enlace **Download R for Windows**, haz clic en **base** y, finalmente, pulsa en el enlace **Download R X.X.X for Windows**. Ten en cuenta que **X.X.X** representa la versión más reciente disponible al momento de la descarga. Una vez que el archivo `.exe` se haya descargado, haz doble clic en él para ejecutarlo; esto abrirá un asistente con instrucciones en pantalla que te guiará paso a paso hasta completar la instalación.
+Selecciona el enlace **Download R for Windows**, haz clic en **base** y, finalmente, pulsa en el enlace **Download R X.X.X for Windows**. Ten en cuenta que **X.X.X** representa la versión más reciente disponible al momento de la descarga. Una vez que el archivo `.exe` se haya descargado, haz doble clic en él para ejecutarlo, esto abrirá un asistente con instrucciones en pantalla que te guiará paso a paso hasta completar la instalación.
 
 #### Mac
 
-Selecciona el enlace **Download R for macOS** y dirígete a la sección **Latest release**. Haz clic en el paquete adecuado para la arquitectura de tu Mac (por ejemplo, **R-X.X.X-arm64.pkg** para chips Apple M1/M2/M3, o **R-X.X.X-x86_64.pkg** para procesadores Intel) para descargar el archivo `.pkg`. Ten en cuenta que **X.X.X** representa la versión más reciente disponible al momento de la descarga. Una vez que el archivo se haya descargado, haz doble clic en él para ejecutarlo; esto abrirá un asistente con instrucciones en pantalla que te guiará paso a paso hasta completar la instalación.
+Selecciona el enlace **Download R for macOS** y dirígete a la sección **Latest release**. Haz clic en el paquete adecuado para la arquitectura de tu Mac (por ejemplo, **R-X.X.X-arm64.pkg** para chips Apple M1/M2/M3, o **R-X.X.X-x86_64.pkg** para procesadores Intel) para descargar el archivo `.pkg`. Ten en cuenta que **X.X.X** representa la versión más reciente disponible al momento de la descarga. Una vez que el archivo se haya descargado, haz doble clic en él para ejecutarlo, esto abrirá un asistente con instrucciones en pantalla que te guiará paso a paso hasta completar la instalación.
 
 #### Linux
 
@@ -52,7 +52,7 @@ Selecciona el enlace **Download R for Linux** y elige la distribución que utili
 
 #### Verificando la instalación de R
 
-Una vez instales R es importante que verifiques la instalación. La forma más fácil de hacerlo es dar doble click en el ícono de R (Ver @fig-r-logo) para el caso de Windows o Mac o en Linux abrir el terminal e ingresa `R` en la línea de comandos.
+Una vez instales R es importante que verifiques la instalación. La forma más fácil de hacerlo es dar doble click en el ícono de R (Ver @fig-r-logo) para el caso de Windows o Mac o en Linux abrir el terminal y digita `R` en la línea de comandos.
 
 ![Ícono de R](images/r-project-logo.png){#fig-r-logo width=20% fig-alt="Ícono del proyecto R"}
 
@@ -60,7 +60,7 @@ Si observas que se abre una ventana con la consola de R (en los casos de Windows
 
 ### Positron {#sec-install-positron}
 
-Para utilizar R con Positron, es necesario que primero revises los [requisitos de instalación](https://positron.posit.co/install.html) para asegurar que el programa funcione bien en tu computador. Luego, dirígete a la [página de descarga oficial de Positron](https://positron.posit.co/download.html), acepta el contrato de licencia, descarga el instalador que corresponda a tu sistema operativo (Windows, Mac o Linux) y completa la instalación.
+Para utilizar R con Positron, es necesario que primero revises los [requisitos de instalación](https://positron.posit.co/install.html) para asegurarte que el programa funcione bien en tu computador. Luego, dirígete a la [página de descarga oficial de Positron](https://positron.posit.co/download.html), acepta el contrato de licencia, descarga el instalador que corresponda a tu sistema operativo (Windows, Mac o Linux) y completa la instalación.
 
 ## Posit Workbench {#sec-posit-workbench}
 
@@ -112,7 +112,7 @@ Si abres Positron por primera vez, verás una pantalla de bienvenida en lugar de
 
 1. **Barra de actividades**: Es tu menú principal. Funciona como un selector de herramientas mediante diferentes iconos. Al hacer clic en cada icono, eliges qué contenido deseas ver en la columna de al lado, permitiéndote cambiar rápidamente entre tus archivos, el buscador, el asistente o cualquier otra funcionalidad que se añada al instalar nuevas extensiones.
 
-2. **Barra lateral primaria**: Es tu ventana de navegación principal y su contenido cambia según el icono que hayas pulsado en la **Barra de actividades**. Por ejemplo, al seleccionar el icono de archivos, este espacio te permitirá abrir una carpeta desde tu computador para visualizar y gestionar todos los documentos y datos con los que vas a trabajar.
+2. **Barra lateral primaria**: Es tu ventana de navegación principal y su contenido cambia según el icono que hayas pulsado en la **Barra de actividades**. Por ejemplo, al seleccionar el icono de archivos ![](images/file-regular-full.png){fig-alt="Ícono del explorador de archivos" height=25}, este espacio te permitirá abrir una carpeta desde tu computador para visualizar y gestionar todos los documentos y datos con los que vas a trabajar.
 
 3. **Editor**: Es el área central donde abres, escribes y modificas tus archivos. Aquí es donde principalmente redactarás instrucciones en el lenguaje R, permitiéndote crear y organizar el código necesario para tus análisis antes de ejecutarlo.
 
@@ -121,7 +121,7 @@ Si abres Positron por primera vez, verás una pantalla de bienvenida en lugar de
 5. **Barra lateral secundaria**: Es tu panel de apoyo y consulta. En este espacio puedes examinar la lista de variables que has creado, visualizar los gráficos generados y acceder a los manuales de ayuda. También sirve para mostrar visualizaciones interactivas o conexiones externas que complementan tu trabajo sin interferir con el código que estás escribiendo.
 
 ::: {.callout-tip}
-Positron dispone de una [guía oficial](https://positron.posit.co/welcome.html) que detalla cada aspecto de la aplicación. Sin embargo, dominar una aplicación es un proceso gradual que se logra con la práctica constante. En esta etapa inicial, no es necesario conocer todas sus funciones; conforme ganes confianza con la interfaz y según lo requieran tus análisis, podrás consultarla para profundizar en aspectos específicos que requieras.
+Positron dispone de una [guía oficial](https://positron.posit.co/welcome.html) que detalla cada aspecto de la aplicación. Sin embargo, dominar una aplicación es un proceso gradual que se logra con la práctica constante. En esta etapa inicial, no es necesario conocer todas sus funciones. Conforme ganes confianza con la interfaz y según lo requieran tus análisis, podrás consultarla para profundizar en aspectos específicos que requieras.
 :::
 
 ### Configuración recomendada para principiantes
@@ -148,4 +148,4 @@ Con estos ajustes lograrás 2 objetivos:
 
 2. **Autoformateo al guardar:** aplicar automáticamente un estilo visual uniforme a tus archivos de R y Quarto utilizando las extensiones [Air](https://open-vsx.org/extension/posit/air-vscode) y [quarto-vscode](https://open-vsx.org/extension/quarto/quarto). Esto permite que el código se reorganice solo, manteniendo una estructura limpia y profesional sin aplicar un esfuerzo manual.
 
-En caso que hayas seguido las instrucciones descritas en @sec-posit-workbench es posible que el administrador de la herramienta previamente haya fijado por defecto éstos aspectos. En caso contrario, puedes agregar ésta configuración.
+En caso que hayas seguido las instrucciones descritas en la @sec-posit-workbench es posible que el administrador de la herramienta previamente haya fijado por defecto éstos aspectos. En caso contrario, puedes agregar ésta configuración.

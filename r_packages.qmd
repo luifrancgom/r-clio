@@ -7,12 +7,12 @@ source("_common.R")
 
 Este capítulo se basa en [@ismay_statistical_2025, cap. 1] y tiene como propósito introducir el concepto de paquetes de R. Exploraremos los siguientes aspectos:
 
-1. ¿Qué son los paquetes de R?
+1. ¿Qué son los paquetes en R?
 2. ¿Cómo instalar paquetes?
 3. ¿Cómo cargar paquetes?
 4. Una demostración de cómo utilizar un paquete
 
-## ¿Qué son los paquetes de R? {#sec-what-are-r-packages}
+## ¿Qué son los paquetes en R? {#sec-what-are-r-packages}
 
 En R un paquete, en términos simples, es una carpeta organizada de cierta forma que alguién más creó que te brinda herramientas listas para usar con el objetivo de realizar una tarea específica o extender la funcionalidad base de R. De hecho, cuando instalas R por primera vez, este ya viene con un grupo de paquetes estandar (o de base) por defecto que le permiten funcionar y realizar ciertas tareas. Independientemente de si un paquete esta incluido en R por defecto o tiene como proposito extender su funcionalidad, su estructura siempre consta de 3 elementos [@wickham_r_2023-1]:
 
@@ -47,12 +47,12 @@ install.packages("tidyverse")
 Luego, presiona {{< kbd Enter >}}. Ten paciencia hasta que el proceso finalice y no te preocupes por los mensajes que aparezcan en la consola. Al ser un conjunto robusto de herramientas, la instalación puede tardar. Sabrás que ha terminado el proceso cuando veas aparecer nuevamente el símbolo `>`.
 
 ::: {.callout-important}
-Al instalar un paquete en R, asegúrate de escribir su nombre entre comillas (`""`). De lo contrario, la instalación fallará. Por ahora, no te preocupes por la razón detrás de éste aspecto. Lo importante por ahora es que te asegures que puedas saber cómo instalar un paquete en R.
+Al instalar un paquete en R, asegúrate de escribir su nombre entre comillas (`""`). De lo contrario, la instalación fallará. Por ahora, no te preocupes por la razón detrás de éste aspecto. Lo importante es que te asegures que puedas saber cómo instalar un paquete en R.
 :::
 
 ## Carga de paquetes
 
-Cuando instalas una aplicación en tu celular es necesario abrirla para poder usarla, no basta con simplemente instalarla. En R para poder utilizar un paquete que se encuentre instalado previamente es necesario cargarlo (equivalente a abrir una aplicación que se encuentra instalada en un celular). En R para cargar un paquete se utiliza el comando `library()`.
+Cuando instalas una aplicación en tu celular es necesario abrirla para poder usarla, no basta con simplemente instalarla. En R para poder utilizar un paquete que se encuentre instalado previamente es necesario cargarlo (equivalente a abrir una aplicación que se encuentra instalada en un celular). En R para cargar un paquete se utiliza la función `library()`.
 
 Por ejemplo, si deseas cargar el paquete `tidyverse` escribe el siguiente comando en la consola:
 
@@ -105,7 +105,9 @@ library(tidyverse)
 Cada vez que requieras ver el resultado de una línea de código que se encuentra dentro de un archivo con extensión `.R` sitúa el cursor (`|`) sobre la línea de código y presiona la combinación de teclas {{< kbd mac=Command-Enter win=Ctrl-Enter linux=Ctrl-Enter >}}. De ahora en adelante nos referimos a éste proceso como **ejecutar el código**. 
 :::
 
-En el @lst-load-tidyverse el símbolo `#` permite agregar comentarios para entender los comandos que escribimos y `----` genera secciones para mantener organizado el contenido dentro de un archivo con extensión `.R` donde las señala en la **Barra lateral primaria** en la sección **OUTLINE** (Ver @fig-3-chap-4) en Positron. Un archivo de este tipo por si sólo no genera ningún resultado. Por ello, debes utilizar la combinación de teclas mencionada anteriormente para ejecutar los comandos en el **Editor** y mostrar el resultado señalado en el @lst-load-tidyverse-message en el **Panel** (ver @fig-positron-layout-outline) dentro de la pestaña **CONSOLE**.
+En el @lst-load-tidyverse el símbolo `#` permite agregar comentarios para entender los comandos que escribimos y `----` genera secciones para mantener organizado el contenido dentro de un archivo con extensión `.R` donde las señala en la **Barra lateral primaria** en la sección **OUTLINE** (Ver @fig-3-chap-4) en Positron. 
+
+Un archivo con extensión `.R` por si sólo no genera ningún resultado. Por ello, debes utilizar la combinación de teclas mencionada anteriormente para ejecutar los comandos en el **Editor** y mostrar el resultado señalado en el @lst-load-tidyverse-message en el **Panel** (ver @fig-positron-layout-outline) dentro de la pestaña **CONSOLE**.
 
 ![Sección OUTLINE dentro de la Barra laterla primaria de Positron](images/fig-3-chap-4.png){#fig-3-chap-4 fig-alt="Vista de la barra lateral primaria de Positron donde se observa la sección OUTLINE mostrando la etiqueta 'Cargar librerías', la cual se genera automáticamente a partir de los guiones en en el archivo '001_uso-paquetes.R'"}
 
@@ -124,11 +126,11 @@ En el resultado del @lst-mpg-database se incluye información para entender aspe
 
 - Una `tibble` solo muestra la cantidad de columnas que caben en tu pantalla. Por ese motivo se señalan en la parte superior los nombres de las columnas `manufacturer`, `model`, `displ`, `year`, `cyl`, `trans`, `drv`, `cty` y luego en la parte inferior las variables restantes `hwy`, `fl` y `class` en el mensaje `# ℹ 3 more variables: hwy <int>, fl <chr>, class <chr>`.
 
-- Debajo de los nombres de las columnas se indica el tipo de dato que corresponde a cada variable (p. ej., `<chr>`, `<dbl>`, `<int>`). En caso que no se puedan mostrar todas las columnas en la pantalla, en la parte inferior se señalan los tipos restantes de las demás columnas. Las diferentes opciones de tipos de columnas se pueden consultar en la documentación oficial en [Column types](https://tibble.tidyverse.org/articles/types.html).
+- Debajo de los nombres de las columnas se indica el tipo de dato que corresponde a cada variable (p. ej., `<chr>`, `<dbl>`, `<int>`). En caso que no se puedan mostrar todas las columnas en la pantalla, en la parte inferior se señalan los tipos restantes de las demás columnas. Las diferentes opciones de tipos de columnas se pueden consultar en la documentación oficial del paquete `tibble`, que hace parte del paquete `tidyverse`, en [Column types](https://tibble.tidyverse.org/articles/types.html).
 
 - Por defecto una `tibble` solo muestra las primeras 10 filas pero señala en la parte inferior con el mensaje `# ℹ 224 more rows` el número de filas restantes que componen la base de datos.
 
-Si la base de datos pertenece a un paquete, como en el caso de `mpg`, es posible consultar documentación acerca de la misma utilizando el símbolo `?` mas su nombre tal como se muestra a continuación:
+Si la base de datos pertenece a un paquete, como en el caso de `mpg`, es posible consultar documentación acerca de la misma utilizando el símbolo `?` más su nombre tal como se muestra a continuación:
 
 ```{r}
 #| eval: false
@@ -136,16 +138,42 @@ Si la base de datos pertenece a un paquete, como en el caso de `mpg`, es posible
 ?mpg
 ```
 
-Si ejecutas éste código en la **Barra lateral secundaria** dentro de la pestaña **HELP** se desplegará la documentación relacionada con `mpg`.
+Si ejecutas éste código, en la **Barra lateral secundaria** dentro de la pestaña **HELP** se desplegará la documentación relacionada con `mpg`.
 
 En Positron también se puede utilizar una herramienta denominada [Explorador de Datos](https://positron.posit.co/data-explorer.html) para visualizar la información en una cuadrícula similar a una hoja de cálculo, así como filtar y ordenar los datos temporalmente y obtener estadísticas de cada variable. Para utilizar ésta herramienta ejecuta el siguiente código:
 
 ```{r}
 #| eval: false
-# Uso del explorador de datos
+# Uso del explorador de datos ----
 View(mpg)
 ```
 
 De esa manera podrás utilizar el explorador de datos y examinar los elementos indicados anteriormente para `mpg` tal como se muestra en la @fig-4-chap-4.
 
 ![Interfaz del explorador de datos aplicado a `mpg`](images/fig-4-chap-4.png){#fig-4-chap-4 fig-alt="Interfaz del Explorador de Datos en Positron mostrando el conjunto de datos mpg. A la izquierda se observa un panel con la lista de variables e histogramas de distribución para cada variable. A la derecha, una cuadrícula interactiva con los datos de los vehículos organizados en filas y columnas."}
+
+En ocasiones se hace necesario poder dar un "vistazo" a un conjunto de datos cuando se tiene un número considerable de columnas. En ese sentido, otra forma adicional de explorar una base de datos es utilizar la función `glimpse()`, donde permite visualizar los nombres de las columnas verticalmente hacia abajo y los datos correspondientes a cada varaible de manera horizontal. Para utilizar ésta herramienta ejecuta el siguiente código:
+
+```{r}
+# "Vistazo" de la base de datos ----
+glimpse(mpg)
+```
+
+De esa manera tal como se muestra anteriormente es posible visualizar en su totalidad los nombres de las columnas sin importar el ancho de la pantalla de tu equipo, así como el tipo de cada columna y una parte de los datos asociados a cada variable. Este aspecto es útil, particularmente cuando se tiene un conjunto de datos con una cantidad considerable de columnas.
+
+Por último, en ciertos contextos puede ser útil extrar y explorar sólo una variable dentro de un conjunto de datos. En R existen diversas formas de lograr esto. Sin embargo, señalaremos sólo 2 alternativas, enfocándonos en el uso del operador `$`, que está incluído por defecto en R, y la función `pull()` del paquete `dplyr`, que hace parte del paquete `tidyverse`. Explora las 2 alternativas, agregando el contenido señalado a continuación en tu archivo `001_uso-paquetes.R` para que al ejecutar el código puedas ver los resultados equivalentes que se generan en la consola.  
+
+Si se buscara, por ejemplo, extraer la variable `manufacturer` de `mpg` con el operador `$` puedes ejecutar el siguiente código:
+
+```{r}
+#| eval: false
+# Extracción de columnas ----
+mpg$manufacturer
+```
+
+De manera alternativa puedes utilizar la función `pull()` del paquete `dplyr`, ejecutando el siguiente código:
+
+```{r}
+#| eval: false
+pull(mpg, manufacturer)
+```

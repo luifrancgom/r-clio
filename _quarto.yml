@@ -45,6 +45,8 @@ book:
 bibliography: references/r-clio.bib
 csl: references/apa.csl
 lang: es
+language: 
+  crossref-nte-prefix: "Nota"
 editor: source
 
 format:
