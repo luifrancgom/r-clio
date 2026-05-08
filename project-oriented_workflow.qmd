@@ -13,7 +13,7 @@ Este capítulo se basa en [@bryan_what_2025, cap. 3, 5] y tiene como propósito 
 
 ## Organizar tu trabajo por proyectos
 
-Imagina que eres un carpintero profesional y quieres construir una silla y una cama. Tienes 2 formas de trabajar (Ver @fig-1-chap-3):
+Imagina que eres un carpintero profesional y quieres construir una silla y una cama. Tienes 2 formas de trabajar (ver @fig-1-chap-3):
 
 **1. El taller del caos**
 
@@ -69,9 +69,11 @@ Existen 3 principios para nombrar archivos y carpetas [@bryan_what_2025, cap. 5]
 
 1. **Legible por máquinas:** los nombres deben estar optimizados para el procesamiento automatizado, basándose en 2 pilares.
    
-   - **Compatibilidad con búsquedas y automatización**: un nombre debe prescindir de espacios en blanco, signos de puntuación (p. ej., `.`, `,`, `;`, `:`) a excepción del punto que precede a la extensión de un archivo (p. ej., `.html`, `.pdf`, `.docx`) y caractéres acentuados (p. ej., `á`, `ñ`, `ü`) así como usar preferiblemente minúsculas.
+   - **Compatibilidad con búsquedas y automatización**: un nombre debe prescindir de espacios en blanco, signos de puntuación (p. ej., `.`, `,`, `;`, `:`)[^chap-3-footnote-1] y caractéres acentuados (p. ej., `á`, `ñ`, `ü`) así como usar preferiblemente minúsculas.
 
    - **Facilidad de cómputo**: es necesario utilizar de manera deliberada delimitadores como `_` o `-`, facilitando que el sistema operativo o R fragmente el nombre y recupere datos automáticamente. 
+
+[^chap-3-footnote-1]: El punto que precede a la extensión de un archivo (p. ej., `.html`, `.pdf`, `.docx`), bajo este contexto, no hace parte del nombre.
 
 2. **Legible por humanos:** un nombre debe permitir deducir el contenido de un archivo o carpeta sin tener que abrirlo, basándose en 2 pilares.
 

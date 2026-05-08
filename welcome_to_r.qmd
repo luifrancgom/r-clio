@@ -14,7 +14,7 @@ Este capítulo se basa en [@ismay_statistical_2025, cap. 1] y tiene como propós
 
 ## ¿Qué es R y Positron?
 
-En términos simples R es un entorno gratuito para realizar análisis estadísticos y crear gráficos. A lo largo del libro utilizaremos R a través de Positron. R se puede entender como el motor de un automóvil y Positron el tablero de control del automovil que queremos manejar (Ver @fig-1-chap-2).
+En términos simples R es un entorno gratuito para realizar análisis estadísticos y crear gráficos. A lo largo del libro utilizaremos R a través de Positron. R se puede entender como el motor de un automóvil y Positron el tablero de control del automovil que queremos manejar (ver @fig-1-chap-2).
 
 ::: {#fig-1-chap-2 layout="[[48,-4,48]]"}
 ![R: Motor](images/r-engine.png){fig-alt="Un motor de un automóvil representando a R como el núcleo de procesamiento de datos."}
@@ -52,7 +52,7 @@ Selecciona el enlace **Download R for Linux** y elige la distribución que utili
 
 #### Verificando la instalación de R
 
-Una vez instales R es importante que verifiques la instalación. La forma más fácil de hacerlo es dar doble click en el ícono de R (Ver @fig-r-logo) para el caso de Windows o Mac o en Linux abrir el terminal y digita `R` en la línea de comandos.
+Una vez instales R es importante que verifiques la instalación. La forma más fácil de hacerlo es dar doble click en el ícono de R (ver @fig-r-logo) para el caso de Windows o Mac o en Linux abrir el terminal y digita `R` en la línea de comandos.
 
 ![Ícono de R](images/r-project-logo.png){#fig-r-logo width=20% fig-alt="Ícono del proyecto R"}
 
@@ -85,7 +85,7 @@ Al utilizar Positron, no es necesario instalar Quarto por separado, ya que se in
 2. **Como asistente de edición (Extensión denominada [quarto-vscode](https://open-vsx.org/extension/quarto/quarto))**: proporciona las herramientas visuales para trabajar cómodamente, incluyendo el autocompletado de comandos, el resaltado de colores, la ejecución interactiva de código y una vista previa en tiempo real de tus resultados.
 
 ::: {.callout-note}
-Más adelante profundizaremos en el uso de Quarto utilizando R y Positron. Por ahora te recomendamos familiarizarte primero con la interfaz de Positron (Ver @sec-user-interface-layout) y R. No obstante, si tienes experiencia previa, puedes consultar la [Guía de inicio rápido de Quarto con Positron](https://quarto.org/docs/get-started/hello/positron.html) en la documentación oficial. 
+Más adelante profundizaremos en el uso de Quarto utilizando R y Positron. Por ahora te recomendamos familiarizarte primero con la interfaz de Positron (ver @sec-user-interface-layout) y R. No obstante, si tienes experiencia previa, puedes consultar la [Guía de inicio rápido de Quarto con Positron](https://quarto.org/docs/get-started/hello/positron.html) en la documentación oficial. 
 :::
 
 ## Interfaz de Positron {#sec-user-interface-layout} 
@@ -105,7 +105,7 @@ En caso que tengas acceso a Posit Workbench, de acuerdo a lo señalado en la @se
 Al utilizar Positron, encontrarás la interfaz organizada como se muestra en la @fig-positron-layout-outline, donde se resalta cada sección de la interfaz. No te preocupes si encuentras pequeñas diferencias o un entorno visual con diferente color dado que los desarrolladores de Positron ésta constantemente actualizando la aplicación o puede que tengas una configuración por defecto diferente en cuanto al entorno visual de la interfaz.
 
 ::: {.callout-note}
-Si abres Positron por primera vez, verás una pantalla de bienvenida en lugar del **Editor** (Ver @fig-positron-layout-outline). Esto es normal, ya que este espacio se activará automáticamente una vez que abras tu primer archivo de R, un proceso que se señalará más adelante.
+Si abres Positron por primera vez, verás una pantalla de bienvenida en lugar del **Editor** (ver @fig-positron-layout-outline). Esto es normal, ya que este espacio se activará automáticamente una vez que abras tu primer archivo de R, un proceso que se señalará más adelante.
 :::
 
 ![Interfaz de Positron resaltando cada sección](images/positron-layout-outline.png){#fig-positron-layout-outline fig-alt="Interfaz de Positron resaltando la barra de actividades, barra lateral primaria, el editor, el panel y la barra lateral secundaria"}

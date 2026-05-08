@@ -22,7 +22,7 @@ En R un paquete, en términos simples, es una carpeta organizada de cierta forma
 
 - **Datos de muestra**: son conjuntos de datos para ilustrar el funcionamiento de las funciones.
 
-Para entender cómo funcionan los paquetes en R se puede utilizar una analogía con las aplicaciones de un celular [@ismay_statistical_2025, cap. 1]. Cuando compras un celular nuevo, este viene por defecto con aplicaciones para que se pueda utilizar. Sin embargo, de acuerdo a las necesidades de cada usuario se instalan otras aplicaciones adicionales para extender la funcionalidad del celular de tal manera que se cubran los requerimientos que cada individuo necesita (Ver @fig-1-chap-4).
+Para entender cómo funcionan los paquetes en R se puede utilizar una analogía con las aplicaciones de un celular [@ismay_statistical_2025, cap. 1]. Cuando compras un celular nuevo, este viene por defecto con aplicaciones para que se pueda utilizar. Sin embargo, de acuerdo a las necesidades de cada usuario se instalan otras aplicaciones adicionales para extender la funcionalidad del celular de tal manera que se cubran los requerimientos que cada individuo necesita (ver @fig-1-chap-4).
 
 ::: {#fig-1-chap-4 layout="[[48,-4,48]]"}
 ![Paquetes por defecto en R: Celular nuevo](images/r-package-cellphone.png){fig-alt="Ilustración de un celular con aplicaciones básicas como calculadora y calendario, representando los paquetes que R incluye por defecto."}
@@ -34,9 +34,9 @@ Analogía para entender la diferencia entre paquetes que vienen incorporados por
 
 ## Instalación de paquetes
 
-Para instalar un paquete que no vienen por defecto en R, retomaremos la analogía de la @sec-what-are-r-packages. En un celular, primero es necesario descargar la aplicación de una tienda una sola vez. Luego, basta con abrirla cada vez que se requiera. Aunque ocasionalmente deba actualizarse, no es necesario reinstalarla nuevamente.
+Para instalar un paquete que no viene por defecto en R, retomaremos la analogía de la @sec-what-are-r-packages. En un celular, primero es necesario descargar la aplicación de una tienda una sola vez. Luego, basta con abrirla cada vez que se requiera. Aunque ocasionalmente deba actualizarse, no es necesario reinstalarla nuevamente.
 
-En R, el proceso es semejante. Primero instalas el paquete desde un repositorio (equivalente a la tienda de aplicaciones) y luego lo cargas, un paso análogo a abrir la aplicación en tu celular.
+En R, el proceso es similar. Primero instalas el paquete desde un repositorio (equivalente a la tienda de aplicaciones) y luego lo cargas, un paso análogo a abrir la aplicación en tu celular.
 
 Para practicar este proceso, instalaremos el paquete [`tidyverse`](https://tidyverse.org/). Este paquete es una colección de herramientas diseñadas para ciencia de datos que utilizaremos constantemente a lo largo del libro. Para iniciar la instalación, ubica la pestaña **Console** en el **Panel** (Ver la @fig-positron-layout-outline) y, tras el símbolo `>`, escribe el siguiente comando:
 
@@ -85,33 +85,35 @@ En el @sec-how-do-i-code-in-r podrás explorar más acerca de los tipos de texto
 
 ## Uso de paquetes
 
-Para entender cómo utilizar un paquete, explorarás tu primer conjuntos de datos en R utilizando el paquete `tidyverse`. Primero, cierra la ventana de Positron si seguiste las instrucciones descritas en la @sec-how-to-install-r-positron y abre la carpeta `r-analisis-datos` (Ver @sec-project-oriented-workflow-positron-r) utilizando las opciones **File > Open Folder...** que podrás encontrar en el menú superior izquierdo de la interfaz. En caso que estes utilizando Posit Workbench (Ver @sec-posit-workbench) abre una sesión con el proyecto `r-analisis-datos`, creado de acuerdo a lo señalado en la @sec-project-oriented-workflow-positron-r.
+Para entender cómo utilizar un paquete, explorarás tu primer conjunto de datos en R utilizando el paquete `tidyverse`. Primero, cierra la ventana de Positron si seguiste las instrucciones descritas en la @sec-how-to-install-r-positron y abre la carpeta `r-analisis-datos` (ver @sec-project-oriented-workflow-positron-r) utilizando las opciones **File > Open Folder...** que podrás encontrar en el menú superior izquierdo de la interfaz. En caso que estes utilizando Posit Workbench (ver @sec-posit-workbench) abre una sesión con el proyecto `r-analisis-datos`, creado de acuerdo a lo señalado en la @sec-project-oriented-workflow-positron-r.
 
 Luego, en la **Barra de actividades** (ver @fig-positron-layout-outline) selecciona el ícono ![](images/file-regular-full.png){fig-alt="Ícono del explorador de archivos" height=25} y párate con el puntero del ratón en la **Barra lateral primaria** (ver @fig-positron-layout-outline) donde al lado izquierdo de la etiqueta `R-ANALISIS-DATOS` podrás encontrar en el segundo ícono de izquierda a derecha la opción de crear una carpeta. Crea la carpeta con el nombre `004_paquetes-r` y dentro de la carpeta también en la **Barra lateral primaria** utiliza el primer ícono de izquierda a derecha para crear un archivo con el nombre `001_uso-paquetes.R`. De esa manera podras abrirlo en el **Editor** (ver @fig-positron-layout-outline) tal como se muestra en la @fig-2-chap-4: 
 
 ![Estructura de carpetas y archivos para explorar tu primer conjuntos de datos](images/fig-2-chap-4.png){#fig-2-chap-4 fig-alt="Captura de pantalla de Positron que muestra la carpeta 004_paquetes-r dentro del proyecto R-ANALISIS-DATOS, conteniendo el archivo 001_uso-paquetes.R abierto en el editor"}
 
-En el archivo `001_uso-paquetes.R` carga el paquete `tidyverse` escribiendo el contenido que se menciona a continuación. Para que R procese la instrucción, sitúa el cursor (`|`) sobre la línea de código y presiona la combinación de teclas {{< kbd mac=Command-Enter win=Ctrl-Enter linux=Ctrl-Enter >}}:
+En el archivo `001_uso-paquetes.R` carga el paquete `tidyverse` escribiendo el contenido que se menciona a continuación:
 
 ```{r}
 #| message: false
 #| lst-label: lst-load-tidyverse
 #| lst-cap: Línea de código para cargar el paquete tidyverse
-# Cargar librerias ----
+# Cargar paquetes ----
 library(tidyverse)
 ```
+
+Para que R procese la instrucción, sitúa el cursor (`|`) sobre la línea de código (ver @lst-load-tidyverse) y presiona la combinación de teclas {{< kbd mac=Command-Enter win=Ctrl-Enter linux=Ctrl-Enter >}}.
 
 ::: {#nte-execute-code .callout-note}
 Cada vez que requieras ver el resultado de una línea de código que se encuentra dentro de un archivo con extensión `.R` sitúa el cursor (`|`) sobre la línea de código y presiona la combinación de teclas {{< kbd mac=Command-Enter win=Ctrl-Enter linux=Ctrl-Enter >}}. De ahora en adelante nos referimos a éste proceso como **ejecutar el código**. 
 :::
 
-En el @lst-load-tidyverse el símbolo `#` permite agregar comentarios para entender los comandos que escribimos y `----` genera secciones para mantener organizado el contenido dentro de un archivo con extensión `.R` donde las señala en la **Barra lateral primaria** en la sección **OUTLINE** (Ver @fig-3-chap-4) en Positron. 
+En el @lst-load-tidyverse el símbolo `#` permite agregar comentarios para entender los comandos que escribimos y `----` genera secciones para mantener organizado el contenido dentro de un archivo con extensión `.R` donde las señala en la **Barra lateral primaria** en la sección **OUTLINE** (ver @fig-3-chap-4) en Positron. 
 
 Un archivo con extensión `.R` por si sólo no genera ningún resultado. Por ello, debes utilizar la combinación de teclas mencionada anteriormente para ejecutar los comandos en el **Editor** y mostrar el resultado señalado en el @lst-load-tidyverse-message en el **Panel** (ver @fig-positron-layout-outline) dentro de la pestaña **CONSOLE**.
 
 ![Sección OUTLINE dentro de la Barra laterla primaria de Positron](images/fig-3-chap-4.png){#fig-3-chap-4 fig-alt="Vista de la barra lateral primaria de Positron donde se observa la sección OUTLINE mostrando la etiqueta 'Cargar librerías', la cual se genera automáticamente a partir de los guiones en en el archivo '001_uso-paquetes.R'"}
 
-Una vez cargado el paquete `tidyverse` puedes explorar el conjunto de datos `mpg` que contiene información de economía de combustible desde 1999 hasta 2008 para 38 modelos populares de automóviles. Agrega al archivo `001_uso-paquetes.R` el siguiente contenido y ejecuta el código (Ver @nte-execute-code) para que puedas visualizar parte de los datos en la consola donde el resultado puede variar dependiendo del tamaño de la pantalla de tu equipo:
+Una vez cargado el paquete `tidyverse` puedes explorar el conjunto de datos `mpg` que contiene información de economía de combustible desde 1999 hasta 2008 para 38 modelos populares de automóviles. Agrega al archivo `001_uso-paquetes.R` el siguiente contenido y ejecuta el código (ver @nte-execute-code) para que puedas visualizar parte de los datos en la consola donde el resultado puede variar dependiendo del tamaño de la pantalla de tu equipo:
 
 ```{r}
 #| lst-label: lst-mpg-database
@@ -130,7 +132,7 @@ En el resultado del @lst-mpg-database se incluye información para entender aspe
 
 - Por defecto una `tibble` solo muestra las primeras 10 filas pero señala en la parte inferior con el mensaje `# ℹ 224 more rows` el número de filas restantes que componen el conjunto de datos.
 
-Si el conjunto de datosß pertenece a un paquete, como en el caso de `mpg`, es posible consultar documentación acerca de la misma utilizando el símbolo `?` más su nombre tal como se muestra a continuación:
+Si el conjunto de datos pertenece a un paquete, como en el caso de `mpg`, es posible consultar la documentación acerca de la misma utilizando el símbolo `?` más su nombre, tal como se muestra a continuación:
 
 ```{r}
 #| eval: false
@@ -138,7 +140,7 @@ Si el conjunto de datosß pertenece a un paquete, como en el caso de `mpg`, es p
 ?mpg
 ```
 
-Si ejecutas éste código, en la **Barra lateral secundaria** dentro de la pestaña **HELP** se desplegará la documentación relacionada con `mpg`.
+Si ejecutas éste código, en la **Barra lateral secundaria** (ver @fig-positron-layout-outline) dentro de la pestaña **HELP**, se desplegará la documentación relacionada con `mpg`.
 
 En Positron también se puede utilizar una herramienta denominada [Explorador de Datos](https://positron.posit.co/data-explorer.html) para visualizar la información en una cuadrícula similar a una hoja de cálculo, así como filtar y ordenar los datos temporalmente y obtener estadísticas de cada variable. Para utilizar ésta herramienta ejecuta el siguiente código:
 
@@ -152,7 +154,7 @@ De esa manera podrás utilizar el explorador de datos y examinar los elementos i
 
 ![Interfaz del explorador de datos aplicado a `mpg`](images/fig-4-chap-4.png){#fig-4-chap-4 fig-alt="Interfaz del Explorador de Datos en Positron mostrando el conjunto de datos mpg. A la izquierda se observa un panel con la lista de variables e histogramas de distribución para cada variable. A la derecha, una cuadrícula interactiva con los datos de los vehículos organizados en filas y columnas."}
 
-En ocasiones se hace necesario poder dar un "vistazo" a un conjunto de datos cuando se tiene un número considerable de columnas. En ese sentido, otra forma adicional de explorar un conjunto de datos, es mediante el uso de la función `glimpse()`. Esta función permite visualizar los nombres de las columnas verticalmente hacia abajo y los datos correspondientes a cada varaible de manera horizontal. Para utilizar ésta herramienta ejecuta el siguiente código:
+En ocasiones se hace necesario poder dar un "vistazo" a un conjunto de datos cuando se tiene un número considerable de columnas. En ese sentido, otra forma adicional de explorar un conjunto de datos, es mediante el uso de la función `glimpse()`. Esta función permite visualizar los nombres de las columnas verticalmente hacia abajo y los datos correspondientes a cada variable de manera horizontal. Para utilizar ésta herramienta ejecuta el siguiente código:
 
 ```{r}
 # "Vistazo" del conjunto de datos ----
@@ -161,7 +163,7 @@ glimpse(mpg)
 
 De esa manera tal como se muestra anteriormente es posible visualizar en su totalidad los nombres de las columnas sin importar el ancho de la pantalla de tu equipo, así como el tipo de cada columna y una parte de los datos asociados a cada variable. Este aspecto es útil, particularmente cuando se tiene un conjunto de datos con una cantidad considerable de columnas.
 
-Por último, en ciertos contextos puede ser útil extrar y explorar sólo una variable dentro de un conjunto de datos. En R existen diversas formas de lograr esto. Sin embargo, señalaremos sólo 2 alternativas, enfocándonos en el uso del operador `$`, que está incluído por defecto en R, y la función `pull()` del paquete `dplyr`, que hace parte del paquete `tidyverse`. Explora las 2 alternativas, agregando el contenido señalado a continuación en tu archivo `001_uso-paquetes.R` para que al ejecutar el código puedas ver los resultados equivalentes que se generan en la consola.  
+Por último, en ciertos contextos puede ser útil extraer y explorar sólo una variable dentro de un conjunto de datos. En R existen diversas formas de lograr esto. Sin embargo, señalaremos sólo 2 alternativas, enfocándonos en el uso del operador `$`, que está incluído por defecto en R, y la función `pull()` del paquete `dplyr`, que hace parte del paquete `tidyverse`.
 
 Si se buscara, por ejemplo, extraer la variable `manufacturer` de `mpg` con el operador `$` puedes ejecutar el siguiente código:
 
