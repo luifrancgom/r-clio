@@ -1,4 +1,4 @@
-# Flujo de trabajo orientado a proyectos
+# Flujo de trabajo orientado a proyectos {#sec-project-oriented-workflow}
 
 ```{r}
 #| echo: false
@@ -73,7 +73,7 @@ Existen 3 principios para nombrar archivos y carpetas [@bryan_what_2025, cap. 5]
 
    - **Facilidad de cómputo**: es necesario utilizar de manera deliberada delimitadores como `_` o `-`, facilitando que el sistema operativo o R fragmente el nombre y recupere datos automáticamente. 
 
-[^chap-3-footnote-1]: El punto que precede a la extensión de un archivo (p. ej., `.html`, `.pdf`, `.docx`), bajo este contexto, no hace parte del nombre.
+[^chap-3-footnote-1]: El punto que precede a la extensión de un archivo (p. ej., `.html`, `.pdf`, `.docx`), bajo este contexto, se excluye en esta indicación debido a que un sistema operativo requiere identificar el programa por defecto para abrirlo.
 
 2. **Legible por humanos:** un nombre debe permitir deducir el contenido de un archivo o carpeta sin tener que abrirlo, basándose en 2 pilares.
 

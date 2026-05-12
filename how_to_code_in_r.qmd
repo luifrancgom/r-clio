@@ -5,9 +5,380 @@
 source("_common.R")
 ```
 
-Este capítulo se basa en [@ismay_statistical_2025, cap. 1] y tiene como propósito ...
+```{r}
+#| label: load-r-packages
+#| echo: false
+#| message: false
+library(tidyverse)
+library(scales)
+```
+
+```{r}
+#| label: import-data
+#| echo: false
+#| message: false
+programas_pregrado_faedis_2026_1 <- read_csv(
+  file = "data/programas-pregrado-faedis_2026-1.csv"
+)
+```
+
+Este capítulo se basa en [@ismay_statistical_2025, cap. 1], [@grolemund_hands-programming_2014, cap. 1] y [@wickham_advanced_2019, cap. 2] donde tiene como propósito introducir conceptos básicos del lenguaje de programación R utilizando datos de los programas de pregrado de la [Facultad de Estudios a Distancia](https://umng.edu.co/facultad/faedis/) de la Universidad Militar Nueva Granada.
 
 Exploraremos los siguientes aspectos:
 
-1. 
-2. 
+1. Operaciones aritméticas
+2. Vectores atómicos en R
+3. Mensajes (messages), advertencias (warnings) y errores (errors)
+4. Tibbles
+5. Operadores relacionales
+
+::: {.callout-note}
+Para desarrollar el contenido de este capítulo recuerda trabajar por proyectos de acuerdo a lo señalado en el @sec-project-oriented-workflow. En ese sentido, genera una carpeta con el nombre `005_como-escribir-codigo-en-r` y dentro de la carpeta crea un archivo con el nombre `001_codigo-en-r-datos-faedis.R` siguiendo las indicaciones descritas en la @sec-package-usage. 
+:::
+
+## Operaciones aritméticas
+
+Para el año 2026 en el primer semestre, la Facultad de Estudios a Distancia ofrecía 7 programas académicos de pregrado con su respectivo costo de matrícula en pesos colombianos (COP), tal como se señala en la siguiente lista: 
+
+- Administración de Empresas: $ 4,389,000 COP
+- Administración de Riesgos, Seguridad y Salud en el Trabajo: $ 4,896,000 COP
+- Contaduría Pública: $ 4,135,000 COP
+- Ingeniería Civil: $ 4,940,000 COP
+- Ingeniería Industrial: $ 5,638,000 COP
+- Ingeniería Informática: $ 4,661,000 COP
+- Relaciones Internacionales y Estudios Políticos: $ 6,238,000 COP
+
+Si se buscara calcular el promedio del costo de matrícula dentro de la facultad para este periodo, es posible utilizar R como una calculadora ejecutando el siguiente código:
+
+```{r}
+#| lst-label: lst-mean-tuition-fee
+#| lst-cap: Costo promedio de mátricula en programas de pregrado de la Facultad de Estudios a Distancia para el año 2026 semestre 1
+# Costo promedio de matrícula ----
+(4389000 +
+  4896000 +
+  4135000 +
+  4940000 +
+  5638000 +
+  4661000 +
+  6238000) /
+  7
+```
+
+En R podemos utilizar los operadores aritméticos para llevar a cabo operaciones como en una calculadora (ver @tbl-arithmetic-operators):
+
+| Operador | Nombre | Ejemplo | Resultado |
+|:---:|:---|:---:|:---:|
+| `+` | Suma | `2 + 4` | `6` |
+| `-` | Resta | `2 - 4` | `-2` |
+| `*` | Multiplicación | `2 * 4` | `8` |
+| `/` | División | `2 / 4` | `0.5` |
+| `^` | Exponente | `2 ^ 4` | `16` |
+
+: Operadores aritméticos en R {#tbl-arithmetic-operators}
+
+## Vectores atómicos en R
+
+En el @lst-mean-tuition-fee se utilizó R para calcular el costo promedio de la mátricula. Sin embargo si quisieramos utilizar nuevamente estos datos tendríamos que escribirlos nuevamente, donde este proceso no es eficiente. R permite guardar datos almacenándolos dentro de un objeto. Una forma de almacenar datos es utilizando vectores atómicos a través de la función `c()` y luego vinculando el objeto que se busque crear a través de un nombre para utilizarlo cuando lo requieras.
+
+A continuación guardarás el costo de matrícula de cada programa de pregrado en un vector atómico mediante la función `c()` y luego vincularás ese objeto al nombre `costo_matricula` tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-atomic-vector
+#| lst-cap: Uso de un vector atómico para almacenar datos
+# Vector atómico ----
+costo_matricula <- c(
+  4389000,
+  4896000,
+  4135000,
+  4940000,
+  5638000,
+  4661000,
+  6238000
+)
+costo_matricula
+```
+
+En el @lst-atomic-vector se utilizaron comas para combinar los valores en la función `c()` y el operador de asignación `<-` para vincular éste objeto con el nombre `costo_matricula`. De esa manera, puedes reutilizar esta información si la requieres nuevamente. 
+
+Por ejemplo, si quisieras calcular la dispersión del costo de matrícula alrededor de la media a través de la desviación estandar muestral, (ver @eq-sample-standard-deviation), entonces es posible reutilizar los datos vinculados con el nombre `costo_matricula`.
+
+$$
+\begin{aligned}
+s & = \sqrt{\frac{1}{n - 1} \sum_{i=1}^n (x_i - \bar{x})^2} \\
+  & = \sqrt{\frac{1}{n - 1} \left[ (x_1 - \bar{x})^2 + \cdots + (x_n - \bar{x})^2 \right]}
+\end{aligned}
+$$ {#eq-sample-standard-deviation}
+
+Donde en la @eq-sample-standard-deviation, $\bar{x} = \frac{1}{n} \sum_{i=1}^n x_i$ corresponde a la media muestral[^chap-4-footnote-1]. 
+
+[^chap-4-footnote-1]: Para nuestro caso $i = 1, \ldots, 7$, $x_1 = 4389000, \ldots, x_7 = 6238000$ y $\bar{x} = 4985286$.
+
+A continuación podras utilizar R para calcular la desviación estandar muestral y examinar las ventajas de utilizar vectores atómicos. En primera instancia puedes utilizar la functión `mean()` para calcular el costo promedio de matrícula así como vincular este dato con el nombre `media_costo_matricula` de la siguiente forma:
+
+```{r}
+# Cálculo de la media muestral ----
+media_costo_matricula <- mean(costo_matricula)
+media_costo_matricula
+```
+
+Luego puedes utilizar la @eq-sample-standard-deviation para calcular la varianza muestral de la siguiente forma:
+
+```{r}
+#| lst-label: lst-sample-variance
+#| lst-cap: Uso de un vector atómico para calcular la varianza muestral
+# Cálculo de la varianza muestral ----
+varianza_costo_matricula <- sum(
+  (costo_matricula - media_costo_matricula)^2
+) /
+  (7 - 1)
+varianza_costo_matricula
+```
+
+En el @lst-sample-variance primero restamos a cada dato la media muestral, `costo_matricula - media_costo_matricula`, donde R utiliza operaciones vectorizadas. En ese sentido, R resta a cada elemento de `costo_matricula` el valor de la media muestral `media_costo_matricula`. Después, también a través de una operación vectorizada, R aplica el exponente `2` mediante `^` a cada elemento de `costo_matricula - media_costo_matricula`. Posteriormente, utilizando la función `sum()` R suma cada uno de los elementos en `(costo_matricula - media_costo_matricula)^2` para poder dividir el valor correspondiente por `7 - 1` y así obtener la varianza muestral.
+
+Una vez se calcule la varianza muestral, de acuerdo a lo señalado en el @lst-sample-variance, puedes calcular la raiz cuadrara principal utilizando la función `sqrt()`, para obtener la desviacion estandar muestral, de la siguiente forma :
+
+```{r}
+# Cálculo de la desviación estandar muestral ----
+desv_estandar_costo_matricula <- sqrt(
+  varianza_costo_matricula
+)
+desv_estandar_costo_matricula
+```
+
+En la @fig-1-chap-4 se señala una representación gráfica de la media y la desviación estandar muestral con los datos asociados donde el valor de `{r} number(desv_estandar_costo_matricula, accuracy = 1, big.mark = ",", prefix = "$ ")` se representan a través de un intervalo alrededor de la media, $[\bar{x} - s, \bar{x} + s]$, con un segmento y los extremos señalados con flechas. 
+
+```{r}
+#| echo: false
+#| label: fig-1-chap-4
+#| fig-cap: Media (círculo rojo) y desviación estandar (segmento y flechas azules) muestral del costo de matrícula
+#| fig-height: 2
+stats_costo_matricula <- programas_pregrado_faedis_2026_1 |>
+  summarise(
+    mean_costo_matricula = mean(costo_matricula),
+    sd_costo_matricula = sd(costo_matricula),
+    x1 = mean_costo_matricula - sd_costo_matricula,
+    x2 = mean_costo_matricula + sd_costo_matricula,
+    y1 = 0,
+    y2 = 0
+  )
+
+programas_pregrado_faedis_2026_1 |>
+  ggplot(aes(x = costo_matricula, y = 0)) +
+  geom_segment(
+    data = stats_costo_matricula,
+    aes(
+      x = x1,
+      y = y1,
+      xend = x2,
+      yend = y2
+    ),
+    color = "#2c3e50",
+    arrow = arrow(
+      length = unit(0.1, "inches"),
+      ends = "both",
+      type = "closed"
+    )
+  ) +
+  geom_point(
+    color = "black",
+    fill = "#18bc9c",
+    shape = 21,
+    size = 2
+  ) +
+  geom_text(
+    aes(
+      label = number(
+        costo_matricula,
+        accuracy = 1,
+        big.mark = ",",
+        prefix = "$ "
+      ),
+    ),
+    angle = 90,
+    hjust = -0.5,
+    size = 2
+  ) +
+  geom_point(
+    data = stats_costo_matricula,
+    aes(x = mean_costo_matricula, y = 0),
+    color = "black",
+    fill = "#e31a1c",
+    shape = 21,
+    size = 2
+  ) +
+  geom_text(
+    data = stats_costo_matricula,
+    aes(
+      x = mean_costo_matricula,
+      y = 0,
+      label = number(
+        mean_costo_matricula,
+        accuracy = 1,
+        big.mark = ",",
+        prefix = "$ "
+      )
+    ),
+    angle = 90,
+    hjust = -0.5,
+    size = 2
+  ) +
+  labs(
+    x = "Costo matricula (Pesos Colombianos - COP)",
+    y = NULL
+  ) +
+  theme(
+    axis.ticks = element_blank(),
+    axis.text = element_blank()
+  )
+```
+
+De esa manera en la @fig-1-chap-4 es posible observar aquellos valores que se encuentran 1 desviación estandar o menos alrededor de la media y que se encuentran dentro del intervalo $[\bar{x} - s, \bar{x} + s]$.
+
+## Mensajes (messages), advertencias (warnings) y errores (errors)
+
+Cuando utilices R y ejecutes un código es posible que observes texto en la consola. Éste texto puede ser el resultado generado al ejecutar el código como también mensajes, advertencias y errores.
+
+Para entender que es un mensaje, advertencia o un error realiza el procedimiento descrito en el primer párrafo de la @sec-package-usage. Luego, carga el paquete `tidyverse` siguiendo las indicaciones de esa misma sección, donde se generará un contenido igual o similar al señalado en el @lst-load-tidyverse-message.
+
+### Mensajes
+
+El contenido del @lst-load-tidyverse-message es un ejemplo de un **mensaje**. Un mensaje en R tiene como propósito informar al usuario sobre algún aspecto en la ejecución del código. En el caso del @lst-load-tidyverse-message la primera parte indica el conjunto de paquetes que `tidyverse` carga al cargar este paquete, así como sus respectivas versiones: 
+
+::: {#lst-load-tidyverse-packages}
+
+```r
+── Attaching core tidyverse packages ── tidyverse 2.0.0 ──
+✔ dplyr     1.2.0     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.2     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.1
+```
+:::
+
+En el @lst-load-tidyverse-packages se indica que los paquetes cargardos al cargar `tidyverse` son: `dplyr`, `readr`, `forcats`, `stringr`, `ggplot2`, `tibble`, `lubridate`, `tidyr` y `purrr`.
+
+La segunda parte indica que existen 2 funciones en el paquete `dplyr` que tienen el mismo nombre que otras funciones en otro paquete estandar (o de base) (ver @sec-what-are-r-packages) llamado `stats` y que por lo tanto si se utilizan de manera directa, entonces R empleará las referentes al paquete `dplyr`: 
+
+::: {#lst-load-tidyverse-conflicts}
+
+```r
+── Conflicts ──────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package to force all conflicts 
+ to become errors
+```
+
+:::
+
+En el @lst-load-tidyverse-conflicts las funciones con el mismo nombre en `dplyr` y `stats` son `filter()` y `lag()`. Si utilizas de manera directa alguna de las funciones, el mensaje indica que estas funciones corresponderan al paquete `dplyr`. En caso que quieras utilizar las funciones del paquete `stat` deberás indicarlo de manera explíctia utilizando la sintáxis `stats::filter()` o `stats::lag()`, según el caso.
+
+### Advertencias {#sec-warnings}
+
+Una **advertencia** señala un posible problema en el código pero no detiene su ejecución. Para ilustrar este caso ejecuta nuevamente el código señalado en el @lst-atomic-vector. Luego, asume que se quiere aumentar el costo de matrícula para cada uno de los programas académicos pero se comete el error de incluir un aumento sólo para 6 programas de la siguiente forma:
+
+```{r}
+#| lst-label: lst-warning
+#| lst-cap: Advertencia al realizar un operación matemática entre vectores atómicos con un número diferente de elementos
+aumento_costo_matricula <- c(
+  100000,
+  130000,
+  250000,
+  145000,
+  210000,
+  94000
+)
+
+costo_matricula + aumento_costo_matricula
+```
+
+Debido a que R utiliza operaciones vectorizadas es posible llevar a cabo la operación señala en el @lst-warning, aún si cada vector atómico (`costo_matricula` y `aumento_costo_matricula`) tiene un número diferente de elementos mediante un proceso que se conocer como **reciclaje de vectores** y que se escribe a continuación: 
+
+- R repite el vector más corto (`aumento_costo_matricula`) hasta que tenga la misma longitud que el vector más largo (`costo_matricula`)
+- Luego realiza la operación matemática 
+
+Por ese motivo para el último costo de matrícula el resultado al generar el aumento es de `{r} number(tail(costo_matricula + aumento_costo_matricula, n =  1), accuracy = 1, big.mark = ",", prefix = "$ ")`. Sin embargo, R le indica una advertencia al usuario sobre este aspecto aún si lleva a cabo la respectiva suma.
+
+### Errores
+
+Por último, un **error** se genera cuando al ejecutar un código existe una imposibilidad lógica de hacerlo o viola las reglas del lenguaje R. En ese caso se detiene la ejecución del código y se genera un texto que busca explicar la razón del problema. De nuevo, para ilustrar este caso asumamos que corregimos la advertencia agregando un nuevo valor de la siguiente manera:
+
+```{r}
+#| lst-label: lst-error
+#| lst-cap: Error por un problema de sintaxis al no separar de manera correcta los elementos de un vector atómico
+#| error: true
+aumento_costo_matricula <- c(
+  100000,
+  130000,
+  250000,
+  145000,
+  210000,
+  94000
+  45000
+)
+
+costo_matricula + aumento_costo_matricula
+```
+
+En el @lst-error no es posible ejecutar el código debido a que no se agregó una coma, `","`, al final del penúltimo valor en el vector atómico `aumento_costo_matricula`. R no entiende como proceder por qué no se esta separando este elemento del último número para que se definan en total 7 valores.
+
+## Tibbles
+
+El uso de vectores atómicos es útil para almacenar datos de un mismo tipo pero tiene limitaciones si se busca integrar variables de diferentes tipos en una misma estructura. Cuando se analizan datos es necesario agrupar distintos atributos para entender el contexto de la información y poder relacionar diferentes variables.
+
+Una tibble permite agrupar datos en una estructura rectangular para entender la relación de variables de diferentes tipos. Para entender este aspecto construirás una tibble para agrupar y darle un contexto adecuado a la información señalada al principio del @sec-how-do-i-code-in-r utilizando la functión `tibble()`.
+
+Para organizar la información de los programas académicos relacionados con el costos de matrícula definiremos en primera instancia tanto el año como el periodo al que se refieren los datos, luego asociaremos un identificador único para cada programa académico, su nombre, nivel académico y finalmente una variable del costo de matrícula.
+
+Para construir una tibble que reuna las características señaladas anteriormente ejecuta el código del @lst-tibble:
+
+```{r}
+#| lst-label: lst-tibble
+#| lst-cap: Construcción de una tibble a partir de información del costo de matrícula de programas académicos de pregrado
+# Creación de tibbles ----
+costo_matricula_pregrado <- tibble(
+  ano = 2026,
+  semestre = 1,
+  codigo_snies = c(
+    6527,
+    108241,
+    11428,
+    11004,
+    53703,
+    105142,
+    10963
+  ),
+  nombre_programa = c(
+    "Administración de Empresas",
+    "Administración de Riesgos, Seguridad y Salud en el Trabajo",
+    "Contaduría Pública",
+    "Ingeniería Civil",
+    "Ingeniería Industrial",
+    "Ingeniería Informática",
+    "Relaciones Internacionales y Estudios Políticos"
+  ),
+  nivel_academico = "Pregrado",
+  costo_matricula = costo_matricula
+)
+
+costo_matricula_pregrado
+```
+
+En la tibble del @lst-tibble respecto a las variables `ano`, `semestre` y `nivel_academico` R aplica el proceso de reciclaje de vectores (ver @sec-warnings) para ajustar el tamaño de las columnas. En el caso de la variable `codigo_snies` se fija un código establecido por el [Sistema Nacional de Información de la Educación Superior - SNIES](https://snies.mineducacion.gov.co/portal/) para identificar y asociar de manera única a cada programa académico con el nombre señalado en la variable `nombre_programa`. Por último, es posible en una tibble utilizar un vector atómico previamente definido, como en el caso de `costo_matricula`, para generar una variable. En el @lst-tibble se utiliza el mismo nombre asociado al vector atómico que contiene el costo de matrícula para la columna que incluye dicha información.
+
+## Operadores relacionales
+
+Los operadores relacionales son operadores binarios que permiten la comparación de valores en vectores atómicos. Estos operadores son útiles por qué establecen condiciones lógicas para filtrar filas de interés en una tibble.
+
+| Operador | Nombre |
+|:---:|:---|
+| `==` | Igual a |
+| `!=` | Diferente de |
+| `>` | Mayor que |
+| `<` | Menor que |
+| `>=` | Mayor o igual que |
+| `<=` | Menor o igual que |
+
+: Operadores relacionales en R {#tbl-relational-operators}

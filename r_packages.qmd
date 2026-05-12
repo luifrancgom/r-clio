@@ -38,6 +38,20 @@ Para instalar un paquete que no viene por defecto en R, retomaremos la analogía
 
 En R, el proceso es similar. Primero instalas el paquete desde un repositorio (equivalente a la tienda de aplicaciones) y luego lo cargas, un paso análogo a abrir la aplicación en tu celular.
 
+
+::: {.callout-note}
+En caso que este utilizando Posit Workbench, de acuerdo a lo señalado en la @sec-posit-workbench, es posible que el proceso descrito a continuación no debas realizarlo. En algunas ocasiones el administrador de esta herramienta puede haber instalado ciertos paquetes con anterioridad.
+
+Para el caso de Posit Workbench ubica la pestaña **Console** en el **Panel** (Ver la @fig-positron-layout-outline) y, tras el símbolo `>` escribe el comando `library(tidyverse)`, luego presiona {{< kbd Enter >}}. Si te aparece un mensaje similar al señalado en el @lst-load-tidyverse-message no es necesario que realices alguna instalación y puedes dirigirte directamente a la @sec-load-packages. En caso contrario si se genera un mensaje igual o similar a:
+
+```r
+Error:
+there is no package called ‘tidyverse’
+```
+
+puedes proceder con las instrucciones que se señalan a continuación.
+:::
+
 Para practicar este proceso, instalaremos el paquete [`tidyverse`](https://tidyverse.org/). Este paquete es una colección de herramientas diseñadas para ciencia de datos que utilizaremos constantemente a lo largo del libro. Para iniciar la instalación, ubica la pestaña **Console** en el **Panel** (Ver la @fig-positron-layout-outline) y, tras el símbolo `>`, escribe el siguiente comando:
 
 ```r
@@ -50,7 +64,7 @@ Luego, presiona {{< kbd Enter >}}. Ten paciencia hasta que el proceso finalice y
 Al instalar un paquete en R, asegúrate de escribir su nombre entre comillas (`""`). De lo contrario, la instalación fallará. Por ahora, no te preocupes por la razón detrás de éste aspecto. Lo importante es que te asegures que puedas saber cómo instalar un paquete en R.
 :::
 
-## Carga de paquetes
+## Carga de paquetes {#sec-load-packages}
 
 Cuando instalas una aplicación en tu celular es necesario abrirla para poder usarla, no basta con simplemente instalarla. En R para poder utilizar un paquete que se encuentre instalado previamente es necesario cargarlo (equivalente a abrir una aplicación que se encuentra instalada en un celular). En R para cargar un paquete se utiliza la función `library()`.
 
@@ -83,7 +97,7 @@ Luego, presiona {{< kbd Enter >}}. Si el paquete `tidyverse` fue instalado de ma
 En el @sec-how-do-i-code-in-r podrás explorar más acerca de los tipos de texto que la consola puede generar y cómo interpretarlos cuando se genere algún contenido. Allí explicaremos en particular el texto del @lst-load-tidyverse-message. 
 :::
 
-## Uso de paquetes
+## Uso de paquetes {#sec-package-usage}
 
 Para entender cómo utilizar un paquete, explorarás tu primer conjunto de datos en R utilizando el paquete `tidyverse`. Primero, cierra la ventana de Positron si seguiste las instrucciones descritas en la @sec-how-to-install-r-positron y abre la carpeta `r-analisis-datos` (ver @sec-project-oriented-workflow-positron-r) utilizando las opciones **File > Open Folder...** que podrás encontrar en el menú superior izquierdo de la interfaz. En caso que estes utilizando Posit Workbench (ver @sec-posit-workbench) abre una sesión con el proyecto `r-analisis-datos`, creado de acuerdo a lo señalado en la @sec-project-oriented-workflow-positron-r.
 
