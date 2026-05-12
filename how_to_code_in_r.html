@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -93,6 +128,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -220,8 +284,23 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#operaciones-aritméticas" id="toc-operaciones-aritméticas" class="nav-link active" data-scroll-target="#operaciones-aritméticas"><span class="header-section-number">5.1</span> Operaciones aritméticas</a></li>
+  <li><a href="#vectores-atómicos-en-r" id="toc-vectores-atómicos-en-r" class="nav-link" data-scroll-target="#vectores-atómicos-en-r"><span class="header-section-number">5.2</span> Vectores atómicos en R</a></li>
+  <li><a href="#mensajes-messages-advertencias-warnings-y-errores-errors" id="toc-mensajes-messages-advertencias-warnings-y-errores-errors" class="nav-link" data-scroll-target="#mensajes-messages-advertencias-warnings-y-errores-errors"><span class="header-section-number">5.3</span> Mensajes (messages), advertencias (warnings) y errores (errors)</a>
+  <ul class="collapse">
+  <li><a href="#mensajes" id="toc-mensajes" class="nav-link" data-scroll-target="#mensajes"><span class="header-section-number">5.3.1</span> Mensajes</a></li>
+  <li><a href="#sec-warnings" id="toc-sec-warnings" class="nav-link" data-scroll-target="#sec-warnings"><span class="header-section-number">5.3.2</span> Advertencias</a></li>
+  <li><a href="#errores" id="toc-errores" class="nav-link" data-scroll-target="#errores"><span class="header-section-number">5.3.3</span> Errores</a></li>
+  </ul></li>
+  <li><a href="#tibbles" id="toc-tibbles" class="nav-link" data-scroll-target="#tibbles"><span class="header-section-number">5.4</span> Tibbles</a></li>
+  <li><a href="#operadores-relacionales" id="toc-operadores-relacionales" class="nav-link" data-scroll-target="#operadores-relacionales"><span class="header-section-number">5.5</span> Operadores relacionales</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/how_to_code_in_r.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/how_to_code_in_r.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -245,19 +324,453 @@ div.csl-indent {
 </header>
 
 
-<p>Este capítulo se basa en <span class="citation" data-cites="ismay_statistical_2025">(<a href="references.html#ref-ismay_statistical_2025" role="doc-biblioref">Ismay, 2025, Capítulo 1</a>)</span> y tiene como propósito …</p>
+<p>Este capítulo se basa en <span class="citation" data-cites="ismay_statistical_2025">(<a href="references.html#ref-ismay_statistical_2025" role="doc-biblioref">Ismay, 2025, Capítulo 1</a>)</span>, <span class="citation" data-cites="grolemund_hands-programming_2014">(<a href="references.html#ref-grolemund_hands-programming_2014" role="doc-biblioref">Grolemund, 2014, Capítulo 1</a>)</span> y <span class="citation" data-cites="wickham_advanced_2019">(<a href="references.html#ref-wickham_advanced_2019" role="doc-biblioref">Wickham, 2019, Capítulo 2</a>)</span> donde tiene como propósito introducir conceptos básicos del lenguaje de programación R utilizando datos de los programas de pregrado de la <a href="https://umng.edu.co/facultad/faedis/">Facultad de Estudios a Distancia</a> de la Universidad Militar Nueva Granada.</p>
 <p>Exploraremos los siguientes aspectos:</p>
 <ol type="1">
-<li></li>
-<li></li>
+<li>Operaciones aritméticas</li>
+<li>Vectores atómicos en R</li>
+<li>Mensajes (messages), advertencias (warnings) y errores (errors)</li>
+<li>Tibbles</li>
+<li>Operadores relacionales</li>
 </ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para desarrollar el contenido de este capítulo recuerda trabajar por proyectos de acuerdo a lo señalado en el <a href="project-oriented_workflow.html" class="quarto-xref"><span>Capítulo 3</span></a>. En ese sentido, genera una carpeta con el nombre <code>005_como-escribir-codigo-en-r</code> y dentro de la carpeta crea un archivo con el nombre <code>001_codigo-en-r-datos-faedis.R</code> siguiendo las indicaciones descritas en la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>.</p>
+</div>
+</div>
+<section id="operaciones-aritméticas" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="operaciones-aritméticas"><span class="header-section-number">5.1</span> Operaciones aritméticas</h2>
+<p>Para el año 2026 en el primer semestre, la Facultad de Estudios a Distancia ofrecía 7 programas académicos de pregrado con su respectivo costo de matrícula en pesos colombianos (COP), tal como se señala en la siguiente lista:</p>
+<ul>
+<li>Administración de Empresas: $ 4,389,000 COP</li>
+<li>Administración de Riesgos, Seguridad y Salud en el Trabajo: $ 4,896,000 COP</li>
+<li>Contaduría Pública: $ 4,135,000 COP</li>
+<li>Ingeniería Civil: $ 4,940,000 COP</li>
+<li>Ingeniería Industrial: $ 5,638,000 COP</li>
+<li>Ingeniería Informática: $ 4,661,000 COP</li>
+<li>Relaciones Internacionales y Estudios Políticos: $ 6,238,000 COP</li>
+</ul>
+<p>Si se buscara calcular el promedio del costo de matrícula dentro de la facultad para este periodo, es posible utilizar R como una calculadora ejecutando el siguiente código:</p>
+<div class="cell">
+<div id="lst-mean-tuition-fee" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-mean-tuition-fee-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;5.1: Costo promedio de mátricula en programas de pregrado de la Facultad de Estudios a Distancia para el año 2026 semestre 1
+</figcaption>
+<div aria-describedby="lst-mean-tuition-fee-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Costo promedio de matrícula ----</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>(<span class="dv">4389000</span> <span class="sc">+</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">4896000</span> <span class="sc">+</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dv">4135000</span> <span class="sc">+</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="dv">4940000</span> <span class="sc">+</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="dv">5638000</span> <span class="sc">+</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="dv">4661000</span> <span class="sc">+</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="dv">6238000</span>) <span class="sc">/</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="dv">7</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4985286</code></pre>
+</div>
+</div>
+<p>En R podemos utilizar los operadores aritméticos para llevar a cabo operaciones como en una calculadora (ver <a href="#tbl-arithmetic-operators" class="quarto-xref">Tabla&nbsp;<span>5.1</span></a>):</p>
+<div id="tbl-arithmetic-operators" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-arithmetic-operators-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;5.1: Operadores aritméticos en R
+</figcaption>
+<div aria-describedby="tbl-arithmetic-operators-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Operador</th>
+<th style="text-align: left;">Nombre</th>
+<th style="text-align: center;">Ejemplo</th>
+<th style="text-align: center;">Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>+</code></td>
+<td style="text-align: left;">Suma</td>
+<td style="text-align: center;"><code>2 + 4</code></td>
+<td style="text-align: center;"><code>6</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>-</code></td>
+<td style="text-align: left;">Resta</td>
+<td style="text-align: center;"><code>2 - 4</code></td>
+<td style="text-align: center;"><code>-2</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>*</code></td>
+<td style="text-align: left;">Multiplicación</td>
+<td style="text-align: center;"><code>2 * 4</code></td>
+<td style="text-align: center;"><code>8</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>/</code></td>
+<td style="text-align: left;">División</td>
+<td style="text-align: center;"><code>2 / 4</code></td>
+<td style="text-align: center;"><code>0.5</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>^</code></td>
+<td style="text-align: left;">Exponente</td>
+<td style="text-align: center;"><code>2 ^ 4</code></td>
+<td style="text-align: center;"><code>16</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="vectores-atómicos-en-r" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="vectores-atómicos-en-r"><span class="header-section-number">5.2</span> Vectores atómicos en R</h2>
+<p>En el <a href="#lst-mean-tuition-fee" class="quarto-xref">Listado&nbsp;<span>5.1</span></a> se utilizó R para calcular el costo promedio de la mátricula. Sin embargo si quisieramos utilizar nuevamente estos datos tendríamos que escribirlos nuevamente, donde este proceso no es eficiente. R permite guardar datos almacenándolos dentro de un objeto. Una forma de almacenar datos es utilizando vectores atómicos a través de la función <code>c()</code> y luego vinculando el objeto que se busque crear a través de un nombre para utilizarlo cuando lo requieras.</p>
+<p>A continuación guardarás el costo de matrícula de cada programa de pregrado en un vector atómico mediante la función <code>c()</code> y luego vincularás ese objeto al nombre <code>costo_matricula</code> tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-atomic-vector" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-atomic-vector-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;5.2: Uso de un vector atómico para almacenar datos
+</figcaption>
+<div aria-describedby="lst-atomic-vector-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vector atómico ----</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>costo_matricula <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">4389000</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="dv">4896000</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="dv">4135000</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="dv">4940000</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="dv">5638000</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="dv">4661000</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="dv">6238000</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>costo_matricula</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4389000 4896000 4135000 4940000 5638000 4661000 6238000</code></pre>
+</div>
+</div>
+<p>En el <a href="#lst-atomic-vector" class="quarto-xref">Listado&nbsp;<span>5.2</span></a> se utilizaron comas para combinar los valores en la función <code>c()</code> y el operador de asignación <code>&lt;-</code> para vincular éste objeto con el nombre <code>costo_matricula</code>. De esa manera, puedes reutilizar esta información si la requieres nuevamente.</p>
+<p>Por ejemplo, si quisieras calcular la dispersión del costo de matrícula alrededor de la media a través de la desviación estandar muestral, (ver <a href="#eq-sample-standard-deviation" class="quarto-xref">Ecuación&nbsp;<span>5.1</span></a>), entonces es posible reutilizar los datos vinculados con el nombre <code>costo_matricula</code>.</p>
+<p><span id="eq-sample-standard-deviation"><span class="math display">\[
+\begin{aligned}
+s &amp; = \sqrt{\frac{1}{n - 1} \sum_{i=1}^n (x_i - \bar{x})^2} \\
+  &amp; = \sqrt{\frac{1}{n - 1} \left[ (x_1 - \bar{x})^2 + \cdots + (x_n - \bar{x})^2 \right]}
+\end{aligned}
+\tag{5.1}\]</span></span></p>
+<p>Donde en la <a href="#eq-sample-standard-deviation" class="quarto-xref">Ecuación&nbsp;<span>5.1</span></a>, <span class="math inline">\(\bar{x} = \frac{1}{n} \sum_{i=1}^n x_i\)</span> corresponde a la media muestral<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<p>A continuación podras utilizar R para calcular la desviación estandar muestral y examinar las ventajas de utilizar vectores atómicos. En primera instancia puedes utilizar la functión <code>mean()</code> para calcular el costo promedio de matrícula así como vincular este dato con el nombre <code>media_costo_matricula</code> de la siguiente forma:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cálculo de la media muestral ----</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>media_costo_matricula <span class="ot">&lt;-</span> <span class="fu">mean</span>(costo_matricula)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>media_costo_matricula</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4985286</code></pre>
+</div>
+</div>
+<p>Luego puedes utilizar la <a href="#eq-sample-standard-deviation" class="quarto-xref">Ecuación&nbsp;<span>5.1</span></a> para calcular la varianza muestral de la siguiente forma:</p>
+<div class="cell">
+<div id="lst-sample-variance" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-sample-variance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;5.3: Uso de un vector atómico para calcular la varianza muestral
+</figcaption>
+<div aria-describedby="lst-sample-variance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cálculo de la varianza muestral ----</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>varianza_costo_matricula <span class="ot">&lt;-</span> <span class="fu">sum</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  (costo_matricula <span class="sc">-</span> media_costo_matricula)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">/</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">7</span> <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>varianza_costo_matricula</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 531509238095</code></pre>
+</div>
+</div>
+<p>En el <a href="#lst-sample-variance" class="quarto-xref">Listado&nbsp;<span>5.3</span></a> primero restamos a cada dato la media muestral, <code>costo_matricula - media_costo_matricula</code>, donde R utiliza operaciones vectorizadas. En ese sentido, R resta a cada elemento de <code>costo_matricula</code> el valor de la media muestral <code>media_costo_matricula</code>. Después, también a través de una operación vectorizada, R aplica el exponente <code>2</code> mediante <code>^</code> a cada elemento de <code>costo_matricula - media_costo_matricula</code>. Posteriormente, utilizando la función <code>sum()</code> R suma cada uno de los elementos en <code>(costo_matricula - media_costo_matricula)^2</code> para poder dividir el valor correspondiente por <code>7 - 1</code> y así obtener la varianza muestral.</p>
+<p>Una vez se calcule la varianza muestral, de acuerdo a lo señalado en el <a href="#lst-sample-variance" class="quarto-xref">Listado&nbsp;<span>5.3</span></a>, puedes calcular la raiz cuadrara principal utilizando la función <code>sqrt()</code>, para obtener la desviacion estandar muestral, de la siguiente forma :</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cálculo de la desviación estandar muestral ----</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>desv_estandar_costo_matricula <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  varianza_costo_matricula</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>desv_estandar_costo_matricula</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 729046.8</code></pre>
+</div>
+</div>
+<p>En la <a href="#fig-1-chap-4" class="quarto-xref">Figura&nbsp;<span>5.1</span></a> se señala una representación gráfica de la media y la desviación estandar muestral con los datos asociados donde el valor de $ 729,047 se representan a través de un intervalo alrededor de la media, <span class="math inline">\([\bar{x} - s, \bar{x} + s]\)</span>, con un segmento y los extremos señalados con flechas.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-1-chap-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-1-chap-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="how_to_code_in_r_files/figure-html/fig-1-chap-4-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-chap-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5.1: Media (círculo rojo) y desviación estandar (segmento y flechas azules) muestral del costo de matrícula
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>De esa manera en la <a href="#fig-1-chap-4" class="quarto-xref">Figura&nbsp;<span>5.1</span></a> es posible observar aquellos valores que se encuentran 1 desviación estandar o menos alrededor de la media y que se encuentran dentro del intervalo <span class="math inline">\([\bar{x} - s, \bar{x} + s]\)</span>.</p>
+</section>
+<section id="mensajes-messages-advertencias-warnings-y-errores-errors" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="mensajes-messages-advertencias-warnings-y-errores-errors"><span class="header-section-number">5.3</span> Mensajes (messages), advertencias (warnings) y errores (errors)</h2>
+<p>Cuando utilices R y ejecutes un código es posible que observes texto en la consola. Éste texto puede ser el resultado generado al ejecutar el código como también mensajes, advertencias y errores.</p>
+<p>Para entender que es un mensaje, advertencia o un error realiza el procedimiento descrito en el primer párrafo de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>. Luego, carga el paquete <code>tidyverse</code> siguiendo las indicaciones de esa misma sección, donde se generará un contenido igual o similar al señalado en el <a href="r_packages.html#lst-load-tidyverse-message" class="quarto-xref">Listado&nbsp;<span>4.1</span></a>.</p>
+<section id="mensajes" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="mensajes"><span class="header-section-number">5.3.1</span> Mensajes</h3>
+<p>El contenido del <a href="r_packages.html#lst-load-tidyverse-message" class="quarto-xref">Listado&nbsp;<span>4.1</span></a> es un ejemplo de un <strong>mensaje</strong>. Un mensaje en R tiene como propósito informar al usuario sobre algún aspecto en la ejecución del código. En el caso del <a href="r_packages.html#lst-load-tidyverse-message" class="quarto-xref">Listado&nbsp;<span>4.1</span></a> la primera parte indica el conjunto de paquetes que <code>tidyverse</code> carga al cargar este paquete, así como sus respectivas versiones:</p>
+<div id="lst-load-tidyverse-packages" class="listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-load-tidyverse-packages-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;5.4
+</figcaption>
+<div aria-describedby="lst-load-tidyverse-packages-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>── Attaching core tidyverse packages ── tidyverse <span class="dv">2</span>.<span class="fl">0.0</span> ──</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>✔ dplyr     <span class="dv">1</span>.<span class="fl">2.0</span>     ✔ readr     <span class="dv">2</span>.<span class="fl">2.0</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>✔ forcats   <span class="dv">1</span>.<span class="fl">0.1</span>     ✔ stringr   <span class="dv">1</span>.<span class="fl">6.0</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>✔ ggplot2   <span class="dv">4</span>.<span class="fl">0.2</span>     ✔ tibble    <span class="dv">3</span>.<span class="fl">3.1</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>✔ lubridate <span class="dv">1</span>.<span class="fl">9.5</span>     ✔ tidyr     <span class="dv">1</span>.<span class="fl">3.2</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>✔ purrr     <span class="dv">1</span>.<span class="fl">2.1</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<p>En el <a href="#lst-load-tidyverse-packages" class="quarto-xref">Listado&nbsp;<span>5.4</span></a> se indica que los paquetes cargardos al cargar <code>tidyverse</code> son: <code>dplyr</code>, <code>readr</code>, <code>forcats</code>, <code>stringr</code>, <code>ggplot2</code>, <code>tibble</code>, <code>lubridate</code>, <code>tidyr</code> y <code>purrr</code>.</p>
+<p>La segunda parte indica que existen 2 funciones en el paquete <code>dplyr</code> que tienen el mismo nombre que otras funciones en otro paquete estandar (o de base) (ver <a href="r_packages.html#sec-what-are-r-packages" class="quarto-xref"><span>Sección 4.1</span></a>) llamado <code>stats</code> y que por lo tanto si se utilizan de manera directa, entonces R empleará las referentes al paquete <code>dplyr</code>:</p>
+<div id="lst-load-tidyverse-conflicts" class="listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-load-tidyverse-conflicts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;5.5
+</figcaption>
+<div aria-describedby="lst-load-tidyverse-conflicts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>── Conflicts ──────────────────── <span class="fu">tidyverse_conflicts</span>() ──</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>✖ dplyr<span class="sc">::</span><span class="fu">filter</span>() masks stats<span class="sc">::</span><span class="fu">filter</span>()</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>✖ dplyr<span class="sc">::</span><span class="fu">lag</span>()    masks stats<span class="sc">::</span><span class="fu">lag</span>()</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>ℹ Use the conflicted package to force all conflicts </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a> to become errors</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<p>En el <a href="#lst-load-tidyverse-conflicts" class="quarto-xref">Listado&nbsp;<span>5.5</span></a> las funciones con el mismo nombre en <code>dplyr</code> y <code>stats</code> son <code>filter()</code> y <code>lag()</code>. Si utilizas de manera directa alguna de las funciones, el mensaje indica que estas funciones corresponderan al paquete <code>dplyr</code>. En caso que quieras utilizar las funciones del paquete <code>stat</code> deberás indicarlo de manera explíctia utilizando la sintáxis <code>stats::filter()</code> o <code>stats::lag()</code>, según el caso.</p>
+</section>
+<section id="sec-warnings" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="sec-warnings"><span class="header-section-number">5.3.2</span> Advertencias</h3>
+<p>Una <strong>advertencia</strong> señala un posible problema en el código pero no detiene su ejecución. Para ilustrar este caso ejecuta nuevamente el código señalado en el <a href="#lst-atomic-vector" class="quarto-xref">Listado&nbsp;<span>5.2</span></a>. Luego, asume que se quiere aumentar el costo de matrícula para cada uno de los programas académicos pero se comete el error de incluir un aumento sólo para 6 programas de la siguiente forma:</p>
+<div class="cell">
+<div id="lst-warning" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-warning-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;5.6: Advertencia al realizar un operación matemática entre vectores atómicos con un número diferente de elementos
+</figcaption>
+<div aria-describedby="lst-warning-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>aumento_costo_matricula <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">100000</span>,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">130000</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="dv">250000</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="dv">145000</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="dv">210000</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="dv">94000</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>costo_matricula <span class="sc">+</span> aumento_costo_matricula</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in costo_matricula + aumento_costo_matricula:
+longer object length is not a multiple of shorter object
+length</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4489000 5026000 4385000 5085000 5848000 4755000 6338000</code></pre>
+</div>
+</div>
+<p>Debido a que R utiliza operaciones vectorizadas es posible llevar a cabo la operación señala en el <a href="#lst-warning" class="quarto-xref">Listado&nbsp;<span>5.6</span></a>, aún si cada vector atómico (<code>costo_matricula</code> y <code>aumento_costo_matricula</code>) tiene un número diferente de elementos mediante un proceso que se conocer como <strong>reciclaje de vectores</strong> y que se escribe a continuación:</p>
+<ul>
+<li>R repite el vector más corto (<code>aumento_costo_matricula</code>) hasta que tenga la misma longitud que el vector más largo (<code>costo_matricula</code>)</li>
+<li>Luego realiza la operación matemática</li>
+</ul>
+<p>Por ese motivo para el último costo de matrícula el resultado al generar el aumento es de $ 6,338,000. Sin embargo, R le indica una advertencia al usuario sobre este aspecto aún si lleva a cabo la respectiva suma.</p>
+</section>
+<section id="errores" class="level3" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="errores"><span class="header-section-number">5.3.3</span> Errores</h3>
+<p>Por último, un <strong>error</strong> se genera cuando al ejecutar un código existe una imposibilidad lógica de hacerlo o viola las reglas del lenguaje R. En ese caso se detiene la ejecución del código y se genera un texto que busca explicar la razón del problema. De nuevo, para ilustrar este caso asumamos que corregimos la advertencia agregando un nuevo valor de la siguiente manera:</p>
+<div class="cell">
+<div id="lst-error" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-error-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;5.7: Error por un problema de sintaxis al no separar de manera correcta los elementos de un vector atómico
+</figcaption>
+<div aria-describedby="lst-error-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>aumento_costo_matricula <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">100000</span>,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">130000</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="dv">250000</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="dv">145000</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="dv">210000</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="dv">94000</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="dv">45000</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>costo_matricula <span class="sc">+</span> aumento_costo_matricula</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in parse(text = input): &lt;text&gt;:8:3: unexpected numeric constant
+7:   94000
+8:   45000
+     ^</code></pre>
+</div>
+</div>
+<p>En el <a href="#lst-error" class="quarto-xref">Listado&nbsp;<span>5.7</span></a> no es posible ejecutar el código debido a que no se agregó una coma, <code>","</code>, al final del penúltimo valor en el vector atómico <code>aumento_costo_matricula</code>. R no entiende como proceder por qué no se esta separando este elemento del último número para que se definan en total 7 valores.</p>
+</section>
+</section>
+<section id="tibbles" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="tibbles"><span class="header-section-number">5.4</span> Tibbles</h2>
+<p>El uso de vectores atómicos es útil para almacenar datos de un mismo tipo pero tiene limitaciones si se busca integrar variables de diferentes tipos en una misma estructura. Cuando se analizan datos es necesario agrupar distintos atributos para entender el contexto de la información y poder relacionar diferentes variables.</p>
+<p>Una tibble permite agrupar datos en una estructura rectangular para entender la relación de variables de diferentes tipos. Para entender este aspecto construirás una tibble para agrupar y darle un contexto adecuado a la información señalada al principio del <a href="#sec-how-do-i-code-in-r" class="quarto-xref"><span>Capítulo 5</span></a> utilizando la functión <code>tibble()</code>.</p>
+<p>Para organizar la información de los programas académicos relacionados con el costos de matrícula definiremos en primera instancia tanto el año como el periodo al que se refieren los datos, luego asociaremos un identificador único para cada programa académico, su nombre, nivel académico y finalmente una variable del costo de matrícula.</p>
+<p>Para construir una tibble que reuna las características señaladas anteriormente ejecuta el código del <a href="#lst-tibble" class="quarto-xref">Listado&nbsp;<span>5.8</span></a>:</p>
+<div class="cell">
+<div id="lst-tibble" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-tibble-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;5.8: Construcción de una tibble a partir de información del costo de matrícula de programas académicos de pregrado
+</figcaption>
+<div aria-describedby="lst-tibble-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creación de tibbles ----</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>costo_matricula_pregrado <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ano =</span> <span class="dv">2026</span>,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">semestre =</span> <span class="dv">1</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">codigo_snies =</span> <span class="fu">c</span>(</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6527</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="dv">108241</span>,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="dv">11428</span>,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="dv">11004</span>,</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="dv">53703</span>,</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="dv">105142</span>,</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="dv">10963</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">nombre_programa =</span> <span class="fu">c</span>(</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Administración de Empresas"</span>,</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Administración de Riesgos, Seguridad y Salud en el Trabajo"</span>,</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Contaduría Pública"</span>,</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Ingeniería Civil"</span>,</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Ingeniería Industrial"</span>,</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Ingeniería Informática"</span>,</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Relaciones Internacionales y Estudios Políticos"</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">nivel_academico =</span> <span class="st">"Pregrado"</span>,</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">costo_matricula =</span> costo_matricula</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>costo_matricula_pregrado</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 6
+    ano semestre codigo_snies nombre_programa               
+  &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt;                         
+1  2026        1         6527 Administración de Empresas    
+2  2026        1       108241 Administración de Riesgos, Se…
+3  2026        1        11428 Contaduría Pública            
+4  2026        1        11004 Ingeniería Civil              
+5  2026        1        53703 Ingeniería Industrial         
+6  2026        1       105142 Ingeniería Informática        
+7  2026        1        10963 Relaciones Internacionales y …
+# ℹ 2 more variables: nivel_academico &lt;chr&gt;,
+#   costo_matricula &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>En la tibble del <a href="#lst-tibble" class="quarto-xref">Listado&nbsp;<span>5.8</span></a> respecto a las variables <code>ano</code>, <code>semestre</code> y <code>nivel_academico</code> R aplica el proceso de reciclaje de vectores (ver <a href="#sec-warnings" class="quarto-xref"><span>Sección 5.3.2</span></a>) para ajustar el tamaño de las columnas. En el caso de la variable <code>codigo_snies</code> se fija un código establecido por el <a href="https://snies.mineducacion.gov.co/portal/">Sistema Nacional de Información de la Educación Superior - SNIES</a> para identificar y asociar de manera única a cada programa académico con el nombre señalado en la variable <code>nombre_programa</code>. Por último, es posible en una tibble utilizar un vector atómico previamente definido, como en el caso de <code>costo_matricula</code>, para generar una variable. En el <a href="#lst-tibble" class="quarto-xref">Listado&nbsp;<span>5.8</span></a> se utiliza el mismo nombre asociado al vector atómico que contiene el costo de matrícula para la columna que incluye dicha información.</p>
+</section>
+<section id="operadores-relacionales" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="operadores-relacionales"><span class="header-section-number">5.5</span> Operadores relacionales</h2>
+<p>Los operadores relacionales son operadores binarios que permiten la comparación de valores en vectores atómicos. Estos operadores son útiles por qué establecen condiciones lógicas para filtrar filas de interés en una tibble.</p>
+<div id="tbl-relational-operators" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-relational-operators-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;5.2: Operadores relacionales en R
+</figcaption>
+<div aria-describedby="tbl-relational-operators-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Operador</th>
+<th style="text-align: left;">Nombre</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>==</code></td>
+<td style="text-align: left;">Igual a</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>!=</code></td>
+<td style="text-align: left;">Diferente de</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>&gt;</code></td>
+<td style="text-align: left;">Mayor que</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>&lt;</code></td>
+<td style="text-align: left;">Menor que</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>&gt;=</code></td>
+<td style="text-align: left;">Mayor o igual que</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>&lt;=</code></td>
+<td style="text-align: left;">Menor o igual que</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-grolemund_hands-programming_2014" class="csl-entry" role="listitem">
+Grolemund, G. (2014). <em>Hands-on programming with <span>R</span></em> (First edition). O’Reilly. <a href="https://jjallaire.github.io/hopr/">https://jjallaire.github.io/hopr/</a>
+</div>
 <div id="ref-ismay_statistical_2025" class="csl-entry" role="listitem">
 Ismay, C. (2025). <em>Statistical inference via data science: a moderndive into r and the tidyverse</em> (Second edition). CRC Press. <a href="https://moderndive.com/v2/index.html">https://moderndive.com/v2/index.html</a>
 </div>
+<div id="ref-wickham_advanced_2019" class="csl-entry" role="listitem">
+Wickham, H. (2019). <em>Advanced <span>R</span></em> (Second edition). CRC Press/Taylor &amp; Francis Group.
 </div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Para nuestro caso <span class="math inline">\(i = 1, \ldots, 7\)</span>, <span class="math inline">\(x_1 = 4389000, \ldots, x_7 = 6238000\)</span> y <span class="math inline">\(\bar{x} = 4985286\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -677,4 +1190,4 @@ Ismay, C. (2025). <em>Statistical inference via data science: a moderndive into 
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/how_to_code_in_r.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/how_to_code_in_r.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/how_to_code_in_r.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/how_to_code_in_r.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></div></div></footer></body></html>

@@ -264,8 +264,8 @@ div.csl-indent {
   <ul>
   <li><a href="#sec-what-are-r-packages" id="toc-sec-what-are-r-packages" class="nav-link active" data-scroll-target="#sec-what-are-r-packages"><span class="header-section-number">4.1</span> ¿Qué son los paquetes en R?</a></li>
   <li><a href="#instalación-de-paquetes" id="toc-instalación-de-paquetes" class="nav-link" data-scroll-target="#instalación-de-paquetes"><span class="header-section-number">4.2</span> Instalación de paquetes</a></li>
-  <li><a href="#carga-de-paquetes" id="toc-carga-de-paquetes" class="nav-link" data-scroll-target="#carga-de-paquetes"><span class="header-section-number">4.3</span> Carga de paquetes</a></li>
-  <li><a href="#uso-de-paquetes" id="toc-uso-de-paquetes" class="nav-link" data-scroll-target="#uso-de-paquetes"><span class="header-section-number">4.4</span> Uso de paquetes</a></li>
+  <li><a href="#sec-load-packages" id="toc-sec-load-packages" class="nav-link" data-scroll-target="#sec-load-packages"><span class="header-section-number">4.3</span> Carga de paquetes</a></li>
+  <li><a href="#sec-package-usage" id="toc-sec-package-usage" class="nav-link" data-scroll-target="#sec-package-usage"><span class="header-section-number">4.4</span> Uso de paquetes</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/r_packages.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/r_packages.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
@@ -306,7 +306,7 @@ div.csl-indent {
 <li><p><strong>Documentación</strong>: es la guía que explica que hace cada función, que requiere para funcionar y que resultado genera.</p></li>
 <li><p><strong>Datos de muestra</strong>: son conjuntos de datos para ilustrar el funcionamiento de las funciones.</p></li>
 </ul>
-<p>Para entender cómo funcionan los paquetes en R se puede utilizar una analogía con las aplicaciones de un celular <span class="citation" data-cites="ismay_statistical_2025">(<a href="references.html#ref-ismay_statistical_2025" role="doc-biblioref">Ismay, 2025, Capítulo 1</a>)</span>. Cuando compras un celular nuevo, este viene por defecto con aplicaciones para que se pueda utilizar. Sin embargo, de acuerdo a las necesidades de cada usuario se instalan otras aplicaciones adicionales para extender la funcionalidad del celular de tal manera que se cubran los requerimientos que cada individuo necesita (ver <a href="#fig-1-chap-4" class="quarto-xref">Figura&nbsp;<span>4.1</span></a>).</p>
+<p>Para entender cómo funcionan los paquetes en R se puede utilizar una analogía con las aplicaciones de un celular <span class="citation" data-cites="ismay_statistical_2025">(<a href="references.html#ref-ismay_statistical_2025" role="doc-biblioref">Ismay, 2025, Capítulo 1</a>)</span>. Cuando compras un celular nuevo, este viene por defecto con aplicaciones para que se pueda utilizar. Sin embargo, de acuerdo a las necesidades de cada usuario se instalan otras aplicaciones adicionales para extender la funcionalidad del celular de tal manera que se cubran los requerimientos que cada individuo necesita (ver <a href="how_to_code_in_r.html#fig-1-chap-4" class="quarto-xref">Figura&nbsp;<span>5.1</span></a>).</p>
 <div id="fig-1-chap-4" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-1-chap-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -342,8 +342,25 @@ Figura&nbsp;4.1: Analogía para entender la diferencia entre paquetes que vienen
 <h2 data-number="4.2" class="anchored" data-anchor-id="instalación-de-paquetes"><span class="header-section-number">4.2</span> Instalación de paquetes</h2>
 <p>Para instalar un paquete que no viene por defecto en R, retomaremos la analogía de la <a href="#sec-what-are-r-packages" class="quarto-xref"><span>Sección 4.1</span></a>. En un celular, primero es necesario descargar la aplicación de una tienda una sola vez. Luego, basta con abrirla cada vez que se requiera. Aunque ocasionalmente deba actualizarse, no es necesario reinstalarla nuevamente.</p>
 <p>En R, el proceso es similar. Primero instalas el paquete desde un repositorio (equivalente a la tienda de aplicaciones) y luego lo cargas, un paso análogo a abrir la aplicación en tu celular.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En caso que este utilizando Posit Workbench, de acuerdo a lo señalado en la <a href="welcome_to_r.html#sec-posit-workbench" class="quarto-xref"><span>Sección 2.3</span></a>, es posible que el proceso descrito a continuación no debas realizarlo. En algunas ocasiones el administrador de esta herramienta puede haber instalado ciertos paquetes con anterioridad.</p>
+<p>Para el caso de Posit Workbench ubica la pestaña <strong>Console</strong> en el <strong>Panel</strong> (Ver la <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) y, tras el símbolo <code>&gt;</code> escribe el comando <code>library(tidyverse)</code>, luego presiona <kbd title="Enter" aria-hidden="true">Enter</kbd><span class="visually-hidden">Enter</span>. Si te aparece un mensaje similar al señalado en el <a href="#lst-load-tidyverse-message" class="quarto-xref">Listado&nbsp;<span>4.1</span></a> no es necesario que realices alguna instalación y puedes dirigirte directamente a la <a href="#sec-load-packages" class="quarto-xref"><span>Sección 4.3</span></a>. En caso contrario si se genera un mensaje igual o similar a:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Error<span class="sc">:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>there is no package called ‘tidyverse’</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>puedes proceder con las instrucciones que se señalan a continuación.</p>
+</div>
+</div>
 <p>Para practicar este proceso, instalaremos el paquete <a href="https://tidyverse.org/"><code>tidyverse</code></a>. Este paquete es una colección de herramientas diseñadas para ciencia de datos que utilizaremos constantemente a lo largo del libro. Para iniciar la instalación, ubica la pestaña <strong>Console</strong> en el <strong>Panel</strong> (Ver la <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) y, tras el símbolo <code>&gt;</code>, escribe el siguiente comando:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Luego, presiona <kbd title="Enter" aria-hidden="true">Enter</kbd><span class="visually-hidden">Enter</span>. Ten paciencia hasta que el proceso finalice y no te preocupes por los mensajes que aparezcan en la consola. Al ser un conjunto robusto de herramientas, la instalación puede tardar. Sabrás que ha terminado el proceso cuando veas aparecer nuevamente el símbolo <code>&gt;</code>.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -359,11 +376,11 @@ Importante
 </div>
 </div>
 </section>
-<section id="carga-de-paquetes" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="carga-de-paquetes"><span class="header-section-number">4.3</span> Carga de paquetes</h2>
+<section id="sec-load-packages" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="sec-load-packages"><span class="header-section-number">4.3</span> Carga de paquetes</h2>
 <p>Cuando instalas una aplicación en tu celular es necesario abrirla para poder usarla, no basta con simplemente instalarla. En R para poder utilizar un paquete que se encuentre instalado previamente es necesario cargarlo (equivalente a abrir una aplicación que se encuentra instalada en un celular). En R para cargar un paquete se utiliza la función <code>library()</code>.</p>
 <p>Por ejemplo, si deseas cargar el paquete <code>tidyverse</code> escribe el siguiente comando en la consola:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Luego, presiona <kbd title="Enter" aria-hidden="true">Enter</kbd><span class="visually-hidden">Enter</span>. Si el paquete <code>tidyverse</code> fue instalado de manera correcta se generará un texto (ver el <a href="#lst-load-tidyverse-message" class="quarto-xref">Listado&nbsp;<span>4.1</span></a>) igual o similar al que se muestra a continuación en la consola:</p>
 <div id="lst-load-tidyverse-message" class="listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
@@ -371,17 +388,17 @@ Importante
 Listado&nbsp;4.1
 </figcaption>
 <div aria-describedby="lst-load-tidyverse-message-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>── Attaching core tidyverse packages ── tidyverse <span class="dv">2</span>.<span class="fl">0.0</span> ──</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>✔ dplyr     <span class="dv">1</span>.<span class="fl">2.0</span>     ✔ readr     <span class="dv">2</span>.<span class="fl">2.0</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>✔ forcats   <span class="dv">1</span>.<span class="fl">0.1</span>     ✔ stringr   <span class="dv">1</span>.<span class="fl">6.0</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>✔ ggplot2   <span class="dv">4</span>.<span class="fl">0.2</span>     ✔ tibble    <span class="dv">3</span>.<span class="fl">3.1</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>✔ lubridate <span class="dv">1</span>.<span class="fl">9.5</span>     ✔ tidyr     <span class="dv">1</span>.<span class="fl">3.2</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>✔ purrr     <span class="dv">1</span>.<span class="fl">2.1</span>     </span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>── Conflicts ──────────────────── <span class="fu">tidyverse_conflicts</span>() ──</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>✖ dplyr<span class="sc">::</span><span class="fu">filter</span>() masks stats<span class="sc">::</span><span class="fu">filter</span>()</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>✖ dplyr<span class="sc">::</span><span class="fu">lag</span>()    masks stats<span class="sc">::</span><span class="fu">lag</span>()</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>ℹ Use the conflicted package to force all conflicts </span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a> to become errors</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>── Attaching core tidyverse packages ── tidyverse <span class="dv">2</span>.<span class="fl">0.0</span> ──</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>✔ dplyr     <span class="dv">1</span>.<span class="fl">2.0</span>     ✔ readr     <span class="dv">2</span>.<span class="fl">2.0</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>✔ forcats   <span class="dv">1</span>.<span class="fl">0.1</span>     ✔ stringr   <span class="dv">1</span>.<span class="fl">6.0</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>✔ ggplot2   <span class="dv">4</span>.<span class="fl">0.2</span>     ✔ tibble    <span class="dv">3</span>.<span class="fl">3.1</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>✔ lubridate <span class="dv">1</span>.<span class="fl">9.5</span>     ✔ tidyr     <span class="dv">1</span>.<span class="fl">3.2</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>✔ purrr     <span class="dv">1</span>.<span class="fl">2.1</span>     </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>── Conflicts ──────────────────── <span class="fu">tidyverse_conflicts</span>() ──</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>✖ dplyr<span class="sc">::</span><span class="fu">filter</span>() masks stats<span class="sc">::</span><span class="fu">filter</span>()</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>✖ dplyr<span class="sc">::</span><span class="fu">lag</span>()    masks stats<span class="sc">::</span><span class="fu">lag</span>()</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>ℹ Use the conflicted package to force all conflicts </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a> to become errors</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
@@ -399,8 +416,8 @@ Nota
 </div>
 </div>
 </section>
-<section id="uso-de-paquetes" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="uso-de-paquetes"><span class="header-section-number">4.4</span> Uso de paquetes</h2>
+<section id="sec-package-usage" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="sec-package-usage"><span class="header-section-number">4.4</span> Uso de paquetes</h2>
 <p>Para entender cómo utilizar un paquete, explorarás tu primer conjunto de datos en R utilizando el paquete <code>tidyverse</code>. Primero, cierra la ventana de Positron si seguiste las instrucciones descritas en la <a href="welcome_to_r.html#sec-how-to-install-r-positron" class="quarto-xref"><span>Sección 2.2</span></a> y abre la carpeta <code>r-analisis-datos</code> (ver <a href="project-oriented_workflow.html#sec-project-oriented-workflow-positron-r" class="quarto-xref"><span>Sección 3.2</span></a>) utilizando las opciones <strong>File &gt; Open Folder…</strong> que podrás encontrar en el menú superior izquierdo de la interfaz. En caso que estes utilizando Posit Workbench (ver <a href="welcome_to_r.html#sec-posit-workbench" class="quarto-xref"><span>Sección 2.3</span></a>) abre una sesión con el proyecto <code>r-analisis-datos</code>, creado de acuerdo a lo señalado en la <a href="project-oriented_workflow.html#sec-project-oriented-workflow-positron-r" class="quarto-xref"><span>Sección 3.2</span></a>.</p>
 <p>Luego, en la <strong>Barra de actividades</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) selecciona el ícono <img src="images/file-regular-full.png" alt="Ícono del explorador de archivos" height="25"> y párate con el puntero del ratón en la <strong>Barra lateral primaria</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) donde al lado izquierdo de la etiqueta <code>R-ANALISIS-DATOS</code> podrás encontrar en el segundo ícono de izquierda a derecha la opción de crear una carpeta. Crea la carpeta con el nombre <code>004_paquetes-r</code> y dentro de la carpeta también en la <strong>Barra lateral primaria</strong> utiliza el primer ícono de izquierda a derecha para crear un archivo con el nombre <code>001_uso-paquetes.R</code>. De esa manera podras abrirlo en el <strong>Editor</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) tal como se muestra en la <a href="#fig-2-chap-4" class="quarto-xref">Figura&nbsp;<span>4.2</span></a>:</p>
 <div id="fig-2-chap-4" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Captura de pantalla de Positron que muestra la carpeta 004_paquetes-r dentro del proyecto R-ANALISIS-DATOS, conteniendo el archivo 001_uso-paquetes.R abierto en el editor">
@@ -421,8 +438,8 @@ Figura&nbsp;4.2: Estructura de carpetas y archivos para explorar tu primer conju
 Listado&nbsp;4.2: Línea de código para cargar el paquete tidyverse
 </figcaption>
 <div aria-describedby="lst-load-tidyverse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar paquetes ----</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar paquetes ----</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
@@ -461,8 +478,8 @@ Figura&nbsp;4.3: Sección OUTLINE dentro de la Barra laterla primaria de Positro
 Listado&nbsp;4.3: Conjunto de datos <code>mpg</code>
 </figcaption>
 <div aria-describedby="lst-mpg-database-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Explorar el conjunto de datos mpg ----</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>mpg</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Explorar el conjunto de datos mpg ----</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>mpg</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
@@ -493,14 +510,14 @@ Listado&nbsp;4.3: Conjunto de datos <code>mpg</code>
 </ul>
 <p>Si el conjunto de datos pertenece a un paquete, como en el caso de <code>mpg</code>, es posible consultar la documentación acerca de la misma utilizando el símbolo <code>?</code> más su nombre, tal como se muestra a continuación:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Documentación del conjunto de datos mpg ----</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>?mpg</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Documentación del conjunto de datos mpg ----</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>?mpg</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Si ejecutas éste código, en la <strong>Barra lateral secundaria</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) dentro de la pestaña <strong>HELP</strong>, se desplegará la documentación relacionada con <code>mpg</code>.</p>
 <p>En Positron también se puede utilizar una herramienta denominada <a href="https://positron.posit.co/data-explorer.html">Explorador de Datos</a> para visualizar la información en una cuadrícula similar a una hoja de cálculo, así como filtar y ordenar los datos temporalmente y obtener estadísticas de cada variable. Para utilizar ésta herramienta ejecuta el siguiente código:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Uso del explorador de datos ----</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(mpg)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Uso del explorador de datos ----</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(mpg)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>De esa manera podrás utilizar el explorador de datos y examinar los elementos indicados anteriormente para <code>mpg</code> tal como se muestra en la <a href="#fig-4-chap-4" class="quarto-xref">Figura&nbsp;<span>4.4</span></a>.</p>
 <div id="fig-4-chap-4" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Interfaz del Explorador de Datos en Positron mostrando el conjunto de datos mpg. A la izquierda se observa un panel con la lista de variables e histogramas de distribución para cada variable. A la derecha, una cuadrícula interactiva con los datos de los vehículos organizados en filas y columnas.">
@@ -515,8 +532,8 @@ Figura&nbsp;4.4: Interfaz del explorador de datos aplicado a <code>mpg</code>
 </div>
 <p>En ocasiones se hace necesario poder dar un “vistazo” a un conjunto de datos cuando se tiene un número considerable de columnas. En ese sentido, otra forma adicional de explorar un conjunto de datos, es mediante el uso de la función <code>glimpse()</code>. Esta función permite visualizar los nombres de las columnas verticalmente hacia abajo y los datos correspondientes a cada variable de manera horizontal. Para utilizar ésta herramienta ejecuta el siguiente código:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># "Vistazo" del conjunto de datos ----</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mpg)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># "Vistazo" del conjunto de datos ----</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mpg)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 234
 Columns: 11
@@ -537,12 +554,12 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "com…</code></pre>
 <p>Por último, en ciertos contextos puede ser útil extraer y explorar sólo una variable dentro de un conjunto de datos. En R existen diversas formas de lograr esto. Sin embargo, señalaremos sólo 2 alternativas, enfocándonos en el uso del operador <code>$</code>, que está incluído por defecto en R, y la función <code>pull()</code> del paquete <code>dplyr</code>, que hace parte del paquete <code>tidyverse</code>.</p>
 <p>Si se buscara, por ejemplo, extraer la variable <code>manufacturer</code> de <code>mpg</code> con el operador <code>$</code> puedes ejecutar el siguiente código:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracción de columnas ----</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>mpg<span class="sc">$</span>manufacturer</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracción de columnas ----</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>mpg<span class="sc">$</span>manufacturer</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>De manera alternativa puedes utilizar la función <code>pull()</code> del paquete <code>dplyr</code>, ejecutando el siguiente código:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pull</span>(mpg, manufacturer)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pull</span>(mpg, manufacturer)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
