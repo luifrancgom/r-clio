@@ -64,7 +64,7 @@ Si se buscara calcular el promedio del costo de matrícula dentro de la facultad
   7
 ```
 
-En R podemos utilizar los operadores aritméticos para llevar a cabo operaciones como en una calculadora (ver @tbl-arithmetic-operators):
+En R podemos utilizar operadores aritméticos para llevar a cabo operaciones como en una calculadora (ver @tbl-arithmetic-operators):
 
 | Operador | Nombre | Ejemplo | Resultado |
 |:---:|:---|:---:|:---:|
@@ -78,9 +78,9 @@ En R podemos utilizar los operadores aritméticos para llevar a cabo operaciones
 
 ## Vectores atómicos en R
 
-En el @lst-mean-tuition-fee se utilizó R para calcular el costo promedio de la mátricula. Sin embargo si quisieramos utilizar nuevamente estos datos tendríamos que escribirlos nuevamente, donde este proceso no es eficiente. R permite guardar datos almacenándolos dentro de un objeto. Una forma de almacenar datos es utilizando vectores atómicos a través de la función `c()` y luego vinculando el objeto que se busque crear a través de un nombre para utilizarlo cuando lo requieras.
+En el @lst-mean-tuition-fee se utilizó R para calcular el costo promedio de la matrícula. Sin embargo si quisieramos utilizar nuevamente estos datos tendríamos que escribirlos nuevamente, donde este proceso no es eficiente. R permite guardar datos almacenándolos dentro de un objeto. Una forma de almacenar datos es utilizando vectores atómicos a través de la función `c()` y luego vinculando el objeto que se busque crear a través de un nombre para utilizarlo cuando lo requieras.
 
-A continuación guardarás el costo de matrícula de cada programa de pregrado en un vector atómico mediante la función `c()` y luego vincularás ese objeto al nombre `costo_matricula` tal como se señala a continuación:
+A continuación guardarás el costo de matrícula de cada programa de pregrado en un vector atómico mediante la función `c()` y luego vincularás ese objeto al nombre `costo_matricula`, tal como se señala a continuación:
 
 ```{r}
 #| lst-label: lst-atomic-vector
@@ -109,7 +109,7 @@ s & = \sqrt{\frac{1}{n - 1} \sum_{i=1}^n (x_i - \bar{x})^2} \\
 \end{aligned}
 $$ {#eq-sample-standard-deviation}
 
-Donde en la @eq-sample-standard-deviation, $\bar{x} = \frac{1}{n} \sum_{i=1}^n x_i$ corresponde a la media muestral[^chap-4-footnote-1]. 
+Donde en la @eq-sample-standard-deviation, $\bar{x} = \frac{1}{n} \sum_{i=1}^n x_i = \frac{1}{n} (x_1 + \cdots + x_n)$ corresponde a la media muestral[^chap-4-footnote-1]. 
 
 [^chap-4-footnote-1]: Para nuestro caso $i = 1, \ldots, 7$, $x_1 = 4389000, \ldots, x_7 = 6238000$ y $\bar{x} = 4985286$.
 
@@ -121,7 +121,7 @@ media_costo_matricula <- mean(costo_matricula)
 media_costo_matricula
 ```
 
-Luego puedes utilizar la @eq-sample-standard-deviation para calcular la varianza muestral de la siguiente forma:
+Luego puedes utilizar parte de la @eq-sample-standard-deviation para calcular la varianza muestral de la siguiente forma:
 
 ```{r}
 #| lst-label: lst-sample-variance
@@ -294,7 +294,7 @@ aumento_costo_matricula <- c(
 costo_matricula + aumento_costo_matricula
 ```
 
-Debido a que R utiliza operaciones vectorizadas es posible llevar a cabo la operación señala en el @lst-warning, aún si cada vector atómico (`costo_matricula` y `aumento_costo_matricula`) tiene un número diferente de elementos mediante un proceso que se conocer como **reciclaje de vectores** y que se escribe a continuación: 
+Debido a que R utiliza operaciones vectorizadas es posible llevar a cabo la operación señalada en el @lst-warning, aún si cada vector atómico (`costo_matricula` y `aumento_costo_matricula`) tiene un número diferente de elementos mediante un proceso que se conocer como **reciclaje de vectores** y que se escribe a continuación: 
 
 - R repite el vector más corto (`aumento_costo_matricula`) hasta que tenga la misma longitud que el vector más largo (`costo_matricula`)
 - Luego realiza la operación matemática 
@@ -326,13 +326,13 @@ En el @lst-error no es posible ejecutar el código debido a que no se agregó un
 
 ## Tibbles
 
-El uso de vectores atómicos es útil para almacenar datos de un mismo tipo pero tiene limitaciones si se busca integrar variables de diferentes tipos en una misma estructura. Cuando se analizan datos es necesario agrupar distintos atributos para entender el contexto de la información y poder relacionar diferentes variables.
+El uso de vectores atómicos es útil para almacenar datos de un mismo tipo pero tiene limitaciones si se buscan integrar variables de diferentes tipos en una misma estructura. Cuando se analizan datos es necesario agrupar distintos atributos para entender el contexto de la información y poder relacionar diferentes variables.
 
 Una tibble permite agrupar datos en una estructura rectangular para entender la relación de variables de diferentes tipos. Para entender este aspecto construirás una tibble para agrupar y darle un contexto adecuado a la información señalada al principio del @sec-how-do-i-code-in-r utilizando la functión `tibble()`.
 
-Para organizar la información de los programas académicos relacionados con el costos de matrícula definiremos en primera instancia tanto el año como el periodo al que se refieren los datos, luego asociaremos un identificador único para cada programa académico, su nombre, nivel académico y finalmente una variable del costo de matrícula.
+Para organizar la información de los programas académicos relacionados con el costos de matrícula definiremos en primera instancia tanto el año como el semestre al que se refieren los datos, luego asociaremos un identificador único para cada programa académico, su nombre, nivel académico y finalmente una variable del costo de matrícula.
 
-Para construir una tibble que reuna las características señaladas anteriormente ejecuta el código del @lst-tibble:
+Para construir una tibble que reuna las características señaladas anteriormente, ejecuta el código del @lst-tibble:
 
 ```{r}
 #| lst-label: lst-tibble
@@ -368,9 +368,14 @@ costo_matricula_pregrado
 
 En la tibble del @lst-tibble respecto a las variables `ano`, `semestre` y `nivel_academico` R aplica el proceso de reciclaje de vectores (ver @sec-warnings) para ajustar el tamaño de las columnas. En el caso de la variable `codigo_snies` se fija un código establecido por el [Sistema Nacional de Información de la Educación Superior - SNIES](https://snies.mineducacion.gov.co/portal/) para identificar y asociar de manera única a cada programa académico con el nombre señalado en la variable `nombre_programa`. Por último, es posible en una tibble utilizar un vector atómico previamente definido, como en el caso de `costo_matricula`, para generar una variable. En el @lst-tibble se utiliza el mismo nombre asociado al vector atómico que contiene el costo de matrícula para la columna que incluye dicha información.
 
+::: {.callout-note}
+**Pending** Talk about sintactically valid names in R
+:::
+
+
 ## Operadores relacionales
 
-Los operadores relacionales son operadores binarios que permiten la comparación de valores en vectores atómicos. Estos operadores son útiles por qué establecen condiciones lógicas para filtrar filas de interés en una tibble.
+Los operadores relacionales son operadores binarios que permiten la comparación de valores en vectores atómicos. Estos operadores son útiles por qué establecen condiciones lógicas para filtrar filas de interés en una tibble. En la @tbl-relational-operators se señalan los operadores relacionales utilizados por R.
 
 | Operador | Nombre |
 |:---:|:---|
@@ -382,3 +387,31 @@ Los operadores relacionales son operadores binarios que permiten la comparación
 | `<=` | Menor o igual que |
 
 : Operadores relacionales en R {#tbl-relational-operators}
+
+Para ilustrar el uso de operadores relacionales utilizaremos inicialmente el operador `$`, el cual fue descrito en la última parte de la @sec-package-usage. De esa manera será posible entender más adelante la utilidad de obtener condiciones lógicas para filtrar filas dentro de una tibble.
+
+Si se buscara identificar aquellos valores del costo de matrícula en la tibble `costo_matricula_pregrado` respecto a la variable `costo_matricula` que son mayores a la media, se podría proceder de la siguiente manera utilizando el operador `$` y operadores relacionales:
+
+```{r}
+#| lst-label: lst-relational-operator-logical-condition
+#| lst-cap: Uso de operadores relacionales para identificar un conjunto de valores que cumplen una condición 
+costo_matricula_pregrado$costo_matricula >
+  mean(costo_matricula_pregrado$costo_matricula)
+```
+
+En el @lst-relational-operator-logical-condition se utiliza el operador `$` para extraer de la tibble `costo_matricula_pregrado` los valores de la variable `costo_matricula` para identificar si son mayores a la media del costo de matrícula, utilizando la función `mean()`. El resultado, es un vector atómico con valores lógicos (`FALSE` o `TRUE`) que identifica que valores dentro de `costo_matricula_pregrado$costo_matricula` cumplen o no cumplen con la condición. En ese sentido, en el resultado del @lst-relational-operator-logical-condition aquellas posiciones con valores `TRUE` corresponden a las posiciones de `costo_matricula_pregrado$costo_matricula` que cumplen con la condición, es decir que son mayores a la media del costo de matrícula.
+
+Al principio no parece claro cómo se puede utilizar el resultado generado en el  @lst-relational-operator-logical-condition. Sin embargo, a continuación se señalará como un resultado con valores lógicos de `TRUE` o `FALSE` permite ser el insumo para poder filtrar filas con base a una determinada condición lógica de interés.
+
+A modo de ejemplo, si buscaras identificar los programas académicos con sus respectivos atributos que cumplen con la condición señalada en el @lst-relational-operator-logical-condition, es posible utilizar la función `filter()` del paquete `dplyr` de la siguiente forma: 
+
+```{r}
+#| lst-label: lst-filter-relational-operators
+#| lst-cap: Uso de la función `filter()` y operadores lógicos para filtrar filas en una tibble
+filter(
+  costo_matricula_pregrado,
+  costo_matricula > mean(costo_matricula)
+)
+```
+
+En el @lst-filter-relational-operators, la función `filter()` requiere como primer argumento una tibble (o un objeto similar) y una expresión que resulte en un vector lógico. Los paquetes del `tidyverse` facilitan este proceso mediante el **enmascaramiento de datos** ([data masking](https://dplyr.tidyverse.org/articles/programming.html)). Este mecanismo permite que la expresión lógica (en este ejemplo, `costo_matricula > mean(costo_matricula)`) haga referencia directa a las columnas del objeto `costo_matricula_pregrado` como si fueran variables "independientes", eliminando la necesidad de utilizar el operador `$`. De esa manera requieres escribir menos texto y te refieres a las variables de la tibble de una manera más natural al utilizar funciones del `tidyverse`.
