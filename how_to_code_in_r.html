@@ -382,7 +382,7 @@ Listado&nbsp;5.1: Costo promedio de mátricula en programas de pregrado de la Fa
 <pre><code>[1] 4985286</code></pre>
 </div>
 </div>
-<p>En R podemos utilizar los operadores aritméticos para llevar a cabo operaciones como en una calculadora (ver <a href="#tbl-arithmetic-operators" class="quarto-xref">Tabla&nbsp;<span>5.1</span></a>):</p>
+<p>En R podemos utilizar operadores aritméticos para llevar a cabo operaciones como en una calculadora (ver <a href="#tbl-arithmetic-operators" class="quarto-xref">Tabla&nbsp;<span>5.1</span></a>):</p>
 <div id="tbl-arithmetic-operators" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-arithmetic-operators-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -437,8 +437,8 @@ Tabla&nbsp;5.1: Operadores aritméticos en R
 </section>
 <section id="vectores-atómicos-en-r" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="vectores-atómicos-en-r"><span class="header-section-number">5.2</span> Vectores atómicos en R</h2>
-<p>En el <a href="#lst-mean-tuition-fee" class="quarto-xref">Listado&nbsp;<span>5.1</span></a> se utilizó R para calcular el costo promedio de la mátricula. Sin embargo si quisieramos utilizar nuevamente estos datos tendríamos que escribirlos nuevamente, donde este proceso no es eficiente. R permite guardar datos almacenándolos dentro de un objeto. Una forma de almacenar datos es utilizando vectores atómicos a través de la función <code>c()</code> y luego vinculando el objeto que se busque crear a través de un nombre para utilizarlo cuando lo requieras.</p>
-<p>A continuación guardarás el costo de matrícula de cada programa de pregrado en un vector atómico mediante la función <code>c()</code> y luego vincularás ese objeto al nombre <code>costo_matricula</code> tal como se señala a continuación:</p>
+<p>En el <a href="#lst-mean-tuition-fee" class="quarto-xref">Listado&nbsp;<span>5.1</span></a> se utilizó R para calcular el costo promedio de la matrícula. Sin embargo si quisieramos utilizar nuevamente estos datos tendríamos que escribirlos nuevamente, donde este proceso no es eficiente. R permite guardar datos almacenándolos dentro de un objeto. Una forma de almacenar datos es utilizando vectores atómicos a través de la función <code>c()</code> y luego vinculando el objeto que se busque crear a través de un nombre para utilizarlo cuando lo requieras.</p>
+<p>A continuación guardarás el costo de matrícula de cada programa de pregrado en un vector atómico mediante la función <code>c()</code> y luego vincularás ese objeto al nombre <code>costo_matricula</code>, tal como se señala a continuación:</p>
 <div class="cell">
 <div id="lst-atomic-vector" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
@@ -472,7 +472,7 @@ s &amp; = \sqrt{\frac{1}{n - 1} \sum_{i=1}^n (x_i - \bar{x})^2} \\
   &amp; = \sqrt{\frac{1}{n - 1} \left[ (x_1 - \bar{x})^2 + \cdots + (x_n - \bar{x})^2 \right]}
 \end{aligned}
 \tag{5.1}\]</span></span></p>
-<p>Donde en la <a href="#eq-sample-standard-deviation" class="quarto-xref">Ecuación&nbsp;<span>5.1</span></a>, <span class="math inline">\(\bar{x} = \frac{1}{n} \sum_{i=1}^n x_i\)</span> corresponde a la media muestral<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<p>Donde en la <a href="#eq-sample-standard-deviation" class="quarto-xref">Ecuación&nbsp;<span>5.1</span></a>, <span class="math inline">\(\bar{x} = \frac{1}{n} \sum_{i=1}^n x_i = \frac{1}{n} (x_1 + \cdots + x_n)\)</span> corresponde a la media muestral<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <p>A continuación podras utilizar R para calcular la desviación estandar muestral y examinar las ventajas de utilizar vectores atómicos. En primera instancia puedes utilizar la functión <code>mean()</code> para calcular el costo promedio de matrícula así como vincular este dato con el nombre <code>media_costo_matricula</code> de la siguiente forma:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cálculo de la media muestral ----</span></span>
@@ -482,7 +482,7 @@ s &amp; = \sqrt{\frac{1}{n - 1} \sum_{i=1}^n (x_i - \bar{x})^2} \\
 <pre><code>[1] 4985286</code></pre>
 </div>
 </div>
-<p>Luego puedes utilizar la <a href="#eq-sample-standard-deviation" class="quarto-xref">Ecuación&nbsp;<span>5.1</span></a> para calcular la varianza muestral de la siguiente forma:</p>
+<p>Luego puedes utilizar parte de la <a href="#eq-sample-standard-deviation" class="quarto-xref">Ecuación&nbsp;<span>5.1</span></a> para calcular la varianza muestral de la siguiente forma:</p>
 <div class="cell">
 <div id="lst-sample-variance" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
@@ -604,7 +604,7 @@ length</code></pre>
 <pre><code>[1] 4489000 5026000 4385000 5085000 5848000 4755000 6338000</code></pre>
 </div>
 </div>
-<p>Debido a que R utiliza operaciones vectorizadas es posible llevar a cabo la operación señala en el <a href="#lst-warning" class="quarto-xref">Listado&nbsp;<span>5.6</span></a>, aún si cada vector atómico (<code>costo_matricula</code> y <code>aumento_costo_matricula</code>) tiene un número diferente de elementos mediante un proceso que se conocer como <strong>reciclaje de vectores</strong> y que se escribe a continuación:</p>
+<p>Debido a que R utiliza operaciones vectorizadas es posible llevar a cabo la operación señalada en el <a href="#lst-warning" class="quarto-xref">Listado&nbsp;<span>5.6</span></a>, aún si cada vector atómico (<code>costo_matricula</code> y <code>aumento_costo_matricula</code>) tiene un número diferente de elementos mediante un proceso que se conocer como <strong>reciclaje de vectores</strong> y que se escribe a continuación:</p>
 <ul>
 <li>R repite el vector más corto (<code>aumento_costo_matricula</code>) hasta que tenga la misma longitud que el vector más largo (<code>costo_matricula</code>)</li>
 <li>Luego realiza la operación matemática</li>
@@ -647,10 +647,10 @@ Listado&nbsp;5.7: Error por un problema de sintaxis al no separar de manera corr
 </section>
 <section id="tibbles" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="tibbles"><span class="header-section-number">5.4</span> Tibbles</h2>
-<p>El uso de vectores atómicos es útil para almacenar datos de un mismo tipo pero tiene limitaciones si se busca integrar variables de diferentes tipos en una misma estructura. Cuando se analizan datos es necesario agrupar distintos atributos para entender el contexto de la información y poder relacionar diferentes variables.</p>
+<p>El uso de vectores atómicos es útil para almacenar datos de un mismo tipo pero tiene limitaciones si se buscan integrar variables de diferentes tipos en una misma estructura. Cuando se analizan datos es necesario agrupar distintos atributos para entender el contexto de la información y poder relacionar diferentes variables.</p>
 <p>Una tibble permite agrupar datos en una estructura rectangular para entender la relación de variables de diferentes tipos. Para entender este aspecto construirás una tibble para agrupar y darle un contexto adecuado a la información señalada al principio del <a href="#sec-how-do-i-code-in-r" class="quarto-xref"><span>Capítulo 5</span></a> utilizando la functión <code>tibble()</code>.</p>
-<p>Para organizar la información de los programas académicos relacionados con el costos de matrícula definiremos en primera instancia tanto el año como el periodo al que se refieren los datos, luego asociaremos un identificador único para cada programa académico, su nombre, nivel académico y finalmente una variable del costo de matrícula.</p>
-<p>Para construir una tibble que reuna las características señaladas anteriormente ejecuta el código del <a href="#lst-tibble" class="quarto-xref">Listado&nbsp;<span>5.8</span></a>:</p>
+<p>Para organizar la información de los programas académicos relacionados con el costos de matrícula definiremos en primera instancia tanto el año como el semestre al que se refieren los datos, luego asociaremos un identificador único para cada programa académico, su nombre, nivel académico y finalmente una variable del costo de matrícula.</p>
+<p>Para construir una tibble que reuna las características señaladas anteriormente, ejecuta el código del <a href="#lst-tibble" class="quarto-xref">Listado&nbsp;<span>5.8</span></a>:</p>
 <div class="cell">
 <div id="lst-tibble" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
@@ -704,10 +704,23 @@ Listado&nbsp;5.8: Construcción de una tibble a partir de información del costo
 </div>
 </div>
 <p>En la tibble del <a href="#lst-tibble" class="quarto-xref">Listado&nbsp;<span>5.8</span></a> respecto a las variables <code>ano</code>, <code>semestre</code> y <code>nivel_academico</code> R aplica el proceso de reciclaje de vectores (ver <a href="#sec-warnings" class="quarto-xref"><span>Sección 5.3.2</span></a>) para ajustar el tamaño de las columnas. En el caso de la variable <code>codigo_snies</code> se fija un código establecido por el <a href="https://snies.mineducacion.gov.co/portal/">Sistema Nacional de Información de la Educación Superior - SNIES</a> para identificar y asociar de manera única a cada programa académico con el nombre señalado en la variable <code>nombre_programa</code>. Por último, es posible en una tibble utilizar un vector atómico previamente definido, como en el caso de <code>costo_matricula</code>, para generar una variable. En el <a href="#lst-tibble" class="quarto-xref">Listado&nbsp;<span>5.8</span></a> se utiliza el mismo nombre asociado al vector atómico que contiene el costo de matrícula para la columna que incluye dicha información.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Pending</strong> Talk about sintactically valid names in R</p>
+</div>
+</div>
 </section>
 <section id="operadores-relacionales" class="level2" data-number="5.5">
 <h2 data-number="5.5" class="anchored" data-anchor-id="operadores-relacionales"><span class="header-section-number">5.5</span> Operadores relacionales</h2>
-<p>Los operadores relacionales son operadores binarios que permiten la comparación de valores en vectores atómicos. Estos operadores son útiles por qué establecen condiciones lógicas para filtrar filas de interés en una tibble.</p>
+<p>Los operadores relacionales son operadores binarios que permiten la comparación de valores en vectores atómicos. Estos operadores son útiles por qué establecen condiciones lógicas para filtrar filas de interés en una tibble. En la <a href="#tbl-relational-operators" class="quarto-xref">Tabla&nbsp;<span>5.2</span></a> se señalan los operadores relacionales utilizados por R.</p>
 <div id="tbl-relational-operators" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-relational-operators-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -751,6 +764,52 @@ Tabla&nbsp;5.2: Operadores relacionales en R
 </div>
 </figure>
 </div>
+<p>Para ilustrar el uso de operadores relacionales utilizaremos inicialmente el operador <code>$</code>, el cual fue descrito en la última parte de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>. De esa manera será posible entender más adelante la utilidad de obtener condiciones lógicas para filtrar filas dentro de una tibble.</p>
+<p>Si se buscara identificar aquellos valores del costo de matrícula en la tibble <code>costo_matricula_pregrado</code> respecto a la variable <code>costo_matricula</code> que son mayores a la media, se podría proceder de la siguiente manera utilizando el operador <code>$</code> y operadores relacionales:</p>
+<div class="cell">
+<div id="lst-relational-operator-logical-condition" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-relational-operator-logical-condition-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;5.9: Uso de operadores relacionales para identificar un conjunto de valores que cumplen una condición
+</figcaption>
+<div aria-describedby="lst-relational-operator-logical-condition-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>costo_matricula_pregrado<span class="sc">$</span>costo_matricula <span class="sc">&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(costo_matricula_pregrado<span class="sc">$</span>costo_matricula)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE</code></pre>
+</div>
+</div>
+<p>En el <a href="#lst-relational-operator-logical-condition" class="quarto-xref">Listado&nbsp;<span>5.9</span></a> se utiliza el operador <code>$</code> para extraer de la tibble <code>costo_matricula_pregrado</code> los valores de la variable <code>costo_matricula</code> para identificar si son mayores a la media del costo de matrícula, utilizando la función <code>mean()</code>. El resultado, es un vector atómico con valores lógicos (<code>FALSE</code> o <code>TRUE</code>) que identifica que valores dentro de <code>costo_matricula_pregrado$costo_matricula</code> cumplen o no cumplen con la condición. En ese sentido, en el resultado del <a href="#lst-relational-operator-logical-condition" class="quarto-xref">Listado&nbsp;<span>5.9</span></a> aquellas posiciones con valores <code>TRUE</code> corresponden a las posiciones de <code>costo_matricula_pregrado$costo_matricula</code> que cumplen con la condición, es decir que son mayores a la media del costo de matrícula.</p>
+<p>Al principio no parece claro cómo se puede utilizar el resultado generado en el <a href="#lst-relational-operator-logical-condition" class="quarto-xref">Listado&nbsp;<span>5.9</span></a>. Sin embargo, a continuación se señalará como un resultado con valores lógicos de <code>TRUE</code> o <code>FALSE</code> permite ser el insumo para poder filtrar filas con base a una determinada condición lógica de interés.</p>
+<p>A modo de ejemplo, si buscaras identificar los programas académicos con sus respectivos atributos que cumplen con la condición señalada en el <a href="#lst-relational-operator-logical-condition" class="quarto-xref">Listado&nbsp;<span>5.9</span></a>, es posible utilizar la función <code>filter()</code> del paquete <code>dplyr</code> de la siguiente forma:</p>
+<div class="cell">
+<div id="lst-filter-relational-operators" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-filter-relational-operators-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;5.10: Uso de la función <code>filter()</code> y operadores lógicos para filtrar filas en una tibble
+</figcaption>
+<div aria-describedby="lst-filter-relational-operators-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  costo_matricula_pregrado,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  costo_matricula <span class="sc">&gt;</span> <span class="fu">mean</span>(costo_matricula)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 6
+    ano semestre codigo_snies nombre_programa               
+  &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt;                         
+1  2026        1        53703 Ingeniería Industrial         
+2  2026        1        10963 Relaciones Internacionales y …
+# ℹ 2 more variables: nivel_academico &lt;chr&gt;,
+#   costo_matricula &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>En el <a href="#lst-filter-relational-operators" class="quarto-xref">Listado&nbsp;<span>5.10</span></a>, la función <code>filter()</code> requiere como primer argumento una tibble (o un objeto similar) y una expresión que resulte en un vector lógico. Los paquetes del <code>tidyverse</code> facilitan este proceso mediante el <strong>enmascaramiento de datos</strong> (<a href="https://dplyr.tidyverse.org/articles/programming.html">data masking</a>). Este mecanismo permite que la expresión lógica (en este ejemplo, <code>costo_matricula &gt; mean(costo_matricula)</code>) haga referencia directa a las columnas del objeto <code>costo_matricula_pregrado</code> como si fueran variables “independientes”, eliminando la necesidad de utilizar el operador <code>$</code>. De esa manera requieres escribir menos texto y te refieres a las variables de la tibble de una manera más natural al utilizar funciones del <code>tidyverse</code>.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
