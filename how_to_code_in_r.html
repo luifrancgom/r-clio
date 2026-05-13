@@ -437,7 +437,7 @@ Tabla&nbsp;5.1: Operadores aritméticos en R
 </section>
 <section id="vectores-atómicos-en-r" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="vectores-atómicos-en-r"><span class="header-section-number">5.2</span> Vectores atómicos en R</h2>
-<p>En el <a href="#lst-mean-tuition-fee" class="quarto-xref">Listado&nbsp;<span>5.1</span></a> se utilizó R para calcular el costo promedio de la matrícula. Sin embargo si quisieramos utilizar nuevamente estos datos tendríamos que escribirlos nuevamente, donde este proceso no es eficiente. R permite guardar datos almacenándolos dentro de un objeto. Una forma de almacenar datos es utilizando vectores atómicos a través de la función <code>c()</code> y luego vinculando el objeto que se busque crear a través de un nombre para utilizarlo cuando lo requieras.</p>
+<p>En el <a href="#lst-mean-tuition-fee" class="quarto-xref">Listado&nbsp;<span>5.1</span></a> se utilizó R para calcular el costo promedio de la matrícula. Sin embargo, si quisieramos reutilizar estos datos tendríamos que escribirlos nuevamente, donde este proceso no es eficiente. R permite guardar datos almacenándolos dentro de un objeto. Una forma de almacenar datos es utilizando vectores atómicos a través de la función <code>c()</code> y luego vinculando el objeto que se busque crear a través de un nombre para utilizarlo cuando lo requieras.</p>
 <p>A continuación guardarás el costo de matrícula de cada programa de pregrado en un vector atómico mediante la función <code>c()</code> y luego vincularás ese objeto al nombre <code>costo_matricula</code>, tal como se señala a continuación:</p>
 <div class="cell">
 <div id="lst-atomic-vector" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
@@ -464,7 +464,7 @@ Listado&nbsp;5.2: Uso de un vector atómico para almacenar datos
 <pre><code>[1] 4389000 4896000 4135000 4940000 5638000 4661000 6238000</code></pre>
 </div>
 </div>
-<p>En el <a href="#lst-atomic-vector" class="quarto-xref">Listado&nbsp;<span>5.2</span></a> se utilizaron comas para combinar los valores en la función <code>c()</code> y el operador de asignación <code>&lt;-</code> para vincular éste objeto con el nombre <code>costo_matricula</code>. De esa manera, puedes reutilizar esta información si la requieres nuevamente.</p>
+<p>En el <a href="#lst-atomic-vector" class="quarto-xref">Listado&nbsp;<span>5.2</span></a> se utilizaron comas para combinar los valores en la función <code>c()</code> y el operador de asignación <code>&lt;-</code> para vincular este objeto con el nombre <code>costo_matricula</code>. De esa manera, puedes reutilizar esta información si la requieres nuevamente.</p>
 <p>Por ejemplo, si quisieras calcular la dispersión del costo de matrícula alrededor de la media a través de la desviación estandar muestral, (ver <a href="#eq-sample-standard-deviation" class="quarto-xref">Ecuación&nbsp;<span>5.1</span></a>), entonces es posible reutilizar los datos vinculados con el nombre <code>costo_matricula</code>.</p>
 <p><span id="eq-sample-standard-deviation"><span class="math display">\[
 \begin{aligned}
@@ -534,7 +534,7 @@ Figura&nbsp;5.1: Media (círculo rojo) y desviación estandar (segmento y flecha
 </section>
 <section id="mensajes-messages-advertencias-warnings-y-errores-errors" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="mensajes-messages-advertencias-warnings-y-errores-errors"><span class="header-section-number">5.3</span> Mensajes (messages), advertencias (warnings) y errores (errors)</h2>
-<p>Cuando utilices R y ejecutes un código es posible que observes texto en la consola. Éste texto puede ser el resultado generado al ejecutar el código como también mensajes, advertencias y errores.</p>
+<p>Cuando utilices R y ejecutes un código es posible que observes texto en la consola. Este texto puede ser el resultado generado al ejecutar el código como también mensajes, advertencias y errores.</p>
 <p>Para entender que es un mensaje, advertencia o un error realiza el procedimiento descrito en el primer párrafo de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>. Luego, carga el paquete <code>tidyverse</code> siguiendo las indicaciones de esa misma sección, donde se generará un contenido igual o similar al señalado en el <a href="r_packages.html#lst-load-tidyverse-message" class="quarto-xref">Listado&nbsp;<span>4.1</span></a>.</p>
 <section id="mensajes" class="level3" data-number="5.3.1">
 <h3 data-number="5.3.1" class="anchored" data-anchor-id="mensajes"><span class="header-section-number">5.3.1</span> Mensajes</h3>
@@ -704,23 +704,32 @@ Listado&nbsp;5.8: Construcción de una tibble a partir de información del costo
 </div>
 </div>
 <p>En la tibble del <a href="#lst-tibble" class="quarto-xref">Listado&nbsp;<span>5.8</span></a> respecto a las variables <code>ano</code>, <code>semestre</code> y <code>nivel_academico</code> R aplica el proceso de reciclaje de vectores (ver <a href="#sec-warnings" class="quarto-xref"><span>Sección 5.3.2</span></a>) para ajustar el tamaño de las columnas. En el caso de la variable <code>codigo_snies</code> se fija un código establecido por el <a href="https://snies.mineducacion.gov.co/portal/">Sistema Nacional de Información de la Educación Superior - SNIES</a> para identificar y asociar de manera única a cada programa académico con el nombre señalado en la variable <code>nombre_programa</code>. Por último, es posible en una tibble utilizar un vector atómico previamente definido, como en el caso de <code>costo_matricula</code>, para generar una variable. En el <a href="#lst-tibble" class="quarto-xref">Listado&nbsp;<span>5.8</span></a> se utiliza el mismo nombre asociado al vector atómico que contiene el costo de matrícula para la columna que incluye dicha información.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Nota
+Importante
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Pending</strong> Talk about sintactically valid names in R</p>
+<p>En el <a href="#lst-tibble" class="quarto-xref">Listado&nbsp;<span>5.8</span></a> y en el desarrollo del <a href="#sec-how-do-i-code-in-r" class="quarto-xref"><span>Capítulo 5</span></a>, se utilizó una convención para nombrar variables similar a la descrita en la <a href="project-oriented_workflow.html#sec-how-to-name-files-folders" class="quarto-xref"><span>Sección 3.3</span></a>. Sin embargo, existe una excepción fundamental: no se utilizó el carácter <code>-</code>.</p>
+<p>En R, para que un nombre asociado a un objeto sea <strong>sintácticamente válido</strong>, debe cumplir con un conjunto de reglas que se pueden consultar con en el comando <code>?make.names</code> en la sección <strong>Details</strong>:</p>
+<ol type="1">
+<li><p><strong>Caracteres permitidos</strong>: Solo puede contener letras, números, puntos (<code>.</code>) y guiones bajos, (<code>_</code>). El guion medio, (<code>-</code>), no está permitido porque R lo interpreta como el operador de resta.</p></li>
+<li><p><strong>Inicio del nombre</strong>: Debe comenzar obligatoriamente con una letra o con un punto, (<code>.</code>).</p></li>
+<li><p><strong>Restricción del punto</strong>: Si un nombre inicia con punto, el siguiente carácter no puede ser un número.</p></li>
+<li><p><strong>Palabras reservadas</strong>: No pueden utilizarse términos del lenguaje de programación de R que están reservados, como por ejemplo <code>if</code>, <code>else</code>, <code>for</code>, <code>TRUE</code> o <code>FALSE</code>. La lista completa se puede consultar con en el comando <code>?Reserved</code> en la sección <strong>Details</strong>.</p></li>
+</ol>
+<p>Aunque R permite técnicamente nombres como <code>.mi_variable</code>, <code>.Mi_Variable</code>, <code>ñi_variablé</code>, en este libro seguiremos las prácticas señaladas en la <a href="project-oriented_workflow.html#sec-how-to-name-files-folders" class="quarto-xref"><span>Sección 3.3</span></a>, pero ajustándolas para que generen nombres sintácticamente válidos.</p>
+<p>Esto implica 2 cambios principales respecto a nombrar carpetas o archivos: no se utilizará el carácter <code>-</code> donde se reemplazará por <code>_</code> y nunca se iniciará un nombre con números. Esta diferencia radica en que un sistema operativo es más flexible al nombrar archivos o carpetas mientras que R, al ser un lenguaje de programación, requiere reglas estrictas para evitar ambigüedades al ejecutar código.</p>
 </div>
 </div>
 </section>
 <section id="operadores-relacionales" class="level2" data-number="5.5">
 <h2 data-number="5.5" class="anchored" data-anchor-id="operadores-relacionales"><span class="header-section-number">5.5</span> Operadores relacionales</h2>
-<p>Los operadores relacionales son operadores binarios que permiten la comparación de valores en vectores atómicos. Estos operadores son útiles por qué establecen condiciones lógicas para filtrar filas de interés en una tibble. En la <a href="#tbl-relational-operators" class="quarto-xref">Tabla&nbsp;<span>5.2</span></a> se señalan los operadores relacionales utilizados por R.</p>
+<p>Los operadores relacionales son operadores binarios que permiten la comparación de valores en vectores atómicos. Estos operadores son útiles por qué establecen condiciones lógicas para filtrar filas de interés en una tibble. En la <a href="#tbl-relational-operators" class="quarto-xref">Tabla&nbsp;<span>5.2</span></a> se señalan algunos de los operadores relacionales utilizados por R.</p>
 <div id="tbl-relational-operators" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-relational-operators-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -783,7 +792,7 @@ Listado&nbsp;5.9: Uso de operadores relacionales para identificar un conjunto de
 </div>
 </div>
 <p>En el <a href="#lst-relational-operator-logical-condition" class="quarto-xref">Listado&nbsp;<span>5.9</span></a> se utiliza el operador <code>$</code> para extraer de la tibble <code>costo_matricula_pregrado</code> los valores de la variable <code>costo_matricula</code> para identificar si son mayores a la media del costo de matrícula, utilizando la función <code>mean()</code>. El resultado, es un vector atómico con valores lógicos (<code>FALSE</code> o <code>TRUE</code>) que identifica que valores dentro de <code>costo_matricula_pregrado$costo_matricula</code> cumplen o no cumplen con la condición. En ese sentido, en el resultado del <a href="#lst-relational-operator-logical-condition" class="quarto-xref">Listado&nbsp;<span>5.9</span></a> aquellas posiciones con valores <code>TRUE</code> corresponden a las posiciones de <code>costo_matricula_pregrado$costo_matricula</code> que cumplen con la condición, es decir que son mayores a la media del costo de matrícula.</p>
-<p>Al principio no parece claro cómo se puede utilizar el resultado generado en el <a href="#lst-relational-operator-logical-condition" class="quarto-xref">Listado&nbsp;<span>5.9</span></a>. Sin embargo, a continuación se señalará como un resultado con valores lógicos de <code>TRUE</code> o <code>FALSE</code> permite ser el insumo para poder filtrar filas con base a una determinada condición lógica de interés.</p>
+<p>Al principio no pareciera claro cómo se puede utilizar el resultado generado en el <a href="#lst-relational-operator-logical-condition" class="quarto-xref">Listado&nbsp;<span>5.9</span></a>. Sin embargo, a continuación se señalará como un resultado con valores lógicos de <code>TRUE</code> o <code>FALSE</code> permite ser el insumo para poder filtrar filas con base a una determinada condición lógica de interés.</p>
 <p>A modo de ejemplo, si buscaras identificar los programas académicos con sus respectivos atributos que cumplen con la condición señalada en el <a href="#lst-relational-operator-logical-condition" class="quarto-xref">Listado&nbsp;<span>5.9</span></a>, es posible utilizar la función <code>filter()</code> del paquete <code>dplyr</code> de la siguiente forma:</p>
 <div class="cell">
 <div id="lst-filter-relational-operators" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
@@ -809,7 +818,7 @@ Listado&nbsp;5.10: Uso de la función <code>filter()</code> y operadores lógico
 #   costo_matricula &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<p>En el <a href="#lst-filter-relational-operators" class="quarto-xref">Listado&nbsp;<span>5.10</span></a>, la función <code>filter()</code> requiere como primer argumento una tibble (o un objeto similar) y una expresión que resulte en un vector lógico. Los paquetes del <code>tidyverse</code> facilitan este proceso mediante el <strong>enmascaramiento de datos</strong> (<a href="https://dplyr.tidyverse.org/articles/programming.html">data masking</a>). Este mecanismo permite que la expresión lógica (en este ejemplo, <code>costo_matricula &gt; mean(costo_matricula)</code>) haga referencia directa a las columnas del objeto <code>costo_matricula_pregrado</code> como si fueran variables “independientes”, eliminando la necesidad de utilizar el operador <code>$</code>. De esa manera requieres escribir menos texto y te refieres a las variables de la tibble de una manera más natural al utilizar funciones del <code>tidyverse</code>.</p>
+<p>En el <a href="#lst-filter-relational-operators" class="quarto-xref">Listado&nbsp;<span>5.10</span></a>, la función <code>filter()</code> requiere como primer argumento una tibble (o un objeto similar) y una expresión que resulte en un vector lógico. Los paquetes del <code>tidyverse</code> facilitan este proceso mediante el <strong>enmascaramiento de datos</strong> (<a href="https://dplyr.tidyverse.org/articles/programming.html">data masking</a>). Este mecanismo permite que la expresión lógica (en este ejemplo, <code>costo_matricula &gt; mean(costo_matricula)</code>) haga referencia directa a las columnas del objeto <code>costo_matricula_pregrado</code> como si fueran variables “independientes”, eliminando la necesidad de utilizar el operador <code>$</code>. De esa manera requieres escribir menos texto al escribir código en R y es posible referirse a las variables de la tibble de una manera más natural al utilizar funciones del <code>tidyverse</code>.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
