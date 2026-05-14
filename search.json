@@ -14,7 +14,7 @@
     "href": "preface.html",
     "title": "1  Prefacio",
     "section": "",
-    "text": "Éste es un libro creado con mardown y con código ejecutable\nÉsta es una referencia Wickham (2023)\nRemember do add how this book was written: how to write mathematics in relation to the chapter by Paul Halmos and Head First Networking: A Brain-Friendly Guide by Al Anderson, Ryan Benedetti\nAlso add the part about Los colombianos somos así by Eduardo Lora to use data from Colombia taking into account the heterogeneity of the university audience.\n\n\n\n\nWickham, H. (2023). R for Data Science (2.ª ed.). O’Reilly Media, Incorporated. https://r4ds.hadley.nz/",
+    "text": "Pending\nRemember do add how this book was written: how to write mathematics in relation to the chapter by Paul Halmos and Head First Networking: A Brain-Friendly Guide by Al Anderson, Ryan Benedetti.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Prefacio</span>"
     ]
@@ -24,7 +24,7 @@
     "href": "first_steps_r.html",
     "title": "Primeros pasos con R",
     "section": "",
-    "text": "Pendiente",
+    "text": "El objetivo de esta primera parte, es presentar los conceptos básicos para el análisis de datos en R a través de los siguiente 4 capítulos:\n\n2  Bienvenidos a R: introduce las herramientas fundamentales para el análisis de datos, definiendo la naturaleza de R y el rol de componentes adicionales tales como Positron, Posit Workbench y Quarto.\n3  Flujo de trabajo orientado a proyectos: introduce los elementos básicos para adoptar un flujo de trabajo por proyectos, así como recomendaciones para mantener el espacio de trabajo debidamente ordenado.\n4  Paquetes de R: introduce el concepto de paquetes así como el proceso para instalarlos y cargarlos para poder utilizarlos.\n5  ¿Cómo escribir código en R?: introduce los conceptos básicos del lenguaje de programación R ilustrando estos aspectos a través de un conjunto de datos.",
     "crumbs": [
       "Primeros pasos con R"
     ]
@@ -347,7 +347,7 @@
     "href": "references.html",
     "title": "Referencias",
     "section": "",
-    "text": "Bryan, J. (2017). Project-oriented workflow. https://www.tidyverse.org/blog/2017/12/workflow-vs-script/\n\n\nBryan, J. (2024). Happy Git and GitHub for\nthe useR. https://happygitwithr.com/\n\n\nBryan, J., Hester, J., Pileggi, S., & Aja, E. D. (2025). What\nThey Forgot to Teach\nYou About R. https://rstats.wtf/\n\n\nGrolemund, G. (2014). Hands-on programming with R\n(First edition). O’Reilly. https://jjallaire.github.io/hopr/\n\n\nIsmay, C. (2025). Statistical inference via data science: A\nmoderndive into r and the tidyverse (Second edition). CRC Press. https://moderndive.com/v2/index.html\n\n\nWickham, H. (2019). Advanced R (Second edition).\nCRC Press/Taylor & Francis Group.\n\n\nWickham, H. (2023). R for Data\nScience (2nd ed.). O’Reilly Media, Incorporated. https://r4ds.hadley.nz/\n\n\nWickham, H., & Bryan, J. (2023). R packages: Organize, test,\ndocument, and share your code (Second edition). O’Reilly. https://r-pkgs.org/",
+    "text": "Bryan, J. (2017). Project-oriented workflow. https://www.tidyverse.org/blog/2017/12/workflow-vs-script/\n\n\nBryan, J. (2024). Happy Git and GitHub for\nthe useR. https://happygitwithr.com/\n\n\nBryan, J., Hester, J., Pileggi, S., & Aja, E. D. (2025). What\nThey Forgot to Teach\nYou About R. https://rstats.wtf/\n\n\nGrolemund, G. (2014). Hands-on programming with R\n(First edition). O’Reilly. https://jjallaire.github.io/hopr/\n\n\nIsmay, C. (2025). Statistical inference via data science: A\nmoderndive into r and the tidyverse (Second edition). CRC Press. https://moderndive.com/v2/index.html\n\n\nWickham, H. (2019). Advanced R (Second edition).\nCRC Press/Taylor & Francis Group.\n\n\nWickham, H., & Bryan, J. (2023). R packages: Organize, test,\ndocument, and share your code (Second edition). O’Reilly. https://r-pkgs.org/",
     "crumbs": [
       "Referencias"
     ]
