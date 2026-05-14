@@ -1,4 +1,4 @@
-# Bienvenidos a R
+# Bienvenidos a R {#sec-welcome-to-r}
 
 ```{r}
 #| echo: false

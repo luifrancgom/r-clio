@@ -1,9 +1,5 @@
 # Prefacio
 
-Éste es un libro creado con mardown y con código ejecutable
+**Pending**
 
-Ésta es una referencia @wickham_r_2023
-
-Remember do add how this book was written: how to write mathematics in relation to the chapter by Paul Halmos and  Head First Networking: A Brain-Friendly Guide  by Al Anderson, Ryan Benedetti
-
-Also add the part about Los colombianos somos así by Eduardo Lora to use data from Colombia taking into account the heterogeneity of the university audience.
+Remember do add how this book was written: how to write mathematics in relation to the chapter by Paul Halmos and  Head First Networking: A Brain-Friendly Guide  by Al Anderson, Ryan Benedetti.

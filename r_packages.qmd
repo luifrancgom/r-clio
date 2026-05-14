@@ -1,4 +1,4 @@
-# Paquetes de R
+# Paquetes de R {#sec-r-packages}
 
 ```{r}
 #| echo: false

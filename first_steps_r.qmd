@@ -1,3 +1,11 @@
 # Primeros pasos con R
 
-Pendiente
+El objetivo de esta primera parte, es presentar los conceptos básicos para el análisis de datos en R a través de los siguiente 4 capítulos:
+
+- @sec-welcome-to-r: introduce las herramientas fundamentales para el análisis de datos, definiendo la naturaleza de R y el rol de componentes adicionales tales como Positron, Posit Workbench y Quarto.
+
+- @sec-project-oriented-workflow: introduce los elementos básicos para adoptar un flujo de trabajo por proyectos, así como recomendaciones para mantener el espacio de trabajo debidamente ordenado.
+
+- @sec-r-packages: introduce el concepto de paquetes así como el proceso para instalarlos y cargarlos para poder utilizarlos.
+
+- @sec-how-do-i-code-in-r: introduce los conceptos básicos del lenguaje de programación R ilustrando estos aspectos a través de un conjunto de datos. 
