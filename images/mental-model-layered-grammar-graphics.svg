@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg1"
+   inkscape:export-filename="test.png"
+   inkscape:export-xdpi="76.969696"
+   inkscape:export-ydpi="76.969696"
+   inkscape:version="1.4.3 (fcd0343856, 2026-01-01)"
+   sodipodi:docname="mental-model-layered-grammar-graphics.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="true"
+     inkscape:lockguides="true"
+     inkscape:zoom="0.71535494"
+     inkscape:cx="396.30676"
+     inkscape:cy="715.02966"
+     inkscape:window-width="1854"
+     inkscape:window-height="1011"
+     inkscape:window-x="1146"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="axonomgrid"
+       id="grid1"
+       units="mm"
+       originx="0"
+       originy="0"
+       spacingx="0.99999998"
+       spacingy="1"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="5"
+       dotted="false"
+       gridanglex="30"
+       gridanglez="30"
+       enabled="true"
+       visible="true" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1">
+    <rect
+       x="98.195004"
+       y="888.18895"
+       width="130.92667"
+       height="37.795287"
+       id="rect2" />
+    <rect
+       x="98.195007"
+       y="888.18896"
+       width="178.53679"
+       height="22.07865"
+       id="rect2-2" />
+    <rect
+       x="98.195007"
+       y="888.18896"
+       width="178.53679"
+       height="22.07865"
+       id="rect2-2-1" />
+    <rect
+       x="98.195007"
+       y="888.18896"
+       width="178.53679"
+       height="22.07865"
+       id="rect2-2-1-4" />
+    <rect
+       x="98.195007"
+       y="888.18896"
+       width="178.53679"
+       height="22.07865"
+       id="rect2-2-1-4-6" />
+    <rect
+       x="98.195007"
+       y="888.18896"
+       width="263.45451"
+       height="29.764541"
+       id="rect2-2-1-4-6-6" />
+    <rect
+       x="98.195007"
+       y="888.18896"
+       width="263.4545"
+       height="29.764542"
+       id="rect2-2-1-4-6-6-5" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#01665e;fill-opacity:0.85098;stroke:#000000;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1"
+       d="m 74.283328,240.57968 77.942382,45 51.96152,-30 -77.94228,-44.99999 z"
+       id="path2-1" />
+    <path
+       style="fill:#5ab4ac;fill-opacity:0.85098;stroke:#000000;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1"
+       d="m 74.522122,225.54229 77.942458,45 51.96152,-30 -77.94231,-45.00002 z"
+       id="path2" />
+    <path
+       style="fill:#c7eae5;fill-opacity:0.85098;stroke:#000000;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1"
+       d="m 74.586067,210.80031 77.942133,45 51.96152,-30 -77.94228,-44.99999 z"
+       id="path2-3" />
+    <path
+       style="fill:#f5f5f5;fill-opacity:0.85098;stroke:#000000;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1"
+       d="m 74.392485,195.21691 77.942185,45 51.96152,-30 -77.94234,-44.99999 z"
+       id="path2-3-3" />
+    <path
+       style="fill:#f6e8c3;fill-opacity:0.85098;stroke:#000000;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1"
+       d="m 73.851126,180.129 77.942184,45 51.96152,-30 -77.94234,-44.99999 z"
+       id="path2-3-3-6" />
+    <path
+       style="fill:#d8b365;fill-opacity:0.85098;stroke:#000000;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1"
+       d="m 73.851156,164.59983 77.942184,45 51.96152,-30 -77.94234,-44.99999 z"
+       id="path2-3-3-6-2" />
+    <path
+       style="fill:#8c510a;fill-opacity:0.85098;stroke:#000000;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1"
+       d="m 73.851039,149.8373 77.942181,45 51.96152,-30 -77.94234,-44.99999 z"
+       id="path2-3-3-6-2-5" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,12.976766,2.6458334)"
+       id="text2"
+       style="font-size:18.6667px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect2);fill:#8c510a;fill-opacity:0.85098;stroke:#000000;stroke-width:0.755906;stroke-dasharray:none;stroke-opacity:1"><tspan
+         x="98.195312"
+         y="904.70511"
+         id="tspan3">Datos (Data)</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,1.4518692,-12.812475)"
+       id="text2-7"
+       style="font-size:18.6667px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect2-2);display:inline;fill:#8c510a;fill-opacity:0.85098;stroke:#000000;stroke-width:0.755906;stroke-dasharray:none;stroke-opacity:1"><tspan
+         x="98.195312"
+         y="904.70511"
+         id="tspan4">Mapeo (Mapping)</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,7.5772585,-27.253228)"
+       id="text2-7-3"
+       style="font-size:18.6667px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect2-2-1);display:inline;fill:#8c510a;fill-opacity:0.85098;stroke:#000000;stroke-width:0.755906;stroke-dasharray:none;stroke-opacity:1"><tspan
+         x="98.195312"
+         y="904.70511"
+         id="tspan5">Capas (Layers)</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,4.8618291,-42.493147)"
+       id="text2-7-3-4"
+       style="font-size:18.6667px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect2-2-1-4);display:inline;fill:#8c510a;fill-opacity:0.85098;stroke:#000000;stroke-width:0.755906;stroke-dasharray:none;stroke-opacity:1"><tspan
+         x="98.195312"
+         y="904.70511"
+         id="tspan6">Escalas (Scales)</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,4.7484845,-58.533518)"
+       id="text2-7-3-4-6"
+       style="font-size:18.6667px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect2-2-1-4-6);display:inline;fill:#8c510a;fill-opacity:0.85098;stroke:#000000;stroke-width:0.755906;stroke-dasharray:none;stroke-opacity:1"><tspan
+         x="98.195312"
+         y="904.70511"
+         id="tspan7">Facetas (Facets)</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-23.018335,-72.346032)"
+       id="text2-7-3-4-6-5"
+       style="font-size:18.6667px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect2-2-1-4-6-6);display:inline;fill:#8c510a;fill-opacity:0.85098;stroke:#000000;stroke-width:0.755906;stroke-dasharray:none;stroke-opacity:1"><tspan
+         x="98.195312"
+         y="904.70511"
+         id="tspan8">Coordenadas (Coordinates)</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,9.0410796,-87.83771)"
+       id="text2-7-3-4-6-5-3"
+       style="font-size:18.6667px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect2-2-1-4-6-6-5);display:inline;fill:#8c510a;fill-opacity:0.85098;stroke:#000000;stroke-width:0.755906;stroke-dasharray:none;stroke-opacity:1"><tspan
+         x="98.195312"
+         y="904.70511"
+         id="tspan9">Tema (Theme)</tspan></text>
+  </g>
+</svg>

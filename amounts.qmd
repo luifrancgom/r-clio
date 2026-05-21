@@ -1,0 +1,26 @@
+# Cantidades
+
+```{r}
+#| echo: false
+source("_common.R")
+```
+
+Este capítulo se basa en [@wickham_ggplot2_2016] y [@wilke_fundamentals_2019] así como en la documentación oficial de [`ggplot2`](https://ggplot2.tidyverse.org/articles/ggplot2.html) donde tiene como propósito introducir el modelo mental de **la gramática de gráficos en capas** (layered grammar of graphics) para visualizar variables numéricas para un conjunto de categorías utilizando el paquete `ggplot2` e información de los resultados del examen [Saber Pro](https://www.icfes.gov.co/evaluaciones-icfes/acerca-del-examen-saber-pro/) del grupo de competencias genéricas para programas de pregrado de la Facultad de Estudios a Distancia de la Universidad Militar Nueva Granada.
+
+Exploraremos los siguientes aspectos:
+
+1. ¿Qué es la gramática de gráficos en capas?
+2. ¿Cómo visualizar variables numéricas para un conjunto de categorías?
+
+::: {.callout-note}
+
+:::
+
+
+## Gramática de gráficos en capas
+
+El paquete `ggplot2`, incluido en el `tidyverse`, permite generar visualizaciones a partir de un conjunto de datos. Este paquete utiliza un marco conceptual basado en la gramática de graficos desarrollada en [@wilkinson_grammar_2005]. La gramática de gráficos en capas es una adaptación de esta gramática para integrarla en el lenguaje de programación de R.
+
+A medida que explores diferentes formas de visualizar un conjuntos de datos se desarrollará en más detalle la gramática de gráficos en capas utilizando el paquete `ggplot2`. Por ahora describiremos las 7 capas que conforman éste modelo mental (ver @fig-mental-model-layered-grammar-graphics) y que se utilizan en `ggplot2` como un conjunto de instrucciones para generar un gráfico.
+
+![Modelo mental de la gramática de gráficos en capas](images/mental-model-layered-grammar-graphics.png){#fig-mental-model-layered-grammar-graphics fig-alt="Diagrama conceptual en perspectiva de 7 capas flotantes que ilustran el modelo mental de ggplot2. De arriba a abajo, las capas están etiquetadas en español e inglés: Tema (Theme), Coordenadas (Coordinates), Facetas (Facets), Escalas (Scales), Capas (Layers), Mapeo (Mapping) y Datos (Data). El orden visual muestra cómo los componentes se superponen verticalmente para construir un gráfico."}

@@ -35,6 +35,11 @@ book:
         - r_packages.qmd
         - how_to_code_in_r.qmd
     - part: data_visualization.qmd
+      chapters: 
+        - amounts.qmd
+        - distributions.qmd
+        - proportions.qmd
+        - x-y_relationships.qmd
     - part: data_wrangling.qmd
     - part: data_tidy.qmd
     - part: data_import.qmd
