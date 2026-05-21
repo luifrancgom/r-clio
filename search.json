@@ -293,6 +293,28 @@
     ]
   },
   {
+    "objectID": "amounts.html",
+    "href": "amounts.html",
+    "title": "6  Cantidades",
+    "section": "",
+    "text": "6.1 Gramática de gráficos en capas\nEste capítulo se basa en (Wickham, 2016) y (Wilke, 2019) así como en la documentación oficial de ggplot2 donde tiene como propósito introducir el modelo mental de la gramática de gráficos en capas (layered grammar of graphics) para visualizar variables numéricas para un conjunto de categorías utilizando el paquete ggplot2 e información de los resultados del examen Saber Pro del grupo de competencias genéricas para programas de pregrado de la Facultad de Estudios a Distancia de la Universidad Militar Nueva Granada.\nExploraremos los siguientes aspectos:\nEl paquete ggplot2, incluido en el tidyverse, permite generar visualizaciones a partir de un conjunto de datos. Este paquete utiliza un marco conceptual basado en la gramática de graficos desarrollada en (Wilkinson & Wills, 2005). La gramática de gráficos en capas es una adaptación de esta gramática para integrarla en el lenguaje de programación de R.\nA medida que explores diferentes formas de visualizar un conjuntos de datos se desarrollará en más detalle la gramática de gráficos en capas utilizando el paquete ggplot2. Por ahora describiremos las 7 capas que conforman éste modelo mental (ver Figura 6.1) y que se utilizan en ggplot2 como un conjunto de instrucciones para generar un gráfico.",
+    "crumbs": [
+      "Visualización de datos",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Cantidades</span>"
+    ]
+  },
+  {
+    "objectID": "amounts.html#gramática-de-gráficos-en-capas",
+    "href": "amounts.html#gramática-de-gráficos-en-capas",
+    "title": "6  Cantidades",
+    "section": "",
+    "text": "Figura 6.1: Modelo mental de la gramática de gráficos en capas\n\n\n\n\n\n\n\nWickham, H. (2016). ggplot2: elegant graphics for data analysis (Second edition). Springer international publishing. https://link-springer-com.ezproxy.umng.edu.co/book/10.1007/978-3-319-24277-4\n\n\nWilke, C. (2019). Fundamentals of data visualization: a primer on making informative and compelling figures (First edition). O’Reilly. https://clauswilke.com/dataviz/\n\n\nWilkinson, L., & Wills, G. (2005). The grammar of graphics (2nd ed). Springer.",
+    "crumbs": [
+      "Visualización de datos",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Cantidades</span>"
+    ]
+  },
+  {
     "objectID": "data_wrangling.html",
     "href": "data_wrangling.html",
     "title": "Manipulación de datos",
@@ -347,7 +369,7 @@
     "href": "references.html",
     "title": "Referencias",
     "section": "",
-    "text": "Bryan, J. (2017). Project-oriented workflow. https://www.tidyverse.org/blog/2017/12/workflow-vs-script/\n\n\nBryan, J. (2024). Happy Git and GitHub for\nthe useR. https://happygitwithr.com/\n\n\nBryan, J., Hester, J., Pileggi, S., & Aja, E. D. (2025). What\nThey Forgot to Teach\nYou About R. https://rstats.wtf/\n\n\nGrolemund, G. (2014). Hands-on programming with R\n(First edition). O’Reilly. https://jjallaire.github.io/hopr/\n\n\nIsmay, C. (2025). Statistical inference via data science: A\nmoderndive into r and the tidyverse (Second edition). CRC Press. https://moderndive.com/v2/index.html\n\n\nWickham, H. (2019). Advanced R (Second edition).\nCRC Press/Taylor & Francis Group.\n\n\nWickham, H., & Bryan, J. (2023). R packages: Organize, test,\ndocument, and share your code (Second edition). O’Reilly. https://r-pkgs.org/",
+    "text": "Bryan, J. (2017). Project-oriented workflow. https://www.tidyverse.org/blog/2017/12/workflow-vs-script/\n\n\nBryan, J. (2024). Happy Git and GitHub for\nthe useR. https://happygitwithr.com/\n\n\nBryan, J., Hester, J., Pileggi, S., & Aja, E. D. (2025). What\nThey Forgot to Teach\nYou About R. https://rstats.wtf/\n\n\nGrolemund, G. (2014). Hands-on programming with R\n(First edition). O’Reilly. https://jjallaire.github.io/hopr/\n\n\nIsmay, C. (2025). Statistical inference via data science: A\nmoderndive into r and the tidyverse (Second edition). CRC Press. https://moderndive.com/v2/index.html\n\n\nWickham, H. (2016). ggplot2: Elegant graphics for data analysis\n(Second edition). Springer international publishing. https://link-springer-com.ezproxy.umng.edu.co/book/10.1007/978-3-319-24277-4\n\n\nWickham, H. (2019). Advanced R (Second edition).\nCRC Press/Taylor & Francis Group.\n\n\nWickham, H., & Bryan, J. (2023). R packages: Organize, test,\ndocument, and share your code (Second edition). O’Reilly. https://r-pkgs.org/\n\n\nWilke, C. (2019). Fundamentals of data visualization: A primer on\nmaking informative and compelling figures (First edition).\nO’Reilly. https://clauswilke.com/dataviz/\n\n\nWilkinson, L., & Wills, G. (2005). The grammar of graphics\n(2nd ed). Springer.",
     "crumbs": [
       "Referencias"
     ]
