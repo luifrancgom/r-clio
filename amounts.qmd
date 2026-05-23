@@ -51,4 +51,4 @@ Para que `ggplot2` genere un gráfico requiere como mínimo los siguientes 3 com
 
 6. **Coordenadas**: es el componente que determina cómo se combinan los atributos estéticos `x` e `y` para posicionar los elementos en el plano del gráfico. Por defecto, se utiliza el sistema de coordenadas cartesianas, pero existen otras opciones dentro de `ggplot2`.
 
-7. **Tema**: es el componente que se encarga de controlar cualquier elemento visual del gráfico que sea ajeno a los datos. Su función principal es determinar la apariencia estética y el estilo general del diseño del gráfico.
+7. **Tema**: es el componente que se encarga de controlar cualquier elemento visual del gráfico que sea ajeno a los datos. Su función principal es determinar la apariencia estética y el estilo general del diseño del gráfico. 
