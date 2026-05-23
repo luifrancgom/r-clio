@@ -282,13 +282,14 @@ div.csl-indent {
 </header>
 
 
-<p>Este capítulo se basa en <span class="citation" data-cites="wickham_ggplot2_2016">(<a href="references.html#ref-wickham_ggplot2_2016" role="doc-biblioref">Wickham, 2016</a>)</span> y <span class="citation" data-cites="wilke_fundamentals_2019">(<a href="references.html#ref-wilke_fundamentals_2019" role="doc-biblioref">Wilke, 2019</a>)</span> así como en la documentación oficial de <a href="https://ggplot2.tidyverse.org/articles/ggplot2.html"><code>ggplot2</code></a> donde tiene como propósito introducir el modelo mental de <strong>la gramática de gráficos en capas</strong> (layered grammar of graphics) para visualizar variables numéricas para un conjunto de categorías utilizando el paquete <code>ggplot2</code> e información de los resultados del examen <a href="https://www.icfes.gov.co/evaluaciones-icfes/acerca-del-examen-saber-pro/">Saber Pro</a> del grupo de competencias genéricas para programas de pregrado de la Facultad de Estudios a Distancia de la Universidad Militar Nueva Granada.</p>
+<p>Este capítulo se basa en <span class="citation" data-cites="wickham_ggplot2_2016">(<a href="references.html#ref-wickham_ggplot2_2016" role="doc-biblioref">Wickham, 2016</a>)</span> y <span class="citation" data-cites="wilke_fundamentals_2019">(<a href="references.html#ref-wilke_fundamentals_2019" role="doc-biblioref">Wilke, 2019</a>)</span> así como en la documentación oficial de <a href="https://ggplot2.tidyverse.org/articles/ggplot2.html"><code>ggplot2</code></a> donde tiene como propósito introducir el modelo mental de <strong>la gramática de gráficos en capas</strong> (layered grammar of graphics) para visualizar variables numéricas a través de un conjunto de categorías utilizando el paquete <code>ggplot2</code> e información de los resultados del examen <a href="https://www.icfes.gov.co/evaluaciones-icfes/acerca-del-examen-saber-pro/">Saber Pro</a> del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia de la Universidad Militar Nueva Granada.</p>
 <p>Exploraremos los siguientes aspectos:</p>
 <ol type="1">
 <li>¿Qué es la gramática de gráficos en capas?</li>
+<li>¿Qué elementos componen la gramática de gráficos en capas?</li>
 <li>¿Cómo visualizar variables numéricas para un conjunto de categorías?</li>
 </ol>
-<div class="callout callout-style-default callout-note callout-empty-content callout-titled">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -298,13 +299,13 @@ Nota
 </div>
 </div>
 <div class="callout-body-container callout-body">
-
+<p>Para desarrollar el contenido de este capítulo <a href="https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/2021-2024_saber-pro-genericas_faedis.rds">descarga 2021-2024_saber-pro-genericas_faedis.rds</a>. Luego, genera una carpeta con el nombre <code>data</code> y dentro de esta carpeta incluye el archivo <code>2021-2024_saber-pro-genericas_faedis.rds</code>. Finalmente, genera una carpeta con el nombre <code>006_visualizar-cantidades-en-r</code> y dentro de la carpeta crea un archivo con el nombre <code>001_visualizar-cantidades-datos-faedis.R</code> siguiendo las indicaciones descritas en la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>.</p>
 </div>
 </div>
 <section id="gramática-de-gráficos-en-capas" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="gramática-de-gráficos-en-capas"><span class="header-section-number">6.1</span> Gramática de gráficos en capas</h2>
 <p>El paquete <code>ggplot2</code>, incluido en el <code>tidyverse</code>, permite generar visualizaciones a partir de un conjunto de datos. Este paquete utiliza un marco conceptual basado en la gramática de graficos desarrollada en <span class="citation" data-cites="wilkinson_grammar_2005">(<a href="references.html#ref-wilkinson_grammar_2005" role="doc-biblioref">Wilkinson &amp; Wills, 2005</a>)</span>. La gramática de gráficos en capas es una adaptación de esta gramática para integrarla en el lenguaje de programación de R.</p>
-<p>A medida que explores diferentes formas de visualizar un conjuntos de datos se desarrollará en más detalle la gramática de gráficos en capas utilizando el paquete <code>ggplot2</code>. Por ahora describiremos las 7 capas que conforman éste modelo mental (ver <a href="#fig-mental-model-layered-grammar-graphics" class="quarto-xref">Figura&nbsp;<span>6.1</span></a>) y que se utilizan en <code>ggplot2</code> como un conjunto de instrucciones para generar un gráfico.</p>
+<p>A medida que explores diferentes formas de visualizar un conjunto de datos entenderás en más detalle la gramática de gráficos en capas utilizando el paquete <code>ggplot2</code>. Por ahora describiremos las 7 capas que conforman éste modelo mental (ver <a href="#fig-mental-model-layered-grammar-graphics" class="quarto-xref">Figura&nbsp;<span>6.1</span></a>) y que se utilizan en <code>ggplot2</code> como un conjunto de instrucciones para generar un gráfico.</p>
 <div id="fig-mental-model-layered-grammar-graphics" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual en perspectiva de 7 capas flotantes que ilustran el modelo mental de ggplot2. De arriba a abajo, las capas están etiquetadas en español e inglés: Tema (Theme), Coordenadas (Coordinates), Facetas (Facets), Escalas (Scales), Capas (Layers), Mapeo (Mapping) y Datos (Data). El orden visual muestra cómo los componentes se superponen verticalmente para construir un gráfico.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mental-model-layered-grammar-graphics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -315,6 +316,35 @@ Figura&nbsp;6.1: Modelo mental de la gramática de gráficos en capas
 </figcaption>
 </figure>
 </div>
+<p>Para que <code>ggplot2</code> genere un gráfico requiere como mínimo los siguientes 3 componentes: Datos, Mapeo y Capas. Los demás elementos restantes (Escalas, Facetas, Coordenadas y Tema) cuentan con valores predeterminados que eliminan inicialmente la necesidad de fijar configuraciones adicionales.</p>
+<ol type="1">
+<li><p><strong>Datos</strong>: es el insumo principal que se requiere para generar un gráfico donde se refiere al conjunto de datos que se busca visualizar.</p></li>
+<li><p><strong>Mapeo</strong>: es el conjunto de instrucciones que permiten mapear las variables de los datos a propiedades visuales denominadas atributos estéticos. En la <a href="#fig-aesthetics-attributes" class="quarto-xref">Figura&nbsp;<span>6.2</span></a> se indican ejemplos de atributos estéticos.</p></li>
+</ol>
+<div id="fig-aesthetics-attributes" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama de seis cuadrantes que representan visualmente los atributos estéticos fundamentales: Posición (x, y) mediante ejes coordenados, Color (color) en los bordes, Relleno (fill) en el interior, Opacidad (alpha) con diferentes niveles de transparencia, Tamaño (size) con círculos de distinto diámetro y Forma (shape) con figuras de un círculo, un cuadrado y un triángulo.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-aesthetics-attributes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/aesthetics-attributes.png" class="img-fluid figure-img" alt="Diagrama de seis cuadrantes que representan visualmente los atributos estéticos fundamentales: Posición (x, y) mediante ejes coordenados, Color (color) en los bordes, Relleno (fill) en el interior, Opacidad (alpha) con diferentes niveles de transparencia, Tamaño (size) con círculos de distinto diámetro y Forma (shape) con figuras de un círculo, un cuadrado y un triángulo.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-aesthetics-attributes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;6.2: Ejemplos de atributos estéticos
+</figcaption>
+</figure>
+</div>
+<ol start="3" type="1">
+<li><p><strong>Capas</strong>: es el componente que toma los datos mapeados para transformarlos en una representación visual comprensible. Cada capa se compone de 3 elementos:</p>
+<ol type="a">
+<li><p>Una <strong>geometría</strong> que determina como se muestran los datos a través de atributos estéticos.</p></li>
+<li><p>Una <strong>transformación estadística</strong> donde calcula nuevas variables a partir de los datos y afecta que parte de ellos se muestran.</p></li>
+<li><p>Un <strong>ajuste de posición</strong> donde determina la ubicación en la que se presentará visualmente cada dato.</p></li>
+</ol>
+<p>Una capa en <code>ggplot2</code> se construye con funciones de la forma <code>geom_*()</code> o <code>stat_*()</code>.</p></li>
+<li><p><strong>Escalas</strong>: es el componente que traduce la información visual del gráfico de vuelta a los datos originales, utilizando los ejes y las leyendas como guías de medición.</p>
+<p>En <code>ggplot2</code> las escalas se aplican mediante funciones que utilizan el patrón <code>scale_{aesthetic}_{type}()</code>, donde <code>{aesthetic}</code> corresponde a uno de los atributos estéticos utilizados en el mapeo y <code>{type}</code> una etiqueta descriptiva asignada a la escala.</p></li>
+<li><p><strong>Facetas</strong>: es el componente que permite visualizar diferentes subconjuntos de datos en paneles individuales, dividiendo el gráfico principal en función de variables categóricas.</p></li>
+<li><p><strong>Coordenadas</strong>: es el componente que determina cómo se combinan los atributos estéticos <code>x</code> e <code>y</code> para posicionar los elementos en el plano del gráfico. Por defecto, se utiliza el sistema de coordenadas cartesianas, pero existen otras opciones dentro de <code>ggplot2</code>.</p></li>
+<li><p><strong>Tema</strong>: es el componente que se encarga de controlar cualquier elemento visual del gráfico que sea ajeno a los datos. Su función principal es determinar la apariencia estética y el estilo general del diseño del gráfico.</p></li>
+</ol>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
