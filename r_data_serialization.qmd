@@ -1,0 +1,8 @@
+# Serialización de datos en R {#sec-rds}
+
+Este capítulo se basa en ... donde tiene como propósito ... 
+
+Exploraremos los siguientes aspectos:
+
+1. 
+2.

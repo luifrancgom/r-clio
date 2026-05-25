@@ -22,7 +22,7 @@ programas_pregrado_faedis_2026_1 <- read_csv(
 )
 ```
 
-Este capítulo se basa en [@ismay_statistical_2025, cap. 1], [@grolemund_hands-programming_2014, cap. 1] y [@wickham_advanced_2019, cap. 2] donde tiene como propósito introducir conceptos básicos del lenguaje de programación R utilizando datos de los programas de pregrado de la [Facultad de Estudios a Distancia](https://umng.edu.co/facultad/faedis/) de la Universidad Militar Nueva Granada.
+Este capítulo se basa en [@ismay_statistical_2025, cap. 1], [@grolemund_hands-programming_2014, cap. 1] y [@wickham_advanced_2019, cap. 2] donde tiene como propósito introducir conceptos básicos del lenguaje de programación R utilizando datos de los programas de pregrado de la [Facultad de Estudios a Distancia (FAEDIS)](https://umng.edu.co/facultad/faedis/) de la Universidad Militar Nueva Granada (UMNG).
 
 Exploraremos los siguientes aspectos:
 
@@ -324,7 +324,7 @@ costo_matricula + aumento_costo_matricula
 
 En el @lst-error no es posible ejecutar el código debido a que no se agregó una coma, `","`, al final del penúltimo valor en el vector atómico `aumento_costo_matricula`. R no entiende como proceder por qué no se esta separando este elemento del último número para que se definan en total 7 valores.
 
-## Tibbles
+## Tibbles {#sec-tibbles}
 
 El uso de vectores atómicos es útil para almacenar datos de un mismo tipo pero tiene limitaciones si se buscan integrar variables de diferentes tipos en una misma estructura. Cuando se analizan datos es necesario agrupar distintos atributos para entender el contexto de la información y poder relacionar diferentes variables.
 
@@ -366,7 +366,7 @@ costo_matricula_pregrado <- tibble(
 costo_matricula_pregrado
 ```
 
-En la tibble del @lst-tibble respecto a las variables `ano`, `semestre` y `nivel_academico` R aplica el proceso de reciclaje de vectores (ver @sec-warnings) para ajustar el tamaño de las columnas. En el caso de la variable `codigo_snies` se fija un código establecido por el [Sistema Nacional de Información de la Educación Superior - SNIES](https://snies.mineducacion.gov.co/portal/) para identificar y asociar de manera única a cada programa académico con el nombre señalado en la variable `nombre_programa`. Por último, es posible en una tibble utilizar un vector atómico previamente definido, como en el caso de `costo_matricula`, para generar una variable. En el @lst-tibble se utiliza el mismo nombre asociado al vector atómico que contiene el costo de matrícula para la columna que incluye dicha información.
+En la tibble del @lst-tibble respecto a las variables `ano`, `semestre` y `nivel_academico` R aplica el proceso de reciclaje de vectores (ver @sec-warnings) para ajustar el tamaño de las columnas. En el caso de la variable `codigo_snies` se fija un código establecido por el [Sistema Nacional de Información de la Educación Superior (SNIES)](https://snies.mineducacion.gov.co/portal/) para identificar y asociar de manera única a cada programa académico con el nombre señalado en la variable `nombre_programa`. Por último, es posible en una tibble utilizar un vector atómico previamente definido, como en el caso de `costo_matricula`, para generar una variable. En el @lst-tibble se utiliza el mismo nombre asociado al vector atómico que contiene el costo de matrícula para la columna que incluye dicha información.
 
 ::: {.callout-important}
 En el @lst-tibble y en el desarrollo del @sec-how-do-i-code-in-r, se utilizó una convención para nombrar variables similar a la descrita en la @sec-how-to-name-files-folders. Sin embargo, existe una excepción fundamental: no se utilizó el carácter `-`.

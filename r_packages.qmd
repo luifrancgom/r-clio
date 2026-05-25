@@ -171,6 +171,8 @@ De esa manera podrás utilizar el explorador de datos y examinar los elementos i
 En ocasiones se hace necesario poder dar un "vistazo" a un conjunto de datos cuando se tiene un número considerable de columnas. En ese sentido, otra forma adicional de explorar un conjunto de datos, es mediante el uso de la función `glimpse()`. Esta función permite visualizar los nombres de las columnas verticalmente hacia abajo y los datos correspondientes a cada variable de manera horizontal. Para utilizar ésta herramienta ejecuta el siguiente código:
 
 ```{r}
+#| lst-label: lst-glimpse
+#| lst-cap: Uso de la función `glimpse` para dar un \"vistazo\" a un conjunto de datos
 # "Vistazo" del conjunto de datos ----
 glimpse(mpg)
 ```
