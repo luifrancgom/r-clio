@@ -1,0 +1,26 @@
+% --- BEGIN CUSTOM COVER PAGE ---
+$if(book.cover-image)$
+\begin{titlepage}
+    \newgeometry{margin=0pt}
+    \thispagestyle{empty}
+    \noindent
+    \begin{minipage}[c][\paperheight][c]{\paperwidth}
+        \centering
+        \includegraphics[width=\paperwidth, height=\paperheight]{$book.cover-image$}
+    \end{minipage}
+\end{titlepage}
+\restoregeometry
+\cleardoublepage
+$endif$
+% --- END CUSTOM COVER PAGE ---
+$if(has-frontmatter)$
+\frontmatter
+$endif$
+$if(title)$
+\maketitle
+$if(abstract)$
+\begin{abstract}
+$abstract$
+\end{abstract}
+$endif$
+$endif$

@@ -16,6 +16,7 @@ book:
       orcid: 0000-0002-2877-9015
   date: 2025-10-29
   date-format: iso
+  cover-image: images/front-cover.png
   downloads: [pdf]
   # favicon: pending
   site-url: https://luifrancgom.github.io/r-clio/
@@ -78,10 +79,17 @@ format:
     colorlinks: true
     # layout
     documentclass: scrbook
+    papersize: a4
     # references
     link-citations: true
     link-bibliography: true
+    # includes
+    include-in-header: 
+      - file: partials/latex/header.tex
     # rendering
+    template-partials:
+      - partials/latex/before-body.tex
+    keep-md: false
     keep-tex: false
 
 
