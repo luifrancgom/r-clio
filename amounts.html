@@ -431,7 +431,7 @@ Nota&nbsp;6.1
 <section id="gramática-de-gráficos-en-capas" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="gramática-de-gráficos-en-capas"><span class="header-section-number">6.1</span> Gramática de gráficos en capas</h2>
 <p>El paquete <code>ggplot2</code>, incluido en el <code>tidyverse</code>, permite generar visualizaciones a partir de un conjunto de datos. Este paquete utiliza un marco conceptual basado en la gramática de gráficos desarrollada en <span class="citation" data-cites="wilkinson_grammar_2005">(<a href="references.html#ref-wilkinson_grammar_2005" role="doc-biblioref">Wilkinson &amp; Wills, 2005</a>)</span>. La gramática de gráficos en capas es una adaptación de esta gramática para integrarla en el lenguaje de programación de R.</p>
-<p>A medida que explores diferentes formas de visualizar un conjunto de datos entenderás en más detalle la gramática de gráficos en capas utilizando el paquete <code>ggplot2</code>. Por ahora se describirá de manera general las 7 capas que conforman éste modelo mental (ver <a href="#fig-mental-model-layered-grammar-graphics" class="quarto-xref">Figura&nbsp;<span>6.1</span></a>) y que se utilizan en <code>ggplot2</code> como un conjunto de instrucciones para generar un gráfico.</p>
+<p>A medida que explores diferentes formas de visualizar un conjunto de datos entenderás en más detalle la gramática de gráficos en capas utilizando el paquete <code>ggplot2</code>. Por ahora se describirá de manera general las 7 capas que conforman este modelo mental (ver <a href="#fig-mental-model-layered-grammar-graphics" class="quarto-xref">Figura&nbsp;<span>6.1</span></a>) y que se utilizan en <code>ggplot2</code> como un conjunto de instrucciones para generar un gráfico.</p>
 <div id="fig-mental-model-layered-grammar-graphics" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual en perspectiva de 7 capas flotantes que ilustran el modelo mental de ggplot2. De arriba a abajo, las capas están etiquetadas en español e inglés: Tema (Theme), Coordenadas (Coordinates), Facetas (Facets), Escalas (Scales), Capas (Layers), Mapeo (Mapping) y Datos (Data). El orden visual muestra cómo los componentes se superponen verticalmente para construir un gráfico.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mental-model-layered-grammar-graphics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -466,7 +466,8 @@ Figura&nbsp;6.2: Ejemplos de atributos estéticos
 </ol>
 <p>Una capa en <code>ggplot2</code> se construye con funciones de la forma <code>geom_*()</code> o <code>stat_*()</code>.</p></li>
 <li><p><strong>Escalas</strong>: es el componente que traduce la información visual del gráfico de vuelta a los datos originales, utilizando los ejes y las leyendas como guías.</p>
-<p>En <code>ggplot2</code> las escalas se aplican mediante funciones que utilizan el patrón <code>scale_{aesthetic}_{type}()</code>, donde <code>{aesthetic}</code> corresponde a uno de los atributos estéticos utilizados en el mapeo y <code>{type}</code> una etiqueta descriptiva asignada a la escala.</p></li>
+<p>En <code>ggplot2</code> las escalas se aplican usualmente mediante funciones que utilizan el patrón <code>scale_{aesthetic}_{type}()</code>, donde <code>{aesthetic}</code> corresponde a uno de los atributos estéticos utilizados en el mapeo y <code>{type}</code> una etiqueta descriptiva asignada a la escala.</p>
+<p>Sin embargo, existe también funciones auxiliares como <code>labs()</code> y <code>lims()</code>que permiten realizar ajustes a las etiquetas y los límites de un gráfico.</p></li>
 <li><p><strong>Facetas</strong>: es el componente que permite visualizar diferentes subconjuntos de datos en paneles individuales, dividiendo el gráfico principal en función de variables categóricas.</p></li>
 <li><p><strong>Coordenadas</strong>: es el componente que determina cómo se combinan los atributos estéticos <code>x</code> y <code>y</code> para posicionar los elementos en el plano del gráfico. Por defecto, se utiliza el sistema de coordenadas cartesianas, pero existen <a href="https://ggplot2.tidyverse.org/reference/index.html#coordinate-systems">otras opciones</a> dentro de <code>ggplot2</code>.</p></li>
 <li><p><strong>Tema</strong>: es el componente que se encarga de controlar cualquier elemento visual del gráfico que sea ajeno a los datos. Su función principal es determinar la apariencia estética y el estilo general del diseño del gráfico.</p></li>
@@ -474,7 +475,7 @@ Figura&nbsp;6.2: Ejemplos de atributos estéticos
 </section>
 <section id="gráfico-de-barras-mediante-conteo-automático" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="gráfico-de-barras-mediante-conteo-automático"><span class="header-section-number">6.2</span> Gráfico de barras mediante conteo automático</h2>
-<p>En esta sección realizarás un gráfico de barras señalando el número de inscritos al examen Saber Pro para cada programa de pregrado de la Facultad de Estudios a Distancia de la Universidad Militar en el periodo 2021-2024 (ver <a href="#fig-1-chap-6" class="quarto-xref">Figura&nbsp;<span>6.3</span></a>).</p>
+<p>En esta sección realizarás un gráfico de barras señalando el número de inscritos al examen Saber Pro para cada programa de pregrado de la Facultad de Estudios a Distancia de la Universidad Militar en el periodo 2021-2024, tal como se indica en la <a href="#fig-1-chap-6" class="quarto-xref">Figura&nbsp;<span>6.3</span></a>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-1-chap-6" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -516,7 +517,7 @@ Nota
 <p>En el <a href="r_data_serialization.html" class="quarto-xref"><span>Capítulo 11</span></a> se abarcará con más detalle la importación de datos para archivos con una extensión <code>.rds</code>. Por ahora, el enfoque del <a href="#sec-amounts" class="quarto-xref"><span>Capítulo 6</span></a> es la visualización de un conjunto de datos.</p>
 </div>
 </div>
-<p>Una vez importes el conjunto de datos, podrás darle un “vistazo” utilizando la functión <code>glimpse()</code> (ver <a href="r_packages.html#lst-glimpse" class="quarto-xref">Listado&nbsp;<span>4.4</span></a>) para identificar el número y los tipos de variables que lo componen así como la cantidad de observaciones disponibles.</p>
+<p>Una vez importes el conjunto de datos, podrás darle un “vistazo” utilizando la functión <code>glimpse()</code> (ver <a href="r_packages.html#lst-glimpse" class="quarto-xref">Listado&nbsp;<span>4.4</span></a>) para identificar el número y los tipos de variables que lo componen, así como la cantidad de observaciones disponibles.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspeccionar datos ----</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(saber_pro_genericas_faedis_2021_2024)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
@@ -596,7 +597,7 @@ Wilkinson, L., &amp; Wills, G. (2005). <em>The grammar of graphics</em> (2nd ed)
 <hr>
 <ol>
 <li id="fn1"><p>DIVIPOLA es el acrónimo de <strong>Divi</strong>sión <strong>Pol</strong>ítico <strong>A</strong>dministrativa de Colombia donde es una nomenclatura estandarizada, diseñada por el Departamento Administrativo Nacional de Estadística (DANE) para la identificación de Entidades Territoriales (departamentos, distritos y municipios), Áreas No Municipalizadas y Centros Poblados.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>SNIES es el acrónimo de <strong>S</strong>istema <strong>N</strong>acional de <strong>I</strong>nformación de la <strong>E</strong>ducación <strong>S</strong>uperior donde el Ministerio de Educación de Colombia asígna un número de registro único a un programa académico para identificarlos (ver también <a href="how_to_code_in_r.html#sec-tibbles" class="quarto-xref"><span>Sección 5.4</span></a>).<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>SNIES es el acrónimo de <strong>S</strong>istema <strong>N</strong>acional de <strong>I</strong>nformación de la <strong>E</strong>ducación <strong>S</strong>uperior donde el Ministerio de Educación de Colombia asígna un número de registro único a un programa académico para identificarlo (ver también <a href="how_to_code_in_r.html#sec-tibbles" class="quarto-xref"><span>Sección 5.4</span></a>).<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
