@@ -289,12 +289,56 @@ window.Quarto = {
  <span class="menu-text">Manipulación de datos</span></span>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Organización y limpieza de datos</span></span>
+      <div class="sidebar-item-container"> 
+            <a href="./data_tidy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Organización y limpieza de datos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data_tidying.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Datos ordenados</span></span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Importación de datos</span></span>
+      <div class="sidebar-item-container"> 
+            <a href="./data_import.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Importación de datos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./r_data_serialization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Serialización de datos en R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./plain_text.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Texto plano</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./spreadsheets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Hojas de cálculo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geopackage_gpkg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">GeoPackage (GPKG)</span></span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
@@ -328,7 +372,7 @@ window.Quarto = {
   <li><a href="#sec-warnings" id="toc-sec-warnings" class="nav-link" data-scroll-target="#sec-warnings"><span class="header-section-number">5.3.2</span> Advertencias</a></li>
   <li><a href="#errores" id="toc-errores" class="nav-link" data-scroll-target="#errores"><span class="header-section-number">5.3.3</span> Errores</a></li>
   </ul></li>
-  <li><a href="#tibbles" id="toc-tibbles" class="nav-link" data-scroll-target="#tibbles"><span class="header-section-number">5.4</span> Tibbles</a></li>
+  <li><a href="#sec-tibbles" id="toc-sec-tibbles" class="nav-link" data-scroll-target="#sec-tibbles"><span class="header-section-number">5.4</span> Tibbles</a></li>
   <li><a href="#operadores-relacionales" id="toc-operadores-relacionales" class="nav-link" data-scroll-target="#operadores-relacionales"><span class="header-section-number">5.5</span> Operadores relacionales</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/how_to_code_in_r.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/how_to_code_in_r.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
@@ -355,7 +399,7 @@ window.Quarto = {
 </header>
 
 
-<p>Este capítulo se basa en <span class="citation" data-cites="ismay_statistical_2025">(<a href="references.html#ref-ismay_statistical_2025" role="doc-biblioref">Ismay, 2025, Capítulo 1</a>)</span>, <span class="citation" data-cites="grolemund_hands-programming_2014">(<a href="references.html#ref-grolemund_hands-programming_2014" role="doc-biblioref">Grolemund, 2014, Capítulo 1</a>)</span> y <span class="citation" data-cites="wickham_advanced_2019">(<a href="references.html#ref-wickham_advanced_2019" role="doc-biblioref">Wickham, 2019, Capítulo 2</a>)</span> donde tiene como propósito introducir conceptos básicos del lenguaje de programación R utilizando datos de los programas de pregrado de la <a href="https://umng.edu.co/facultad/faedis/">Facultad de Estudios a Distancia</a> de la Universidad Militar Nueva Granada.</p>
+<p>Este capítulo se basa en <span class="citation" data-cites="ismay_statistical_2025">(<a href="references.html#ref-ismay_statistical_2025" role="doc-biblioref">Ismay, 2025, Capítulo 1</a>)</span>, <span class="citation" data-cites="grolemund_hands-programming_2014">(<a href="references.html#ref-grolemund_hands-programming_2014" role="doc-biblioref">Grolemund, 2014, Capítulo 1</a>)</span> y <span class="citation" data-cites="wickham_advanced_2019">(<a href="references.html#ref-wickham_advanced_2019" role="doc-biblioref">Wickham, 2019, Capítulo 2</a>)</span> donde tiene como propósito introducir conceptos básicos del lenguaje de programación R utilizando datos de los programas de pregrado de la <a href="https://umng.edu.co/facultad/faedis/">Facultad de Estudios a Distancia (FAEDIS)</a> de la Universidad Militar Nueva Granada (UMNG).</p>
 <p>Exploraremos los siguientes aspectos:</p>
 <ol type="1">
 <li>Operaciones aritméticas</li>
@@ -676,8 +720,8 @@ Listado&nbsp;5.7: Error por un problema de sintaxis al no separar de manera corr
 <p>En el <a href="#lst-error" class="quarto-xref">Listado&nbsp;<span>5.7</span></a> no es posible ejecutar el código debido a que no se agregó una coma, <code>","</code>, al final del penúltimo valor en el vector atómico <code>aumento_costo_matricula</code>. R no entiende como proceder por qué no se esta separando este elemento del último número para que se definan en total 7 valores.</p>
 </section>
 </section>
-<section id="tibbles" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="tibbles"><span class="header-section-number">5.4</span> Tibbles</h2>
+<section id="sec-tibbles" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="sec-tibbles"><span class="header-section-number">5.4</span> Tibbles</h2>
 <p>El uso de vectores atómicos es útil para almacenar datos de un mismo tipo pero tiene limitaciones si se buscan integrar variables de diferentes tipos en una misma estructura. Cuando se analizan datos es necesario agrupar distintos atributos para entender el contexto de la información y poder relacionar diferentes variables.</p>
 <p>Una tibble permite agrupar datos en una estructura rectangular para entender la relación de variables de diferentes tipos. Para entender este aspecto construirás una tibble para agrupar y darle un contexto adecuado a la información señalada al principio del <a href="#sec-how-do-i-code-in-r" class="quarto-xref"><span>Capítulo 5</span></a> utilizando la functión <code>tibble()</code>.</p>
 <p>Para organizar la información de los programas académicos relacionados con el costos de matrícula definiremos en primera instancia tanto el año como el semestre al que se refieren los datos, luego asociaremos un identificador único para cada programa académico, su nombre, nivel académico y finalmente una variable del costo de matrícula.</p>
@@ -734,7 +778,7 @@ Listado&nbsp;5.8: Construcción de una tibble a partir de información del costo
 #   costo_matricula &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<p>En la tibble del <a href="#lst-tibble" class="quarto-xref">Listado&nbsp;<span>5.8</span></a> respecto a las variables <code>ano</code>, <code>semestre</code> y <code>nivel_academico</code> R aplica el proceso de reciclaje de vectores (ver <a href="#sec-warnings" class="quarto-xref"><span>Sección 5.3.2</span></a>) para ajustar el tamaño de las columnas. En el caso de la variable <code>codigo_snies</code> se fija un código establecido por el <a href="https://snies.mineducacion.gov.co/portal/">Sistema Nacional de Información de la Educación Superior - SNIES</a> para identificar y asociar de manera única a cada programa académico con el nombre señalado en la variable <code>nombre_programa</code>. Por último, es posible en una tibble utilizar un vector atómico previamente definido, como en el caso de <code>costo_matricula</code>, para generar una variable. En el <a href="#lst-tibble" class="quarto-xref">Listado&nbsp;<span>5.8</span></a> se utiliza el mismo nombre asociado al vector atómico que contiene el costo de matrícula para la columna que incluye dicha información.</p>
+<p>En la tibble del <a href="#lst-tibble" class="quarto-xref">Listado&nbsp;<span>5.8</span></a> respecto a las variables <code>ano</code>, <code>semestre</code> y <code>nivel_academico</code> R aplica el proceso de reciclaje de vectores (ver <a href="#sec-warnings" class="quarto-xref"><span>Sección 5.3.2</span></a>) para ajustar el tamaño de las columnas. En el caso de la variable <code>codigo_snies</code> se fija un código establecido por el <a href="https://snies.mineducacion.gov.co/portal/">Sistema Nacional de Información de la Educación Superior (SNIES)</a> para identificar y asociar de manera única a cada programa académico con el nombre señalado en la variable <code>nombre_programa</code>. Por último, es posible en una tibble utilizar un vector atómico previamente definido, como en el caso de <code>costo_matricula</code>, para generar una variable. En el <a href="#lst-tibble" class="quarto-xref">Listado&nbsp;<span>5.8</span></a> se utiliza el mismo nombre asociado al vector atómico que contiene el costo de matrícula para la columna que incluye dicha información.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
