@@ -34,7 +34,7 @@ Luego, genera una carpeta con el nombre `data` y dentro de esta carpeta incluye 
 
 El paquete `ggplot2`, incluido en el `tidyverse`, permite generar visualizaciones a partir de un conjunto de datos. Este paquete utiliza un marco conceptual basado en la gramática de gráficos desarrollada en [@wilkinson_grammar_2005]. La gramática de gráficos en capas es una adaptación de esta gramática para integrarla en el lenguaje de programación de R.
 
-A medida que explores diferentes formas de visualizar un conjunto de datos entenderás en más detalle la gramática de gráficos en capas utilizando el paquete `ggplot2`. Por ahora se describirá de manera general las 7 capas que conforman éste modelo mental (ver @fig-mental-model-layered-grammar-graphics) y que se utilizan en `ggplot2` como un conjunto de instrucciones para generar un gráfico.
+A medida que explores diferentes formas de visualizar un conjunto de datos entenderás en más detalle la gramática de gráficos en capas utilizando el paquete `ggplot2`. Por ahora se describirá de manera general las 7 capas que conforman este modelo mental (ver @fig-mental-model-layered-grammar-graphics) y que se utilizan en `ggplot2` como un conjunto de instrucciones para generar un gráfico.
 
 ![Modelo mental de la gramática de gráficos en capas](images/mental-model-layered-grammar-graphics.png){#fig-mental-model-layered-grammar-graphics fig-alt="Diagrama conceptual en perspectiva de 7 capas flotantes que ilustran el modelo mental de ggplot2. De arriba a abajo, las capas están etiquetadas en español e inglés: Tema (Theme), Coordenadas (Coordinates), Facetas (Facets), Escalas (Scales), Capas (Layers), Mapeo (Mapping) y Datos (Data). El orden visual muestra cómo los componentes se superponen verticalmente para construir un gráfico."}
 
@@ -58,7 +58,9 @@ Para que `ggplot2` genere un gráfico requiere como mínimo los siguientes 3 com
 
 4. **Escalas**: es el componente que traduce la información visual del gráfico de vuelta a los datos originales, utilizando los ejes y las leyendas como guías.
 
-   En `ggplot2` las escalas se aplican mediante funciones que utilizan el patrón `scale_{aesthetic}_{type}()`, donde `{aesthetic}` corresponde a uno de los atributos estéticos utilizados en el mapeo y `{type}` una etiqueta descriptiva asignada a la escala.
+   En `ggplot2` las escalas se aplican usualmente mediante funciones que utilizan el patrón `scale_{aesthetic}_{type}()`, donde `{aesthetic}` corresponde a uno de los atributos estéticos utilizados en el mapeo y `{type}` una etiqueta descriptiva asignada a la escala.
+
+   Sin embargo, existe también funciones auxiliares como `labs()` y `lims()`que permiten realizar ajustes a las etiquetas y los límites de un gráfico.
 
 5. **Facetas**: es el componente que permite visualizar diferentes subconjuntos de datos en paneles individuales, dividiendo el gráfico principal en función de variables categóricas. 
 
@@ -68,7 +70,7 @@ Para que `ggplot2` genere un gráfico requiere como mínimo los siguientes 3 com
 
 ## Gráfico de barras mediante conteo automático
 
-En esta sección realizarás un gráfico de barras señalando el número de inscritos al examen Saber Pro para cada programa de pregrado de la Facultad de Estudios a Distancia de la Universidad Militar en el periodo 2021-2024 (ver @fig-1-chap-6).
+En esta sección realizarás un gráfico de barras señalando el número de inscritos al examen Saber Pro para cada programa de pregrado de la Facultad de Estudios a Distancia de la Universidad Militar en el periodo 2021-2024, tal como se indica en la @fig-1-chap-6.
 
 ```{r}
 #| label: fig-1-chap-6
@@ -117,7 +119,7 @@ saber_pro_genericas_faedis_2021_2024 <- read_rds(
 En el @sec-rds se abarcará con más detalle la importación de datos para archivos con una extensión `.rds`. Por ahora, el enfoque del @sec-amounts es la visualización de un conjunto de datos.
 :::
 
-Una vez importes el conjunto de datos, podrás darle un "vistazo" utilizando la functión `glimpse()` (ver @lst-glimpse) para identificar el número y los tipos de variables que lo componen así como la cantidad de observaciones disponibles.
+Una vez importes el conjunto de datos, podrás darle un "vistazo" utilizando la functión `glimpse()` (ver @lst-glimpse) para identificar el número y los tipos de variables que lo componen, así como la cantidad de observaciones disponibles.
 
 ```{r}
 # Inspeccionar datos ----
@@ -151,4 +153,4 @@ Para examinar y en particular crear un gráfico a partir de un conjunto de datos
 
 [^chap-6-footnote-1]: DIVIPOLA es el acrónimo de **Divi**sión **Pol**ítico **A**dministrativa de Colombia donde es una nomenclatura estandarizada, diseñada por el Departamento Administrativo Nacional de Estadística (DANE) para la identificación de Entidades Territoriales (departamentos, distritos y municipios), Áreas No Municipalizadas y Centros Poblados.
 
-[^chap-6-footnote-2]: SNIES es el acrónimo de **S**istema **N**acional de **I**nformación de la **E**ducación **S**uperior donde el Ministerio de Educación de Colombia asígna un número de registro único a un programa académico para identificarlos (ver también @sec-tibbles).
+[^chap-6-footnote-2]: SNIES es el acrónimo de **S**istema **N**acional de **I**nformación de la **E**ducación **S**uperior donde el Ministerio de Educación de Colombia asígna un número de registro único a un programa académico para identificarlo (ver también @sec-tibbles).
