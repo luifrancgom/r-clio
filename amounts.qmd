@@ -75,6 +75,7 @@ En esta sección realizarás un gráfico de barras señalando el número de insc
 ```{r}
 #| label: fig-1-chap-6
 #| fig-cap: Resultado final de un gráfico de barras utilizando `ggplot2`
+#| fig-height: 5.5
 #| echo: false
 saber_pro_genericas_faedis_2021_2024 <- read_rds(
   file = "data/2021-2024_saber-pro-genericas_faedis.rds"
@@ -89,7 +90,10 @@ ggplot(
   labs(
     x = "Número de inscritos",
     y = NULL,
-    title = "Inscritos examen Saber Pro por programas de pregrado de FAEDIS",
+    title = str_wrap(
+      "Inscritos examen Saber Pro por programas de pregrado de FAEDIS",
+      width = 50
+    ),
     subtitle = "Perido: 2021-2024",
     caption = "Fuente: Data Icfes"
   )
