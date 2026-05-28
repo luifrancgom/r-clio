@@ -428,7 +428,7 @@ Nota
 </div>
 <div class="callout-body-container callout-body">
 <p>En caso que este utilizando Posit Workbench, de acuerdo a lo señalado en la <a href="welcome_to_r.html#sec-posit-workbench" class="quarto-xref"><span>Sección 2.3</span></a>, es posible que el proceso descrito a continuación no debas realizarlo. En algunas ocasiones el administrador de esta herramienta puede haber instalado ciertos paquetes con anterioridad.</p>
-<p>Para el caso de Posit Workbench ubica la pestaña <strong>Console</strong> en el <strong>Panel</strong> (Ver la <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) y, tras el símbolo <code>&gt;</code> escribe el comando <code>library(tidyverse)</code>, luego presiona <kbd title="Enter" aria-hidden="true">Enter</kbd><span class="visually-hidden">Enter</span>. Si te aparece un mensaje similar al señalado en el <a href="#lst-load-tidyverse-message" class="quarto-xref">Listado&nbsp;<span>4.1</span></a> no es necesario que realices alguna instalación y puedes dirigirte directamente a la <a href="#sec-load-packages" class="quarto-xref"><span>Sección 4.3</span></a>. En caso contrario si se genera un mensaje igual o similar a:</p>
+<p>Para el caso de Posit Workbench ubica la pestaña <strong>Console</strong> en el <strong>Panel</strong> (Ver la <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) y, tras el símbolo <code>&gt;</code> escribe el comando <code>library(tidyverse)</code>, luego presiona <kbd title="Enter" aria-hidden="true">Enter</kbd><span class="visually-hidden">Enter</span>. Si te aparece un mensaje similar al señalado en el <a href="#lst-load-tidyverse-message" class="quarto-xref">Listado&nbsp;<span>4.1</span></a> no es necesario que realices alguna instalación y puedes dirigirte directamente a la <a href="#sec-load-packages" class="quarto-xref"><span>Sección 4.3</span></a>. En caso contrario, si se genera un mensaje igual o similar a:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Error<span class="sc">:</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>there is no package called ‘tidyverse’</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>puedes proceder con las instrucciones que se señalan a continuación.</p>
@@ -585,8 +585,17 @@ Listado&nbsp;4.3: Conjunto de datos <code>mpg</code>
 </ul>
 <p>Si el conjunto de datos pertenece a un paquete, como en el caso de <code>mpg</code>, es posible consultar la documentación acerca de la misma utilizando el símbolo <code>?</code> más su nombre, tal como se muestra a continuación:</p>
 <div class="cell">
+<div id="lst-help" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-help-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;4.4: Uso del símbolo <code>?</code> para consultar documentación en R
+</figcaption>
+<div aria-describedby="lst-help-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Documentación del conjunto de datos mpg ----</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>?mpg</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
 </div>
 <p>Si ejecutas éste código, en la <strong>Barra lateral secundaria</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) dentro de la pestaña <strong>HELP</strong>, se desplegará la documentación relacionada con <code>mpg</code>.</p>
 <p>En Positron también se puede utilizar una herramienta denominada <a href="https://positron.posit.co/data-explorer.html">Explorador de Datos</a> para visualizar la información en una cuadrícula similar a una hoja de cálculo, así como filtar y ordenar los datos temporalmente y obtener estadísticas de cada variable. Para utilizar ésta herramienta ejecuta el siguiente código:</p>
@@ -610,7 +619,7 @@ Figura&nbsp;4.4: Interfaz del explorador de datos aplicado a <code>mpg</code>
 <div id="lst-glimpse" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-glimpse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listado&nbsp;4.4: Uso de la función <code>glimpse</code> para dar un “vistazo” a un conjunto de datos
+Listado&nbsp;4.5: Uso de la función <code>glimpse</code> para dar un “vistazo” a un conjunto de datos
 </figcaption>
 <div aria-describedby="lst-glimpse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># "Vistazo" del conjunto de datos ----</span></span>

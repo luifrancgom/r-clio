@@ -364,10 +364,13 @@ window.Quarto = {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#gramática-de-gráficos-en-capas" id="toc-gramática-de-gráficos-en-capas" class="nav-link active" data-scroll-target="#gramática-de-gráficos-en-capas"><span class="header-section-number">6.1</span> Gramática de gráficos en capas</a></li>
+  <li><a href="#sec-layered-grammar-graphics" id="toc-sec-layered-grammar-graphics" class="nav-link active" data-scroll-target="#sec-layered-grammar-graphics"><span class="header-section-number">6.1</span> Gramática de gráficos en capas</a></li>
   <li><a href="#gráfico-de-barras-mediante-conteo-automático" id="toc-gráfico-de-barras-mediante-conteo-automático" class="nav-link" data-scroll-target="#gráfico-de-barras-mediante-conteo-automático"><span class="header-section-number">6.2</span> Gráfico de barras mediante conteo automático</a>
   <ul class="collapse">
   <li><a href="#datos" id="toc-datos" class="nav-link" data-scroll-target="#datos"><span class="header-section-number">6.2.1</span> Datos</a></li>
+  <li><a href="#mapeo" id="toc-mapeo" class="nav-link" data-scroll-target="#mapeo"><span class="header-section-number">6.2.2</span> Mapeo</a></li>
+  <li><a href="#capas" id="toc-capas" class="nav-link" data-scroll-target="#capas"><span class="header-section-number">6.2.3</span> Capas</a></li>
+  <li><a href="#escalas" id="toc-escalas" class="nav-link" data-scroll-target="#escalas"><span class="header-section-number">6.2.4</span> Escalas</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/amounts.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/amounts.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
@@ -428,8 +431,8 @@ Nota&nbsp;6.1
 <p>Luego, genera una carpeta con el nombre <code>data</code> y dentro de esta carpeta incluye el archivo <code>2021-2024_saber-pro-genericas_faedis.rds</code>. Finalmente, genera una carpeta con el nombre <code>006_visualizar-cantidades-en-r</code> y dentro de la carpeta crea un archivo con el nombre <code>001_visualizar-cantidades-datos-faedis.R</code> siguiendo las indicaciones descritas en la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>.</p>
 </div>
 </div>
-<section id="gramática-de-gráficos-en-capas" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="gramática-de-gráficos-en-capas"><span class="header-section-number">6.1</span> Gramática de gráficos en capas</h2>
+<section id="sec-layered-grammar-graphics" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="sec-layered-grammar-graphics"><span class="header-section-number">6.1</span> Gramática de gráficos en capas</h2>
 <p>El paquete <code>ggplot2</code>, incluido en el <code>tidyverse</code>, permite generar visualizaciones a partir de un conjunto de datos. Este paquete utiliza un marco conceptual basado en la gramática de gráficos desarrollada en <span class="citation" data-cites="wilkinson_grammar_2005">(<a href="references.html#ref-wilkinson_grammar_2005" role="doc-biblioref">Wilkinson &amp; Wills, 2005</a>)</span>. La gramática de gráficos en capas es una adaptación de esta gramática para integrarla en el lenguaje de programación de R.</p>
 <p>A medida que explores diferentes formas de visualizar un conjunto de datos entenderás en más detalle la gramática de gráficos en capas utilizando el paquete <code>ggplot2</code>. Por ahora se describirán de manera general las 7 capas que conforman este modelo mental (ver <a href="#fig-mental-model-layered-grammar-graphics" class="quarto-xref">Figura&nbsp;<span>6.1</span></a>) y que se utilizan en <code>ggplot2</code> como un conjunto de instrucciones para generar un gráfico.</p>
 <div id="fig-mental-model-layered-grammar-graphics" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual en perspectiva de 7 capas flotantes que ilustran el modelo mental de ggplot2. De arriba a abajo, las capas están etiquetadas en español e inglés: Tema (Theme), Coordenadas (Coordinates), Facetas (Facets), Escalas (Scales), Capas (Layers), Mapeo (Mapping) y Datos (Data). El orden visual muestra cómo los componentes se superponen verticalmente para construir un gráfico.">
@@ -517,7 +520,7 @@ Nota
 <p>En el <a href="r_data_serialization.html" class="quarto-xref"><span>Capítulo 11</span></a> se abarcará con más detalle la importación de datos para archivos con una extensión <code>.rds</code>. Por ahora, el enfoque del <a href="#sec-amounts" class="quarto-xref"><span>Capítulo 6</span></a> será la visualización de un conjunto de datos.</p>
 </div>
 </div>
-<p>Una vez importes el conjunto de datos, podrás darle un “vistazo” utilizando la functión <code>glimpse()</code> (ver <a href="r_packages.html#lst-glimpse" class="quarto-xref">Listado&nbsp;<span>4.4</span></a>) para identificar el número y los tipos de variables que lo componen, así como la cantidad de observaciones disponibles.</p>
+<p>Una vez importes el conjunto de datos, podrás darle un “vistazo” utilizando la functión <code>glimpse()</code> (ver <a href="r_packages.html#lst-glimpse" class="quarto-xref">Listado&nbsp;<span>4.5</span></a>) para identificar el número y los tipos de variables que lo componen, así como la cantidad de observaciones disponibles.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspeccionar datos ----</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(saber_pro_genericas_faedis_2021_2024)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
@@ -571,6 +574,234 @@ $ punt_global                 &lt;dbl&gt; 139, 170, 128, 155, 16…</code></pre>
 <li><strong>mod_razona_cuantitat_punt</strong>: puntaje del módulo de razonamiento cuantitativo obtenido por el estudiante (el rango posible es <span class="math inline">\([0, 300]\)</span>)</li>
 <li><strong>punt_global</strong>: puntaje total obtenido por el estudiante en el grupo de competencias genéricas (este grupo comprenden los módulos de competencias ciudadanas, comunicación escrita, inglés, lectura crítica y razonamiento cuantitativo y la variable se refiere al promedio simple del puntaje de estos módulos redondeado al entero más cercano)</li>
 </ol>
+</section>
+<section id="ggplot" class="level4" data-number="6.2.1.2">
+<h4 data-number="6.2.1.2" class="anchored" data-anchor-id="ggplot"><span class="header-section-number">6.2.1.2</span> <code>ggplot()</code></h4>
+<p>Para construir la <a href="#fig-1-chap-6" class="quarto-xref">Figura&nbsp;<span>6.3</span></a> se requiere en primera instancia inicializar un objeto <code>ggplot</code>. Para llevar a cabo este proceso se utiliza la función <code>ggplot()</code> y el parámetro <code>data</code> de esta función con el conjunto de datos que se buscan visualizar, en este caso <code>saber_pro_genericas_faedis_2021_2024</code>:</p>
+<div class="cell">
+<div id="lst-ggplot" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-ggplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;6.1: Inicialización de un objeto <code>ggplot</code>
+</figcaption>
+<div aria-describedby="lst-ggplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> saber_pro_genericas_faedis_2021_2024)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="amounts_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>En este paso R no genera un gráfico, simplemente genera visualmente un “lienzo” completamente vacío. El propósito en el <a href="#lst-ggplot" class="quarto-xref">Listado&nbsp;<span>6.1</span></a> es almacenar los datos para que sean después utilizados por otros componentes.</p>
+</section>
+</section>
+<section id="mapeo" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="mapeo"><span class="header-section-number">6.2.2</span> Mapeo</h3>
+<p>Este componente tiene como propósito fijar un conjunto de instrucciones respecto a cómo los datos son asociados a los atributos estéticos. Para realizar el mapeo se utiliza la función <code>aes()</code> junto con el parámetro <code>mapping</code> dentro de la función <code>ggplot()</code>. Para ilustar este aspecto de manera concreta utilizaremos inicialmente la posición (ver <a href="#fig-aesthetics-attributes" class="quarto-xref">Figura&nbsp;<span>6.2</span></a>) asociando la coordenada <code>x</code> a la variable <code>estu_prgm_academico</code>, donde se encuentran los nombres de los programas académicos:</p>
+<div class="cell">
+<div id="lst-mapping-1" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-mapping-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;6.2: Mapeo de datos hacia atributos estéticos utilizando la coordenada <code>x</code>
+</figcaption>
+<div aria-describedby="lst-mapping-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> estu_prgm_academico)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="amounts_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>En el <a href="#lst-mapping-1" class="quarto-xref">Listado&nbsp;<span>6.2</span></a> se fija una posición para cada nombre de los programas académicos en la coordenada <code>x</code>. Debido a la longitud de los nombres y la forma como se muestran de manera horizontal, el gráfico generado es confuso. Para solucionar este aspecto es posible utilizar de manera alternativa la coordena <code>y</code> asociándola a la variable <code>estu_prgm_academico</code>:</p>
+<div class="cell">
+<div id="lst-mapping-2" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-mapping-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;6.3: Mapeo de datos hacia atributos estéticos utilizando la coordenada <code>y</code>
+</figcaption>
+<div aria-describedby="lst-mapping-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> estu_prgm_academico)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="amounts_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="capas" class="level3" data-number="6.2.3">
+<h3 data-number="6.2.3" class="anchored" data-anchor-id="capas"><span class="header-section-number">6.2.3</span> Capas</h3>
+<section id="geometrías" class="level4" data-number="6.2.3.1">
+<h4 data-number="6.2.3.1" class="anchored" data-anchor-id="geometrías"><span class="header-section-number">6.2.3.1</span> Geometrías</h4>
+<p>Para ilustrar el número de estudiantes inscritos por programa académico es posible utilizar la función <code>geom_bar()</code> donde a través de la longitud de un conjunto de barras y contando el número de casos para cada grupo se genera una representación gráfica de este aspecto. Para lograr lo descrito anteriormente agrega la capa <code>geom_bar()</code> utilizando el operador <code>+</code>:</p>
+<div class="cell">
+<div id="lst-geometry" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-geometry-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;6.4: Uso de una geometría para ilustrar gráficamente datos a través de un atributo estético
+</figcaption>
+<div aria-describedby="lst-geometry-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> estu_prgm_academico)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="amounts_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>En el <a href="#lst-geometry" class="quarto-xref">Listado&nbsp;<span>6.4</span></a> los nombres de los programas académicos se ordenan internamente de manera alfabética y se representan al generar el gŕafico de esa forma en la coordenada <code>y</code>. Sin embargo, para facilitar la comunicación respecto al número de inscritos en relación a la variable <code>estu_prgm_academico</code> es importante ordenarla por el número de casos en cada grupo dentro del gráfico. Para ordenar <code>estu_prgm_academico</code> por el número de casos se puede utilizar la función <code>fct_infreq()</code>:</p>
+<div class="cell">
+<div id="lst-fct-infreq" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-fct-infreq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;6.5: Uso de la función <code>fct_infreq()</code> para ordenar datos categóricos de acuerdo al número de casos
+</figcaption>
+<div aria-describedby="lst-fct-infreq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">fct_infreq</span>(estu_prgm_academico))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="amounts_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>La función <code>fct_infreq()</code> ordena una variable categórica por el número de casos en cada grupo empezando por el más grande y terminando por el más pequeño. En caso que se busque ordenar <code>estu_prgm_academico</code> de forma descendente desde arriba hacia abajo, se puede reversar el orden generado por la función <code>fct_infreq()</code> con la función <code>fct_rev()</code> utilizando como insumo el código del <a href="#lst-fct-infreq" class="quarto-xref">Listado&nbsp;<span>6.5</span></a>:</p>
+<div class="cell">
+<div id="lst-fct-rev" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-fct-rev-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;6.6: Uso de la función <code>fct_rev()</code> para reversar el orden de datos categóricos previamente ordenados
+</figcaption>
+<div aria-describedby="lst-fct-rev-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">fct_rev</span>(<span class="fu">fct_infreq</span>(estu_prgm_academico)))</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="amounts_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-stats" class="level4" data-number="6.2.3.2">
+<h4 data-number="6.2.3.2" class="anchored" data-anchor-id="sec-stats"><span class="header-section-number">6.2.3.2</span> Transformaciones estadísticas</h4>
+<p>En el <a href="r_packages.html#lst-help" class="quarto-xref">Listado&nbsp;<span>4.4</span></a> se señaló la forma de consultar la documentación de un conjunto de datos que pertenece a un paquete utilizando el símbolo <code>?</code>. De la misma forma, es posible también realizar este proceso con una función. Si se examina la documentación de la función <code>geom_bar()</code> con <code>?geom_bar</code> en la sección <strong>Usage</strong> es posible verificar que dentro de los argumentos de esta, se encuentra el parámetro <code>stat</code> con el argumento <code>"count"</code>, como <code>stat = "count"</code>. Esta opción es la que permite que la función <code>geom_bar()</code> realice un conteo del número de casos dentro de la variable <code>estu_prgm_academico</code> para generar la representación gráfica mediante la longitud de un conjunto de barras utilizando el código en el <a href="#lst-fct-rev" class="quarto-xref">Listado&nbsp;<span>6.6</span></a>.</p>
+</section>
+<section id="ajustes-de-posición" class="level4" data-number="6.2.3.3">
+<h4 data-number="6.2.3.3" class="anchored" data-anchor-id="ajustes-de-posición"><span class="header-section-number">6.2.3.3</span> Ajustes de posición</h4>
+<p>Al igual que en la <a href="#sec-stats" class="quarto-xref"><span>Sección 6.2.3.2</span></a> si examinas la documentación de la función <code>geom_bar()</code> en la sección <strong>Usage</strong> se puede también encontrar el parámetro <code>position</code> con el argumento <code>"stack"</code>, como <code>position = "stack"</code>. En el <a href="distributions.html" class="quarto-xref"><span>Capítulo 7</span></a> se explorará, con otra tipo de geometría, cómo se puede utilizar este ajuste de posición para agregar información adicional dentro de un gráfico. Por ahora, en el <a href="#sec-amounts" class="quarto-xref"><span>Capítulo 6</span></a> no se profundizará respecto al uso de ajustes de posición.</p>
+</section>
+</section>
+<section id="escalas" class="level3" data-number="6.2.4">
+<h3 data-number="6.2.4" class="anchored" data-anchor-id="escalas"><span class="header-section-number">6.2.4</span> Escalas</h3>
+<p>Este componente permite interpretar lo que se muestra en el gráfico a partir de etiquetas y leyendas. En el gráfico generado en el <a href="#lst-fct-rev" class="quarto-xref">Listado&nbsp;<span>6.6</span></a> las etiquetas correspondientes a los nombres de los programas en la coordenada <code>y</code> tienen una longitud demasiado extensa donde abarcan la mayor área del gráfico, opacando la información que se busca resaltar respecto al número de inscritos por programa. Para corregir este aspecto, se puede utilizar la función <code>scale_y_discrete()</code> utilizando el parámetro <code>labels</code> y la función auxiliar <code>label_wrap_gen()</code> con el propósito de limitar el ancho de los nombres de los programas que se señalan en el gráfico. Utilizando de nuevo el operador <code>+</code>, como en el <a href="#lst-geometry" class="quarto-xref">Listado&nbsp;<span>6.4</span></a>, puedes agregar este componente de la siguiente manera:</p>
+<div class="cell">
+<div id="lst-scales" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-scales-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;6.7: Uso de una escala para modificar las etiquetas en la coordenada <code>y</code>
+</figcaption>
+<div aria-describedby="lst-scales-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">fct_rev</span>(<span class="fu">fct_infreq</span>(estu_prgm_academico)))</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">labels =</span> <span class="fu">label_wrap_gen</span>(<span class="at">width =</span> <span class="dv">18</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="amounts_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Adicionalmente, se pueden eliminar o modificar diferentes etiquetas en el gráfico para incluir información de contexto de tal manera que sea más comprensible. Para modificar estos elementos en el paquete <code>ggplot2</code> se utiliza la función <code>labs()</code>. Utilizando esta función se puede agregar un título, subtítulo y nota al pie así como señalar una descripción más adecuada en la etiqueta de la coordenada <code>x</code> y eliminar la etiqueta coordenada <code>y</code> debido a que el nombre de los programas es lo suficiente claro para determinar a que se refiere esta información:</p>
+<div class="cell">
+<div id="lst-labs" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-labs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;6.8: Uso de la función <code>labs()</code> para agregar, modificar o eliminar etiquetas en un gráfico
+</figcaption>
+<div aria-describedby="lst-labs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">fct_rev</span>(<span class="fu">fct_infreq</span>(estu_prgm_academico)))</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">labels =</span> <span class="fu">label_wrap_gen</span>(<span class="at">width =</span> <span class="dv">18</span>)) <span class="sc">+</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Número de inscritos"</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="cn">NULL</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Inscritos Saber Pro por programa en FAEDIS"</span>,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Perido: 2021 - 2024"</span>,</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Fuente: Data Icfes"</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="amounts_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>En el <a href="#lst-labs" class="quarto-xref">Listado&nbsp;<span>6.8</span></a> se utilizan diferentes parámetros de la función <code>labs()</code> con unos argumentos para modificar las etiquetas de la siguiente manera:</p>
+<ol type="1">
+<li><code>x = "Número de inscritos"</code>: permite modificar la etiqueta de la coordenada <code>x</code> para entender los valores que se presentan</li>
+<li><code>y = NULL</code>: permite eliminar la etiqueta de la coordenada <code>y</code>, utilizando <code>NULL</code> para señalar la ausencia de este elemento</li>
+<li><code>title = "Inscritos Saber Pro por programa en FAEDIS"</code>: permite señalar el título que acompaña la gráfica indicando un texto que describa el fenómeno que se busca representar</li>
+<li><code>subtitle = "Perido: 2021-2024"</code>: permite señalar un subtítulo donde en este caso se indica el periodo al que se refieren los datos</li>
+<li><code>caption = "Fuente: Data Icfes"</code>: permite señalar una nota al pie indicando la fuente de donde se obtuvieron los datos</li>
+</ol>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
@@ -590,7 +821,6 @@ Wilke, C. (2019). <em>Fundamentals of data visualization: a primer on making inf
 Wilkinson, L., &amp; Wills, G. (2005). <em>The grammar of graphics</em> (2nd ed). Springer.
 </div>
 </div>
-</section>
 </section>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
