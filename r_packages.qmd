@@ -42,7 +42,7 @@ En R, el proceso es similar. Primero instalas el paquete desde un repositorio (e
 ::: {.callout-note}
 En caso que este utilizando Posit Workbench, de acuerdo a lo señalado en la @sec-posit-workbench, es posible que el proceso descrito a continuación no debas realizarlo. En algunas ocasiones el administrador de esta herramienta puede haber instalado ciertos paquetes con anterioridad.
 
-Para el caso de Posit Workbench ubica la pestaña **Console** en el **Panel** (Ver la @fig-positron-layout-outline) y, tras el símbolo `>` escribe el comando `library(tidyverse)`, luego presiona {{< kbd Enter >}}. Si te aparece un mensaje similar al señalado en el @lst-load-tidyverse-message no es necesario que realices alguna instalación y puedes dirigirte directamente a la @sec-load-packages. En caso contrario si se genera un mensaje igual o similar a:
+Para el caso de Posit Workbench ubica la pestaña **Console** en el **Panel** (Ver la @fig-positron-layout-outline) y, tras el símbolo `>` escribe el comando `library(tidyverse)`, luego presiona {{< kbd Enter >}}. Si te aparece un mensaje similar al señalado en el @lst-load-tidyverse-message no es necesario que realices alguna instalación y puedes dirigirte directamente a la @sec-load-packages. En caso contrario, si se genera un mensaje igual o similar a:
 
 ```r
 Error:
@@ -149,6 +149,8 @@ En el resultado del @lst-mpg-database se incluye información para entender aspe
 Si el conjunto de datos pertenece a un paquete, como en el caso de `mpg`, es posible consultar la documentación acerca de la misma utilizando el símbolo `?` más su nombre, tal como se muestra a continuación:
 
 ```{r}
+#| lst-label: lst-help
+#| lst-cap: Uso del símbolo `?` para consultar documentación en R
 #| eval: false
 # Documentación del conjunto de datos mpg ----
 ?mpg

@@ -30,7 +30,7 @@ Para desarrollar el contenido de este capítulo descarga el archivo señalado a 
 Luego, genera una carpeta con el nombre `data` y dentro de esta carpeta incluye el archivo `2021-2024_saber-pro-genericas_faedis.rds`. Finalmente, genera una carpeta con el nombre `006_visualizar-cantidades-en-r` y dentro de la carpeta crea un archivo con el nombre `001_visualizar-cantidades-datos-faedis.R` siguiendo las indicaciones descritas en la @sec-package-usage.
 ::::
 
-## Gramática de gráficos en capas
+## Gramática de gráficos en capas {#sec-layered-grammar-graphics}
 
 El paquete `ggplot2`, incluido en el `tidyverse`, permite generar visualizaciones a partir de un conjunto de datos. Este paquete utiliza un marco conceptual basado en la gramática de gráficos desarrollada en [@wilkinson_grammar_2005]. La gramática de gráficos en capas es una adaptación de esta gramática para integrarla en el lenguaje de programación de R.
 
@@ -90,11 +90,8 @@ ggplot(
   labs(
     x = "Número de inscritos",
     y = NULL,
-    title = str_wrap(
-      "Inscritos examen Saber Pro por programas de pregrado de FAEDIS",
-      width = 50
-    ),
-    subtitle = "Perido: 2021-2024",
+    title = "Inscritos Saber Pro por programa en FAEDIS",
+    subtitle = "Perido: 2021 - 2024",
     caption = "Fuente: Data Icfes"
   )
 ```
@@ -158,3 +155,138 @@ Para examinar y en particular crear un gráfico a partir de un conjunto de datos
 [^chap-6-footnote-1]: DIVIPOLA es el acrónimo de **Divi**sión **Pol**ítico **A**dministrativa de Colombia donde es una nomenclatura estandarizada, diseñada por el Departamento Administrativo Nacional de Estadística (DANE) para la identificación de Entidades Territoriales (departamentos, distritos y municipios), Áreas No Municipalizadas y Centros Poblados.
 
 [^chap-6-footnote-2]: SNIES es el acrónimo de **S**istema **N**acional de **I**nformación de la **E**ducación **S**uperior donde el Ministerio de Educación de Colombia asígna un número de registro único a un programa académico para identificarlo (ver también @sec-tibbles).
+
+#### `ggplot()`
+
+Para construir la @fig-1-chap-6 se requiere en primera instancia inicializar un objeto `ggplot`. Para llevar a cabo este proceso se utiliza la función `ggplot()` y el parámetro `data` de esta función con el conjunto de datos que se buscan visualizar, en este caso `saber_pro_genericas_faedis_2021_2024`:
+
+```{r}
+#| lst-label: lst-ggplot
+#| lst-cap: Inicialización de un objeto `ggplot` 
+#| fig-height: 5.5
+ggplot(data = saber_pro_genericas_faedis_2021_2024)
+```
+
+En este paso R no genera un gráfico, simplemente genera visualmente un "lienzo" completamente vacío. El propósito en el @lst-ggplot es almacenar los datos para que sean después utilizados por otros componentes.
+
+### Mapeo
+
+Este componente tiene como propósito fijar un conjunto de instrucciones respecto a cómo los datos son asociados a los atributos estéticos. Para realizar el mapeo se utiliza la función `aes()` junto con el parámetro `mapping` dentro de la función `ggplot()`. Para ilustar este aspecto de manera concreta utilizaremos inicialmente la posición (ver @fig-aesthetics-attributes) asociando la coordenada `x` a la variable `estu_prgm_academico`, donde se encuentran los nombres de los programas académicos:
+
+```{r}
+#| lst-label: lst-mapping-1
+#| lst-cap: Mapeo de datos hacia atributos estéticos utilizando la coordenada `x` 
+#| fig-height: 5.5
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024,
+  mapping = aes(x = estu_prgm_academico)
+)
+```
+
+En el @lst-mapping-1 se fija una posición para cada nombre de los programas académicos en la coordenada `x`. Debido a la longitud de los nombres y la forma como se muestran de manera horizontal, el gráfico generado es confuso. Para solucionar este aspecto es posible utilizar de manera alternativa la coordena `y` asociándola a la variable `estu_prgm_academico`: 
+
+```{r}
+#| lst-label: lst-mapping-2
+#| lst-cap: Mapeo de datos hacia atributos estéticos utilizando la coordenada `y` 
+#| fig-height: 5.5
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024,
+  mapping = aes(y = estu_prgm_academico)
+)
+```
+
+### Capas
+
+#### Geometrías
+
+Para ilustrar el número de estudiantes inscritos por programa académico es posible utilizar la función `geom_bar()` donde a través de la longitud de un conjunto de barras y contando el número de casos para cada grupo se genera una representación gráfica de este aspecto. Para lograr lo descrito anteriormente agrega la capa `geom_bar()` utilizando el operador `+`:
+
+```{r}
+#| lst-label: lst-geometry
+#| lst-cap: Uso de una geometría para ilustrar gráficamente datos a través de un atributo estético
+#| fig-height: 5.5
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024,
+  mapping = aes(y = estu_prgm_academico)
+) +
+  geom_bar()
+```
+
+En el @lst-geometry los nombres de los programas académicos se ordenan internamente de manera alfabética y se representan al generar el gŕafico de esa forma en la coordenada `y`. Sin embargo, para facilitar la comunicación respecto al número de inscritos en relación a la variable `estu_prgm_academico` es importante ordenarla por el número de casos en cada grupo dentro del gráfico. Para ordenar `estu_prgm_academico` por el número de casos se puede utilizar la función `fct_infreq()`:
+
+```{r}
+#| lst-label: lst-fct-infreq
+#| lst-cap: Uso de la función `fct_infreq()` para ordenar datos categóricos de acuerdo al número de casos
+#| fig-height: 5.5
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024,
+  mapping = aes(y = fct_infreq(estu_prgm_academico))
+) +
+  geom_bar()
+```
+
+La función `fct_infreq()` ordena una variable categórica por el número de casos en cada grupo empezando por el más grande y terminando por el más pequeño. En caso que se busque ordenar `estu_prgm_academico` de forma descendente desde arriba hacia abajo, se puede reversar el orden generado por la función `fct_infreq()` con la función `fct_rev()` utilizando como insumo el código del @lst-fct-infreq:
+
+```{r}
+#| lst-label: lst-fct-rev
+#| lst-cap: Uso de la función `fct_rev()` para reversar el orden de datos categóricos previamente ordenados
+#| fig-height: 5.5
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024,
+  mapping = aes(y = fct_rev(fct_infreq(estu_prgm_academico)))
+) +
+  geom_bar()
+```
+
+#### Transformaciones estadísticas {#sec-stats}
+
+En el @lst-help se señaló la forma de consultar la documentación de un conjunto de datos que pertenece a un paquete utilizando el símbolo `?`. De la misma forma, es posible también realizar este proceso con una función. Si se examina la documentación de la función `geom_bar()` con `?geom_bar` en la sección **Usage** es posible verificar que dentro de los argumentos de esta, se encuentra el parámetro `stat` con el argumento `"count"`, como `stat = "count"`. Esta opción es la que permite que la función `geom_bar()` realice un conteo del número de casos dentro de la variable `estu_prgm_academico` para generar la representación gráfica mediante la longitud de un conjunto de barras utilizando el código en el @lst-fct-rev.
+
+#### Ajustes de posición
+
+Al igual que en la @sec-stats si examinas la documentación de la función `geom_bar()` en la sección **Usage** se puede también encontrar el parámetro `position` con el argumento `"stack"`, como `position = "stack"`. En el @sec-distributions se explorará, con otra tipo de geometría, cómo se puede utilizar este ajuste de posición para agregar información adicional dentro de un gráfico. Por ahora, en el @sec-amounts no se profundizará respecto al uso de ajustes de posición. 
+
+### Escalas
+
+Este componente permite interpretar lo que se muestra en el gráfico a partir de etiquetas y leyendas. En el gráfico generado en el @lst-fct-rev las etiquetas correspondientes a los nombres de los programas en la coordenada `y` tienen una longitud demasiado extensa donde abarcan la mayor área del gráfico, opacando la información que se busca resaltar respecto al número de inscritos por programa. Para corregir este aspecto, se puede utilizar la función `scale_y_discrete()` utilizando el parámetro `labels` y la función auxiliar `label_wrap_gen()` con el propósito de limitar el ancho de los nombres de los programas que se señalan en el gráfico. Utilizando de nuevo el operador `+`, como en el @lst-geometry, puedes agregar este componente de la siguiente manera:
+
+```{r}
+#| lst-label: lst-scales
+#| lst-cap: Uso de una escala para modificar las etiquetas en la coordenada `y`
+#| fig-height: 5.5
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024,
+  mapping = aes(y = fct_rev(fct_infreq(estu_prgm_academico)))
+) +
+  geom_bar() +
+  scale_y_discrete(labels = label_wrap_gen(width = 18))
+```
+
+Adicionalmente, se pueden eliminar o modificar diferentes etiquetas en el gráfico para incluir información de contexto de tal manera que sea más comprensible. Para modificar estos elementos en el paquete `ggplot2` se utiliza la función `labs()`. Utilizando esta función se puede agregar un título, subtítulo y nota al pie así como señalar una descripción más adecuada en la etiqueta de la coordenada `x` y eliminar la etiqueta coordenada `y` debido a que el nombre de los programas es lo suficiente claro para determinar a que se refiere esta información:
+
+```{r}
+#| lst-label: lst-labs
+#| lst-cap: Uso de la función `labs()` para agregar, modificar o eliminar etiquetas en un gráfico 
+#| fig-height: 5.5
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024,
+  mapping = aes(y = fct_rev(fct_infreq(estu_prgm_academico)))
+) +
+  geom_bar() +
+  scale_y_discrete(labels = label_wrap_gen(width = 18)) +
+  labs(
+    x = "Número de inscritos",
+    y = NULL,
+    title = "Inscritos Saber Pro por programa en FAEDIS",
+    subtitle = "Perido: 2021 - 2024",
+    caption = "Fuente: Data Icfes"
+  )
+```
+
+En el @lst-labs se utilizan diferentes parámetros de la función `labs()` con unos argumentos para modificar las etiquetas de la siguiente manera:
+
+1. `x = "Número de inscritos"`: permite modificar la etiqueta de la coordenada `x` para entender los valores que se presentan
+2. `y = NULL`: permite eliminar la etiqueta de la coordenada `y`, utilizando `NULL` para señalar la ausencia de este elemento
+3. `title = "Inscritos Saber Pro por programa en FAEDIS"`: permite señalar el título que acompaña la gráfica indicando un texto que describa el fenómeno que se busca representar
+4. `subtitle = "Perido: 2021-2024"`: permite señalar un subtítulo donde en este caso se indica el periodo al que se refieren los datos
+5. `caption = "Fuente: Data Icfes"`: permite señalar una nota al pie indicando la fuente de donde se obtuvieron los datos 

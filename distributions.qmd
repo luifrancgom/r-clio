@@ -1,1 +1,1 @@
-# Distribuciones
+# Distribuciones {#sec-distributions}
