@@ -337,6 +337,17 @@
     ]
   },
   {
+    "objectID": "distributions.html",
+    "href": "distributions.html",
+    "title": "7  Distribuciones",
+    "section": "",
+    "text": "Este capítulo se basa en (Wickham, 2016) y (Wilke, 2019) así como en la documentación oficial de ggplot2 donde tiene como propósito …\nExploraremos los siguientes aspectos:\n\n\n\n\n\n\n\n\nWickham, H. (2016). ggplot2: elegant graphics for data analysis (Second edition). Springer international publishing. https://link-springer-com.ezproxy.umng.edu.co/book/10.1007/978-3-319-24277-4\n\n\nWilke, C. (2019). Fundamentals of data visualization: a primer on making informative and compelling figures (First edition). O’Reilly. https://clauswilke.com/dataviz/",
+    "crumbs": [
+      "Visualización de datos",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Distribuciones</span>"
+    ]
+  },
+  {
     "objectID": "data_wrangling.html",
     "href": "data_wrangling.html",
     "title": "Manipulación de datos",
