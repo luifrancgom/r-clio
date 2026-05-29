@@ -1,1 +1,21 @@
 # Distribuciones {#sec-distributions}
+
+```{r}
+#| echo: false
+source("_common.R")
+```
+
+```{r}
+#| label: load-r-packages
+#| echo: false
+#| message: false
+
+```
+
+Este capítulo se basa en [@wickham_ggplot2_2016] y [@wilke_fundamentals_2019] así como en la documentación oficial de [`ggplot2`](https://ggplot2.tidyverse.org/articles/ggplot2.html) donde tiene como propósito ...
+
+Exploraremos los siguientes aspectos:
+
+1.
+2.
+
