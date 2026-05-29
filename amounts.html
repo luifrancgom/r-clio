@@ -99,7 +99,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b5787c9654e12a5b249c65e5f38ff7b3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-c55a999e4631334e606710a473942548.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -414,7 +414,7 @@ Nota&nbsp;6.1
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Para desarrollar el contenido de este capítulo descarga el archivo señalado a continuación:</p>
+<p>Para desarrollar el contenido de este capítulo es necesario que descarges el archivo señalado a continuación:</p>
 <div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -495,7 +495,7 @@ Figura&nbsp;6.3: Resultado final de un gráfico de barras utilizando <code>ggplo
 </div>
 <section id="datos" class="level3" data-number="6.2.1">
 <h3 data-number="6.2.1" class="anchored" data-anchor-id="datos"><span class="header-section-number">6.2.1</span> Datos</h3>
-<p>El primer componente de la gramática de gráficos en capas son los Datos. En ese sentido explorarás el conjuntos de datos en <code>2021-2024_saber-pro-genericas_faedis.rds</code>. Primero, debes cargar el paquete <code>tidyverse</code> utilizando el archivo <code>001_visualizar-cantidades-datos-faedis.R</code></p>
+<p>El primer componente de la gramática de gráficos en capas son los datos. En ese sentido explorarás el conjuntos de datos en <code>2021-2024_saber-pro-genericas_faedis.rds</code>. Primero, debes cargar el paquete <code>tidyverse</code> utilizando el archivo <code>001_visualizar-cantidades-datos-faedis.R</code></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar paquetes ----</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
@@ -577,7 +577,7 @@ $ punt_global                 &lt;dbl&gt; 139, 170, 128, 155, 16…</code></pre>
 </section>
 <section id="ggplot" class="level4" data-number="6.2.1.2">
 <h4 data-number="6.2.1.2" class="anchored" data-anchor-id="ggplot"><span class="header-section-number">6.2.1.2</span> <code>ggplot()</code></h4>
-<p>Para construir la <a href="#fig-1-chap-6" class="quarto-xref">Figura&nbsp;<span>6.3</span></a> se requiere en primera instancia inicializar un objeto <code>ggplot</code>. Para llevar a cabo este proceso se utiliza la función <code>ggplot()</code> y el parámetro <code>data</code> de esta función con el conjunto de datos que se buscan visualizar, en este caso <code>saber_pro_genericas_faedis_2021_2024</code>:</p>
+<p>Para construir la <a href="#fig-1-chap-6" class="quarto-xref">Figura&nbsp;<span>6.3</span></a> se requiere en primera instancia inicializar un objeto <code>ggplot</code>. Para llevar a cabo este proceso se utiliza la función <code>ggplot()</code> y el parámetro <code>data</code> de esta función con el conjunto de datos que se busca visualizar, en este caso <code>saber_pro_genericas_faedis_2021_2024</code>:</p>
 <div class="cell">
 <div id="lst-ggplot" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
@@ -653,7 +653,7 @@ Listado&nbsp;6.3: Mapeo de datos hacia atributos estéticos utilizando la coorde
 <h3 data-number="6.2.3" class="anchored" data-anchor-id="capas"><span class="header-section-number">6.2.3</span> Capas</h3>
 <section id="geometrías" class="level4" data-number="6.2.3.1">
 <h4 data-number="6.2.3.1" class="anchored" data-anchor-id="geometrías"><span class="header-section-number">6.2.3.1</span> Geometrías</h4>
-<p>Para ilustrar el número de estudiantes inscritos por programa académico es posible utilizar la función <code>geom_bar()</code> donde a través de la longitud de un conjunto de barras y contando el número de casos para cada grupo se genera una representación gráfica de este aspecto. Para lograr lo descrito anteriormente agrega la capa <code>geom_bar()</code> utilizando el operador <code>+</code>:</p>
+<p>Para ilustrar el número de estudiantes inscritos por programa académico es posible utilizar la función <code>geom_bar()</code> donde a través de la longitud de un conjunto de barras y contando el número de casos para cada grupo se genera una representación gráfica de este aspecto. Para lograr lo descrito anteriormente agrega la capa <code>geom_bar()</code> utilizando el operador <code>+</code>, tal como se señala a continuación:</p>
 <div class="cell">
 <div id="lst-geometry" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
@@ -762,7 +762,9 @@ Listado&nbsp;6.7: Uso de una escala para modificar las etiquetas en la coordenad
 </div>
 </div>
 </div>
-<p>Adicionalmente, se pueden eliminar o modificar diferentes etiquetas en el gráfico para incluir información de contexto de tal manera que sea más comprensible. Para modificar estos elementos en el paquete <code>ggplot2</code> se utiliza la función <code>labs()</code>. Utilizando esta función se puede agregar un título, subtítulo y nota al pie así como señalar una descripción más adecuada en la etiqueta de la coordenada <code>x</code> y eliminar la etiqueta coordenada <code>y</code> debido a que el nombre de los programas es lo suficiente claro para determinar a que se refiere esta información:</p>
+<p>De esa manera, se puede limitar con el parámetro <code>width</code> y el argumento <code>18</code> la longitud de las etiquetas en la coordenada <code>y</code> a un máximo de <span class="math inline">\(18\)</span> caracteres, utilizando la función <code>label_wrap_gen()</code> dentro de <code>scale_y_discrete()</code>.</p>
+<p>Adicionalmente, se pueden eliminar o modificar diferentes etiquetas en el gráfico para incluir información de contexto de tal manera que sea más comprensible. Para modificar estos elementos en el paquete <code>ggplot2</code> se utiliza la función <code>labs()</code> haciendo uso nuevamente del operador <code>+</code>.</p>
+<p>Utilizando esta función se puede agregar un título, un subtítulo y una nota al pie así como señalar una descripción más adecuada en la etiqueta de la coordenada <code>x</code> y eliminar la etiqueta de la coordenada <code>y</code>, debido a que el nombre de los programas es lo suficiente claro para determinar a que se refiere esta información:</p>
 <div class="cell">
 <div id="lst-labs" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
@@ -798,7 +800,7 @@ Listado&nbsp;6.8: Uso de la función <code>labs()</code> para agregar, modificar
 <ol type="1">
 <li><code>x = "Número de inscritos"</code>: permite modificar la etiqueta de la coordenada <code>x</code> para entender los valores que se presentan</li>
 <li><code>y = NULL</code>: permite eliminar la etiqueta de la coordenada <code>y</code>, utilizando <code>NULL</code> para señalar la ausencia de este elemento</li>
-<li><code>title = "Inscritos Saber Pro por programa en FAEDIS"</code>: permite señalar el título que acompaña la gráfica indicando un texto que describa el fenómeno que se busca representar</li>
+<li><code>title = "Inscritos Saber Pro por programa en FAEDIS"</code>: permite señalar el título que acompaña la gráfica indicando un texto que describe el fenómeno que se busca representar</li>
 <li><code>subtitle = "Perido: 2021-2024"</code>: permite señalar un subtítulo donde en este caso se indica el periodo al que se refieren los datos</li>
 <li><code>caption = "Fuente: Data Icfes"</code>: permite señalar una nota al pie indicando la fuente de donde se obtuvieron los datos</li>
 </ol>
