@@ -21,7 +21,7 @@ Exploraremos los siguientes aspectos:
 3. ¿Cómo visualizar variables numéricas para un conjunto de categorías?
 
 :::: {#nte-1-chap-6 .callout-note}
-Para desarrollar el contenido de este capítulo descarga el archivo señalado a continuación:
+Para desarrollar el contenido de este capítulo es necesario que descarges el archivo señalado a continuación:
    
 ::: {.callout appearance="minimal"}
 ## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2021-2024_saber-pro-genericas_faedis.rds](https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/2021-2024_saber-pro-genericas_faedis.rds)
@@ -98,7 +98,7 @@ ggplot(
 
 ### Datos
 
-El primer componente de la gramática de gráficos en capas son los Datos. En ese sentido explorarás el conjuntos de datos en `2021-2024_saber-pro-genericas_faedis.rds`. Primero, debes cargar el paquete `tidyverse` utilizando el archivo `001_visualizar-cantidades-datos-faedis.R`
+El primer componente de la gramática de gráficos en capas son los datos. En ese sentido explorarás el conjuntos de datos en `2021-2024_saber-pro-genericas_faedis.rds`. Primero, debes cargar el paquete `tidyverse` utilizando el archivo `001_visualizar-cantidades-datos-faedis.R`
 
 ```{r}
 #| eval: false
@@ -158,7 +158,7 @@ Para examinar y en particular crear un gráfico a partir de un conjunto de datos
 
 #### `ggplot()`
 
-Para construir la @fig-1-chap-6 se requiere en primera instancia inicializar un objeto `ggplot`. Para llevar a cabo este proceso se utiliza la función `ggplot()` y el parámetro `data` de esta función con el conjunto de datos que se buscan visualizar, en este caso `saber_pro_genericas_faedis_2021_2024`:
+Para construir la @fig-1-chap-6 se requiere en primera instancia inicializar un objeto `ggplot`. Para llevar a cabo este proceso se utiliza la función `ggplot()` y el parámetro `data` de esta función con el conjunto de datos que se busca visualizar, en este caso `saber_pro_genericas_faedis_2021_2024`:
 
 ```{r}
 #| lst-label: lst-ggplot
@@ -199,7 +199,7 @@ ggplot(
 
 #### Geometrías
 
-Para ilustrar el número de estudiantes inscritos por programa académico es posible utilizar la función `geom_bar()` donde a través de la longitud de un conjunto de barras y contando el número de casos para cada grupo se genera una representación gráfica de este aspecto. Para lograr lo descrito anteriormente agrega la capa `geom_bar()` utilizando el operador `+`:
+Para ilustrar el número de estudiantes inscritos por programa académico es posible utilizar la función `geom_bar()` donde a través de la longitud de un conjunto de barras y contando el número de casos para cada grupo se genera una representación gráfica de este aspecto. Para lograr lo descrito anteriormente agrega la capa `geom_bar()` utilizando el operador `+`, tal como se señala a continuación:
 
 ```{r}
 #| lst-label: lst-geometry
@@ -262,7 +262,11 @@ ggplot(
   scale_y_discrete(labels = label_wrap_gen(width = 18))
 ```
 
-Adicionalmente, se pueden eliminar o modificar diferentes etiquetas en el gráfico para incluir información de contexto de tal manera que sea más comprensible. Para modificar estos elementos en el paquete `ggplot2` se utiliza la función `labs()`. Utilizando esta función se puede agregar un título, subtítulo y nota al pie así como señalar una descripción más adecuada en la etiqueta de la coordenada `x` y eliminar la etiqueta coordenada `y` debido a que el nombre de los programas es lo suficiente claro para determinar a que se refiere esta información:
+De esa manera, se puede limitar con el parámetro `width` y el argumento `18` la longitud de las etiquetas en la coordenada `y` a un máximo de $18$ caracteres, utilizando la función `label_wrap_gen()` dentro de `scale_y_discrete()`. 
+
+Adicionalmente, se pueden eliminar o modificar diferentes etiquetas en el gráfico para incluir información de contexto de tal manera que sea más comprensible. Para modificar estos elementos en el paquete `ggplot2` se utiliza la función `labs()` haciendo uso nuevamente del operador `+`. 
+
+Utilizando esta función se puede agregar un título, un subtítulo y una nota al pie así como señalar una descripción más adecuada en la etiqueta de la coordenada `x` y eliminar la etiqueta de la coordenada `y`, debido a que el nombre de los programas es lo suficiente claro para determinar a que se refiere esta información:
 
 ```{r}
 #| lst-label: lst-labs
@@ -287,6 +291,6 @@ En el @lst-labs se utilizan diferentes parámetros de la función `labs()` con u
 
 1. `x = "Número de inscritos"`: permite modificar la etiqueta de la coordenada `x` para entender los valores que se presentan
 2. `y = NULL`: permite eliminar la etiqueta de la coordenada `y`, utilizando `NULL` para señalar la ausencia de este elemento
-3. `title = "Inscritos Saber Pro por programa en FAEDIS"`: permite señalar el título que acompaña la gráfica indicando un texto que describa el fenómeno que se busca representar
+3. `title = "Inscritos Saber Pro por programa en FAEDIS"`: permite señalar el título que acompaña la gráfica indicando un texto que describe el fenómeno que se busca representar
 4. `subtitle = "Perido: 2021-2024"`: permite señalar un subtítulo donde en este caso se indica el periodo al que se refieren los datos
 5. `caption = "Fuente: Data Icfes"`: permite señalar una nota al pie indicando la fuente de donde se obtuvieron los datos 
