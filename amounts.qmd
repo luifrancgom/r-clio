@@ -27,7 +27,7 @@ Para desarrollar el contenido de este capítulo es necesario que descarges el ar
 ## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2021-2024_saber-pro-genericas_faedis.rds](https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/2021-2024_saber-pro-genericas_faedis.rds)
 :::
 
-Luego, genera una carpeta con el nombre `data` y dentro de esta carpeta incluye el archivo `2021-2024_saber-pro-genericas_faedis.rds`. Finalmente, genera una carpeta con el nombre `006_visualizar-cantidades-en-r` y dentro de la carpeta crea un archivo con el nombre `001_visualizar-cantidades-datos-faedis.R` siguiendo las indicaciones descritas en la @sec-package-usage.
+Luego, genera una carpeta con el nombre `data` y dentro de esta carpeta incluye el archivo `2021-2024_saber-pro-genericas_faedis.rds`. Finalmente, genera una carpeta con el nombre `006_visualizar-cantidades-en-r` y dentro de la carpeta crea un archivo con el nombre `001_visualizar-cantidades-datos-faedis.R`, siguiendo las indicaciones descritas en la @sec-package-usage.
 ::::
 
 ## Gramática de gráficos en capas {#sec-layered-grammar-graphics}
