@@ -9,13 +9,76 @@ source("_common.R")
 #| label: load-r-packages
 #| echo: false
 #| message: false
-
+library(tidyverse)
 ```
 
-Este capítulo se basa en [@wickham_ggplot2_2016] y [@wilke_fundamentals_2019] así como en la documentación oficial de [`ggplot2`](https://ggplot2.tidyverse.org/articles/ggplot2.html) donde tiene como propósito ...
+Este capítulo se basa en [@wickham_ggplot2_2016] y [@wilke_fundamentals_2019] así como en la documentación oficial de [`ggplot2`](https://ggplot2.tidyverse.org/articles/ggplot2.html) donde tiene como propósito utilizar el modelo mental de la gramática de gráficos en capas para visualizar la distribución de variables numéricas utilizando el paquete `ggplot2` e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).
 
 Exploraremos los siguientes aspectos:
 
-1.
-2.
+1. ¿Cómo visualizar la distribución de una variable numérica?
+2. ¿Cómo incorporar una variable categórica dentro de la visualización de una distribución?
+3. ¿Cómo agregar colores a un gráfico mediante los atributos estéticos `color` y `fill`?
+4. ¿Cómo aplicar una paleta personalizada de colores?
 
+:::: {.callout-note}
+Para desarrollar el contenido de este capítulo es necesario que hayas completado la descarga y ubicación del archivo `2021-2024_saber-pro-genericas_faedis.rds` dentro de la carpeta `data`, respecto a lo descrito en la @nte-1-chap-6.
+
+En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `007_visualizar-distribuciones-en-r` y dentro de ella genera el archivo `001_visualizar-distribuciones-datos-faedis.R`, siguiendo las pautas de la @sec-package-usage.
+::::
+
+## Histograma
+
+En esta sección realizarás un histograma señalando la distribución del puntaje del módulo de inglés por nivel de desempeño para los programas de pregrado de la Facultad de Estudios a Distancia de la Universidad Militar en el periodo 2021-2024, tal como se indica en la @fig-1-chap-7.
+
+```{r}
+#| label: fig-1-chap-7
+#| fig-cap: Resultado final de un histograma utilizando `ggplot2`
+#| echo: false
+saber_pro_genericas_faedis_2021_2024 <- read_rds(
+  file = "data/2021-2024_saber-pro-genericas_faedis.rds"
+)
+
+paleta_primaria_umng <- c(
+  "#043074",
+  "#fdc600",
+  "#0d5e30",
+  "#ee2a24",
+  "#000000",
+  "#ffffff"
+)
+
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024,
+  mapping = aes(x = mod_ingles_punt)
+) +
+  geom_histogram(
+    mapping = aes(fill = mod_ingles_desem),
+    color = "black",
+    boundary = 0,
+    bins = 40
+  ) +
+  scale_fill_manual(
+    values = paleta_primaria_umng[1:4]
+  ) +
+  labs(
+    x = "Puntaje (rango [0, 300])",
+    y = "Frequencia",
+    fill = "Nivel de desempeño",
+    title = "Distribución puntaje módulo inglés en FAEDIS",
+    subtitle = "Perido: 2021 - 2024",
+    caption = "Fuente: Data Icfes"
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+
+**Pending**: add manual de identidad visual umng and hex codes 
+
+https://www.colorhexa.com/
+https://www.w3schools.com/html/html_colors_hex.asp
+https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/hex-color
+https://ggplot2.tidyverse.org/reference/scale_colour_continuous.html
+https://ggplot2.tidyverse.org/reference/aes_colour_fill_alpha.html
