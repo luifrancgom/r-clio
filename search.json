@@ -341,7 +341,18 @@
     "href": "distributions.html",
     "title": "7  Distribuciones",
     "section": "",
-    "text": "Este capítulo se basa en (Wickham, 2016) y (Wilke, 2019) así como en la documentación oficial de ggplot2 donde tiene como propósito …\nExploraremos los siguientes aspectos:\n\n\n\n\n\n\n\n\nWickham, H. (2016). ggplot2: elegant graphics for data analysis (Second edition). Springer international publishing. https://link-springer-com.ezproxy.umng.edu.co/book/10.1007/978-3-319-24277-4\n\n\nWilke, C. (2019). Fundamentals of data visualization: a primer on making informative and compelling figures (First edition). O’Reilly. https://clauswilke.com/dataviz/",
+    "text": "7.1 Histograma\nEste capítulo se basa en (Wickham, 2016) y (Wilke, 2019) así como en la documentación oficial de ggplot2 donde tiene como propósito utilizar el modelo mental de la gramática de gráficos en capas para visualizar la distribución de variables numéricas utilizando el paquete ggplot2 e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).\nExploraremos los siguientes aspectos:\nEn esta sección realizarás un histograma señalando la distribución del puntaje del módulo de inglés por nivel de desempeño para los programas de pregrado de la Facultad de Estudios a Distancia de la Universidad Militar en el periodo 2021-2024, tal como se indica en la Figura 7.1.\nFigura 7.1: Resultado final de un histograma utilizando ggplot2\nPending: add manual de identidad visual umng and hex codes\nhttps://www.colorhexa.com/ https://www.w3schools.com/html/html_colors_hex.asp https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/hex-color https://ggplot2.tidyverse.org/reference/scale_colour_continuous.html https://ggplot2.tidyverse.org/reference/aes_colour_fill_alpha.html",
+    "crumbs": [
+      "Visualización de datos",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Distribuciones</span>"
+    ]
+  },
+  {
+    "objectID": "distributions.html#histograma",
+    "href": "distributions.html#histograma",
+    "title": "7  Distribuciones",
+    "section": "",
+    "text": "Wickham, H. (2016). ggplot2: elegant graphics for data analysis (Second edition). Springer international publishing. https://link-springer-com.ezproxy.umng.edu.co/book/10.1007/978-3-319-24277-4\n\n\nWilke, C. (2019). Fundamentals of data visualization: a primer on making informative and compelling figures (First edition). O’Reilly. https://clauswilke.com/dataviz/",
     "crumbs": [
       "Visualización de datos",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Distribuciones</span>"

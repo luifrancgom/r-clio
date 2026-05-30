@@ -295,8 +295,14 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#histograma" id="toc-histograma" class="nav-link active" data-scroll-target="#histograma"><span class="header-section-number">7.1</span> Histograma</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/distributions.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/distributions.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -320,12 +326,47 @@ div.csl-indent {
 </header>
 
 
-<p>Este capítulo se basa en <span class="citation" data-cites="wickham_ggplot2_2016">(<a href="references.html#ref-wickham_ggplot2_2016" role="doc-biblioref">Wickham, 2016</a>)</span> y <span class="citation" data-cites="wilke_fundamentals_2019">(<a href="references.html#ref-wilke_fundamentals_2019" role="doc-biblioref">Wilke, 2019</a>)</span> así como en la documentación oficial de <a href="https://ggplot2.tidyverse.org/articles/ggplot2.html"><code>ggplot2</code></a> donde tiene como propósito …</p>
+<p>Este capítulo se basa en <span class="citation" data-cites="wickham_ggplot2_2016">(<a href="references.html#ref-wickham_ggplot2_2016" role="doc-biblioref">Wickham, 2016</a>)</span> y <span class="citation" data-cites="wilke_fundamentals_2019">(<a href="references.html#ref-wilke_fundamentals_2019" role="doc-biblioref">Wilke, 2019</a>)</span> así como en la documentación oficial de <a href="https://ggplot2.tidyverse.org/articles/ggplot2.html"><code>ggplot2</code></a> donde tiene como propósito utilizar el modelo mental de la gramática de gráficos en capas para visualizar la distribución de variables numéricas utilizando el paquete <code>ggplot2</code> e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).</p>
 <p>Exploraremos los siguientes aspectos:</p>
 <ol type="1">
-<li></li>
-<li></li>
+<li>¿Cómo visualizar la distribución de una variable numérica?</li>
+<li>¿Cómo incorporar una variable categórica dentro de la visualización de una distribución?</li>
+<li>¿Cómo agregar colores a un gráfico mediante los atributos estéticos <code>color</code> y <code>fill</code>?</li>
+<li>¿Cómo aplicar una paleta personalizada de colores?</li>
 </ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para desarrollar el contenido de este capítulo es necesario que hayas completado la descarga y ubicación del archivo <code>2021-2024_saber-pro-genericas_faedis.rds</code> dentro de la carpeta <code>data</code>, respecto a lo descrito en la <a href="amounts.html#nte-1-chap-6" class="quarto-xref">Nota&nbsp;<span>6.1</span></a>.</p>
+<p>En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada <code>007_visualizar-distribuciones-en-r</code> y dentro de ella genera el archivo <code>001_visualizar-distribuciones-datos-faedis.R</code>, siguiendo las pautas de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>.</p>
+</div>
+</div>
+<section id="histograma" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="histograma"><span class="header-section-number">7.1</span> Histograma</h2>
+<p>En esta sección realizarás un histograma señalando la distribución del puntaje del módulo de inglés por nivel de desempeño para los programas de pregrado de la Facultad de Estudios a Distancia de la Universidad Militar en el periodo 2021-2024, tal como se indica en la <a href="#fig-1-chap-7" class="quarto-xref">Figura&nbsp;<span>7.1</span></a>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-1-chap-7" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-1-chap-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="distributions_files/figure-html/fig-1-chap-7-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-chap-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;7.1: Resultado final de un histograma utilizando <code>ggplot2</code>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Pending</strong>: add manual de identidad visual umng and hex codes</p>
+<p>https://www.colorhexa.com/ https://www.w3schools.com/html/html_colors_hex.asp https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/hex-color https://ggplot2.tidyverse.org/reference/scale_colour_continuous.html https://ggplot2.tidyverse.org/reference/aes_colour_fill_alpha.html</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
@@ -336,6 +377,7 @@ Wickham, H. (2016). <em>ggplot2: elegant graphics for data analysis</em> (Second
 Wilke, C. (2019). <em>Fundamentals of data visualization: a primer on making informative and compelling figures</em> (First edition). O’Reilly. <a href="https://clauswilke.com/dataviz/">https://clauswilke.com/dataviz/</a>
 </div>
 </div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -755,4 +797,4 @@ Wilke, C. (2019). <em>Fundamentals of data visualization: a primer on making inf
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/distributions.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/distributions.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/distributions.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/distributions.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></div></div></footer></body></html>
