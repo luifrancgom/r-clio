@@ -76,7 +76,7 @@ ggplot(
 
 ## Datos, mapeo y capas
 
-En primera instancia es necesario importar los datos para explorarlos en R como se señala a continuación teniendo en cuenta lo indicado en la @nte-1-chap-7.
+Para generar la @fig-1-chap-7 es necesario en primera instancia importar los datos para explorarlos en R como se señala a continuación teniendo en cuenta lo indicado en la @nte-1-chap-7.
 
 ```{r}
 #| eval: false
@@ -98,13 +98,13 @@ ggplot(
   geom_histogram()
 ```
 
-Para visualizar una distribución de una variable numérica se requieren definir determinados argumentos para un conjunto de parámetros. Por ejemplo, al ejecutar el código del @lst-data-mapping-geom-histogram se genera un mensaje indicado el número de contenedores (ver `stat_bin() using bins = 30`) que por defecto se utiliza para generar el histograma o solicitando seleccionar al usuario un determinado ancho del contenedor (ver `Pick better value binwidth`). En la literatura se han propuesto diferentes criterios (ver @nte-2-chap-7) para determinar el número de contenedores o el ancho de cada contenedor pero en el caso del paquete `ggplot2` esta decisión se traslada al usuario respecto a que valor finalmente desea fijar.
+Para visualizar una distribución de una variable numérica se requieren definir, de manera ex-ante, determinados argumentos para un conjunto de parámetros. Por ejemplo, al ejecutar el código del @lst-data-mapping-geom-histogram se genera un mensaje indicado el número de contenedores (ver `stat_bin() using bins = 30`) que por defecto se utiliza para generar el histograma y solicitando al usuario seleccionar un determinado ancho del contenedor (ver `Pick better value binwidth`). En la literatura se han propuesto diferentes criterios (ver @nte-2-chap-7) para determinar el número de contenedores o el ancho de cada contenedor pero en el caso del paquete `ggplot2` esta decisión se traslada al usuario respecto a que valor finalmente desea fijar.
 
 ::: {#nte-2-chap-7 .callout-note}
 En la sección [Number of bins and width](https://en.wikipedia.org/wiki/Histogram#Number_of_bins_and_width) del artículo de Wikipedia relacionado con el término [histogram](https://en.wikipedia.org/wiki/Histogram#Number_of_bins_and_width) se puede consultar la lista de criterios más conocidos que se han propuesto para definir el número de contenedores o el ancho de cada contenedor en un histograma.
 :::
 
-Para fines ilustrativos se fijará el parámetro `bins` con el argumento `40`, como `bins = 40`, con el propósito de recrear la @fig-1-chap-7 donde en el @sec-distributions no se ahondará en los criterios señalados en la @nte-2-chap-7. También si se examina el gráfico generado por el @lst-data-mapping-geom-histogram el primer contenedor include valores negativos. Sin embargo, el rango de la variable `mod_ingles_punt` es $[0, 300]$. Para mejorar este aspecto existe el parámetro `boundary` que se utiliza para anclar el borde inicial a partir del cuál el número de contenedores se generan de izquierda a derecha. En este caso podemos utilizar éste parámetro con el argumento `0`, como `boundary = 0`. Aplicando estos aspectos como se muestra a continuación podemos mejor el histograma relacionado con el @lst-data-mapping-geom-histogram y eliminar el mensaje que inicialmente se señalaba respecto al número de contenedores que se fijaban por defecto:
+Para fines ilustrativos se fijará el parámetro `bins` con el argumento `40`, como `bins = 40`, con el propósito de recrear la @fig-1-chap-7 donde en el @sec-distributions no se ahondará en los criterios señalados en la @nte-2-chap-7. También si se examina el gráfico generado por el @lst-data-mapping-geom-histogram el primer contenedor incluye valores negativos. Sin embargo, el rango de la variable `mod_ingles_punt` es $[0, 300]$. Para mejorar este aspecto existe el parámetro `boundary` que se utiliza para anclar el borde inicial a partir del cuál el número de contenedores se generan de izquierda a derecha. En este caso podemos utilizar éste parámetro con el argumento `0`, como `boundary = 0`. Aplicando estos aspectos como se muestra a continuación podemos mejorar el histograma relacionado con el @lst-data-mapping-geom-histogram y eliminar el mensaje que inicialmente se señalaba respecto al número de contenedores que se fijaba por defecto:
 
 ```{r}
 #| lst-label: lst-bins-boundary-histogram
@@ -119,14 +119,42 @@ ggplot(
   )
 ```
 
-### Aplicación de colores
+### Aplicación de colores {#sec-color-aesthetic-attributes}
+
+En el gráfico generado como resultado del @lst-bins-boundary-histogram es díficil identificar de manera individual cada uno de los contenedores debido a que no existe un color aplicado a los bordes de cada uno de ellos dentro del histograma. El paquete `ggplot2` incluye la posibilidad de agregar colores a este tipo de geometría a través de los atributos estéticos `color` y `fill`. En `ggplot2` existe 2 maneras de agregar colores: 
+
+1. Fijar un valor a los atributos estéticos `color` o `fill` por fuera de `aes()` pero dentro de `geom_histogram()` 
+2. Asociar una variable a los atributos estéticos `color` o `fill` dentro de `aes()` en `geom_histogram()`  
+
+En el primer caso este valor se puede inicialmente especificar a través de un nombre donde R cuenta con 657 colores predefinidos, los cuales se pueden listar mediante la función `colors()` o `colours()`. También es posible utilizar una representación hexadecimal con un caracter de la forma `#rrggbb`, donde cada uno de los pares `rr`, `gg` y `bb` (blue) consta de 2 dígitos hexadecimales que representan un valor en el rango de `00` a `ff` (ver @nte-hex-color-values).
+
+::: {#nte-hex-color-values .callout-note}
+Una representación hexadecimal se especifica mediante el formato `#rrggbb`, donde los enteros hexadecimales `rr` (red o rojo), `gg` (green o verde) y `bb` (blue o azul) definen los componentes del color. En el artículo de W3Schools titulado [HTML HEX Colors](https://www.w3schools.com/html/html_colors_hex.asp) el lector puede explorar con más detalle y de manera interactiva la representación de un color determinado utilizando un valor hexadecimal.
+
+Debido a que los dígitos en un sistema de numeración hexadecimal corresponde a $0, 1, \ldots, 9$ más $a, b \ldots, f$ y por el uso de 2 dígitos para cada par `rr`, `gg` y `bb`, existen en total $(16 \times 16) \times (16 \times 16) \times (16 \times 16) = 16,777,216$ posibles colores bajo esta representación. En particular `#000000` representa la ausencia total de luz en `rr`, `gg` y `bb` donde corresponde a un negro absoluto y `#ffffff` representa la intensidad máxima permitida en `rr`, `gg` y `bb` donde corresponde a un blanco absoluto.  
+:::
+
+Para ilustrar los anteriores aspectos utilizando como insumo el código del @lst-bins-boundary-histogram se hará uso de los nombres de los colores `black` y `yellow` como argumentos para los parámetros `color` y `fill` utilizando el primer caso:
+
+```{r}
+#| lst-label: lst-color-fill-fix-fix
+#| lst-cap: Fijación de colores por fuera de `aes()` para los atributos estéticos `color` y `fill` en un geometría asociada con un histograma 
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024,
+  mapping = aes(x = mod_ingles_punt)
+) +
+  geom_histogram(
+    boundary = 0,
+    bins = 40,
+    color = "black",
+    fill = "yellow"
+  )
+```
+
+# Asociación de colores a una variable categórica
 
 
 
 **Pending**: add manual de identidad visual umng and hex codes 
 
 https://www.colorhexa.com/
-https://www.w3schools.com/html/html_colors_hex.asp
-https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/hex-color
-https://ggplot2.tidyverse.org/reference/scale_colour_continuous.html
-https://ggplot2.tidyverse.org/reference/aes_colour_fill_alpha.html
