@@ -17,11 +17,11 @@ Este capítulo se basa en [@wickham_ggplot2_2016] y [@wilke_fundamentals_2019] a
 Exploraremos los siguientes aspectos:
 
 1. ¿Cómo visualizar la distribución de una variable numérica?
-2. ¿Cómo incorporar una variable categórica dentro de la visualización de una distribución?
-3. ¿Cómo agregar colores a un gráfico mediante los atributos estéticos `color` y `fill`?
+2. ¿Cómo aplicar colores a un gráfico mediante los atributos estéticos `color` y `fill`?
+3. ¿Cómo incorporar una variable categórica dentro de la visualización de una distribución?
 4. ¿Cómo aplicar una paleta personalizada de colores?
 
-:::: {.callout-note}
+:::: {#nte-1-chap-7 .callout-note}
 Para desarrollar el contenido de este capítulo es necesario que hayas completado la descarga y ubicación del archivo `2021-2024_saber-pro-genericas_faedis.rds` dentro de la carpeta `data`, respecto a lo descrito en la @nte-1-chap-6.
 
 En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `007_visualizar-distribuciones-en-r` y dentro de ella genera el archivo `001_visualizar-distribuciones-datos-faedis.R`, siguiendo las pautas de la @sec-package-usage.
@@ -73,6 +73,54 @@ ggplot(
     legend.position = "bottom"
   )
 ```
+
+## Datos, mapeo y capas
+
+En primera instancia es necesario importar los datos para explorarlos en R como se señala a continuación teniendo en cuenta lo indicado en la @nte-1-chap-7.
+
+```{r}
+#| eval: false
+# Importar datos ----
+saber_pro_genericas_faedis_2021_2024 <- read_rds(
+  file = "data/2021-2024_saber-pro-genericas_faedis.rds"
+)
+```
+
+Luego, se puede utilizar la función `ggplot()` y el parámetro `data`, asociando la coordenada `x` a la variable `mod_ingles_punt` para definir el mapeo así como el operador `+` junto con la función `geom_histogram()` para visualizar la distribución de una variable numérica, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-data-mapping-geom-histogram
+#| lst-cap: Uso de datos, mapeo y una geometría para ilustrar gráficamente la distribución de una variable numérica
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024,
+  mapping = aes(x = mod_ingles_punt)
+) +
+  geom_histogram()
+```
+
+Para visualizar una distribución de una variable numérica se requieren definir determinados argumentos para un conjunto de parámetros. Por ejemplo, al ejecutar el código del @lst-data-mapping-geom-histogram se genera un mensaje indicado el número de contenedores (ver `stat_bin() using bins = 30`) que por defecto se utiliza para generar el histograma o solicitando seleccionar al usuario un determinado ancho del contenedor (ver `Pick better value binwidth`). En la literatura se han propuesto diferentes criterios (ver @nte-2-chap-7) para determinar el número de contenedores o el ancho de cada contenedor pero en el caso del paquete `ggplot2` esta decisión se traslada al usuario respecto a que valor finalmente desea fijar.
+
+::: {#nte-2-chap-7 .callout-note}
+En la sección [Number of bins and width](https://en.wikipedia.org/wiki/Histogram#Number_of_bins_and_width) del artículo de Wikipedia relacionado con el término [histogram](https://en.wikipedia.org/wiki/Histogram#Number_of_bins_and_width) se puede consultar la lista de criterios más conocidos que se han propuesto para definir el número de contenedores o el ancho de cada contenedor en un histograma.
+:::
+
+Para fines ilustrativos se fijará el parámetro `bins` con el argumento `40`, como `bins = 40`, con el propósito de recrear la @fig-1-chap-7 donde en el @sec-distributions no se ahondará en los criterios señalados en la @nte-2-chap-7. También si se examina el gráfico generado por el @lst-data-mapping-geom-histogram el primer contenedor include valores negativos. Sin embargo, el rango de la variable `mod_ingles_punt` es $[0, 300]$. Para mejorar este aspecto existe el parámetro `boundary` que se utiliza para anclar el borde inicial a partir del cuál el número de contenedores se generan de izquierda a derecha. En este caso podemos utilizar éste parámetro con el argumento `0`, como `boundary = 0`. Aplicando estos aspectos como se muestra a continuación podemos mejor el histograma relacionado con el @lst-data-mapping-geom-histogram y eliminar el mensaje que inicialmente se señalaba respecto al número de contenedores que se fijaban por defecto:
+
+```{r}
+#| lst-label: lst-bins-boundary-histogram
+#| lst-cap: Definición del número de contenedores y anclaje inicial de bordes 
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024,
+  mapping = aes(x = mod_ingles_punt)
+) +
+  geom_histogram(
+    boundary = 0,
+    bins = 40
+  )
+```
+
+### Aplicación de colores
+
 
 
 **Pending**: add manual de identidad visual umng and hex codes 
