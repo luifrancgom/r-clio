@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -93,6 +128,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -301,6 +365,10 @@ div.csl-indent {
    
   <ul>
   <li><a href="#histograma" id="toc-histograma" class="nav-link active" data-scroll-target="#histograma"><span class="header-section-number">7.1</span> Histograma</a></li>
+  <li><a href="#datos-mapeo-y-capas" id="toc-datos-mapeo-y-capas" class="nav-link" data-scroll-target="#datos-mapeo-y-capas"><span class="header-section-number">7.2</span> Datos, mapeo y capas</a>
+  <ul class="collapse">
+  <li><a href="#aplicación-de-colores" id="toc-aplicación-de-colores" class="nav-link" data-scroll-target="#aplicación-de-colores"><span class="header-section-number">7.2.1</span> Aplicación de colores</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/distributions.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/distributions.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
@@ -330,17 +398,17 @@ div.csl-indent {
 <p>Exploraremos los siguientes aspectos:</p>
 <ol type="1">
 <li>¿Cómo visualizar la distribución de una variable numérica?</li>
+<li>¿Cómo aplicar colores a un gráfico mediante los atributos estéticos <code>color</code> y <code>fill</code>?</li>
 <li>¿Cómo incorporar una variable categórica dentro de la visualización de una distribución?</li>
-<li>¿Cómo agregar colores a un gráfico mediante los atributos estéticos <code>color</code> y <code>fill</code>?</li>
 <li>¿Cómo aplicar una paleta personalizada de colores?</li>
 </ol>
-<div class="callout callout-style-default callout-note callout-titled">
+<div id="nte-1-chap-7" class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Nota
+Nota&nbsp;7.1
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -365,6 +433,87 @@ Figura&nbsp;7.1: Resultado final de un histograma utilizando <code>ggplot2</code
 </div>
 </div>
 </div>
+</section>
+<section id="datos-mapeo-y-capas" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="datos-mapeo-y-capas"><span class="header-section-number">7.2</span> Datos, mapeo y capas</h2>
+<p>En primera instancia es necesario importar los datos para explorarlos en R como se señala a continuación teniendo en cuenta lo indicado en la <a href="#nte-1-chap-7" class="quarto-xref">Nota&nbsp;<span>7.1</span></a>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar datos ----</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"data/2021-2024_saber-pro-genericas_faedis.rds"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Luego, se puede utilizar la función <code>ggplot()</code> y el parámetro <code>data</code>, asociando la coordenada <code>x</code> a la variable <code>mod_ingles_punt</code> para definir el mapeo así como el operador <code>+</code> junto con la función <code>geom_histogram()</code> para visualizar la distribución de una variable numérica, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-data-mapping-geom-histogram" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-data-mapping-geom-histogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;7.1: Uso de datos, mapeo y una geometría para ilustrar gráficamente la distribución de una variable numérica
+</figcaption>
+<div aria-describedby="lst-data-mapping-geom-histogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> mod_ingles_punt)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value
+`binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="distributions_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Para visualizar una distribución de una variable numérica se requieren definir determinados argumentos para un conjunto de parámetros. Por ejemplo, al ejecutar el código del <a href="#lst-data-mapping-geom-histogram" class="quarto-xref">Listado&nbsp;<span>7.1</span></a> se genera un mensaje indicado el número de contenedores (ver <code>stat_bin() using bins = 30</code>) que por defecto se utiliza para generar el histograma o solicitando seleccionar al usuario un determinado ancho del contenedor (ver <code>Pick better value binwidth</code>). En la literatura se han propuesto diferentes criterios (ver <a href="#nte-2-chap-7" class="quarto-xref">Nota&nbsp;<span>7.2</span></a>) para determinar el número de contenedores o el ancho de cada contenedor pero en el caso del paquete <code>ggplot2</code> esta decisión se traslada al usuario respecto a que valor finalmente desea fijar.</p>
+<div id="nte-2-chap-7" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota&nbsp;7.2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En la sección <a href="https://en.wikipedia.org/wiki/Histogram#Number_of_bins_and_width">Number of bins and width</a> del artículo de Wikipedia relacionado con el término <a href="https://en.wikipedia.org/wiki/Histogram#Number_of_bins_and_width">histogram</a> se puede consultar la lista de criterios más conocidos que se han propuesto para definir el número de contenedores o el ancho de cada contenedor en un histograma.</p>
+</div>
+</div>
+<p>Para fines ilustrativos se fijará el parámetro <code>bins</code> con el argumento <code>40</code>, como <code>bins = 40</code>, con el propósito de recrear la <a href="#fig-1-chap-7" class="quarto-xref">Figura&nbsp;<span>7.1</span></a> donde en el <a href="#sec-distributions" class="quarto-xref"><span>Capítulo 7</span></a> no se ahondará en los criterios señalados en la <a href="#nte-2-chap-7" class="quarto-xref">Nota&nbsp;<span>7.2</span></a>. También si se examina el gráfico generado por el <a href="#lst-data-mapping-geom-histogram" class="quarto-xref">Listado&nbsp;<span>7.1</span></a> el primer contenedor include valores negativos. Sin embargo, el rango de la variable <code>mod_ingles_punt</code> es <span class="math inline">\([0, 300]\)</span>. Para mejorar este aspecto existe el parámetro <code>boundary</code> que se utiliza para anclar el borde inicial a partir del cuál el número de contenedores se generan de izquierda a derecha. En este caso podemos utilizar éste parámetro con el argumento <code>0</code>, como <code>boundary = 0</code>. Aplicando estos aspectos como se muestra a continuación podemos mejor el histograma relacionado con el <a href="#lst-data-mapping-geom-histogram" class="quarto-xref">Listado&nbsp;<span>7.1</span></a> y eliminar el mensaje que inicialmente se señalaba respecto al número de contenedores que se fijaban por defecto:</p>
+<div class="cell">
+<div id="lst-bins-boundary-histogram" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-bins-boundary-histogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;7.2: Definición del número de contenedores y anclaje inicial de bordes
+</figcaption>
+<div aria-describedby="lst-bins-boundary-histogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> mod_ingles_punt)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">boundary =</span> <span class="dv">0</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">bins =</span> <span class="dv">40</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="distributions_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="aplicación-de-colores" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="aplicación-de-colores"><span class="header-section-number">7.2.1</span> Aplicación de colores</h3>
 <p><strong>Pending</strong>: add manual de identidad visual umng and hex codes</p>
 <p>https://www.colorhexa.com/ https://www.w3schools.com/html/html_colors_hex.asp https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/hex-color https://ggplot2.tidyverse.org/reference/scale_colour_continuous.html https://ggplot2.tidyverse.org/reference/aes_colour_fill_alpha.html</p>
 
@@ -377,6 +526,7 @@ Wickham, H. (2016). <em>ggplot2: elegant graphics for data analysis</em> (Second
 Wilke, C. (2019). <em>Fundamentals of data visualization: a primer on making informative and compelling figures</em> (First edition). O’Reilly. <a href="https://clauswilke.com/dataviz/">https://clauswilke.com/dataviz/</a>
 </div>
 </div>
+</section>
 </section>
 
 </main> <!-- /main -->
