@@ -369,7 +369,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#sec-color-aesthetic-attributes" id="toc-sec-color-aesthetic-attributes" class="nav-link" data-scroll-target="#sec-color-aesthetic-attributes"><span class="header-section-number">7.2.1</span> Aplicación de colores</a></li>
   </ul></li>
-  <li><a href="#asociación-de-colores-a-una-variable-categórica" id="toc-asociación-de-colores-a-una-variable-categórica" class="nav-link" data-scroll-target="#asociación-de-colores-a-una-variable-categórica"><span class="header-section-number">8</span> Asociación de colores a una variable categórica</a></li>
+  <li><a href="#sec-color-aes-var" id="toc-sec-color-aes-var" class="nav-link" data-scroll-target="#sec-color-aes-var"><span class="header-section-number">7.3</span> Asociación de colores a una variable categórica</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/distributions.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/distributions.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
@@ -515,12 +515,12 @@ Listado&nbsp;7.2: Definición del número de contenedores y anclaje inicial de b
 </div>
 <section id="sec-color-aesthetic-attributes" class="level3" data-number="7.2.1">
 <h3 data-number="7.2.1" class="anchored" data-anchor-id="sec-color-aesthetic-attributes"><span class="header-section-number">7.2.1</span> Aplicación de colores</h3>
-<p>En el gráfico generado como resultado del <a href="#lst-bins-boundary-histogram" class="quarto-xref">Listado&nbsp;<span>7.2</span></a> es díficil identificar de manera individual cada uno de los contenedores debido a que no existe un color aplicado a los bordes de cada uno de ellos dentro del histograma. El paquete <code>ggplot2</code> incluye la posibilidad de agregar colores a este tipo de geometría a través de los atributos estéticos <code>color</code> y <code>fill</code>. En <code>ggplot2</code> existe 2 maneras de agregar colores:</p>
+<p>En el gráfico generado como resultado del <a href="#lst-bins-boundary-histogram" class="quarto-xref">Listado&nbsp;<span>7.2</span></a> es díficil identificar de manera individual cada uno de los contenedores debido a que no existe un color aplicado a los bordes de cada uno de ellos dentro del histograma. El paquete <code>ggplot2</code> incluye la posibilidad de agregar colores a este tipo de geometría a través de los atributos estéticos <code>color</code> y <code>fill</code>. En <code>ggplot2</code> existen 2 maneras de agregar colores:</p>
 <ol type="1">
 <li>Fijar un valor a los atributos estéticos <code>color</code> o <code>fill</code> por fuera de <code>aes()</code> pero dentro de <code>geom_histogram()</code></li>
 <li>Asociar una variable a los atributos estéticos <code>color</code> o <code>fill</code> dentro de <code>aes()</code> en <code>geom_histogram()</code></li>
 </ol>
-<p>En el primer caso este valor se puede inicialmente especificar a través de un nombre donde R cuenta con 657 colores predefinidos, los cuales se pueden listar mediante la función <code>colors()</code> o <code>colours()</code>. También es posible utilizar una representación hexadecimal con un caracter de la forma <code>#rrggbb</code>, donde cada uno de los pares <code>rr</code>, <code>gg</code> y <code>bb</code> (blue) consta de 2 dígitos hexadecimales que representan un valor en el rango de <code>00</code> a <code>ff</code> (ver <a href="#nte-hex-color-values" class="quarto-xref">Nota&nbsp;<span>7.3</span></a>).</p>
+<p>En el primer caso este valor se puede inicialmente especificar a través de un nombre donde R cuenta con 657 colores predefinidos, los cuales se pueden listar mediante la función <code>colors()</code> o <code>colours()</code>. También es posible utilizar una representación hexadecimal con un caracter de la forma <code>#rrggbb</code>, donde cada uno de los pares <code>rr</code>, <code>gg</code> y <code>bb</code> consta de 2 dígitos hexadecimales que representan un valor en el rango de <code>00</code> a <code>ff</code> (ver <a href="#nte-hex-color-values" class="quarto-xref">Nota&nbsp;<span>7.3</span></a>).</p>
 <div id="nte-hex-color-values" class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -531,7 +531,7 @@ Nota&nbsp;7.3
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Una representación hexadecimal se especifica mediante el formato <code>#rrggbb</code>, donde los enteros hexadecimales <code>rr</code> (red o rojo), <code>gg</code> (green o verde) y <code>bb</code> (blue o azul) definen los componentes del color. En el artículo de W3Schools titulado <a href="https://www.w3schools.com/html/html_colors_hex.asp">HTML HEX Colors</a> el lector puede explorar con más detalle y de manera interactiva la representación de un color determinado utilizando un valor hexadecimal.</p>
+<p>Una representación hexadecimal se especifica mediante el formato <code>#rrggbb</code>, donde los enteros hexadecimales <code>rr</code> (red o rojo), <code>gg</code> (green o verde) y <code>bb</code> (blue o azul) definen los componentes del color. En el artículo de <a href="https://www.w3schools.com/">W3Schools</a> titulado <a href="https://www.w3schools.com/html/html_colors_hex.asp">HTML HEX Colors</a> el lector puede explorar con más detalle y de manera interactiva la representación de un color determinado utilizando un valor hexadecimal.</p>
 <p>Debido a que los dígitos en un sistema de numeración hexadecimal corresponde a <span class="math inline">\(0, 1, \ldots, 9\)</span> más <span class="math inline">\(a, b \ldots, f\)</span> y por el uso de 2 dígitos para cada par <code>rr</code>, <code>gg</code> y <code>bb</code>, existen en total <span class="math inline">\((16 \times 16) \times (16 \times 16) \times (16 \times 16) = 16,777,216\)</span> posibles colores bajo esta representación. En particular <code>#000000</code> representa la ausencia total de luz en <code>rr</code>, <code>gg</code> y <code>bb</code> donde corresponde a un negro absoluto y <code>#ffffff</code> representa la intensidad máxima permitida en <code>rr</code>, <code>gg</code> y <code>bb</code> donde corresponde a un blanco absoluto.</p>
 </div>
 </div>
@@ -566,8 +566,39 @@ Listado&nbsp;7.3: Fijación de colores por fuera de <code>aes()</code> para los 
 </div>
 </section>
 </section>
-<section id="asociación-de-colores-a-una-variable-categórica" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Asociación de colores a una variable categórica</h1>
+<section id="sec-color-aes-var" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="sec-color-aes-var"><span class="header-section-number">7.3</span> Asociación de colores a una variable categórica</h2>
+<p>Para entender el segundo caso señalado en la <a href="#sec-color-aesthetic-attributes" class="quarto-xref"><span>Sección 7.2.1</span></a> respecto a la asignación de colores, en esta sección se realizará una modificación en el código del <a href="#lst-color-fill-fix-fix" class="quarto-xref">Listado&nbsp;<span>7.3</span></a> para visualizar los niveles de desempeño del módulo de inglés utilizando la variable <code>mod_ingles_desem</code>. De esa manera se complementa la visualización del puntaje numérico obtenido con una descripción cualitativa de las habilidades y conocimientos en inglés. Para incluir este aspecto es necesario asociar el parámetro <code>fill</code> con el argumento <code>mod_ingles_desem</code> dentro de la función <code>geom_histogram()</code> a través de <code>aes()</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-color-fill-fix-var" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-color-fill-fix-var-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;7.4: Fijación de colores dentro de <code>aes()</code> para el atributo estético <code>fill</code> en un geometría asociada con un histograma
+</figcaption>
+<div aria-describedby="lst-color-fill-fix-var-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> mod_ingles_punt)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">fill =</span> mod_ingles_desem),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">boundary =</span> <span class="dv">0</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">bins =</span> <span class="dv">40</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="distributions_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Como resultado de la ejecución del código del <a href="#lst-color-fill-fix-var" class="quarto-xref">Listado&nbsp;<span>7.4</span></a> se genera una visualización tanto del puntaje numérico como de los niveles de desempeño del módulo de inglés. Éste aspecto es posible incluirlo debido a que la función <code>geom_histogram()</code> contiene un ajuste de posición (ver <a href="amounts.html#sec-position" class="quarto-xref"><span>Sección 6.2.3.3</span></a>) a través del parámetro <code>position</code> con el argumento <code>"stack"</code>, como <code>position = "stack"</code>. Si se consulta la documentación de esta función en la sección <strong>Usage</strong>, se encontrará que esta es la configuración por defecto que se utiliza. Es decir, el ajuste de posición permite apilar contenedores cuando se agrupan los valores por una variable categórica como <code>mod_ingles_desem</code> y existen diferentes grupos que estan incluídos dentro de un mismo contenedor.</p>
+<p>En el gráfico generado por el código del <a href="#lst-color-fill-fix-var" class="quarto-xref">Listado&nbsp;<span>7.4</span></a></p>
 <p><strong>Pending</strong>: add manual de identidad visual umng and hex codes</p>
 <p>https://www.colorhexa.com/</p>
 
