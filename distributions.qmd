@@ -121,15 +121,15 @@ ggplot(
 
 ### Aplicación de colores {#sec-color-aesthetic-attributes}
 
-En el gráfico generado como resultado del @lst-bins-boundary-histogram es díficil identificar de manera individual cada uno de los contenedores debido a que no existe un color aplicado a los bordes de cada uno de ellos dentro del histograma. El paquete `ggplot2` incluye la posibilidad de agregar colores a este tipo de geometría a través de los atributos estéticos `color` y `fill`. En `ggplot2` existe 2 maneras de agregar colores: 
+En el gráfico generado como resultado del @lst-bins-boundary-histogram es díficil identificar de manera individual cada uno de los contenedores debido a que no existe un color aplicado a los bordes de cada uno de ellos dentro del histograma. El paquete `ggplot2` incluye la posibilidad de agregar colores a este tipo de geometría a través de los atributos estéticos `color` y `fill`. En `ggplot2` existen 2 maneras de agregar colores: 
 
 1. Fijar un valor a los atributos estéticos `color` o `fill` por fuera de `aes()` pero dentro de `geom_histogram()` 
 2. Asociar una variable a los atributos estéticos `color` o `fill` dentro de `aes()` en `geom_histogram()`  
 
-En el primer caso este valor se puede inicialmente especificar a través de un nombre donde R cuenta con 657 colores predefinidos, los cuales se pueden listar mediante la función `colors()` o `colours()`. También es posible utilizar una representación hexadecimal con un caracter de la forma `#rrggbb`, donde cada uno de los pares `rr`, `gg` y `bb` (blue) consta de 2 dígitos hexadecimales que representan un valor en el rango de `00` a `ff` (ver @nte-hex-color-values).
+En el primer caso este valor se puede inicialmente especificar a través de un nombre donde R cuenta con 657 colores predefinidos, los cuales se pueden listar mediante la función `colors()` o `colours()`. También es posible utilizar una representación hexadecimal con un caracter de la forma `#rrggbb`, donde cada uno de los pares `rr`, `gg` y `bb` consta de 2 dígitos hexadecimales que representan un valor en el rango de `00` a `ff` (ver @nte-hex-color-values).
 
 ::: {#nte-hex-color-values .callout-note}
-Una representación hexadecimal se especifica mediante el formato `#rrggbb`, donde los enteros hexadecimales `rr` (red o rojo), `gg` (green o verde) y `bb` (blue o azul) definen los componentes del color. En el artículo de W3Schools titulado [HTML HEX Colors](https://www.w3schools.com/html/html_colors_hex.asp) el lector puede explorar con más detalle y de manera interactiva la representación de un color determinado utilizando un valor hexadecimal.
+Una representación hexadecimal se especifica mediante el formato `#rrggbb`, donde los enteros hexadecimales `rr` (red o rojo), `gg` (green o verde) y `bb` (blue o azul) definen los componentes del color. En el artículo de [W3Schools](https://www.w3schools.com/) titulado [HTML HEX Colors](https://www.w3schools.com/html/html_colors_hex.asp) el lector puede explorar con más detalle y de manera interactiva la representación de un color determinado utilizando un valor hexadecimal.
 
 Debido a que los dígitos en un sistema de numeración hexadecimal corresponde a $0, 1, \ldots, 9$ más $a, b \ldots, f$ y por el uso de 2 dígitos para cada par `rr`, `gg` y `bb`, existen en total $(16 \times 16) \times (16 \times 16) \times (16 \times 16) = 16,777,216$ posibles colores bajo esta representación. En particular `#000000` representa la ausencia total de luz en `rr`, `gg` y `bb` donde corresponde a un negro absoluto y `#ffffff` representa la intensidad máxima permitida en `rr`, `gg` y `bb` donde corresponde a un blanco absoluto.  
 :::
@@ -151,9 +151,28 @@ ggplot(
   )
 ```
 
-# Asociación de colores a una variable categórica
+## Asociación de colores a una variable categórica {#sec-color-aes-var}
 
+Para entender el segundo caso señalado en la @sec-color-aesthetic-attributes respecto a la asignación de colores, en esta sección se realizará una modificación en el código del @lst-color-fill-fix-fix para visualizar los niveles de desempeño del módulo de inglés utilizando la variable `mod_ingles_desem`. De esa manera se complementa la visualización del puntaje numérico obtenido con una descripción cualitativa de las habilidades y conocimientos en inglés. Para incluir este aspecto es necesario asociar el parámetro `fill` con el argumento `mod_ingles_desem` dentro de la función `geom_histogram()` a través de `aes()`, tal como se señala a continuación:
 
+```{r}
+#| lst-label: lst-color-fill-fix-var
+#| lst-cap: Fijación de colores dentro de `aes()` para el atributo estético `fill` en un geometría asociada con un histograma 
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024,
+  mapping = aes(x = mod_ingles_punt)
+) +
+  geom_histogram(
+    mapping = aes(fill = mod_ingles_desem),
+    boundary = 0,
+    bins = 40,
+    color = "black"
+  )
+```
+
+Como resultado de la ejecución del código del @lst-color-fill-fix-var se genera una visualización tanto del puntaje numérico como de los niveles de desempeño del módulo de inglés. Éste aspecto es posible incluirlo debido a que la función `geom_histogram()` contiene un ajuste de posición (ver @sec-position) a través del parámetro `position` con el argumento `"stack"`, como `position = "stack"`. Si se consulta la documentación de esta función en la sección **Usage**, se encontrará que esta es la configuración por defecto que se utiliza. Es decir, el ajuste de posición permite apilar contenedores cuando se agrupan los valores por una variable categórica como `mod_ingles_desem` y existen diferentes grupos que estan incluídos dentro de un mismo contenedor.    
+
+En el gráfico generado por el código del @lst-color-fill-fix-var 
 
 **Pending**: add manual de identidad visual umng and hex codes 
 

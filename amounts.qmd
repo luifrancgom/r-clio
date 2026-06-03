@@ -242,9 +242,9 @@ ggplot(
 
 En el @lst-help se señaló la forma de consultar la documentación de un conjunto de datos que pertenece a un paquete utilizando el símbolo `?`. De la misma forma, es posible también realizar este proceso con una función. Si se examina la documentación de la función `geom_bar()` con `?geom_bar` en la sección **Usage** es posible verificar que se encuentra el parámetro `stat` con el argumento `"count"`, como `stat = "count"`. Esta opción es la que permite que la función `geom_bar()` realice un conteo del número de casos dentro de la variable `estu_prgm_academico` para generar la representación gráfica mediante la longitud de un conjunto de barras utilizando el código en el @lst-fct-rev.
 
-#### Ajustes de posición
+#### Ajustes de posición {#sec-position}
 
-Al igual que en la @sec-stats si examinas la documentación de la función `geom_bar()` en la sección **Usage** se puede también encontrar el parámetro `position` con el argumento `"stack"`, como `position = "stack"`. En el @sec-distributions se explorará, con otra tipo de geometría, cómo se puede utilizar este ajuste de posición para agregar información adicional dentro de un gráfico. Por ahora, en el @sec-amounts no se profundizará respecto al uso de ajustes de posición. 
+Al igual que en la @sec-stats si examinas la documentación de la función `geom_bar()` en la sección **Usage** se puede también encontrar el parámetro `position` con el argumento `"stack"`, como `position = "stack"`. En la @sec-color-aes-var se explorará, con otra tipo de geometría, cómo se puede utilizar este ajuste de posición para agregar información adicional dentro de un gráfico. Por ahora, en el @sec-amounts no se profundizará respecto al uso de ajustes de posición. 
 
 ### Escalas
 
