@@ -42,16 +42,21 @@ book:
         - proportions.qmd
         - x-y_relationships.qmd
     - part: data_wrangling.qmd
-    - part: data_tidy.qmd
-      chapters: 
-        - data_tidying.qmd
+      chapters:
+        - single_table_verbs.qmd
+        - two_table_verbs.qmd
     - part: data_import.qmd
       chapters:
         - r_data_serialization.qmd
         - plain_text.qmd
         - spreadsheets.qmd
         - geopackage_gpkg.qmd
-    - part: programming.qmd
+    - part: data_tidy.qmd
+      chapters: 
+        - tidy_data.qmd
+        - pivoting.qmd
+        - splitting_combining.qmd
+    - part: functional_programming.qmd
     - part: data_communication.qmd
     - references.qmd
 

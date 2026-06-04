@@ -314,6 +314,6 @@ ggplot(
   )
 ```
 
-En el @lst-scale-fill-manual-legend utilizando el parámetro `fill` dentro de la función `labs()` es posible modificar el título de la legenda que señala los valores de la variable categórica `mod_ingles_desem` cuando se asocia al atributo estético `fill` dentro de la función `aes()` en la geometría `geom_histogram`.
+En el @lst-scale-fill-manual-legend utilizando el parámetro `fill` dentro de la función `labs()` es posible modificar el título de la leyenda que señala los valores de la variable categórica `mod_ingles_desem` cuando se asocia al atributo estético `fill` dentro de la función `aes()` en la geometría `geom_histogram`.
 
 ## Tema
