@@ -91,7 +91,7 @@ ggplot(
     x = "Número de inscritos",
     y = NULL,
     title = "Inscritos Saber Pro por programa en FAEDIS",
-    subtitle = "Perido: 2021 - 2024",
+    subtitle = "Periodo: 2021 - 2024",
     caption = "Fuente: Data Icfes"
   )
 ```
@@ -282,7 +282,7 @@ ggplot(
     x = "Número de inscritos",
     y = NULL,
     title = "Inscritos Saber Pro por programa en FAEDIS",
-    subtitle = "Perido: 2021 - 2024",
+    subtitle = "Periodo: 2021 - 2024",
     caption = "Fuente: Data Icfes"
   )
 ```
