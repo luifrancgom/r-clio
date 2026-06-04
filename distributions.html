@@ -370,6 +370,8 @@ window.Quarto = {
   <li><a href="#sec-color-aesthetic-attributes" id="toc-sec-color-aesthetic-attributes" class="nav-link" data-scroll-target="#sec-color-aesthetic-attributes"><span class="header-section-number">7.2.1</span> Aplicación de colores</a></li>
   </ul></li>
   <li><a href="#sec-color-aes-var" id="toc-sec-color-aes-var" class="nav-link" data-scroll-target="#sec-color-aes-var"><span class="header-section-number">7.3</span> Asociación de colores a una variable categórica</a></li>
+  <li><a href="#escalas" id="toc-escalas" class="nav-link" data-scroll-target="#escalas"><span class="header-section-number">7.4</span> Escalas</a></li>
+  <li><a href="#tema" id="toc-tema" class="nav-link" data-scroll-target="#tema"><span class="header-section-number">7.5</span> Tema</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/distributions.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/distributions.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
@@ -598,9 +600,123 @@ Listado&nbsp;7.4: Fijación de colores dentro de <code>aes()</code> para el atri
 </div>
 </div>
 <p>Como resultado de la ejecución del código del <a href="#lst-color-fill-fix-var" class="quarto-xref">Listado&nbsp;<span>7.4</span></a> se genera una visualización tanto del puntaje numérico como de los niveles de desempeño del módulo de inglés. Éste aspecto es posible incluirlo debido a que la función <code>geom_histogram()</code> contiene un ajuste de posición (ver <a href="amounts.html#sec-position" class="quarto-xref"><span>Sección 6.2.3.3</span></a>) a través del parámetro <code>position</code> con el argumento <code>"stack"</code>, como <code>position = "stack"</code>. Si se consulta la documentación de esta función en la sección <strong>Usage</strong>, se encontrará que esta es la configuración por defecto que se utiliza. Es decir, el ajuste de posición permite apilar contenedores cuando se agrupan los valores por una variable categórica como <code>mod_ingles_desem</code> y existen diferentes grupos que estan incluídos dentro de un mismo contenedor.</p>
-<p>En el gráfico generado por el código del <a href="#lst-color-fill-fix-var" class="quarto-xref">Listado&nbsp;<span>7.4</span></a></p>
-<p><strong>Pending</strong>: add manual de identidad visual umng and hex codes</p>
-<p>https://www.colorhexa.com/</p>
+<p>Adicionalmente, en el gráfico generado por el código del <a href="#lst-color-fill-fix-var" class="quarto-xref">Listado&nbsp;<span>7.4</span></a> <code>ggplot2</code> utiliza una paleta de colores por defecto cuando se asocia el parámetro <code>fill</code> con el argumento <code>mod_ingles_desem</code>. En particular, la paleta de colores que utiliza <code>ggplot2</code> para una variable categórica con 4 valores como <code>mod_ingles_desem</code> es:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="distributions_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="escalas" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="escalas"><span class="header-section-number">7.4</span> Escalas</h2>
+<p>La paleta de colores utilizada por defecto en <code>ggplot2</code> y señalada en la <a href="#sec-color-aes-var" class="quarto-xref"><span>Sección 7.3</span></a> se puede modificar y personalizar haciendo uso de una representación hexadecimal (ver <a href="#nte-hex-color-values" class="quarto-xref">Nota&nbsp;<span>7.3</span></a>) para el conjunto de colores alternativos que se busquen aplicar. En particular, en la Universidad Militar Nueva Granada (UMNG) a través del <a href="https://github.com/luifrancgom/r-clio/raw/main/documentation/manual-identidad-visual-umng_2024-09.pdf">Manual de Identidad Visual</a> se estableció una paleta de colores primaria que contiene 2 colores institucionales y 4 colores complementarios dada por:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-pal-primary-umng" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pal-primary-umng-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="distributions_files/figure-html/fig-pal-primary-umng-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pal-primary-umng-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;7.2: Paleta de colores primaria de la Universidad Militar Nueva Granada (UMNG) de acuerdo al Manual de Identidad Visual
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>De esa manera es posible definir un vector de caracteres que contenga la representación hexadecimal de cada color señalado en la <a href="#fig-pal-primary-umng" class="quarto-xref">Figura&nbsp;<span>7.2</span></a> como se señala a continuación y posteriormente seleccionar los primeros 4 colores:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Paleta primaria UMNG ----</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>paleta_primaria_umng <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#043074"</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#fdc600"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#0d5e30"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#ee2a24"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#000000"</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#ffffff"</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Para modificar la paleta de colores por defecto que utiliza <code>ggplot2</code> respecto al gráfico generado por el código señalado en el <a href="#lst-color-fill-fix-var" class="quarto-xref">Listado&nbsp;<span>7.4</span></a> se puede utilizar el operador <code>+</code> junto con la función <code>scale_fill_manual()</code>. Esta función a través del parámetro <code>values</code> permite fijar un vector de caracteres con la representación hexadecimal de los colores que se busquen utilizar. De esa manera, se puede seleccionar los primeros 4 colores de <code>paleta_primaria_umng</code> y agregar los aspectos mencionados al código del <a href="#lst-color-fill-fix-var" class="quarto-xref">Listado&nbsp;<span>7.4</span></a>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-scale-fill-manual" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-scale-fill-manual-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;7.5: Personalización de la paleta de colores asociada al atributo estético <code>fill</code> dentro de <code>aes()</code> en una geometría
+</figcaption>
+<div aria-describedby="lst-scale-fill-manual-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> mod_ingles_punt)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">fill =</span> mod_ingles_desem),</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">boundary =</span> <span class="dv">0</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">bins =</span> <span class="dv">40</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> paleta_primaria_umng[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="distributions_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>En el <a href="#lst-scale-fill-manual" class="quarto-xref">Listado&nbsp;<span>7.5</span></a>, la expresión <code>1:4</code> genera un vector con la secuencia de números <code>1, 2, 3, 4</code>. Al combinar esta secuencia con los corchetes, <code>[]</code>, de la forma <code>paleta_primaria_umng[1:4]</code>, se realiza una extracción por posición que recupera los primeros 4 elementos del vector original para asignarlos directamente al parámetro <code>values</code> de la función <code>scale_fill_manual()</code>.</p>
+<p>Adicionalmente, se pueden eliminar o modificar diferentes etiquetas en el gráfico para incluir información de contexto de tal manera que sea más comprensible mediante el operador <code>+</code> junto con la función <code>labs()</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-scale-fill-manual-legend" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-scale-fill-manual-legend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;7.6: Uso de la función <code>labs()</code> para agregar, modificar o eliminar etiquetas en un gráfico
+</figcaption>
+<div aria-describedby="lst-scale-fill-manual-legend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> mod_ingles_punt)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">fill =</span> mod_ingles_desem),</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">boundary =</span> <span class="dv">0</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">bins =</span> <span class="dv">40</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> paleta_primaria_umng[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Puntaje (rango [0, 300])"</span>,</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Frequencia"</span>,</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Nivel de desempeño"</span>,</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribución puntaje módulo inglés en FAEDIS"</span>,</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Periodo: 2021 - 2024"</span>,</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Fuente: Data Icfes"</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="distributions_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>En el <a href="#lst-scale-fill-manual-legend" class="quarto-xref">Listado&nbsp;<span>7.6</span></a> utilizando el parámetro <code>fill</code> dentro de la función <code>labs()</code> es posible modificar el título de la legenda que señala los valores de la variable categórica <code>mod_ingles_desem</code> cuando se asocia al atributo estético <code>fill</code> dentro de la función <code>aes()</code> en la geometría <code>geom_histogram</code>.</p>
+</section>
+<section id="tema" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="tema"><span class="header-section-number">7.5</span> Tema</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
