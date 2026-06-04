@@ -110,7 +110,7 @@ ggplot(
   ) +
   labs(
     x = "Puntaje (rango [0, 300])",
-    y = "Frequencia",
+    y = "Frecuencia",
     fill = "Nivel de desempeño",
     title = "Distribución puntaje módulo inglés en FAEDIS",
     subtitle = "Periodo: 2021 - 2024",
@@ -306,7 +306,7 @@ ggplot(
   ) +
   labs(
     x = "Puntaje (rango [0, 300])",
-    y = "Frequencia",
+    y = "Frecuencia",
     fill = "Nivel de desempeño",
     title = "Distribución puntaje módulo inglés en FAEDIS",
     subtitle = "Periodo: 2021 - 2024",
