@@ -3,6 +3,52 @@
 ```{r}
 #| echo: false
 source("_common.R")
+
+show_palette <- function(hex_codes, n_col, size) {
+  # Data
+  data_palette <- tibble(
+    hex_codes = as_factor(x = str_to_lower(hex_codes))
+  )
+
+  # Plot
+  p <- ggplot(data_palette) +
+    geom_rect(
+      aes(
+        xmin = 0,
+        xmax = 1,
+        ymin = 0,
+        ymax = 1,
+        fill = hex_codes
+      ),
+      color = "black"
+    ) +
+    geom_label(
+      aes(
+        x = 0.5,
+        y = 0.5,
+        label = hex_codes
+      ),
+      size = size,
+      fill = "white"
+    ) +
+    scale_fill_manual(values = hex_codes) +
+    facet_wrap(
+      facets = vars(hex_codes),
+      ncol = n_col
+    ) +
+    coord_fixed(expand = FALSE) +
+    theme_void() +
+    theme(
+      strip.text = element_blank(),
+      strip.background = element_blank(),
+      panel.spacing = unit(0, "pt"),
+      plot.margin = margin(0, 0, 0, 0, "pt"),
+      legend.position = "none"
+    )
+
+  # Return
+  return(p)
+}
 ```
 
 ```{r}
@@ -10,6 +56,7 @@ source("_common.R")
 #| echo: false
 #| message: false
 library(tidyverse)
+library(scales)
 ```
 
 Este capítulo se basa en [@wickham_ggplot2_2016] y [@wilke_fundamentals_2019] así como en la documentación oficial de [`ggplot2`](https://ggplot2.tidyverse.org/articles/ggplot2.html) donde tiene como propósito utilizar el modelo mental de la gramática de gráficos en capas para visualizar la distribución de variables numéricas utilizando el paquete `ggplot2` e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).
@@ -66,7 +113,7 @@ ggplot(
     y = "Frequencia",
     fill = "Nivel de desempeño",
     title = "Distribución puntaje módulo inglés en FAEDIS",
-    subtitle = "Perido: 2021 - 2024",
+    subtitle = "Periodo: 2021 - 2024",
     caption = "Fuente: Data Icfes"
   ) +
   theme(
@@ -172,8 +219,101 @@ ggplot(
 
 Como resultado de la ejecución del código del @lst-color-fill-fix-var se genera una visualización tanto del puntaje numérico como de los niveles de desempeño del módulo de inglés. Éste aspecto es posible incluirlo debido a que la función `geom_histogram()` contiene un ajuste de posición (ver @sec-position) a través del parámetro `position` con el argumento `"stack"`, como `position = "stack"`. Si se consulta la documentación de esta función en la sección **Usage**, se encontrará que esta es la configuración por defecto que se utiliza. Es decir, el ajuste de posición permite apilar contenedores cuando se agrupan los valores por una variable categórica como `mod_ingles_desem` y existen diferentes grupos que estan incluídos dentro de un mismo contenedor.    
 
-En el gráfico generado por el código del @lst-color-fill-fix-var 
+Adicionalmente, en el gráfico generado por el código del @lst-color-fill-fix-var `ggplot2` utiliza una paleta de colores por defecto cuando se asocia el parámetro `fill` con el argumento `mod_ingles_desem`. En particular, la paleta de colores que utiliza `ggplot2` para una variable categórica con 4 valores como `mod_ingles_desem` es:
 
-**Pending**: add manual de identidad visual umng and hex codes 
+```{r}
+#| echo: false
+#| fig-height: 1.5
+# See the source code of scale_fill_discrete()
+# in relation to fallback.palette = pal_hue()
+show_palette(
+  hex_codes = pal_hue()(4),
+  n_col = 4,
+  size = 4
+)
+```
 
-https://www.colorhexa.com/
+## Escalas
+
+La paleta de colores utilizada por defecto en `ggplot2` y señalada en la @sec-color-aes-var se puede modificar y personalizar haciendo uso de una representación hexadecimal (ver @nte-hex-color-values) para el conjunto de colores alternativos que se busquen aplicar. En particular, en la Universidad Militar Nueva Granada (UMNG) a través del [Manual de Identidad Visual](https://github.com/luifrancgom/r-clio/raw/main/documentation/manual-identidad-visual-umng_2024-09.pdf) se estableció una paleta de colores primaria que contiene 2 colores institucionales y 4 colores complementarios dada por:
+
+```{r}
+#| echo: false
+#| label: fig-pal-primary-umng
+#| fig-cap: Paleta de colores primaria de la Universidad Militar Nueva Granada (UMNG) de acuerdo al Manual de Identidad Visual
+#| fig-height: 1.5
+show_palette(
+  hex_codes = paleta_primaria_umng,
+  n_col = 6,
+  size = 4
+)
+```
+
+De esa manera es posible definir un vector de caracteres que contenga la representación hexadecimal de cada color señalado en la @fig-pal-primary-umng como se señala a continuación y posteriormente seleccionar los primeros 4 colores:
+
+```{r}
+#| eval: false
+# Paleta primaria UMNG ----
+paleta_primaria_umng <- c(
+  "#043074",
+  "#fdc600",
+  "#0d5e30",
+  "#ee2a24",
+  "#000000",
+  "#ffffff"
+)
+```
+
+Para modificar la paleta de colores por defecto que utiliza `ggplot2` respecto al gráfico generado por el código señalado en el @lst-color-fill-fix-var se puede utilizar el operador `+` junto con la función `scale_fill_manual()`. Esta función a través del parámetro `values` permite fijar un vector de caracteres con la representación hexadecimal de los colores que se busquen utilizar. De esa manera, se puede seleccionar los primeros 4 colores de `paleta_primaria_umng` y agregar los aspectos mencionados al código del @lst-color-fill-fix-var, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-scale-fill-manual
+#| lst-cap: Personalización de la paleta de colores asociada al atributo estético `fill` dentro de `aes()` en una geometría
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024,
+  mapping = aes(x = mod_ingles_punt)
+) +
+  geom_histogram(
+    mapping = aes(fill = mod_ingles_desem),
+    boundary = 0,
+    bins = 40,
+    color = "black"
+  ) +
+  scale_fill_manual(
+    values = paleta_primaria_umng[1:4]
+  )
+```
+
+En el @lst-scale-fill-manual, la expresión `1:4` genera un vector con la secuencia de números `1, 2, 3, 4`. Al combinar esta secuencia con los corchetes, `[]`, de la forma `paleta_primaria_umng[1:4]`, se realiza una extracción por posición que recupera los primeros 4 elementos del vector original para asignarlos directamente al parámetro `values` de la función `scale_fill_manual()`.
+
+Adicionalmente, se pueden eliminar o modificar diferentes etiquetas en el gráfico para incluir información de contexto de tal manera que sea más comprensible mediante el operador `+` junto con la función `labs()`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-scale-fill-manual-legend
+#| lst-cap: Uso de la función `labs()` para agregar, modificar o eliminar etiquetas en un gráfico
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024,
+  mapping = aes(x = mod_ingles_punt)
+) +
+  geom_histogram(
+    mapping = aes(fill = mod_ingles_desem),
+    color = "black",
+    boundary = 0,
+    bins = 40
+  ) +
+  scale_fill_manual(
+    values = paleta_primaria_umng[1:4]
+  ) +
+  labs(
+    x = "Puntaje (rango [0, 300])",
+    y = "Frequencia",
+    fill = "Nivel de desempeño",
+    title = "Distribución puntaje módulo inglés en FAEDIS",
+    subtitle = "Periodo: 2021 - 2024",
+    caption = "Fuente: Data Icfes"
+  )
+```
+
+En el @lst-scale-fill-manual-legend utilizando el parámetro `fill` dentro de la función `labs()` es posible modificar el título de la legenda que señala los valores de la variable categórica `mod_ingles_desem` cuando se asocia al atributo estético `fill` dentro de la función `aes()` en la geometría `geom_histogram`.
+
+## Tema
