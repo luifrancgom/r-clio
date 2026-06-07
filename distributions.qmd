@@ -181,11 +181,11 @@ Una representación hexadecimal se especifica mediante el formato `#rrggbb`, don
 Debido a que los dígitos en un sistema de numeración hexadecimal corresponde a $0, 1, \ldots, 9$ más $a, b \ldots, f$ y por el uso de 2 dígitos para cada par `rr`, `gg` y `bb`, existen en total $(16 \times 16) \times (16 \times 16) \times (16 \times 16) = 16,777,216$ posibles colores bajo esta representación. En particular `#000000` representa la ausencia total de luz en `rr`, `gg` y `bb` donde corresponde a un negro absoluto y `#ffffff` representa la intensidad máxima permitida en `rr`, `gg` y `bb` donde corresponde a un blanco absoluto.  
 :::
 
-Para ilustrar los anteriores aspectos utilizando como insumo el código del @lst-bins-boundary-histogram se hará uso de los nombres de los colores `black` y `yellow` como argumentos para los parámetros `color` y `fill` utilizando el primer caso:
+Para ilustrar los anteriores aspectos utilizando como insumo el código del @lst-bins-boundary-histogram, se hará uso de los nombres de los colores `black` y `yellow` como argumentos para los parámetros `color` y `fill` utilizando el primer caso, tal como se señala a continuación:
 
 ```{r}
 #| lst-label: lst-color-fill-fix-fix
-#| lst-cap: Fijación de colores por fuera de `aes()` para los atributos estéticos `color` y `fill` en un geometría asociada con un histograma 
+#| lst-cap: Asignación de colores por fuera de `aes()` para los atributos estéticos `color` y `fill` en un geometría asociada con un histograma 
 ggplot(
   data = saber_pro_genericas_faedis_2021_2024,
   mapping = aes(x = mod_ingles_punt)
@@ -204,7 +204,7 @@ Para entender el segundo caso señalado en la @sec-color-aesthetic-attributes re
 
 ```{r}
 #| lst-label: lst-color-fill-fix-var
-#| lst-cap: Fijación de colores dentro de `aes()` para el atributo estético `fill` en un geometría asociada con un histograma 
+#| lst-cap: Asignación de colores dentro de `aes()` para el atributo estético `fill` en un geometría asociada con un histograma 
 ggplot(
   data = saber_pro_genericas_faedis_2021_2024,
   mapping = aes(x = mod_ingles_punt)
@@ -217,7 +217,7 @@ ggplot(
   )
 ```
 
-Como resultado de la ejecución del código del @lst-color-fill-fix-var se genera una visualización tanto del puntaje numérico como de los niveles de desempeño del módulo de inglés. Éste aspecto es posible incluirlo debido a que la función `geom_histogram()` contiene un ajuste de posición (ver @sec-position) a través del parámetro `position` con el argumento `"stack"`, como `position = "stack"`. Si se consulta la documentación de esta función en la sección **Usage**, se encontrará que esta es la configuración por defecto que se utiliza. Es decir, el ajuste de posición permite apilar contenedores cuando se agrupan los valores por una variable categórica como `mod_ingles_desem` y existen diferentes grupos que estan incluídos dentro de un mismo contenedor.    
+Como resultado de la ejecución del código del @lst-color-fill-fix-var se genera una visualización tanto del puntaje numérico como de los niveles de desempeño del módulo de inglés. Éste aspecto es posible incluirlo debido a que la función `geom_histogram()` contiene un ajuste de posición (ver @sec-position) a través del parámetro `position` con el argumento `"stack"`, como `position = "stack"`. Si se consulta la documentación de esta función (`?geom_histogram`) en la sección **Usage**, se encontrará que esta es la configuración por defecto que se utiliza. Es decir, el ajuste de posición permite apilar contenedores cuando se agrupan los valores por una variable categórica como `mod_ingles_desem` y existen diferentes grupos que estan incluídos dentro de un mismo contenedor.    
 
 Adicionalmente, en el gráfico generado por el código del @lst-color-fill-fix-var `ggplot2` utiliza una paleta de colores por defecto cuando se asocia el parámetro `fill` con el argumento `mod_ingles_desem`. En particular, la paleta de colores que utiliza `ggplot2` para una variable categórica con 4 valores como `mod_ingles_desem` es:
 
@@ -235,7 +235,7 @@ show_palette(
 
 ## Escalas
 
-La paleta de colores utilizada por defecto en `ggplot2` y señalada en la @sec-color-aes-var se puede modificar y personalizar haciendo uso de una representación hexadecimal (ver @nte-hex-color-values) para el conjunto de colores alternativos que se busquen aplicar. En particular, en la Universidad Militar Nueva Granada (UMNG) a través del [Manual de Identidad Visual](https://github.com/luifrancgom/r-clio/raw/main/documentation/manual-identidad-visual-umng_2024-09.pdf) se estableció una paleta de colores primaria que contiene 2 colores institucionales y 4 colores complementarios dada por:
+La paleta de colores utilizada por defecto en `ggplot2` y señalada en la @sec-color-aes-var se puede modificar y personalizar haciendo uso de una representación hexadecimal (ver @nte-hex-color-values) para el conjunto de colores alternativos que se busquen aplicar. En particular, en la Universidad Militar Nueva Granada (UMNG) a través del [Manual de Identidad Visual](https://github.com/luifrancgom/r-clio/raw/main/documentation/manual-identidad-visual-umng_2024-09.pdf) se estableció una paleta de colores primaria que contiene 2 colores institucionales y 4 colores complementarios, donde se encuentra dada por:
 
 ```{r}
 #| echo: false
@@ -264,7 +264,7 @@ paleta_primaria_umng <- c(
 )
 ```
 
-Para modificar la paleta de colores por defecto que utiliza `ggplot2` respecto al gráfico generado por el código señalado en el @lst-color-fill-fix-var se puede utilizar el operador `+` junto con la función `scale_fill_manual()`. Esta función a través del parámetro `values` permite fijar un vector de caracteres con la representación hexadecimal de los colores que se busquen utilizar. De esa manera, se puede seleccionar los primeros 4 colores de `paleta_primaria_umng` y agregar los aspectos mencionados al código del @lst-color-fill-fix-var, tal como se señala a continuación:
+Para modificar la paleta de colores por defecto que utiliza `ggplot2` respecto al gráfico generado por el código señalado en el @lst-color-fill-fix-var se puede utilizar el operador `+` junto con la función `scale_fill_manual()`. Esta función a través del parámetro `values` permite fijar un vector de caracteres con la representación hexadecimal de los colores que se busquen utilizar. De esa manera, se pueden seleccionar los primeros 4 colores de `paleta_primaria_umng` y agregar los aspectos mencionados al código del @lst-color-fill-fix-var, tal como se señala a continuación:
 
 ```{r}
 #| lst-label: lst-scale-fill-manual
@@ -314,6 +314,6 @@ ggplot(
   )
 ```
 
-En el @lst-scale-fill-manual-legend utilizando el parámetro `fill` dentro de la función `labs()` es posible modificar el título de la leyenda que señala los valores de la variable categórica `mod_ingles_desem` cuando se asocia al atributo estético `fill` dentro de la función `aes()` en la geometría `geom_histogram`.
+En el @lst-scale-fill-manual-legend utilizando el parámetro `fill` dentro de la función `labs()` es posible modificar el título de la leyenda que señala los valores de la variable categórica `mod_ingles_desem` cuando se asocia al atributo estético `fill` dentro de la función `aes()` en la geometría `geom_histogram`. Respecto a los demás parámetros con sus respectivos argumentos que se incluyeron en la función `labs()`, son elementos que se aplicaron de manera similar a lo señalado en el @lst-labs.
 
 ## Tema

@@ -24,8 +24,8 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      inkscape:zoom="0.71535494"
-     inkscape:cx="397.00572"
-     inkscape:cy="561.25984"
+     inkscape:cx="397.70467"
+     inkscape:cy="559.86193"
      inkscape:window-width="1854"
      inkscape:window-height="1011"
      inkscape:window-x="1146"
@@ -124,10 +124,7 @@
      inkscape:groupmode="layer"
      id="layer1">
     <g
-       id="g12"
-       inkscape:export-filename="aesthetics-attributes.png"
-       inkscape:export-xdpi="96"
-       inkscape:export-ydpi="96">
+       id="g1">
       <path
          style="fill:#000000;stroke:#000000;stroke-width:0.264583;stroke-opacity:1;marker-end:url(#marker12)"
          d="M 16.643835,89.136986 V 49.561644"
@@ -143,7 +140,7 @@
          style="font-size:16px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect3);display:inline;fill:#000000;stroke:#000000;stroke-opacity:1"><tspan
            x="216.67578"
            y="334.27734"
-           id="tspan2">x</tspan></text>
+           id="tspan1">x</tspan></text>
       <text
          xml:space="preserve"
          transform="matrix(0.26458333,0,0,0.26458333,-46.999794,-39.430183)"
@@ -151,16 +148,16 @@
          style="font-size:16px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect3-7);display:inline;fill:#000000;stroke:#000000;stroke-opacity:1"><tspan
            x="216.67578"
            y="334.27734"
-           id="tspan3">y</tspan></text>
+           id="tspan2">y</tspan></text>
+      <text
+         xml:space="preserve"
+         transform="matrix(0.26458333,0,0,0.26458333,0.90688166,0.47725071)"
+         id="text12"
+         style="font-size:16px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect12);display:inline;fill:#000000;stroke:#000000;stroke-width:1.00157;stroke-dasharray:none;stroke-opacity:1"><tspan
+           x="71.292969"
+           y="148.35547"
+           id="tspan3">Posición (x, y)</tspan></text>
     </g>
-    <text
-       xml:space="preserve"
-       transform="matrix(0.26458333,0,0,0.26458333,0.90688166,0.47725071)"
-       id="text12"
-       style="font-size:16px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect12);display:inline;fill:#000000;stroke:#000000;stroke-width:1.00157;stroke-dasharray:none;stroke-opacity:1"><tspan
-         x="71.292969"
-         y="148.35547"
-         id="tspan4">Posición (x, y)</tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,64.206583,0.47725071)"
@@ -168,7 +165,7 @@
        style="font-size:16px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect12-2);display:inline;fill:#000000;stroke:#000000;stroke-width:1.00157;stroke-dasharray:none;stroke-opacity:1"><tspan
          x="71.292969"
          y="148.35547"
-         id="tspan5">Color (color)</tspan></text>
+         id="tspan4">Color (color)</tspan></text>
     <g
        id="g13"
        transform="translate(-0.15033973,0.68966347)">
@@ -225,7 +222,7 @@
        style="font-size:16px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect12-2-8);display:inline;fill:#000000;stroke:#000000;stroke-width:1.00157;stroke-dasharray:none;stroke-opacity:1"><tspan
          x="71.292969"
          y="148.35547"
-         id="tspan6">Relleno (fill)</tspan></text>
+         id="tspan5">Relleno (fill)</tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,-2.4882599,69.233181)"
@@ -233,7 +230,7 @@
        style="font-size:16px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect12-9);display:inline;fill:#000000;stroke:#000000;stroke-width:1.00157;stroke-dasharray:none;stroke-opacity:1"><tspan
          x="71.292969"
          y="148.35547"
-         id="tspan7">Opacidad (alpha)</tspan></text>
+         id="tspan6">Opacidad (alpha)</tspan></text>
     <g
        id="g15"
        transform="translate(2.5898175,10.943038)">
@@ -263,7 +260,7 @@
        style="font-size:16px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect12-9-7);display:inline;fill:#000000;stroke:#000000;stroke-width:1.00157;stroke-dasharray:none;stroke-opacity:1"><tspan
          x="71.292969"
          y="148.35547"
-         id="tspan8">Forma (shape)</tspan></text>
+         id="tspan7">Forma (shape)</tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,62.730704,69.305528)"
@@ -271,7 +268,7 @@
        style="font-size:16px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect12-9-0);display:inline;fill:#000000;stroke:#000000;stroke-width:1.00157;stroke-dasharray:none;stroke-opacity:1"><tspan
          x="71.292969"
          y="148.35547"
-         id="tspan9">Tamaño (size)</tspan></text>
+         id="tspan8">Tamaño (size)</tspan></text>
     <g
        id="g16"
        transform="translate(0,8.8263617)"
