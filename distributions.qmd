@@ -123,10 +123,13 @@ ggplot(
 
 ## Datos, mapeo y capas
 
-Para generar la @fig-1-chap-7 es necesario en primera instancia importar los datos para explorarlos en R como se señala a continuación, teniendo en cuenta lo indicado en la @nte-1-chap-7:
+Para generar la @fig-1-chap-7 es necesario en primera instancia cargar los paquetes que se requieran utilizar y posteriormente importar los datos para explorarlos en R como se señala a continuación, teniendo en cuenta lo indicado en la @nte-1-chap-7:
 
 ```{r}
 #| eval: false
+# Cargar paquetes ----
+library(tidyverse)
+
 # Importar datos ----
 saber_pro_genericas_faedis_2021_2024 <- read_rds(
   file = "data/2021-2024_saber-pro-genericas_faedis.rds"
