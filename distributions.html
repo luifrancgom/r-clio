@@ -470,7 +470,7 @@ Figura&nbsp;7.1: Resultado final de un histograma utilizando <code>ggplot2</code
 </section>
 <section id="datos-mapeo-y-capas" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="datos-mapeo-y-capas"><span class="header-section-number">7.2</span> Datos, mapeo y capas</h2>
-<p>Para generar la <a href="#fig-1-chap-7" class="quarto-xref">Figura&nbsp;<span>7.1</span></a> es necesario en primera instancia importar los datos para explorarlos en R como se señala a continuación teniendo en cuenta lo indicado en la <a href="#nte-1-chap-7" class="quarto-xref">Nota&nbsp;<span>7.1</span></a>.</p>
+<p>Para generar la <a href="#fig-1-chap-7" class="quarto-xref">Figura&nbsp;<span>7.1</span></a> es necesario en primera instancia importar los datos para explorarlos en R como se señala a continuación, teniendo en cuenta lo indicado en la <a href="#nte-1-chap-7" class="quarto-xref">Nota&nbsp;<span>7.1</span></a>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar datos ----</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(</span>
@@ -748,6 +748,52 @@ Listado&nbsp;7.6: Uso de la función <code>labs()</code> para agregar, modificar
 </section>
 <section id="tema" class="level2" data-number="7.5">
 <h2 data-number="7.5" class="anchored" data-anchor-id="tema"><span class="header-section-number">7.5</span> Tema</h2>
+<p>Un aspecto que es posible mejorar dentro del gráfico generado por el <a href="#lst-scale-fill-manual-legend" class="quarto-xref">Listado&nbsp;<span>7.6</span></a> es el foco de atención hacia el histograma, sin perder la información generada por la leyenda que ilustra los niveles de desempeño a través de la variable <code>mod_ingles_desem</code>.</p>
+<p>Para modificar este aspecto es necesario personalizar los componentes del gráfico que no están vinculados a los datos donde se utiliza la función <code>theme()</code>. Esta función tiene un <a href="https://ggplot2.tidyverse.org/reference/theme.html">conjunto amplio de parámeros</a> que pueden modificar diferentes aspectos del gráfico. Sin embargo, el objetivo no es abarcar cada uno de ellos.</p>
+<p>En ésta última sección del <a href="#sec-distributions" class="quarto-xref"><span>Capítulo 7</span></a> modificarás la posición de la leyenda que contiene la información de la variable <code>mod_ingles_desem</code> de tal manera que se pueda extender el ancho del gráfico. Para aplicar este cambio se utilizará el parámetro <code>legend.position</code> junto con el argumento <code>"bottom"</code>, como <code>legend.position = "bottom"</code>, dentro de la función <code>theme()</code> agregando este aspecto con el operador <code>+</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-theme-legend-position" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-theme-legend-position-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;7.7: Uso de la función <code>theme()</code> para modificar la posición de una leyenda
+</figcaption>
+<div aria-describedby="lst-theme-legend-position-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> mod_ingles_punt)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">fill =</span> mod_ingles_desem),</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">boundary =</span> <span class="dv">0</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">bins =</span> <span class="dv">40</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> paleta_primaria_umng[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Puntaje (rango [0, 300])"</span>,</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Frecuencia"</span>,</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Nivel de desempeño"</span>,</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribución puntaje módulo inglés en FAEDIS"</span>,</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Periodo: 2021 - 2024"</span>,</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Fuente: Data Icfes"</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="distributions_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>De esa manera con el código señalado en el <a href="#lst-theme-legend-position" class="quarto-xref">Listado&nbsp;<span>7.7</span></a>, es posible recrear finalmente la <a href="#fig-1-chap-7" class="quarto-xref">Figura&nbsp;<span>7.1</span></a> para ilustrar la distribución de la variable <code>mod_ingles_punt</code> junto con los niveles de desempeño representados en <code>mod_ingles_desem</code> para el módulo de inglés.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
