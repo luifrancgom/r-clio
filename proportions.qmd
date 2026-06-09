@@ -1,1 +1,80 @@
 # Proporciones
+
+```{r}
+#| echo: false
+source("_common.R")
+```
+
+```{r}
+#| label: load-r-packages
+#| echo: false
+#| message: false
+library(tidyverse)
+library(scales)
+```
+
+Este capítulo se basa en [@wickham_ggplot2_2016] y [@wilke_fundamentals_2019] así como en la documentación oficial de [`ggplot2`](https://ggplot2.tidyverse.org/articles/ggplot2.html) donde tiene como propósito utilizar el modelo mental de la gramática de gráficos en capas para visualizar proporciones para un conjunto determinado de grupos utilizando el paquete `ggplot2` e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).
+
+Exploraremos los siguientes aspectos:
+
+1. 
+2. 
+
+:::: {#nte-1-chap-8 .callout-note}
+Para desarrollar el contenido de este capítulo es necesario que hayas completado la descarga y ubicación del archivo `2021-2024_saber-pro-genericas_faedis.rds` dentro de la carpeta `data`, respecto a lo descrito en la @nte-1-chap-6.
+
+En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `008_visualizar-proporciones-en-r` y dentro de ella genera el archivo `001_visualizar-proporciones-datos-faedis.R`, siguiendo las pautas de la @sec-package-usage.
+::::
+
+## Gráfico de barras apiladas y normalizadas
+
+Pending
+
+```{r}
+#| label: fig-1-chap-8
+#| fig-cap: Resultado final de un gráfico de barras apiladas y normalizadas en el rango $[0,1]$ utilizando `ggplot2`
+#| fig-height: 5.5
+#| echo: false
+saber_pro_genericas_faedis_2021_2024 <- read_rds(
+  file = "data/2021-2024_saber-pro-genericas_faedis.rds"
+)
+
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024,
+  mapping = aes(
+    y = fct_reorder(
+      estu_prgm_academico,
+      .x = estu_genero == "F",
+      .fun = mean
+    )
+  )
+) +
+  geom_bar(
+    mapping = aes(fill = estu_genero),
+    color = "black",
+    position = "fill"
+  ) +
+  scale_x_continuous(
+    labels = label_percent()
+  ) +
+  scale_y_discrete(labels = label_wrap_gen(width = 18)) +
+  scale_fill_discrete(
+    labels = c("Femenino", "Masculino")
+  ) +
+  labs(
+    x = "Porcentaje de inscritos",
+    y = NULL,
+    fill = "Género",
+    title = str_wrap(
+      "Proporción inscritos Saber Pro por género y programa en FAEDIS",
+      width = 50
+    ),
+    subtitle = "Periodo: 2021 - 2024",
+    caption = "Fuente: Data Icfes"
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+## Pending
