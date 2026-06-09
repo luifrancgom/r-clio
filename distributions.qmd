@@ -123,7 +123,7 @@ ggplot(
 
 ## Datos, mapeo y capas
 
-Para generar la @fig-1-chap-7 es necesario en primera instancia importar los datos para explorarlos en R como se señala a continuación teniendo en cuenta lo indicado en la @nte-1-chap-7.
+Para generar la @fig-1-chap-7 es necesario en primera instancia importar los datos para explorarlos en R como se señala a continuación, teniendo en cuenta lo indicado en la @nte-1-chap-7:
 
 ```{r}
 #| eval: false
@@ -317,3 +317,40 @@ ggplot(
 En el @lst-scale-fill-manual-legend utilizando el parámetro `fill` dentro de la función `labs()` es posible modificar el título de la leyenda que señala los valores de la variable categórica `mod_ingles_desem` cuando se asocia al atributo estético `fill` dentro de la función `aes()` en la geometría `geom_histogram`. Respecto a los demás parámetros con sus respectivos argumentos que se incluyeron en la función `labs()`, son elementos que se aplicaron de manera similar a lo señalado en el @lst-labs.
 
 ## Tema
+
+Un aspecto que es posible mejorar dentro del gráfico generado por el @lst-scale-fill-manual-legend es el foco de atención hacia el histograma, sin perder la información generada por la leyenda que ilustra los niveles de desempeño a través de la variable `mod_ingles_desem`. 
+
+Para modificar este aspecto es necesario personalizar los componentes del gráfico que no están vinculados a los datos donde se utiliza la función `theme()`. Esta función tiene un [conjunto amplio de parámeros](https://ggplot2.tidyverse.org/reference/theme.html) que pueden modificar diferentes aspectos del gráfico. Sin embargo, el objetivo no es abarcar cada uno de ellos. 
+
+En ésta última sección del @sec-distributions modificarás la posición de la leyenda que contiene la información de la variable `mod_ingles_desem` de tal manera que se pueda extender el ancho del gráfico. Para aplicar este cambio se utilizará el parámetro `legend.position` junto con el argumento `"bottom"`, como `legend.position = "bottom"`, dentro de la función `theme()` agregando este aspecto con el operador `+`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-theme-legend-position
+#| lst-cap: Uso de la función `theme()` para modificar la posición de una leyenda
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024,
+  mapping = aes(x = mod_ingles_punt)
+) +
+  geom_histogram(
+    mapping = aes(fill = mod_ingles_desem),
+    color = "black",
+    boundary = 0,
+    bins = 40
+  ) +
+  scale_fill_manual(
+    values = paleta_primaria_umng[1:4]
+  ) +
+  labs(
+    x = "Puntaje (rango [0, 300])",
+    y = "Frecuencia",
+    fill = "Nivel de desempeño",
+    title = "Distribución puntaje módulo inglés en FAEDIS",
+    subtitle = "Periodo: 2021 - 2024",
+    caption = "Fuente: Data Icfes"
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+De esa manera con el código señalado en el @lst-theme-legend-position, es posible recrear finalmente la @fig-1-chap-7 para ilustrar la distribución de la variable `mod_ingles_punt` junto con los niveles de desempeño representados en `mod_ingles_desem` para el módulo de inglés.
