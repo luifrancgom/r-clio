@@ -99,7 +99,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c55a999e4631334e606710a473942548.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-3d832611e24eec6391b535c6fa41efbe.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -401,7 +401,7 @@ window.Quarto = {
   <li><a href="#datos" id="toc-datos" class="nav-link" data-scroll-target="#datos"><span class="header-section-number">6.2.1</span> Datos</a></li>
   <li><a href="#mapeo" id="toc-mapeo" class="nav-link" data-scroll-target="#mapeo"><span class="header-section-number">6.2.2</span> Mapeo</a></li>
   <li><a href="#capas" id="toc-capas" class="nav-link" data-scroll-target="#capas"><span class="header-section-number">6.2.3</span> Capas</a></li>
-  <li><a href="#escalas" id="toc-escalas" class="nav-link" data-scroll-target="#escalas"><span class="header-section-number">6.2.4</span> Escalas</a></li>
+  <li><a href="#sec-scales" id="toc-sec-scales" class="nav-link" data-scroll-target="#sec-scales"><span class="header-section-number">6.2.4</span> Escalas</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/amounts.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/amounts.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
@@ -766,8 +766,8 @@ Listado&nbsp;6.6: Uso de la función <code>fct_rev()</code> para reversar el ord
 <p>Al igual que en la <a href="#sec-stats" class="quarto-xref"><span>Sección 6.2.3.2</span></a> si examinas la documentación de la función <code>geom_bar()</code> en la sección <strong>Usage</strong> se puede también encontrar el parámetro <code>position</code> con el argumento <code>"stack"</code>, como <code>position = "stack"</code>. En la <a href="distributions.html#sec-color-aes-var" class="quarto-xref"><span>Sección 7.3</span></a> se explorará, con otra tipo de geometría, cómo se puede utilizar este ajuste de posición para agregar información adicional dentro de un gráfico. Por ahora, en el <a href="#sec-amounts" class="quarto-xref"><span>Capítulo 6</span></a> no se profundizará respecto al uso de ajustes de posición.</p>
 </section>
 </section>
-<section id="escalas" class="level3" data-number="6.2.4">
-<h3 data-number="6.2.4" class="anchored" data-anchor-id="escalas"><span class="header-section-number">6.2.4</span> Escalas</h3>
+<section id="sec-scales" class="level3" data-number="6.2.4">
+<h3 data-number="6.2.4" class="anchored" data-anchor-id="sec-scales"><span class="header-section-number">6.2.4</span> Escalas</h3>
 <p>Este componente permite interpretar lo que se muestra en el gráfico a partir de etiquetas y leyendas. En el gráfico generado en el <a href="#lst-fct-rev" class="quarto-xref">Listado&nbsp;<span>6.6</span></a> las etiquetas correspondientes a los nombres de los programas en la coordenada <code>y</code> tienen una longitud demasiado extensa donde abarcan la mayor área del gráfico, opacando la información que se busca resaltar respecto al número de inscritos por programa. Para corregir este aspecto, se puede utilizar la función <code>scale_y_discrete()</code> utilizando el parámetro <code>labels</code> y la función auxiliar <code>label_wrap_gen()</code> con el propósito de limitar el ancho de los nombres de los programas que se señalan en el gráfico. Utilizando de nuevo el operador <code>+</code>, como en el <a href="#lst-geometry" class="quarto-xref">Listado&nbsp;<span>6.4</span></a>, puedes agregar este componente de la siguiente manera:</p>
 <div class="cell">
 <div id="lst-scales" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">

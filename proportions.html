@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -64,7 +99,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c55a999e4631334e606710a473942548.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-3d832611e24eec6391b535c6fa41efbe.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -361,7 +396,12 @@ window.Quarto = {
    
   <ul>
   <li><a href="#gráfico-de-barras-apiladas-y-normalizadas" id="toc-gráfico-de-barras-apiladas-y-normalizadas" class="nav-link active" data-scroll-target="#gráfico-de-barras-apiladas-y-normalizadas"><span class="header-section-number">8.1</span> Gráfico de barras apiladas y normalizadas</a></li>
-  <li><a href="#pending" id="toc-pending" class="nav-link" data-scroll-target="#pending"><span class="header-section-number">8.2</span> Pending</a></li>
+  <li><a href="#datos-mapeo-capas-y-escalas" id="toc-datos-mapeo-capas-y-escalas" class="nav-link" data-scroll-target="#datos-mapeo-capas-y-escalas"><span class="header-section-number">8.2</span> Datos, mapeo, capas y escalas</a>
+  <ul class="collapse">
+  <li><a href="#gráfico-de-barras-apiladas" id="toc-gráfico-de-barras-apiladas" class="nav-link" data-scroll-target="#gráfico-de-barras-apiladas"><span class="header-section-number">8.2.1</span> Gráfico de barras apiladas</a></li>
+  <li><a href="#normalización" id="toc-normalización" class="nav-link" data-scroll-target="#normalización"><span class="header-section-number">8.2.2</span> Normalización</a></li>
+  <li><a href="#ordenamiento-de-etiquetas" id="toc-ordenamiento-de-etiquetas" class="nav-link" data-scroll-target="#ordenamiento-de-etiquetas"><span class="header-section-number">8.2.3</span> Ordenamiento de etiquetas</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/proportions.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/proportions.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
@@ -370,7 +410,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data_visualization.html">Visualización de datos</a></li><li class="breadcrumb-item"><a href="./proportions.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Proporciones</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Proporciones</span></h1>
+<h1 class="title"><span id="sec-proportions" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Proporciones</span></span></h1>
 </div>
 
 
@@ -387,11 +427,12 @@ window.Quarto = {
 </header>
 
 
-<p>Este capítulo se basa en <span class="citation" data-cites="wickham_ggplot2_2016">(<a href="references.html#ref-wickham_ggplot2_2016" role="doc-biblioref">Wickham, 2016</a>)</span> y <span class="citation" data-cites="wilke_fundamentals_2019">(<a href="references.html#ref-wilke_fundamentals_2019" role="doc-biblioref">Wilke, 2019</a>)</span> así como en la documentación oficial de <a href="https://ggplot2.tidyverse.org/articles/ggplot2.html"><code>ggplot2</code></a> donde tiene como propósito utilizar el modelo mental de la gramática de gráficos en capas para visualizar proporciones para un conjunto determinado de grupos utilizando el paquete <code>ggplot2</code> e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).</p>
+<p>Este capítulo se basa en <span class="citation" data-cites="wickham_ggplot2_2016">(<a href="references.html#ref-wickham_ggplot2_2016" role="doc-biblioref">Wickham, 2016</a>)</span> y <span class="citation" data-cites="wilke_fundamentals_2019">(<a href="references.html#ref-wilke_fundamentals_2019" role="doc-biblioref">Wilke, 2019</a>)</span> así como en la documentación oficial de <a href="https://ggplot2.tidyverse.org/articles/ggplot2.html"><code>ggplot2</code></a> y <a href="https://scales.r-lib.org/index.html"><code>scales</code></a> donde tiene como propósito utilizar el modelo mental de la gramática de gráficos en capas para visualizar proporciones para un conjunto determinado de grupos utilizando el paquete <code>ggplot2</code> e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).</p>
 <p>Exploraremos los siguientes aspectos:</p>
 <ol type="1">
-<li></li>
-<li></li>
+<li>¿Cómo visualizar la composición de un determinado grupo donde cada parte representa una proporción?</li>
+<li>¿Cómo ordenar las etiquetas correspondientes al eje de un gráfico con base a otra variable?</li>
+<li>¿Cómo controlar el formato de las etiquetas de los ejes en un gráfico?</li>
 </ol>
 <div id="nte-1-chap-8" class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -409,7 +450,7 @@ Nota&nbsp;8.1
 </div>
 <section id="gráfico-de-barras-apiladas-y-normalizadas" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="gráfico-de-barras-apiladas-y-normalizadas"><span class="header-section-number">8.1</span> Gráfico de barras apiladas y normalizadas</h2>
-<p>Pending</p>
+<p>En esta sección realizarás un gráfico de barras apiladas y normalizadas en el rango <span class="math inline">\([0,1]\)</span>, señalando la proporción de inscritos por género al examen Saber Pro para cada programa de pregrado de la Facultad de Estudios a Distancia de la Universidad Militar en el periodo 2021-2024, tal como se indica en la <a href="#fig-1-chap-8" class="quarto-xref">Figura&nbsp;<span>8.1</span></a>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-1-chap-8" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -425,8 +466,84 @@ Figura&nbsp;8.1: Resultado final de un gráfico de barras apiladas y normalizada
 </div>
 </div>
 </section>
-<section id="pending" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="pending"><span class="header-section-number">8.2</span> Pending</h2>
+<section id="datos-mapeo-capas-y-escalas" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="datos-mapeo-capas-y-escalas"><span class="header-section-number">8.2</span> Datos, mapeo, capas y escalas</h2>
+<p>Para generar la <a href="#fig-1-chap-8" class="quarto-xref">Figura&nbsp;<span>8.1</span></a> es necesario en primera instancia cargar los paquetes que se requieran utilizar y posteriormente importar los datos para explorarlos en R como se señala a continuación, teniendo en cuenta lo indicado en la <a href="#nte-1-chap-8" class="quarto-xref">Nota&nbsp;<span>8.1</span></a>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar paquetes ----</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar datos ----</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"data/2021-2024_saber-pro-genericas_faedis.rds"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>En la <a href="how_to_code_in_r.html#sec-messages" class="quarto-xref"><span>Sección 5.3.1</span></a> respecto al <a href="r_packages.html#lst-load-tidyverse-message" class="quarto-xref">Listado&nbsp;<span>4.1</span></a> se señaló que al utilizar <code>library(tidyverse)</code> se cargaban un conjunto de paquetes. Estos paquetes conforman el núcleo del <code>tidyverse</code>. Sin embargo, al instalar el paquete <code>tidyverse</code> (ver <a href="r_packages.html#sec-installing-packages" class="quarto-xref"><span>Sección 4.2</span></a>), se incluyen un conjunto adicional de paquetes con un uso más específico. Estos paquetes por fuera del núcleo del <code>tidyverse</code> no se cargan al ejecutar <code>library(tidyverse)</code>, donde en caso que se requieran utilizar se necesitan cargar por separado utilizando la función <code>library()</code>.</p>
+<p>Uno de estos paquetes por fuera del núcleo del <code>tidyverse</code> es <code>scales</code>. Este paquete contiene herramientas para modificar los cortes, las etiquetas y aplicar transformaciones a los ejes de un gráfico así como especificar otras paletas de colores. En el <a href="#sec-proportions" class="quarto-xref"><span>Capítulo 8</span></a> utilizarás el paquete <code>scales</code> para controlar el formato de las etiquetas del eje asociado con la coordenada <code>x</code>.</p>
+<section id="gráfico-de-barras-apiladas" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="gráfico-de-barras-apiladas"><span class="header-section-number">8.2.1</span> Gráfico de barras apiladas</h3>
+<p>Una vez se carguen los paquetes que se utilizarán y se importen los datos, es posible utilizar las ideas desarrolladas en el <a href="amounts.html#lst-geometry" class="quarto-xref">Listado&nbsp;<span>6.4</span></a> así como el atributo estético <code>fill</code> junto con la variable <code>estu_genero</code> como <code>fill = estu_genero</code> dentro de <code>aes()</code>en la función <code>geom_bar()</code>. También se puede aplicar el ajuste mencionado en la <a href="amounts.html#sec-scales" class="quarto-xref"><span>Sección 6.2.4</span></a> respecto a la longitud de las etiquetas en el eje asociado con la coordenada <code>y</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-stacked-bars" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-stacked-bars-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;8.1: Gráfico de barras apiladas
+</figcaption>
+<div aria-describedby="lst-stacked-bars-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> estu_prgm_academico)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">fill =</span> estu_genero)) <span class="sc">+</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">labels =</span> <span class="fu">label_wrap_gen</span>(<span class="at">width =</span> <span class="dv">18</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="proportions_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="normalización" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="normalización"><span class="header-section-number">8.2.2</span> Normalización</h3>
+<p>En el gráfico generado por el código del <a href="#lst-stacked-bars" class="quarto-xref">Listado&nbsp;<span>8.1</span></a> es difícil comparar la proporción de inscritos por género para cada programa académico debido a que se realiza un conteo absoluto. Para aislar el tamaño total de cada grupo y sus partes de tal manera que se pueda revisar la composición por género se puede aplicar una normalización en el rango <span class="math inline">\([0,1]\)</span> de tal manera que cada barra tenga una longitud de <span class="math inline">\(1\)</span>. Matemáticamente, este proceso divide el conteo de cada género entre el total de inscritos de su respectivo programa académico.</p>
+<p>Para aplicar una normalización en el rango <span class="math inline">\([0,1]\)</span> en <code>ggplot2</code> es necesario modificar la posición dentro de la función <code>geom_bar()</code> debido a que esta geometría utiliza por defecto el parámetro <code>position</code> con el argumento <code>"stack"</code>, como <code>position = "stack"</code>. Si se cambia el argumento <code>"stack"</code> por <code>"fill"</code> se pueden mantener las barras apiladas y que tengan además una longitud constante. Además es posible fijar el atributo estético <code>color</code> por fuera de <code>aes()</code> pero dentro de <code>geom_bar()</code> con el argumento <code>"black"</code> para resaltar la composición interna de cada grupo por género, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-stacked-normalized-bars" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-stacked-normalized-bars-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;8.2: Gráfico de barras apiladas y normalizadas en el rango <span class="math inline">\([0,1]\)</span>
+</figcaption>
+<div aria-describedby="lst-stacked-normalized-bars-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> estu_prgm_academico)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">fill =</span> estu_genero),</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">"fill"</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">labels =</span> <span class="fu">label_wrap_gen</span>(<span class="at">width =</span> <span class="dv">18</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="proportions_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="ordenamiento-de-etiquetas" class="level3" data-number="8.2.3">
+<h3 data-number="8.2.3" class="anchored" data-anchor-id="ordenamiento-de-etiquetas"><span class="header-section-number">8.2.3</span> Ordenamiento de etiquetas</h3>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
@@ -437,6 +554,7 @@ Wickham, H. (2016). <em>ggplot2: elegant graphics for data analysis</em> (Second
 Wilke, C. (2019). <em>Fundamentals of data visualization: a primer on making informative and compelling figures</em> (First edition). O’Reilly. <a href="https://clauswilke.com/dataviz/">https://clauswilke.com/dataviz/</a>
 </div>
 </div>
+</section>
 </section>
 
 </main> <!-- /main -->
