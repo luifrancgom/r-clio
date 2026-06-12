@@ -241,7 +241,7 @@ Cuando utilices R y ejecutes un código es posible que observes texto en la cons
 
 Para entender que es un mensaje, advertencia o un error realiza el procedimiento descrito en el primer párrafo de la @sec-package-usage. Luego, carga el paquete `tidyverse` siguiendo las indicaciones de esa misma sección, donde se generará un contenido igual o similar al señalado en el @lst-load-tidyverse-message.
 
-### Mensajes
+### Mensajes {#sec-messages}
 
 El contenido del @lst-load-tidyverse-message es un ejemplo de un **mensaje**. Un mensaje en R tiene como propósito informar al usuario sobre algún aspecto en la ejecución del código. En el caso del @lst-load-tidyverse-message la primera parte indica el conjunto de paquetes que `tidyverse` carga al cargar este paquete, así como sus respectivas versiones: 
 

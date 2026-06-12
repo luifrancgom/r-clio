@@ -1,6 +1,6 @@
 # Bienvenidos {.unnumbered}
 
-Este es el [sitio web](https://luifrancgom.github.io/r-clio/) de **R para análisis de datos** aplicado para la comunidad CLIO (Coopera, Lidera, Innova y Orienta). El libro tiene como objetivo introducir a los participantes de la comunidad de aprendizaje CLIO al uso del lenguage de programación [R](https://www.r-project.org/) a través del entorno integrado de desarrollo [Positron](https://positron.posit.co/welcome.html) para realizar análisis de datos y comunicar los resultados utilizando [Quarto](https://quarto.org/). 
+Este es el [sitio web](https://luifrancgom.github.io/r-clio/) de **R para análisis de datos** aplicado para la comunidad CLIO (Coopera, Lidera, Innova y Orienta). El libro tiene como objetivo introducir a los participantes de la comunidad de aprendizaje CLIO al uso del lenguaje de programación [R](https://www.r-project.org/) a través del entorno integrado de desarrollo [Positron](https://positron.posit.co/welcome.html) para realizar análisis de datos y comunicar los resultados utilizando [Quarto](https://quarto.org/). 
 
 A través del libro darás los primeros pasos en el uso de R y aprenderás a visualizar, manipular, organizar, limpiar e importar datos así como programar en este lenguaje y comunicar resultados en Quarto.
 

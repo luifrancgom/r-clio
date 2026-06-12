@@ -246,7 +246,7 @@ En el @lst-help se señaló la forma de consultar la documentación de un conjun
 
 Al igual que en la @sec-stats si examinas la documentación de la función `geom_bar()` en la sección **Usage** se puede también encontrar el parámetro `position` con el argumento `"stack"`, como `position = "stack"`. En la @sec-color-aes-var se explorará, con otra tipo de geometría, cómo se puede utilizar este ajuste de posición para agregar información adicional dentro de un gráfico. Por ahora, en el @sec-amounts no se profundizará respecto al uso de ajustes de posición. 
 
-### Escalas
+### Escalas {#sec-scales}
 
 Este componente permite interpretar lo que se muestra en el gráfico a partir de etiquetas y leyendas. En el gráfico generado en el @lst-fct-rev las etiquetas correspondientes a los nombres de los programas en la coordenada `y` tienen una longitud demasiado extensa donde abarcan la mayor área del gráfico, opacando la información que se busca resaltar respecto al número de inscritos por programa. Para corregir este aspecto, se puede utilizar la función `scale_y_discrete()` utilizando el parámetro `labels` y la función auxiliar `label_wrap_gen()` con el propósito de limitar el ancho de los nombres de los programas que se señalan en el gráfico. Utilizando de nuevo el operador `+`, como en el @lst-geometry, puedes agregar este componente de la siguiente manera:
 

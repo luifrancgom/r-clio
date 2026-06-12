@@ -29,10 +29,10 @@ Para entender cómo funcionan los paquetes en R se puede utilizar una analogía 
 
 ![Paquetes que extienden la funcionalidad de R: Tienda de aplicaciones](images/r-package-store-app.png){fig-alt="Interfaz de una tienda de aplicaciones digitales con diversos íconos de herramientas especializadas, simbolizando paquetes no instalados por defecto en R que extienden su funcionalidad base."}
 
-Analogía para entender la diferencia entre paquetes que vienen incorporados por defecto en R y aquellos que se pueden instalar para extender su funcionalidad base
+Analogía para entender la diferencia entre paquetes que vienen incorporados por defecto en R y aquellos que se pueden instalar para extender su funcionalidad base.
 :::
 
-## Instalación de paquetes
+## Instalación de paquetes {#sec-installing-packages}
 
 Para instalar un paquete que no viene por defecto en R, retomaremos la analogía de la @sec-what-are-r-packages. En un celular, primero es necesario descargar la aplicación de una tienda una sola vez. Luego, basta con abrirla cada vez que se requiera. Aunque ocasionalmente deba actualizarse, no es necesario reinstalarla nuevamente.
 
