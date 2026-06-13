@@ -134,3 +134,54 @@ ggplot(
 ```
 
 ### Ordenamiento de etiquetas
+
+El gráfico generado en el @lst-stacked-normalized-bars presenta las etiquetas del eje asociado a la coordenada `y`, ordenadas de forma alfabética. Al igual que en la @sec-geometries, es fundamental ordenarlas de manera lógica para facilitar la comparación de los programas académicos según la composición de sus inscritos por género. Por lo tanto, se utilizará la proporción de inscritos de género femenino (`F`) como criterio para reordenar dichas etiquetas.
+
+Para aplicar este ordenamiento utilizando `ggplot2` y comprender su lógica, es necesario reducir el análisis a un conjunto más pequeño de datos. A modo de ejemplo, se pueden extraer los primeros $10$ valores de la columna `estu_genero` utilizando el operador `$` (ver @sec-package-usage) y una extracción por posición (ver @sec-scales-color-palette), tal como se señala a continuación:
+
+```{r}
+estu_genero_muestra <- saber_pro_genericas_faedis_2021_2024$estu_genero[1:10]
+estu_genero_muestra
+```
+
+Luego, utilizando el operador relacional `==` (ver @sec-relational-operators), es posible identificar cuáles valores en `estu_genero_muestra` corresponden al género femenino (`F`):
+
+```{r}
+estu_genero_muestra == "F"
+```
+
+En ese sentido, al evaluar si cada elemento en `estu_genero_muestra` es igual a `"F"`, R devuelve un vector de tipo lógico. De este modo, cada posición donde se cumpla la condición se transformará en `TRUE`, mientras que, en caso contrario, se le asignará un `FALSE`.
+
+Por otra parte, en R los vectores lógicos experimentan una coerción automática hacia vectores enteros en contextos donde se requiere un valor numérico, mapeando `TRUE` a `1` y `FALSE` a `0`. Es posible aprovechar este comportamiento calculando la media aritmética de la condición `estu_genero_muestra == "F"` mediante la función `mean()`, lo cual nos devuelve, por definición matemática, la proporción exacta de valores iguales a `"F"`:
+
+```{r}
+mean(estu_genero_muestra == "F")
+```
+
+El proceso descrito anteriormente puede aplicarse a la columna `estu_prgm_academico` en el conjunto de datos `saber_pro_genericas_faedis_2021_2024` haciendo uso de la función `fct_reorder()`. Esta función permite ordenar un vector de caracteres con base en otra variable y haciendo uso de una función que corresponda a una estadística descriptiva, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-fct-reorder
+#| lst-cap: Ordenamiento de etiquetas de un eje asociado a una coordenada utilizando la function `fct_reorder()`
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024,
+  mapping = aes(
+    y = fct_reorder(
+      estu_prgm_academico,
+      .x = estu_genero == "F",
+      .fun = mean
+    )
+  )
+) +
+  geom_bar(
+    mapping = aes(fill = estu_genero),
+    color = "black",
+    position = "fill"
+  ) +
+  scale_y_discrete(labels = label_wrap_gen(width = 18))
+```
+ 
+
+En el @lst-fct-reorder se utiliza la función `fct_reorder()` para reordenar `estu_prgm_academico` con base en la variable `estu_genero == "F"` asociada al parámetro `.x`, y haciendo uso de la función `mean` asociada al parámetro `.fun`. Internamente, esta herramienta genera un vector lógico con base en la condición `estu_genero == "F"` para cada programa académico y calcula su media aritmética, lo que en este caso es equivalente a la proporción de inscritos del género femenino. Con base en esta estadística descriptiva, R reordena las etiquetas del eje asociadas a la coordenada `y`.
+
+### Modificación de etiquetas

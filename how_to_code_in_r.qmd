@@ -386,7 +386,7 @@ Aunque R permite técnicamente nombres como `.mi_variable`, `.Mi_Variable`, `ñi
 Esto implica 2 cambios principales respecto a nombrar carpetas o archivos: no se utilizará el carácter `-` donde se reemplazará por `_` y nunca se iniciará un nombre con números. Esta diferencia radica en que un sistema operativo es más flexible al nombrar archivos o carpetas mientras que R, al ser un lenguaje de programación, requiere reglas estrictas para evitar ambigüedades al ejecutar código.
 :::
 
-## Operadores relacionales
+## Operadores relacionales {#sec-relational-operators}
 
 Los operadores relacionales son operadores binarios que permiten la comparación de valores en vectores atómicos. Estos operadores son útiles por qué establecen condiciones lógicas para filtrar filas de interés en una tibble. En la @tbl-relational-operators se señalan algunos de los operadores relacionales utilizados por R.
 

@@ -236,7 +236,7 @@ show_palette(
 )
 ```
 
-## Escalas
+## Escalas {#sec-scales-color-palette}
 
 La paleta de colores utilizada por defecto en `ggplot2` y señalada en la @sec-color-aes-var se puede modificar y personalizar haciendo uso de una representación hexadecimal (ver @nte-hex-color-values) para el conjunto de colores alternativos que se busquen aplicar. En particular, en la Universidad Militar Nueva Granada (UMNG) a través del [Manual de Identidad Visual](https://github.com/luifrancgom/r-clio/raw/main/documentation/manual-identidad-visual-umng_2024-09.pdf) se estableció una paleta de colores primaria que contiene 2 colores institucionales y 4 colores complementarios, donde se encuentra dada por:
 

@@ -197,7 +197,7 @@ ggplot(
 
 ### Capas
 
-#### Geometrías
+#### Geometrías {#sec-geometries}
 
 Para ilustrar el número de estudiantes inscritos por programa académico es posible utilizar la función `geom_bar()` donde a través de la longitud de un conjunto de barras y contando el número de casos para cada grupo se genera una representación gráfica de este aspecto. Para lograr lo descrito anteriormente agrega la capa `geom_bar()` utilizando el operador `+`, tal como se señala a continuación:
 
