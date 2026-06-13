@@ -401,6 +401,7 @@ window.Quarto = {
   <li><a href="#gráfico-de-barras-apiladas" id="toc-gráfico-de-barras-apiladas" class="nav-link" data-scroll-target="#gráfico-de-barras-apiladas"><span class="header-section-number">8.2.1</span> Gráfico de barras apiladas</a></li>
   <li><a href="#normalización" id="toc-normalización" class="nav-link" data-scroll-target="#normalización"><span class="header-section-number">8.2.2</span> Normalización</a></li>
   <li><a href="#ordenamiento-de-etiquetas" id="toc-ordenamiento-de-etiquetas" class="nav-link" data-scroll-target="#ordenamiento-de-etiquetas"><span class="header-section-number">8.2.3</span> Ordenamiento de etiquetas</a></li>
+  <li><a href="#modificación-de-etiquetas" id="toc-modificación-de-etiquetas" class="nav-link" data-scroll-target="#modificación-de-etiquetas"><span class="header-section-number">8.2.4</span> Modificación de etiquetas</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/proportions.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/proportions.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
@@ -544,6 +545,71 @@ Listado&nbsp;8.2: Gráfico de barras apiladas y normalizadas en el rango <span c
 </section>
 <section id="ordenamiento-de-etiquetas" class="level3" data-number="8.2.3">
 <h3 data-number="8.2.3" class="anchored" data-anchor-id="ordenamiento-de-etiquetas"><span class="header-section-number">8.2.3</span> Ordenamiento de etiquetas</h3>
+<p>El gráfico generado en el <a href="#lst-stacked-normalized-bars" class="quarto-xref">Listado&nbsp;<span>8.2</span></a> presenta las etiquetas del eje asociado a la coordenada <code>y</code>, ordenadas de forma alfabética. Al igual que en la <a href="amounts.html#sec-geometries" class="quarto-xref"><span>Sección 6.2.3.1</span></a>, es fundamental ordenarlas de manera lógica para facilitar la comparación de los programas académicos según la composición de sus inscritos por género. Por lo tanto, se utilizará la proporción de inscritos de género femenino (<code>F</code>) como criterio para reordenar dichas etiquetas.</p>
+<p>Para aplicar este ordenamiento utilizando <code>ggplot2</code> y comprender su lógica, es necesario reducir el análisis a un conjunto más pequeño de datos. A modo de ejemplo, se pueden extraer los primeros <span class="math inline">\(10\)</span> valores de la columna <code>estu_genero</code> utilizando el operador <code>$</code> (ver <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>) y una extracción por posición (ver <a href="distributions.html#sec-scales-color-palette" class="quarto-xref"><span>Sección 7.4</span></a>), tal como se señala a continuación:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>estu_genero_muestra <span class="ot">&lt;-</span> saber_pro_genericas_faedis_2021_2024<span class="sc">$</span>estu_genero[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>estu_genero_muestra</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] M M M M F F F F F F
+Levels: F M</code></pre>
+</div>
+</div>
+<p>Luego, utilizando el operador relacional <code>==</code> (ver <a href="how_to_code_in_r.html#sec-relational-operators" class="quarto-xref"><span>Sección 5.5</span></a>), es posible identificar cuáles valores en <code>estu_genero_muestra</code> corresponden al género femenino (<code>F</code>):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>estu_genero_muestra <span class="sc">==</span> <span class="st">"F"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
+[10]  TRUE</code></pre>
+</div>
+</div>
+<p>En ese sentido, al evaluar si cada elemento en <code>estu_genero_muestra</code> es igual a <code>"F"</code>, R devuelve un vector de tipo lógico. De este modo, cada posición donde se cumpla la condición se transformará en <code>TRUE</code>, mientras que, en caso contrario, se le asignará un <code>FALSE</code>.</p>
+<p>Por otra parte, en R los vectores lógicos experimentan una coerción automática hacia vectores enteros en contextos donde se requiere un valor numérico, mapeando <code>TRUE</code> a <code>1</code> y <code>FALSE</code> a <code>0</code>. Es posible aprovechar este comportamiento calculando la media aritmética de la condición <code>estu_genero_muestra == "F"</code> mediante la función <code>mean()</code>, lo cual nos devuelve, por definición matemática, la proporción exacta de valores iguales a <code>"F"</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(estu_genero_muestra <span class="sc">==</span> <span class="st">"F"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6</code></pre>
+</div>
+</div>
+<p>El proceso descrito anteriormente puede aplicarse a la columna <code>estu_prgm_academico</code> en el conjunto de datos <code>saber_pro_genericas_faedis_2021_2024</code> haciendo uso de la función <code>fct_reorder()</code>. Esta función permite ordenar un vector de caracteres con base en otra variable y haciendo uso de una función que corresponda a una estadística descriptiva, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-fct-reorder" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-fct-reorder-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;8.3: Ordenamiento de etiquetas de un eje asociado a una coordenada utilizando la function <code>fct_reorder()</code>
+</figcaption>
+<div aria-describedby="lst-fct-reorder-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">fct_reorder</span>(</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>      estu_prgm_academico,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">.x =</span> estu_genero <span class="sc">==</span> <span class="st">"F"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">.fun =</span> mean</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">fill =</span> estu_genero),</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">"fill"</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">labels =</span> <span class="fu">label_wrap_gen</span>(<span class="at">width =</span> <span class="dv">18</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="proportions_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>En el <a href="#lst-fct-reorder" class="quarto-xref">Listado&nbsp;<span>8.3</span></a> se utiliza la función <code>fct_reorder()</code> para reordenar <code>estu_prgm_academico</code> con base en la variable <code>estu_genero == "F"</code> asociada al parámetro <code>.x</code>, y haciendo uso de la función <code>mean</code> asociada al parámetro <code>.fun</code>. Internamente, esta herramienta genera un vector lógico con base en la condición <code>estu_genero == "F"</code> para cada programa académico y calcula su media aritmética, lo que en este caso es equivalente a la proporción de inscritos del género femenino. Con base en esta estadística descriptiva, R reordena las etiquetas del eje asociadas a la coordenada <code>y</code>.</p>
+</section>
+<section id="modificación-de-etiquetas" class="level3" data-number="8.2.4">
+<h3 data-number="8.2.4" class="anchored" data-anchor-id="modificación-de-etiquetas"><span class="header-section-number">8.2.4</span> Modificación de etiquetas</h3>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
