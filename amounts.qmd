@@ -86,7 +86,9 @@ ggplot(
   mapping = aes(y = fct_rev(fct_infreq(estu_prgm_academico)))
 ) +
   geom_bar() +
-  scale_y_discrete(labels = label_wrap_gen(width = 18)) +
+  scale_y_discrete(
+    labels = label_wrap_gen(width = 18)
+  ) +
   labs(
     x = "Número de inscritos",
     y = NULL,
@@ -259,7 +261,9 @@ ggplot(
   mapping = aes(y = fct_rev(fct_infreq(estu_prgm_academico)))
 ) +
   geom_bar() +
-  scale_y_discrete(labels = label_wrap_gen(width = 18))
+  scale_y_discrete(
+    labels = label_wrap_gen(width = 18)
+  )
 ```
 
 De esa manera, se puede limitar con el parámetro `width` y el argumento `18` la longitud de las etiquetas en la coordenada `y` a un máximo de $18$ caracteres, utilizando la función `label_wrap_gen()` dentro de `scale_y_discrete()`. 
@@ -277,7 +281,9 @@ ggplot(
   mapping = aes(y = fct_rev(fct_infreq(estu_prgm_academico)))
 ) +
   geom_bar() +
-  scale_y_discrete(labels = label_wrap_gen(width = 18)) +
+  scale_y_discrete(
+    labels = label_wrap_gen(width = 18)
+  ) +
   labs(
     x = "Número de inscritos",
     y = NULL,
