@@ -545,7 +545,7 @@ Listado&nbsp;8.2: Gráfico de barras apiladas y normalizadas en el rango <span c
 </section>
 <section id="ordenamiento-de-etiquetas" class="level3" data-number="8.2.3">
 <h3 data-number="8.2.3" class="anchored" data-anchor-id="ordenamiento-de-etiquetas"><span class="header-section-number">8.2.3</span> Ordenamiento de etiquetas</h3>
-<p>El gráfico generado en el <a href="#lst-stacked-normalized-bars" class="quarto-xref">Listado&nbsp;<span>8.2</span></a> presenta las etiquetas del eje asociado a la coordenada <code>y</code>, ordenadas de forma alfabética. Al igual que en la <a href="amounts.html#sec-geometries" class="quarto-xref"><span>Sección 6.2.3.1</span></a>, es fundamental ordenarlas de manera lógica para facilitar la comparación de los programas académicos según la composición de sus inscritos por género. Por lo tanto, se utilizará la proporción de inscritos de género femenino (<code>F</code>) como criterio para reordenar dichas etiquetas.</p>
+<p>El gráfico generado en el <a href="#lst-stacked-normalized-bars" class="quarto-xref">Listado&nbsp;<span>8.2</span></a> presenta las etiquetas del eje asociado a la coordenada <code>y</code>, ordenadas de forma alfabética. Al igual que en la <a href="amounts.html#sec-geometries" class="quarto-xref"><span>Sección 6.2.3.1</span></a>, es fundamental ordenarlas de manera lógica para facilitar la comparación de los programas académicos según la composición de sus inscritos por género. Por lo tanto, se utilizará la proporción de inscritos del género femenino (<code>F</code>) como criterio para reordenar dichas etiquetas.</p>
 <p>Para aplicar este ordenamiento utilizando <code>ggplot2</code> y comprender su lógica, es necesario reducir el análisis a un conjunto más pequeño de datos. A modo de ejemplo, se pueden extraer los primeros <span class="math inline">\(10\)</span> valores de la columna <code>estu_genero</code> utilizando el operador <code>$</code> (ver <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>) y una extracción por posición (ver <a href="distributions.html#sec-scales-color-palette" class="quarto-xref"><span>Sección 7.4</span></a>), tal como se señala a continuación:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>estu_genero_muestra <span class="ot">&lt;-</span> saber_pro_genericas_faedis_2021_2024<span class="sc">$</span>estu_genero[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
@@ -571,7 +571,7 @@ Levels: F M</code></pre>
 <pre><code>[1] 0.6</code></pre>
 </div>
 </div>
-<p>El proceso descrito anteriormente puede aplicarse a la columna <code>estu_prgm_academico</code> en el conjunto de datos <code>saber_pro_genericas_faedis_2021_2024</code> haciendo uso de la función <code>fct_reorder()</code>. Esta función permite ordenar un vector de caracteres con base en otra variable y haciendo uso de una función que corresponda a una estadística descriptiva, tal como se señala a continuación:</p>
+<p>El proceso descrito anteriormente puede aplicarse a la columna <code>estu_prgm_academico</code> en el conjunto de datos <code>saber_pro_genericas_faedis_2021_2024</code> haciendo uso de la función <code>fct_reorder()</code>. Esta función permite ordenar un vector de caracteres con base a otra variable y haciendo uso de una función que corresponda usualmente a una estadística descriptiva, tal como se señala a continuación:</p>
 <div class="cell">
 <div id="lst-fct-reorder" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
@@ -606,10 +606,110 @@ Listado&nbsp;8.3: Ordenamiento de etiquetas de un eje asociado a una coordenada 
 </div>
 </div>
 </div>
-<p>En el <a href="#lst-fct-reorder" class="quarto-xref">Listado&nbsp;<span>8.3</span></a> se utiliza la función <code>fct_reorder()</code> para reordenar <code>estu_prgm_academico</code> con base en la variable <code>estu_genero == "F"</code> asociada al parámetro <code>.x</code>, y haciendo uso de la función <code>mean</code> asociada al parámetro <code>.fun</code>. Internamente, esta herramienta genera un vector lógico con base en la condición <code>estu_genero == "F"</code> para cada programa académico y calcula su media aritmética, lo que en este caso es equivalente a la proporción de inscritos del género femenino. Con base en esta estadística descriptiva, R reordena las etiquetas del eje asociadas a la coordenada <code>y</code>.</p>
+<p>En el <a href="#lst-fct-reorder" class="quarto-xref">Listado&nbsp;<span>8.3</span></a> se utiliza la función <code>fct_reorder()</code> para reordenar <code>estu_prgm_academico</code> con base a la variable auxiliar <code>estu_genero == "F"</code> asociada al parámetro <code>.x</code>, y haciendo uso de la función <code>mean</code> asociada al parámetro <code>.fun</code>. Internamente, <code>ggplot2</code> junto con <code>fct_reorder()</code> genera un vector lógico con base en la condición <code>estu_genero == "F"</code> y calcula la media aritmética para cada programa académico, lo que en este caso es equivalente a la proporción de inscritos del género femenino para cada grupo. Con base en esta estadística descriptiva, R reordena las etiquetas del eje asociadas a la coordenada <code>y</code>.</p>
 </section>
 <section id="modificación-de-etiquetas" class="level3" data-number="8.2.4">
 <h3 data-number="8.2.4" class="anchored" data-anchor-id="modificación-de-etiquetas"><span class="header-section-number">8.2.4</span> Modificación de etiquetas</h3>
+<p>En el gráfico generado por el <a href="#lst-fct-reorder" class="quarto-xref">Listado&nbsp;<span>8.3</span></a> es posible generar etiquetas que especifiquen de manera más clara la información que se busca indicar. Este aspecto se puede aplicar de 2 maneras:</p>
+<ol type="1">
+<li>Modificando las escalas de manera directa a través de las funciones <code>scale_x_continuous()</code> y <code>scale_fill_discrete()</code></li>
+<li>Agregando etiquetas adicionales o modificando ciertos títulos con la función <code>labs()</code></li>
+</ol>
+<p>Respecto al primer aspecto utilizando el paquete <code>scales()</code> es posible utilizar funciones auxiliares como <code>label_percent()</code> para presentar los cortes en el eje asociado con la coordenada <code>x</code> en términos porcentuales. También se pueden modificar los valores <code>"F"</code> y <code>"M"</code> asociados con la leyenda para señalar las etiquetas del género por <code>"Femenino"</code> y <code>"Masculino"</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-label-percent-scale-fill-discrete" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-label-percent-scale-fill-discrete-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;8.4: Modificación de las etiquetas en los cortes en el eje asociado con la coordenada <code>x</code> y las categorías dentro de la leyenda
+</figcaption>
+<div aria-describedby="lst-label-percent-scale-fill-discrete-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">fct_reorder</span>(</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>      estu_prgm_academico,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">.x =</span> estu_genero <span class="sc">==</span> <span class="st">"F"</span>,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">.fun =</span> mean</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">fill =</span> estu_genero),</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">"fill"</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">labels =</span> <span class="fu">label_wrap_gen</span>(<span class="at">width =</span> <span class="dv">18</span>)) <span class="sc">+</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">label_percent</span>()</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Femenino"</span>, <span class="st">"Masculino"</span>)</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="proportions_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>En el paquete <code>scales</code> existe un <a href="https://scales.r-lib.org/reference/index.html#axis-labels">conjunto de funciones auxiliares</a> que se utilizan con el parámetro <code>labels</code> dentro de <code>ggplot2</code> para controlar el formato de las etiquetas en los ejes y las leyendas. En el <a href="#lst-label-percent-scale-fill-discrete" class="quarto-xref">Listado&nbsp;<span>8.4</span></a> dentro de la función <code>scale_x_continuous()</code> se incluyó la función <code>label_percent()</code> como argumento del parámetro <code>labels</code> para expresar los cortes como porcentajes.</p>
+<p>También para que exista claridad respecto a las categorías de la leyenda asociada con el género, a través del parámeto <code>labels</code> dentro de la functión <code>scale_fill_discrete()</code>, se utilizó como argumento un vector de caracteres que describiera mejor los colores asociados con el gráfico. El uso de la función <code>scale_fill_discrete()</code> se utiliza debido a que se requiere modificar un aspecto relacionado con el atributo estético <code>fill</code> y las categorías asociadas con el género toman valores discretos (<code>discrete</code> en inglés).</p>
+<p>En relación al segundo aspecto se pueden eliminar o modificar diferentes etiquetas en el gráfico para incluir información de contexto mediante la función <code>labs()</code> de manera similar a como se procedió en el <a href="amounts.html#lst-labs" class="quarto-xref">Listado&nbsp;<span>6.8</span></a> y el <a href="distributions.html#lst-scale-fill-manual-legend" class="quarto-xref">Listado&nbsp;<span>7.6</span></a>. Sin embargo, en este caso, adicionalmente se hará uso de la función <code>str_wrap()</code> pertenecitente al paquete <code>stringr</code> que se incluye dentro del <code>tidyverse</code> (ver <a href="how_to_code_in_r.html#sec-messages" class="quarto-xref"><span>Sección 5.3.1</span></a>) para controlar la longitud del título del gráfico, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-labs-str_wrap" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-labs-str_wrap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;8.5: Modificación de las etiquetas en los cortes en el eje asociado con la coordenada <code>x</code> y las categorías dentro de la leyenda
+</figcaption>
+<div aria-describedby="lst-labs-str_wrap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">fct_reorder</span>(</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>      estu_prgm_academico,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">.x =</span> estu_genero <span class="sc">==</span> <span class="st">"F"</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">.fun =</span> mean</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">fill =</span> estu_genero),</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">"fill"</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">labels =</span> <span class="fu">label_wrap_gen</span>(<span class="at">width =</span> <span class="dv">18</span>)) <span class="sc">+</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">label_percent</span>()</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Femenino"</span>, <span class="st">"Masculino"</span>)</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Porcentaje de inscritos"</span>,</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="cn">NULL</span>,</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Género"</span>,</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">str_wrap</span>(</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Proporción inscritos Saber Pro por género y programa en FAEDIS"</span>,</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">width =</span> <span class="dv">50</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Periodo: 2021 - 2024"</span>,</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Fuente: Data Icfes"</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="proportions_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
