@@ -55,10 +55,10 @@ ggplot(
     color = "black",
     position = "fill"
   ) +
+  scale_y_discrete(labels = label_wrap_gen(width = 18)) +
   scale_x_continuous(
     labels = label_percent()
   ) +
-  scale_y_discrete(labels = label_wrap_gen(width = 18)) +
   scale_fill_discrete(
     labels = c("Femenino", "Masculino")
   ) +
@@ -135,7 +135,7 @@ ggplot(
 
 ### Ordenamiento de etiquetas
 
-El gráfico generado en el @lst-stacked-normalized-bars presenta las etiquetas del eje asociado a la coordenada `y`, ordenadas de forma alfabética. Al igual que en la @sec-geometries, es fundamental ordenarlas de manera lógica para facilitar la comparación de los programas académicos según la composición de sus inscritos por género. Por lo tanto, se utilizará la proporción de inscritos de género femenino (`F`) como criterio para reordenar dichas etiquetas.
+El gráfico generado en el @lst-stacked-normalized-bars presenta las etiquetas del eje asociado a la coordenada `y`, ordenadas de forma alfabética. Al igual que en la @sec-geometries, es fundamental ordenarlas de manera lógica para facilitar la comparación de los programas académicos según la composición de sus inscritos por género. Por lo tanto, se utilizará la proporción de inscritos del género femenino (`F`) como criterio para reordenar dichas etiquetas.
 
 Para aplicar este ordenamiento utilizando `ggplot2` y comprender su lógica, es necesario reducir el análisis a un conjunto más pequeño de datos. A modo de ejemplo, se pueden extraer los primeros $10$ valores de la columna `estu_genero` utilizando el operador `$` (ver @sec-package-usage) y una extracción por posición (ver @sec-scales-color-palette), tal como se señala a continuación:
 
@@ -158,7 +158,7 @@ Por otra parte, en R los vectores lógicos experimentan una coerción automátic
 mean(estu_genero_muestra == "F")
 ```
 
-El proceso descrito anteriormente puede aplicarse a la columna `estu_prgm_academico` en el conjunto de datos `saber_pro_genericas_faedis_2021_2024` haciendo uso de la función `fct_reorder()`. Esta función permite ordenar un vector de caracteres con base en otra variable y haciendo uso de una función que corresponda a una estadística descriptiva, tal como se señala a continuación:
+El proceso descrito anteriormente puede aplicarse a la columna `estu_prgm_academico` en el conjunto de datos `saber_pro_genericas_faedis_2021_2024` haciendo uso de la función `fct_reorder()`. Esta función permite ordenar un vector de caracteres con base a otra variable y haciendo uso de una función que corresponda usualmente a una estadística descriptiva, tal como se señala a continuación:
 
 ```{r}
 #| lst-label: lst-fct-reorder
@@ -182,6 +182,85 @@ ggplot(
 ```
  
 
-En el @lst-fct-reorder se utiliza la función `fct_reorder()` para reordenar `estu_prgm_academico` con base en la variable `estu_genero == "F"` asociada al parámetro `.x`, y haciendo uso de la función `mean` asociada al parámetro `.fun`. Internamente, esta herramienta genera un vector lógico con base en la condición `estu_genero == "F"` para cada programa académico y calcula su media aritmética, lo que en este caso es equivalente a la proporción de inscritos del género femenino. Con base en esta estadística descriptiva, R reordena las etiquetas del eje asociadas a la coordenada `y`.
+En el @lst-fct-reorder se utiliza la función `fct_reorder()` para reordenar `estu_prgm_academico` con base a la variable auxiliar `estu_genero == "F"` asociada al parámetro `.x`, y haciendo uso de la función `mean` asociada al parámetro `.fun`. Internamente, `ggplot2` junto con `fct_reorder()` genera un vector lógico con base en la condición `estu_genero == "F"` y calcula la media aritmética para cada programa académico, lo que en este caso es equivalente a la proporción de inscritos del género femenino para cada grupo. Con base en esta estadística descriptiva, R reordena las etiquetas del eje asociadas a la coordenada `y`.
 
 ### Modificación de etiquetas
+
+En el gráfico generado por el @lst-fct-reorder es posible generar etiquetas que especifiquen de manera más clara la información que se busca indicar. Este aspecto se puede aplicar de 2 maneras:
+
+1. Modificando las escalas de manera directa a través de las funciones `scale_x_continuous()` y `scale_fill_discrete()`
+2. Agregando etiquetas adicionales o modificando ciertos títulos con la función `labs()`
+
+Respecto al primer aspecto utilizando el paquete `scales()` es posible utilizar funciones auxiliares como `label_percent()` para presentar los cortes en el eje asociado con la coordenada `x` en términos porcentuales. También se pueden modificar los valores `"F"` y `"M"` asociados con la leyenda para señalar las etiquetas del género por `"Femenino"` y `"Masculino"`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-label-percent-scale-fill-discrete
+#| lst-cap: Modificación de las etiquetas en los cortes en el eje asociado con la coordenada `x` y las categorías dentro de la leyenda  
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024,
+  mapping = aes(
+    y = fct_reorder(
+      estu_prgm_academico,
+      .x = estu_genero == "F",
+      .fun = mean
+    )
+  )
+) +
+  geom_bar(
+    mapping = aes(fill = estu_genero),
+    color = "black",
+    position = "fill"
+  ) +
+  scale_y_discrete(labels = label_wrap_gen(width = 18)) +
+  scale_x_continuous(
+    labels = label_percent()
+  ) +
+  scale_fill_discrete(
+    labels = c("Femenino", "Masculino")
+  )
+```
+
+En el paquete `scales` existe un [conjunto de funciones auxiliares](https://scales.r-lib.org/reference/index.html#axis-labels) que se utilizan con el parámetro `labels` dentro de `ggplot2` para controlar el formato de las etiquetas en los ejes y las leyendas. En el @lst-label-percent-scale-fill-discrete dentro de la función `scale_x_continuous()` se incluyó la función `label_percent()` como argumento del parámetro `labels` para expresar los cortes como porcentajes. 
+
+También para que exista claridad respecto a las categorías de la leyenda asociada con el género, a través del parámeto `labels` dentro de la functión `scale_fill_discrete()`, se utilizó como argumento un vector de caracteres que describiera mejor los colores asociados con el gráfico. El uso de la función `scale_fill_discrete()` se utiliza debido a que se requiere modificar un aspecto relacionado con el atributo estético `fill` y las categorías asociadas con el género toman valores discretos (`discrete` en inglés).
+
+En relación al segundo aspecto se pueden eliminar o modificar diferentes etiquetas en el gráfico para incluir información de contexto mediante la función `labs()` de manera similar a como se procedió en el @lst-labs y el @lst-scale-fill-manual-legend. Sin embargo, en este caso, adicionalmente se hará uso de la función `str_wrap()` pertenecitente al paquete `stringr` que se incluye dentro del `tidyverse` (ver @sec-messages) para controlar la longitud del título del gráfico, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-labs-str_wrap
+#| lst-cap: Modificación de las etiquetas en los cortes en el eje asociado con la coordenada `x` y las categorías dentro de la leyenda
+#| fig-height: 5.5
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024,
+  mapping = aes(
+    y = fct_reorder(
+      estu_prgm_academico,
+      .x = estu_genero == "F",
+      .fun = mean
+    )
+  )
+) +
+  geom_bar(
+    mapping = aes(fill = estu_genero),
+    color = "black",
+    position = "fill"
+  ) +
+  scale_y_discrete(labels = label_wrap_gen(width = 18)) +
+  scale_x_continuous(
+    labels = label_percent()
+  ) +
+  scale_fill_discrete(
+    labels = c("Femenino", "Masculino")
+  ) +
+  labs(
+    x = "Porcentaje de inscritos",
+    y = NULL,
+    fill = "Género",
+    title = str_wrap(
+      "Proporción inscritos Saber Pro por género y programa en FAEDIS",
+      width = 50
+    ),
+    subtitle = "Periodo: 2021 - 2024",
+    caption = "Fuente: Data Icfes"
+  )
+```
