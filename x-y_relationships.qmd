@@ -1,1 +1,21 @@
 # Relaciones x-y
+
+```{r}
+#| echo: false
+source("_common.R")
+```
+
+```{r}
+#| label: load-r-packages
+#| echo: false
+#| message: false
+library(tidyverse)
+```
+
+Este capítulo se basa en [@wickham_ggplot2_2016] y [@wilke_fundamentals_2019] ... donde tiene como propósito utilizar el modelo mental de la gramática de gráficos en capas para ... utilizando el paquete `ggplot2` e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).
+
+Exploraremos los siguientes aspectos:
+
+1.
+2.
+
