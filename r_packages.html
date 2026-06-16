@@ -448,13 +448,13 @@ Figura&nbsp;4.1: Analogía para entender la diferencia entre paquetes que vienen
 <h2 data-number="4.2" class="anchored" data-anchor-id="sec-installing-packages"><span class="header-section-number">4.2</span> Instalación de paquetes</h2>
 <p>Para instalar un paquete que no viene por defecto en R, retomaremos la analogía de la <a href="#sec-what-are-r-packages" class="quarto-xref"><span>Sección 4.1</span></a>. En un celular, primero es necesario descargar la aplicación de una tienda una sola vez. Luego, basta con abrirla cada vez que se requiera. Aunque ocasionalmente deba actualizarse, no es necesario reinstalarla nuevamente.</p>
 <p>En R, el proceso es similar. Primero instalas el paquete desde un repositorio (equivalente a la tienda de aplicaciones) y luego lo cargas, un paso análogo a abrir la aplicación en tu celular.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div id="nte-1-chap-4" class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Nota
+Nota&nbsp;4.1
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -468,13 +468,13 @@ Nota
 <p>Para practicar este proceso, instalaremos el paquete <a href="https://tidyverse.org/"><code>tidyverse</code></a>. Este paquete es una colección de herramientas diseñadas para ciencia de datos que utilizaremos constantemente a lo largo del libro. Para iniciar la instalación, ubica la pestaña <strong>Console</strong> en el <strong>Panel</strong> (Ver la <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) y, tras el símbolo <code>&gt;</code>, escribe el siguiente comando:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Luego, presiona <kbd title="Enter" aria-hidden="true">Enter</kbd><span class="visually-hidden">Enter</span>. Ten paciencia hasta que el proceso finalice y no te preocupes por los mensajes que aparezcan en la consola. Al ser un conjunto robusto de herramientas, la instalación puede tardar. Sabrás que ha terminado el proceso cuando veas aparecer nuevamente el símbolo <code>&gt;</code>.</p>
-<div class="callout callout-style-default callout-important callout-titled">
+<div id="imp-1-chap-4" class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Importante
+Importante&nbsp;4.1
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -508,13 +508,13 @@ Listado&nbsp;4.1
 </div>
 </figure>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
+<div id="nte-2-chap-4" class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Nota
+Nota&nbsp;4.2
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -557,7 +557,7 @@ Listado&nbsp;4.2: Línea de código para cargar el paquete tidyverse
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Nota&nbsp;4.1
+Nota&nbsp;4.3
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -576,7 +576,7 @@ Figura&nbsp;4.3: Sección OUTLINE dentro de la Barra laterla primaria de Positro
 </figcaption>
 </figure>
 </div>
-<p>Una vez cargado el paquete <code>tidyverse</code> puedes explorar el conjunto de datos <code>mpg</code> que contiene información de economía de combustible desde 1999 hasta 2008 para 38 modelos populares de automóviles. Agrega al archivo <code>001_uso-paquetes.R</code> el siguiente contenido y ejecuta el código (ver <a href="#nte-execute-code" class="quarto-xref">Nota&nbsp;<span>4.1</span></a>) para que puedas visualizar parte de los datos en la consola donde el resultado puede variar dependiendo del tamaño de la pantalla de tu equipo:</p>
+<p>Una vez cargado el paquete <code>tidyverse</code> puedes explorar el conjunto de datos <code>mpg</code> que contiene información de economía de combustible desde 1999 hasta 2008 para 38 modelos populares de automóviles. Agrega al archivo <code>001_uso-paquetes.R</code> el siguiente contenido y ejecuta el código (ver <a href="#nte-execute-code" class="quarto-xref">Nota&nbsp;<span>4.3</span></a>) para que puedas visualizar parte de los datos en la consola donde el resultado puede variar dependiendo del tamaño de la pantalla de tu equipo:</p>
 <div class="cell">
 <div id="lst-mpg-database" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
