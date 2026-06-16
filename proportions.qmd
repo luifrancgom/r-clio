@@ -93,7 +93,7 @@ saber_pro_genericas_faedis_2021_2024 <- read_rds(
 )
 ```
 
-En la @sec-messages respecto al @lst-load-tidyverse-message se señaló que al utilizar `library(tidyverse)` se cargaban un conjunto de paquetes. Estos paquetes conforman el núcleo del `tidyverse`. Sin embargo, al instalar el paquete `tidyverse` (ver @sec-installing-packages), se incluyen un conjunto adicional de paquetes con un uso más específico. Estos paquetes por fuera del núcleo del `tidyverse` no se cargan al ejecutar `library(tidyverse)`, donde en caso que se requieran utilizar se necesitan cargar por separado utilizando la función `library()`.
+En la @sec-messages respecto al @lst-load-tidyverse-message se señaló que al utilizar `library(tidyverse)` se cargaban un conjunto de paquetes. Estos paquetes conforman el núcleo del `tidyverse`. Sin embargo, al instalar el paquete `tidyverse` (ver @sec-installing-packages), se incluye un conjunto adicional de paquetes con un uso más específico. Estos paquetes por fuera del núcleo del `tidyverse` no se cargan al ejecutar `library(tidyverse)`, donde en caso que se requieran utilizar se necesitan cargar por separado utilizando la función `library()`.
 
 Uno de estos paquetes por fuera del núcleo del `tidyverse` es `scales`. Este paquete contiene herramientas para modificar los cortes, las etiquetas y aplicar transformaciones a los ejes de un gráfico así como especificar otras paletas de colores. En el @sec-proportions utilizarás el paquete `scales` para controlar el formato de las etiquetas del eje asociado con la coordenada `x`.
 
@@ -222,9 +222,9 @@ ggplot(
 
 En el paquete `scales` existe un [conjunto de funciones auxiliares](https://scales.r-lib.org/reference/index.html#axis-labels) que se utilizan con el parámetro `labels` dentro de `ggplot2` para controlar el formato de las etiquetas en los ejes y las leyendas. En el @lst-label-percent-scale-fill-discrete dentro de la función `scale_x_continuous()` se incluyó la función `label_percent()` como argumento del parámetro `labels` para expresar los cortes como porcentajes. 
 
-También para que exista claridad respecto a las categorías de la leyenda asociada con el género, a través del parámeto `labels` dentro de la functión `scale_fill_discrete()`, se utilizó como argumento un vector de caracteres que describiera mejor los colores asociados con el gráfico. El uso de la función `scale_fill_discrete()` se utiliza debido a que se requiere modificar un aspecto relacionado con el atributo estético `fill` y las categorías asociadas con el género toman valores discretos (`discrete` en inglés).
+También para que exista claridad respecto a las categorías de la leyenda asociada con el género, a través del parámeto `labels` dentro de la función `scale_fill_discrete()`, se utilizó como argumento un vector de caracteres que describiera mejor los colores asociados con el gráfico. El uso de la función `scale_fill_discrete()` se utiliza debido a que se requiere modificar un aspecto relacionado con el atributo estético `fill` y las categorías asociadas con el género toman valores discretos (`discrete` en inglés).
 
-En relación al segundo aspecto se pueden eliminar o modificar diferentes etiquetas en el gráfico para incluir información de contexto mediante la función `labs()` de manera similar a como se procedió en el @lst-labs y el @lst-scale-fill-manual-legend. Sin embargo, en este caso, adicionalmente se hará uso de la función `str_wrap()` pertenecitente al paquete `stringr` que se incluye dentro del `tidyverse` (ver @sec-messages) para controlar la longitud del título del gráfico, tal como se señala a continuación:
+En relación al segundo aspecto se pueden eliminar o modificar diferentes etiquetas en el gráfico para incluir información de contexto mediante la función `labs()` de manera similar a como se procedió en el @lst-labs y el @lst-scale-fill-manual-legend. Sin embargo, en este caso, adicionalmente se puede hacer uso de la función `str_wrap()` perteneciente al paquete [`stringr`](https://stringr.tidyverse.org/), que se incluye dentro del `tidyverse` (ver @sec-messages), para controlar la longitud del título del gráfico, tal como se señala a continuación:
 
 ```{r}
 #| lst-label: lst-labs-str_wrap
@@ -264,3 +264,53 @@ ggplot(
     caption = "Fuente: Data Icfes"
   )
 ```
+
+Una pregunta natural respecto al @lst-labs-str_wrap es por qué no utilizar la función `label_wrap_gen()` para controlar la longitud del título, tal como se aplicó en la función `scale_y_discrete()` para las etiquetas del eje asociadas con la coordenada `y`. La función `label_wrap_gen()` fue construida como una función auxiliar dentro del paquete `ggplot2` para modificar de manera directa un conjunto de etiquetas en las escalas. Por el contrario, la función `str_wrap()` del paquete `stringr` se diseñó para dividir un texto determinado en párrafos con un formato adecuado, donde el primer parámetro de la función, denominado `string`, debe corresponder a un vector de caracteres (ver `?str_wrap`).
+
+## Tema
+
+En la @sec-theme se hizo uso de la función `theme()` utilizando el parámetro `legend.position` junto con el argumento `"bottom"`, como `legend.position = "bottom"`. De nuevo, es posible utilizar este mismo aspecto para expandir el área del gráfico, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-proportions-legend-position
+#| lst-cap: Uso de la función `theme()` para modificar la posición de una leyenda
+#| fig-height: 5.5
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024,
+  mapping = aes(
+    y = fct_reorder(
+      estu_prgm_academico,
+      .x = estu_genero == "F",
+      .fun = mean
+    )
+  )
+) +
+  geom_bar(
+    mapping = aes(fill = estu_genero),
+    color = "black",
+    position = "fill"
+  ) +
+  scale_y_discrete(labels = label_wrap_gen(width = 18)) +
+  scale_x_continuous(
+    labels = label_percent()
+  ) +
+  scale_fill_discrete(
+    labels = c("Femenino", "Masculino")
+  ) +
+  labs(
+    x = "Porcentaje de inscritos",
+    y = NULL,
+    fill = "Género",
+    title = str_wrap(
+      "Proporción inscritos Saber Pro por género y programa en FAEDIS",
+      width = 50
+    ),
+    subtitle = "Periodo: 2021 - 2024",
+    caption = "Fuente: Data Icfes"
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+De esa manera con el código señalado en el @lst-proportions-legend-position, es posible recrear finalmente la @fig-1-chap-8 para ilustrar la proporción de inscritos por género y programa académico utilizanto las variables `estu_prgm_academico` y `estu_genero`.

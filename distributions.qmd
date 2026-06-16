@@ -319,7 +319,7 @@ ggplot(
 
 En el @lst-scale-fill-manual-legend utilizando el parámetro `fill` dentro de la función `labs()` es posible modificar el título de la leyenda que señala los valores de la variable categórica `mod_ingles_desem` cuando se asocia al atributo estético `fill` dentro de la función `aes()` en la geometría `geom_histogram`. Respecto a los demás parámetros con sus respectivos argumentos que se incluyeron en la función `labs()`, son elementos que se aplicaron de manera similar a lo señalado en el @lst-labs.
 
-## Tema
+## Tema {#sec-theme}
 
 Un aspecto que es posible mejorar dentro del gráfico generado por el @lst-scale-fill-manual-legend es el foco de atención hacia el histograma, sin perder la información generada por la leyenda que ilustra los niveles de desempeño a través de la variable `mod_ingles_desem`. 
 
