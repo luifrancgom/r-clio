@@ -402,7 +402,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#sec-color-aes-var" id="toc-sec-color-aes-var" class="nav-link" data-scroll-target="#sec-color-aes-var"><span class="header-section-number">7.3</span> Asociación de colores a una variable categórica</a></li>
   <li><a href="#sec-scales-color-palette" id="toc-sec-scales-color-palette" class="nav-link" data-scroll-target="#sec-scales-color-palette"><span class="header-section-number">7.4</span> Escalas</a></li>
-  <li><a href="#tema" id="toc-tema" class="nav-link" data-scroll-target="#tema"><span class="header-section-number">7.5</span> Tema</a></li>
+  <li><a href="#sec-theme" id="toc-sec-theme" class="nav-link" data-scroll-target="#sec-theme"><span class="header-section-number">7.5</span> Tema</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/distributions.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/distributions.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
@@ -749,8 +749,8 @@ Listado&nbsp;7.6: Uso de la función <code>labs()</code> para agregar, modificar
 </div>
 <p>En el <a href="#lst-scale-fill-manual-legend" class="quarto-xref">Listado&nbsp;<span>7.6</span></a> utilizando el parámetro <code>fill</code> dentro de la función <code>labs()</code> es posible modificar el título de la leyenda que señala los valores de la variable categórica <code>mod_ingles_desem</code> cuando se asocia al atributo estético <code>fill</code> dentro de la función <code>aes()</code> en la geometría <code>geom_histogram</code>. Respecto a los demás parámetros con sus respectivos argumentos que se incluyeron en la función <code>labs()</code>, son elementos que se aplicaron de manera similar a lo señalado en el <a href="amounts.html#lst-labs" class="quarto-xref">Listado&nbsp;<span>6.8</span></a>.</p>
 </section>
-<section id="tema" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="tema"><span class="header-section-number">7.5</span> Tema</h2>
+<section id="sec-theme" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="sec-theme"><span class="header-section-number">7.5</span> Tema</h2>
 <p>Un aspecto que es posible mejorar dentro del gráfico generado por el <a href="#lst-scale-fill-manual-legend" class="quarto-xref">Listado&nbsp;<span>7.6</span></a> es el foco de atención hacia el histograma, sin perder la información generada por la leyenda que ilustra los niveles de desempeño a través de la variable <code>mod_ingles_desem</code>.</p>
 <p>Para modificar este aspecto es necesario personalizar los componentes del gráfico que no están vinculados a los datos donde se utiliza la función <code>theme()</code>. Esta función tiene un <a href="https://ggplot2.tidyverse.org/reference/theme.html">conjunto amplio de parámeros</a> que pueden modificar diferentes aspectos del gráfico. Sin embargo, el objetivo no es abarcar cada uno de ellos.</p>
 <p>En ésta última sección del <a href="#sec-distributions" class="quarto-xref"><span>Capítulo 7</span></a> modificarás la posición de la leyenda que contiene la información de la variable <code>mod_ingles_desem</code> de tal manera que se pueda extender el ancho del gráfico. Para aplicar este cambio se utilizará el parámetro <code>legend.position</code> junto con el argumento <code>"bottom"</code>, como <code>legend.position = "bottom"</code>, dentro de la función <code>theme()</code> agregando este aspecto con el operador <code>+</code>, tal como se señala a continuación:</p>

@@ -403,6 +403,7 @@ window.Quarto = {
   <li><a href="#ordenamiento-de-etiquetas" id="toc-ordenamiento-de-etiquetas" class="nav-link" data-scroll-target="#ordenamiento-de-etiquetas"><span class="header-section-number">8.2.3</span> Ordenamiento de etiquetas</a></li>
   <li><a href="#modificación-de-etiquetas" id="toc-modificación-de-etiquetas" class="nav-link" data-scroll-target="#modificación-de-etiquetas"><span class="header-section-number">8.2.4</span> Modificación de etiquetas</a></li>
   </ul></li>
+  <li><a href="#tema" id="toc-tema" class="nav-link" data-scroll-target="#tema"><span class="header-section-number">8.3</span> Tema</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/proportions.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/proportions.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
@@ -480,7 +481,7 @@ Figura&nbsp;8.1: Resultado final de un gráfico de barras apiladas y normalizada
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"data/2021-2024_saber-pro-genericas_faedis.rds"</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>En la <a href="how_to_code_in_r.html#sec-messages" class="quarto-xref"><span>Sección 5.3.1</span></a> respecto al <a href="r_packages.html#lst-load-tidyverse-message" class="quarto-xref">Listado&nbsp;<span>4.1</span></a> se señaló que al utilizar <code>library(tidyverse)</code> se cargaban un conjunto de paquetes. Estos paquetes conforman el núcleo del <code>tidyverse</code>. Sin embargo, al instalar el paquete <code>tidyverse</code> (ver <a href="r_packages.html#sec-installing-packages" class="quarto-xref"><span>Sección 4.2</span></a>), se incluyen un conjunto adicional de paquetes con un uso más específico. Estos paquetes por fuera del núcleo del <code>tidyverse</code> no se cargan al ejecutar <code>library(tidyverse)</code>, donde en caso que se requieran utilizar se necesitan cargar por separado utilizando la función <code>library()</code>.</p>
+<p>En la <a href="how_to_code_in_r.html#sec-messages" class="quarto-xref"><span>Sección 5.3.1</span></a> respecto al <a href="r_packages.html#lst-load-tidyverse-message" class="quarto-xref">Listado&nbsp;<span>4.1</span></a> se señaló que al utilizar <code>library(tidyverse)</code> se cargaban un conjunto de paquetes. Estos paquetes conforman el núcleo del <code>tidyverse</code>. Sin embargo, al instalar el paquete <code>tidyverse</code> (ver <a href="r_packages.html#sec-installing-packages" class="quarto-xref"><span>Sección 4.2</span></a>), se incluye un conjunto adicional de paquetes con un uso más específico. Estos paquetes por fuera del núcleo del <code>tidyverse</code> no se cargan al ejecutar <code>library(tidyverse)</code>, donde en caso que se requieran utilizar se necesitan cargar por separado utilizando la función <code>library()</code>.</p>
 <p>Uno de estos paquetes por fuera del núcleo del <code>tidyverse</code> es <code>scales</code>. Este paquete contiene herramientas para modificar los cortes, las etiquetas y aplicar transformaciones a los ejes de un gráfico así como especificar otras paletas de colores. En el <a href="#sec-proportions" class="quarto-xref"><span>Capítulo 8</span></a> utilizarás el paquete <code>scales</code> para controlar el formato de las etiquetas del eje asociado con la coordenada <code>x</code>.</p>
 <section id="gráfico-de-barras-apiladas" class="level3" data-number="8.2.1">
 <h3 data-number="8.2.1" class="anchored" data-anchor-id="gráfico-de-barras-apiladas"><span class="header-section-number">8.2.1</span> Gráfico de barras apiladas</h3>
@@ -657,8 +658,8 @@ Listado&nbsp;8.4: Modificación de las etiquetas en los cortes en el eje asociad
 </div>
 </div>
 <p>En el paquete <code>scales</code> existe un <a href="https://scales.r-lib.org/reference/index.html#axis-labels">conjunto de funciones auxiliares</a> que se utilizan con el parámetro <code>labels</code> dentro de <code>ggplot2</code> para controlar el formato de las etiquetas en los ejes y las leyendas. En el <a href="#lst-label-percent-scale-fill-discrete" class="quarto-xref">Listado&nbsp;<span>8.4</span></a> dentro de la función <code>scale_x_continuous()</code> se incluyó la función <code>label_percent()</code> como argumento del parámetro <code>labels</code> para expresar los cortes como porcentajes.</p>
-<p>También para que exista claridad respecto a las categorías de la leyenda asociada con el género, a través del parámeto <code>labels</code> dentro de la functión <code>scale_fill_discrete()</code>, se utilizó como argumento un vector de caracteres que describiera mejor los colores asociados con el gráfico. El uso de la función <code>scale_fill_discrete()</code> se utiliza debido a que se requiere modificar un aspecto relacionado con el atributo estético <code>fill</code> y las categorías asociadas con el género toman valores discretos (<code>discrete</code> en inglés).</p>
-<p>En relación al segundo aspecto se pueden eliminar o modificar diferentes etiquetas en el gráfico para incluir información de contexto mediante la función <code>labs()</code> de manera similar a como se procedió en el <a href="amounts.html#lst-labs" class="quarto-xref">Listado&nbsp;<span>6.8</span></a> y el <a href="distributions.html#lst-scale-fill-manual-legend" class="quarto-xref">Listado&nbsp;<span>7.6</span></a>. Sin embargo, en este caso, adicionalmente se hará uso de la función <code>str_wrap()</code> pertenecitente al paquete <code>stringr</code> que se incluye dentro del <code>tidyverse</code> (ver <a href="how_to_code_in_r.html#sec-messages" class="quarto-xref"><span>Sección 5.3.1</span></a>) para controlar la longitud del título del gráfico, tal como se señala a continuación:</p>
+<p>También para que exista claridad respecto a las categorías de la leyenda asociada con el género, a través del parámeto <code>labels</code> dentro de la función <code>scale_fill_discrete()</code>, se utilizó como argumento un vector de caracteres que describiera mejor los colores asociados con el gráfico. El uso de la función <code>scale_fill_discrete()</code> se utiliza debido a que se requiere modificar un aspecto relacionado con el atributo estético <code>fill</code> y las categorías asociadas con el género toman valores discretos (<code>discrete</code> en inglés).</p>
+<p>En relación al segundo aspecto se pueden eliminar o modificar diferentes etiquetas en el gráfico para incluir información de contexto mediante la función <code>labs()</code> de manera similar a como se procedió en el <a href="amounts.html#lst-labs" class="quarto-xref">Listado&nbsp;<span>6.8</span></a> y el <a href="distributions.html#lst-scale-fill-manual-legend" class="quarto-xref">Listado&nbsp;<span>7.6</span></a>. Sin embargo, en este caso, adicionalmente se puede hacer uso de la función <code>str_wrap()</code> perteneciente al paquete <a href="https://stringr.tidyverse.org/"><code>stringr</code></a>, que se incluye dentro del <code>tidyverse</code> (ver <a href="how_to_code_in_r.html#sec-messages" class="quarto-xref"><span>Sección 5.3.1</span></a>), para controlar la longitud del título del gráfico, tal como se señala a continuación:</p>
 <div class="cell">
 <div id="lst-labs-str_wrap" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
@@ -710,6 +711,67 @@ Listado&nbsp;8.5: Modificación de las etiquetas en los cortes en el eje asociad
 </div>
 </div>
 </div>
+<p>Una pregunta natural respecto al <a href="#lst-labs-str_wrap" class="quarto-xref">Listado&nbsp;<span>8.5</span></a> es por qué no utilizar la función <code>label_wrap_gen()</code> para controlar la longitud del título, tal como se aplicó en la función <code>scale_y_discrete()</code> para las etiquetas del eje asociadas con la coordenada <code>y</code>. La función <code>label_wrap_gen()</code> fue construida como una función auxiliar dentro del paquete <code>ggplot2</code> para modificar de manera directa un conjunto de etiquetas en las escalas. Por el contrario, la función <code>str_wrap()</code> del paquete <code>stringr</code> se diseñó para dividir un texto determinado en párrafos con un formato adecuado, donde el primer parámetro de la función, denominado <code>string</code>, debe corresponder a un vector de caracteres (ver <code>?str_wrap</code>).</p>
+</section>
+</section>
+<section id="tema" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="tema"><span class="header-section-number">8.3</span> Tema</h2>
+<p>En la <a href="distributions.html#sec-theme" class="quarto-xref"><span>Sección 7.5</span></a> se hizo uso de la función <code>theme()</code> utilizando el parámetro <code>legend.position</code> junto con el argumento <code>"bottom"</code>, como <code>legend.position = "bottom"</code>. De nuevo, es posible utilizar este mismo aspecto para expandir el área del gráfico, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-proportions-legend-position" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-proportions-legend-position-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;8.6: Uso de la función <code>theme()</code> para modificar la posición de una leyenda
+</figcaption>
+<div aria-describedby="lst-proportions-legend-position-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">fct_reorder</span>(</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>      estu_prgm_academico,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">.x =</span> estu_genero <span class="sc">==</span> <span class="st">"F"</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">.fun =</span> mean</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">fill =</span> estu_genero),</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">"fill"</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">labels =</span> <span class="fu">label_wrap_gen</span>(<span class="at">width =</span> <span class="dv">18</span>)) <span class="sc">+</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">label_percent</span>()</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Femenino"</span>, <span class="st">"Masculino"</span>)</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Porcentaje de inscritos"</span>,</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="cn">NULL</span>,</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Género"</span>,</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">str_wrap</span>(</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Proporción inscritos Saber Pro por género y programa en FAEDIS"</span>,</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">width =</span> <span class="dv">50</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Periodo: 2021 - 2024"</span>,</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Fuente: Data Icfes"</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="proportions_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>De esa manera con el código señalado en el <a href="#lst-proportions-legend-position" class="quarto-xref">Listado&nbsp;<span>8.6</span></a>, es posible recrear finalmente la <a href="#fig-1-chap-8" class="quarto-xref">Figura&nbsp;<span>8.1</span></a> para ilustrar la proporción de inscritos por género y programa académico utilizanto las variables <code>estu_prgm_academico</code> y <code>estu_genero</code>.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
@@ -720,7 +782,6 @@ Wickham, H. (2016). <em>ggplot2: elegant graphics for data analysis</em> (Second
 Wilke, C. (2019). <em>Fundamentals of data visualization: a primer on making informative and compelling figures</em> (First edition). O’Reilly. <a href="https://clauswilke.com/dataviz/">https://clauswilke.com/dataviz/</a>
 </div>
 </div>
-</section>
 </section>
 
 </main> <!-- /main -->
