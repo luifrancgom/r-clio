@@ -41,7 +41,7 @@ Cuando utilices R con Positron para realizar un análisis de datos, es important
 
 Estas prácticas permiten que el proyecto sea portátil y comprensible. Al implementarlas, podrás mover la carpeta del proyecto de un lugar a otro en tu computador, e incluso enviarla a otras personas y que el proyecto simplemente "funcione" [@bryan_project-oriented_2017]. Además, permites que otras personas puedan explorar el proyecto y entender la estructura de tu trabajo.
 
-::: {.callout-note}
+::: {#nte-1-chap-3 .callout-note}
 En la @sec-project-oriented-workflow-positron-r abordaremos de manera práctica en Positron como se materializan los aspectos mencionados en ésta sección. Si algunos elementos no se entienden a profundidad con la generación de un proyecto de R en Positron quedarán más claros estos aspectos.
 :::
 
@@ -53,13 +53,13 @@ Para generar un proyecto de R en Positron, utiliza la combinación de teclas {{<
 
 Primero, deberás definir el nombre de la carpeta donde estará tu proyecto y la ubicación dentro de tu computador o equipo. En el caso del nombre, para que sigas el contenido del libro te recomendamos utilizar `r-analisis-datos`. 
 
-::: {.callout-note}
+::: {#nte-2-chap-3 .callout-note}
 En la [@sec-how-to-name-files-folders] abarcaremos con más detalle la forma recomendada de nombrar archivos y carpetas adoptando un conjunto de principios, de modo que puedas mantener tu proyecto organizado. 
 :::
 
 Segundo, aunque es posible aplicar ajustes avanzados, te sugerimos mantener la configuración inicial lo más simple posible. Para el desarrollo de este libro, solo es necesario que selecciones la versión de R que utilizarás. Otras opciones como **Initialize Git repository** o **Use `renv` to create a reproducible environment** no las abarcaremos.
 
-::: {.callout-note}
+::: {#nte-3-chap-3 .callout-note}
 Si deseas profundizar en éstas opciones más adelante, cuando estes familiarizado con R y Positron, puedes consultar [@bryan_happy_2024] y la [documentación oficial](https://rstudio.github.io/renv/index.html) de `renv` 
 :::
 
@@ -89,7 +89,7 @@ Existen 3 principios para nombrar archivos y carpetas [@bryan_what_2025, cap. 5]
 
    - **Rellenar números con ceros a la izquierda:** para mantener el orden se deben usar ceros (p. ej., `000`, `001`,  `002`, ... , `010`, ...) en lugar de números simples (`0`, `1`, `2`, ... , `10`, ...). Sin los ceros iniciales, un sistema operativo situará el `10` inmediatamente después del `1`, rompiendo la secuencia lógica.
 
-::: {.callout-tip}
+::: {#imp-1-chap-2 .callout-tip}
 ¿Cuándo usar guión bajo (`_`) vs guión medio (`-`) para nombrar archivos y carpetas?
 
 Para que tus archivos sean fáciles de fragmentar por R o el sistema operativo, utiliza esta regla sencilla:

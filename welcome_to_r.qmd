@@ -28,7 +28,7 @@ Si abandonamos la analogía anterior y sómos más específicos, R es un lenguaj
 
 ## ¿Cómo instalar R y Positron? {#sec-how-to-install-r-positron}
 
-::: {.callout-important}
+::: {#imp-1-chap-2 .callout-important}
 Si formas parte de una institución educativa, verifica si tienes acceso a **Positron Pro** a través de **Posit Workbench** (ver @sec-posit-workbench). En caso de contar con este acceso, no es necesario realizar una instalación local. Por lo tanto, puedes saltarte los pasos de la @sec-install-r y la @sec-install-positron, ya que tendras acceso directo a estas herramientas.
 
 Sin embargo, una vez que te sientas familiarizado con estas herramientas, te recomendamos consultar esas secciones para instalar R y Positron en tu propio computador personal.
@@ -64,7 +64,7 @@ Para utilizar R con Positron, es necesario que primero revises los [requisitos d
 
 ## Posit Workbench {#sec-posit-workbench}
 
-::: {.callout-important}
+::: {#imp-2-chap-2 .callout-important}
 Si realizaste una instalación local de acuerdo a los pasos descritos en la @sec-install-r y la @sec-install-positron puedes saltarte esta sección.
 :::
 
@@ -84,7 +84,7 @@ Al utilizar Positron, no es necesario instalar Quarto por separado, ya que se in
 
 2. **Como asistente de edición (Extensión denominada [quarto-vscode](https://open-vsx.org/extension/quarto/quarto))**: proporciona las herramientas visuales para trabajar cómodamente, incluyendo el autocompletado de comandos, el resaltado de colores, la ejecución interactiva de código y una vista previa en tiempo real de tus resultados.
 
-::: {.callout-note}
+::: {#nte-1-chap-2 .callout-note}
 Más adelante profundizaremos en el uso de Quarto utilizando R y Positron. Por ahora te recomendamos familiarizarte primero con la interfaz de Positron (ver @sec-user-interface-layout) y R. No obstante, si tienes experiencia previa, puedes consultar la [Guía de inicio rápido de Quarto con Positron](https://quarto.org/docs/get-started/hello/positron.html) en la documentación oficial. 
 :::
 
@@ -104,7 +104,7 @@ En caso que tengas acceso a Posit Workbench, de acuerdo a lo señalado en la @se
 
 Al utilizar Positron, encontrarás la interfaz organizada como se muestra en la @fig-positron-layout-outline, donde se resalta cada sección de la interfaz. No te preocupes si encuentras pequeñas diferencias o un entorno visual con diferente color dado que los desarrolladores de Positron ésta constantemente actualizando la aplicación o puede que tengas una configuración por defecto diferente en cuanto al entorno visual de la interfaz.
 
-::: {.callout-note}
+::: {#nte-2-chap-2 .callout-note}
 Si abres Positron por primera vez, verás una pantalla de bienvenida en lugar del **Editor** (ver @fig-positron-layout-outline). Esto es normal, ya que este espacio se activará automáticamente una vez que abras tu primer archivo de R, un proceso que se señalará más adelante.
 :::
 
@@ -120,7 +120,7 @@ Si abres Positron por primera vez, verás una pantalla de bienvenida en lugar de
 
 5. **Barra lateral secundaria**: Es tu panel de apoyo y consulta. En este espacio puedes examinar la lista de variables que has creado, visualizar los gráficos generados y acceder a los manuales de ayuda. También sirve para mostrar visualizaciones interactivas o conexiones externas que complementan tu trabajo sin interferir con el código que estás escribiendo.
 
-::: {.callout-tip}
+::: {#tip-1-chap-2 .callout-tip}
 Positron dispone de una [guía oficial](https://positron.posit.co/welcome.html) que detalla cada aspecto de la aplicación. Sin embargo, dominar una aplicación es un proceso gradual que se logra con la práctica constante. En esta etapa inicial, no es necesario conocer todas sus funciones. Conforme ganes confianza con la interfaz y según lo requieran tus análisis, podrás consultarla para profundizar en aspectos específicos que requieras.
 :::
 

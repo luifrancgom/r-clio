@@ -39,7 +39,7 @@ Para instalar un paquete que no viene por defecto en R, retomaremos la analogía
 En R, el proceso es similar. Primero instalas el paquete desde un repositorio (equivalente a la tienda de aplicaciones) y luego lo cargas, un paso análogo a abrir la aplicación en tu celular.
 
 
-::: {.callout-note}
+::: {#nte-1-chap-4 .callout-note}
 En caso que este utilizando Posit Workbench, de acuerdo a lo señalado en la @sec-posit-workbench, es posible que el proceso descrito a continuación no debas realizarlo. En algunas ocasiones el administrador de esta herramienta puede haber instalado ciertos paquetes con anterioridad.
 
 Para el caso de Posit Workbench ubica la pestaña **Console** en el **Panel** (Ver la @fig-positron-layout-outline) y, tras el símbolo `>` escribe el comando `library(tidyverse)`, luego presiona {{< kbd Enter >}}. Si te aparece un mensaje similar al señalado en el @lst-load-tidyverse-message no es necesario que realices alguna instalación y puedes dirigirte directamente a la @sec-load-packages. En caso contrario, si se genera un mensaje igual o similar a:
@@ -60,7 +60,7 @@ install.packages("tidyverse")
 
 Luego, presiona {{< kbd Enter >}}. Ten paciencia hasta que el proceso finalice y no te preocupes por los mensajes que aparezcan en la consola. Al ser un conjunto robusto de herramientas, la instalación puede tardar. Sabrás que ha terminado el proceso cuando veas aparecer nuevamente el símbolo `>`.
 
-::: {.callout-important}
+::: {#imp-1-chap-4 .callout-important}
 Al instalar un paquete en R, asegúrate de escribir su nombre entre comillas (`""`). De lo contrario, la instalación fallará. Por ahora, no te preocupes por la razón detrás de éste aspecto. Lo importante es que te asegures que puedas saber cómo instalar un paquete en R.
 :::
 
@@ -93,7 +93,7 @@ Luego, presiona {{< kbd Enter >}}. Si el paquete `tidyverse` fue instalado de ma
 ```
 :::
 
-::: {.callout-note}
+::: {#nte-2-chap-4 .callout-note}
 En el @sec-how-do-i-code-in-r podrás explorar más acerca de los tipos de texto que la consola puede generar y cómo interpretarlos cuando se genere algún contenido. Allí explicaremos en particular el texto del @lst-load-tidyverse-message. 
 :::
 

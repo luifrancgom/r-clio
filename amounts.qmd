@@ -118,7 +118,7 @@ saber_pro_genericas_faedis_2021_2024 <- read_rds(
 )
 ```
 
-::: {.callout-note}
+::: {#nte-2-chap-6 .callout-note}
 En el @sec-rds se abarcará con más detalle la importación de datos para archivos con una extensión `.rds`. Por ahora, el enfoque del @sec-amounts será la visualización de un conjunto de datos.
 :::
 
