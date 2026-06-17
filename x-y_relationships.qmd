@@ -16,6 +16,99 @@ Este capítulo se basa en [@wickham_ggplot2_2016] y [@wilke_fundamentals_2019] .
 
 Exploraremos los siguientes aspectos:
 
-1.
-2.
+1. ¿Cómo visualizar asociaciones entre pares de variables continuas para identificar posibles patrones?
+2. ¿Cómo visualizar diferentes subconjuntos de datos en paneles individuales?
+3. ¿Cómo visualizar la evolución de una variable contínua por grupos a lo largo del tiempo?
+4. ¿Cómo modificar la distribución de las etiquetas dentro de una leyenda en un gráfico?  
 
+:::: {#nte-1-chap-9 .callout-note}
+Para desarrollar el contenido de este capítulo es necesario que hayas completado la descarga y ubicación del archivo `2021-2024_saber-pro-genericas_faedis.rds` dentro de la carpeta `data`, respecto a lo descrito en la @nte-1-chap-6. Adicionalmente, es necesario que descarges el archivo señalado a continuación y lo incluyas también dentro de la carpeta `data`:
+
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2021-2024_saber-pro-genericas_faedis_programas.rds](https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/2021-2024_saber-pro-genericas_faedis_programas.rds)
+:::
+
+En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `009_visualizar-relaciones-x-y-en-r` y dentro de ella genera el archivo `001_visualizar-relaciones-x-y-datos-faedis.R`, siguiendo las pautas de la @sec-package-usage.
+
+::::
+
+## Gráfico de puntos
+
+En esta sección realizarás un gráfico de puntos señalando la asociación del puntaje del módulo de lectura crítica con el puntaje del módulo de razonamiento cuantitativo aplicando facetas para los programas de pregrado de la Facultad de Estudios a Distancia de la Universidad Militar en el periodo 2021-2024, tal como se indica en la @fig-1-chap-8.
+
+```{r}
+#| label: fig-1-chap-8
+#| fig-cap: Resultado final de un gráfico de puntos aplicando facetas y utilizando `ggplot2`
+#| fig-height: 6.5
+#| echo: false
+#| message: false
+saber_pro_genericas_faedis_2021_2024 <- read_rds(
+  file = "data/2021-2024_saber-pro-genericas_faedis.rds"
+)
+
+saber_pro_genericas_faedis_2021_2024 |>
+  ggplot(
+    aes(
+      x = mod_lectura_critica_punt,
+      y = mod_razona_cuantitat_punt
+    )
+  ) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  facet_wrap(
+    facets = vars(estu_prgm_academico),
+    labeller = label_wrap_gen(width = 18)
+  ) +
+  labs(
+    x = "Puntaje módulo lectura crítica (rango [0,300])",
+    y = "Puntaje módulo razonamiento cuantitativo (rango [0,300])",
+    title = "Asociación puntaje módulos por programa en FAEDIS",
+    subtitle = "Periodo: 2021 - 2024",
+    caption = "Fuente: Data Icfes"
+  )
+```
+
+## Gráfico de líneas
+
+En esta sección realizarás un gráfico de líneas señalando la evolución a lo largo del tiempo del puntaje global promedio para los programas de pregrado de la Facultad de Estudios a Distancia de la Universidad Militar en el periodo 2021-2024, tal como se indica en la @fig-2-chap-8.
+
+```{r}
+#| label: fig-2-chap-8
+#| fig-cap: Resultado final de un gráfico de líneas utilizando `ggplot2`
+#| fig-height: 5.5
+#| echo: false
+saber_pro_genericas_faedis_2021_2024_programas <- read_rds(
+  file = "data/2021-2024_saber-pro-genericas_faedis_programas.rds"
+)
+
+saber_pro_genericas_faedis_2021_2024_programas |>
+  ggplot(
+    aes(x = ano, y = punt_global)
+  ) +
+  geom_line(
+    aes(
+      group = estu_prgm_academico,
+      color = fct_reorder(
+        .f = estu_prgm_academico,
+        .x = punt_global,
+        .fun = last
+      )
+    )
+  ) +
+  geom_point() +
+  scale_color_discrete(
+    labels = label_wrap_gen(width = 18),
+    guide = guide_legend(nrow = 3, reverse = TRUE)
+  ) +
+  labs(
+    x = "Año",
+    y = "Promedio puntaje global (rango [0,300])",
+    color = NULL,
+    title = "Promedio puntaje global por programa en FAEDIS",
+    subtitle = "Periodo: 2021 - 2024",
+    caption = "Fuente: Data Icfes"
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
