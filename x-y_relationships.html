@@ -326,8 +326,15 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#gráfico-de-puntos" id="toc-gráfico-de-puntos" class="nav-link active" data-scroll-target="#gráfico-de-puntos"><span class="header-section-number">9.1</span> Gráfico de puntos</a></li>
+  <li><a href="#gráfico-de-líneas" id="toc-gráfico-de-líneas" class="nav-link" data-scroll-target="#gráfico-de-líneas"><span class="header-section-number">9.2</span> Gráfico de líneas</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/x-y_relationships.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/x-y_relationships.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -354,9 +361,73 @@ div.csl-indent {
 <p>Este capítulo se basa en <span class="citation" data-cites="wickham_ggplot2_2016">(<a href="references.html#ref-wickham_ggplot2_2016" role="doc-biblioref">Wickham, 2016</a>)</span> y <span class="citation" data-cites="wilke_fundamentals_2019">(<a href="references.html#ref-wilke_fundamentals_2019" role="doc-biblioref">Wilke, 2019</a>)</span> … donde tiene como propósito utilizar el modelo mental de la gramática de gráficos en capas para … utilizando el paquete <code>ggplot2</code> e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).</p>
 <p>Exploraremos los siguientes aspectos:</p>
 <ol type="1">
-<li></li>
-<li></li>
+<li>¿Cómo visualizar asociaciones entre pares de variables continuas para identificar posibles patrones?</li>
+<li>¿Cómo visualizar diferentes subconjuntos de datos en paneles individuales?</li>
+<li>¿Cómo visualizar la evolución de una variable contínua por grupos a lo largo del tiempo?</li>
+<li>¿Cómo modificar la distribución de las etiquetas dentro de una leyenda en un gráfico?</li>
 </ol>
+<div id="nte-1-chap-9" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota&nbsp;9.1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para desarrollar el contenido de este capítulo es necesario que hayas completado la descarga y ubicación del archivo <code>2021-2024_saber-pro-genericas_faedis.rds</code> dentro de la carpeta <code>data</code>, respecto a lo descrito en la <a href="amounts.html#nte-1-chap-6" class="quarto-xref">Nota&nbsp;<span>6.1</span></a>. Adicionalmente, es necesario que descarges el archivo señalado a continuación y lo incluyas también dentro de la carpeta <code>data</code>:</p>
+<div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span><img src="images/download-solid-full.png" alt="Ícono del explorador de archivos" height="25"> <a href="https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/2021-2024_saber-pro-genericas_faedis_programas.rds">2021-2024_saber-pro-genericas_faedis_programas.rds</a>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<p>En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada <code>009_visualizar-relaciones-x-y-en-r</code> y dentro de ella genera el archivo <code>001_visualizar-relaciones-x-y-datos-faedis.R</code>, siguiendo las pautas de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>.</p>
+</div>
+</div>
+<section id="gráfico-de-puntos" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="gráfico-de-puntos"><span class="header-section-number">9.1</span> Gráfico de puntos</h2>
+<p>En esta sección realizarás un gráfico de puntos señalando la asociación del puntaje del módulo de lectura crítica con el puntaje del módulo de razonamiento cuantitativo aplicando facetas para los programas de pregrado de la Facultad de Estudios a Distancia de la Universidad Militar en el periodo 2021-2024, tal como se indica en la <a href="#fig-1-chap-8" class="quarto-xref">Figura&nbsp;<span>9.1</span></a>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-1-chap-8" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-1-chap-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="x-y_relationships_files/figure-html/fig-1-chap-8-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-chap-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;9.1: Resultado final de un gráfico de puntos aplicando facetas y utilizando <code>ggplot2</code>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="gráfico-de-líneas" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="gráfico-de-líneas"><span class="header-section-number">9.2</span> Gráfico de líneas</h2>
+<p>En esta sección realizarás un gráfico de líneas señalando la evolución a lo largo del tiempo del puntaje global promedio para los programas de pregrado de la Facultad de Estudios a Distancia de la Universidad Militar en el periodo 2021-2024, tal como se indica en la <a href="#fig-2-chap-8" class="quarto-xref">Figura&nbsp;<span>9.2</span></a>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-2-chap-8" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-2-chap-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="x-y_relationships_files/figure-html/fig-2-chap-8-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-chap-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;9.2: Resultado final de un gráfico de líneas utilizando <code>ggplot2</code>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
@@ -367,6 +438,7 @@ Wickham, H. (2016). <em>ggplot2: elegant graphics for data analysis</em> (Second
 Wilke, C. (2019). <em>Fundamentals of data visualization: a primer on making informative and compelling figures</em> (First edition). O’Reilly. <a href="https://clauswilke.com/dataviz/">https://clauswilke.com/dataviz/</a>
 </div>
 </div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -786,4 +858,4 @@ Wilke, C. (2019). <em>Fundamentals of data visualization: a primer on making inf
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/x-y_relationships.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/x-y_relationships.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/x-y_relationships.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/x-y_relationships.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></div></div></footer></body></html>
