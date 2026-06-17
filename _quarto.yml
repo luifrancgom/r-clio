@@ -14,7 +14,7 @@ book:
         id: umng
         name: Universidad Militar Nueva Granada
       orcid: 0000-0002-2877-9015
-  date: 2025-10-29
+  date: last-modified
   date-format: iso
   cover-image: images/front-cover.png
   downloads: [pdf]
@@ -57,6 +57,9 @@ book:
         - pivoting.qmd
         - splitting_combining.qmd
     - part: functional_programming.qmd
+      chapters:
+        - anonymous_functions.qmd
+        - map_functions.qmd 
     - part: data_communication.qmd
     - references.qmd
 
