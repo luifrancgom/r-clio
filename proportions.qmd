@@ -83,6 +83,7 @@ ggplot(
 Para generar la @fig-1-chap-8 es necesario en primera instancia cargar los paquetes que se requieran utilizar y posteriormente importar los datos para explorarlos en R como se señala a continuación, teniendo en cuenta lo indicado en la @nte-1-chap-8:
 
 ```{r}
+#| eval: false
 # Cargar paquetes ----
 library(tidyverse)
 library(scales)
