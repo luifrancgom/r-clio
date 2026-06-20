@@ -32,6 +32,10 @@ jobs:
           packages: |
             any::renv
 
+      - name: Restore Renv Lockfile
+        run: renv::restore()
+        shell: Rscript {0}
+
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
         with:
