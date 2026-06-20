@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -93,6 +128,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -350,8 +414,15 @@ div.csl-indent {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#gráfico-de-puntos" id="toc-gráfico-de-puntos" class="nav-link active" data-scroll-target="#gráfico-de-puntos"><span class="header-section-number">9.1</span> Gráfico de puntos</a></li>
-  <li><a href="#gráfico-de-líneas" id="toc-gráfico-de-líneas" class="nav-link" data-scroll-target="#gráfico-de-líneas"><span class="header-section-number">9.2</span> Gráfico de líneas</a></li>
+  <li><a href="#gráfico-de-puntos" id="toc-gráfico-de-puntos" class="nav-link active" data-scroll-target="#gráfico-de-puntos"><span class="header-section-number">9.1</span> Gráfico de puntos</a>
+  <ul class="collapse">
+  <li><a href="#datos-mapeo-y-capas" id="toc-datos-mapeo-y-capas" class="nav-link" data-scroll-target="#datos-mapeo-y-capas"><span class="header-section-number">9.1.1</span> Datos, mapeo y capas</a></li>
+  <li><a href="#facetas" id="toc-facetas" class="nav-link" data-scroll-target="#facetas"><span class="header-section-number">9.1.2</span> Facetas</a></li>
+  </ul></li>
+  <li><a href="#gráfico-de-líneas" id="toc-gráfico-de-líneas" class="nav-link" data-scroll-target="#gráfico-de-líneas"><span class="header-section-number">9.2</span> Gráfico de líneas</a>
+  <ul class="collapse">
+  <li><a href="#datos-mapeo-y-capas-1" id="toc-datos-mapeo-y-capas-1" class="nav-link" data-scroll-target="#datos-mapeo-y-capas-1"><span class="header-section-number">9.2.1</span> Datos, mapeo y capas</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/x-y_relationships.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/x-y_relationships.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
@@ -377,7 +448,7 @@ div.csl-indent {
 </header>
 
 
-<p>Este capítulo se basa en <span class="citation" data-cites="wickham_ggplot2_2016">(<a href="references.html#ref-wickham_ggplot2_2016" role="doc-biblioref">Wickham, 2016</a>)</span> y <span class="citation" data-cites="wilke_fundamentals_2019">(<a href="references.html#ref-wilke_fundamentals_2019" role="doc-biblioref">Wilke, 2019</a>)</span> … donde tiene como propósito utilizar el modelo mental de la gramática de gráficos en capas para … utilizando el paquete <code>ggplot2</code> e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).</p>
+<p>Este capítulo se basa en <span class="citation" data-cites="wickham_ggplot2_2016">(<a href="references.html#ref-wickham_ggplot2_2016" role="doc-biblioref">Wickham, 2016</a>)</span> y <span class="citation" data-cites="wilke_fundamentals_2019">(<a href="references.html#ref-wilke_fundamentals_2019" role="doc-biblioref">Wilke, 2019</a>)</span> así como en la documentación oficial de <a href="https://ggplot2.tidyverse.org/articles/ggplot2.html"><code>ggplot2</code></a> ßdonde tiene como propósito utilizar el modelo mental de la gramática de gráficos en capas para visualizar asociaciones entre variables y la evolución de una variable contínua a lo largo del tiempo utilizando el paquete <code>ggplot2</code> e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).</p>
 <p>Exploraremos los siguientes aspectos:</p>
 <ol type="1">
 <li>¿Cómo visualizar asociaciones entre pares de variables continuas para identificar posibles patrones?</li>
@@ -414,38 +485,646 @@ Nota&nbsp;9.1
 </div>
 <section id="gráfico-de-puntos" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="gráfico-de-puntos"><span class="header-section-number">9.1</span> Gráfico de puntos</h2>
-<p>En esta sección realizarás un gráfico de puntos señalando la asociación del puntaje del módulo de lectura crítica con el puntaje del módulo de razonamiento cuantitativo aplicando facetas para los programas de pregrado de la Facultad de Estudios a Distancia de la Universidad Militar en el periodo 2021-2024, tal como se indica en la <a href="#fig-1-chap-8" class="quarto-xref">Figura&nbsp;<span>9.1</span></a>.</p>
+<p>En esta sección realizarás un gráfico de puntos señalando la asociación del puntaje del módulo de lectura crítica con el puntaje del módulo de razonamiento cuantitativo aplicando facetas para los programas de pregrado de la Facultad de Estudios a Distancia de la Universidad Militar en el periodo 2021-2024, tal como se indica en la <a href="#fig-1-chap-9" class="quarto-xref">Figura&nbsp;<span>9.1</span></a>.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-1-chap-8" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-1-chap-9" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-1-chap-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="x-y_relationships_files/figure-html/fig-1-chap-8-1.png" class="img-fluid figure-img" width="672">
+<div aria-describedby="fig-1-chap-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="x-y_relationships_files/figure-html/fig-1-chap-9-1.png" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-chap-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-chap-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;9.1: Resultado final de un gráfico de puntos aplicando facetas y utilizando <code>ggplot2</code>
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
+<section id="datos-mapeo-y-capas" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="datos-mapeo-y-capas"><span class="header-section-number">9.1.1</span> Datos, mapeo y capas</h3>
+<p>Para generar la <a href="#fig-1-chap-9" class="quarto-xref">Figura&nbsp;<span>9.1</span></a> es necesario en primera instancia cargar los paquetes que se requieran utilizar y posteriormente importar los datos para explorarlos en R como se señala a continuación, teniendo en cuenta lo indicado en la <a href="#nte-1-chap-9" class="quarto-xref">Nota&nbsp;<span>9.2</span></a>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar paquetes ----</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar datos ----</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"data/2021-2024_saber-pro-genericas_faedis.rds"</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Una vez se carguen los paquetes que se utilizarán y se importen los datos, se pueden mapear las variables <code>mod_lectura_critica_punt</code> y <code>mod_razona_cuantitat_punt</code> a los ejes asociados con las coordenadas <code>x</code> y <code>y</code>. También se puede utilizar la función <code>geom_point()</code> para generar un gráfico de puntos de tal manera que se pueda visualizar la asociación entre 2 variables continuas, como <code>mod_lectura_critica_punt</code> y <code>mod_razona_cuantitat_punt</code>:</p>
+<div class="cell">
+<div id="lst-geom-point" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-geom-point-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;9.1: Gráfico de puntos
+</figcaption>
+<div aria-describedby="lst-geom-point-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> mod_lectura_critica_punt,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> mod_razona_cuantitat_punt</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="x-y_relationships_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>En un gráfico de puntos es posible superponer una recta para identificar una tendencia general en relación a la asociación de 2 variables contínuas utilizando la función <code>geom_smooth()</code> y el parámetro <code>method</code> con el argumento <code>"lm"</code>, como <code>method = "lm"</code>:</p>
+<div class="cell">
+<div id="lst-geom-smooth" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-geom-smooth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;9.2: Gráfico de puntos superponiendo una recta mediante el uso de la geometría <code>geom_smooth()</code> y el método <code>lm</code>
+</figcaption>
+<div aria-describedby="lst-geom-smooth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> mod_lectura_critica_punt,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> mod_razona_cuantitat_punt</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="x-y_relationships_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<!-- Check in the ggplot2 repository R/stat-smooth.R StatSmooth where method <- match.fun(method) is used. In the case of "lm" match.fun("lm") -->
+<p>Al ejecutar el código del <a href="#lst-geom-smooth" class="quarto-xref">Listado&nbsp;<span>9.2</span></a> se genera un mensaje indicando que la geometría <code>geom_smooth()</code> utiliza la fórmula <code>y ~ x</code> (ver <code>geom_smooth()</code> <code>using formula = 'y ~ x'</code>). Internamente <code>ggplot2</code>, mediante la función <code>lm()</code>, ajusta un modelo de regresión lineal. A partir de un modelo teórico poblacional (ver <a href="#eq-population-model" class="quarto-xref">Ecuación&nbsp;<span>9.1</span></a>), R estima un modelo lineal (ver <a href="#eq-estimated-model" class="quarto-xref">Ecuación&nbsp;<span>9.2</span></a>) mediante el método de mínimos cuadrados ordinarios:</p>
+<p><span id="eq-population-model"><span class="math display">\[
+y = \beta_0 + \beta_1x + \epsilon
+\tag{9.1}\]</span></span></p>
+<p><span id="eq-estimated-model"><span class="math display">\[
+\hat{y} = \hat{\beta}_0 + \hat{\beta}_1x
+\tag{9.2}\]</span></span></p>
+<p>Donde en la <a href="#eq-estimated-model" class="quarto-xref">Ecuación&nbsp;<span>9.2</span></a> <span class="math inline">\(\hat{\beta}_0\)</span> corresponde al corte estimado con el eje asociado a la coordenada <code>y</code> y <span class="math inline">\(\hat{\beta}_1\)</span> se refiere a la pendiente de la línea estimada. En este caso particular, <code>y</code> corresponde a la variable <code>mod_razona_cuantitat_punt</code> y <code>x</code> corresponde a la variable <code>mod_lectura_critica_punt</code>.</p>
+<div id="nte-1-chap-9" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota&nbsp;9.2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En el libro no abarcaremos con detalle el tema de regresión lineal y modelos lineales. Sin embargo, para el lector interesado en el tema, una introducción amigable y clara se puede consultar en la lista de reproducción <a href="https://youtube.com/playlist?list=PLblh5JKOoLUIzaEkCLIUxQFjPIlapw8nU&amp;si=42dIKCT3xe3HmlpB">Linear Regression and Linear Models</a> del canal <a href="https://www.youtube.com/@statquest">StatQuest with Josh Starmer</a>.</p>
+</div>
+</div>
+<p>El paquete <code>ggplot2</code> no almacena o guarda los parámetros estimados del modelo. En ese sentido, <code>geom_smooth(method = "lm")</code> calcula la recta internamente sólo de forma temporal para poder dibujarla. Si deseas conocer los parámetros puedes utilizar para esta caso el siguiente código:</p>
+<div class="cell">
+<div id="lst-lm" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-lm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;9.3: Uso de la función <code>lm()</code> para obtener la estimación de los parámetros en una regresión lineal simple
+</figcaption>
+<div aria-describedby="lst-lm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> mod_razona_cuantitat_punt <span class="sc">~</span> mod_lectura_critica_punt,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<p>En la <a href="#tbl-estimated-parameters" class="quarto-xref">Tabla&nbsp;<span>9.1</span></a> se señalan las estimaciones de los respectivos parámetros relacionados con la recta del gráfico generado por el <a href="#lst-geom-smooth" class="quarto-xref">Listado&nbsp;<span>9.2</span></a> mediante la función <code>geom_smooth</code> y el parámetro <code>method</code> con el argumento <code>"lm"</code>.</p>
+<div class="cell">
+<div id="tbl-estimated-parameters" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-estimated-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;9.1: Parámetros estimados utilizando la función <code>lm()</code> en una regresión lineal simple
+</figcaption>
+<div aria-describedby="tbl-estimated-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="pzveloiefp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pzveloiefp table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#pzveloiefp thead, #pzveloiefp tbody, #pzveloiefp tfoot, #pzveloiefp tr, #pzveloiefp td, #pzveloiefp th {
+  border-style: none;
+}
+
+#pzveloiefp p {
+  margin: 0;
+  padding: 0;
+}
+
+#pzveloiefp .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 40%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#pzveloiefp .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#pzveloiefp .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#pzveloiefp .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#pzveloiefp .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#pzveloiefp .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#pzveloiefp .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#pzveloiefp .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#pzveloiefp .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#pzveloiefp .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#pzveloiefp .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pzveloiefp .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#pzveloiefp .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#pzveloiefp .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#pzveloiefp .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pzveloiefp .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#pzveloiefp .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#pzveloiefp .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#pzveloiefp .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pzveloiefp .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#pzveloiefp .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pzveloiefp .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#pzveloiefp .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pzveloiefp .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pzveloiefp .gt_left {
+  text-align: left;
+}
+
+#pzveloiefp .gt_center {
+  text-align: center;
+}
+
+#pzveloiefp .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#pzveloiefp .gt_font_normal {
+  font-weight: normal;
+}
+
+#pzveloiefp .gt_font_bold {
+  font-weight: bold;
+}
+
+#pzveloiefp .gt_font_italic {
+  font-style: italic;
+}
+
+#pzveloiefp .gt_super {
+  font-size: 65%;
+}
+
+#pzveloiefp .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#pzveloiefp .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#pzveloiefp .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#pzveloiefp .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#pzveloiefp .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#pzveloiefp .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#pzveloiefp .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#pzveloiefp .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#pzveloiefp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Parámetro</th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Estimación</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="term"><span class="math inline">\(\beta_0\)</span></td>
+<td class="gt_row gt_right" headers="estimate">64.10</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="term"><span class="math inline">\(\beta_1\)</span></td>
+<td class="gt_row gt_right" headers="estimate">0.59</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="facetas" class="level3" data-number="9.1.2">
+<h3 data-number="9.1.2" class="anchored" data-anchor-id="facetas"><span class="header-section-number">9.1.2</span> Facetas</h3>
+</section>
 </section>
 <section id="gráfico-de-líneas" class="level2" data-number="9.2">
 <h2 data-number="9.2" class="anchored" data-anchor-id="gráfico-de-líneas"><span class="header-section-number">9.2</span> Gráfico de líneas</h2>
-<p>En esta sección realizarás un gráfico de líneas señalando la evolución a lo largo del tiempo del puntaje global promedio para los programas de pregrado de la Facultad de Estudios a Distancia de la Universidad Militar en el periodo 2021-2024, tal como se indica en la <a href="#fig-2-chap-8" class="quarto-xref">Figura&nbsp;<span>9.2</span></a>.</p>
+<p>En esta sección realizarás un gráfico de líneas señalando la evolución a lo largo del tiempo del puntaje global promedio para los programas de pregrado de la Facultad de Estudios a Distancia de la Universidad Militar en el periodo 2021-2024, tal como se indica en la <a href="#fig-2-chap-9" class="quarto-xref">Figura&nbsp;<span>9.2</span></a>.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-2-chap-8" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-2-chap-9" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-2-chap-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="x-y_relationships_files/figure-html/fig-2-chap-8-1.png" class="img-fluid figure-img" width="672">
+<div aria-describedby="fig-2-chap-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="x-y_relationships_files/figure-html/fig-2-chap-9-1.png" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-chap-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-chap-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;9.2: Resultado final de un gráfico de líneas utilizando <code>ggplot2</code>
 </figcaption>
 </figure>
 </div>
 </div>
+</div>
+<section id="datos-mapeo-y-capas-1" class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1" class="anchored" data-anchor-id="datos-mapeo-y-capas-1"><span class="header-section-number">9.2.1</span> Datos, mapeo y capas</h3>
+<p>Para generar la <a href="#fig-1-chap-9" class="quarto-xref">Figura&nbsp;<span>9.1</span></a> es necesario en primera instancia cargar los paquetes que se requieran utilizar y posteriormente importar los datos para explorarlos en R como se señala a continuación, teniendo en cuenta lo indicado en la <a href="#nte-1-chap-9" class="quarto-xref">Nota&nbsp;<span>9.2</span></a>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar paquetes ----</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar datos ----</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"data/2021-2024_saber-pro-genericas_faedis_programas.rds"</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
@@ -457,6 +1136,7 @@ Wickham, H. (2016). <em>ggplot2: elegant graphics for data analysis</em> (Second
 Wilke, C. (2019). <em>Fundamentals of data visualization: a primer on making informative and compelling figures</em> (First edition). O’Reilly. <a href="https://clauswilke.com/dataviz/">https://clauswilke.com/dataviz/</a>
 </div>
 </div>
+</section>
 </section>
 
 </main> <!-- /main -->
