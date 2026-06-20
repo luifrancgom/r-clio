@@ -25,16 +25,13 @@ jobs:
           r-version: 'renv'
           use-public-rspm: true
 
+      - name: Install Linux System Libraries
+        run: sudo apt-get update && sudo apt-get install -y libnode-dev libcurl4-openssl-dev
+
       - name: Install R Dependencies
-        uses: r-lib/actions/setup-r-dependencies@v2
+        uses: r-lib/actions/setup-renv@v2
         with:
           cache-version: 1
-          packages: |
-            any::renv
-
-      - name: Restore Renv Lockfile
-        run: renv::restore()
-        shell: Rscript {0}
 
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
