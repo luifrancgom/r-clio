@@ -10,9 +10,11 @@ source("_common.R")
 #| echo: false
 #| message: false
 library(tidyverse)
+library(tidymodels)
+library(gt)
 ```
 
-Este capítulo se basa en [@wickham_ggplot2_2016] y [@wilke_fundamentals_2019] ... donde tiene como propósito utilizar el modelo mental de la gramática de gráficos en capas para ... utilizando el paquete `ggplot2` e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).
+Este capítulo se basa en [@wickham_ggplot2_2016] y [@wilke_fundamentals_2019] así como en la documentación oficial de [`ggplot2`](https://ggplot2.tidyverse.org/articles/ggplot2.html) ßdonde tiene como propósito utilizar el modelo mental de la gramática de gráficos en capas para visualizar asociaciones entre variables y la evolución de una variable contínua a lo largo del tiempo utilizando el paquete `ggplot2` e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).
 
 Exploraremos los siguientes aspectos:
 
@@ -34,10 +36,10 @@ En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta 
 
 ## Gráfico de puntos
 
-En esta sección realizarás un gráfico de puntos señalando la asociación del puntaje del módulo de lectura crítica con el puntaje del módulo de razonamiento cuantitativo aplicando facetas para los programas de pregrado de la Facultad de Estudios a Distancia de la Universidad Militar en el periodo 2021-2024, tal como se indica en la @fig-1-chap-8.
+En esta sección realizarás un gráfico de puntos señalando la asociación del puntaje del módulo de lectura crítica con el puntaje del módulo de razonamiento cuantitativo aplicando facetas para los programas de pregrado de la Facultad de Estudios a Distancia de la Universidad Militar en el periodo 2021-2024, tal como se indica en la @fig-1-chap-9.
 
 ```{r}
-#| label: fig-1-chap-8
+#| label: fig-1-chap-9
 #| fig-cap: Resultado final de un gráfico de puntos aplicando facetas y utilizando `ggplot2`
 #| fig-height: 6.5
 #| echo: false
@@ -68,12 +70,132 @@ saber_pro_genericas_faedis_2021_2024 |>
   )
 ```
 
-## Gráfico de líneas
+### Datos, mapeo y capas
 
-En esta sección realizarás un gráfico de líneas señalando la evolución a lo largo del tiempo del puntaje global promedio para los programas de pregrado de la Facultad de Estudios a Distancia de la Universidad Militar en el periodo 2021-2024, tal como se indica en la @fig-2-chap-8.
+Para generar la @fig-1-chap-9 es necesario en primera instancia cargar los paquetes que se requieran utilizar y posteriormente importar los datos para explorarlos en R como se señala a continuación, teniendo en cuenta lo indicado en la @nte-1-chap-9:
 
 ```{r}
-#| label: fig-2-chap-8
+#| eval: false
+# Cargar paquetes ----
+library(tidyverse)
+
+# Importar datos ----
+saber_pro_genericas_faedis_2021_2024 <- read_rds(
+  file = "data/2021-2024_saber-pro-genericas_faedis.rds"
+)
+```
+
+Una vez se carguen los paquetes que se utilizarán y se importen los datos, se pueden mapear las variables `mod_lectura_critica_punt` y `mod_razona_cuantitat_punt` a los ejes asociados con las coordenadas `x` y `y`. También se puede utilizar la función `geom_point()` para generar un gráfico de puntos de tal manera que se pueda visualizar la asociación entre 2 variables continuas, como `mod_lectura_critica_punt` y `mod_razona_cuantitat_punt`:
+
+```{r}
+#| lst-label: lst-geom-point
+#| lst-cap: Gráfico de puntos
+saber_pro_genericas_faedis_2021_2024 |>
+  ggplot(
+    aes(
+      x = mod_lectura_critica_punt,
+      y = mod_razona_cuantitat_punt
+    )
+  ) +
+  geom_point()
+```
+
+En un gráfico de puntos es posible superponer una recta para identificar una tendencia general en relación a la asociación de 2 variables contínuas utilizando la función `geom_smooth()` y el parámetro `method` con el argumento `"lm"`, como `method = "lm"`:
+
+```{r}
+#| lst-label: lst-geom-smooth
+#| lst-cap: Gráfico de puntos superponiendo una recta mediante el uso de la geometría `geom_smooth()` y el método `lm`
+saber_pro_genericas_faedis_2021_2024 |>
+  ggplot(
+    aes(
+      x = mod_lectura_critica_punt,
+      y = mod_razona_cuantitat_punt
+    )
+  ) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+<!-- Check in the ggplot2 repository R/stat-smooth.R StatSmooth where method <- match.fun(method) is used. In the case of "lm" match.fun("lm") -->
+
+Al ejecutar el código del @lst-geom-smooth se genera un mensaje indicando que la geometría `geom_smooth()` utiliza la fórmula `y ~ x` (ver `geom_smooth()` `using formula = 'y ~ x'`). Internamente `ggplot2`, mediante la función `lm()`, ajusta un modelo de regresión lineal. A partir de un modelo teórico poblacional (ver @eq-population-model), R estima un modelo lineal (ver @eq-estimated-model) mediante el método de mínimos cuadrados ordinarios: 
+
+$$
+y = \beta_0 + \beta_1x + \epsilon
+$${#eq-population-model}
+
+$$
+\hat{y} = \hat{\beta}_0 + \hat{\beta}_1x 
+$${#eq-estimated-model}
+
+Donde en la @eq-estimated-model $\hat{\beta}_0$ corresponde al corte estimado con el eje asociado a la coordenada `y` y $\hat{\beta}_1$ se refiere a la pendiente de la línea estimada. En este caso particular, `y` corresponde a la variable `mod_razona_cuantitat_punt` y `x` corresponde a la variable `mod_lectura_critica_punt`. 
+
+:::: {#nte-1-chap-9 .callout-note}
+En el libro no abarcaremos con detalle el tema de regresión lineal y modelos lineales. Sin embargo, para el lector interesado en el tema, una introducción amigable y clara se puede consultar en la lista de reproducción [Linear Regression and Linear Models](https://youtube.com/playlist?list=PLblh5JKOoLUIzaEkCLIUxQFjPIlapw8nU&si=42dIKCT3xe3HmlpB) del canal [StatQuest with Josh Starmer](https://www.youtube.com/@statquest).   
+::::
+
+El paquete `ggplot2` no almacena o guarda los parámetros estimados del modelo. En ese sentido, `geom_smooth(method = "lm")` calcula la recta internamente sólo de forma temporal para poder dibujarla. Si deseas conocer los parámetros puedes utilizar para esta caso el siguiente código:
+
+```{r}
+#| lst-label: lst-lm
+#| lst-cap: Uso de la función `lm()` para obtener la estimación de los parámetros en una regresión lineal simple
+#| eval: false
+lm(
+  formula = mod_razona_cuantitat_punt ~ mod_lectura_critica_punt,
+  data = saber_pro_genericas_faedis_2021_2024
+)
+```
+
+En la @tbl-estimated-parameters se señalan las estimaciones de los respectivos parámetros relacionados con la recta del gráfico generado por el @lst-geom-smooth mediante la función `geom_smooth` y el parámetro `method` con el argumento `"lm"`.
+
+```{r}
+#| label: tbl-estimated-parameters
+#| tbl-cap: Parámetros estimados utilizando la función `lm()` en una regresión lineal simple
+#| echo: false
+linear_model <- lm(
+  formula = mod_razona_cuantitat_punt ~ mod_lectura_critica_punt,
+  data = saber_pro_genericas_faedis_2021_2024
+)
+
+lineal_model_table <- linear_model |>
+  tidy() |>
+  select(term, estimate) |>
+  mutate(
+    term = case_when(
+      term == "(Intercept)" ~ "$\\beta_0$",
+      term == "mod_lectura_critica_punt" ~ "$\\beta_1$",
+      TRUE ~ term
+    )
+  )
+
+lineal_model_table |>
+  gt() |>
+  cols_label(
+    term = "Parámetro",
+    estimate = "Estimación"
+  ) |>
+  fmt_number(
+    columns = estimate,
+    decimals = 2
+  ) |>
+  fmt_markdown(
+    columns = term
+  ) |>
+  tab_options(
+    table.width = pct(40)
+  )
+```
+
+### Facetas
+
+
+
+## Gráfico de líneas
+
+En esta sección realizarás un gráfico de líneas señalando la evolución a lo largo del tiempo del puntaje global promedio para los programas de pregrado de la Facultad de Estudios a Distancia de la Universidad Militar en el periodo 2021-2024, tal como se indica en la @fig-2-chap-9.
+
+```{r}
+#| label: fig-2-chap-9
 #| fig-cap: Resultado final de un gráfico de líneas utilizando `ggplot2`
 #| fig-height: 5.5
 #| echo: false
@@ -111,4 +233,19 @@ saber_pro_genericas_faedis_2021_2024_programas |>
   theme(
     legend.position = "bottom"
   )
+```
+
+### Datos, mapeo y capas
+
+Para generar la @fig-1-chap-9 es necesario en primera instancia cargar los paquetes que se requieran utilizar y posteriormente importar los datos para explorarlos en R como se señala a continuación, teniendo en cuenta lo indicado en la @nte-1-chap-9:
+
+```{r}
+#| eval: false
+# Cargar paquetes ----
+library(tidyverse)
+
+# Importar datos ----
+saber_pro_genericas_faedis_2021_2024 <- read_rds(
+  file = "data/2021-2024_saber-pro-genericas_faedis_programas.rds"
+)
 ```
