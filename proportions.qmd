@@ -228,7 +228,7 @@ También para que exista claridad respecto a las categorías de la leyenda asoci
 En relación al segundo aspecto se pueden eliminar o modificar diferentes etiquetas en el gráfico para incluir información de contexto mediante la función `labs()` de manera similar a como se procedió en el @lst-labs y el @lst-scale-fill-manual-legend. Sin embargo, en este caso, adicionalmente se puede hacer uso de la función `str_wrap()` perteneciente al paquete [`stringr`](https://stringr.tidyverse.org/), que se incluye dentro del `tidyverse` (ver @sec-messages), para controlar la longitud del título del gráfico, tal como se señala a continuación:
 
 ```{r}
-#| lst-label: lst-labs-str_wrap
+#| lst-label: lst-labs-str-wrap
 #| lst-cap: Modificación de las etiquetas en los cortes en el eje asociado con la coordenada `x` y las categorías dentro de la leyenda
 #| fig-height: 5.5
 ggplot(
@@ -266,7 +266,7 @@ ggplot(
   )
 ```
 
-Una pregunta natural respecto al @lst-labs-str_wrap es por qué no utilizar la función `label_wrap_gen()` para controlar la longitud del título, tal como se aplicó en la función `scale_y_discrete()` para las etiquetas del eje asociadas con la coordenada `y`. La función `label_wrap_gen()` fue construida como una función auxiliar dentro del paquete `ggplot2` para modificar de manera directa un conjunto de etiquetas en las escalas. Por el contrario, la función `str_wrap()` del paquete `stringr` se diseñó para dividir un texto determinado en párrafos con un formato adecuado, donde el primer parámetro de la función, denominado `string`, debe corresponder a un vector de caracteres (ver `?str_wrap`).
+Una pregunta natural respecto al @lst-labs-str-wrap es por qué no utilizar la función `label_wrap_gen()` para controlar la longitud del título, tal como se aplicó en la función `scale_y_discrete()` para las etiquetas del eje asociadas con la coordenada `y`. La función `label_wrap_gen()` fue construida como una función auxiliar dentro del paquete `ggplot2` para modificar de manera directa un conjunto de etiquetas en las escalas. Por el contrario, la función `str_wrap()` del paquete `stringr` se diseñó para dividir un texto determinado en párrafos con un formato adecuado, donde el primer parámetro de la función, denominado `string`, debe corresponder a un vector de caracteres (ver `?str_wrap`).
 
 ## Tema
 

@@ -14,11 +14,11 @@ library(tidymodels)
 library(gt)
 ```
 
-Este capítulo se basa en [@wickham_ggplot2_2016] y [@wilke_fundamentals_2019] así como en la documentación oficial de [`ggplot2`](https://ggplot2.tidyverse.org/articles/ggplot2.html) ßdonde tiene como propósito utilizar el modelo mental de la gramática de gráficos en capas para visualizar asociaciones entre variables y la evolución de una variable contínua a lo largo del tiempo utilizando el paquete `ggplot2` e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).
+Este capítulo se basa en [@wickham_ggplot2_2016] y [@wilke_fundamentals_2019] así como en la documentación oficial de [`ggplot2`](https://ggplot2.tidyverse.org/articles/ggplot2.html) donde tiene como propósito utilizar el modelo mental de la gramática de gráficos en capas para visualizar asociaciones entre variables y la evolución de una variable contínua a lo largo del tiempo utilizando el paquete `ggplot2` e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).
 
 Exploraremos los siguientes aspectos:
 
-1. ¿Cómo visualizar asociaciones entre pares de variables continuas para identificar posibles patrones?
+1. ¿Cómo visualizar asociaciones entre pares de variables contínuas para identificar posibles patrones?
 2. ¿Cómo visualizar diferentes subconjuntos de datos en paneles individuales?
 3. ¿Cómo visualizar la evolución de una variable contínua por grupos a lo largo del tiempo?
 4. ¿Cómo modificar la distribución de las etiquetas dentro de una leyenda en un gráfico?  
@@ -85,7 +85,7 @@ saber_pro_genericas_faedis_2021_2024 <- read_rds(
 )
 ```
 
-Una vez se carguen los paquetes que se utilizarán y se importen los datos, se pueden mapear las variables `mod_lectura_critica_punt` y `mod_razona_cuantitat_punt` a los ejes asociados con las coordenadas `x` y `y`. También se puede utilizar la función `geom_point()` para generar un gráfico de puntos de tal manera que se pueda visualizar la asociación entre 2 variables continuas, como `mod_lectura_critica_punt` y `mod_razona_cuantitat_punt`:
+Una vez se carguen los paquetes que se utilizarán y se importen los datos, se pueden mapear las variables `mod_lectura_critica_punt` y `mod_razona_cuantitat_punt` a los ejes asociados con las coordenadas `x` y `y`. También se puede utilizar la función `geom_point()` para generar un gráfico de puntos de tal manera que se pueda visualizar la asociación entre 2 variables contínuas, como `mod_lectura_critica_punt` y `mod_razona_cuantitat_punt`:
 
 ```{r}
 #| lst-label: lst-geom-point
@@ -134,7 +134,7 @@ Donde en la @eq-estimated-model $\hat{\beta}_0$ corresponde al corte estimado co
 En el libro no abarcaremos con detalle el tema de regresión lineal y modelos lineales. Sin embargo, para el lector interesado en el tema, una introducción amigable y clara se puede consultar en la lista de reproducción [Linear Regression and Linear Models](https://youtube.com/playlist?list=PLblh5JKOoLUIzaEkCLIUxQFjPIlapw8nU&si=42dIKCT3xe3HmlpB) del canal [StatQuest with Josh Starmer](https://www.youtube.com/@statquest).   
 ::::
 
-El paquete `ggplot2` no almacena o guarda los parámetros estimados del modelo. En ese sentido, `geom_smooth(method = "lm")` calcula la recta internamente sólo de forma temporal para poder dibujarla. Si deseas conocer los parámetros puedes utilizar para esta caso el siguiente código:
+El paquete `ggplot2` no almacena o guarda los parámetros estimados del modelo. En ese sentido, `geom_smooth(method = "lm")` calcula la recta internamente solo de forma temporal para poder dibujarla. Si deseas conocer los parámetros puedes utilizar para esta caso el siguiente código:
 
 ```{r}
 #| lst-label: lst-lm
@@ -146,7 +146,7 @@ lm(
 )
 ```
 
-En la @tbl-estimated-parameters se señalan las estimaciones de los respectivos parámetros relacionados con la recta del gráfico generado por el @lst-geom-smooth mediante la función `geom_smooth` y el parámetro `method` con el argumento `"lm"`.
+En la @tbl-estimated-parameters se señalan las estimaciones de los respectivos parámetros relacionados con la recta del gráfico generado por el @lst-geom-smooth mediante la función `geom_smooth()` y el parámetro `method` con el argumento `"lm"`.
 
 ```{r}
 #| label: tbl-estimated-parameters
@@ -181,6 +181,13 @@ lineal_model_table |>
   fmt_markdown(
     columns = term
   ) |>
+  cols_align(
+    align = "center"
+  ) |>
+  cols_width(
+    term ~ px(100),
+    estimate ~ px(100)
+  ) |>
   tab_options(
     table.width = pct(40)
   )
@@ -188,7 +195,151 @@ lineal_model_table |>
 
 ### Facetas
 
+En el gráfico generado por el @lst-geom-smooth la asociación entre los resultados del los módulos razonamiento cuantitativo y lectura crítica se encuentran consolidados para cada uno de los programas académicos señalando una tendencia general. Para examinar si existe algún tipo de heterogeneidad entre los programas académicos es posible utilizar el componente de facetas correspondiente a la gramática de gráficos en capas. Este componente permite visualizar el mismo gráfico generado por el @lst-geom-smooth pero para cada programa académico en páneles individuales utilizando la función `facet_wrap()`. Para utilizar ésta función se requiere definir la variable que permitirá generar los grupos para generar cada gráfico utilizando el parámetro `facets` y como argumento la respectiva variable dentro de la función `vars()`. Además como en el @lst-scales y el @lst-stacked-bars es necesario limitar el ancho de los nombres de los programas donde este aspecto también se puede modificar mediante el parámetro `labeler` utilizando la función `label_wrap_gen()`, tal como se señala a continuación:
 
+```{r}
+#| lst-label: lst-facet-wrap
+#| lst-cap: Uso de la función `facet_wrap()` junto con el parámetro `facets` y la función `vars()` como argumento para visualizar diferentes subconjuntos de datos
+#| message: false
+#| fig-height: 5.5
+saber_pro_genericas_faedis_2021_2024 |>
+  ggplot(
+    aes(
+      x = mod_lectura_critica_punt,
+      y = mod_razona_cuantitat_punt
+    )
+  ) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  facet_wrap(
+    facets = vars(estu_prgm_academico),
+    labeller = label_wrap_gen(width = 18)
+  )
+```
+
+En el gráfico generado por el @lst-facet-wrap se puede identificar que la pendiente de la recta generada por la función `geom_smooth()` junto con el parámetro `method` y el argumento `"lm"` no es la misma cuando se examina la tendencia general para cada uno de los programas académicos. En la @tbl-estimated-parameters-facet se señalan las estimaciones de los respectivos parámetros para cada uno de los programas académcios relacionados con la rectas del gráfico generado por el @lst-facet-wrap mediante la función `geom_smooth()` y el parámetro `method` con el argumento `"lm"`.
+
+```{r}
+#| label: tbl-estimated-parameters-facet
+#| tbl-cap: Parámetros estimados utilizando la función `lm()` en una regresión lineal simple por programa académico
+#| echo: false
+saber_pro_genericas_faedis_2021_2024_lm_tbl <- saber_pro_genericas_faedis_2021_2024 |>
+  select(
+    estu_snies_prgmacademico,
+    estu_prgm_academico,
+    mod_lectura_critica_punt,
+    mod_razona_cuantitat_punt
+  ) |>
+  nest(
+    .by = c(
+      estu_snies_prgmacademico,
+      estu_prgm_academico
+    )
+  ) |>
+  mutate(
+    lm = map(
+      .x = data,
+      .f = \(x) {
+        lm(
+          formula = mod_razona_cuantitat_punt ~ mod_lectura_critica_punt,
+          data = x
+        )
+      }
+    )
+  ) |>
+  mutate(
+    lm = map(
+      .x = lm,
+      .f = \(x) tidy(x = x)
+    )
+  )
+
+saber_pro_genericas_faedis_2021_2024_lm_coefs <- saber_pro_genericas_faedis_2021_2024_lm_tbl |>
+  select(
+    estu_prgm_academico,
+    lm
+  ) |>
+  mutate(
+    lm = map(
+      .x = lm,
+      .f = \(x) {
+        x |>
+          select(term, estimate) |>
+          mutate(
+            term = case_when(
+              term == "(Intercept)" ~ "beta_0",
+              term == "mod_lectura_critica_punt" ~ "beta_1",
+              TRUE ~ term
+            )
+          )
+      }
+    )
+  ) |>
+  unnest(
+    col = lm
+  ) |>
+  pivot_wider(
+    names_from = term,
+    values_from = estimate
+  )
+
+saber_pro_genericas_faedis_2021_2024_lm_coefs |>
+  gt() |>
+  cols_label(
+    estu_prgm_academico = "Programa académico",
+    beta_0 = md("$\\beta_0$"),
+    beta_1 = md("$\\beta_1$")
+  ) |>
+  fmt_number(
+    columns = where(fn = is.numeric),
+    decimals = 2
+  ) |>
+  cols_align(
+    align = "center",
+    columns = where(fn = is.numeric)
+  ) |>
+  cols_width(
+    estu_prgm_academico ~ px(200),
+    beta_0 ~ px(50),
+    beta_1 ~ px(50)
+  ) |>
+  tab_options(
+    table.width = pct(90)
+  )
+```
+
+### Escalas
+
+En el gráfico generado por el @lst-facet-wrap se pueden modificar diferentes etiquetas en el para incluir información de contexto de tal manera que sea más comprensible utilizando la función `labs()`, como se señala a continuación:
+
+```{r}
+#| lst-label: lst-labs-facet-wrap
+#| lst-cap: Uso de la función `labs()` para agregar y modificar etiquetas en un gráfico
+#| message: false
+#| fig-height: 6
+saber_pro_genericas_faedis_2021_2024 |>
+  ggplot(
+    aes(
+      x = mod_lectura_critica_punt,
+      y = mod_razona_cuantitat_punt
+    )
+  ) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  facet_wrap(
+    facets = vars(estu_prgm_academico),
+    labeller = label_wrap_gen(width = 18)
+  ) +
+  labs(
+    x = "Puntaje módulo lectura crítica (rango [0,300])",
+    y = "Puntaje módulo razonamiento cuantitativo (rango [0,300])",
+    title = "Asociación puntaje módulos por programa en FAEDIS",
+    subtitle = "Periodo: 2021 - 2024",
+    caption = "Fuente: Data Icfes"
+  )
+```
+
+De esa manera con el código señalado en el @lst-labs-facet-wrap, es posible recrear finalmente la @fig-1-chap-9 para ilustrar la asociación de las variables `mod_lectura_critica_punt` y `mod_razona_cuantitat_punt` correspondientes a los módulos de lectura crítica y razonamiento cuantitativo para cada uno de los programas académicos.
 
 ## Gráfico de líneas
 
@@ -237,7 +388,7 @@ saber_pro_genericas_faedis_2021_2024_programas |>
 
 ### Datos, mapeo y capas
 
-Para generar la @fig-1-chap-9 es necesario en primera instancia cargar los paquetes que se requieran utilizar y posteriormente importar los datos para explorarlos en R como se señala a continuación, teniendo en cuenta lo indicado en la @nte-1-chap-9:
+Para generar la @fig-2-chap-9 es necesario en primera instancia cargar los paquetes que se requieran utilizar y posteriormente importar los datos para explorarlos en R como se señala a continuación, teniendo en cuenta lo indicado en la @nte-1-chap-9:
 
 ```{r}
 #| eval: false
