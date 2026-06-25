@@ -1,6 +1,6 @@
 # Primeros pasos con R
 
-El objetivo de esta parte, es presentar los conceptos básicos para el análisis de datos en R a través de los siguiente 4 capítulos:
+El objetivo de esta parte, es presentar los conceptos básicos para el análisis de datos en R a través de los siguientes 4 capítulos:
 
 - @sec-welcome-to-r: introduce las herramientas fundamentales para el análisis de datos, definiendo la naturaleza de R y el rol de componentes adicionales tales como Positron, Posit Workbench y Quarto.
 
