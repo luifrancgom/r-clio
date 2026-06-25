@@ -1,4 +1,4 @@
-# GeoPackage (GPKG) {#sec-gpkg}
+# GeoPackage (`.gpkg`) {#sec-gpkg}
 
 Este capítulo se basa en ... donde tiene como propósito ... 
 
