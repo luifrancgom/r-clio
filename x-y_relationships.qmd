@@ -1,4 +1,4 @@
-# Relaciones x-y
+# Relaciones x-y {#sec-x-y-relationships}
 
 ```{r}
 #| echo: false
@@ -14,7 +14,7 @@ library(tidymodels)
 library(gt)
 ```
 
-Este capítulo se basa en [@wickham_ggplot2_2016] y [@wilke_fundamentals_2019] así como en la documentación oficial de [`ggplot2`](https://ggplot2.tidyverse.org/articles/ggplot2.html) donde tiene como propósito utilizar el modelo mental de la gramática de gráficos en capas para visualizar asociaciones entre variables y la evolución de una variable contínua a lo largo del tiempo utilizando el paquete `ggplot2` e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).
+Este capítulo se basa en [@wickham_ggplot2_2016] y [@wilke_fundamentals_2019] así como en la documentación oficial de [`ggplot2`](https://ggplot2.tidyverse.org/articles/ggplot2.html) donde tiene como propósito utilizar el modelo mental de la gramática de gráficos en capas para visualizar asociaciones entre variables numéricas y la evolución de una variable contínua a lo largo del tiempo utilizando el paquete `ggplot2` e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).
 
 Exploraremos los siguientes aspectos:
 
@@ -48,13 +48,13 @@ saber_pro_genericas_faedis_2021_2024 <- read_rds(
   file = "data/2021-2024_saber-pro-genericas_faedis.rds"
 )
 
-saber_pro_genericas_faedis_2021_2024 |>
-  ggplot(
-    aes(
-      x = mod_lectura_critica_punt,
-      y = mod_razona_cuantitat_punt
-    )
-  ) +
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024,
+  mapping = aes(
+    x = mod_lectura_critica_punt,
+    y = mod_razona_cuantitat_punt
+  )
+) +
   geom_point() +
   geom_smooth(method = "lm") +
   facet_wrap(
@@ -90,13 +90,13 @@ Una vez se carguen los paquetes que se utilizarán y se importen los datos, se p
 ```{r}
 #| lst-label: lst-geom-point
 #| lst-cap: Gráfico de puntos
-saber_pro_genericas_faedis_2021_2024 |>
-  ggplot(
-    aes(
-      x = mod_lectura_critica_punt,
-      y = mod_razona_cuantitat_punt
-    )
-  ) +
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024,
+  mapping = aes(
+    x = mod_lectura_critica_punt,
+    y = mod_razona_cuantitat_punt
+  )
+) +
   geom_point()
 ```
 
@@ -105,13 +105,13 @@ En un gráfico de puntos es posible superponer una recta para identificar una te
 ```{r}
 #| lst-label: lst-geom-smooth
 #| lst-cap: Gráfico de puntos superponiendo una recta mediante el uso de la geometría `geom_smooth()` y el método `lm`
-saber_pro_genericas_faedis_2021_2024 |>
-  ggplot(
-    aes(
-      x = mod_lectura_critica_punt,
-      y = mod_razona_cuantitat_punt
-    )
-  ) +
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024,
+  mapping = aes(
+    x = mod_lectura_critica_punt,
+    y = mod_razona_cuantitat_punt
+  )
+) +
   geom_point() +
   geom_smooth(method = "lm")
 ```
@@ -131,10 +131,12 @@ $${#eq-estimated-model}
 Donde en la @eq-estimated-model $\hat{\beta}_0$ corresponde al corte estimado con el eje asociado a la coordenada `y` y $\hat{\beta}_1$ se refiere a la pendiente de la línea estimada. En este caso particular, `y` corresponde a la variable `mod_razona_cuantitat_punt` y `x` corresponde a la variable `mod_lectura_critica_punt`. 
 
 :::: {#nte-1-chap-9 .callout-note}
-En el libro no abarcaremos con detalle el tema de regresión lineal y modelos lineales. Sin embargo, para el lector interesado en el tema, una introducción amigable y clara se puede consultar en la lista de reproducción [Linear Regression and Linear Models](https://youtube.com/playlist?list=PLblh5JKOoLUIzaEkCLIUxQFjPIlapw8nU&si=42dIKCT3xe3HmlpB) del canal [StatQuest with Josh Starmer](https://www.youtube.com/@statquest).   
+En el libro no abarcaremos con detalle el tema de regresión lineal y modelos lineales. Sin embargo, para el lector interesado en el tema, una introducción amigable y clara se puede consultar en la lista de reproducción [Linear Regression and Linear Models](https://youtube.com/playlist?list=PLblh5JKOoLUIzaEkCLIUxQFjPIlapw8nU&si=42dIKCT3xe3HmlpB) del canal [StatQuest with Josh Starmer](https://www.youtube.com/@statquest).
+
+Por otro lado, aquel lector con conocimientos previos de estadística y probabilidad a nivel de pregrado, que tengan interés en profundizar de manera más detallada en los modelos lineales utilizando R, pueden consultar [@faraway_linear_2025]. Sin embargo, esta lectura no es un requisito para comprender los temas abordados en el @sec-x-y-relationships.  
 ::::
 
-El paquete `ggplot2` no almacena o guarda los parámetros estimados del modelo. En ese sentido, `geom_smooth(method = "lm")` calcula la recta internamente solo de forma temporal para poder dibujarla. Si deseas conocer los parámetros puedes utilizar para esta caso el siguiente código:
+El paquete `ggplot2` no almacena o guarda los parámetros estimados del modelo. En ese sentido, `geom_smooth(method = "lm")` calcula la recta internamente solo de forma temporal para poder dibujarla. Si deseas conocer la estimación de los parámetros puedes utilizar para esta caso el siguiente código:
 
 ```{r}
 #| lst-label: lst-lm
@@ -202,13 +204,13 @@ En el gráfico generado por el @lst-geom-smooth la asociación entre los resulta
 #| lst-cap: Uso de la función `facet_wrap()` junto con el parámetro `facets` y la función `vars()` como argumento para visualizar diferentes subconjuntos de datos
 #| message: false
 #| fig-height: 5.5
-saber_pro_genericas_faedis_2021_2024 |>
-  ggplot(
-    aes(
-      x = mod_lectura_critica_punt,
-      y = mod_razona_cuantitat_punt
-    )
-  ) +
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024,
+  mapping = aes(
+    x = mod_lectura_critica_punt,
+    y = mod_razona_cuantitat_punt
+  )
+) +
   geom_point() +
   geom_smooth(method = "lm") +
   facet_wrap(
@@ -317,13 +319,13 @@ En el gráfico generado por el @lst-facet-wrap se pueden modificar diferentes et
 #| lst-cap: Uso de la función `labs()` para agregar y modificar etiquetas en un gráfico
 #| message: false
 #| fig-height: 6
-saber_pro_genericas_faedis_2021_2024 |>
-  ggplot(
-    aes(
-      x = mod_lectura_critica_punt,
-      y = mod_razona_cuantitat_punt
-    )
-  ) +
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024,
+  mapping = aes(
+    x = mod_lectura_critica_punt,
+    y = mod_razona_cuantitat_punt
+  )
+) +
   geom_point() +
   geom_smooth(method = "lm") +
   facet_wrap(
@@ -354,15 +356,18 @@ saber_pro_genericas_faedis_2021_2024_programas <- read_rds(
   file = "data/2021-2024_saber-pro-genericas_faedis_programas.rds"
 )
 
-saber_pro_genericas_faedis_2021_2024_programas |>
-  ggplot(
-    aes(x = ano, y = punt_global)
-  ) +
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024_programas,
+  mapping = aes(
+    x = ano,
+    y = punt_global
+  )
+) +
   geom_line(
-    aes(
+    mapping = aes(
       group = estu_prgm_academico,
       color = fct_reorder(
-        .f = estu_prgm_academico,
+        estu_prgm_academico,
         .x = punt_global,
         .fun = last
       )
@@ -396,7 +401,236 @@ Para generar la @fig-2-chap-9 es necesario en primera instancia cargar los paque
 library(tidyverse)
 
 # Importar datos ----
-saber_pro_genericas_faedis_2021_2024 <- read_rds(
+saber_pro_genericas_faedis_2021_2024_programas <- read_rds(
   file = "data/2021-2024_saber-pro-genericas_faedis_programas.rds"
 )
 ```
+
+Una vez importes el conjunto de datos, podrás darle un “vistazo” utilizando la functión `glimpse()` (ver Listado 4.5) para identificar el número y los tipos de variables que lo componen, así como la cantidad de observaciones disponibles.
+
+```{r}
+# Inspeccionar datos ----
+glimpse(saber_pro_genericas_faedis_2021_2024_programas)
+```
+
+### Descripción de variables
+
+Esta base de datos es construida a partir de `saber_pro_genericas_faedis_2021_2024` donde aprenderás acerca de como construirla en el @sec-tow-table-verbs utilizando verbos de 2 tablas con el paquete `dplyr` perteneciente al `tidyverse`. A continuación, se describen cada una de las variables en `saber_pro_genericas_faedis_2021_2024_programas`:
+
+1. **ano**: año correspondiente a los resultados del examen Saber Pro
+2. **estu_snies_prgmacademico**: código SNIES del programa académico relacionado con los resultados del examen Saber Pro 
+3. **estu_prgm_academico**: nombre del programa académico relacionado con los resultados del examen Saber Pro
+4. **mod_competen_ciudada_punt**: puntaje promedio redondeado al entero más próximo del módulo de competencias ciudadanas obtenido por los estudiantes del programa académico (el rango posible es $[0, 300]$)
+5. **mod_comuni_escrita_punt**: puntaje promedio redondeado al entero más próximo del módulo de comunicación escrita obtenido por los estudiantes del programa académico (el rango posible es $[0, 300]$)
+6. **mod_ingles_punt**: puntaje promedio redondeado al entero más próximo del módulo de inglés obtenido por los entudiantes del programa académico (el rango posible es $[0, 300]$)
+7. **mod_lectura_critica_punt**: puntaje promedio redondeado al entero más próximo del módulo de lectura crítica obtenido por los estudiantes del programa académico (el rango posible es $[0, 300]$)
+8. **mod_razona_cuantitat_punt**: puntaje promedio redondeado al entero más próximo del módulo de razonamiento cuantitativo obtenido por los estudiantes del programa académico (el rango posible es $[0, 300]$)
+9. **punt_global**: puntaje total promedio redondeado al entero más próximo obtenido por los entudiantes del programa académico en el grupo de competencias genéricas (este grupo comprenden los módulos de competencias ciudadanas, comunicación escrita, inglés, lectura crítica y razonamiento cuantitativo)
+
+### Mapeo y capas
+
+Para ilustrar el comportamiento del puntaje global promedio obtenido por cada uno de los programas académicos a través de las variables `ano` y `punt_global` mediante un gráfico de líneas es posible utilizar la función `geom_line()`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-geom-line
+#| lst-cap: Uso de la función `geom_line()` para generar un gráfico de líneas
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024_programas,
+  mapping = aes(
+    x = ano,
+    y = punt_global
+  )
+) +
+  geom_line()
+```
+
+En el gráfico generado por el @lst-geom-line la función `geom_line()` conecta los puntos siguiendo el orden del eje asociado con la coordenada `x`. Debido a que se tienen diferentes programas académicos para cada año respecto al puntaje global, el gráfico generado no es claro debido a que conecta los puntos para cada año sin agrupar por cada programa académico. Para corregir este aspecto es posible utilizar el atributo estético `group` como parámetro y el argumento `estu_prgm_academico` dentro de la función `aes()` en conjunto con la función `geom_line()`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-geom-line
+#| lst-cap: Uso del atríbuto estético `group` dentro de la función `aes()` en conjunto con la función `geom_line()` para generar un gráfico de líneas por cada categoría dentro de un grupo
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024_programas,
+  mapping = aes(
+    x = ano,
+    y = punt_global
+  )
+) +
+  geom_line(
+    aes(group = estu_prgm_academico)
+  )
+```
+
+Aunque en el gráfico generado por el @lst-geom-line se agrupa el comportamiento de la variable `punt_global` a lo largo del tiempo no es claro a que programa académico corresponde cada línea. En la @sec-layers-scales corregiremos este aspecto utilizando el atributo estético `color` dentro de `aes()` en conjunto con la function `geom_line()`. 
+
+### Capas y escalas {#sec-layers-scales}
+
+Para asociar cada línea con un programa académico es posible utilizar el atributo estético `color` con parámetro y la variable `estu_prgm_academico` como argumento dentro de la función `aes()` es conjunto con la función `geom_line()`. Al aplicar este aspecto `ggplot2` genera una leyenda que permite identificar el programa académico que se asocia con cada línea. Debido a que también necesitamos también controlar la longitud de las etiquetas asociados con el nombre de cada programa académico es necesario utilizar la función `label_wrap_gen()` como argumento junto con el parámetro `labels` dentro de la función `scale_color_discrete()` teniendo en cuenta que queremos modificar la escala asociada con el atributo estético `color` y `estu_prgm_academico` es una variable discreta, tal como se señala a continuación:   
+
+```{r}
+#| lst-label: lst-color-labels-geom-line
+#| lst-cap: Uso del atributo estético `color` dentro de la función `aes()` en conjunto con la función `geom_line()` y modificación de las etiquetas dentro de una leyenda asociadas con este atributo estético
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024_programas,
+  mapping = aes(
+    x = ano,
+    y = punt_global
+  )
+) +
+  geom_line(
+    mapping = aes(
+      group = estu_prgm_academico,
+      color = estu_prgm_academico
+    )
+  ) +
+  scale_color_discrete(
+    labels = label_wrap_gen(width = 18)
+  )
+```
+
+En el gráfico generado por el @lst-color-labels-geom-line podemos agregar una capa adicional utilizando la geometría `geom_point()` para indicar de manera más clara las coordenadas de cada dato, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-geom-point-geom-line
+#| lst-cap: Uso de la función `geom_point()` para resaltar las coordenadas de cada dato dentro de un gráfico de líneas
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024_programas,
+  mapping = aes(
+    x = ano,
+    y = punt_global
+  )
+) +
+  geom_line(
+    mapping = aes(
+      group = estu_prgm_academico,
+      color = estu_prgm_academico
+    )
+  ) +
+  geom_point() +
+  scale_color_discrete(
+    labels = label_wrap_gen(width = 18)
+  )
+```
+
+En el código del @lst-geom-point-geom-line existe un aspecto que no se ha señalado de manera explícita con el objetivo de mantener de la forma más simple posible la explicación acerca del funcionamiento de la gramática de gráficos en capas implementada en `ggplot2`. Los parámetros `data` y `mapping` a través de la función `aes()` respecto a los atributos estéticos así como sus respectivos argumentos que se definen en la función `ggplot()` son heredados por parte de las geometrías que se definan posteriormente a través de las funciones de la forma `geom_*()`. En ese sentido, en el @lst-geom-point-geom-line los datos asociados con el parámetro `data` son utilizados tanto por la función `geom_line()` como por la función `geom_point()`. De la misma forma ocurre con los atributos estéticos `x` y `y` definidos dentro de la función `aes()` donde la función `geom_line()` los utiliza para generar el trazo de las líneas y la función `geom_line()` para definir las coordenadas de los puntos que se generan en el gráfico.
+
+Por otro lado, aquellos parámetros con sus respectivos argumentos que son definidos en las geometrías a través de las funciones de la forma `geom_*()` solo se utilizan por parte de la geometría donde se definan y no son heredados en otras geometrías que se hayan definido anterior o posteriormente. Por ejemplo, en el gráfico generado por el @lst-geom-point-geom-line el color de los puntos asociados con la función `geom_line()` adquieren por defecto el color `"black"` pero ese mismo comportamiento no se mantiene para las líneas generadas por la función `geom_line()` debido a que el atributo estético `color` dentro de la función `aes()` tiene asociado la variable `estu_prgm_academico`.  
+
+::: {#imp-1-chap-9 .callout-important}
+Los parámetros `data` y `mapping` a través de la función `aes()` respecto a los atributos estéticos así como sus respectivos argumentos que se definen en la función `ggplot()` son heredados por parte de las geometrías que se definan posteriormente a través de las funciones de la forma `geom_*()`.
+
+Sin embargo los parámetros que se definan dentro de una geometría particular a través de una función de la forma `geom_*()` no son heredados por otras geometrías que se definan anterior o posteriormente a través de otras funciones de la forma `geom_*()`.
+
+En ese sentido, `ggplot2` aplica un principio que se conoce en el desarrollo de software como [**D**on't **R**epeat **Y**ourself (DRY)](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) de tal manera que no sea necesario repetir en cada geometría parámetros o argumentos que se busquen definir de manera global para que sean utilizados en todas las geometrías. Sin embargo, mantiene un nivel de flexibilidad apropiado donde permite que se definan parámetros con sus respectivos argumentos para que sean utilizados dentro de una geometría en particular.
+:::
+
+### Escalas y tema
+
+En el gráfico generado por el @lst-geom-point-geom-line se pueden modificar diferentes etiquetas en el para incluir información de contexto de tal manera que sea más comprensible utilizando la función `labs()`, como se señala a continuación:
+
+```{r}
+#| lst-label: lst-labs-geom-line
+#| lst-cap: Uso de la función `labs()` para agregar y modificar etiquetas en un gráfico
+#| message: false
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024_programas,
+  mapping = aes(x = ano, y = punt_global)
+) +
+  geom_line(
+    mapping = aes(
+      group = estu_prgm_academico,
+      color = estu_prgm_academico
+    )
+  ) +
+  geom_point() +
+  scale_color_discrete(
+    labels = label_wrap_gen(width = 18)
+  ) +
+  labs(
+    x = "Año",
+    y = "Promedio puntaje global (rango [0,300])",
+    color = NULL,
+    title = "Promedio puntaje global por programa en FAEDIS",
+    subtitle = "Periodo: 2021 - 2024",
+    caption = "Fuente: Data Icfes"
+  )
+```
+
+En el gráfico generado por el @lst-labs-geom-line aunque los colores de las líneas se encuentran asociadas con un programa académico y ésta asociación se señala en una leyenda es posible mejorar la presentación del gráfico. Los nombres de los programas dentro de la leyenda se encuentran ordenados en orden alfabético. Una forma de generar un ordenamiento para que exista una asociación más clara con las etiquetas de la leyenda es utilizar el último valor del año del que se tiene información. 
+
+Al igual que en el @lst-fct-reorder es posible utilizar la función `fct_reorder()` pero en este caso afectando el atributo estético `color` en `geom_line()` con la función `last`, que proviene del paquete `dplyr` incluído en el `tidyverse`, donde permite identificar el último valor, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-fct-reorder-geom-line
+#| lst-cap: Ordenamiento de etiquetas dentro de una leyenda asociado al atributo estético `color` utilizando la function `fct_reorder()`
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024_programas,
+  mapping = aes(x = ano, y = punt_global)
+) +
+  geom_line(
+    mapping = aes(
+      group = estu_prgm_academico,
+      color = fct_reorder(
+        estu_prgm_academico,
+        .x = punt_global,
+        .fun = last
+      )
+    )
+  ) +
+  geom_point() +
+  scale_color_discrete(
+    labels = label_wrap_gen(width = 18)
+  ) +
+  labs(
+    x = "Año",
+    y = "Promedio puntaje global (rango [0,300])",
+    color = NULL,
+    title = "Promedio puntaje global por programa en FAEDIS",
+    subtitle = "Periodo: 2021 - 2024",
+    caption = "Fuente: Data Icfes"
+  )
+```
+
+En el gráfico generado por el @lst-fct-reorder-geom-line las etiquetas en la leyenda correspondientes a los programas académicos ya no se encuentran ordenadas alfabéticamente sino por el último valor de la variable `punt_global` en relación al año más reciente del que se tiene información. Sin embargo, en este caso el ordenamiento generado en la leyenda se aplica en forma descendente pero en el gráfico la variable `punt_global` se ordena de manera natural en forma ascendente.
+
+Para mejorar este aspecto así como extender el ancho del gráfico, es posible utilizar tanto la función `theme()` con el parámetro `legend.position` y el argumento `"bottom"` así como el parámtero `guide` y la función `guide_legend()` como argumento dentro de `scale_color_discrete()` para modificar la leyenda del gráfico, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-guide-legend-theme-geom-line
+#| lst-cap: Uso de las funciones `guide_legend()` y `theme()` para modificar la leyenda dentro de un gráfico
+#| fig-height: 5.5
+ggplot(
+  data = saber_pro_genericas_faedis_2021_2024_programas,
+  mapping = aes(x = ano, y = punt_global)
+) +
+  geom_line(
+    aes(
+      group = estu_prgm_academico,
+      color = fct_reorder(
+        estu_prgm_academico,
+        .x = punt_global,
+        .fun = last
+      )
+    )
+  ) +
+  geom_point() +
+  scale_color_discrete(
+    labels = label_wrap_gen(width = 18),
+    guide = guide_legend(nrow = 3, reverse = TRUE)
+  ) +
+  labs(
+    x = "Año",
+    y = "Promedio puntaje global (rango [0,300])",
+    color = NULL,
+    title = "Promedio puntaje global por programa en FAEDIS",
+    subtitle = "Periodo: 2021 - 2024",
+    caption = "Fuente: Data Icfes"
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+En el gráfico generado por el código del @lst-guide-legend-theme-geom-line se utiliza nuevamente la función `theme()` para modificar la posición de la leyenda donde este aspecto no es nuevo debido a que se introdujo en la @sec-theme y en la @sec-geom-bar-theme. En el caso de la función `guide_legend()` el parámetro `nrow` permite definir el número de filas que se utiliza para ordenar en forma de grilla las categorías de la leyenda donde se utiliza como argumento el valor de `3` teniendo en cuenta la longitud de los nombres de los programas académicos. Por otro lado, el parámetro `reverse` junto con el argumento `TRUE` permite reversar el ordenamiento que por defecto se aplica a las etiquetas dentro de la leyenda de tal manera que los nombres de los programas académicos esten ordenamos de arriba hacia abajo y de izquierda a derecha con respecto al ordenamiento ascendente de la variable `punt_global` respecto al último año que se tiene información dentro del gráfico.
+
+De esa manera con el código señalado en el @lst-guide-legend-theme-geom-line, es posible recrear finalmente la @fig-2-chap-9 para ilustrar el comportamiento del puntaje global promedio por programa académico a lo largo del tiempo.

@@ -1,3 +1,15 @@
 # Visualización de datos
 
-Pendiente
+El objetivo de esta parte, es presentar el modelo mental de **la gramática de gráficos en capas** (**layered grammar of graphics**, [@wickham_layered_2010]) para visualizar datos en R utilizando el paquete `ggplot2` a través de los siguientes 4 capítulos:
+
+- @sec-amounts: introduce la forma de visualizar variables numéricas para un conjunto de categorías a través del uso de un gráfico de barras.
+
+- @sec-distributions: introduce la forma de visualizar la distribución de una variable numérica a través del uso de un histograma.
+
+- @sec-proportions: introduce la forma de visualizar proporciones para un conjunto determinado de grupos a través del uso de un gráfico de barras apiladas y normalizadas.
+
+- @sec-x-y-relationships: introduce la forma de visualizar asociaciones entre variables numéricas y la evolución de una variable contínua a lo largo del tiempo a través del uso de un gráfico de puntos y un gráfico de líneas.
+
+Una vez se entienda el funcionamiento del paquete `ggplot2` a través del modelo mental de **la gramática de gráficos en capas**, el lector interesado en profundizar y explorar otras formas de visualizar datos puede consultar el recurso [The R Graph Gallery](https://r-graph-gallery.com/) donde contiene ejemplos acompañados de código reproducible y una explicación de como se construyen estas visualizaciones.
+
+Asimismo, quienes tengan experiencia previa en el lenguaje de programación [Python](https://www.python.org/)  podrán transferir fácilmente las habilidades de R desarrolladas en esta parte. Esto es posible gracias a que dicho lenguaje cuenta con una implementación fiel de **la gramática de gráficos en capas** mediante el paquete [`plotnine`](https://plotnine.org/).
