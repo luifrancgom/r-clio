@@ -23,7 +23,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -253,7 +273,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./geopackage_gpkg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GeoPackage (GPKG)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GeoPackage (<code>.gpkg</code>)</span></span></a>
   </div>
 </li>
       </ul>
@@ -350,9 +370,22 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Pendiente</p>
+<p>El objetivo de esta parte, es presentar el modelo mental de <strong>la gramática de gráficos en capas</strong> (<strong>layered grammar of graphics</strong>, <span class="citation" data-cites="wickham_layered_2010">(<a href="references.html#ref-wickham_layered_2010" role="doc-biblioref">Wickham, 2010</a>)</span>) para visualizar datos en R utilizando el paquete <code>ggplot2</code> a través de los siguientes 4 capítulos:</p>
+<ul>
+<li><p><a href="amounts.html" class="quarto-xref"><span>6&nbsp; Cantidades</span></a>: introduce la forma de visualizar variables numéricas para un conjunto de categorías a través del uso de un gráfico de barras.</p></li>
+<li><p><a href="distributions.html" class="quarto-xref"><span>7&nbsp; Distribuciones</span></a>: introduce la forma de visualizar la distribución de una variable numérica a través del uso de un histograma.</p></li>
+<li><p><a href="proportions.html" class="quarto-xref"><span>8&nbsp; Proporciones</span></a>: introduce la forma de visualizar proporciones para un conjunto determinado de grupos a través del uso de un gráfico de barras apiladas y normalizadas.</p></li>
+<li><p><a href="x-y_relationships.html" class="quarto-xref"><span>9&nbsp; Relaciones x-y</span></a>: introduce la forma de visualizar asociaciones entre variables numéricas y la evolución de una variable contínua a lo largo del tiempo a través del uso de un gráfico de puntos y un gráfico de líneas.</p></li>
+</ul>
+<p>Una vez se entienda el funcionamiento del paquete <code>ggplot2</code> a través del modelo mental de <strong>la gramática de gráficos en capas</strong>, el lector interesado en profundizar y explorar otras formas de visualizar datos puede consultar el recurso <a href="https://r-graph-gallery.com/">The R Graph Gallery</a> donde contiene ejemplos acompañados de código reproducible y una explicación de como se construyen estas visualizaciones.</p>
+<p>Asimismo, quienes tengan experiencia previa en el lenguaje de programación <a href="https://www.python.org/">Python</a> podrán transferir fácilmente las habilidades de R desarrolladas en esta parte. Esto es posible gracias a que dicho lenguaje cuenta con una implementación fiel de <strong>la gramática de gráficos en capas</strong> mediante el paquete <a href="https://plotnine.org/"><code>plotnine</code></a>.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-wickham_layered_2010" class="csl-entry" role="listitem">
+Wickham, H. (2010). A <span>Layered</span> <span>Grammar</span> of <span>Graphics</span>. <em>Journal of Computational and Graphical Statistics</em>, <em>19</em>(1), 3-28. <a href="https://doi.org/10.1198/jcgs.2009.07098">https://doi.org/10.1198/jcgs.2009.07098</a>
+</div>
+</div>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

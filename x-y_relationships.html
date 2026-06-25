@@ -337,7 +337,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./geopackage_gpkg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GeoPackage (GPKG)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GeoPackage (<code>.gpkg</code>)</span></span></a>
   </div>
 </li>
       </ul>
@@ -423,6 +423,10 @@ window.Quarto = {
   <li><a href="#gráfico-de-líneas" id="toc-gráfico-de-líneas" class="nav-link" data-scroll-target="#gráfico-de-líneas"><span class="header-section-number">9.2</span> Gráfico de líneas</a>
   <ul class="collapse">
   <li><a href="#datos-mapeo-y-capas-1" id="toc-datos-mapeo-y-capas-1" class="nav-link" data-scroll-target="#datos-mapeo-y-capas-1"><span class="header-section-number">9.2.1</span> Datos, mapeo y capas</a></li>
+  <li><a href="#descripción-de-variables" id="toc-descripción-de-variables" class="nav-link" data-scroll-target="#descripción-de-variables"><span class="header-section-number">9.2.2</span> Descripción de variables</a></li>
+  <li><a href="#mapeo-y-capas" id="toc-mapeo-y-capas" class="nav-link" data-scroll-target="#mapeo-y-capas"><span class="header-section-number">9.2.3</span> Mapeo y capas</a></li>
+  <li><a href="#sec-layers-scales" id="toc-sec-layers-scales" class="nav-link" data-scroll-target="#sec-layers-scales"><span class="header-section-number">9.2.4</span> Capas y escalas</a></li>
+  <li><a href="#escalas-y-tema" id="toc-escalas-y-tema" class="nav-link" data-scroll-target="#escalas-y-tema"><span class="header-section-number">9.2.5</span> Escalas y tema</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/x-y_relationships.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/x-y_relationships.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
@@ -432,7 +436,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data_visualization.html">Visualización de datos</a></li><li class="breadcrumb-item"><a href="./x-y_relationships.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Relaciones x-y</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Relaciones x-y</span></h1>
+<h1 class="title"><span id="sec-x-y-relationships" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Relaciones x-y</span></span></h1>
 </div>
 
 
@@ -449,7 +453,7 @@ window.Quarto = {
 </header>
 
 
-<p>Este capítulo se basa en <span class="citation" data-cites="wickham_ggplot2_2016">(<a href="references.html#ref-wickham_ggplot2_2016" role="doc-biblioref">Wickham, 2016</a>)</span> y <span class="citation" data-cites="wilke_fundamentals_2019">(<a href="references.html#ref-wilke_fundamentals_2019" role="doc-biblioref">Wilke, 2019</a>)</span> así como en la documentación oficial de <a href="https://ggplot2.tidyverse.org/articles/ggplot2.html"><code>ggplot2</code></a> donde tiene como propósito utilizar el modelo mental de la gramática de gráficos en capas para visualizar asociaciones entre variables y la evolución de una variable contínua a lo largo del tiempo utilizando el paquete <code>ggplot2</code> e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).</p>
+<p>Este capítulo se basa en <span class="citation" data-cites="wickham_ggplot2_2016">(<a href="references.html#ref-wickham_ggplot2_2016" role="doc-biblioref">Wickham, 2016</a>)</span> y <span class="citation" data-cites="wilke_fundamentals_2019">(<a href="references.html#ref-wilke_fundamentals_2019" role="doc-biblioref">Wilke, 2019</a>)</span> así como en la documentación oficial de <a href="https://ggplot2.tidyverse.org/articles/ggplot2.html"><code>ggplot2</code></a> donde tiene como propósito utilizar el modelo mental de la gramática de gráficos en capas para visualizar asociaciones entre variables numéricas y la evolución de una variable contínua a lo largo del tiempo utilizando el paquete <code>ggplot2</code> e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).</p>
 <p>Exploraremos los siguientes aspectos:</p>
 <ol type="1">
 <li>¿Cómo visualizar asociaciones entre pares de variables contínuas para identificar posibles patrones?</li>
@@ -521,13 +525,13 @@ Figura&nbsp;9.1: Resultado final de un gráfico de puntos aplicando facetas y ut
 Listado&nbsp;9.1: Gráfico de puntos
 </figcaption>
 <div aria-describedby="lst-geom-point-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="sc">|&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> mod_lectura_critica_punt,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> mod_razona_cuantitat_punt</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> mod_lectura_critica_punt,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> mod_razona_cuantitat_punt</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
@@ -548,13 +552,13 @@ Listado&nbsp;9.1: Gráfico de puntos
 Listado&nbsp;9.2: Gráfico de puntos superponiendo una recta mediante el uso de la geometría <code>geom_smooth()</code> y el método <code>lm</code>
 </figcaption>
 <div aria-describedby="lst-geom-smooth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> mod_lectura_critica_punt,</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> mod_razona_cuantitat_punt</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> mod_lectura_critica_punt,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> mod_razona_cuantitat_punt</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -591,9 +595,10 @@ Nota&nbsp;9.2
 </div>
 <div class="callout-body-container callout-body">
 <p>En el libro no abarcaremos con detalle el tema de regresión lineal y modelos lineales. Sin embargo, para el lector interesado en el tema, una introducción amigable y clara se puede consultar en la lista de reproducción <a href="https://youtube.com/playlist?list=PLblh5JKOoLUIzaEkCLIUxQFjPIlapw8nU&amp;si=42dIKCT3xe3HmlpB">Linear Regression and Linear Models</a> del canal <a href="https://www.youtube.com/@statquest">StatQuest with Josh Starmer</a>.</p>
+<p>Por otro lado, aquel lector con conocimientos previos de estadística y probabilidad a nivel de pregrado, que tengan interés en profundizar de manera más detallada en los modelos lineales utilizando R, pueden consultar <span class="citation" data-cites="faraway_linear_2025">(<a href="references.html#ref-faraway_linear_2025" role="doc-biblioref">Faraway, 2025</a>)</span>. Sin embargo, esta lectura no es un requisito para comprender los temas abordados en el <a href="#sec-x-y-relationships" class="quarto-xref"><span>Capítulo 9</span></a>.</p>
 </div>
 </div>
-<p>El paquete <code>ggplot2</code> no almacena o guarda los parámetros estimados del modelo. En ese sentido, <code>geom_smooth(method = "lm")</code> calcula la recta internamente solo de forma temporal para poder dibujarla. Si deseas conocer los parámetros puedes utilizar para esta caso el siguiente código:</p>
+<p>El paquete <code>ggplot2</code> no almacena o guarda los parámetros estimados del modelo. En ese sentido, <code>geom_smooth(method = "lm")</code> calcula la recta internamente solo de forma temporal para poder dibujarla. Si deseas conocer la estimación de los parámetros puedes utilizar para esta caso el siguiente código:</p>
 <div class="cell">
 <div id="lst-lm" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
@@ -1104,13 +1109,13 @@ Tabla&nbsp;9.1: Parámetros estimados utilizando la función <code>lm()</code> e
 Listado&nbsp;9.4: Uso de la función <code>facet_wrap()</code> junto con el parámetro <code>facets</code> y la función <code>vars()</code> como argumento para visualizar diferentes subconjuntos de datos
 </figcaption>
 <div aria-describedby="lst-facet-wrap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="sc">|&gt;</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> mod_lectura_critica_punt,</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> mod_razona_cuantitat_punt</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> mod_lectura_critica_punt,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> mod_razona_cuantitat_punt</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(</span>
@@ -1651,13 +1656,13 @@ Tabla&nbsp;9.2: Parámetros estimados utilizando la función <code>lm()</code> e
 Listado&nbsp;9.5: Uso de la función <code>labs()</code> para agregar y modificar etiquetas en un gráfico
 </figcaption>
 <div aria-describedby="lst-labs-facet-wrap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="sc">|&gt;</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> mod_lectura_critica_punt,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> mod_razona_cuantitat_punt</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> mod_lectura_critica_punt,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> mod_razona_cuantitat_punt</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(</span>
@@ -1710,13 +1715,342 @@ Figura&nbsp;9.2: Resultado final de un gráfico de líneas utilizando <code>ggpl
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar datos ----</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024_programas <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(</span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"data/2021-2024_saber-pro-genericas_faedis_programas.rds"</span></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p>Una vez importes el conjunto de datos, podrás darle un “vistazo” utilizando la functión <code>glimpse()</code> (ver Listado 4.5) para identificar el número y los tipos de variables que lo componen, así como la cantidad de observaciones disponibles.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspeccionar datos ----</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(saber_pro_genericas_faedis_2021_2024_programas)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 26
+Columns: 9
+$ ano                       &lt;int&gt; 2021, 2021, 2021, 2021, …
+$ estu_snies_prgmacademico  &lt;int&gt; 6527, 10963, 11004, 1142…
+$ estu_prgm_academico       &lt;chr&gt; "ADMINISTRACION DE EMPRE…
+$ mod_competen_ciudada_punt &lt;dbl&gt; 142, 158, 144, 155, 159,…
+$ mod_comuni_escrita_punt   &lt;dbl&gt; 147, 149, 120, 145, 146,…
+$ mod_ingles_punt           &lt;dbl&gt; 157, 151, 155, 150, 170,…
+$ mod_lectura_critica_punt  &lt;dbl&gt; 142, 157, 141, 147, 150,…
+$ mod_razona_cuantitat_punt &lt;dbl&gt; 145, 138, 154, 149, 161,…
+$ punt_global               &lt;dbl&gt; 147, 151, 143, 149, 157,…</code></pre>
+</div>
+</div>
+</section>
+<section id="descripción-de-variables" class="level3" data-number="9.2.2">
+<h3 data-number="9.2.2" class="anchored" data-anchor-id="descripción-de-variables"><span class="header-section-number">9.2.2</span> Descripción de variables</h3>
+<p>Esta base de datos es construida a partir de <code>saber_pro_genericas_faedis_2021_2024</code> donde aprenderás acerca de como construirla en el <a href="two_table_verbs.html" class="quarto-xref"><span>Capítulo 11</span></a> utilizando verbos de 2 tablas con el paquete <code>dplyr</code> perteneciente al <code>tidyverse</code>. A continuación, se describen cada una de las variables en <code>saber_pro_genericas_faedis_2021_2024_programas</code>:</p>
+<ol type="1">
+<li><strong>ano</strong>: año correspondiente a los resultados del examen Saber Pro</li>
+<li><strong>estu_snies_prgmacademico</strong>: código SNIES del programa académico relacionado con los resultados del examen Saber Pro</li>
+<li><strong>estu_prgm_academico</strong>: nombre del programa académico relacionado con los resultados del examen Saber Pro</li>
+<li><strong>mod_competen_ciudada_punt</strong>: puntaje promedio redondeado al entero más próximo del módulo de competencias ciudadanas obtenido por los estudiantes del programa académico (el rango posible es <span class="math inline">\([0, 300]\)</span>)</li>
+<li><strong>mod_comuni_escrita_punt</strong>: puntaje promedio redondeado al entero más próximo del módulo de comunicación escrita obtenido por los estudiantes del programa académico (el rango posible es <span class="math inline">\([0, 300]\)</span>)</li>
+<li><strong>mod_ingles_punt</strong>: puntaje promedio redondeado al entero más próximo del módulo de inglés obtenido por los entudiantes del programa académico (el rango posible es <span class="math inline">\([0, 300]\)</span>)</li>
+<li><strong>mod_lectura_critica_punt</strong>: puntaje promedio redondeado al entero más próximo del módulo de lectura crítica obtenido por los estudiantes del programa académico (el rango posible es <span class="math inline">\([0, 300]\)</span>)</li>
+<li><strong>mod_razona_cuantitat_punt</strong>: puntaje promedio redondeado al entero más próximo del módulo de razonamiento cuantitativo obtenido por los estudiantes del programa académico (el rango posible es <span class="math inline">\([0, 300]\)</span>)</li>
+<li><strong>punt_global</strong>: puntaje total promedio redondeado al entero más próximo obtenido por los entudiantes del programa académico en el grupo de competencias genéricas (este grupo comprenden los módulos de competencias ciudadanas, comunicación escrita, inglés, lectura crítica y razonamiento cuantitativo)</li>
+</ol>
+</section>
+<section id="mapeo-y-capas" class="level3" data-number="9.2.3">
+<h3 data-number="9.2.3" class="anchored" data-anchor-id="mapeo-y-capas"><span class="header-section-number">9.2.3</span> Mapeo y capas</h3>
+<p>Para ilustrar el comportamiento del puntaje global promedio obtenido por cada uno de los programas académicos a través de las variables <code>ano</code> y <code>punt_global</code> mediante un gráfico de líneas es posible utilizar la función <code>geom_line()</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-geom-line" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-geom-line-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;9.6: Uso de la función <code>geom_line()</code> para generar un gráfico de líneas
+</figcaption>
+<div aria-describedby="lst-geom-line-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024_programas,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> ano,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> punt_global</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="x-y_relationships_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>En el gráfico generado por el <a href="#lst-geom-line" class="quarto-xref">Listado&nbsp;<span>9.7</span></a> la función <code>geom_line()</code> conecta los puntos siguiendo el orden del eje asociado con la coordenada <code>x</code>. Debido a que se tienen diferentes programas académicos para cada año respecto al puntaje global, el gráfico generado no es claro debido a que conecta los puntos para cada año sin agrupar por cada programa académico. Para corregir este aspecto es posible utilizar el atributo estético <code>group</code> como parámetro y el argumento <code>estu_prgm_academico</code> dentro de la función <code>aes()</code> en conjunto con la función <code>geom_line()</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-geom-line" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-geom-line-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;9.7: Uso del atríbuto estético <code>group</code> dentro de la función <code>aes()</code> en conjunto con la función <code>geom_line()</code> para generar un gráfico de líneas por cada categoría dentro de un grupo
+</figcaption>
+<div aria-describedby="lst-geom-line-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024_programas,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> ano,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> punt_global</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">group =</span> estu_prgm_academico)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="x-y_relationships_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Aunque en el gráfico generado por el <a href="#lst-geom-line" class="quarto-xref">Listado&nbsp;<span>9.7</span></a> se agrupa el comportamiento de la variable <code>punt_global</code> a lo largo del tiempo no es claro a que programa académico corresponde cada línea. En la <a href="#sec-layers-scales" class="quarto-xref"><span>Sección 9.2.4</span></a> corregiremos este aspecto utilizando el atributo estético <code>color</code> dentro de <code>aes()</code> en conjunto con la function <code>geom_line()</code>.</p>
+</section>
+<section id="sec-layers-scales" class="level3" data-number="9.2.4">
+<h3 data-number="9.2.4" class="anchored" data-anchor-id="sec-layers-scales"><span class="header-section-number">9.2.4</span> Capas y escalas</h3>
+<p>Para asociar cada línea con un programa académico es posible utilizar el atributo estético <code>color</code> con parámetro y la variable <code>estu_prgm_academico</code> como argumento dentro de la función <code>aes()</code> es conjunto con la función <code>geom_line()</code>. Al aplicar este aspecto <code>ggplot2</code> genera una leyenda que permite identificar el programa académico que se asocia con cada línea. Debido a que también necesitamos también controlar la longitud de las etiquetas asociados con el nombre de cada programa académico es necesario utilizar la función <code>label_wrap_gen()</code> como argumento junto con el parámetro <code>labels</code> dentro de la función <code>scale_color_discrete()</code> teniendo en cuenta que queremos modificar la escala asociada con el atributo estético <code>color</code> y <code>estu_prgm_academico</code> es una variable discreta, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-color-labels-geom-line" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-color-labels-geom-line-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;9.8: Uso del atributo estético <code>color</code> dentro de la función <code>aes()</code> en conjunto con la función <code>geom_line()</code> y modificación de las etiquetas dentro de una leyenda asociadas con este atributo estético
+</figcaption>
+<div aria-describedby="lst-color-labels-geom-line-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024_programas,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> ano,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> punt_global</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">group =</span> estu_prgm_academico,</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> estu_prgm_academico</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">label_wrap_gen</span>(<span class="at">width =</span> <span class="dv">18</span>)</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="x-y_relationships_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>En el gráfico generado por el <a href="#lst-color-labels-geom-line" class="quarto-xref">Listado&nbsp;<span>9.8</span></a> podemos agregar una capa adicional utilizando la geometría <code>geom_point()</code> para indicar de manera más clara las coordenadas de cada dato, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-geom-point-geom-line" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-geom-point-geom-line-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;9.9: Uso de la función <code>geom_point()</code> para resaltar las coordenadas de cada dato dentro de un gráfico de líneas
+</figcaption>
+<div aria-describedby="lst-geom-point-geom-line-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024_programas,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> ano,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> punt_global</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">group =</span> estu_prgm_academico,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> estu_prgm_academico</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">label_wrap_gen</span>(<span class="at">width =</span> <span class="dv">18</span>)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="x-y_relationships_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>En el código del <a href="#lst-geom-point-geom-line" class="quarto-xref">Listado&nbsp;<span>9.9</span></a> existe un aspecto que no se ha señalado de manera explícita con el objetivo de mantener de la forma más simple posible la explicación acerca del funcionamiento de la gramática de gráficos en capas implementada en <code>ggplot2</code>. Los parámetros <code>data</code> y <code>mapping</code> a través de la función <code>aes()</code> respecto a los atributos estéticos así como sus respectivos argumentos que se definen en la función <code>ggplot()</code> son heredados por parte de las geometrías que se definan posteriormente a través de las funciones de la forma <code>geom_*()</code>. En ese sentido, en el <a href="#lst-geom-point-geom-line" class="quarto-xref">Listado&nbsp;<span>9.9</span></a> los datos asociados con el parámetro <code>data</code> son utilizados tanto por la función <code>geom_line()</code> como por la función <code>geom_point()</code>. De la misma forma ocurre con los atributos estéticos <code>x</code> y <code>y</code> definidos dentro de la función <code>aes()</code> donde la función <code>geom_line()</code> los utiliza para generar el trazo de las líneas y la función <code>geom_line()</code> para definir las coordenadas de los puntos que se generan en el gráfico.</p>
+<p>Por otro lado, aquellos parámetros con sus respectivos argumentos que son definidos en las geometrías a través de las funciones de la forma <code>geom_*()</code> solo se utilizan por parte de la geometría donde se definan y no son heredados en otras geometrías que se hayan definido anterior o posteriormente. Por ejemplo, en el gráfico generado por el <a href="#lst-geom-point-geom-line" class="quarto-xref">Listado&nbsp;<span>9.9</span></a> el color de los puntos asociados con la función <code>geom_line()</code> adquieren por defecto el color <code>"black"</code> pero ese mismo comportamiento no se mantiene para las líneas generadas por la función <code>geom_line()</code> debido a que el atributo estético <code>color</code> dentro de la función <code>aes()</code> tiene asociado la variable <code>estu_prgm_academico</code>.</p>
+<div id="imp-1-chap-9" class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante&nbsp;9.1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Los parámetros <code>data</code> y <code>mapping</code> a través de la función <code>aes()</code> respecto a los atributos estéticos así como sus respectivos argumentos que se definen en la función <code>ggplot()</code> son heredados por parte de las geometrías que se definan posteriormente a través de las funciones de la forma <code>geom_*()</code>.</p>
+<p>Sin embargo los parámetros que se definan dentro de una geometría particular a través de una función de la forma <code>geom_*()</code> no son heredados por otras geometrías que se definan anterior o posteriormente a través de otras funciones de la forma <code>geom_*()</code>.</p>
+<p>En ese sentido, <code>ggplot2</code> aplica un principio que se conoce en el desarrollo de software como <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself"><strong>D</strong>on’t <strong>R</strong>epeat <strong>Y</strong>ourself (DRY)</a> de tal manera que no sea necesario repetir en cada geometría parámetros o argumentos que se busquen definir de manera global para que sean utilizados en todas las geometrías. Sin embargo, mantiene un nivel de flexibilidad apropiado donde permite que se definan parámetros con sus respectivos argumentos para que sean utilizados dentro de una geometría en particular.</p>
+</div>
+</div>
+</section>
+<section id="escalas-y-tema" class="level3" data-number="9.2.5">
+<h3 data-number="9.2.5" class="anchored" data-anchor-id="escalas-y-tema"><span class="header-section-number">9.2.5</span> Escalas y tema</h3>
+<p>En el gráfico generado por el <a href="#lst-geom-point-geom-line" class="quarto-xref">Listado&nbsp;<span>9.9</span></a> se pueden modificar diferentes etiquetas en el para incluir información de contexto de tal manera que sea más comprensible utilizando la función <code>labs()</code>, como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-labs-geom-line" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-labs-geom-line-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;9.10: Uso de la función <code>labs()</code> para agregar y modificar etiquetas en un gráfico
+</figcaption>
+<div aria-describedby="lst-labs-geom-line-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024_programas,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> ano, <span class="at">y =</span> punt_global)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">group =</span> estu_prgm_academico,</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> estu_prgm_academico</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">label_wrap_gen</span>(<span class="at">width =</span> <span class="dv">18</span>)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Año"</span>,</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Promedio puntaje global (rango [0,300])"</span>,</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="cn">NULL</span>,</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Promedio puntaje global por programa en FAEDIS"</span>,</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Periodo: 2021 - 2024"</span>,</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Fuente: Data Icfes"</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="x-y_relationships_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>En el gráfico generado por el <a href="#lst-labs-geom-line" class="quarto-xref">Listado&nbsp;<span>9.10</span></a> aunque los colores de las líneas se encuentran asociadas con un programa académico y ésta asociación se señala en una leyenda es posible mejorar la presentación del gráfico. Los nombres de los programas dentro de la leyenda se encuentran ordenados en orden alfabético. Una forma de generar un ordenamiento para que exista una asociación más clara con las etiquetas de la leyenda es utilizar el último valor del año del que se tiene información.</p>
+<p>Al igual que en el <a href="proportions.html#lst-fct-reorder" class="quarto-xref">Listado&nbsp;<span>8.3</span></a> es posible utilizar la función <code>fct_reorder()</code> pero en este caso afectando el atributo estético <code>color</code> en <code>geom_line()</code> con la función <code>last</code>, que proviene del paquete <code>dplyr</code> incluído en el <code>tidyverse</code>, donde permite identificar el último valor, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-fct-reorder-geom-line" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-fct-reorder-geom-line-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;9.11: Ordenamiento de etiquetas dentro de una leyenda asociado al atributo estético <code>color</code> utilizando la function <code>fct_reorder()</code>
+</figcaption>
+<div aria-describedby="lst-fct-reorder-geom-line-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024_programas,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> ano, <span class="at">y =</span> punt_global)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">group =</span> estu_prgm_academico,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> <span class="fu">fct_reorder</span>(</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        estu_prgm_academico,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">.x =</span> punt_global,</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">.fun =</span> last</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">label_wrap_gen</span>(<span class="at">width =</span> <span class="dv">18</span>)</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Año"</span>,</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Promedio puntaje global (rango [0,300])"</span>,</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="cn">NULL</span>,</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Promedio puntaje global por programa en FAEDIS"</span>,</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Periodo: 2021 - 2024"</span>,</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Fuente: Data Icfes"</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="x-y_relationships_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>En el gráfico generado por el <a href="#lst-fct-reorder-geom-line" class="quarto-xref">Listado&nbsp;<span>9.11</span></a> las etiquetas en la leyenda correspondientes a los programas académicos ya no se encuentran ordenadas alfabéticamente sino por el último valor de la variable <code>punt_global</code> en relación al año más reciente del que se tiene información. Sin embargo, en este caso el ordenamiento generado en la leyenda se aplica en forma descendente pero en el gráfico la variable <code>punt_global</code> se ordena de manera natural en forma ascendente.</p>
+<p>Para mejorar este aspecto así como extender el ancho del gráfico, es posible utilizar tanto la función <code>theme()</code> con el parámetro <code>legend.position</code> y el argumento <code>"bottom"</code> así como el parámtero <code>guide</code> y la función <code>guide_legend()</code> como argumento dentro de <code>scale_color_discrete()</code> para modificar la leyenda del gráfico, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-guide-legend-theme-geom-line" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-guide-legend-theme-geom-line-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;9.12: Uso de las funciones <code>guide_legend()</code> y <code>theme()</code> para modificar la leyenda dentro de un gráfico
+</figcaption>
+<div aria-describedby="lst-guide-legend-theme-geom-line-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> saber_pro_genericas_faedis_2021_2024_programas,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> ano, <span class="at">y =</span> punt_global)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">group =</span> estu_prgm_academico,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> <span class="fu">fct_reorder</span>(</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>        estu_prgm_academico,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">.x =</span> punt_global,</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">.fun =</span> last</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">label_wrap_gen</span>(<span class="at">width =</span> <span class="dv">18</span>),</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">guide =</span> <span class="fu">guide_legend</span>(<span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">reverse =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Año"</span>,</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Promedio puntaje global (rango [0,300])"</span>,</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="cn">NULL</span>,</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Promedio puntaje global por programa en FAEDIS"</span>,</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Periodo: 2021 - 2024"</span>,</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Fuente: Data Icfes"</span></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="x-y_relationships_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>En el gráfico generado por el código del <a href="#lst-guide-legend-theme-geom-line" class="quarto-xref">Listado&nbsp;<span>9.12</span></a> se utiliza nuevamente la función <code>theme()</code> para modificar la posición de la leyenda donde este aspecto no es nuevo debido a que se introdujo en la <a href="distributions.html#sec-theme" class="quarto-xref"><span>Sección 7.5</span></a> y en la <a href="proportions.html#sec-geom-bar-theme" class="quarto-xref"><span>Sección 8.3</span></a>. En el caso de la función <code>guide_legend()</code> el parámetro <code>nrow</code> permite definir el número de filas que se utiliza para ordenar en forma de grilla las categorías de la leyenda donde se utiliza como argumento el valor de <code>3</code> teniendo en cuenta la longitud de los nombres de los programas académicos. Por otro lado, el parámetro <code>reverse</code> junto con el argumento <code>TRUE</code> permite reversar el ordenamiento que por defecto se aplica a las etiquetas dentro de la leyenda de tal manera que los nombres de los programas académicos esten ordenamos de arriba hacia abajo y de izquierda a derecha con respecto al ordenamiento ascendente de la variable <code>punt_global</code> respecto al último año que se tiene información dentro del gráfico.</p>
+<p>De esa manera con el código señalado en el <a href="#lst-guide-legend-theme-geom-line" class="quarto-xref">Listado&nbsp;<span>9.12</span></a>, es posible recrear finalmente la <a href="#fig-2-chap-9" class="quarto-xref">Figura&nbsp;<span>9.2</span></a> para ilustrar el comportamiento del puntaje global promedio por programa académico a lo largo del tiempo.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-faraway_linear_2025" class="csl-entry" role="listitem">
+Faraway, J. J. (2025). <em>Linear <span>Models</span> with <span>R</span></em> (3.ª ed.). Chapman; Hall/CRC. <a href="https://doi.org/10.1201/9781003449973">https://doi.org/10.1201/9781003449973</a>
+</div>
 <div id="ref-wickham_ggplot2_2016" class="csl-entry" role="listitem">
 Wickham, H. (2016). <em>ggplot2: elegant graphics for data analysis</em> (Second edition). Springer international publishing. <a href="https://link-springer-com.ezproxy.umng.edu.co/book/10.1007/978-3-319-24277-4">https://link-springer-com.ezproxy.umng.edu.co/book/10.1007/978-3-319-24277-4</a>
 </div>

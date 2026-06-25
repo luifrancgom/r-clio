@@ -337,7 +337,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./geopackage_gpkg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GeoPackage (GPKG)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">GeoPackage (<code>.gpkg</code>)</span></span></a>
   </div>
 </li>
       </ul>
@@ -422,7 +422,7 @@ window.Quarto = {
   <li><a href="#ordenamiento-de-etiquetas" id="toc-ordenamiento-de-etiquetas" class="nav-link" data-scroll-target="#ordenamiento-de-etiquetas"><span class="header-section-number">8.2.3</span> Ordenamiento de etiquetas</a></li>
   <li><a href="#modificación-de-etiquetas" id="toc-modificación-de-etiquetas" class="nav-link" data-scroll-target="#modificación-de-etiquetas"><span class="header-section-number">8.2.4</span> Modificación de etiquetas</a></li>
   </ul></li>
-  <li><a href="#tema" id="toc-tema" class="nav-link" data-scroll-target="#tema"><span class="header-section-number">8.3</span> Tema</a></li>
+  <li><a href="#sec-geom-bar-theme" id="toc-sec-geom-bar-theme" class="nav-link" data-scroll-target="#sec-geom-bar-theme"><span class="header-section-number">8.3</span> Tema</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/proportions.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/proportions.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
@@ -733,8 +733,8 @@ Listado&nbsp;8.5: Modificación de las etiquetas en los cortes en el eje asociad
 <p>Una pregunta natural respecto al <a href="#lst-labs-str-wrap" class="quarto-xref">Listado&nbsp;<span>8.5</span></a> es por qué no utilizar la función <code>label_wrap_gen()</code> para controlar la longitud del título, tal como se aplicó en la función <code>scale_y_discrete()</code> para las etiquetas del eje asociadas con la coordenada <code>y</code>. La función <code>label_wrap_gen()</code> fue construida como una función auxiliar dentro del paquete <code>ggplot2</code> para modificar de manera directa un conjunto de etiquetas en las escalas. Por el contrario, la función <code>str_wrap()</code> del paquete <code>stringr</code> se diseñó para dividir un texto determinado en párrafos con un formato adecuado, donde el primer parámetro de la función, denominado <code>string</code>, debe corresponder a un vector de caracteres (ver <code>?str_wrap</code>).</p>
 </section>
 </section>
-<section id="tema" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="tema"><span class="header-section-number">8.3</span> Tema</h2>
+<section id="sec-geom-bar-theme" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="sec-geom-bar-theme"><span class="header-section-number">8.3</span> Tema</h2>
 <p>En la <a href="distributions.html#sec-theme" class="quarto-xref"><span>Sección 7.5</span></a> se hizo uso de la función <code>theme()</code> utilizando el parámetro <code>legend.position</code> junto con el argumento <code>"bottom"</code>, como <code>legend.position = "bottom"</code>. De nuevo, es posible utilizar este mismo aspecto para expandir el área del gráfico, tal como se señala a continuación:</p>
 <div class="cell">
 <div id="lst-proportions-legend-position" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
