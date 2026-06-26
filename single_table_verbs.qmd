@@ -1,1 +1,40 @@
-# Verbos de una sola tabla
+# Verbos de una sola tabla {#sec-single-table-verbs}
+
+```{r}
+#| echo: false
+source("_common.R")
+```
+
+```{r}
+#| label: load-r-packages
+#| echo: false
+#| message: false
+library(tidyverse)
+```
+
+Este capítulo se basa en [@wickham_r_2023, Cap. 3] así como en la documentación oficial de [`dplyr`](https://dplyr.tidyverse.org/articles/dplyr.html) donde tiene como propósito introducir una **gramática de manipulación de datos** a través de un conjunto consistente de verbos para resolver las tareas más comunes en el manejo de datos cuando se tiene una sola tabla utilizando el paquete `dplyr` e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado en Colombia.
+
+Exploraremos los siguientes aspectos:
+
+1. ¿En qué consistente la gramática de manipulación de datos utilizada en `dplyr`? 
+2. ¿Qué y cuáles son los verbos de una sola tabla para filas?
+3. ¿Qué y cuáles son los verbos de una sola tabla para columnas?
+4. ¿Qué y cuáles son los verbos de una sola tabla para agrupar o desagrupar filas?
+5. ¿Qué es y para qué sirve el operador **pipe** (`|>`)?
+
+:::: {#nte-1-chap-10 .callout-note}
+Para desarrollar el contenido de este capítulo es necesario que descarges el archivo señalado a continuación y lo incluyas dentro de la carpeta `data`, respecto a lo descrito en la @nte-1-chap-6:
+   
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2021_2024-saber_pro-genericas.csv.xz](https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/2021_2024-saber_pro-genericas.csv.xz)
+:::
+
+En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `010_verbos-una-sola-tabla-en-r` y dentro de ella genera el archivo `001_manipular-datos-una-sola-tabla.R`, siguiendo las pautas de la @sec-package-usage.
+
+::::
+
+## Gramática de manipulación de datos en `dplyr`
+
+
+
+## Caso de estudio: obtención de datos de interés del Saber-Pro para FAEDIS 
