@@ -1,1 +1,1 @@
-# Verbos de dos tablas {#sec-tow-table-verbs}
+# Verbos de dos tablas {#sec-two-table-verbs}
