@@ -415,7 +415,7 @@ glimpse(saber_pro_genericas_faedis_2021_2024_programas)
 
 ### Descripción de variables
 
-Esta base de datos es construida a partir de `saber_pro_genericas_faedis_2021_2024` donde aprenderás acerca de como construirla en el @sec-tow-table-verbs utilizando verbos de 2 tablas con el paquete `dplyr` perteneciente al `tidyverse`. A continuación, se describen cada una de las variables en `saber_pro_genericas_faedis_2021_2024_programas`:
+Esta base de datos es construida a partir de `saber_pro_genericas_faedis_2021_2024` donde aprenderás acerca de como construirla en el @sec-single-table-verbs utilizando verbos de una sola tabla con el paquete `dplyr` perteneciente al `tidyverse`. A continuación, se describen cada una de las variables en `saber_pro_genericas_faedis_2021_2024_programas`:
 
 1. **ano**: año correspondiente a los resultados del examen Saber Pro
 2. **estu_snies_prgmacademico**: código SNIES del programa académico relacionado con los resultados del examen Saber Pro 
