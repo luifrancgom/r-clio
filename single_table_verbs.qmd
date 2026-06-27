@@ -19,7 +19,7 @@ Exploraremos los siguientes aspectos:
 1. ¿En qué consistente la gramática de manipulación de datos utilizada en `dplyr`? 
 2. ¿Qué y cuáles son los verbos de una sola tabla para filas?
 3. ¿Qué y cuáles son los verbos de una sola tabla para columnas?
-4. ¿Qué y cuáles son los verbos de una sola tabla para agrupar o desagrupar filas?
+4. ¿Qué y cuáles son los verbos de una sola tabla para collapsar, agrupar o desagrupar filas?
 5. ¿Qué es y para qué sirve el operador **pipe** (`|>`)?
 
 :::: {#nte-1-chap-10 .callout-note}
@@ -34,6 +34,82 @@ En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta 
 ::::
 
 ## Gramática de manipulación de datos en `dplyr`
+
+El paquete `dplyr`, incluido en el `tidyverse`, permite manipular datos a partir de un conjuntos de datos en 2 niveles:
+
+1. Dentro de una sola tabla de datos
+2. Entre diferentes tablas de datos
+
+El primer nivel se abarcará en el @sec-single-table-verbs y el segundo nivel se desarrollará en el @sec-two-table-verbs. Al igual que en el caso de `ggplot2` (ver @sec-layered-grammar-graphics) el paquete `dplyr` funciona mejor si el conjunto de datos es ordenado ([tidy data](https://tidyr.tidyverse.org/articles/tidy-data.html) en inglés, [@wickham_tidy_2014]) donde este concepto se tratará en más detalle en el @sec-data-tidying. 
+
+A medida que explores diferentes formas de manipular un conjunto de datos entenderás en más detalle la gramática de manipulación de datos propuesta en el paquete `dplyr`. Por ahora se describirán en la @sec-verbs de manera general y gráfica los verbos más comunes que se utilizan para manipular datos en una sola tabla y que se utilizan en `dplyr`.
+
+En el paquete `dplyr`, para mantener la consistencia de las funciones que lo componen, siempre se cumple que cada uno de los verbos obedece a los siguientes aspectos [@wickham_r_2023, Cap. 3]:
+
+1. El primer argumento es una tibble (o en su defecto un objeto de R similar).
+2. Los argumentos subsiguientes especifican las columnas, filas o expresiones que operarán sobre las filas o columnas.
+3. El resultado[^chap-10-footnote-1] de una función en `dplyr` es siempre una nueva tibble (o en su defecto un objeto de R similar).
+
+[^chap-10-footnote-1]: En la documentación de ayuda de R, al buscar por ejemplo información acerca de la función `filter()` (ver @lst-filter-relational-operators) con el comando `?filter` en la consola, la descripción del resultado se encuentra bajo la sección titulada **Value**. En este libro se usará el término "resultado" de la función y no "valor", con el fin de utilizar una expresión más intuitivo para el lector.
+
+### Verbos {#sec-verbs}
+
+Los verbos para manipular datos en una sola tabla se encuentran organizados en 3 categorias teniendo en cuenta el elemento que se desea manipular: 
+
+a. Verbos para filas
+b. Verbos para columnas
+c. Verbos para collapsar, agrupar o desagrupar filas
+
+Debido a que la manipulación de datos requiere realizar un conjunto de operaciones de manera secuencial, se hace necesario contar con un operador que "encadene" de forma armónica cada una de las transformaciones deseadas. Para este propósito se utiliza el operador *pipe* (`|>`), el cual se abordará con mayor detalle en la @sec-pipe-operator.
+
+#### Verbos para filas
+
+Esta categoría incluye las funciones `filter()`, `slice()` y `arrange()`. La primera función, correspondiente a `filter()`, se utiliza para seleccionar filas con base a una expresión que retorne un vector lógico donde usualmente se hace uso de operadores relacionales (ver @sec-relational-operators). En la @fig-filter-verb se presenta una representación gráfica respecto a la manipulación que se puede realizar con la función `filter()`.
+
+![Representación gráfica de la función `filter()`](images/filter.png){#fig-filter-verb fig-alt="Diagrama conceptual que muestra cómo la función filter extrae filas de una tabla basándose en una condición lógica. A la izquierda hay una tabla de 4 filas de colores y a la derecha una tabla resultante con solo 2 filas."}
+
+Para utilizar un ejemplo concreto puedes utilizar el conjunto de datos utilizados en el @sec-amounts respecto a `2021-2024_saber-pro-genericas_faedis.rds` para identificar las filas correspondientes al año $2022$ y de estudiantes pertenecientes al género masculino:
+
+```{r}
+# Importar datos ----
+saber_pro_genericas_faedis_2021_2024 <- read_rds(
+  file = "data/2021-2024_saber-pro-genericas_faedis.rds"
+)
+
+# Filtrar ---
+filter(
+  saber_pro_genericas_faedis_2021_2024,
+  ano == 2022 & estu_genero == "M"
+)
+```
+
+La segunda función, correspondiente a `slice()`, se utiliza para seleccionar filas con base en su ubicación utilizando un vector de números enteros. Los números enteros deben ser todos estrictamente positivos o todos estrictamente negativos[^chap-10-footnote-2] donde los valores positivos se interpretan como la posición de filas que se desean conservar mientras que los valores negativos las posiciones de las filas que se desean descartar. En la @fig-slice-verb se presenta una representación gráfica respecto a la manipulación que se puede realizar con la función `slice()`.
+
+[^chap-10-footnote-2]: A diferencia de otros lenguajes de programación como [Python](https://python-history.blogspot.com/2013/10/why-python-uses-0-based-indexing.html), los índices de las posiciones comienzan en cero (`0`). En [R](https://cran.r-project.org/doc/manuals/r-release/R-intro.html#Index-vectors_003b-selecting-and-modifying-subsets-of-a-data-set) al igual que en otros lenguajes de programación como [Julia](https://docs.julialang.org/en/v1/manual/noteworthy-differences/#Noteworthy-differences-from-Python) se utiliza una indexación basada en `1`. Esto significa que la primera fila o elemento siempre corresponde a la posición `1`, y el uso del `0` no se toma en cuenta para seleccionar elementos. 
+
+![Representación gráfica de la función `slice()`](images/slice.png){#fig-slice-verb fig-alt="Diagrama conceptual que muestra cómo la función slice selecciona filas basándose en su posición. A la izquierda hay una tabla con 4 filas de colores y a la derecha una tabla reducida con solo 2 filas correspondientes a las posiciones especificadas."}
+
+Para utilizar un ejemplo concreto puedes utilizar el conjunto de datos `2021-2024_saber-pro-genericas_faedis.rds` para seleccionar las filas correspondientes a las posiciones `1`, `3` y `5`:
+
+```{r}
+# Seleccionar filas por posición ----
+slice(
+  saber_pro_genericas_faedis_2021_2024,
+  c(1, 3, 5)
+)
+```
+
+La función `slice()` tiene asociada un conjunto de [funciones auxiliares](https://dplyr.tidyverse.org/reference/slice.html) de la forma `slice_*` que pueden ser útiles para seleccionar determinadas filas:
+
+a. `slice_head()` y `slice_tail()` permiten seleccionar las primeras o últimas filas.
+b. `slice_sample()` permite selecciona filas de manera aleatoria.
+c. `slice_min()` y `slice_max()` permite seleccionar aquellas filas que contienen los valores  más pequeños o más grandes de una determinada variable.
+
+La tercera función, correspondiente a `arrange()`, se utiliza para cambiar el orden de las filas con base en un conjunto de columas. En la @fig-arrange-verb se presenta una representación gráfica respecto a la manipulación que se puede realizar con la función `arrange()`.
+
+![Representación gráfica de la función `arrange()`](images/arrange.png){#fig-arrange-verb fig-alt=""}
+
+### Operador pipe (`|>`) {#sec-pipe-operator}
 
 
 
