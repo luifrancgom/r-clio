@@ -60,11 +60,11 @@ a. Verbos para filas
 b. Verbos para columnas
 c. Verbos para collapsar, agrupar o desagrupar filas
 
-Debido a que la manipulación de datos requiere realizar un conjunto de operaciones de manera secuencial, se hace necesario contar con un operador que "encadene" de forma armónica cada una de las transformaciones deseadas. Para este propósito se utiliza el operador *pipe* (`|>`), el cual se abordará con mayor detalle en la @sec-pipe-operator.
+Debido a que la manipulación de datos requiere realizar un conjunto de operaciones de manera secuencial, se hace necesario contar con un operador que "encadene" de forma armónica cada una de las transformaciones deseadas. Para este propósito se utiliza el operador **pipe** (`|>`), el cual se abordará con mayor detalle en la @sec-pipe-operator.
 
 #### Verbos para filas
 
-Esta categoría incluye las funciones `filter()`, `slice()` y `arrange()`. La primera función, correspondiente a `filter()`, se utiliza para seleccionar filas con base a una expresión que retorne un vector lógico donde usualmente se hace uso de operadores relacionales (ver @sec-relational-operators). En la @fig-filter-verb se presenta una representación gráfica respecto a la manipulación que se puede realizar con la función `filter()`.
+Esta categoría incluye las funciones `filter()`, `slice()` y `arrange()`. La primera función, correspondiente a `filter()`, se utiliza para seleccionar filas con base a una expresión que retorne un vector lógico donde usualmente se hace uso de operadores relacionales (ver @sec-relational-operators). En la @fig-filter-verb se ilustra gráficamente la manipulación que se puede realizar con la función `filter()`.
 
 ![Representación gráfica de la función `filter()`](images/filter.png){#fig-filter-verb fig-alt="Diagrama conceptual que muestra cómo la función filter extrae filas de una tabla basándose en una condición lógica. A la izquierda hay una tabla de 4 filas de colores y a la derecha una tabla resultante con solo 2 filas."}
 
@@ -83,7 +83,7 @@ filter(
 )
 ```
 
-La segunda función, correspondiente a `slice()`, se utiliza para seleccionar filas con base en su ubicación utilizando un vector de números enteros. Los números enteros deben ser todos estrictamente positivos o todos estrictamente negativos[^chap-10-footnote-2] donde los valores positivos se interpretan como la posición de filas que se desean conservar mientras que los valores negativos las posiciones de las filas que se desean descartar. En la @fig-slice-verb se presenta una representación gráfica respecto a la manipulación que se puede realizar con la función `slice()`.
+La segunda función, correspondiente a `slice()`, se utiliza para seleccionar filas con base en su ubicación utilizando un vector de números enteros. Los números enteros deben ser todos estrictamente positivos o todos estrictamente negativos[^chap-10-footnote-2] donde los valores positivos se interpretan como la posición de filas que se desean conservar mientras que los valores negativos las posiciones de las filas que se desean descartar. En la @fig-slice-verb se ilustra gráficamente la manipulación que se puede realizar con la función `slice()`.
 
 [^chap-10-footnote-2]: A diferencia de otros lenguajes de programación como [Python](https://python-history.blogspot.com/2013/10/why-python-uses-0-based-indexing.html), los índices de las posiciones comienzan en cero (`0`). En [R](https://cran.r-project.org/doc/manuals/r-release/R-intro.html#Index-vectors_003b-selecting-and-modifying-subsets-of-a-data-set) al igual que en otros lenguajes de programación como [Julia](https://docs.julialang.org/en/v1/manual/noteworthy-differences/#Noteworthy-differences-from-Python) se utiliza una indexación basada en `1`. Esto significa que la primera fila o elemento siempre corresponde a la posición `1`, y el uso del `0` no se toma en cuenta para seleccionar elementos. 
 
@@ -105,12 +105,89 @@ a. `slice_head()` y `slice_tail()` permiten seleccionar las primeras o últimas 
 b. `slice_sample()` permite selecciona filas de manera aleatoria.
 c. `slice_min()` y `slice_max()` permite seleccionar aquellas filas que contienen los valores  más pequeños o más grandes de una determinada variable.
 
-La tercera función, correspondiente a `arrange()`, se utiliza para cambiar el orden de las filas con base en un conjunto de columas. En la @fig-arrange-verb se presenta una representación gráfica respecto a la manipulación que se puede realizar con la función `arrange()`.
+La tercera función, correspondiente a `arrange()`, se utiliza para cambiar el orden de las filas con base en un conjunto de columnas. Por defecto, este verbo ordena los datos de forma ascendente donde en caso de necesitar un ordenamiento descendente, se debe aplicar la función auxiliar `desc()` sobre la variable que se desee organizar bajo ese criterio. En la @fig-arrange-verb se ilustra gráficamente la manipulación que realiza `arrange()`.
 
-![Representación gráfica de la función `arrange()`](images/arrange.png){#fig-arrange-verb fig-alt=""}
+![Representación gráfica de la función `arrange()`](images/arrange.png){#fig-arrange-verb fig-alt="Diagrama conceptual que muestra cómo la función arrange reordena las filas de una tabla según los valores de una columna. A la izquierda se observa una tabla con filas degradadas de verde oscuro a verde claro, y a la derecha se muestra el resultado tras aplicar la función sobre la columna a, invirtiendo el orden de las filas de claro a oscuro."}
 
-### Operador pipe (`|>`) {#sec-pipe-operator}
+Para utilizar un ejemplo concreto puedes utilizar el conjunto de datos `2021-2024_saber-pro-genericas_faedis.rds` para ordenar la variable `ano` en forma descendente y luego al interior de cada año la variable `estu_semestrecursa` en forma ascendente:
+
+```{r}
+arrange(
+  saber_pro_genericas_faedis_2021_2024,
+  desc(ano),
+  estu_semestrecursa
+)
+```
+
+#### Verbos para columnas
+
+Esta categoría incluye las funciones `select()`, `rename()`, `mutate()` y `relocate()`. La primera función, correspondiente a `select()`, se utiliza para determinar qué columnas se incluyen en una tibble. La selección de las columnas se realiza con base al nombre de las variables o a su tipo donde se pueden utilizar [operadores o funciones auxiliares](https://dplyr.tidyverse.org/reference/select.html#overview-of-selection-features). En la @fig-select-verb se ilustra gráficamente la manipulación que se puede realizar con la función `select()`.
+
+![Representación gráfica de la función `select()`](images/select.png){#fig-select-verb fig-alt="Diagrama conceptual que muestra cómo la función select extrae columnas de una tabla. A la izquierda hay una tabla con tres columnas (a en marrón, b en azul claro y c en verde oscuro). Una flecha con el comando select indica la extracción de la columna b, generando a la derecha una nueva tabla que contiene únicamente dicha columna con sus cuatro filas intactas."}
+
+Para utilizar un ejemplo concreto puedes utilizar el conjunto de datos `2021-2024_saber-pro-genericas_faedis.rds` para seleccionar las columnas asociadas con las variables `ano`, `estu_consecutivo` y `punt_global`:
+
+```{r}
+select(
+  saber_pro_genericas_faedis_2021_2024,
+  ano,
+  estu_consecutivo,
+  punt_global
+)
+```
+
+En la @sec-case-study-select se utilizarán [operadores o funciones auxiliares](https://dplyr.tidyverse.org/reference/select.html#overview-of-selection-features) para ilustrar la forma como se pueden seleccionar columnas de manera más precisa. A medida que explores más formas de seleccionar columnas de un conjunto de datos podrás consultar en más detalle la documentación de ayuda de la función `select()` (`?select`) respecto a las diferentes funcionalidades de selección.
+
+La segunda función, correspondiente a `rename()`, se utiliza para cambiar el nombre de las columnas usando el esquema `nuevo_nombre = antiguo_nombre`. En la @fig-rename-verb se ilustra gráficamente la manipulación que se puede realizar con la función `rename()`.
+
+![Representación gráfica de la función `rename()`](images/rename.png){#fig-rename-verb fig-alt="Diagrama conceptual que muestra cómo la función rename cambia el nombre de una columna sin alterar la estructura ni el contenido de los datos. A la izquierda hay una tabla con columnas a, b y c. Una flecha con el comando rename indica el cambio d = b, generando a la derecha una tabla idéntica donde la segunda columna ahora se llama d."}
+
+Para utilizar un ejemplo concreto puedes utilizar el conjunto de datos `2021-2024_saber-pro-genericas_faedis.rds` para renombrar la columna `estu_consecutivo` por un nombre más descriptivo como `id_saber_pro_estudiante`:
+
+```{r}
+rename(
+  saber_pro_genericas_faedis_2021_2024,
+  id_saber_pro_estudiante = estu_consecutivo
+)
+```
+
+La tercera función, correspondiente a `mutate()`, se utiliza para crear nuevas columnas a partir de variables existentes dentro de una tibble. También se puede utilizar para modificar columnas si el nombre es el mismo a una columna existente. La función `mutate()` por defecto ubica las nuevas columnas al final de la tibble y mantiene todas las variables presentes en la tibble original. Sin embargo estos aspectos se pueden modificar con los parámetros `.keep`, `.before` y `.after` (ver `?mutate`). En la @fig-mutate-verb se ilustra gráficamente la manipulación que se puede realizar con la función `mutate()`.
+
+![Representación gráfica de la función `mutate()`](images/mutate.png){#fig-mutate-verb fig-alt="Diagrama conceptual que muestra cómo la función mutate crea una nueva columna a partir de operaciones entre variables existentes. A la izquierda se observa una tabla con columnas a, b y c. Una flecha con el comando mutate indica la operación d = a + b, generando a la derecha una tabla expandida que conserva las columnas originales y añade la nueva columna d en color ocre."}
+
+Para utilizar un ejemplo concreto puedes utilizar el conjunto de datos `2021-2024_saber-pro-genericas_faedis.rds` para generar una nueva columna denominada `punt_global_norm` donde corresponde a la variable `punt_global` normalizada en el intervalo $[0, 1]$[^chap-10-footnote-3] y conservando sólo las columnas utilizadas para generar ésta nueva variable a través del parámetro `.keep` con el argumento `"used"`, como `.keep = "used"`:
+
+[^chap-10-footnote-3]: Si $x$ es una variable numérica entonces su normalización en el intervalo $[0, 1]$ se puede definir como $x_{norm} = \frac{x- \min(x)}{\max(x) - \min(x)}$ donde $\min(x)$ es el valor mínimo de la variable $x$ y $\max(x)$ es el valor máximo de la variable $x$.
+
+```{r}
+mutate(
+  saber_pro_genericas_faedis_2021_2024,
+  punt_global_norm = (punt_global - min(punt_global)) /
+    (max(punt_global) - min(punt_global)),
+  .keep = "used"
+)
+```
+
+La cuarta función, correspondiente a `relocate()`, se utiliza para modificar la posición de las columnas utilizando la misma sintaxis de la función `select`. Por defecto esta función reasigna las columnas en las primeras posiciones de la tibble pero a través de los parámetros `.before` y `.after` se puede controlar de manera más precisa la nueva asignación de posiciones indicando antes o después de que variable se desean asignar las nuevas posiciónes de determinas columnas. En la @fig-relocate-verb se ilustra gráficamente la manipulación que se puede realizar con la función `relocate()`.
+
+![Representación gráfica de la función `relocate()`](images/relocate.png){#fig-relocate-verb fig-alt="Diagrama conceptual que muestra cómo la función relocate cambia la posición de las columnas sin alterar sus datos. A la izquierda hay una tabla con columnas en el orden a, b y c. Una flecha con el comando relocate indica mover la columna c, generando a la derecha una nueva tabla donde dicha columna ahora aparece al principio, reordenando las columnas como c, a y b."}
+
+Para utilizar un ejemplo concreto puedes utilizar el conjunto de datos `2021-2024_saber-pro-genericas_faedis.rds` para mover la variable `punt_global` después de la columna asociada con `estu_consecutivo` utilizando el parámetro `.after` junto con `estu_consecutivo`, como `.after = estu_consecutivo`:
+
+```{r}
+relocate(
+  saber_pro_genericas_faedis_2021_2024,
+  punt_global,
+  .after = estu_consecutivo
+)
+```
+
+#### Operador pipe (`|>`) {#sec-pipe-operator}
 
 
 
-## Caso de estudio: obtención de datos de interés del Saber-Pro para FAEDIS 
+#### Verbos para collapsar, agrupar y desagrupar filas {#sec-verbs-collapse-group-ungroup}
+
+
+
+## Caso de estudio: obtención de datos de interés del Saber-Pro para FAEDIS {#sec-case-study-select} 
