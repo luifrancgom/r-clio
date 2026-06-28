@@ -417,9 +417,8 @@ window.Quarto = {
   <li><a href="#gramática-de-manipulación-de-datos-en-dplyr" id="toc-gramática-de-manipulación-de-datos-en-dplyr" class="nav-link active" data-scroll-target="#gramática-de-manipulación-de-datos-en-dplyr"><span class="header-section-number">10.1</span> Gramática de manipulación de datos en <code>dplyr</code></a>
   <ul class="collapse">
   <li><a href="#sec-verbs" id="toc-sec-verbs" class="nav-link" data-scroll-target="#sec-verbs"><span class="header-section-number">10.1.1</span> Verbos</a></li>
-  <li><a href="#sec-pipe-operator" id="toc-sec-pipe-operator" class="nav-link" data-scroll-target="#sec-pipe-operator"><span class="header-section-number">10.1.2</span> Operador pipe (<code>|&gt;</code>)</a></li>
   </ul></li>
-  <li><a href="#caso-de-estudio-obtención-de-datos-de-interés-del-saber-pro-para-faedis" id="toc-caso-de-estudio-obtención-de-datos-de-interés-del-saber-pro-para-faedis" class="nav-link" data-scroll-target="#caso-de-estudio-obtención-de-datos-de-interés-del-saber-pro-para-faedis"><span class="header-section-number">10.2</span> Caso de estudio: obtención de datos de interés del Saber-Pro para FAEDIS</a></li>
+  <li><a href="#sec-case-study-select" id="toc-sec-case-study-select" class="nav-link" data-scroll-target="#sec-case-study-select"><span class="header-section-number">10.2</span> Caso de estudio: obtención de datos de interés del Saber-Pro para FAEDIS</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/single_table_verbs.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/single_table_verbs.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
@@ -504,10 +503,10 @@ Nota&nbsp;10.1
 <li>Verbos para columnas</li>
 <li>Verbos para collapsar, agrupar o desagrupar filas</li>
 </ol>
-<p>Debido a que la manipulación de datos requiere realizar un conjunto de operaciones de manera secuencial, se hace necesario contar con un operador que “encadene” de forma armónica cada una de las transformaciones deseadas. Para este propósito se utiliza el operador <em>pipe</em> (<code>|&gt;</code>), el cual se abordará con mayor detalle en la <a href="#sec-pipe-operator" class="quarto-xref"><span>Sección 10.1.2</span></a>.</p>
+<p>Debido a que la manipulación de datos requiere realizar un conjunto de operaciones de manera secuencial, se hace necesario contar con un operador que “encadene” de forma armónica cada una de las transformaciones deseadas. Para este propósito se utiliza el operador <strong>pipe</strong> (<code>|&gt;</code>), el cual se abordará con mayor detalle en la <a href="#sec-pipe-operator" class="quarto-xref"><span>Sección 10.1.1.3</span></a>.</p>
 <section id="verbos-para-filas" class="level4" data-number="10.1.1.1">
 <h4 data-number="10.1.1.1" class="anchored" data-anchor-id="verbos-para-filas"><span class="header-section-number">10.1.1.1</span> Verbos para filas</h4>
-<p>Esta categoría incluye las funciones <code>filter()</code>, <code>slice()</code> y <code>arrange()</code>. La primera función, correspondiente a <code>filter()</code>, se utiliza para seleccionar filas con base a una expresión que retorne un vector lógico donde usualmente se hace uso de operadores relacionales (ver <a href="how_to_code_in_r.html#sec-relational-operators" class="quarto-xref"><span>Sección 5.5</span></a>). En la <a href="#fig-filter-verb" class="quarto-xref">Figura&nbsp;<span>10.1</span></a> se presenta una representación gráfica respecto a la manipulación que se puede realizar con la función <code>filter()</code>.</p>
+<p>Esta categoría incluye las funciones <code>filter()</code>, <code>slice()</code> y <code>arrange()</code>. La primera función, correspondiente a <code>filter()</code>, se utiliza para seleccionar filas con base a una expresión que retorne un vector lógico donde usualmente se hace uso de operadores relacionales (ver <a href="how_to_code_in_r.html#sec-relational-operators" class="quarto-xref"><span>Sección 5.5</span></a>). En la <a href="#fig-filter-verb" class="quarto-xref">Figura&nbsp;<span>10.1</span></a> se ilustra gráficamente la manipulación que se puede realizar con la función <code>filter()</code>.</p>
 <div id="fig-filter-verb" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que muestra cómo la función filter extrae filas de una tabla basándose en una condición lógica. A la izquierda hay una tabla de 4 filas de colores y a la derecha una tabla resultante con solo 2 filas.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-filter-verb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -553,7 +552,7 @@ Figura&nbsp;10.1: Representación gráfica de la función <code>filter()</code>
 #   estu_mcpio_presentacion &lt;chr&gt;, …</code></pre>
 </div>
 </div>
-<p>La segunda función, correspondiente a <code>slice()</code>, se utiliza para seleccionar filas con base en su ubicación utilizando un vector de números enteros. Los números enteros deben ser todos estrictamente positivos o todos estrictamente negativos<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> donde los valores positivos se interpretan como la posición de filas que se desean conservar mientras que los valores negativos las posiciones de las filas que se desean descartar. En la <a href="#fig-slice-verb" class="quarto-xref">Figura&nbsp;<span>10.2</span></a> se presenta una representación gráfica respecto a la manipulación que se puede realizar con la función <code>slice()</code>.</p>
+<p>La segunda función, correspondiente a <code>slice()</code>, se utiliza para seleccionar filas con base en su ubicación utilizando un vector de números enteros. Los números enteros deben ser todos estrictamente positivos o todos estrictamente negativos<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> donde los valores positivos se interpretan como la posición de filas que se desean conservar mientras que los valores negativos las posiciones de las filas que se desean descartar. En la <a href="#fig-slice-verb" class="quarto-xref">Figura&nbsp;<span>10.2</span></a> se ilustra gráficamente la manipulación que se puede realizar con la función <code>slice()</code>.</p>
 <div id="fig-slice-verb" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que muestra cómo la función slice selecciona filas basándose en su posición. A la izquierda hay una tabla con 4 filas de colores y a la derecha una tabla reducida con solo 2 filas correspondientes a las posiciones especificadas.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-slice-verb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -593,25 +592,215 @@ Figura&nbsp;10.2: Representación gráfica de la función <code>slice()</code>
 <li><code>slice_sample()</code> permite selecciona filas de manera aleatoria.</li>
 <li><code>slice_min()</code> y <code>slice_max()</code> permite seleccionar aquellas filas que contienen los valores más pequeños o más grandes de una determinada variable.</li>
 </ol>
-<p>La tercera función, correspondiente a <code>arrange()</code>, se utiliza para cambiar el orden de las filas con base en un conjunto de columas. En la <a href="#fig-arrange-verb" class="quarto-xref">Figura&nbsp;<span>10.3</span></a> se presenta una representación gráfica respecto a la manipulación que se puede realizar con la función <code>arrange()</code>.</p>
-<div id="fig-arrange-verb" class="quarto-float quarto-figure quarto-figure-center anchored" alt="">
+<p>La tercera función, correspondiente a <code>arrange()</code>, se utiliza para cambiar el orden de las filas con base en un conjunto de columnas. Por defecto, este verbo ordena los datos de forma ascendente donde en caso de necesitar un ordenamiento descendente, se debe aplicar la función auxiliar <code>desc()</code> sobre la variable que se desee organizar bajo ese criterio. En la <a href="#fig-arrange-verb" class="quarto-xref">Figura&nbsp;<span>10.3</span></a> se ilustra gráficamente la manipulación que realiza <code>arrange()</code>.</p>
+<div id="fig-arrange-verb" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que muestra cómo la función arrange reordena las filas de una tabla según los valores de una columna. A la izquierda se observa una tabla con filas degradadas de verde oscuro a verde claro, y a la derecha se muestra el resultado tras aplicar la función sobre la columna a, invirtiendo el orden de las filas de claro a oscuro.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-arrange-verb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/arrange.png" class="img-fluid figure-img" alt="">
+<img src="images/arrange.png" class="img-fluid figure-img" alt="Diagrama conceptual que muestra cómo la función arrange reordena las filas de una tabla según los valores de una columna. A la izquierda se observa una tabla con filas degradadas de verde oscuro a verde claro, y a la derecha se muestra el resultado tras aplicar la función sobre la columna a, invirtiendo el orden de las filas de claro a oscuro.">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-arrange-verb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;10.3: Representación gráfica de la función <code>arrange()</code>
 </figcaption>
 </figure>
 </div>
+<p>Para utilizar un ejemplo concreto puedes utilizar el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> para ordenar la variable <code>ano</code> en forma descendente y luego al interior de cada año la variable <code>estu_semestrecursa</code> en forma ascendente:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">desc</span>(ano),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  estu_semestrecursa</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,239 × 20
+     ano estu_consecutivo estu_genero estu_semestrecursa
+   &lt;int&gt; &lt;chr&gt;            &lt;fct&gt;       &lt;ord&gt;             
+ 1  2024 EK202430030817   F           06                
+ 2  2024 EK202430030783   F           06                
+ 3  2024 EK202410086302   F           07                
+ 4  2024 EK202410000136   F           07                
+ 5  2024 EK202410000145   M           07                
+ 6  2024 EK202410129804   F           07                
+ 7  2024 EK202410067203   M           07                
+ 8  2024 EK202410067226   M           07                
+ 9  2024 EK202410129912   M           07                
+10  2024 EK202410129981   M           07                
+# ℹ 1,229 more rows
+# ℹ 16 more variables: fami_estratovivienda &lt;ord&gt;,
+#   fami_educacionmadre &lt;ord&gt;, fami_educacionpadre &lt;fct&gt;,
+#   estu_cod_depto_presentacion &lt;chr&gt;,
+#   estu_depto_presentacion &lt;chr&gt;,
+#   estu_cod_mcpio_presentacion &lt;chr&gt;,
+#   estu_mcpio_presentacion &lt;chr&gt;, …</code></pre>
+</div>
+</div>
+</section>
+<section id="verbos-para-columnas" class="level4" data-number="10.1.1.2">
+<h4 data-number="10.1.1.2" class="anchored" data-anchor-id="verbos-para-columnas"><span class="header-section-number">10.1.1.2</span> Verbos para columnas</h4>
+<p>Esta categoría incluye las funciones <code>select()</code>, <code>rename()</code>, <code>mutate()</code> y <code>relocate()</code>. La primera función, correspondiente a <code>select()</code>, se utiliza para determinar qué columnas se incluyen en una tibble. La selección de las columnas se realiza con base al nombre de las variables o a su tipo donde se pueden utilizar <a href="https://dplyr.tidyverse.org/reference/select.html#overview-of-selection-features">operadores o funciones auxiliares</a>. En la <a href="#fig-select-verb" class="quarto-xref">Figura&nbsp;<span>10.4</span></a> se ilustra gráficamente la manipulación que se puede realizar con la función <code>select()</code>.</p>
+<div id="fig-select-verb" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que muestra cómo la función select extrae columnas de una tabla. A la izquierda hay una tabla con tres columnas (a en marrón, b en azul claro y c en verde oscuro). Una flecha con el comando select indica la extracción de la columna b, generando a la derecha una nueva tabla que contiene únicamente dicha columna con sus cuatro filas intactas.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-select-verb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/select.png" class="img-fluid figure-img" alt="Diagrama conceptual que muestra cómo la función select extrae columnas de una tabla. A la izquierda hay una tabla con tres columnas (a en marrón, b en azul claro y c en verde oscuro). Una flecha con el comando select indica la extracción de la columna b, generando a la derecha una nueva tabla que contiene únicamente dicha columna con sus cuatro filas intactas.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-select-verb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;10.4: Representación gráfica de la función <code>select()</code>
+</figcaption>
+</figure>
+</div>
+<p>Para utilizar un ejemplo concreto puedes utilizar el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> para seleccionar las columnas asociadas con las variables <code>ano</code>, <code>estu_consecutivo</code> y <code>punt_global</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  ano,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  estu_consecutivo,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  punt_global</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,239 × 3
+     ano estu_consecutivo punt_global
+   &lt;int&gt; &lt;chr&gt;                  &lt;dbl&gt;
+ 1  2021 EK202120262469           139
+ 2  2021 EK202120116785           170
+ 3  2021 EK202120116868           128
+ 4  2021 EK202120116831           155
+ 5  2021 EK202120116814           166
+ 6  2021 EK202120117053           142
+ 7  2021 EK202120262258           151
+ 8  2021 EK202120262692           145
+ 9  2021 EK202120117033           132
+10  2021 EK202120117014           146
+# ℹ 1,229 more rows</code></pre>
+</div>
+</div>
+<p>En la <a href="#sec-case-study-select" class="quarto-xref"><span>Sección 10.2</span></a> se utilizarán <a href="https://dplyr.tidyverse.org/reference/select.html#overview-of-selection-features">operadores o funciones auxiliares</a> para ilustrar la forma como se pueden seleccionar columnas de manera más precisa. A medida que explores más formas de seleccionar columnas de un conjunto de datos podrás consultar en más detalle la documentación de ayuda de la función <code>select()</code> (<code>?select</code>) respecto a las diferentes funcionalidades de selección.</p>
+<p>La segunda función, correspondiente a <code>rename()</code>, se utiliza para cambiar el nombre de las columnas usando el esquema <code>nuevo_nombre = antiguo_nombre</code>. En la <a href="#fig-rename-verb" class="quarto-xref">Figura&nbsp;<span>10.5</span></a> se ilustra gráficamente la manipulación que se puede realizar con la función <code>rename()</code>.</p>
+<div id="fig-rename-verb" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que muestra cómo la función rename cambia el nombre de una columna sin alterar la estructura ni el contenido de los datos. A la izquierda hay una tabla con columnas a, b y c. Una flecha con el comando rename indica el cambio d = b, generando a la derecha una tabla idéntica donde la segunda columna ahora se llama d.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rename-verb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/rename.png" class="img-fluid figure-img" alt="Diagrama conceptual que muestra cómo la función rename cambia el nombre de una columna sin alterar la estructura ni el contenido de los datos. A la izquierda hay una tabla con columnas a, b y c. Una flecha con el comando rename indica el cambio d = b, generando a la derecha una tabla idéntica donde la segunda columna ahora se llama d.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rename-verb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;10.5: Representación gráfica de la función <code>rename()</code>
+</figcaption>
+</figure>
+</div>
+<p>Para utilizar un ejemplo concreto puedes utilizar el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> para renombrar la columna <code>estu_consecutivo</code> por un nombre más descriptivo como <code>id_saber_pro_estudiante</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id_saber_pro_estudiante =</span> estu_consecutivo</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,239 × 20
+     ano id_saber_pro_estudiante estu_genero
+   &lt;int&gt; &lt;chr&gt;                   &lt;fct&gt;      
+ 1  2021 EK202120262469          M          
+ 2  2021 EK202120116785          M          
+ 3  2021 EK202120116868          M          
+ 4  2021 EK202120116831          M          
+ 5  2021 EK202120116814          F          
+ 6  2021 EK202120117053          F          
+ 7  2021 EK202120262258          F          
+ 8  2021 EK202120262692          F          
+ 9  2021 EK202120117033          F          
+10  2021 EK202120117014          F          
+# ℹ 1,229 more rows
+# ℹ 17 more variables: estu_semestrecursa &lt;ord&gt;,
+#   fami_estratovivienda &lt;ord&gt;, fami_educacionmadre &lt;ord&gt;,
+#   fami_educacionpadre &lt;fct&gt;,
+#   estu_cod_depto_presentacion &lt;chr&gt;,
+#   estu_depto_presentacion &lt;chr&gt;,
+#   estu_cod_mcpio_presentacion &lt;chr&gt;, …</code></pre>
+</div>
+</div>
+<p>La tercera función, correspondiente a <code>mutate()</code>, se utiliza para crear nuevas columnas a partir de variables existentes dentro de una tibble. También se puede utilizar para modificar columnas si el nombre es el mismo a una columna existente. La función <code>mutate()</code> por defecto ubica las nuevas columnas al final de la tibble y mantiene todas las variables presentes en la tibble original. Sin embargo estos aspectos se pueden modificar con los parámetros <code>.keep</code>, <code>.before</code> y <code>.after</code> (ver <code>?mutate</code>). En la <a href="#fig-mutate-verb" class="quarto-xref">Figura&nbsp;<span>10.6</span></a> se ilustra gráficamente la manipulación que se puede realizar con la función <code>mutate()</code>.</p>
+<div id="fig-mutate-verb" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que muestra cómo la función mutate crea una nueva columna a partir de operaciones entre variables existentes. A la izquierda se observa una tabla con columnas a, b y c. Una flecha con el comando mutate indica la operación d = a + b, generando a la derecha una tabla expandida que conserva las columnas originales y añade la nueva columna d en color ocre.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mutate-verb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/mutate.png" class="img-fluid figure-img" alt="Diagrama conceptual que muestra cómo la función mutate crea una nueva columna a partir de operaciones entre variables existentes. A la izquierda se observa una tabla con columnas a, b y c. Una flecha con el comando mutate indica la operación d = a + b, generando a la derecha una tabla expandida que conserva las columnas originales y añade la nueva columna d en color ocre.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mutate-verb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;10.6: Representación gráfica de la función <code>mutate()</code>
+</figcaption>
+</figure>
+</div>
+<p>Para utilizar un ejemplo concreto puedes utilizar el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> para generar una nueva columna denominada <code>punt_global_norm</code> donde corresponde a la variable <code>punt_global</code> normalizada en el intervalo <span class="math inline">\([0, 1]\)</span><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> y conservando sólo las columnas utilizadas para generar ésta nueva variable a través del parámetro <code>.keep</code> con el argumento <code>"used"</code>, como <code>.keep = "used"</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">punt_global_norm =</span> (punt_global <span class="sc">-</span> <span class="fu">min</span>(punt_global)) <span class="sc">/</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    (<span class="fu">max</span>(punt_global) <span class="sc">-</span> <span class="fu">min</span>(punt_global)),</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">.keep =</span> <span class="st">"used"</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,239 × 2
+   punt_global punt_global_norm
+         &lt;dbl&gt;            &lt;dbl&gt;
+ 1         139            0.610
+ 2         170            0.746
+ 3         128            0.561
+ 4         155            0.680
+ 5         166            0.728
+ 6         142            0.623
+ 7         151            0.662
+ 8         145            0.636
+ 9         132            0.579
+10         146            0.640
+# ℹ 1,229 more rows</code></pre>
+</div>
+</div>
+<p>La cuarta función, correspondiente a <code>relocate()</code>, se utiliza para modificar la posición de las columnas utilizando la misma sintaxis de la función <code>select</code>. Por defecto esta función reasigna las columnas en las primeras posiciones de la tibble pero a través de los parámetros <code>.before</code> y <code>.after</code> se puede controlar de manera más precisa la nueva asignación de posiciones indicando antes o después de que variable se desean asignar las nuevas posiciónes de determinas columnas. En la <a href="#fig-relocate-verb" class="quarto-xref">Figura&nbsp;<span>10.7</span></a> se ilustra gráficamente la manipulación que se puede realizar con la función <code>relocate()</code>.</p>
+<div id="fig-relocate-verb" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que muestra cómo la función relocate cambia la posición de las columnas sin alterar sus datos. A la izquierda hay una tabla con columnas en el orden a, b y c. Una flecha con el comando relocate indica mover la columna c, generando a la derecha una nueva tabla donde dicha columna ahora aparece al principio, reordenando las columnas como c, a y b.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-relocate-verb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/relocate.png" class="img-fluid figure-img" alt="Diagrama conceptual que muestra cómo la función relocate cambia la posición de las columnas sin alterar sus datos. A la izquierda hay una tabla con columnas en el orden a, b y c. Una flecha con el comando relocate indica mover la columna c, generando a la derecha una nueva tabla donde dicha columna ahora aparece al principio, reordenando las columnas como c, a y b.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-relocate-verb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;10.7: Representación gráfica de la función <code>relocate()</code>
+</figcaption>
+</figure>
+</div>
+<p>Para utilizar un ejemplo concreto puedes utilizar el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> para mover la variable <code>punt_global</code> después de la columna asociada con <code>estu_consecutivo</code> utilizando el parámetro <code>.after</code> junto con <code>estu_consecutivo</code>, como <code>.after = estu_consecutivo</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">relocate</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  punt_global,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">.after =</span> estu_consecutivo</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,239 × 20
+     ano estu_consecutivo punt_global estu_genero
+   &lt;int&gt; &lt;chr&gt;                  &lt;dbl&gt; &lt;fct&gt;      
+ 1  2021 EK202120262469           139 M          
+ 2  2021 EK202120116785           170 M          
+ 3  2021 EK202120116868           128 M          
+ 4  2021 EK202120116831           155 M          
+ 5  2021 EK202120116814           166 F          
+ 6  2021 EK202120117053           142 F          
+ 7  2021 EK202120262258           151 F          
+ 8  2021 EK202120262692           145 F          
+ 9  2021 EK202120117033           132 F          
+10  2021 EK202120117014           146 F          
+# ℹ 1,229 more rows
+# ℹ 16 more variables: estu_semestrecursa &lt;ord&gt;,
+#   fami_estratovivienda &lt;ord&gt;, fami_educacionmadre &lt;ord&gt;,
+#   fami_educacionpadre &lt;fct&gt;,
+#   estu_cod_depto_presentacion &lt;chr&gt;,
+#   estu_depto_presentacion &lt;chr&gt;,
+#   estu_cod_mcpio_presentacion &lt;chr&gt;, …</code></pre>
+</div>
+</div>
+</section>
+<section id="sec-pipe-operator" class="level4" data-number="10.1.1.3">
+<h4 data-number="10.1.1.3" class="anchored" data-anchor-id="sec-pipe-operator"><span class="header-section-number">10.1.1.3</span> Operador pipe (<code>|&gt;</code>)</h4>
+</section>
+<section id="sec-verbs-collapse-group-ungroup" class="level4" data-number="10.1.1.4">
+<h4 data-number="10.1.1.4" class="anchored" data-anchor-id="sec-verbs-collapse-group-ungroup"><span class="header-section-number">10.1.1.4</span> Verbos para collapsar, agrupar y desagrupar filas</h4>
 </section>
 </section>
-<section id="sec-pipe-operator" class="level3" data-number="10.1.2">
-<h3 data-number="10.1.2" class="anchored" data-anchor-id="sec-pipe-operator"><span class="header-section-number">10.1.2</span> Operador pipe (<code>|&gt;</code>)</h3>
 </section>
-</section>
-<section id="caso-de-estudio-obtención-de-datos-de-interés-del-saber-pro-para-faedis" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="caso-de-estudio-obtención-de-datos-de-interés-del-saber-pro-para-faedis"><span class="header-section-number">10.2</span> Caso de estudio: obtención de datos de interés del Saber-Pro para FAEDIS</h2>
+<section id="sec-case-study-select" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="sec-case-study-select"><span class="header-section-number">10.2</span> Caso de estudio: obtención de datos de interés del Saber-Pro para FAEDIS</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
@@ -628,6 +817,7 @@ Wickham, H. (2023). <em>R for <span>Data</span> <span>Science</span></em> (2.ª 
 <ol>
 <li id="fn1"><p>En la documentación de ayuda de R, al buscar por ejemplo información acerca de la función <code>filter()</code> (ver <a href="how_to_code_in_r.html#lst-filter-relational-operators" class="quarto-xref">Listado&nbsp;<span>5.10</span></a>) con el comando <code>?filter</code> en la consola, la descripción del resultado se encuentra bajo la sección titulada <strong>Value</strong>. En este libro se usará el término “resultado” de la función y no “valor”, con el fin de utilizar una expresión más intuitivo para el lector.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>A diferencia de otros lenguajes de programación como <a href="https://python-history.blogspot.com/2013/10/why-python-uses-0-based-indexing.html">Python</a>, los índices de las posiciones comienzan en cero (<code>0</code>). En <a href="https://cran.r-project.org/doc/manuals/r-release/R-intro.html#Index-vectors_003b-selecting-and-modifying-subsets-of-a-data-set">R</a> al igual que en otros lenguajes de programación como <a href="https://docs.julialang.org/en/v1/manual/noteworthy-differences/#Noteworthy-differences-from-Python">Julia</a> se utiliza una indexación basada en <code>1</code>. Esto significa que la primera fila o elemento siempre corresponde a la posición <code>1</code>, y el uso del <code>0</code> no se toma en cuenta para seleccionar elementos.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Si <span class="math inline">\(x\)</span> es una variable numérica entonces su normalización en el intervalo <span class="math inline">\([0, 1]\)</span> se puede definir como <span class="math inline">\(x_{norm} = \frac{x- \min(x)}{\max(x) - \min(x)}\)</span> donde <span class="math inline">\(\min(x)\)</span> es el valor mínimo de la variable <span class="math inline">\(x\)</span> y <span class="math inline">\(\max(x)\)</span> es el valor máximo de la variable <span class="math inline">\(x\)</span>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
