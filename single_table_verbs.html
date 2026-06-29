@@ -749,7 +749,7 @@ Figura&nbsp;10.6: Representación gráfica de la función <code>mutate()</code>
 # ℹ 1,229 more rows</code></pre>
 </div>
 </div>
-<p>La cuarta función, correspondiente a <code>relocate()</code>, se utiliza para modificar la posición de las columnas utilizando la misma sintaxis de la función <code>select</code>. Por defecto esta función reasigna las columnas en las primeras posiciones de la tibble pero a través de los parámetros <code>.before</code> y <code>.after</code> se puede controlar de manera más precisa la nueva asignación de posiciones indicando antes o después de que variable se desean asignar las nuevas posiciónes de determinas columnas. En la <a href="#fig-relocate-verb" class="quarto-xref">Figura&nbsp;<span>10.7</span></a> se ilustra gráficamente la manipulación que se puede realizar con la función <code>relocate()</code>.</p>
+<p>La cuarta función, correspondiente a <code>relocate()</code>, se utiliza para modificar la posición de las columnas utilizando la misma sintaxis de la función <code>select</code>. Por defecto esta función reasigna las columnas en las primeras posiciones de la tibble pero a través de los parámetros <code>.before</code> y <code>.after</code> se puede controlar de manera más precisa la nueva asignación de posiciones indicando antes o después de que variable se desean asignar las nuevas posiciónes de determinadas columnas. En la <a href="#fig-relocate-verb" class="quarto-xref">Figura&nbsp;<span>10.7</span></a> se ilustra gráficamente la manipulación que se puede realizar con la función <code>relocate()</code>.</p>
 <div id="fig-relocate-verb" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que muestra cómo la función relocate cambia la posición de las columnas sin alterar sus datos. A la izquierda hay una tabla con columnas en el orden a, b y c. Una flecha con el comando relocate indica mover la columna c, generando a la derecha una nueva tabla donde dicha columna ahora aparece al principio, reordenando las columnas como c, a y b.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-relocate-verb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -793,6 +793,661 @@ Figura&nbsp;10.7: Representación gráfica de la función <code>relocate()</code
 </section>
 <section id="sec-pipe-operator" class="level4" data-number="10.1.1.3">
 <h4 data-number="10.1.1.3" class="anchored" data-anchor-id="sec-pipe-operator"><span class="header-section-number">10.1.1.3</span> Operador pipe (<code>|&gt;</code>)</h4>
+<p>Cuando se manipulan datos usualmente se requieren combinar múltiples verbos para contestar una determinada pregunta. El operador <strong>pipe</strong> (<code>|&gt;</code>) permite realizar este proceso donde fue introducido en la versión <code>4.1.0</code> de R y motivado por un operador similar del paquete <a href="https://magrittr.tidyverse.org/"><code>magrittr</code></a> perteneciente al <code>tidyverse</code> (ver <code>?`|&gt;`</code>). Debido a que en el paquete <code>dplyr</code> se utilizan funciones para manipular datos en la <a href="#tbl-use-interpreation-pipe" class="quarto-xref">Tabla&nbsp;<span>10.1</span></a> se ilustra el uso y la interpretación del operador <code>|&gt;</code>.</p>
+<div class="cell">
+<div id="tbl-use-interpreation-pipe" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-use-interpreation-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;10.1: Uso e interpretación del operador pipe (<code>|&gt;</code>)
+</figcaption>
+<div aria-describedby="tbl-use-interpreation-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="pzveloiefp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pzveloiefp table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#pzveloiefp thead, #pzveloiefp tbody, #pzveloiefp tfoot, #pzveloiefp tr, #pzveloiefp td, #pzveloiefp th {
+  border-style: none;
+}
+
+#pzveloiefp p {
+  margin: 0;
+  padding: 0;
+}
+
+#pzveloiefp .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#pzveloiefp .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#pzveloiefp .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#pzveloiefp .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#pzveloiefp .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#pzveloiefp .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#pzveloiefp .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#pzveloiefp .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#pzveloiefp .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#pzveloiefp .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#pzveloiefp .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pzveloiefp .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#pzveloiefp .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#pzveloiefp .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#pzveloiefp .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pzveloiefp .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#pzveloiefp .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#pzveloiefp .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#pzveloiefp .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pzveloiefp .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#pzveloiefp .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pzveloiefp .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#pzveloiefp .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pzveloiefp .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pzveloiefp .gt_left {
+  text-align: left;
+}
+
+#pzveloiefp .gt_center {
+  text-align: center;
+}
+
+#pzveloiefp .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#pzveloiefp .gt_font_normal {
+  font-weight: normal;
+}
+
+#pzveloiefp .gt_font_bold {
+  font-weight: bold;
+}
+
+#pzveloiefp .gt_font_italic {
+  font-style: italic;
+}
+
+#pzveloiefp .gt_super {
+  font-size: 65%;
+}
+
+#pzveloiefp .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#pzveloiefp .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#pzveloiefp .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#pzveloiefp .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#pzveloiefp .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#pzveloiefp .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#pzveloiefp .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#pzveloiefp .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#pzveloiefp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="use" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Uso</th>
+<th id="interpretation" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Interpretación</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="use"><span class="math inline">\(a \;\lvert&gt;\; f(x)\)</span></td>
+<td class="gt_row gt_left" headers="interpretation"><span class="math inline">\(f(x = a)\)</span></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="use"><span class="math inline">\(b \;\lvert&gt;\; f(x, y)\)</span></td>
+<td class="gt_row gt_left" headers="interpretation"><span class="math inline">\(f(x = b, y)\)</span></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="use"><span class="math inline">\(c \;\lvert&gt;\; f(x) \;\lvert&gt;\; g(y)\)</span></td>
+<td class="gt_row gt_left" headers="interpretation"><span class="math inline">\(g(y = f(x = c))\)</span></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="use"><span class="math inline">\(d \;\lvert&gt;\; f(x, y = \text{\_})\)</span></td>
+<td class="gt_row gt_left" headers="interpretation"><span class="math inline">\(f(x, y = d)\)</span></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Para utilizar un ejemplo concreto utilizando el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> y una aplicación del operador <code>|&gt;</code> se podría por ejemplo estar interesado en identificar los casos atípicos en los cuales no sólo el puntaje del módulo de razonamiento cuantitativo o de lectura crítica es <span class="math inline">\(0\)</span> (ver <a href="x-y_relationships.html#lst-geom-point" class="quarto-xref">Listado&nbsp;<span>9.1</span></a>) sino si se presenta en al menos alguno de los otros módulos utilizando las funciones <code>select()</code>, <code>filter()</code> y <code>arrange()</code> más <code>glimpse()</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-example-use-pipe" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-example-use-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;10.1: Ejemplo en el uso del del operador pipe (<code>|&gt;</code>) para manipular datos
+</figcaption>
+<div aria-describedby="lst-example-use-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    ano,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    estu_consecutivo,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    estu_snies_prgmacademico,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    estu_prgm_academico,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    mod_competen_ciudada_punt,</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    mod_comuni_escrita_punt,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    mod_ingles_punt,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    mod_lectura_critica_punt,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    mod_razona_cuantitat_punt</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    mod_competen_ciudada_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>      mod_comuni_escrita_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>      mod_ingles_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>      mod_lectura_critica_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>      mod_razona_cuantitat_punt <span class="sc">==</span> <span class="dv">0</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(estu_prgm_academico) <span class="sc">|&gt;</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 85
+Columns: 9
+$ ano                       &lt;int&gt; 2021, 2021, 2022, 2022, …
+$ estu_consecutivo          &lt;chr&gt; "EK202120264262", "EK202…
+$ estu_snies_prgmacademico  &lt;int&gt; 6527, 6527, 6527, 6527, …
+$ estu_prgm_academico       &lt;chr&gt; "ADMINISTRACION DE EMPRE…
+$ mod_competen_ciudada_punt &lt;dbl&gt; 77, 0, 0, 136, 122, 83, …
+$ mod_comuni_escrita_punt   &lt;dbl&gt; 0, 128, 0, 0, 0, 0, 0, 1…
+$ mod_ingles_punt           &lt;dbl&gt; 187, 0, 0, 164, 144, 146…
+$ mod_lectura_critica_punt  &lt;dbl&gt; 92, 64, 0, 143, 132, 123…
+$ mod_razona_cuantitat_punt &lt;dbl&gt; 130, 0, 0, 107, 155, 146…</code></pre>
+</div>
+</div>
+<p>El <a href="#lst-example-use-pipe" class="quarto-xref">Listado&nbsp;<span>10.1</span></a> ilustra las ventajas de hacer uso del operador <code>|&gt;</code> para que el código sea más legible donde permite:</p>
+<ol type="a">
+<li>Estructurar el proceso de manipulación de datos de manera secuencial de izquierda a derecha y leer el código de arriba hacía abajo</li>
+<li>Evita el uso de funciones anidadas</li>
+<li>Minimiza la necesidad de crear variables intermedias o definiciones de funciones</li>
+<li>Facilita agregar o eliminar pasos en cualquier parte de la secuencia en caso que se requiera</li>
+</ol>
+<p>Respecto al punto a. con relación al código del <a href="#lst-example-use-pipe" class="quarto-xref">Listado&nbsp;<span>10.1</span></a> es posible identificar inicialmente que se parte de la variable <code>saber_pro_genericas_faedis_2021_2024</code>, luego se seleccionan determinadas columnas, posteriormente se filtran determinadas filas utilizando ciertas condiciones lógicas para finalmente ordenar las observaciones de interés con base a los nombres de los programas académicos para darles un “vistazo”.</p>
+<p>En caso que no se use el operador <code>|&gt;</code> existen <span class="math inline">\(2\)</span> alternativas que se señalan en los puntos b. y c.&nbsp;donde el primero se ilustra en el <a href="#lst-code-using-nested-functions" class="quarto-xref">Listado&nbsp;<span>10.2</span></a> utilizando el mismo código pero con funciones anidadas, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-code-using-nested-functions" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-code-using-nested-functions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;10.2: Uso de funciones anidadas cuando no se usa el operador <code>|&gt;</code>
+</figcaption>
+<div aria-describedby="lst-code-using-nested-functions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">select</span>(</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>        saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>        ano,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>        estu_consecutivo,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>        estu_snies_prgmacademico,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>        estu_prgm_academico,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>        mod_competen_ciudada_punt,</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>        mod_comuni_escrita_punt,</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>        mod_ingles_punt,</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>        mod_lectura_critica_punt,</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>        mod_razona_cuantitat_punt</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>      mod_competen_ciudada_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>        mod_comuni_escrita_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>        mod_ingles_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>        mod_lectura_critica_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>        mod_razona_cuantitat_punt <span class="sc">==</span> <span class="dv">0</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>    estu_prgm_academico</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<p>En el <a href="#lst-code-using-nested-functions" class="quarto-xref">Listado&nbsp;<span>10.2</span></a> para entender el código, se debe leerlo de adentro hacía afuera donde es más difícil de comprender si se busca identificar la secuencia de pasos utilizada. También es posible crear variables intermedias donde este enfoque se ilustra en el <a href="#lst-code-using-intermediate-variables" class="quarto-xref">Listado&nbsp;<span>10.3</span></a> utilizando el mismo código, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-code-using-intermediate-variables" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-code-using-intermediate-variables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;10.3: Creación de variables intermedias cuando no se usa el operador <code>|&gt;</code>
+</figcaption>
+<div aria-describedby="lst-code-using-intermediate-variables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Seleccionar columnas ----</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>datos_seleccionados <span class="ot">&lt;-</span> <span class="fu">select</span>(</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  ano,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  estu_consecutivo,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  estu_snies_prgmacademico,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  estu_prgm_academico,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  mod_competen_ciudada_punt,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  mod_comuni_escrita_punt,</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  mod_ingles_punt,</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  mod_lectura_critica_punt,</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  mod_razona_cuantitat_punt</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrar filas con ceros ----</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>datos_filtrados <span class="ot">&lt;-</span> <span class="fu">filter</span>(</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  datos_seleccionados,</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  mod_competen_ciudada_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    mod_comuni_escrita_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    mod_ingles_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>    mod_lectura_critica_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>    mod_razona_cuantitat_punt <span class="sc">==</span> <span class="dv">0</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Ordenar por programa académico ---</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>datos_ordenados <span class="ot">&lt;-</span> <span class="fu">arrange</span>(</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>  datos_filtrados,</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>  estu_prgm_academico</span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a><span class="co"># "Vistazo" de datos ----</span></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(datos_ordenados)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<p>En el <a href="#lst-code-using-intermediate-variables" class="quarto-xref">Listado&nbsp;<span>10.3</span></a> se crean variables intermedias adicionales para un análisis sencillo. Sin embargo, esta práctica puede saturar el entorno de trabajo, aumentar el riesgo de cometer errores por confusión de nombres y dificulta el mantenimiento del código si se desea agregar un nuevo paso en la secuencia<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</p>
+<p>Esto no significa que se deba optar por el extremo opuesto y utilizar el operador <code>|&gt;</code> de manera indiscriminada para generar secuencias interminables de pasos. En la práctica en el análisis de datos, tarde o temprano será necesario e incluso recomendable crear variables intermedias. La clave no es eliminar por completo la creación de variables, sino aprender a gestionar un conjunto mínimo y adecuado de variables con un propósito claro, en lugar de lidiar con una enorme cantidad de objetos.</p>
+<p>En la <a href="#tbl-use-interpreation-pipe" class="quarto-xref">Tabla&nbsp;<span>10.1</span></a> se señala en la última fila el uso del guion bajo (<code>_</code>). Este elemento funciona como un marcador de posición (<em>placeholder</em> en inglés) que sirve para controlar de manera explícita en qué lugar se insertará el objeto debido a que, por defecto, este se introduce como el primer argumento de una función. En algunos casos se hace necesario modificar este comportamiento por defecto donde por ejemplo el <a href="x-y_relationships.html#lst-lm" class="quarto-xref">Listado&nbsp;<span>9.3</span></a> se puede reescribir utilizando el operador <code>|&gt;</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-lm-pipe" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-lm-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;10.4: Uso del marcador de posición <code>_</code> y el operador <code>|&gt;</code> en la función <code>lm()</code>
+</figcaption>
+<div aria-describedby="lst-lm-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="sc">|&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> mod_razona_cuantitat_punt <span class="sc">~</span> mod_lectura_critica_punt,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> _</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = mod_razona_cuantitat_punt ~ mod_lectura_critica_punt, 
+    data = saber_pro_genericas_faedis_2021_2024)
+
+Coefficients:
+             (Intercept)  mod_lectura_critica_punt  
+                 64.0985                    0.5856  </code></pre>
+</div>
+</div>
 </section>
 <section id="sec-verbs-collapse-group-ungroup" class="level4" data-number="10.1.1.4">
 <h4 data-number="10.1.1.4" class="anchored" data-anchor-id="sec-verbs-collapse-group-ungroup"><span class="header-section-number">10.1.1.4</span> Verbos para collapsar, agrupar y desagrupar filas</h4>
@@ -804,6 +1459,9 @@ Figura&nbsp;10.7: Representación gráfica de la función <code>relocate()</code
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-karlton_naming_2017" class="csl-entry" role="listitem">
+Karlton, D. P. (2017). <em>Naming things is hard <span></span> dk</em>. <a href="https://www.karlton.org/2017/12/naming-things-hard/">https://www.karlton.org/2017/12/naming-things-hard/</a>
+</div>
 <div id="ref-wickham_tidy_2014" class="csl-entry" role="listitem">
 Wickham, H. (2014). Tidy <span>Data</span>. <em>Journal of Statistical Software</em>, <em>59</em>(10). <a href="https://doi.org/10.18637/jss.v059.i10">https://doi.org/10.18637/jss.v059.i10</a>
 </div>
@@ -815,9 +1473,10 @@ Wickham, H. (2023). <em>R for <span>Data</span> <span>Science</span></em> (2.ª 
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>En la documentación de ayuda de R, al buscar por ejemplo información acerca de la función <code>filter()</code> (ver <a href="how_to_code_in_r.html#lst-filter-relational-operators" class="quarto-xref">Listado&nbsp;<span>5.10</span></a>) con el comando <code>?filter</code> en la consola, la descripción del resultado se encuentra bajo la sección titulada <strong>Value</strong>. En este libro se usará el término “resultado” de la función y no “valor”, con el fin de utilizar una expresión más intuitivo para el lector.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>En la documentación de ayuda de R, al buscar por ejemplo información acerca de la función <code>filter()</code> (ver <a href="how_to_code_in_r.html#lst-filter-relational-operators" class="quarto-xref">Listado&nbsp;<span>5.10</span></a>) con el comando <code>?filter</code> en la consola, la descripción del resultado se encuentra bajo la sección titulada <strong>Value</strong>. En este libro se usará el término “resultado” de la función y no “valor”, con el fin de utilizar una expresión más intuitiva para el lector.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>A diferencia de otros lenguajes de programación como <a href="https://python-history.blogspot.com/2013/10/why-python-uses-0-based-indexing.html">Python</a>, los índices de las posiciones comienzan en cero (<code>0</code>). En <a href="https://cran.r-project.org/doc/manuals/r-release/R-intro.html#Index-vectors_003b-selecting-and-modifying-subsets-of-a-data-set">R</a> al igual que en otros lenguajes de programación como <a href="https://docs.julialang.org/en/v1/manual/noteworthy-differences/#Noteworthy-differences-from-Python">Julia</a> se utiliza una indexación basada en <code>1</code>. Esto significa que la primera fila o elemento siempre corresponde a la posición <code>1</code>, y el uso del <code>0</code> no se toma en cuenta para seleccionar elementos.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Si <span class="math inline">\(x\)</span> es una variable numérica entonces su normalización en el intervalo <span class="math inline">\([0, 1]\)</span> se puede definir como <span class="math inline">\(x_{norm} = \frac{x- \min(x)}{\max(x) - \min(x)}\)</span> donde <span class="math inline">\(\min(x)\)</span> es el valor mínimo de la variable <span class="math inline">\(x\)</span> y <span class="math inline">\(\max(x)\)</span> es el valor máximo de la variable <span class="math inline">\(x\)</span>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Aunque nombrar variables en este contexto parece un aspecto menor, en las ciencias de la computación es célebre la frase de Philip Lewis Karlton durante su tiempo en Netscape, donde señaló que <em>“There are only two hard things in Computer Science: cache invalidation and naming things.”</em> <span class="citation" data-cites="karlton_naming_2017">(<a href="references.html#ref-karlton_naming_2017" role="doc-biblioref">Karlton, 2017</a>)</span><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
