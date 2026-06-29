@@ -141,14 +141,13 @@ El paquete `ggplot2` no almacena o guarda los parámetros estimados del modelo. 
 ```{r}
 #| lst-label: lst-lm
 #| lst-cap: Uso de la función `lm()` para obtener la estimación de los parámetros en una regresión lineal simple
-#| eval: false
 lm(
   formula = mod_razona_cuantitat_punt ~ mod_lectura_critica_punt,
   data = saber_pro_genericas_faedis_2021_2024
 )
 ```
 
-En la @tbl-estimated-parameters se señalan las estimaciones de los respectivos parámetros relacionados con la recta del gráfico generado por el @lst-geom-smooth mediante la función `geom_smooth()` y el parámetro `method` con el argumento `"lm"`.
+En la @tbl-estimated-parameters se señalan las estimaciones de los respectivos parámetros redondeados a $2$ decimales y relacionados con la recta del gráfico generado por el @lst-geom-smooth mediante la función `geom_smooth()` y el parámetro `method` con el argumento `"lm"`.
 
 ```{r}
 #| label: tbl-estimated-parameters
@@ -219,7 +218,7 @@ ggplot(
   )
 ```
 
-En el gráfico generado por el @lst-facet-wrap se puede identificar que la pendiente de la recta generada por la función `geom_smooth()` junto con el parámetro `method` y el argumento `"lm"` no es la misma cuando se examina la tendencia general para cada uno de los programas académicos. En la @tbl-estimated-parameters-facet se señalan las estimaciones de los respectivos parámetros para cada uno de los programas académcios relacionados con la rectas del gráfico generado por el @lst-facet-wrap mediante la función `geom_smooth()` y el parámetro `method` con el argumento `"lm"`.
+En el gráfico generado por el @lst-facet-wrap se puede identificar que la pendiente de la recta generada por la función `geom_smooth()` junto con el parámetro `method` y el argumento `"lm"` no es la misma cuando se examina la tendencia general para cada uno de los programas académicos. En la @tbl-estimated-parameters-facet se señalan las estimaciones de los respectivos parámetros y redondeados a $2$ decimales para cada uno de los programas académcios relacionados con la rectas del gráfico generado por el @lst-facet-wrap mediante la función `geom_smooth()` y el parámetro `method` con el argumento `"lm"`.
 
 ```{r}
 #| label: tbl-estimated-parameters-facet

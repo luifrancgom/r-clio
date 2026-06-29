@@ -10,6 +10,7 @@ source("_common.R")
 #| echo: false
 #| message: false
 library(tidyverse)
+library(gt)
 ```
 
 Este capítulo se basa en [@wickham_r_2023, Cap. 3] así como en la documentación oficial de [`dplyr`](https://dplyr.tidyverse.org/articles/dplyr.html) donde tiene como propósito introducir una **gramática de manipulación de datos** a través de un conjunto consistente de verbos para resolver las tareas más comunes en el manejo de datos cuando se tiene una sola tabla utilizando el paquete `dplyr` e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado en Colombia.
@@ -50,7 +51,7 @@ En el paquete `dplyr`, para mantener la consistencia de las funciones que lo com
 2. Los argumentos subsiguientes especifican las columnas, filas o expresiones que operarán sobre las filas o columnas.
 3. El resultado[^chap-10-footnote-1] de una función en `dplyr` es siempre una nueva tibble (o en su defecto un objeto de R similar).
 
-[^chap-10-footnote-1]: En la documentación de ayuda de R, al buscar por ejemplo información acerca de la función `filter()` (ver @lst-filter-relational-operators) con el comando `?filter` en la consola, la descripción del resultado se encuentra bajo la sección titulada **Value**. En este libro se usará el término "resultado" de la función y no "valor", con el fin de utilizar una expresión más intuitivo para el lector.
+[^chap-10-footnote-1]: En la documentación de ayuda de R, al buscar por ejemplo información acerca de la función `filter()` (ver @lst-filter-relational-operators) con el comando `?filter` en la consola, la descripción del resultado se encuentra bajo la sección titulada **Value**. En este libro se usará el término "resultado" de la función y no "valor", con el fin de utilizar una expresión más intuitiva para el lector.
 
 ### Verbos {#sec-verbs}
 
@@ -168,7 +169,7 @@ mutate(
 )
 ```
 
-La cuarta función, correspondiente a `relocate()`, se utiliza para modificar la posición de las columnas utilizando la misma sintaxis de la función `select`. Por defecto esta función reasigna las columnas en las primeras posiciones de la tibble pero a través de los parámetros `.before` y `.after` se puede controlar de manera más precisa la nueva asignación de posiciones indicando antes o después de que variable se desean asignar las nuevas posiciónes de determinas columnas. En la @fig-relocate-verb se ilustra gráficamente la manipulación que se puede realizar con la función `relocate()`.
+La cuarta función, correspondiente a `relocate()`, se utiliza para modificar la posición de las columnas utilizando la misma sintaxis de la función `select`. Por defecto esta función reasigna las columnas en las primeras posiciones de la tibble pero a través de los parámetros `.before` y `.after` se puede controlar de manera más precisa la nueva asignación de posiciones indicando antes o después de que variable se desean asignar las nuevas posiciónes de determinadas columnas. En la @fig-relocate-verb se ilustra gráficamente la manipulación que se puede realizar con la función `relocate()`.
 
 ![Representación gráfica de la función `relocate()`](images/relocate.png){#fig-relocate-verb fig-alt="Diagrama conceptual que muestra cómo la función relocate cambia la posición de las columnas sin alterar sus datos. A la izquierda hay una tabla con columnas en el orden a, b y c. Una flecha con el comando relocate indica mover la columna c, generando a la derecha una nueva tabla donde dicha columna ahora aparece al principio, reordenando las columnas como c, a y b."}
 
@@ -184,7 +185,163 @@ relocate(
 
 #### Operador pipe (`|>`) {#sec-pipe-operator}
 
+Cuando se manipulan datos usualmente se requieren combinar múltiples verbos para contestar una determinada pregunta. El operador **pipe** (`|>`) permite realizar este proceso donde fue introducido en la versión `4.1.0` de R y motivado por un operador similar del paquete [`magrittr`](https://magrittr.tidyverse.org/) perteneciente al `tidyverse` (ver `` ?`|>` ``). Debido a que en el paquete `dplyr` se utilizan funciones para manipular datos en la @tbl-use-interpreation-pipe se ilustra el uso y la interpretación del operador `|>`.
 
+```{r}
+#| label: tbl-use-interpreation-pipe
+#| tbl-cap: Uso e interpretación del operador pipe (`|>`)
+#| echo: false
+use_interpretation_pipe <- tibble(
+  use = c(
+    "$a \\;\\lvert>\\; f(x)$",
+    "$b \\;\\lvert>\\; f(x, y)$",
+    "$c \\;\\lvert>\\; f(x) \\;\\lvert>\\; g(y)$",
+    "$d \\;\\lvert>\\; f(x, y = \\text{\\_})$"
+  ),
+  interpretation = c(
+    "$f(x = a)$",
+    "$f(x = b, y)$",
+    "$g(y = f(x = c))$",
+    "$f(x, y = d)$"
+  )
+)
+
+use_interpretation_pipe |>
+  gt() |>
+  cols_label(
+    use = "Uso",
+    interpretation = "Interpretación"
+  ) |>
+  fmt_markdown()
+```
+
+Para utilizar un ejemplo concreto utilizando el conjunto de datos `2021-2024_saber-pro-genericas_faedis.rds` y una aplicación del operador `|>` se podría por ejemplo estar interesado en identificar los casos atípicos en los cuales no sólo el puntaje del módulo de razonamiento cuantitativo o de lectura crítica es $0$ (ver @lst-geom-point) sino si se presenta en al menos alguno de los otros módulos utilizando las funciones `select()`, `filter()` y `arrange()` más `glimpse()`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-example-use-pipe
+#| lst-cap: Ejemplo en el uso del del operador pipe (`|>`) para manipular datos 
+saber_pro_genericas_faedis_2021_2024 |>
+  select(
+    ano,
+    estu_consecutivo,
+    estu_snies_prgmacademico,
+    estu_prgm_academico,
+    mod_competen_ciudada_punt,
+    mod_comuni_escrita_punt,
+    mod_ingles_punt,
+    mod_lectura_critica_punt,
+    mod_razona_cuantitat_punt
+  ) |>
+  filter(
+    mod_competen_ciudada_punt == 0 |
+      mod_comuni_escrita_punt == 0 |
+      mod_ingles_punt == 0 |
+      mod_lectura_critica_punt == 0 |
+      mod_razona_cuantitat_punt == 0
+  ) |>
+  arrange(estu_prgm_academico) |>
+  glimpse()
+```
+
+El @lst-example-use-pipe ilustra las ventajas de hacer uso del operador `|>` para que el código sea más legible donde permite:
+
+a. Estructurar el proceso de manipulación de datos de manera secuencial de izquierda a derecha y leer el código de arriba hacía abajo
+b. Evita el uso de funciones anidadas
+c. Minimiza la necesidad de crear variables intermedias o definiciones de funciones
+d. Facilita agregar o eliminar pasos en cualquier parte de la secuencia en caso que se requiera
+
+Respecto al punto a. con relación al código del @lst-example-use-pipe es posible identificar inicialmente que se parte de la variable `saber_pro_genericas_faedis_2021_2024`, luego se seleccionan determinadas columnas, posteriormente se filtran determinadas filas utilizando ciertas condiciones lógicas para finalmente ordenar las observaciones de interés con base a los nombres de los programas académicos para darles un "vistazo".
+
+En caso que no se use el operador `|>` existen $2$ alternativas que se señalan en los puntos b. y c. donde el primero se ilustra en el @lst-code-using-nested-functions utilizando el mismo código pero con funciones anidadas, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-code-using-nested-functions
+#| lst-cap: Uso de funciones anidadas cuando no se usa el operador `|>`
+#| eval: false
+glimpse(
+  arrange(
+    filter(
+      select(
+        saber_pro_genericas_faedis_2021_2024,
+        ano,
+        estu_consecutivo,
+        estu_snies_prgmacademico,
+        estu_prgm_academico,
+        mod_competen_ciudada_punt,
+        mod_comuni_escrita_punt,
+        mod_ingles_punt,
+        mod_lectura_critica_punt,
+        mod_razona_cuantitat_punt
+      ),
+      mod_competen_ciudada_punt == 0 |
+        mod_comuni_escrita_punt == 0 |
+        mod_ingles_punt == 0 |
+        mod_lectura_critica_punt == 0 |
+        mod_razona_cuantitat_punt == 0
+    ),
+    estu_prgm_academico
+  )
+)
+```
+
+En el @lst-code-using-nested-functions para entender el código, se debe leerlo de adentro hacía afuera donde es más difícil de comprender si se busca identificar la secuencia de pasos utilizada. También es posible crear variables intermedias donde este enfoque se  ilustra en el @lst-code-using-intermediate-variables utilizando el mismo código, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-code-using-intermediate-variables
+#| lst-cap: Creación de variables intermedias cuando no se usa el operador `|>`
+#| eval: false
+
+# Seleccionar columnas ----
+datos_seleccionados <- select(
+  saber_pro_genericas_faedis_2021_2024,
+  ano,
+  estu_consecutivo,
+  estu_snies_prgmacademico,
+  estu_prgm_academico,
+  mod_competen_ciudada_punt,
+  mod_comuni_escrita_punt,
+  mod_ingles_punt,
+  mod_lectura_critica_punt,
+  mod_razona_cuantitat_punt
+)
+
+# Filtrar filas con ceros ----
+datos_filtrados <- filter(
+  datos_seleccionados,
+  mod_competen_ciudada_punt == 0 |
+    mod_comuni_escrita_punt == 0 |
+    mod_ingles_punt == 0 |
+    mod_lectura_critica_punt == 0 |
+    mod_razona_cuantitat_punt == 0
+)
+
+# Ordenar por programa académico ---
+datos_ordenados <- arrange(
+  datos_filtrados,
+  estu_prgm_academico
+)
+
+# "Vistazo" de datos ----
+glimpse(datos_ordenados)
+```
+
+En el @lst-code-using-intermediate-variables se crean variables intermedias adicionales para un análisis sencillo. Sin embargo, esta práctica puede saturar el entorno de trabajo, aumentar el riesgo de cometer errores por confusión de nombres y dificulta el mantenimiento del código si se desea agregar un nuevo paso en la secuencia[^chap-10-footnote-4].
+
+[^chap-10-footnote-4]: Aunque nombrar variables en este contexto parece un aspecto menor, en las ciencias de la computación es célebre la frase de Philip Lewis Karlton durante su tiempo en Netscape, donde señaló que *"There are only two hard things in Computer Science: cache invalidation and naming things."* [@karlton_naming_2017] 
+
+Esto no significa que se deba optar por el extremo opuesto y utilizar el operador `|>` de manera indiscriminada para generar secuencias interminables de pasos. En la práctica en el análisis de datos, tarde o temprano será necesario e incluso recomendable crear variables intermedias. La clave no es eliminar por completo la creación de variables, sino aprender a gestionar un conjunto mínimo y adecuado de variables con un propósito claro, en lugar de lidiar con una enorme cantidad de objetos.
+
+En la @tbl-use-interpreation-pipe se señala en la última fila el uso del guion bajo (`_`). Este elemento funciona como un marcador de posición (*placeholder* en inglés) que sirve para controlar de manera explícita en qué lugar se insertará el objeto debido a que, por defecto, este se introduce como el primer argumento de una función. En algunos casos se hace necesario modificar este comportamiento por defecto donde por ejemplo el @lst-lm se puede reescribir utilizando el operador `|>`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-lm-pipe
+#| lst-cap: Uso del marcador de posición `_` y el operador `|>` en la función `lm()`
+saber_pro_genericas_faedis_2021_2024 |>
+  lm(
+    formula = mod_razona_cuantitat_punt ~ mod_lectura_critica_punt,
+    data = _
+  )
+```
 
 #### Verbos para collapsar, agrupar y desagrupar filas {#sec-verbs-collapse-group-ungroup}
 
