@@ -60,7 +60,7 @@ En la [@sec-how-to-name-files-folders] abarcaremos con más detalle la forma rec
 Segundo, aunque es posible aplicar ajustes avanzados, te sugerimos mantener la configuración inicial lo más simple posible. Para el desarrollo de este libro, solo es necesario que selecciones la versión de R que utilizarás. Otras opciones como **Initialize Git repository** o **Use `renv` to create a reproducible environment** no las abarcaremos.
 
 ::: {#nte-3-chap-3 .callout-note}
-Si deseas profundizar en éstas opciones más adelante, cuando estes familiarizado con R y Positron, puedes consultar [@bryan_happy_2024] y la [documentación oficial](https://rstudio.github.io/renv/index.html) de `renv` 
+Si deseas profundizar en éstas opciones más adelante, cuando estes familiarizado con R y Positron, puedes consultar [@bryan_happy_2025] y la [documentación oficial](https://rstudio.github.io/renv/index.html) de `renv` 
 :::
 
 ## ¿Cómo nombrar archivos y carpetas? {#sec-how-to-name-files-folders}
