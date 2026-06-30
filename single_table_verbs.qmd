@@ -345,6 +345,70 @@ saber_pro_genericas_faedis_2021_2024 |>
 
 #### Verbos para collapsar, agrupar y desagrupar filas {#sec-verbs-collapse-group-ungroup}
 
+Esta categoría incluye las funciones `group_by()`, `summarise()` y `ungroup()`. La primera función, correspondiente a `group_by()`, se utiliza para convertir una tibble en una tibble agrupada de tal manera que los verbos posteriores que se apliquen se realizan por grupo. En la @fig-group-by-verb se ilustra gráficamente la manipulación que se puede realizar con la función `group_by()`.
 
+![Representación gráfica de la función `group_by()`](images/group_by.png){#fig-group-by-verb fig-alt="Diagrama conceptual que muestra cómo la función group_by agrupa las filas de una tabla según los valores de una columna. A la izquierda hay una tabla con columnas a, b y c, donde la columna a contiene dos celdas marrón oscuro (filas 1 y 4) y dos celdas ocre (filas 2 y 3). Una flecha con el comando group_by indica agrupar por la columna a, generando a la derecha la separación de los datos en dos subtablas independientes según su color: un grupo con las filas 1 y 4, y otro con las filas 2 y 3."}
+
+Para ilustrar el comportamiento de esta función con un ejemplo concreto puedes utilizar el conjunto de datos `2021-2024_saber-pro-genericas_faedis.rds` para agrupar el conjunto de datos por año y el género de los estudiantes a través de las variables `ano` y `estu_genero`:
+
+```{r}
+saber_pro_genericas_faedis_2021_2024 |>
+  group_by(
+    ano,
+    estu_genero
+  )
+```
+
+En la parte superior de la tibble además de indicar el número de filas así como las columnas que la componen (ver @lst-mpg-database) se incluye además un segundo comentario, `# Groups:   ano, estu_genero [8]`, que indica las variables que se utilizaron para realizar la agrupación así como el número de grupos formados. En este caso son $8$ teniendo en cuenta que se tienen $4$ años (`2021`, `2022`, `2023` y `2024`) y $2$ categorías de género (`F`, `M`) para un total de $4 \times 2 = 8$ grupos.
+
+La segunda función, correspondiente a `summarise()`, se utiliza para crear una tibble donde si existen variables agrupadas genera una fila por cada combinación de variables agrupadas y una columna por cada estadística descriptiva que se especifique. En caso que no existan variables agrupadas genera un a sola fila con la estadística descriptiva que se especifique y una columna por cada estadística descriptiva que se defina. En la @fig-summarise-verb se ilustra gráficamente la manipulación que se puede realizar con la función `summarise()`.
+
+![Representación gráfica de la función `summarise()`](images/summarise.png){#fig-summarise-verb fig-alt="Diagrama conceptual que muestra cómo la función summarise colapsa múltiples filas en una única estadística descriptiva. A la izquierda hay una tabla con columnas a, b y c, donde la columna a contiene cuatro filas con un gradiente de color que va desde el amarillo claro hasta el rojo oscuro. Una flecha con el comando summarise indica el cálculo f = mean(a), generando a la derecha una nueva tabla reducida a una única fila y una sola columna etiquetada como f de color naranja, la cual representa el promedio calculado."}
+
+Para ilustrar el comportamiento de esta función con un ejemplo concreto puedes utilizar el conjunto de datos `2021-2024_saber-pro-genericas_faedis.rds` donde con las variables agrupadas `ano` y `estu_genero`es posible calcular el puntaje global promedio redondeado a $0$ decimales por año y género:
+
+```{r}
+saber_pro_genericas_faedis_2021_2024 |>
+  group_by(
+    ano,
+    estu_genero
+  ) |>
+  summarise(
+    punt_global = mean(punt_global) |>
+      round(digits = 0)
+  )
+```
+
+Por defecto cuando existe variables agrupadas la función `summarise()` desagrupa por la última variable el resultado final, en este caso por `estu_genero`. Debido a lo anterior el paquete `dplyr` genera un mensaje indicando este comportamiento así como diferentes alternativas para no utilizar la función `group_by()` mediante el uso del parámetro `.by` y el argumento `c(ano, estu_genero)`, como `.by = c(ano, estu_genero)`. Aunque existe la anterior alternativa (ver @imp-1-chap-10) a lo largo del libro se utilizará de manera explícita la función `group_by()` cuando se busque hacer uso la función `summarise()` para calcular estadísticas descriptivas por grupos.
+
+::: {#imp-1-chap-10 .callout-important}
+En el paquete `dplyr` existen $2$ formas de agrupar:
+
+1. Utilizando `group_by()` donde la agrupación persiste al aplicar diferentes verbos.
+2. Utilizando los parámetros `.by` o `by` dentro de un determinado verbo donde la agrupación sólo afecta el verbo donde se utilize el parámetro.
+
+El lector interesado puede consultar la [documentación oficial](https://dplyr.tidyverse.org/reference/dplyr_by.html) de `dplyr` para conocer más detalles de éste aspecto en caso que sea de su interés. Sin embargo, a lo largo del libro utilizaremos la función `group_by()` de manera explícita y no los parámetros `.by` o `by` dentro de los verbos.
+
+Una vez estes familiarizado con el paquete `dplyr` podras examinar el comportamiento de utilizar una u otra opción. Por ahora el enfoque es conocer los diferentes verbos disponibles en el contexto de la gramática de manipulación de datos. 
+:::
+
+La tercera función, correspondiente a `ungroup()`, se utiliza para desagrupar una tibble agrupada. En caso que no se especifiquen de manera explícita las variables a utilizar para realizar la desagrupación esta función genera una tibble totalmente desagrupada. En la @fig-ungroup-verb se ilustra gráficamente la manipulación que se puede realizar con la función `ungroup()`.
+
+![Representación gráfica de la función `ungroup()`](images/ungroup.png){#fig-ungroup-verb fig-alt="Diagrama conceptual que muestra cómo la función ungroup deshace la agrupación de una tabla para volver a consolidarla en un único bloque. A la izquierda se observan dos subtablas independientes o grupos separados: el de arriba con las filas 1 y 4 (color marrón oscuro en la columna a) y el de abajo con las filas 2 y 3 (color ocre en la columna a). Una flecha central con el comando ungroup indica la eliminación del criterio de agrupación por la columna a, generando a la derecha una única tabla unificada y ordenada de forma secuencial con las filas del 1 al 4."}
+
+Para ilustrar el comportamiento de esta función con un ejemplo concreto puedes utilizar el conjunto de datos `2021-2024_saber-pro-genericas_faedis.rds` donde es posible desagrupar completamente una tibble que puede ser utilizada como insumo para crear un gráfico similar a la @fig-2-chap-9 pero por género:
+
+```{r}
+saber_pro_genericas_faedis_2021_2024 |>
+  group_by(
+    ano,
+    estu_genero
+  ) |>
+  summarise(
+    punt_global = mean(punt_global) |>
+      round(digits = 0)
+  ) |>
+  ungroup()
+```
 
 ## Caso de estudio: obtención de datos de interés del Saber-Pro para FAEDIS {#sec-case-study-select} 
