@@ -1451,6 +1451,161 @@ Coefficients:
 </section>
 <section id="sec-verbs-collapse-group-ungroup" class="level4" data-number="10.1.1.4">
 <h4 data-number="10.1.1.4" class="anchored" data-anchor-id="sec-verbs-collapse-group-ungroup"><span class="header-section-number">10.1.1.4</span> Verbos para collapsar, agrupar y desagrupar filas</h4>
+<p>Esta categoría incluye las funciones <code>group_by()</code>, <code>summarise()</code> y <code>ungroup()</code>. La primera función, correspondiente a <code>group_by()</code>, se utiliza para convertir una tibble en una tibble agrupada de tal manera que los verbos posteriores que se apliquen se realizan por grupo. En la <a href="#fig-group-by-verb" class="quarto-xref">Figura&nbsp;<span>10.8</span></a> se ilustra gráficamente la manipulación que se puede realizar con la función <code>group_by()</code>.</p>
+<div id="fig-group-by-verb" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que muestra cómo la función group_by agrupa las filas de una tabla según los valores de una columna. A la izquierda hay una tabla con columnas a, b y c, donde la columna a contiene dos celdas marrón oscuro (filas 1 y 4) y dos celdas ocre (filas 2 y 3). Una flecha con el comando group_by indica agrupar por la columna a, generando a la derecha la separación de los datos en dos subtablas independientes según su color: un grupo con las filas 1 y 4, y otro con las filas 2 y 3.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-group-by-verb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/group_by.png" class="img-fluid figure-img" alt="Diagrama conceptual que muestra cómo la función group_by agrupa las filas de una tabla según los valores de una columna. A la izquierda hay una tabla con columnas a, b y c, donde la columna a contiene dos celdas marrón oscuro (filas 1 y 4) y dos celdas ocre (filas 2 y 3). Una flecha con el comando group_by indica agrupar por la columna a, generando a la derecha la separación de los datos en dos subtablas independientes según su color: un grupo con las filas 1 y 4, y otro con las filas 2 y 3.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-group-by-verb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;10.8: Representación gráfica de la función <code>group_by()</code>
+</figcaption>
+</figure>
+</div>
+<p>Para ilustrar el comportamiento de esta función con un ejemplo concreto puedes utilizar el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> para agrupar el conjunto de datos por año y el género de los estudiantes a través de las variables <code>ano</code> y <code>estu_genero</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    ano,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    estu_genero</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,239 × 20
+# Groups:   ano, estu_genero [8]
+     ano estu_consecutivo estu_genero estu_semestrecursa
+   &lt;int&gt; &lt;chr&gt;            &lt;fct&gt;       &lt;ord&gt;             
+ 1  2021 EK202120262469   M           09                
+ 2  2021 EK202120116785   M           09                
+ 3  2021 EK202120116868   M           09                
+ 4  2021 EK202120116831   M           09                
+ 5  2021 EK202120116814   F           09                
+ 6  2021 EK202120117053   F           09                
+ 7  2021 EK202120262258   F           08                
+ 8  2021 EK202120262692   F           09                
+ 9  2021 EK202120117033   F           08                
+10  2021 EK202120117014   F           08                
+# ℹ 1,229 more rows
+# ℹ 16 more variables: fami_estratovivienda &lt;ord&gt;,
+#   fami_educacionmadre &lt;ord&gt;, fami_educacionpadre &lt;fct&gt;,
+#   estu_cod_depto_presentacion &lt;chr&gt;,
+#   estu_depto_presentacion &lt;chr&gt;,
+#   estu_cod_mcpio_presentacion &lt;chr&gt;,
+#   estu_mcpio_presentacion &lt;chr&gt;, …</code></pre>
+</div>
+</div>
+<p>En la parte superior de la tibble además de indicar el número de filas así como las columnas que la componen (ver <a href="r_packages.html#lst-mpg-database" class="quarto-xref">Listado&nbsp;<span>4.3</span></a>) se incluye además un segundo comentario, <code># Groups:   ano, estu_genero [8]</code>, que indica las variables que se utilizaron para realizar la agrupación así como el número de grupos formados. En este caso son <span class="math inline">\(8\)</span> teniendo en cuenta que se tienen <span class="math inline">\(4\)</span> años (<code>2021</code>, <code>2022</code>, <code>2023</code> y <code>2024</code>) y <span class="math inline">\(2\)</span> categorías de género (<code>F</code>, <code>M</code>) para un total de <span class="math inline">\(4 \times 2 = 8\)</span> grupos.</p>
+<p>La segunda función, correspondiente a <code>summarise()</code>, se utiliza para crear una tibble donde si existen variables agrupadas genera una fila por cada combinación de variables agrupadas y una columna por cada estadística descriptiva que se especifique. En caso que no existan variables agrupadas genera un a sola fila con la estadística descriptiva que se especifique y una columna por cada estadística descriptiva que se defina. En la <a href="#fig-summarise-verb" class="quarto-xref">Figura&nbsp;<span>10.9</span></a> se ilustra gráficamente la manipulación que se puede realizar con la función <code>summarise()</code>.</p>
+<div id="fig-summarise-verb" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que muestra cómo la función summarise colapsa múltiples filas en una única estadística descriptiva. A la izquierda hay una tabla con columnas a, b y c, donde la columna a contiene cuatro filas con un gradiente de color que va desde el amarillo claro hasta el rojo oscuro. Una flecha con el comando summarise indica el cálculo f = mean(a), generando a la derecha una nueva tabla reducida a una única fila y una sola columna etiquetada como f de color naranja, la cual representa el promedio calculado.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-summarise-verb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/summarise.png" class="img-fluid figure-img" alt="Diagrama conceptual que muestra cómo la función summarise colapsa múltiples filas en una única estadística descriptiva. A la izquierda hay una tabla con columnas a, b y c, donde la columna a contiene cuatro filas con un gradiente de color que va desde el amarillo claro hasta el rojo oscuro. Una flecha con el comando summarise indica el cálculo f = mean(a), generando a la derecha una nueva tabla reducida a una única fila y una sola columna etiquetada como f de color naranja, la cual representa el promedio calculado.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-summarise-verb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;10.9: Representación gráfica de la función <code>summarise()</code>
+</figcaption>
+</figure>
+</div>
+<p>Para ilustrar el comportamiento de esta función con un ejemplo concreto puedes utilizar el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> donde con las variables agrupadas <code>ano</code> y <code>estu_genero</code>es posible calcular el puntaje global promedio redondeado a <span class="math inline">\(0\)</span> decimales por año y género:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    ano,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    estu_genero</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">punt_global =</span> <span class="fu">mean</span>(punt_global) <span class="sc">|&gt;</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">0</span>)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has regrouped the output.
+ℹ Summaries were computed grouped by ano and estu_genero.
+ℹ Output is grouped by ano.
+ℹ Use `summarise(.groups = "drop_last")` to silence this
+  message.
+ℹ Use `summarise(.by = c(ano, estu_genero))` for
+  per-operation grouping (`?dplyr::dplyr_by`) instead.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 3
+# Groups:   ano [4]
+    ano estu_genero punt_global
+  &lt;int&gt; &lt;fct&gt;             &lt;dbl&gt;
+1  2021 F                   147
+2  2021 M                   148
+3  2022 F                   144
+4  2022 M                   147
+5  2023 F                   148
+6  2023 M                   147
+7  2024 F                   150
+8  2024 M                   148</code></pre>
+</div>
+</div>
+<p>Por defecto cuando existe variables agrupadas la función <code>summarise()</code> desagrupa por la última variable el resultado final, en este caso por <code>estu_genero</code>. Debido a lo anterior el paquete <code>dplyr</code> genera un mensaje indicando este comportamiento así como diferentes alternativas para no utilizar la función <code>group_by()</code> mediante el uso del parámetro <code>.by</code> y el argumento <code>c(ano, estu_genero)</code>, como <code>.by = c(ano, estu_genero)</code>. Aunque existe la anterior alternativa (ver <a href="#imp-1-chap-10" class="quarto-xref">Important&nbsp;<span>10.1</span></a>) a lo largo del libro se utilizará de manera explícita la función <code>group_by()</code> cuando se busque hacer uso la función <code>summarise()</code> para calcular estadísticas descriptivas por grupos.</p>
+<div id="imp-1-chap-10" class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante&nbsp;10.1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En el paquete <code>dplyr</code> existen <span class="math inline">\(2\)</span> formas de agrupar:</p>
+<ol type="1">
+<li>Utilizando <code>group_by()</code> donde la agrupación persiste al aplicar diferentes verbos.</li>
+<li>Utilizando los parámetros <code>.by</code> o <code>by</code> dentro de un determinado verbo donde la agrupación sólo afecta el verbo donde se utilize el parámetro.</li>
+</ol>
+<p>El lector interesado puede consultar la <a href="https://dplyr.tidyverse.org/reference/dplyr_by.html">documentación oficial</a> de <code>dplyr</code> para conocer más detalles de éste aspecto en caso que sea de su interés. Sin embargo, a lo largo del libro utilizaremos la función <code>group_by()</code> de manera explícita y no los parámetros <code>.by</code> o <code>by</code> dentro de los verbos.</p>
+<p>Una vez estes familiarizado con el paquete <code>dplyr</code> podras examinar el comportamiento de utilizar una u otra opción. Por ahora el enfoque es conocer los diferentes verbos disponibles en el contexto de la gramática de manipulación de datos.</p>
+</div>
+</div>
+<p>La tercera función, correspondiente a <code>ungroup()</code>, se utiliza para desagrupar una tibble agrupada. En caso que no se especifiquen de manera explícita las variables a utilizar para realizar la desagrupación esta función genera una tibble totalmente desagrupada. En la <a href="#fig-ungroup-verb" class="quarto-xref">Figura&nbsp;<span>10.10</span></a> se ilustra gráficamente la manipulación que se puede realizar con la función <code>ungroup()</code>.</p>
+<div id="fig-ungroup-verb" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que muestra cómo la función ungroup deshace la agrupación de una tabla para volver a consolidarla en un único bloque. A la izquierda se observan dos subtablas independientes o grupos separados: el de arriba con las filas 1 y 4 (color marrón oscuro en la columna a) y el de abajo con las filas 2 y 3 (color ocre en la columna a). Una flecha central con el comando ungroup indica la eliminación del criterio de agrupación por la columna a, generando a la derecha una única tabla unificada y ordenada de forma secuencial con las filas del 1 al 4.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ungroup-verb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ungroup.png" class="img-fluid figure-img" alt="Diagrama conceptual que muestra cómo la función ungroup deshace la agrupación de una tabla para volver a consolidarla en un único bloque. A la izquierda se observan dos subtablas independientes o grupos separados: el de arriba con las filas 1 y 4 (color marrón oscuro en la columna a) y el de abajo con las filas 2 y 3 (color ocre en la columna a). Una flecha central con el comando ungroup indica la eliminación del criterio de agrupación por la columna a, generando a la derecha una única tabla unificada y ordenada de forma secuencial con las filas del 1 al 4.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ungroup-verb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;10.10: Representación gráfica de la función <code>ungroup()</code>
+</figcaption>
+</figure>
+</div>
+<p>Para ilustrar el comportamiento de esta función con un ejemplo concreto puedes utilizar el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> donde es posible desagrupar completamente una tibble que puede ser utilizada como insumo para crear un gráfico similar a la <a href="x-y_relationships.html#fig-2-chap-9" class="quarto-xref">Figura&nbsp;<span>9.2</span></a> pero por género:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="sc">|&gt;</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    ano,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    estu_genero</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">punt_global =</span> <span class="fu">mean</span>(punt_global) <span class="sc">|&gt;</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">0</span>)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has regrouped the output.
+ℹ Summaries were computed grouped by ano and estu_genero.
+ℹ Output is grouped by ano.
+ℹ Use `summarise(.groups = "drop_last")` to silence this
+  message.
+ℹ Use `summarise(.by = c(ano, estu_genero))` for
+  per-operation grouping (`?dplyr::dplyr_by`) instead.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 3
+    ano estu_genero punt_global
+  &lt;int&gt; &lt;fct&gt;             &lt;dbl&gt;
+1  2021 F                   147
+2  2021 M                   148
+3  2022 F                   144
+4  2022 M                   147
+5  2023 F                   148
+6  2023 M                   147
+7  2024 F                   150
+8  2024 M                   148</code></pre>
+</div>
+</div>
 </section>
 </section>
 </section>
