@@ -115,7 +115,7 @@ En el archivo `001_uso-paquetes.R` carga el paquete `tidyverse` escribiendo el c
 library(tidyverse)
 ```
 
-Para que R procese la instrucción, sitúa el cursor (`|`) sobre la línea de código (ver @lst-load-tidyverse) y presiona la combinación de teclas {{< kbd mac=Command-Enter win=Ctrl-Enter linux=Ctrl-Enter >}}.
+Para que R procese la instrucción, sitúa el cursor (**|**) sobre la línea de código (ver @lst-load-tidyverse) y presiona la combinación de teclas {{< kbd mac=Command-Enter win=Ctrl-Enter linux=Ctrl-Enter >}}.
 
 ::: {#nte-execute-code .callout-note}
 Cada vez que requieras ver el resultado de una línea de código que se encuentra dentro de un archivo con extensión `.R` sitúa el cursor (`|`) sobre la línea de código y presiona la combinación de teclas {{< kbd mac=Command-Enter win=Ctrl-Enter linux=Ctrl-Enter >}}. De ahora en adelante nos referimos a éste proceso como **ejecutar el código**. 

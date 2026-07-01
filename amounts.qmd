@@ -98,7 +98,7 @@ ggplot(
   )
 ```
 
-### Datos
+### Datos {#sec-data}
 
 El primer componente de la gramática de gráficos en capas son los datos. En ese sentido explorarás el conjuntos de datos en `2021-2024_saber-pro-genericas_faedis.rds`. Primero, debes cargar el paquete `tidyverse` utilizando el archivo `001_visualizar-cantidades-datos-faedis.R`
 
@@ -111,6 +111,8 @@ library(tidyverse)
 De esa manera puedes importar los datos para explorarlos en R como se señala a continuación teniendo en cuenta lo indicado en la @nte-1-chap-6.
 
 ```{r}
+#| lst-label: lst-import-data
+#| lst-cap: Importación de datos para obtener el insumo principal que se requiere para generar un gráfico
 #| eval: false
 # Importar datos ----
 saber_pro_genericas_faedis_2021_2024 <- read_rds(
@@ -119,7 +121,7 @@ saber_pro_genericas_faedis_2021_2024 <- read_rds(
 ```
 
 ::: {#nte-2-chap-6 .callout-note}
-En el @sec-rds se abarcará con más detalle la importación de datos para archivos con una extensión `.rds`. Por ahora, el enfoque del @sec-amounts será la visualización de un conjunto de datos.
+En el @sec-rds se abarcará con más detalle la importación de datos para archivos con una extensión `.rds` mediante la función `read_rds()`, teniendo en cuenta lo indicado en el @lst-import-data. Por ahora, el enfoque del @sec-amounts será la visualización de un conjunto de datos.
 :::
 
 Una vez importes el conjunto de datos, podrás darle un "vistazo" utilizando la functión `glimpse()` (ver @lst-glimpse) para identificar el número y los tipos de variables que lo componen, así como la cantidad de observaciones disponibles.
@@ -129,7 +131,7 @@ Una vez importes el conjunto de datos, podrás darle un "vistazo" utilizando la 
 glimpse(saber_pro_genericas_faedis_2021_2024)
 ```
 
-#### Descripción de variables
+#### Descripción de variables {#sec-variable-description}
 
 Para examinar y en particular crear un gráfico a partir de un conjunto de datos es necesario entender a que se refieren cada una de las variables que lo componen. En ese sentido, a continuación se describen cada una de las variables en `2021-2024_saber-pro-genericas_faedis.rds`:
 

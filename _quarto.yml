@@ -68,6 +68,7 @@ csl: references/apa.csl
 lang: es
 language: 
   crossref-nte-prefix: "Nota"
+  crossref-imp-prefix: "Importante"
 editor: source
 
 format:

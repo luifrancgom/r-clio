@@ -428,3 +428,27 @@ filter(
 ```
 
 En el @lst-filter-relational-operators, la función `filter()` requiere como primer argumento una tibble (o un objeto similar) y una expresión que resulte en un vector lógico. Los paquetes del `tidyverse` facilitan este proceso mediante el **enmascaramiento de datos** ([data masking](https://dplyr.tidyverse.org/articles/programming.html)). Este mecanismo permite que la expresión lógica (en este ejemplo, `costo_matricula > mean(costo_matricula)`) haga referencia directa a las columnas del objeto `costo_matricula_pregrado` como si fueran variables "independientes", eliminando la necesidad de utilizar el operador `$`. De esa manera requieres escribir menos texto al escribir código en R y es posible referirse a las variables de la tibble de una manera más natural al utilizar funciones del `tidyverse`.
+
+## Operadores lógicos vectorizados {#sec-vectorized-logical-operators}
+
+Los operadores lógicos vectorizados son operadores que realizan comparaciones elemento por elemento de manera similar a los operadores aritméticos (ver @tbl-arithmetic-operators) pero que se refieren a la negación lógica NO (`NOT` en inglés), el operador lógico Y (`AND` en inglés) y el operador lógico O (`OR` en inglés). En la @tbl-vectorized-logical-operators se señalan algunos de los operadores lógicos vectorizados utilizados en R.
+
+| Operador | Nombre | Operación |
+|:---:|:---|:---|
+| `!` | Negación lógica | NO (`NOT`) |
+| `&` | Conjunción lógica | Y (`AND`) elemento a elemento |
+| `|` | Disyunción lógica | O (`OR`) elemento a elemento |
+
+: Operadores lógicos vectorizados en R {#tbl-vectorized-logical-operators}
+
+A modo de ejemplo, si buscaras identificar los programas académicos con sus respectivos atributos que cumplen con la condición señalada en el @lst-relational-operator-logical-condition y que además son menores al valor máximo respecto a la variable `costo_matrícula`, es posible utilizar la función `filter()` del paquete `dplyr` de la siguiente forma:
+
+```{r}
+#| lst-label: lst-filter-logical-vectorized-operators
+#| lst-cap: Uso de la función `filter()` y operadores lógicos vectorizados para filtrar filas en una tibble
+filter(
+  costo_matricula_pregrado,
+  costo_matricula > mean(costo_matricula) &
+    costo_matricula < max(costo_matricula)
+)
+```

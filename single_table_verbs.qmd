@@ -9,11 +9,10 @@ source("_common.R")
 #| label: load-r-packages
 #| echo: false
 #| message: false
-library(tidyverse)
 library(gt)
 ```
 
-Este capítulo se basa en [@wickham_r_2023, Cap. 3] así como en la documentación oficial de [`dplyr`](https://dplyr.tidyverse.org/articles/dplyr.html) donde tiene como propósito introducir una **gramática de manipulación de datos** a través de un conjunto consistente de verbos para resolver las tareas más comunes en el manejo de datos cuando se tiene una sola tabla utilizando el paquete `dplyr` e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado en Colombia.
+Este capítulo se basa en [@wickham_r_2023, Cap. 3] así como en la documentación oficial de [`dplyr`](https://dplyr.tidyverse.org/articles/dplyr.html) donde tiene como propósito introducir una **gramática de manipulación de datos** a través de un conjunto consistente de verbos para resolver las tareas más comunes en el manejo de datos cuando se tiene una sola tabla utilizando el paquete `dplyr` e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes al periodo 2021-2024 para Colombia.
 
 Exploraremos los siguientes aspectos:
 
@@ -72,6 +71,9 @@ Esta categoría incluye las funciones `filter()`, `slice()` y `arrange()`. La pr
 Para utilizar un ejemplo concreto puedes utilizar el conjunto de datos utilizados en el @sec-amounts respecto a `2021-2024_saber-pro-genericas_faedis.rds` para identificar las filas correspondientes al año $2022$ y de estudiantes pertenecientes al género masculino:
 
 ```{r}
+# Cargar paquetes ----
+library(tidyverse)
+
 # Importar datos ----
 saber_pro_genericas_faedis_2021_2024 <- read_rds(
   file = "data/2021-2024_saber-pro-genericas_faedis.rds"
@@ -137,7 +139,7 @@ select(
 )
 ```
 
-En la @sec-case-study-select se utilizarán [operadores o funciones auxiliares](https://dplyr.tidyverse.org/reference/select.html#overview-of-selection-features) para ilustrar la forma como se pueden seleccionar columnas de manera más precisa. A medida que explores más formas de seleccionar columnas de un conjunto de datos podrás consultar en más detalle la documentación de ayuda de la función `select()` (`?select`) respecto a las diferentes funcionalidades de selección.
+En la @sec-case-study-select se utilizarán [operadores o funciones auxiliares](https://dplyr.tidyverse.org/reference/select.html#overview-of-selection-features) para ilustrar la forma como se pueden seleccionar columnas de manera más precisa. A medida que explores más formas de seleccionar columnas de un conjunto de datos podrás consultar en más detalle la documentación de ayuda de la función `select()` (ver `?select`) respecto a las diferentes funcionalidades de selección.
 
 La segunda función, correspondiente a `rename()`, se utiliza para cambiar el nombre de las columnas usando el esquema `nuevo_nombre = antiguo_nombre`. En la @fig-rename-verb se ilustra gráficamente la manipulación que se puede realizar con la función `rename()`.
 
@@ -152,7 +154,7 @@ rename(
 )
 ```
 
-La tercera función, correspondiente a `mutate()`, se utiliza para crear nuevas columnas a partir de variables existentes dentro de una tibble. También se puede utilizar para modificar columnas si el nombre es el mismo a una columna existente. La función `mutate()` por defecto ubica las nuevas columnas al final de la tibble y mantiene todas las variables presentes en la tibble original. Sin embargo estos aspectos se pueden modificar con los parámetros `.keep`, `.before` y `.after` (ver `?mutate`). En la @fig-mutate-verb se ilustra gráficamente la manipulación que se puede realizar con la función `mutate()`.
+La tercera función, correspondiente a `mutate()`, se utiliza para crear nuevas columnas usualmente a partir de variables existentes dentro de una tibble. También se puede utilizar para modificar columnas si el nombre es el mismo a una columna existente. La función `mutate()` por defecto ubica las nuevas columnas al final de la tibble y mantiene todas las variables presentes en la tibble original. Sin embargo estos aspectos se pueden modificar con los parámetros `.keep`, `.before` y `.after` (ver `?mutate`). En la @fig-mutate-verb se ilustra gráficamente la manipulación que se puede realizar con la función `mutate()`.
 
 ![Representación gráfica de la función `mutate()`](images/mutate.png){#fig-mutate-verb fig-alt="Diagrama conceptual que muestra cómo la función mutate crea una nueva columna a partir de operaciones entre variables existentes. A la izquierda se observa una tabla con columnas a, b y c. Una flecha con el comando mutate indica la operación d = a + b, generando a la derecha una tabla expandida que conserva las columnas originales y añade la nueva columna d en color ocre."}
 
@@ -215,7 +217,7 @@ use_interpretation_pipe |>
   fmt_markdown()
 ```
 
-Para utilizar un ejemplo concreto utilizando el conjunto de datos `2021-2024_saber-pro-genericas_faedis.rds` y una aplicación del operador `|>` se podría por ejemplo estar interesado en identificar los casos atípicos en los cuales no sólo el puntaje del módulo de razonamiento cuantitativo o de lectura crítica es $0$ (ver @lst-geom-point) sino si se presenta en al menos alguno de los otros módulos utilizando las funciones `select()`, `filter()` y `arrange()` más `glimpse()`, tal como se señala a continuación:
+Para utilizar un ejemplo concreto utilizando el conjunto de datos `2021-2024_saber-pro-genericas_faedis.rds` y una aplicación del operador `|>` se podría por ejemplo estar interesado en identificar los casos atípicos en los cuales no sólo el puntaje del módulo de razonamiento cuantitativo o de lectura crítica es $0$ (ver @lst-geom-point) sino si se presenta en al menos alguno de los otros módulos utilizando las funciones `select()`, `filter()` y `arrange()` más `glimpse()` así como el operador lógico vectorizado `|` (ver @tbl-vectorized-logical-operators), tal como se señala a continuación:
 
 ```{r}
 #| lst-label: lst-example-use-pipe
@@ -242,6 +244,10 @@ saber_pro_genericas_faedis_2021_2024 |>
   arrange(estu_prgm_academico) |>
   glimpse()
 ```
+
+:::: {#tip-1-chap-10 .callout-tip}
+En Positron, puedes insertar el operador `|>` utilizando la combinación de teclas {{< kbd mac=Shift-Command-M win=Ctrl-Shift-M linux=Ctrl-Shift-M >}} de tal manera que no tengas que digitarlo de manera manual.
+::::
 
 El @lst-example-use-pipe ilustra las ventajas de hacer uso del operador `|>` para que el código sea más legible donde permite:
 
@@ -331,7 +337,7 @@ En el @lst-code-using-intermediate-variables se crean variables intermedias adic
 
 Esto no significa que se deba optar por el extremo opuesto y utilizar el operador `|>` de manera indiscriminada para generar secuencias interminables de pasos. En la práctica en el análisis de datos, tarde o temprano será necesario e incluso recomendable crear variables intermedias. La clave no es eliminar por completo la creación de variables, sino aprender a gestionar un conjunto mínimo y adecuado de variables con un propósito claro, en lugar de lidiar con una enorme cantidad de objetos.
 
-En la @tbl-use-interpreation-pipe se señala en la última fila el uso del guion bajo (`_`). Este elemento funciona como un marcador de posición (*placeholder* en inglés) que sirve para controlar de manera explícita en qué lugar se insertará el objeto debido a que, por defecto, este se introduce como el primer argumento de una función. En algunos casos se hace necesario modificar este comportamiento por defecto donde por ejemplo el @lst-lm se puede reescribir utilizando el operador `|>`, tal como se señala a continuación:
+En la @tbl-use-interpreation-pipe se señala en la última fila el uso del guion bajo (`_`). Este elemento funciona como un marcador de posición (*placeholder* en inglés) que sirve para controlar de manera explícita en qué lugar se insertará el objeto debido a que, por defecto, este se introduce como el primer argumento de una función al utilizar el operador `|>`. En algunos casos se hace necesario modificar este comportamiento por defecto donde por ejemplo el @lst-lm se puede reescribir utilizando el operador `|>`, tal como se señala a continuación:
 
 ```{r}
 #| lst-label: lst-lm-pipe
@@ -345,11 +351,11 @@ saber_pro_genericas_faedis_2021_2024 |>
 
 #### Verbos para collapsar, agrupar y desagrupar filas {#sec-verbs-collapse-group-ungroup}
 
-Esta categoría incluye las funciones `group_by()`, `summarise()` y `ungroup()`. La primera función, correspondiente a `group_by()`, se utiliza para convertir una tibble en una tibble agrupada de tal manera que los verbos posteriores que se apliquen se realizan por grupo. En la @fig-group-by-verb se ilustra gráficamente la manipulación que se puede realizar con la función `group_by()`.
+Esta categoría incluye las funciones `group_by()`, `summarise()` y `ungroup()`. La primera función, correspondiente a `group_by()`, se utiliza para convertir una tibble en una tibble agrupada de tal manera que los verbos posteriores que se utilicen se apliquen por grupo. En la @fig-group-by-verb se ilustra gráficamente la manipulación que se puede realizar con la función `group_by()`.
 
 ![Representación gráfica de la función `group_by()`](images/group_by.png){#fig-group-by-verb fig-alt="Diagrama conceptual que muestra cómo la función group_by agrupa las filas de una tabla según los valores de una columna. A la izquierda hay una tabla con columnas a, b y c, donde la columna a contiene dos celdas marrón oscuro (filas 1 y 4) y dos celdas ocre (filas 2 y 3). Una flecha con el comando group_by indica agrupar por la columna a, generando a la derecha la separación de los datos en dos subtablas independientes según su color: un grupo con las filas 1 y 4, y otro con las filas 2 y 3."}
 
-Para ilustrar el comportamiento de esta función con un ejemplo concreto puedes utilizar el conjunto de datos `2021-2024_saber-pro-genericas_faedis.rds` para agrupar el conjunto de datos por año y el género de los estudiantes a través de las variables `ano` y `estu_genero`:
+Para ilustrar el comportamiento de esta función con un ejemplo concreto puedes utilizar el conjunto de datos `2021-2024_saber-pro-genericas_faedis.rds` para agruparlos por año y el género a través de las variables `ano` y `estu_genero`:
 
 ```{r}
 saber_pro_genericas_faedis_2021_2024 |>
@@ -361,7 +367,7 @@ saber_pro_genericas_faedis_2021_2024 |>
 
 En la parte superior de la tibble además de indicar el número de filas así como las columnas que la componen (ver @lst-mpg-database) se incluye además un segundo comentario, `# Groups:   ano, estu_genero [8]`, que indica las variables que se utilizaron para realizar la agrupación así como el número de grupos formados. En este caso son $8$ teniendo en cuenta que se tienen $4$ años (`2021`, `2022`, `2023` y `2024`) y $2$ categorías de género (`F`, `M`) para un total de $4 \times 2 = 8$ grupos.
 
-La segunda función, correspondiente a `summarise()`, se utiliza para crear una tibble donde si existen variables agrupadas genera una fila por cada combinación de variables agrupadas y una columna por cada estadística descriptiva que se especifique. En caso que no existan variables agrupadas genera un a sola fila con la estadística descriptiva que se especifique y una columna por cada estadística descriptiva que se defina. En la @fig-summarise-verb se ilustra gráficamente la manipulación que se puede realizar con la función `summarise()`.
+La segunda función, correspondiente a `summarise()`, se utiliza para crear una tibble donde si existen variables agrupadas genera una fila por cada combinación de variables agrupadas y una columna por cada estadística descriptiva que se especifique. En caso que no existan variables agrupadas genera una sola fila con la estadística descriptiva que se especifique y una columna por cada estadística descriptiva que se defina. En la @fig-summarise-verb se ilustra gráficamente la manipulación que se puede realizar con la función `summarise()`.
 
 ![Representación gráfica de la función `summarise()`](images/summarise.png){#fig-summarise-verb fig-alt="Diagrama conceptual que muestra cómo la función summarise colapsa múltiples filas en una única estadística descriptiva. A la izquierda hay una tabla con columnas a, b y c, donde la columna a contiene cuatro filas con un gradiente de color que va desde el amarillo claro hasta el rojo oscuro. Una flecha con el comando summarise indica el cálculo f = mean(a), generando a la derecha una nueva tabla reducida a una única fila y una sola columna etiquetada como f de color naranja, la cual representa el promedio calculado."}
 
@@ -385,9 +391,9 @@ Por defecto cuando existe variables agrupadas la función `summarise()` desagrup
 En el paquete `dplyr` existen $2$ formas de agrupar:
 
 1. Utilizando `group_by()` donde la agrupación persiste al aplicar diferentes verbos.
-2. Utilizando los parámetros `.by` o `by` dentro de un determinado verbo donde la agrupación sólo afecta el verbo donde se utilize el parámetro.
+2. Utilizando los parámetros `.by` o `by` dentro de un determinado verbo donde la agrupación sólo afecta el verbo donde se utilice el parámetro.
 
-El lector interesado puede consultar la [documentación oficial](https://dplyr.tidyverse.org/reference/dplyr_by.html) de `dplyr` para conocer más detalles de éste aspecto en caso que sea de su interés. Sin embargo, a lo largo del libro utilizaremos la función `group_by()` de manera explícita y no los parámetros `.by` o `by` dentro de los verbos.
+El lector interesado puede consultar la [documentación oficial](https://dplyr.tidyverse.org/reference/dplyr_by.html) de `dplyr` para conocer más detalles de este aspecto en caso que sea de su interés. Sin embargo, a lo largo del libro utilizaremos la función `group_by()` de manera explícita y no los parámetros `.by` o `by` dentro de los verbos.
 
 Una vez estes familiarizado con el paquete `dplyr` podras examinar el comportamiento de utilizar una u otra opción. Por ahora el enfoque es conocer los diferentes verbos disponibles en el contexto de la gramática de manipulación de datos. 
 :::
@@ -396,9 +402,10 @@ La tercera función, correspondiente a `ungroup()`, se utiliza para desagrupar u
 
 ![Representación gráfica de la función `ungroup()`](images/ungroup.png){#fig-ungroup-verb fig-alt="Diagrama conceptual que muestra cómo la función ungroup deshace la agrupación de una tabla para volver a consolidarla en un único bloque. A la izquierda se observan dos subtablas independientes o grupos separados: el de arriba con las filas 1 y 4 (color marrón oscuro en la columna a) y el de abajo con las filas 2 y 3 (color ocre en la columna a). Una flecha central con el comando ungroup indica la eliminación del criterio de agrupación por la columna a, generando a la derecha una única tabla unificada y ordenada de forma secuencial con las filas del 1 al 4."}
 
-Para ilustrar el comportamiento de esta función con un ejemplo concreto puedes utilizar el conjunto de datos `2021-2024_saber-pro-genericas_faedis.rds` donde es posible desagrupar completamente una tibble que puede ser utilizada como insumo para crear un gráfico similar a la @fig-2-chap-9 pero por género:
+Para ilustrar el comportamiento de esta función con un ejemplo concreto puedes utilizar el conjunto de datos `2021-2024_saber-pro-genericas_faedis.rds` donde es posible desagrupar completamente una tibble, que puede ser utilizada como insumo para crear un gráfico similar a la @fig-2-chap-9 pero por género:
 
 ```{r}
+#| message: false
 saber_pro_genericas_faedis_2021_2024 |>
   group_by(
     ano,
@@ -412,3 +419,93 @@ saber_pro_genericas_faedis_2021_2024 |>
 ```
 
 ## Caso de estudio: obtención de datos de interés del Saber-Pro para FAEDIS {#sec-case-study-select} 
+
+El propósito de la @sec-case-study-select es aplicar la gramática de manipulación de datos para ilustrar su uso partiendo de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado en Colombia para el periodo 2021-2024. El objetivo es obtener el conjunto de datos `2021-2024_saber-pro-genericas_faedis.rds` descrito en la @sec-data así como el conjunto de datos `2021-2024_saber-pro-genericas_faedis_programas.rds` descrito en la @sec-data-geom-line. 
+
+### Datos {#sec-data-case-study-dplyr}
+
+Para desarrollar el caso de estudio es necesario en primera instancia importar los datos para explorarlos en R como se señala a continuación, teniendo en cuenta lo indicado en la @nte-1-chap-10:
+
+```{r}
+#| lst-label: lst-import-data-case-study-dplyr
+#| lst-cap: Importación de datos para desarrollar el caso de estudio
+# Importar datos ----
+saber_pro_genericas_2021_2024 <- read_csv(
+  file = "data/2021_2024-saber_pro-genericas.csv.xz",
+  col_types = cols(
+    estu_fechanacimiento = col_character()
+  )
+)
+```
+
+::: {#nte-2-chap-10 .callout-note}
+En el @sec-plain-text se abarcará con más detalle la importación de datos para archivos con extensión `.csv` mediante la función `read_csv()`, así como la razón detrás del uso del parámetro `col_types` y su respectivo argumento con la función `cols()`, teniendo en cuenta lo indicado en el @lst-import-data-case-study-dplyr. Por ahora, el enfoque del @sec-single-table-verbs será comprender la gramática de manipulación de datos mediante el paquete `dplyr`.
+
+Adicionalmente, es necesario señalar que este archivo cuenta con una extensión combinada `.csv.xz`. El sufijo `.xz` indica simplemente que el archivo de texto original (`.csv`) fue comprimido mediante un [algoritmo de alta eficiencia](https://en.wikipedia.org/wiki/XZ_Utils) para reducir drásticamente su tamaño en el disco. No obstante, no es necesario profundizar en este detalle técnico para el desarrollo del @sec-single-table-verbs ni del @sec-plain-text, dado que la función `read_csv()` detecta dicha extensión de forma automática y descomprime los datos de manera transparente al momento de realizar el proceso de importación.
+:::
+
+Una vez importes el conjunto de datos, podrás darle un “vistazo” utilizando la functión `glimpse()` para identificar el número y los tipos de variables que lo componen, así como la cantidad de observaciones disponibles.
+
+```{r}
+# Inspeccionar datos ----
+glimpse(saber_pro_genericas_2021_2024)
+```
+
+El conjunto de datos `2021_2024-saber_pro-genericas.csv.xz` corresponden a los microdatos anonimizados de los resultados del examen Saber Pro del grupo de competencias genéricas para Colombia donde se consolidó la información de tal manera que todas las $82$ variables que se incluyen estuvieran disponibles para todo el periodo 2021-2024. Al conjunto de datos se le realizó una mínima limpieza respecto a los datos originales disponibles en el portal [DataIcfes](https://www.icfes.gov.co/investigaciones/data-icfes/) con relación a las variables `ano`, `periodo`, `estu_fechanacimiento`, `estu_cod_depto_presentacion`, `estu_inst_departamento`, `estu_cod_mcpio_presentacion`, `estu_inst_codmunicipio` y `estu_prgm_codmunicipio`.
+
+En el conjunto de datos `2021_2024-saber_pro-genericas.csv.xz` una variable clave a tener en cuenta y que se utilizará más adelante es **estu_agregado** donde indica si la observación es (`S` para Sí) o no (`N` para No) incluída en el informe nacional de resultados del Saber-Pro. Las demás variables no se describirán teniendo en cuenta que no son relevantes para el desarrollo del estudio de caso (ver @nte-1-chap-10) o cuya descripción ya se señaló en la @sec-variable-description. 
+
+:::: {#nte-3-chap-10 .callout-note}
+Debido a que el objetivo es utilizar la gramática de manipulación de datos para reconstruir los conjuntos de datos `2021-2024_saber-pro-genericas_faedis.rds` y `2021-2024_saber-pro-genericas_faedis_programas.rds` en la @sec-data-case-study-dplyr no se describen cada una de las $82$ variables. Sin embargo, el lector interesado puede descargar el diccionario de datos, publicado originalmente en el portal [DataIcfes](https://www.icfes.gov.co/investigaciones/data-icfes/), donde se describen cada una de estas variables e información adicional:  
+   
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [diccionario-datos-examen-saber-pro.pdf](https://github.com/luifrancgom/r-clio/raw/main/documentation/diccionario-datos-examen-saber-pro.pdf)
+:::
+
+En la sección **2. Periodo 2021 - 2024** del anterior documento, a partir de la página 17, el lector podrá encontrar ésta información respecto al periodo 2021-2024. La única variable que no encontrará es `ano` donde en los datos originales se agrupan en la variable `periodo` tanto el año como el periodo de presentación. En la limpieza de datos se separó esta información en las variables `ano` y `periodo`.
+::::
+
+### Filtrar (`filter()`)
+
+El primer paso para reconstruir el conjuntos de datos `2021-2024_saber-pro-genericas_faedis.rds` es filtrar las filas relacionadas con las observaciones que se tienen en cuenta en el informe nacional de resultados del Saber-Pro a través de la variable `estu_agregado` así como de los programas de FAEDIS a partir de los códigos del SNIESs.
+
+Inicialmente respecto al segundo aspecto, se podría adoptar una estrategia similar a la descrita en el @lst-example-use-pipe, generando un conjunto de condiciones lógicas mediante el operador lógico vectorizado `|` para obtener las observaciones correspondientes a los programas académicos de FAEDIS, verificando si la variable `estu_snies_prgmacademico` es igual a cada uno de los códigos SNIES de los programas de FAEDIS. Sin embargo, R cuenta con el operador binario `%in%`, el cual ofrece una interfaz más intuitiva al devolver un vector lógico que indica si existe o no una coincidencia para su operando izquierdo dentro del conjunto de elementos ubicado a la derecha, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-filter-data-case-study-dplyr
+#| lst-cap: Filtrar filas para obtener las observaciones del conjunto de datos `2021-2024_saber-pro-genericas_faedis.rds`
+
+# Filtrar ----
+## Vector auxiliar ----
+snies_faedis <- c(
+  6527,
+  108241,
+  11428,
+  11004,
+  53703,
+  105142,
+  10963
+)
+
+saber_pro_genericas_2021_2024_faedis <- saber_pro_genericas_2021_2024 |>
+  filter(estu_agregado == "S") |>
+  filter(estu_snies_prgmacademico %in% snies_faedis)
+
+saber_pro_genericas_2021_2024_faedis
+```
+
+De esa manera, mediante el código del @lst-filter-data-case-study-dplyr es posible obtener inicialmente las $1239$ filas que se indicaron en la @sec-data. 
+
+### Seleccionar (`select()`)
+
+El segundo paso para reconstruir el conjuntos de datos `2021-2024_saber-pro-genericas_faedis.rds` es seleccionar las columnas relacionadas con las $20$ variables indicadas en la @sec-data. Inicialmente se podría seleccionar nombre por nombre cada una de las variables en la función `select()` pero se pueden utilizar [operadores o funciones auxiliares](https://dplyr.tidyverse.org/reference/select.html#overview-of-selection-features) para optimizar este proceso.    
+
+### Reubicar (`relocate()`)
+
+
+
+### Transformar (`mutate()`)
+
+
+
+### Collapsar, agrupar y desagrupar (`summarise()`, `group()` y `ungroup()`)

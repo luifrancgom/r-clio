@@ -405,14 +405,14 @@ saber_pro_genericas_faedis_2021_2024_programas <- read_rds(
 )
 ```
 
-Una vez importes el conjunto de datos, podrás darle un “vistazo” utilizando la functión `glimpse()` (ver Listado 4.5) para identificar el número y los tipos de variables que lo componen, así como la cantidad de observaciones disponibles.
+Una vez importes el conjunto de datos, podrás darle un “vistazo” utilizando la functión `glimpse()` para identificar el número y los tipos de variables que lo componen, así como la cantidad de observaciones disponibles.
 
 ```{r}
 # Inspeccionar datos ----
 glimpse(saber_pro_genericas_faedis_2021_2024_programas)
 ```
 
-### Descripción de variables
+### Descripción de variables {#sec-data-geom-line}
 
 Esta base de datos es construida a partir de `saber_pro_genericas_faedis_2021_2024` donde aprenderás acerca de como construirla en el @sec-single-table-verbs utilizando verbos de una sola tabla con el paquete `dplyr` perteneciente al `tidyverse`. A continuación, se describen cada una de las variables en `saber_pro_genericas_faedis_2021_2024_programas`:
 
