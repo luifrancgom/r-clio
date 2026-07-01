@@ -467,7 +467,7 @@ En la sección **2. Periodo 2021 - 2024** del anterior documento, a partir de la
 
 ### Filtrar (`filter()`)
 
-El primer paso para reconstruir el conjuntos de datos `2021-2024_saber-pro-genericas_faedis.rds` es filtrar las filas relacionadas con las observaciones que se tienen en cuenta en el informe nacional de resultados del Saber-Pro a través de la variable `estu_agregado` así como de los programas de FAEDIS a partir de los códigos del SNIESs.
+El primer paso para reconstruir el conjuntos de datos `2021-2024_saber-pro-genericas_faedis.rds` comprende filtrar las filas relacionadas con las observaciones que se tienen en cuenta en el informe nacional de resultados del Saber-Pro a través de la variable `estu_agregado` así como de los programas de FAEDIS a partir de los códigos del SNIESs.
 
 Inicialmente respecto al segundo aspecto, se podría adoptar una estrategia similar a la descrita en el @lst-example-use-pipe, generando un conjunto de condiciones lógicas mediante el operador lógico vectorizado `|` para obtener las observaciones correspondientes a los programas académicos de FAEDIS, verificando si la variable `estu_snies_prgmacademico` es igual a cada uno de los códigos SNIES de los programas de FAEDIS. Sin embargo, R cuenta con el operador binario `%in%`, el cual ofrece una interfaz más intuitiva al devolver un vector lógico que indica si existe o no una coincidencia para su operando izquierdo dentro del conjunto de elementos ubicado a la derecha, tal como se señala a continuación:
 
@@ -498,14 +498,91 @@ De esa manera, mediante el código del @lst-filter-data-case-study-dplyr es posi
 
 ### Seleccionar (`select()`)
 
-El segundo paso para reconstruir el conjuntos de datos `2021-2024_saber-pro-genericas_faedis.rds` es seleccionar las columnas relacionadas con las $20$ variables indicadas en la @sec-data. Inicialmente se podría seleccionar nombre por nombre cada una de las variables en la función `select()` pero se pueden utilizar [operadores o funciones auxiliares](https://dplyr.tidyverse.org/reference/select.html#overview-of-selection-features) para optimizar este proceso.    
+El segundo paso para reconstruir el conjuntos de datos `2021-2024_saber-pro-genericas_faedis.rds` comprende seleccionar las columnas relacionadas con las $20$ variables indicadas en la @sec-data. Inicialmente se podría seleccionar nombre por nombre incluyendo cada una de las variables en la función `select()` pero se pueden utilizar [operadores o funciones auxiliares](https://dplyr.tidyverse.org/reference/select.html#overview-of-selection-features) para optimizar este proceso. A continuación se señalan algunos se ellos que se utilizarán más adelante en el estudio de caso:
+
+- `:`: permite seleccionar un rango consecutivo de variables
+- `&` y `|`: son operadores lógicos vectorizados (ver @tbl-vectorized-logical-operators) que se pueden utilizar para seleccionar la unión o intersección de un conjunto de variables
+- `starts_with()`: permite seleccionar variables que comienzan con un determinado prefijo
+- `ends_with()`: permite seleccionar variables que terminan con un determinado sufijo
+
+Utilizadno estos [operadores o funciones auxiliares](https://dplyr.tidyverse.org/reference/select.html#overview-of-selection-features) es posible seleccionar las $20$ variables correspondientes al conjunto de datos `2021-2024_saber-pro-genericas_faedis.rds`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-select-data-case-study-dplyr
+#| lst-cap: Seleccionar columnas para obtener las variables del conjunto de datos `2021-2024_saber-pro-genericas_faedis.rds`
+
+# Seleccionar ----
+saber_pro_genericas_2021_2024_faedis <- saber_pro_genericas_2021_2024_faedis |>
+  select(
+    ano,
+    estu_consecutivo,
+    estu_genero,
+    estu_semestrecursa,
+    fami_educacionmadre:fami_estratovivienda,
+    ends_with("_presentacion"),
+    estu_snies_prgmacademico,
+    estu_prgm_academico,
+    ends_with("_punt") | starts_with("punt_"),
+    mod_ingles_desem
+  )
+
+saber_pro_genericas_2021_2024_faedis
+```
+
+En el @lst-select-data-case-study-dplyr se utiliza `:` como `fami_educacionmadre:fami_estratovivienda` para seleccionar las variables `fami_educacionmadre`, `fami_educacionpadre` y `fami_estratovivienda` teniendo en cuenta que son variables que se encuentra de manera consecutiva. En el caso de `ends_with()` está función se utiliza como `ends_with("_presentacion")` para seleccionar los nombres y los códigos de los departamentos y municipios de presentación del Saber-pro. Finalmente el operador lógico vectorizado `|` junto con las funciones `ends_with()` y `starts_with()` se utilizan como `ends_with("_punt") | starts_with("punt_")` para extraer el puntaje de los módulos correspondientes a las competencias genéricas así como el puntaje global.   
 
 ### Reubicar (`relocate()`)
 
+El tercer paso para reconstruir el conjuntos de datos `2021-2024_saber-pro-genericas_faedis.rds` comprende reubicar algunas de las columnas relacionadas con las $20$ variables indicadas en la @sec-data utilizando la función `relocate`, tal como se señala a continuación:
 
+```{r}
+#| lst-label: lst-relocate-data-case-study-dplyr
+#| lst-cap: Reubicar columnas para obtener el mismo ordenamiento de las variables del conjunto de datos `2021-2024_saber-pro-genericas_faedis.rds`
 
-### Transformar (`mutate()`)
+# Reubicar ----
+saber_pro_genericas_2021_2024_faedis <- saber_pro_genericas_2021_2024_faedis |>
+  relocate(
+    fami_estratovivienda,
+    .before = fami_educacionmadre
+  ) |>
+  relocate(
+    fami_estratovivienda,
+    .before = fami_educacionmadre
+  ) |>
+  relocate(
+    estu_depto_presentacion,
+    .after = estu_cod_depto_presentacion
+  ) |>
+  relocate(
+    estu_mcpio_presentacion,
+    .after = estu_cod_mcpio_presentacion
+  ) |>
+  relocate(
+    mod_ingles_desem,
+    .after = mod_ingles_punt
+  )
 
+saber_pro_genericas_2021_2024_faedis
+```
 
+En el @lst-relocate-data-case-study-dplyr la reubicación de columnas tiene el objetivo de agrupar las variables por categorías de tal manera que al analizar el conjunto de datos `2021-2024_saber-pro-genericas_faedis.rds` sea más fácil de organizar. En este caso la reubicación tiene como propósito la siguiente agrupación por categorías:
+
+- **Periodo**: `ano`
+- **Id**: `estu_consecutivo`
+- **Caracteríticas de quien presenta la prueba**: `estu_genero` y `estu_semestrecursa`
+- **Entorno familiar**: `fami_estratovivienda`, `fami_educacionmadre`, y `fami_educacionpadre`
+- **Lugar de presentación de la prueba**: `estu_cod_depto_presentacion`, `estu_depto_presentacion`, `estu_cod_mcpio_presentacion` y `estu_mcpio_presentacion`
+- **Programa académico**: `estu_snies_prgmacademico` y ` estu_prgm_academico`
+- **Resultados de la prueba**:
+  - **Ciudadanas**: `mod_competen_ciudada_punt`
+  - **Comunicación escrita**: `mod_comuni_escrita_punt`
+  - **Inglés**: `mod_ingles_punt` y `mod_ingles_desem`
+  - **Lectura crítica**: `mod_lectura_critica_punt,`
+  - **Razonamiento cuantitativo**: `mod_razona_cuantitat_punt`
+  - **Puntaje global**: `punt_global`  
+
+### Modificar (`mutate()`)
+
+El cuarto paso para reconstruir el conjuntos de datos `2021-2024_saber-pro-genericas_faedis.rds` comprende modificar algunas de las columnas relacionadas con las $20$ variables indicadas en la @sec-data utilizando la función `mutate()`. Aunque la función `mutate()` se puede utilizar para generar nuevas variables el propósito en este caso es asociar el tipo adecuado de ciertas variables dentro de R. Algunas variables no son continuas sino discretas y en otros casos existen [variables categóricas](https://en.wikipedia.org/wiki/Categorical_variable) que son [nominales](https://en.wikipedia.org/wiki/Nominal_category) u [ordinales](https://en.wikipedia.org/wiki/Ordinal_data) pero que están codificadas como caracteres. 
 
 ### Collapsar, agrupar y desagrupar (`summarise()`, `group()` y `ungroup()`)
