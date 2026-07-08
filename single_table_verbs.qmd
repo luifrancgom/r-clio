@@ -583,6 +583,10 @@ En el @lst-relocate-data-case-study-dplyr la reubicación de columnas tiene el o
 
 ### Modificar (`mutate()`)
 
-El cuarto paso para reconstruir el conjuntos de datos `2021-2024_saber-pro-genericas_faedis.rds` comprende modificar algunas de las columnas relacionadas con las $20$ variables indicadas en la @sec-data utilizando la función `mutate()`. Aunque la función `mutate()` se puede utilizar para generar nuevas variables el propósito en este caso es asociar el tipo adecuado de ciertas variables dentro de R. Algunas variables no son continuas sino discretas y en otros casos existen [variables categóricas](https://en.wikipedia.org/wiki/Categorical_variable) que son [nominales](https://en.wikipedia.org/wiki/Nominal_category) u [ordinales](https://en.wikipedia.org/wiki/Ordinal_data) pero que están codificadas como caracteres. 
+El cuarto paso para reconstruir el conjuntos de datos `2021-2024_saber-pro-genericas_faedis.rds` comprende modificar algunas de las columnas relacionadas con las $20$ variables indicadas en la @sec-data utilizando la función `mutate()`. Aunque la función `mutate()` se puede utilizar para generar nuevas variables el propósito en este caso es asociar el tipo adecuado de ciertas variables dentro de R. Algunas variables no son continuas sino discretas y en otros casos existen [variables categóricas](https://en.wikipedia.org/wiki/Categorical_variable) que son [nominales](https://en.wikipedia.org/wiki/Nominal_category) u [ordinales](https://en.wikipedia.org/wiki/Ordinal_data) pero que están codificadas como caracteres.
+
+R implementa diferentes tipos de datos. 
+
+
 
 ### Collapsar, agrupar y desagrupar (`summarise()`, `group()` y `ungroup()`)
