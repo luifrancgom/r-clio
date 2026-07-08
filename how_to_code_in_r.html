@@ -424,6 +424,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#sec-tibbles" id="toc-sec-tibbles" class="nav-link" data-scroll-target="#sec-tibbles"><span class="header-section-number">5.4</span> Tibbles</a></li>
   <li><a href="#sec-relational-operators" id="toc-sec-relational-operators" class="nav-link" data-scroll-target="#sec-relational-operators"><span class="header-section-number">5.5</span> Operadores relacionales</a></li>
+  <li><a href="#sec-vectorized-logical-operators" id="toc-sec-vectorized-logical-operators" class="nav-link" data-scroll-target="#sec-vectorized-logical-operators"><span class="header-section-number">5.6</span> Operadores lógicos vectorizados</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/how_to_code_in_r.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/how_to_code_in_r.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
@@ -944,6 +945,70 @@ Listado&nbsp;5.10: Uso de la función <code>filter()</code> y operadores lógico
 </div>
 </div>
 <p>En el <a href="#lst-filter-relational-operators" class="quarto-xref">Listado&nbsp;<span>5.10</span></a>, la función <code>filter()</code> requiere como primer argumento una tibble (o un objeto similar) y una expresión que resulte en un vector lógico. Los paquetes del <code>tidyverse</code> facilitan este proceso mediante el <strong>enmascaramiento de datos</strong> (<a href="https://dplyr.tidyverse.org/articles/programming.html">data masking</a>). Este mecanismo permite que la expresión lógica (en este ejemplo, <code>costo_matricula &gt; mean(costo_matricula)</code>) haga referencia directa a las columnas del objeto <code>costo_matricula_pregrado</code> como si fueran variables “independientes”, eliminando la necesidad de utilizar el operador <code>$</code>. De esa manera requieres escribir menos texto al escribir código en R y es posible referirse a las variables de la tibble de una manera más natural al utilizar funciones del <code>tidyverse</code>.</p>
+</section>
+<section id="sec-vectorized-logical-operators" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="sec-vectorized-logical-operators"><span class="header-section-number">5.6</span> Operadores lógicos vectorizados</h2>
+<p>Los operadores lógicos vectorizados son operadores que realizan comparaciones elemento por elemento de manera similar a los operadores aritméticos (ver <a href="#tbl-arithmetic-operators" class="quarto-xref">Tabla&nbsp;<span>5.1</span></a>) pero que se refieren a la negación lógica NO (<code>NOT</code> en inglés), el operador lógico Y (<code>AND</code> en inglés) y el operador lógico O (<code>OR</code> en inglés). En la <a href="#tbl-vectorized-logical-operators" class="quarto-xref">Tabla&nbsp;<span>5.3</span></a> se señalan algunos de los operadores lógicos vectorizados utilizados en R.</p>
+<div id="tbl-vectorized-logical-operators" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-vectorized-logical-operators-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;5.3: Operadores lógicos vectorizados en R
+</figcaption>
+<div aria-describedby="tbl-vectorized-logical-operators-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Operador</th>
+<th style="text-align: left;">Nombre</th>
+<th style="text-align: left;">Operación</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>!</code></td>
+<td style="text-align: left;">Negación lógica</td>
+<td style="text-align: left;">NO (<code>NOT</code>)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>&amp;</code></td>
+<td style="text-align: left;">Conjunción lógica</td>
+<td style="text-align: left;">Y (<code>AND</code>) elemento a elemento</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>|</code></td>
+<td style="text-align: left;">Disyunción lógica</td>
+<td style="text-align: left;">O (<code>OR</code>) elemento a elemento</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>A modo de ejemplo, si buscaras identificar los programas académicos con sus respectivos atributos que cumplen con la condición señalada en el <a href="#lst-relational-operator-logical-condition" class="quarto-xref">Listado&nbsp;<span>5.9</span></a> y que además son menores al valor máximo respecto a la variable <code>costo_matrícula</code>, es posible utilizar la función <code>filter()</code> del paquete <code>dplyr</code> de la siguiente forma:</p>
+<div class="cell">
+<div id="lst-filter-logical-vectorized-operators" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-filter-logical-vectorized-operators-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;5.11: Uso de la función <code>filter()</code> y operadores lógicos vectorizados para filtrar filas en una tibble
+</figcaption>
+<div aria-describedby="lst-filter-logical-vectorized-operators-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  costo_matricula_pregrado,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  costo_matricula <span class="sc">&gt;</span> <span class="fu">mean</span>(costo_matricula) <span class="sc">&amp;</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    costo_matricula <span class="sc">&lt;</span> <span class="fu">max</span>(costo_matricula)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 6
+    ano semestre codigo_snies nombre_programa      
+  &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt;                
+1  2026        1        53703 Ingeniería Industrial
+# ℹ 2 more variables: nivel_academico &lt;chr&gt;,
+#   costo_matricula &lt;dbl&gt;</code></pre>
+</div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">

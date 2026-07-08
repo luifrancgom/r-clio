@@ -417,7 +417,7 @@ window.Quarto = {
   <li><a href="#sec-layered-grammar-graphics" id="toc-sec-layered-grammar-graphics" class="nav-link active" data-scroll-target="#sec-layered-grammar-graphics"><span class="header-section-number">6.1</span> Gramática de gráficos en capas</a></li>
   <li><a href="#gráfico-de-barras-mediante-conteo-automático" id="toc-gráfico-de-barras-mediante-conteo-automático" class="nav-link" data-scroll-target="#gráfico-de-barras-mediante-conteo-automático"><span class="header-section-number">6.2</span> Gráfico de barras mediante conteo automático</a>
   <ul class="collapse">
-  <li><a href="#datos" id="toc-datos" class="nav-link" data-scroll-target="#datos"><span class="header-section-number">6.2.1</span> Datos</a></li>
+  <li><a href="#sec-data" id="toc-sec-data" class="nav-link" data-scroll-target="#sec-data"><span class="header-section-number">6.2.1</span> Datos</a></li>
   <li><a href="#mapeo" id="toc-mapeo" class="nav-link" data-scroll-target="#mapeo"><span class="header-section-number">6.2.2</span> Mapeo</a></li>
   <li><a href="#capas" id="toc-capas" class="nav-link" data-scroll-target="#capas"><span class="header-section-number">6.2.3</span> Capas</a></li>
   <li><a href="#sec-scales" id="toc-sec-scales" class="nav-link" data-scroll-target="#sec-scales"><span class="header-section-number">6.2.4</span> Escalas</a></li>
@@ -543,8 +543,8 @@ Figura&nbsp;6.3: Resultado final de un gráfico de barras utilizando <code>ggplo
 </div>
 </div>
 </div>
-<section id="datos" class="level3" data-number="6.2.1">
-<h3 data-number="6.2.1" class="anchored" data-anchor-id="datos"><span class="header-section-number">6.2.1</span> Datos</h3>
+<section id="sec-data" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="sec-data"><span class="header-section-number">6.2.1</span> Datos</h3>
 <p>El primer componente de la gramática de gráficos en capas son los datos. En ese sentido explorarás el conjuntos de datos en <code>2021-2024_saber-pro-genericas_faedis.rds</code>. Primero, debes cargar el paquete <code>tidyverse</code> utilizando el archivo <code>001_visualizar-cantidades-datos-faedis.R</code></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar paquetes ----</span></span>
@@ -552,10 +552,19 @@ Figura&nbsp;6.3: Resultado final de un gráfico de barras utilizando <code>ggplo
 </div>
 <p>De esa manera puedes importar los datos para explorarlos en R como se señala a continuación teniendo en cuenta lo indicado en la <a href="#nte-1-chap-6" class="quarto-xref">Nota&nbsp;<span>6.1</span></a>.</p>
 <div class="cell">
+<div id="lst-import-data" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-import-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;6.1: Importación de datos para obtener el insumo principal que se requiere para generar un gráfico
+</figcaption>
+<div aria-describedby="lst-import-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar datos ----</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"data/2021-2024_saber-pro-genericas_faedis.rds"</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
 </div>
 <div id="nte-2-chap-6" class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -567,7 +576,7 @@ Nota&nbsp;6.2
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>En el <a href="r_data_serialization.html" class="quarto-xref"><span>Capítulo 12</span></a> se abarcará con más detalle la importación de datos para archivos con una extensión <code>.rds</code>. Por ahora, el enfoque del <a href="#sec-amounts" class="quarto-xref"><span>Capítulo 6</span></a> será la visualización de un conjunto de datos.</p>
+<p>En el <a href="r_data_serialization.html" class="quarto-xref"><span>Capítulo 12</span></a> se abarcará con más detalle la importación de datos para archivos con una extensión <code>.rds</code> mediante la función <code>read_rds()</code>, teniendo en cuenta lo indicado en el <a href="#lst-import-data" class="quarto-xref">Listado&nbsp;<span>6.1</span></a>. Por ahora, el enfoque del <a href="#sec-amounts" class="quarto-xref"><span>Capítulo 6</span></a> será la visualización de un conjunto de datos.</p>
 </div>
 </div>
 <p>Una vez importes el conjunto de datos, podrás darle un “vistazo” utilizando la functión <code>glimpse()</code> (ver <a href="r_packages.html#lst-glimpse" class="quarto-xref">Listado&nbsp;<span>4.5</span></a>) para identificar el número y los tipos de variables que lo componen, así como la cantidad de observaciones disponibles.</p>
@@ -583,7 +592,7 @@ $ estu_genero                 &lt;fct&gt; M, M, M, M, F, F, F, F…
 $ estu_semestrecursa          &lt;ord&gt; 09, 09, 09, 09, 09, 09…
 $ fami_estratovivienda        &lt;ord&gt; Estrato 3, Estrato 4, …
 $ fami_educacionmadre         &lt;ord&gt; Técnica o tecnológica …
-$ fami_educacionpadre         &lt;fct&gt; Secundaria (Bachillera…
+$ fami_educacionpadre         &lt;ord&gt; Secundaria (Bachillera…
 $ estu_cod_depto_presentacion &lt;chr&gt; "11", "11", "11", "11"…
 $ estu_depto_presentacion     &lt;chr&gt; "BOGOTÁ", "BOGOTÁ", "B…
 $ estu_cod_mcpio_presentacion &lt;chr&gt; "11001", "11001", "110…
@@ -593,14 +602,14 @@ $ estu_prgm_academico         &lt;chr&gt; "ADMINISTRACION DE EMP…
 $ mod_competen_ciudada_punt   &lt;dbl&gt; 162, 190, 154, 179, 17…
 $ mod_comuni_escrita_punt     &lt;dbl&gt; 133, 174, 85, 157, 154…
 $ mod_ingles_punt             &lt;dbl&gt; 151, 155, 150, 144, 14…
-$ mod_ingles_desem            &lt;fct&gt; A2, A2, A2, A2, A2, A2…
+$ mod_ingles_desem            &lt;ord&gt; A2, A2, A2, A2, A2, A2…
 $ mod_lectura_critica_punt    &lt;dbl&gt; 114, 168, 139, 148, 18…
 $ mod_razona_cuantitat_punt   &lt;dbl&gt; 135, 164, 113, 149, 16…
 $ punt_global                 &lt;dbl&gt; 139, 170, 128, 155, 16…</code></pre>
 </div>
 </div>
-<section id="descripción-de-variables" class="level4" data-number="6.2.1.1">
-<h4 data-number="6.2.1.1" class="anchored" data-anchor-id="descripción-de-variables"><span class="header-section-number">6.2.1.1</span> Descripción de variables</h4>
+<section id="sec-variable-description" class="level4" data-number="6.2.1.1">
+<h4 data-number="6.2.1.1" class="anchored" data-anchor-id="sec-variable-description"><span class="header-section-number">6.2.1.1</span> Descripción de variables</h4>
 <p>Para examinar y en particular crear un gráfico a partir de un conjunto de datos es necesario entender a que se refieren cada una de las variables que lo componen. En ese sentido, a continuación se describen cada una de las variables en <code>2021-2024_saber-pro-genericas_faedis.rds</code>:</p>
 <ol type="1">
 <li><strong>ano</strong>: año de presentación del examen Saber Pro</li>
@@ -632,7 +641,7 @@ $ punt_global                 &lt;dbl&gt; 139, 170, 128, 155, 16…</code></pre>
 <div id="lst-ggplot" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-ggplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listado&nbsp;6.1: Inicialización de un objeto <code>ggplot</code>
+Listado&nbsp;6.2: Inicialización de un objeto <code>ggplot</code>
 </figcaption>
 <div aria-describedby="lst-ggplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> saber_pro_genericas_faedis_2021_2024)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
@@ -647,7 +656,7 @@ Listado&nbsp;6.1: Inicialización de un objeto <code>ggplot</code>
 </div>
 </div>
 </div>
-<p>En este paso R no genera un gráfico, simplemente genera visualmente un “lienzo” completamente vacío. El propósito en el <a href="#lst-ggplot" class="quarto-xref">Listado&nbsp;<span>6.1</span></a> es almacenar los datos para que sean después utilizados por otros componentes.</p>
+<p>En este paso R no genera un gráfico, simplemente genera visualmente un “lienzo” completamente vacío. El propósito en el <a href="#lst-ggplot" class="quarto-xref">Listado&nbsp;<span>6.2</span></a> es almacenar los datos para que sean después utilizados por otros componentes.</p>
 </section>
 </section>
 <section id="mapeo" class="level3" data-number="6.2.2">
@@ -657,7 +666,7 @@ Listado&nbsp;6.1: Inicialización de un objeto <code>ggplot</code>
 <div id="lst-mapping-1" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-mapping-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listado&nbsp;6.2: Mapeo de datos hacia atributos estéticos utilizando la coordenada <code>x</code>
+Listado&nbsp;6.3: Mapeo de datos hacia atributos estéticos utilizando la coordenada <code>x</code>
 </figcaption>
 <div aria-describedby="lst-mapping-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
@@ -675,12 +684,12 @@ Listado&nbsp;6.2: Mapeo de datos hacia atributos estéticos utilizando la coorde
 </div>
 </div>
 </div>
-<p>En el <a href="#lst-mapping-1" class="quarto-xref">Listado&nbsp;<span>6.2</span></a> se fija una posición para cada nombre de los programas académicos en la coordenada <code>x</code>. Debido a la longitud de los nombres y la forma como se muestran de manera horizontal, el gráfico generado es confuso. Para solucionar este aspecto es posible utilizar de manera alternativa la coordena <code>y</code> asociándola a la variable <code>estu_prgm_academico</code>:</p>
+<p>En el <a href="#lst-mapping-1" class="quarto-xref">Listado&nbsp;<span>6.3</span></a> se fija una posición para cada nombre de los programas académicos en la coordenada <code>x</code>. Debido a la longitud de los nombres y la forma como se muestran de manera horizontal, el gráfico generado es confuso. Para solucionar este aspecto es posible utilizar de manera alternativa la coordena <code>y</code> asociándola a la variable <code>estu_prgm_academico</code>:</p>
 <div class="cell">
 <div id="lst-mapping-2" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-mapping-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listado&nbsp;6.3: Mapeo de datos hacia atributos estéticos utilizando la coordenada <code>y</code>
+Listado&nbsp;6.4: Mapeo de datos hacia atributos estéticos utilizando la coordenada <code>y</code>
 </figcaption>
 <div aria-describedby="lst-mapping-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
@@ -708,7 +717,7 @@ Listado&nbsp;6.3: Mapeo de datos hacia atributos estéticos utilizando la coorde
 <div id="lst-geometry" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-geometry-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listado&nbsp;6.4: Uso de una geometría para ilustrar gráficamente datos a través de un atributo estético
+Listado&nbsp;6.5: Uso de una geometría para ilustrar gráficamente datos a través de un atributo estético
 </figcaption>
 <div aria-describedby="lst-geometry-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
@@ -727,12 +736,12 @@ Listado&nbsp;6.4: Uso de una geometría para ilustrar gráficamente datos a trav
 </div>
 </div>
 </div>
-<p>En el <a href="#lst-geometry" class="quarto-xref">Listado&nbsp;<span>6.4</span></a> los nombres de los programas académicos se ordenan internamente de manera alfabética y se representan al generar el gŕafico de esa forma en la coordenada <code>y</code>. Sin embargo, para facilitar la comunicación respecto al número de inscritos en relación a la variable <code>estu_prgm_academico</code> es importante ordenarla por el número de casos en cada grupo dentro del gráfico. Para ordenar <code>estu_prgm_academico</code> por el número de casos se puede utilizar la función <code>fct_infreq()</code>:</p>
+<p>En el <a href="#lst-geometry" class="quarto-xref">Listado&nbsp;<span>6.5</span></a> los nombres de los programas académicos se ordenan internamente de manera alfabética y se representan al generar el gŕafico de esa forma en la coordenada <code>y</code>. Sin embargo, para facilitar la comunicación respecto al número de inscritos en relación a la variable <code>estu_prgm_academico</code> es importante ordenarla por el número de casos en cada grupo dentro del gráfico. Para ordenar <code>estu_prgm_academico</code> por el número de casos se puede utilizar la función <code>fct_infreq()</code>:</p>
 <div class="cell">
 <div id="lst-fct-infreq" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-fct-infreq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listado&nbsp;6.5: Uso de la función <code>fct_infreq()</code> para ordenar datos categóricos de acuerdo al número de casos
+Listado&nbsp;6.6: Uso de la función <code>fct_infreq()</code> para ordenar datos categóricos de acuerdo al número de casos
 </figcaption>
 <div aria-describedby="lst-fct-infreq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
@@ -751,12 +760,12 @@ Listado&nbsp;6.5: Uso de la función <code>fct_infreq()</code> para ordenar dato
 </div>
 </div>
 </div>
-<p>La función <code>fct_infreq()</code> ordena una variable categórica por el número de casos en cada grupo empezando por el más grande y terminando por el más pequeño. En caso que se busque ordenar <code>estu_prgm_academico</code> de forma descendente desde arriba hacia abajo, se puede reversar el orden generado por la función <code>fct_infreq()</code> con la función <code>fct_rev()</code> utilizando como insumo el código del <a href="#lst-fct-infreq" class="quarto-xref">Listado&nbsp;<span>6.5</span></a>:</p>
+<p>La función <code>fct_infreq()</code> ordena una variable categórica por el número de casos en cada grupo empezando por el más grande y terminando por el más pequeño. En caso que se busque ordenar <code>estu_prgm_academico</code> de forma descendente desde arriba hacia abajo, se puede reversar el orden generado por la función <code>fct_infreq()</code> con la función <code>fct_rev()</code> utilizando como insumo el código del <a href="#lst-fct-infreq" class="quarto-xref">Listado&nbsp;<span>6.6</span></a>:</p>
 <div class="cell">
 <div id="lst-fct-rev" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-fct-rev-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listado&nbsp;6.6: Uso de la función <code>fct_rev()</code> para reversar el orden de datos categóricos previamente ordenados
+Listado&nbsp;6.7: Uso de la función <code>fct_rev()</code> para reversar el orden de datos categóricos previamente ordenados
 </figcaption>
 <div aria-describedby="lst-fct-rev-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
@@ -778,7 +787,7 @@ Listado&nbsp;6.6: Uso de la función <code>fct_rev()</code> para reversar el ord
 </section>
 <section id="sec-stats" class="level4" data-number="6.2.3.2">
 <h4 data-number="6.2.3.2" class="anchored" data-anchor-id="sec-stats"><span class="header-section-number">6.2.3.2</span> Transformaciones estadísticas</h4>
-<p>En el <a href="r_packages.html#lst-help" class="quarto-xref">Listado&nbsp;<span>4.4</span></a> se señaló la forma de consultar la documentación de un conjunto de datos que pertenece a un paquete utilizando el símbolo <code>?</code>. De la misma forma, es posible también realizar este proceso con una función. Si se examina la documentación de la función <code>geom_bar()</code> con <code>?geom_bar</code> en la sección <strong>Usage</strong> es posible verificar que se encuentra el parámetro <code>stat</code> con el argumento <code>"count"</code>, como <code>stat = "count"</code>. Esta opción es la que permite que la función <code>geom_bar()</code> realice un conteo del número de casos dentro de la variable <code>estu_prgm_academico</code> para generar la representación gráfica mediante la longitud de un conjunto de barras utilizando el código en el <a href="#lst-fct-rev" class="quarto-xref">Listado&nbsp;<span>6.6</span></a>.</p>
+<p>En el <a href="r_packages.html#lst-help" class="quarto-xref">Listado&nbsp;<span>4.4</span></a> se señaló la forma de consultar la documentación de un conjunto de datos que pertenece a un paquete utilizando el símbolo <code>?</code>. De la misma forma, es posible también realizar este proceso con una función. Si se examina la documentación de la función <code>geom_bar()</code> con <code>?geom_bar</code> en la sección <strong>Usage</strong> es posible verificar que se encuentra el parámetro <code>stat</code> con el argumento <code>"count"</code>, como <code>stat = "count"</code>. Esta opción es la que permite que la función <code>geom_bar()</code> realice un conteo del número de casos dentro de la variable <code>estu_prgm_academico</code> para generar la representación gráfica mediante la longitud de un conjunto de barras utilizando el código en el <a href="#lst-fct-rev" class="quarto-xref">Listado&nbsp;<span>6.7</span></a>.</p>
 </section>
 <section id="sec-position" class="level4" data-number="6.2.3.3">
 <h4 data-number="6.2.3.3" class="anchored" data-anchor-id="sec-position"><span class="header-section-number">6.2.3.3</span> Ajustes de posición</h4>
@@ -787,12 +796,12 @@ Listado&nbsp;6.6: Uso de la función <code>fct_rev()</code> para reversar el ord
 </section>
 <section id="sec-scales" class="level3" data-number="6.2.4">
 <h3 data-number="6.2.4" class="anchored" data-anchor-id="sec-scales"><span class="header-section-number">6.2.4</span> Escalas</h3>
-<p>Este componente permite interpretar lo que se muestra en el gráfico a partir de etiquetas y leyendas. En el gráfico generado en el <a href="#lst-fct-rev" class="quarto-xref">Listado&nbsp;<span>6.6</span></a> las etiquetas correspondientes a los nombres de los programas en la coordenada <code>y</code> tienen una longitud demasiado extensa donde abarcan la mayor área del gráfico, opacando la información que se busca resaltar respecto al número de inscritos por programa. Para corregir este aspecto, se puede utilizar la función <code>scale_y_discrete()</code> utilizando el parámetro <code>labels</code> y la función auxiliar <code>label_wrap_gen()</code> con el propósito de limitar el ancho de los nombres de los programas que se señalan en el gráfico. Utilizando de nuevo el operador <code>+</code>, como en el <a href="#lst-geometry" class="quarto-xref">Listado&nbsp;<span>6.4</span></a>, puedes agregar este componente de la siguiente manera:</p>
+<p>Este componente permite interpretar lo que se muestra en el gráfico a partir de etiquetas y leyendas. En el gráfico generado en el <a href="#lst-fct-rev" class="quarto-xref">Listado&nbsp;<span>6.7</span></a> las etiquetas correspondientes a los nombres de los programas en la coordenada <code>y</code> tienen una longitud demasiado extensa donde abarcan la mayor área del gráfico, opacando la información que se busca resaltar respecto al número de inscritos por programa. Para corregir este aspecto, se puede utilizar la función <code>scale_y_discrete()</code> utilizando el parámetro <code>labels</code> y la función auxiliar <code>label_wrap_gen()</code> con el propósito de limitar el ancho de los nombres de los programas que se señalan en el gráfico. Utilizando de nuevo el operador <code>+</code>, como en el <a href="#lst-geometry" class="quarto-xref">Listado&nbsp;<span>6.5</span></a>, puedes agregar este componente de la siguiente manera:</p>
 <div class="cell">
 <div id="lst-scales" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-scales-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listado&nbsp;6.7: Uso de una escala para modificar las etiquetas en la coordenada <code>y</code>
+Listado&nbsp;6.8: Uso de una escala para modificar las etiquetas en la coordenada <code>y</code>
 </figcaption>
 <div aria-describedby="lst-scales-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
@@ -821,7 +830,7 @@ Listado&nbsp;6.7: Uso de una escala para modificar las etiquetas en la coordenad
 <div id="lst-labs" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-labs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listado&nbsp;6.8: Uso de la función <code>labs()</code> para agregar, modificar o eliminar etiquetas en un gráfico
+Listado&nbsp;6.9: Uso de la función <code>labs()</code> para agregar, modificar o eliminar etiquetas en un gráfico
 </figcaption>
 <div aria-describedby="lst-labs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
@@ -850,7 +859,7 @@ Listado&nbsp;6.8: Uso de la función <code>labs()</code> para agregar, modificar
 </div>
 </div>
 </div>
-<p>En el <a href="#lst-labs" class="quarto-xref">Listado&nbsp;<span>6.8</span></a> se utilizan diferentes parámetros de la función <code>labs()</code> con unos argumentos para modificar las etiquetas de la siguiente manera:</p>
+<p>En el <a href="#lst-labs" class="quarto-xref">Listado&nbsp;<span>6.9</span></a> se utilizan diferentes parámetros de la función <code>labs()</code> con unos argumentos para modificar las etiquetas de la siguiente manera:</p>
 <ol type="1">
 <li><code>x = "Número de inscritos"</code>: permite modificar la etiqueta de la coordenada <code>x</code> para entender los valores que se presentan</li>
 <li><code>y = NULL</code>: permite eliminar la etiqueta de la coordenada <code>y</code>, utilizando <code>NULL</code> para señalar la ausencia de este elemento</li>

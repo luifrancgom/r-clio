@@ -100,6 +100,8 @@ div.csl-indent {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-64be2b63562b242f4737c478eddaaebd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/kbd/kbd.js"></script>
+<link href="site_libs/quarto-contrib/kbd/kbd.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -418,7 +420,15 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#sec-verbs" id="toc-sec-verbs" class="nav-link" data-scroll-target="#sec-verbs"><span class="header-section-number">10.1.1</span> Verbos</a></li>
   </ul></li>
-  <li><a href="#sec-case-study-select" id="toc-sec-case-study-select" class="nav-link" data-scroll-target="#sec-case-study-select"><span class="header-section-number">10.2</span> Caso de estudio: obtención de datos de interés del Saber-Pro para FAEDIS</a></li>
+  <li><a href="#sec-case-study-select" id="toc-sec-case-study-select" class="nav-link" data-scroll-target="#sec-case-study-select"><span class="header-section-number">10.2</span> Caso de estudio: obtención de datos de interés del Saber-Pro para FAEDIS</a>
+  <ul class="collapse">
+  <li><a href="#sec-data-case-study-dplyr" id="toc-sec-data-case-study-dplyr" class="nav-link" data-scroll-target="#sec-data-case-study-dplyr"><span class="header-section-number">10.2.1</span> Datos</a></li>
+  <li><a href="#filtrar-filter" id="toc-filtrar-filter" class="nav-link" data-scroll-target="#filtrar-filter"><span class="header-section-number">10.2.2</span> Filtrar (<code>filter()</code>)</a></li>
+  <li><a href="#seleccionar-select" id="toc-seleccionar-select" class="nav-link" data-scroll-target="#seleccionar-select"><span class="header-section-number">10.2.3</span> Seleccionar (<code>select()</code>)</a></li>
+  <li><a href="#reubicar-relocate" id="toc-reubicar-relocate" class="nav-link" data-scroll-target="#reubicar-relocate"><span class="header-section-number">10.2.4</span> Reubicar (<code>relocate()</code>)</a></li>
+  <li><a href="#modificar-mutate" id="toc-modificar-mutate" class="nav-link" data-scroll-target="#modificar-mutate"><span class="header-section-number">10.2.5</span> Modificar (<code>mutate()</code>)</a></li>
+  <li><a href="#collapsar-agrupar-y-desagrupar-summarise-group-y-ungroup" id="toc-collapsar-agrupar-y-desagrupar-summarise-group-y-ungroup" class="nav-link" data-scroll-target="#collapsar-agrupar-y-desagrupar-summarise-group-y-ungroup"><span class="header-section-number">10.2.6</span> Collapsar, agrupar y desagrupar (<code>summarise()</code>, <code>group()</code> y <code>ungroup()</code>)</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/single_table_verbs.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/single_table_verbs.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
@@ -444,7 +454,7 @@ window.Quarto = {
 </header>
 
 
-<p>Este capítulo se basa en <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 3</a>)</span> así como en la documentación oficial de <a href="https://dplyr.tidyverse.org/articles/dplyr.html"><code>dplyr</code></a> donde tiene como propósito introducir una <strong>gramática de manipulación de datos</strong> a través de un conjunto consistente de verbos para resolver las tareas más comunes en el manejo de datos cuando se tiene una sola tabla utilizando el paquete <code>dplyr</code> e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado en Colombia.</p>
+<p>Este capítulo se basa en <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 3</a>)</span> así como en la documentación oficial de <a href="https://dplyr.tidyverse.org/articles/dplyr.html"><code>dplyr</code></a> donde tiene como propósito introducir una <strong>gramática de manipulación de datos</strong> a través de un conjunto consistente de verbos para resolver las tareas más comunes en el manejo de datos cuando se tiene una sola tabla utilizando el paquete <code>dplyr</code> e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes al periodo 2021-2024 para Colombia.</p>
 <p>Exploraremos los siguientes aspectos:</p>
 <ol type="1">
 <li>¿En qué consistente la gramática de manipulación de datos utilizada en <code>dplyr</code>?</li>
@@ -519,16 +529,30 @@ Figura&nbsp;10.1: Representación gráfica de la función <code>filter()</code>
 </div>
 <p>Para utilizar un ejemplo concreto puedes utilizar el conjunto de datos utilizados en el <a href="amounts.html" class="quarto-xref"><span>Capítulo 6</span></a> respecto a <code>2021-2024_saber-pro-genericas_faedis.rds</code> para identificar las filas correspondientes al año <span class="math inline">\(2022\)</span> y de estudiantes pertenecientes al género masculino:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar datos ----</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"data/2021-2024_saber-pro-genericas_faedis.rds"</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrar ---</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  saber_pro_genericas_faedis_2021_2024,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  ano <span class="sc">==</span> <span class="dv">2022</span> <span class="sc">&amp;</span> estu_genero <span class="sc">==</span> <span class="st">"M"</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar paquetes ----</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar datos ----</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"data/2021-2024_saber-pro-genericas_faedis.rds"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrar ---</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  ano <span class="sc">==</span> <span class="dv">2022</span> <span class="sc">&amp;</span> estu_genero <span class="sc">==</span> <span class="st">"M"</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 194 × 20
      ano estu_consecutivo estu_genero estu_semestrecursa
@@ -545,7 +569,7 @@ Figura&nbsp;10.1: Representación gráfica de la función <code>filter()</code>
 10  2022 EK202220120496   M           08                
 # ℹ 184 more rows
 # ℹ 16 more variables: fami_estratovivienda &lt;ord&gt;,
-#   fami_educacionmadre &lt;ord&gt;, fami_educacionpadre &lt;fct&gt;,
+#   fami_educacionmadre &lt;ord&gt;, fami_educacionpadre &lt;ord&gt;,
 #   estu_cod_depto_presentacion &lt;chr&gt;,
 #   estu_depto_presentacion &lt;chr&gt;,
 #   estu_cod_mcpio_presentacion &lt;chr&gt;,
@@ -565,11 +589,11 @@ Figura&nbsp;10.2: Representación gráfica de la función <code>slice()</code>
 </div>
 <p>Para utilizar un ejemplo concreto puedes utilizar el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> para seleccionar las filas correspondientes a las posiciones <code>1</code>, <code>3</code> y <code>5</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Seleccionar filas por posición ----</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice</span>(</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  saber_pro_genericas_faedis_2021_2024,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Seleccionar filas por posición ----</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 20
     ano estu_consecutivo estu_genero estu_semestrecursa
@@ -578,7 +602,7 @@ Figura&nbsp;10.2: Representación gráfica de la función <code>slice()</code>
 2  2021 EK202120116868   M           09                
 3  2021 EK202120116814   F           09                
 # ℹ 16 more variables: fami_estratovivienda &lt;ord&gt;,
-#   fami_educacionmadre &lt;ord&gt;, fami_educacionpadre &lt;fct&gt;,
+#   fami_educacionmadre &lt;ord&gt;, fami_educacionpadre &lt;ord&gt;,
 #   estu_cod_depto_presentacion &lt;chr&gt;,
 #   estu_depto_presentacion &lt;chr&gt;,
 #   estu_cod_mcpio_presentacion &lt;chr&gt;,
@@ -605,11 +629,11 @@ Figura&nbsp;10.3: Representación gráfica de la función <code>arrange()</code>
 </div>
 <p>Para utilizar un ejemplo concreto puedes utilizar el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> para ordenar la variable <code>ano</code> en forma descendente y luego al interior de cada año la variable <code>estu_semestrecursa</code> en forma ascendente:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  saber_pro_genericas_faedis_2021_2024,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">desc</span>(ano),</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  estu_semestrecursa</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">desc</span>(ano),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  estu_semestrecursa</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,239 × 20
      ano estu_consecutivo estu_genero estu_semestrecursa
@@ -626,7 +650,7 @@ Figura&nbsp;10.3: Representación gráfica de la función <code>arrange()</code>
 10  2024 EK202410129981   M           07                
 # ℹ 1,229 more rows
 # ℹ 16 more variables: fami_estratovivienda &lt;ord&gt;,
-#   fami_educacionmadre &lt;ord&gt;, fami_educacionpadre &lt;fct&gt;,
+#   fami_educacionmadre &lt;ord&gt;, fami_educacionpadre &lt;ord&gt;,
 #   estu_cod_depto_presentacion &lt;chr&gt;,
 #   estu_depto_presentacion &lt;chr&gt;,
 #   estu_cod_mcpio_presentacion &lt;chr&gt;,
@@ -649,12 +673,12 @@ Figura&nbsp;10.4: Representación gráfica de la función <code>select()</code>
 </div>
 <p>Para utilizar un ejemplo concreto puedes utilizar el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> para seleccionar las columnas asociadas con las variables <code>ano</code>, <code>estu_consecutivo</code> y <code>punt_global</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  saber_pro_genericas_faedis_2021_2024,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  ano,</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  estu_consecutivo,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  punt_global</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  ano,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  estu_consecutivo,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  punt_global</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,239 × 3
      ano estu_consecutivo punt_global
@@ -672,7 +696,7 @@ Figura&nbsp;10.4: Representación gráfica de la función <code>select()</code>
 # ℹ 1,229 more rows</code></pre>
 </div>
 </div>
-<p>En la <a href="#sec-case-study-select" class="quarto-xref"><span>Sección 10.2</span></a> se utilizarán <a href="https://dplyr.tidyverse.org/reference/select.html#overview-of-selection-features">operadores o funciones auxiliares</a> para ilustrar la forma como se pueden seleccionar columnas de manera más precisa. A medida que explores más formas de seleccionar columnas de un conjunto de datos podrás consultar en más detalle la documentación de ayuda de la función <code>select()</code> (<code>?select</code>) respecto a las diferentes funcionalidades de selección.</p>
+<p>En la <a href="#sec-case-study-select" class="quarto-xref"><span>Sección 10.2</span></a> se utilizarán <a href="https://dplyr.tidyverse.org/reference/select.html#overview-of-selection-features">operadores o funciones auxiliares</a> para ilustrar la forma como se pueden seleccionar columnas de manera más precisa. A medida que explores más formas de seleccionar columnas de un conjunto de datos podrás consultar en más detalle la documentación de ayuda de la función <code>select()</code> (ver <code>?select</code>) respecto a las diferentes funcionalidades de selección.</p>
 <p>La segunda función, correspondiente a <code>rename()</code>, se utiliza para cambiar el nombre de las columnas usando el esquema <code>nuevo_nombre = antiguo_nombre</code>. En la <a href="#fig-rename-verb" class="quarto-xref">Figura&nbsp;<span>10.5</span></a> se ilustra gráficamente la manipulación que se puede realizar con la función <code>rename()</code>.</p>
 <div id="fig-rename-verb" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que muestra cómo la función rename cambia el nombre de una columna sin alterar la estructura ni el contenido de los datos. A la izquierda hay una tabla con columnas a, b y c. Una flecha con el comando rename indica el cambio d = b, generando a la derecha una tabla idéntica donde la segunda columna ahora se llama d.">
 <figure class="quarto-float quarto-float-fig figure">
@@ -686,10 +710,10 @@ Figura&nbsp;10.5: Representación gráfica de la función <code>rename()</code>
 </div>
 <p>Para utilizar un ejemplo concreto puedes utilizar el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> para renombrar la columna <code>estu_consecutivo</code> por un nombre más descriptivo como <code>id_saber_pro_estudiante</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  saber_pro_genericas_faedis_2021_2024,</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id_saber_pro_estudiante =</span> estu_consecutivo</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id_saber_pro_estudiante =</span> estu_consecutivo</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,239 × 20
      ano id_saber_pro_estudiante estu_genero
@@ -707,13 +731,13 @@ Figura&nbsp;10.5: Representación gráfica de la función <code>rename()</code>
 # ℹ 1,229 more rows
 # ℹ 17 more variables: estu_semestrecursa &lt;ord&gt;,
 #   fami_estratovivienda &lt;ord&gt;, fami_educacionmadre &lt;ord&gt;,
-#   fami_educacionpadre &lt;fct&gt;,
+#   fami_educacionpadre &lt;ord&gt;,
 #   estu_cod_depto_presentacion &lt;chr&gt;,
 #   estu_depto_presentacion &lt;chr&gt;,
 #   estu_cod_mcpio_presentacion &lt;chr&gt;, …</code></pre>
 </div>
 </div>
-<p>La tercera función, correspondiente a <code>mutate()</code>, se utiliza para crear nuevas columnas a partir de variables existentes dentro de una tibble. También se puede utilizar para modificar columnas si el nombre es el mismo a una columna existente. La función <code>mutate()</code> por defecto ubica las nuevas columnas al final de la tibble y mantiene todas las variables presentes en la tibble original. Sin embargo estos aspectos se pueden modificar con los parámetros <code>.keep</code>, <code>.before</code> y <code>.after</code> (ver <code>?mutate</code>). En la <a href="#fig-mutate-verb" class="quarto-xref">Figura&nbsp;<span>10.6</span></a> se ilustra gráficamente la manipulación que se puede realizar con la función <code>mutate()</code>.</p>
+<p>La tercera función, correspondiente a <code>mutate()</code>, se utiliza para crear nuevas columnas usualmente a partir de variables existentes dentro de una tibble. También se puede utilizar para modificar columnas si el nombre es el mismo a una columna existente. La función <code>mutate()</code> por defecto ubica las nuevas columnas al final de la tibble y mantiene todas las variables presentes en la tibble original. Sin embargo estos aspectos se pueden modificar con los parámetros <code>.keep</code>, <code>.before</code> y <code>.after</code> (ver <code>?mutate</code>). En la <a href="#fig-mutate-verb" class="quarto-xref">Figura&nbsp;<span>10.6</span></a> se ilustra gráficamente la manipulación que se puede realizar con la función <code>mutate()</code>.</p>
 <div id="fig-mutate-verb" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que muestra cómo la función mutate crea una nueva columna a partir de operaciones entre variables existentes. A la izquierda se observa una tabla con columnas a, b y c. Una flecha con el comando mutate indica la operación d = a + b, generando a la derecha una tabla expandida que conserva las columnas originales y añade la nueva columna d en color ocre.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mutate-verb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -726,12 +750,12 @@ Figura&nbsp;10.6: Representación gráfica de la función <code>mutate()</code>
 </div>
 <p>Para utilizar un ejemplo concreto puedes utilizar el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> para generar una nueva columna denominada <code>punt_global_norm</code> donde corresponde a la variable <code>punt_global</code> normalizada en el intervalo <span class="math inline">\([0, 1]\)</span><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> y conservando sólo las columnas utilizadas para generar ésta nueva variable a través del parámetro <code>.keep</code> con el argumento <code>"used"</code>, como <code>.keep = "used"</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  saber_pro_genericas_faedis_2021_2024,</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">punt_global_norm =</span> (punt_global <span class="sc">-</span> <span class="fu">min</span>(punt_global)) <span class="sc">/</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    (<span class="fu">max</span>(punt_global) <span class="sc">-</span> <span class="fu">min</span>(punt_global)),</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">.keep =</span> <span class="st">"used"</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">punt_global_norm =</span> (punt_global <span class="sc">-</span> <span class="fu">min</span>(punt_global)) <span class="sc">/</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    (<span class="fu">max</span>(punt_global) <span class="sc">-</span> <span class="fu">min</span>(punt_global)),</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">.keep =</span> <span class="st">"used"</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,239 × 2
    punt_global punt_global_norm
@@ -762,11 +786,11 @@ Figura&nbsp;10.7: Representación gráfica de la función <code>relocate()</code
 </div>
 <p>Para utilizar un ejemplo concreto puedes utilizar el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> para mover la variable <code>punt_global</code> después de la columna asociada con <code>estu_consecutivo</code> utilizando el parámetro <code>.after</code> junto con <code>estu_consecutivo</code>, como <code>.after = estu_consecutivo</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">relocate</span>(</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  saber_pro_genericas_faedis_2021_2024,</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  punt_global,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">.after =</span> estu_consecutivo</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">relocate</span>(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  punt_global,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">.after =</span> estu_consecutivo</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,239 × 20
      ano estu_consecutivo punt_global estu_genero
@@ -784,7 +808,7 @@ Figura&nbsp;10.7: Representación gráfica de la función <code>relocate()</code
 # ℹ 1,229 more rows
 # ℹ 16 more variables: estu_semestrecursa &lt;ord&gt;,
 #   fami_estratovivienda &lt;ord&gt;, fami_educacionmadre &lt;ord&gt;,
-#   fami_educacionpadre &lt;fct&gt;,
+#   fami_educacionpadre &lt;ord&gt;,
 #   estu_cod_depto_presentacion &lt;chr&gt;,
 #   estu_depto_presentacion &lt;chr&gt;,
 #   estu_cod_mcpio_presentacion &lt;chr&gt;, …</code></pre>
@@ -1285,7 +1309,7 @@ Tabla&nbsp;10.1: Uso e interpretación del operador pipe (<code>|&gt;</code>)
 </figure>
 </div>
 </div>
-<p>Para utilizar un ejemplo concreto utilizando el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> y una aplicación del operador <code>|&gt;</code> se podría por ejemplo estar interesado en identificar los casos atípicos en los cuales no sólo el puntaje del módulo de razonamiento cuantitativo o de lectura crítica es <span class="math inline">\(0\)</span> (ver <a href="x-y_relationships.html#lst-geom-point" class="quarto-xref">Listado&nbsp;<span>9.1</span></a>) sino si se presenta en al menos alguno de los otros módulos utilizando las funciones <code>select()</code>, <code>filter()</code> y <code>arrange()</code> más <code>glimpse()</code>, tal como se señala a continuación:</p>
+<p>Para utilizar un ejemplo concreto utilizando el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> y una aplicación del operador <code>|&gt;</code> se podría por ejemplo estar interesado en identificar los casos atípicos en los cuales no sólo el puntaje del módulo de razonamiento cuantitativo o de lectura crítica es <span class="math inline">\(0\)</span> (ver <a href="x-y_relationships.html#lst-geom-point" class="quarto-xref">Listado&nbsp;<span>9.1</span></a>) sino si se presenta en al menos alguno de los otros módulos utilizando las funciones <code>select()</code>, <code>filter()</code> y <code>arrange()</code> más <code>glimpse()</code> así como el operador lógico vectorizado <code>|</code> (ver <a href="how_to_code_in_r.html#tbl-vectorized-logical-operators" class="quarto-xref">Tabla&nbsp;<span>5.3</span></a>), tal como se señala a continuación:</p>
 <div class="cell">
 <div id="lst-example-use-pipe" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
@@ -1293,27 +1317,27 @@ Tabla&nbsp;10.1: Uso e interpretación del operador pipe (<code>|&gt;</code>)
 Listado&nbsp;10.1: Ejemplo en el uso del del operador pipe (<code>|&gt;</code>) para manipular datos
 </figcaption>
 <div aria-describedby="lst-example-use-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="sc">|&gt;</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    ano,</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    estu_consecutivo,</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    estu_snies_prgmacademico,</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    estu_prgm_academico,</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    mod_competen_ciudada_punt,</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    mod_comuni_escrita_punt,</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    mod_ingles_punt,</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    mod_lectura_critica_punt,</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    mod_razona_cuantitat_punt</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    mod_competen_ciudada_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>      mod_comuni_escrita_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>      mod_ingles_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>      mod_lectura_critica_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>      mod_razona_cuantitat_punt <span class="sc">==</span> <span class="dv">0</span></span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(estu_prgm_academico) <span class="sc">|&gt;</span></span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    ano,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    estu_consecutivo,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    estu_snies_prgmacademico,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    estu_prgm_academico,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    mod_competen_ciudada_punt,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    mod_comuni_escrita_punt,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    mod_ingles_punt,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    mod_lectura_critica_punt,</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    mod_razona_cuantitat_punt</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    mod_competen_ciudada_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>      mod_comuni_escrita_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>      mod_ingles_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>      mod_lectura_critica_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>      mod_razona_cuantitat_punt <span class="sc">==</span> <span class="dv">0</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(estu_prgm_academico) <span class="sc">|&gt;</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
@@ -1329,6 +1353,19 @@ $ mod_comuni_escrita_punt   &lt;dbl&gt; 0, 128, 0, 0, 0, 0, 0, 1…
 $ mod_ingles_punt           &lt;dbl&gt; 187, 0, 0, 164, 144, 146…
 $ mod_lectura_critica_punt  &lt;dbl&gt; 92, 64, 0, 143, 132, 123…
 $ mod_razona_cuantitat_punt &lt;dbl&gt; 130, 0, 0, 107, 155, 146…</code></pre>
+</div>
+</div>
+<div id="tip-1-chap-10" class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip&nbsp;10.1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En Positron, puedes insertar el operador <code>|&gt;</code> utilizando la combinación de teclas <kbd title="linux: Ctrl-Shift-M, mac: Shift-Command-M, windows: Ctrl-Shift-M" aria-hidden="true" data-linux="Ctrl-Shift-M" data-mac="Shift-Command-M" data-windows="Ctrl-Shift-M"></kbd><span class="visually-hidden"></span> de tal manera que no tengas que digitarlo de manera manual.</p>
 </div>
 </div>
 <p>El <a href="#lst-example-use-pipe" class="quarto-xref">Listado&nbsp;<span>10.1</span></a> ilustra las ventajas de hacer uso del operador <code>|&gt;</code> para que el código sea más legible donde permite:</p>
@@ -1347,30 +1384,30 @@ $ mod_razona_cuantitat_punt &lt;dbl&gt; 130, 0, 0, 107, 155, 146…</code></pre>
 Listado&nbsp;10.2: Uso de funciones anidadas cuando no se usa el operador <code>|&gt;</code>
 </figcaption>
 <div aria-describedby="lst-code-using-nested-functions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">select</span>(</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>        saber_pro_genericas_faedis_2021_2024,</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>        ano,</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>        estu_consecutivo,</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>        estu_snies_prgmacademico,</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>        estu_prgm_academico,</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>        mod_competen_ciudada_punt,</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>        mod_comuni_escrita_punt,</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>        mod_ingles_punt,</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>        mod_lectura_critica_punt,</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>        mod_razona_cuantitat_punt</span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>      mod_competen_ciudada_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>        mod_comuni_escrita_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>        mod_ingles_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>        mod_lectura_critica_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>        mod_razona_cuantitat_punt <span class="sc">==</span> <span class="dv">0</span></span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>    estu_prgm_academico</span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">select</span>(</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>        saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>        ano,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>        estu_consecutivo,</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>        estu_snies_prgmacademico,</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>        estu_prgm_academico,</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>        mod_competen_ciudada_punt,</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>        mod_comuni_escrita_punt,</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>        mod_ingles_punt,</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>        mod_lectura_critica_punt,</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>        mod_razona_cuantitat_punt</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>      mod_competen_ciudada_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>        mod_comuni_escrita_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>        mod_ingles_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>        mod_lectura_critica_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>        mod_razona_cuantitat_punt <span class="sc">==</span> <span class="dv">0</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>    estu_prgm_academico</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
@@ -1383,45 +1420,45 @@ Listado&nbsp;10.2: Uso de funciones anidadas cuando no se usa el operador <code>
 Listado&nbsp;10.3: Creación de variables intermedias cuando no se usa el operador <code>|&gt;</code>
 </figcaption>
 <div aria-describedby="lst-code-using-intermediate-variables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Seleccionar columnas ----</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>datos_seleccionados <span class="ot">&lt;-</span> <span class="fu">select</span>(</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  saber_pro_genericas_faedis_2021_2024,</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  ano,</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  estu_consecutivo,</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  estu_snies_prgmacademico,</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  estu_prgm_academico,</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  mod_competen_ciudada_punt,</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  mod_comuni_escrita_punt,</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  mod_ingles_punt,</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  mod_lectura_critica_punt,</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  mod_razona_cuantitat_punt</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrar filas con ceros ----</span></span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>datos_filtrados <span class="ot">&lt;-</span> <span class="fu">filter</span>(</span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  datos_seleccionados,</span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  mod_competen_ciudada_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    mod_comuni_escrita_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    mod_ingles_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>    mod_lectura_critica_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>    mod_razona_cuantitat_punt <span class="sc">==</span> <span class="dv">0</span></span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Ordenar por programa académico ---</span></span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>datos_ordenados <span class="ot">&lt;-</span> <span class="fu">arrange</span>(</span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>  datos_filtrados,</span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>  estu_prgm_academico</span>
-<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a><span class="co"># "Vistazo" de datos ----</span></span>
-<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(datos_ordenados)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Seleccionar columnas ----</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>datos_seleccionados <span class="ot">&lt;-</span> <span class="fu">select</span>(</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  saber_pro_genericas_faedis_2021_2024,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  ano,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  estu_consecutivo,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  estu_snies_prgmacademico,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  estu_prgm_academico,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  mod_competen_ciudada_punt,</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  mod_comuni_escrita_punt,</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  mod_ingles_punt,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  mod_lectura_critica_punt,</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  mod_razona_cuantitat_punt</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrar filas con ceros ----</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>datos_filtrados <span class="ot">&lt;-</span> <span class="fu">filter</span>(</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>  datos_seleccionados,</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  mod_competen_ciudada_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>    mod_comuni_escrita_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    mod_ingles_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>    mod_lectura_critica_punt <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>    mod_razona_cuantitat_punt <span class="sc">==</span> <span class="dv">0</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Ordenar por programa académico ---</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>datos_ordenados <span class="ot">&lt;-</span> <span class="fu">arrange</span>(</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>  datos_filtrados,</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>  estu_prgm_academico</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a><span class="co"># "Vistazo" de datos ----</span></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(datos_ordenados)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
 </div>
 <p>En el <a href="#lst-code-using-intermediate-variables" class="quarto-xref">Listado&nbsp;<span>10.3</span></a> se crean variables intermedias adicionales para un análisis sencillo. Sin embargo, esta práctica puede saturar el entorno de trabajo, aumentar el riesgo de cometer errores por confusión de nombres y dificulta el mantenimiento del código si se desea agregar un nuevo paso en la secuencia<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</p>
 <p>Esto no significa que se deba optar por el extremo opuesto y utilizar el operador <code>|&gt;</code> de manera indiscriminada para generar secuencias interminables de pasos. En la práctica en el análisis de datos, tarde o temprano será necesario e incluso recomendable crear variables intermedias. La clave no es eliminar por completo la creación de variables, sino aprender a gestionar un conjunto mínimo y adecuado de variables con un propósito claro, en lugar de lidiar con una enorme cantidad de objetos.</p>
-<p>En la <a href="#tbl-use-interpreation-pipe" class="quarto-xref">Tabla&nbsp;<span>10.1</span></a> se señala en la última fila el uso del guion bajo (<code>_</code>). Este elemento funciona como un marcador de posición (<em>placeholder</em> en inglés) que sirve para controlar de manera explícita en qué lugar se insertará el objeto debido a que, por defecto, este se introduce como el primer argumento de una función. En algunos casos se hace necesario modificar este comportamiento por defecto donde por ejemplo el <a href="x-y_relationships.html#lst-lm" class="quarto-xref">Listado&nbsp;<span>9.3</span></a> se puede reescribir utilizando el operador <code>|&gt;</code>, tal como se señala a continuación:</p>
+<p>En la <a href="#tbl-use-interpreation-pipe" class="quarto-xref">Tabla&nbsp;<span>10.1</span></a> se señala en la última fila el uso del guion bajo (<code>_</code>). Este elemento funciona como un marcador de posición (<em>placeholder</em> en inglés) que sirve para controlar de manera explícita en qué lugar se insertará el objeto debido a que, por defecto, este se introduce como el primer argumento de una función al utilizar el operador <code>|&gt;</code>. En algunos casos se hace necesario modificar este comportamiento por defecto donde por ejemplo el <a href="x-y_relationships.html#lst-lm" class="quarto-xref">Listado&nbsp;<span>9.3</span></a> se puede reescribir utilizando el operador <code>|&gt;</code>, tal como se señala a continuación:</p>
 <div class="cell">
 <div id="lst-lm-pipe" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
@@ -1429,11 +1466,11 @@ Listado&nbsp;10.3: Creación de variables intermedias cuando no se usa el operad
 Listado&nbsp;10.4: Uso del marcador de posición <code>_</code> y el operador <code>|&gt;</code> en la función <code>lm()</code>
 </figcaption>
 <div aria-describedby="lst-lm-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="sc">|&gt;</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> mod_razona_cuantitat_punt <span class="sc">~</span> mod_lectura_critica_punt,</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> _</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> mod_razona_cuantitat_punt <span class="sc">~</span> mod_lectura_critica_punt,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> _</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
@@ -1451,7 +1488,7 @@ Coefficients:
 </section>
 <section id="sec-verbs-collapse-group-ungroup" class="level4" data-number="10.1.1.4">
 <h4 data-number="10.1.1.4" class="anchored" data-anchor-id="sec-verbs-collapse-group-ungroup"><span class="header-section-number">10.1.1.4</span> Verbos para collapsar, agrupar y desagrupar filas</h4>
-<p>Esta categoría incluye las funciones <code>group_by()</code>, <code>summarise()</code> y <code>ungroup()</code>. La primera función, correspondiente a <code>group_by()</code>, se utiliza para convertir una tibble en una tibble agrupada de tal manera que los verbos posteriores que se apliquen se realizan por grupo. En la <a href="#fig-group-by-verb" class="quarto-xref">Figura&nbsp;<span>10.8</span></a> se ilustra gráficamente la manipulación que se puede realizar con la función <code>group_by()</code>.</p>
+<p>Esta categoría incluye las funciones <code>group_by()</code>, <code>summarise()</code> y <code>ungroup()</code>. La primera función, correspondiente a <code>group_by()</code>, se utiliza para convertir una tibble en una tibble agrupada de tal manera que los verbos posteriores que se utilicen se apliquen por grupo. En la <a href="#fig-group-by-verb" class="quarto-xref">Figura&nbsp;<span>10.8</span></a> se ilustra gráficamente la manipulación que se puede realizar con la función <code>group_by()</code>.</p>
 <div id="fig-group-by-verb" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que muestra cómo la función group_by agrupa las filas de una tabla según los valores de una columna. A la izquierda hay una tabla con columnas a, b y c, donde la columna a contiene dos celdas marrón oscuro (filas 1 y 4) y dos celdas ocre (filas 2 y 3). Una flecha con el comando group_by indica agrupar por la columna a, generando a la derecha la separación de los datos en dos subtablas independientes según su color: un grupo con las filas 1 y 4, y otro con las filas 2 y 3.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-group-by-verb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1462,13 +1499,13 @@ Figura&nbsp;10.8: Representación gráfica de la función <code>group_by()</code
 </figcaption>
 </figure>
 </div>
-<p>Para ilustrar el comportamiento de esta función con un ejemplo concreto puedes utilizar el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> para agrupar el conjunto de datos por año y el género de los estudiantes a través de las variables <code>ano</code> y <code>estu_genero</code>:</p>
+<p>Para ilustrar el comportamiento de esta función con un ejemplo concreto puedes utilizar el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> para agruparlos por año y el género a través de las variables <code>ano</code> y <code>estu_genero</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="sc">|&gt;</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    ano,</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    estu_genero</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    ano,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    estu_genero</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,239 × 20
 # Groups:   ano, estu_genero [8]
@@ -1486,7 +1523,7 @@ Figura&nbsp;10.8: Representación gráfica de la función <code>group_by()</code
 10  2021 EK202120117014   F           08                
 # ℹ 1,229 more rows
 # ℹ 16 more variables: fami_estratovivienda &lt;ord&gt;,
-#   fami_educacionmadre &lt;ord&gt;, fami_educacionpadre &lt;fct&gt;,
+#   fami_educacionmadre &lt;ord&gt;, fami_educacionpadre &lt;ord&gt;,
 #   estu_cod_depto_presentacion &lt;chr&gt;,
 #   estu_depto_presentacion &lt;chr&gt;,
 #   estu_cod_mcpio_presentacion &lt;chr&gt;,
@@ -1494,7 +1531,7 @@ Figura&nbsp;10.8: Representación gráfica de la función <code>group_by()</code
 </div>
 </div>
 <p>En la parte superior de la tibble además de indicar el número de filas así como las columnas que la componen (ver <a href="r_packages.html#lst-mpg-database" class="quarto-xref">Listado&nbsp;<span>4.3</span></a>) se incluye además un segundo comentario, <code># Groups:   ano, estu_genero [8]</code>, que indica las variables que se utilizaron para realizar la agrupación así como el número de grupos formados. En este caso son <span class="math inline">\(8\)</span> teniendo en cuenta que se tienen <span class="math inline">\(4\)</span> años (<code>2021</code>, <code>2022</code>, <code>2023</code> y <code>2024</code>) y <span class="math inline">\(2\)</span> categorías de género (<code>F</code>, <code>M</code>) para un total de <span class="math inline">\(4 \times 2 = 8\)</span> grupos.</p>
-<p>La segunda función, correspondiente a <code>summarise()</code>, se utiliza para crear una tibble donde si existen variables agrupadas genera una fila por cada combinación de variables agrupadas y una columna por cada estadística descriptiva que se especifique. En caso que no existan variables agrupadas genera un a sola fila con la estadística descriptiva que se especifique y una columna por cada estadística descriptiva que se defina. En la <a href="#fig-summarise-verb" class="quarto-xref">Figura&nbsp;<span>10.9</span></a> se ilustra gráficamente la manipulación que se puede realizar con la función <code>summarise()</code>.</p>
+<p>La segunda función, correspondiente a <code>summarise()</code>, se utiliza para crear una tibble donde si existen variables agrupadas genera una fila por cada combinación de variables agrupadas y una columna por cada estadística descriptiva que se especifique. En caso que no existan variables agrupadas genera una sola fila con la estadística descriptiva que se especifique y una columna por cada estadística descriptiva que se defina. En la <a href="#fig-summarise-verb" class="quarto-xref">Figura&nbsp;<span>10.9</span></a> se ilustra gráficamente la manipulación que se puede realizar con la función <code>summarise()</code>.</p>
 <div id="fig-summarise-verb" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que muestra cómo la función summarise colapsa múltiples filas en una única estadística descriptiva. A la izquierda hay una tabla con columnas a, b y c, donde la columna a contiene cuatro filas con un gradiente de color que va desde el amarillo claro hasta el rojo oscuro. Una flecha con el comando summarise indica el cálculo f = mean(a), generando a la derecha una nueva tabla reducida a una única fila y una sola columna etiquetada como f de color naranja, la cual representa el promedio calculado.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-summarise-verb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1507,15 +1544,15 @@ Figura&nbsp;10.9: Representación gráfica de la función <code>summarise()</cod
 </div>
 <p>Para ilustrar el comportamiento de esta función con un ejemplo concreto puedes utilizar el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> donde con las variables agrupadas <code>ano</code> y <code>estu_genero</code>es posible calcular el puntaje global promedio redondeado a <span class="math inline">\(0\)</span> decimales por año y género:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="sc">|&gt;</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    ano,</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    estu_genero</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">punt_global =</span> <span class="fu">mean</span>(punt_global) <span class="sc">|&gt;</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">0</span>)</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    ano,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    estu_genero</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">punt_global =</span> <span class="fu">mean</span>(punt_global) <span class="sc">|&gt;</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">0</span>)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`summarise()` has regrouped the output.
 ℹ Summaries were computed grouped by ano and estu_genero.
@@ -1540,7 +1577,7 @@ Figura&nbsp;10.9: Representación gráfica de la función <code>summarise()</cod
 8  2024 M                   148</code></pre>
 </div>
 </div>
-<p>Por defecto cuando existe variables agrupadas la función <code>summarise()</code> desagrupa por la última variable el resultado final, en este caso por <code>estu_genero</code>. Debido a lo anterior el paquete <code>dplyr</code> genera un mensaje indicando este comportamiento así como diferentes alternativas para no utilizar la función <code>group_by()</code> mediante el uso del parámetro <code>.by</code> y el argumento <code>c(ano, estu_genero)</code>, como <code>.by = c(ano, estu_genero)</code>. Aunque existe la anterior alternativa (ver <a href="#imp-1-chap-10" class="quarto-xref">Important&nbsp;<span>10.1</span></a>) a lo largo del libro se utilizará de manera explícita la función <code>group_by()</code> cuando se busque hacer uso la función <code>summarise()</code> para calcular estadísticas descriptivas por grupos.</p>
+<p>Por defecto cuando existe variables agrupadas la función <code>summarise()</code> desagrupa por la última variable el resultado final, en este caso por <code>estu_genero</code>. Debido a lo anterior el paquete <code>dplyr</code> genera un mensaje indicando este comportamiento así como diferentes alternativas para no utilizar la función <code>group_by()</code> mediante el uso del parámetro <code>.by</code> y el argumento <code>c(ano, estu_genero)</code>, como <code>.by = c(ano, estu_genero)</code>. Aunque existe la anterior alternativa (ver <a href="#imp-1-chap-10" class="quarto-xref">Importante&nbsp;<span>10.1</span></a>) a lo largo del libro se utilizará de manera explícita la función <code>group_by()</code> cuando se busque hacer uso la función <code>summarise()</code> para calcular estadísticas descriptivas por grupos.</p>
 <div id="imp-1-chap-10" class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1554,9 +1591,9 @@ Importante&nbsp;10.1
 <p>En el paquete <code>dplyr</code> existen <span class="math inline">\(2\)</span> formas de agrupar:</p>
 <ol type="1">
 <li>Utilizando <code>group_by()</code> donde la agrupación persiste al aplicar diferentes verbos.</li>
-<li>Utilizando los parámetros <code>.by</code> o <code>by</code> dentro de un determinado verbo donde la agrupación sólo afecta el verbo donde se utilize el parámetro.</li>
+<li>Utilizando los parámetros <code>.by</code> o <code>by</code> dentro de un determinado verbo donde la agrupación sólo afecta el verbo donde se utilice el parámetro.</li>
 </ol>
-<p>El lector interesado puede consultar la <a href="https://dplyr.tidyverse.org/reference/dplyr_by.html">documentación oficial</a> de <code>dplyr</code> para conocer más detalles de éste aspecto en caso que sea de su interés. Sin embargo, a lo largo del libro utilizaremos la función <code>group_by()</code> de manera explícita y no los parámetros <code>.by</code> o <code>by</code> dentro de los verbos.</p>
+<p>El lector interesado puede consultar la <a href="https://dplyr.tidyverse.org/reference/dplyr_by.html">documentación oficial</a> de <code>dplyr</code> para conocer más detalles de este aspecto en caso que sea de su interés. Sin embargo, a lo largo del libro utilizaremos la función <code>group_by()</code> de manera explícita y no los parámetros <code>.by</code> o <code>by</code> dentro de los verbos.</p>
 <p>Una vez estes familiarizado con el paquete <code>dplyr</code> podras examinar el comportamiento de utilizar una u otra opción. Por ahora el enfoque es conocer los diferentes verbos disponibles en el contexto de la gramática de manipulación de datos.</p>
 </div>
 </div>
@@ -1571,27 +1608,18 @@ Figura&nbsp;10.10: Representación gráfica de la función <code>ungroup()</code
 </figcaption>
 </figure>
 </div>
-<p>Para ilustrar el comportamiento de esta función con un ejemplo concreto puedes utilizar el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> donde es posible desagrupar completamente una tibble que puede ser utilizada como insumo para crear un gráfico similar a la <a href="x-y_relationships.html#fig-2-chap-9" class="quarto-xref">Figura&nbsp;<span>9.2</span></a> pero por género:</p>
+<p>Para ilustrar el comportamiento de esta función con un ejemplo concreto puedes utilizar el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> donde es posible desagrupar completamente una tibble, que puede ser utilizada como insumo para crear un gráfico similar a la <a href="x-y_relationships.html#fig-2-chap-9" class="quarto-xref">Figura&nbsp;<span>9.2</span></a> pero por género:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="sc">|&gt;</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    ano,</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    estu_genero</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">punt_global =</span> <span class="fu">mean</span>(punt_global) <span class="sc">|&gt;</span></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">0</span>)</span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`summarise()` has regrouped the output.
-ℹ Summaries were computed grouped by ano and estu_genero.
-ℹ Output is grouped by ano.
-ℹ Use `summarise(.groups = "drop_last")` to silence this
-  message.
-ℹ Use `summarise(.by = c(ano, estu_genero))` for
-  per-operation grouping (`?dplyr::dplyr_by`) instead.</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024 <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    ano,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    estu_genero</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">punt_global =</span> <span class="fu">mean</span>(punt_global) <span class="sc">|&gt;</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">0</span>)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 3
     ano estu_genero punt_global
@@ -1611,6 +1639,366 @@ Figura&nbsp;10.10: Representación gráfica de la función <code>ungroup()</code
 </section>
 <section id="sec-case-study-select" class="level2" data-number="10.2">
 <h2 data-number="10.2" class="anchored" data-anchor-id="sec-case-study-select"><span class="header-section-number">10.2</span> Caso de estudio: obtención de datos de interés del Saber-Pro para FAEDIS</h2>
+<p>El propósito de la <a href="#sec-case-study-select" class="quarto-xref"><span>Sección 10.2</span></a> es aplicar la gramática de manipulación de datos para ilustrar su uso partiendo de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado en Colombia para el periodo 2021-2024. El objetivo es obtener el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> descrito en la <a href="amounts.html#sec-data" class="quarto-xref"><span>Sección 6.2.1</span></a> así como el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis_programas.rds</code> descrito en la <a href="x-y_relationships.html#sec-data-geom-line" class="quarto-xref"><span>Sección 9.2.2</span></a>.</p>
+<section id="sec-data-case-study-dplyr" class="level3" data-number="10.2.1">
+<h3 data-number="10.2.1" class="anchored" data-anchor-id="sec-data-case-study-dplyr"><span class="header-section-number">10.2.1</span> Datos</h3>
+<p>Para desarrollar el caso de estudio es necesario en primera instancia importar los datos para explorarlos en R como se señala a continuación, teniendo en cuenta lo indicado en la <a href="#nte-1-chap-10" class="quarto-xref">Nota&nbsp;<span>10.1</span></a>:</p>
+<div class="cell">
+<div id="lst-import-data-case-study-dplyr" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-import-data-case-study-dplyr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;10.5: Importación de datos para desarrollar el caso de estudio
+</figcaption>
+<div aria-describedby="lst-import-data-case-study-dplyr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar datos ----</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"data/2021_2024-saber_pro-genericas.csv.xz"</span>,</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">estu_fechanacimiento =</span> <span class="fu">col_character</span>()</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<div id="nte-2-chap-10" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota&nbsp;10.2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En el <a href="plain_text.html" class="quarto-xref"><span>Capítulo 13</span></a> se abarcará con más detalle la importación de datos para archivos con extensión <code>.csv</code> mediante la función <code>read_csv()</code>, así como la razón detrás del uso del parámetro <code>col_types</code> y su respectivo argumento con la función <code>cols()</code>, teniendo en cuenta lo indicado en el <a href="#lst-import-data-case-study-dplyr" class="quarto-xref">Listado&nbsp;<span>10.5</span></a>. Por ahora, el enfoque del <a href="#sec-single-table-verbs" class="quarto-xref"><span>Capítulo 10</span></a> será comprender la gramática de manipulación de datos mediante el paquete <code>dplyr</code>.</p>
+<p>Adicionalmente, es necesario señalar que este archivo cuenta con una extensión combinada <code>.csv.xz</code>. El sufijo <code>.xz</code> indica simplemente que el archivo de texto original (<code>.csv</code>) fue comprimido mediante un <a href="https://en.wikipedia.org/wiki/XZ_Utils">algoritmo de alta eficiencia</a> para reducir drásticamente su tamaño en el disco. No obstante, no es necesario profundizar en este detalle técnico para el desarrollo del <a href="#sec-single-table-verbs" class="quarto-xref"><span>Capítulo 10</span></a> ni del <a href="plain_text.html" class="quarto-xref"><span>Capítulo 13</span></a>, dado que la función <code>read_csv()</code> detecta dicha extensión de forma automática y descomprime los datos de manera transparente al momento de realizar el proceso de importación.</p>
+</div>
+</div>
+<p>Una vez importes el conjunto de datos, podrás darle un “vistazo” utilizando la functión <code>glimpse()</code> para identificar el número y los tipos de variables que lo componen, así como la cantidad de observaciones disponibles.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspeccionar datos ----</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(saber_pro_genericas_2021_2024)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,015,295
+Columns: 82
+$ estu_actividadrefuerzoareas   &lt;chr&gt; NA, NA, NA, "Si", NA…
+$ estu_actividadrefuerzogeneric &lt;chr&gt; NA, NA, NA, "Si", NA…
+$ estu_agregado                 &lt;chr&gt; "S", "S", "S", "S", …
+$ estu_cod_depto_presentacion   &lt;chr&gt; "11", "11", "11", "1…
+$ estu_cod_mcpio_presentacion   &lt;chr&gt; "11001", "11001", "1…
+$ estu_consecutivo              &lt;chr&gt; "EK202120193457", "E…
+$ estu_cursodocentesies         &lt;chr&gt; NA, NA, NA, "Entre 2…
+$ estu_cursoiesapoyoexterno     &lt;chr&gt; NA, NA, NA, "Entre 2…
+$ estu_depto_presentacion       &lt;chr&gt; "BOGOTÁ", "BOGOTÁ", …
+$ estu_estudiante               &lt;chr&gt; "ESTUDIANTE", "ESTUD…
+$ estu_etnia                    &lt;chr&gt; NA, NA, NA, "Afrodes…
+$ estu_exterior                 &lt;chr&gt; "NO", "NO", "NO", "N…
+$ estu_fechanacimiento          &lt;chr&gt; "1992-10-05", "1994-…
+$ estu_genero                   &lt;chr&gt; "M", "M", "M", "F", …
+$ estu_horassemanatrabaja       &lt;chr&gt; "Menos de 10 horas",…
+$ estu_inse_individual          &lt;dbl&gt; 56.97800, 75.18547, …
+$ estu_inst_codmunicipio        &lt;chr&gt; "11001", "11001", "6…
+$ estu_inst_departamento        &lt;chr&gt; "BOGOTÁ", "BOGOTÁ", …
+$ estu_inst_municipio           &lt;chr&gt; "BOGOTÁ D.C.", "BOGO…
+$ estu_mcpio_presentacion       &lt;chr&gt; "BOGOTÁ D.C.", "BOGO…
+$ estu_metodo_prgm              &lt;chr&gt; "PRESENCIAL", "PRESE…
+$ estu_nacionalidad             &lt;chr&gt; "COLOMBIA", "COLOMBI…
+$ estu_nivel_prgm_academico     &lt;chr&gt; "UNIVERSITARIO", "UN…
+$ estu_nse_individual           &lt;dbl&gt; 3, 4, 4, 1, 1, 1, 2,…
+$ estu_nucleo_pregrado          &lt;chr&gt; "INGENIERÍA DE SISTE…
+$ estu_pagomatriculabeca        &lt;chr&gt; "No", "No", "No", "S…
+$ estu_pagomatriculacredito     &lt;chr&gt; "No", "Si", "No", "N…
+$ estu_pagomatriculapadres      &lt;chr&gt; "No", "Si", "Si", "N…
+$ estu_pagomatriculapropio      &lt;chr&gt; "Si", "No", "No", "N…
+$ estu_pais_reside              &lt;chr&gt; "COLOMBIA", "COLOMBI…
+$ estu_prgm_academico           &lt;chr&gt; "INGENIERÍA DE SISTE…
+$ estu_prgm_codmunicipio        &lt;chr&gt; "11001", "11001", "6…
+$ estu_prgm_departamento        &lt;chr&gt; "BOGOTÁ", "BOGOTÁ", …
+$ estu_prgm_municipio           &lt;chr&gt; "BOGOTÁ D.C.", "BOGO…
+$ estu_privado_libertad         &lt;chr&gt; "N", "N", "N", "N", …
+$ estu_semestrecursa            &lt;chr&gt; "10", "08", "10", "0…
+$ estu_simulacrotipoicfes       &lt;chr&gt; NA, NA, NA, "Si", NA…
+$ estu_snies_prgmacademico      &lt;dbl&gt; 106661, 1536, 2524, …
+$ estu_tieneetnia               &lt;chr&gt; "No", "No", "No", "S…
+$ estu_tipodocumento            &lt;chr&gt; "CC", "CC", "CC", "C…
+$ estu_tituloobtenidobachiller  &lt;chr&gt; "Bachiller técnico",…
+$ fami_cuantoscompartebaño      &lt;chr&gt; "NINGUNA", "NINGUNA"…
+$ fami_educacionmadre           &lt;chr&gt; "Educación profesion…
+$ fami_educacionpadre           &lt;chr&gt; "Educación profesion…
+$ fami_estratovivienda          &lt;chr&gt; "Estrato 3", "Estrat…
+$ fami_ocupacionmadre           &lt;chr&gt; "Hogar", "Empleado d…
+$ fami_ocupacionpadre           &lt;chr&gt; "Empleado de nivel t…
+$ fami_tieneautomovil           &lt;chr&gt; "Si", "Si", "Si", NA…
+$ fami_tienecomputador          &lt;chr&gt; "Si", "Si", "Si", NA…
+$ fami_tieneconsolavideojuegos  &lt;chr&gt; "No", "Si", "Si", NA…
+$ fami_tienehornomicroogas      &lt;chr&gt; "No", "Si", "Si", NA…
+$ fami_tieneinternet            &lt;chr&gt; "Si", "Si", "Si", "S…
+$ fami_tienelavadora            &lt;chr&gt; "Si", "Si", "Si", NA…
+$ fami_tienemotocicleta         &lt;chr&gt; "No", "Si", "No", NA…
+$ fami_tieneserviciotv          &lt;chr&gt; "No", "Si", "Si", "S…
+$ inst_caracter_academico       &lt;chr&gt; "UNIVERSIDAD", "UNIV…
+$ inst_cod_institucion          &lt;dbl&gt; 1101, 1813, 1723, 12…
+$ inst_nombre_institucion       &lt;chr&gt; "UNIVERSIDAD NACIONA…
+$ inst_origen                   &lt;chr&gt; "OFICIAL NACIONAL", …
+$ mod_competen_ciudada_desem    &lt;dbl&gt; 4, 3, 3, 2, 1, 2, 3,…
+$ mod_competen_ciudada_pnal     &lt;dbl&gt; 100, 94, 75, 32, 25,…
+$ mod_competen_ciudada_pnbc     &lt;dbl&gt; 100, 97, 66, 40, 30,…
+$ mod_competen_ciudada_punt     &lt;dbl&gt; 220, 193, 168, 127, …
+$ mod_comuni_escrita_desem      &lt;dbl&gt; 4, 2, 2, 2, 2, 2, NA…
+$ mod_comuni_escrita_pnal       &lt;dbl&gt; 96, 28, 51, 26, 45, …
+$ mod_comuni_escrita_pnbc       &lt;dbl&gt; 97, 31, 50, 25, 52, …
+$ mod_comuni_escrita_punt       &lt;dbl&gt; 186, 123, 139, 122, …
+$ mod_ingles_desem              &lt;chr&gt; "B2", "B2", "B2", "A…
+$ mod_ingles_pnal               &lt;dbl&gt; 93, 99, 90, 48, 41, …
+$ mod_ingles_pnbc               &lt;dbl&gt; 91, 99, 89, 57, 55, …
+$ mod_ingles_punt               &lt;dbl&gt; 202, 218, 197, 149, …
+$ mod_lectura_critica_desem     &lt;dbl&gt; 4, 3, 3, 2, 3, 1, 3,…
+$ mod_lectura_critica_pnal      &lt;dbl&gt; 98, 84, 81, 29, 67, …
+$ mod_lectura_critica_pnbc      &lt;dbl&gt; 98, 91, 75, 35, 81, …
+$ mod_lectura_critica_punt      &lt;dbl&gt; 205, 178, 174, 127, …
+$ mod_razona_cuantitat_punt     &lt;dbl&gt; 300, 181, 193, 137, …
+$ mod_razona_cuantitativo_pnal  &lt;dbl&gt; 100, 87, 93, 43, 73,…
+$ mod_razona_cuantitativo_pnbc  &lt;dbl&gt; 100, 94, 71, 61, 79,…
+$ percentil_global              &lt;dbl&gt; 100, 90, 87, 33, 50,…
+$ ano                           &lt;dbl&gt; 2021, 2021, 2021, 20…
+$ periodo                       &lt;dbl&gt; 2, 2, 2, 2, 2, 2, 2,…
+$ punt_global                   &lt;dbl&gt; 223, 179, 174, 132, …</code></pre>
+</div>
+</div>
+<p>El conjunto de datos <code>2021_2024-saber_pro-genericas.csv.xz</code> corresponden a los microdatos anonimizados de los resultados del examen Saber Pro del grupo de competencias genéricas para Colombia donde se consolidó la información de tal manera que todas las <span class="math inline">\(82\)</span> variables que se incluyen estuvieran disponibles para todo el periodo 2021-2024. Al conjunto de datos se le realizó una mínima limpieza respecto a los datos originales disponibles en el portal <a href="https://www.icfes.gov.co/investigaciones/data-icfes/">DataIcfes</a> con relación a las variables <code>ano</code>, <code>periodo</code>, <code>estu_fechanacimiento</code>, <code>estu_cod_depto_presentacion</code>, <code>estu_inst_departamento</code>, <code>estu_cod_mcpio_presentacion</code>, <code>estu_inst_codmunicipio</code> y <code>estu_prgm_codmunicipio</code>.</p>
+<p>En el conjunto de datos <code>2021_2024-saber_pro-genericas.csv.xz</code> una variable clave a tener en cuenta y que se utilizará más adelante es <strong>estu_agregado</strong> donde indica si la observación es (<code>S</code> para Sí) o no (<code>N</code> para No) incluída en el informe nacional de resultados del Saber-Pro. Las demás variables no se describirán teniendo en cuenta que no son relevantes para el desarrollo del estudio de caso (ver <a href="#nte-1-chap-10" class="quarto-xref">Nota&nbsp;<span>10.1</span></a>) o cuya descripción ya se señaló en la <a href="amounts.html#sec-variable-description" class="quarto-xref"><span>Sección 6.2.1.1</span></a>.</p>
+<div id="nte-3-chap-10" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota&nbsp;10.3
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Debido a que el objetivo es utilizar la gramática de manipulación de datos para reconstruir los conjuntos de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> y <code>2021-2024_saber-pro-genericas_faedis_programas.rds</code> en la <a href="#sec-data-case-study-dplyr" class="quarto-xref"><span>Sección 10.2.1</span></a> no se describen cada una de las <span class="math inline">\(82\)</span> variables. Sin embargo, el lector interesado puede descargar el diccionario de datos, publicado originalmente en el portal <a href="https://www.icfes.gov.co/investigaciones/data-icfes/">DataIcfes</a>, donde se describen cada una de estas variables e información adicional:</p>
+<div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span><img src="images/download-solid-full.png" alt="Ícono del explorador de archivos" height="25"> <a href="https://github.com/luifrancgom/r-clio/raw/main/documentation/diccionario-datos-examen-saber-pro.pdf">diccionario-datos-examen-saber-pro.pdf</a>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<p>En la sección <strong>2. Periodo 2021 - 2024</strong> del anterior documento, a partir de la página 17, el lector podrá encontrar ésta información respecto al periodo 2021-2024. La única variable que no encontrará es <code>ano</code> donde en los datos originales se agrupan en la variable <code>periodo</code> tanto el año como el periodo de presentación. En la limpieza de datos se separó esta información en las variables <code>ano</code> y <code>periodo</code>.</p>
+</div>
+</div>
+</section>
+<section id="filtrar-filter" class="level3" data-number="10.2.2">
+<h3 data-number="10.2.2" class="anchored" data-anchor-id="filtrar-filter"><span class="header-section-number">10.2.2</span> Filtrar (<code>filter()</code>)</h3>
+<p>El primer paso para reconstruir el conjuntos de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> comprende filtrar las filas relacionadas con las observaciones que se tienen en cuenta en el informe nacional de resultados del Saber-Pro a través de la variable <code>estu_agregado</code> así como de los programas de FAEDIS a partir de los códigos del SNIESs.</p>
+<p>Inicialmente respecto al segundo aspecto, se podría adoptar una estrategia similar a la descrita en el <a href="#lst-example-use-pipe" class="quarto-xref">Listado&nbsp;<span>10.1</span></a>, generando un conjunto de condiciones lógicas mediante el operador lógico vectorizado <code>|</code> para obtener las observaciones correspondientes a los programas académicos de FAEDIS, verificando si la variable <code>estu_snies_prgmacademico</code> es igual a cada uno de los códigos SNIES de los programas de FAEDIS. Sin embargo, R cuenta con el operador binario <code>%in%</code>, el cual ofrece una interfaz más intuitiva al devolver un vector lógico que indica si existe o no una coincidencia para su operando izquierdo dentro del conjunto de elementos ubicado a la derecha, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-filter-data-case-study-dplyr" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-filter-data-case-study-dplyr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;10.6: Filtrar filas para obtener las observaciones del conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code>
+</figcaption>
+<div aria-describedby="lst-filter-data-case-study-dplyr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrar ----</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Vector auxiliar ----</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>snies_faedis <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="dv">6527</span>,</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="dv">108241</span>,</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="dv">11428</span>,</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="dv">11004</span>,</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="dv">53703</span>,</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  <span class="dv">105142</span>,</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  <span class="dv">10963</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024_faedis <span class="ot">&lt;-</span> saber_pro_genericas_2021_2024 <span class="sc">|&gt;</span></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(estu_agregado <span class="sc">==</span> <span class="st">"S"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(estu_snies_prgmacademico <span class="sc">%in%</span> snies_faedis)</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024_faedis</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,239 × 82
+   estu_actividadrefuerzoareas estu_actividadrefuerzogeneric
+   &lt;chr&gt;                       &lt;chr&gt;                        
+ 1 &lt;NA&gt;                        &lt;NA&gt;                         
+ 2 No                          Si                           
+ 3 &lt;NA&gt;                        &lt;NA&gt;                         
+ 4 &lt;NA&gt;                        &lt;NA&gt;                         
+ 5 &lt;NA&gt;                        &lt;NA&gt;                         
+ 6 &lt;NA&gt;                        &lt;NA&gt;                         
+ 7 &lt;NA&gt;                        &lt;NA&gt;                         
+ 8 &lt;NA&gt;                        &lt;NA&gt;                         
+ 9 &lt;NA&gt;                        &lt;NA&gt;                         
+10 &lt;NA&gt;                        &lt;NA&gt;                         
+# ℹ 1,229 more rows
+# ℹ 80 more variables: estu_agregado &lt;chr&gt;,
+#   estu_cod_depto_presentacion &lt;chr&gt;,
+#   estu_cod_mcpio_presentacion &lt;chr&gt;,
+#   estu_consecutivo &lt;chr&gt;, estu_cursodocentesies &lt;chr&gt;,
+#   estu_cursoiesapoyoexterno &lt;chr&gt;,
+#   estu_depto_presentacion &lt;chr&gt;, estu_estudiante &lt;chr&gt;, …</code></pre>
+</div>
+</div>
+<p>De esa manera, mediante el código del <a href="#lst-filter-data-case-study-dplyr" class="quarto-xref">Listado&nbsp;<span>10.6</span></a> es posible obtener inicialmente las <span class="math inline">\(1239\)</span> filas que se indicaron en la <a href="amounts.html#sec-data" class="quarto-xref"><span>Sección 6.2.1</span></a>.</p>
+</section>
+<section id="seleccionar-select" class="level3" data-number="10.2.3">
+<h3 data-number="10.2.3" class="anchored" data-anchor-id="seleccionar-select"><span class="header-section-number">10.2.3</span> Seleccionar (<code>select()</code>)</h3>
+<p>El segundo paso para reconstruir el conjuntos de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> comprende seleccionar las columnas relacionadas con las <span class="math inline">\(20\)</span> variables indicadas en la <a href="amounts.html#sec-data" class="quarto-xref"><span>Sección 6.2.1</span></a>. Inicialmente se podría seleccionar nombre por nombre incluyendo cada una de las variables en la función <code>select()</code> pero se pueden utilizar <a href="https://dplyr.tidyverse.org/reference/select.html#overview-of-selection-features">operadores o funciones auxiliares</a> para optimizar este proceso. A continuación se señalan algunos se ellos que se utilizarán más adelante en el estudio de caso:</p>
+<ul>
+<li><code>:</code>: permite seleccionar un rango consecutivo de variables</li>
+<li><code>&amp;</code> y <code>|</code>: son operadores lógicos vectorizados (ver <a href="how_to_code_in_r.html#tbl-vectorized-logical-operators" class="quarto-xref">Tabla&nbsp;<span>5.3</span></a>) que se pueden utilizar para seleccionar la unión o intersección de un conjunto de variables</li>
+<li><code>starts_with()</code>: permite seleccionar variables que comienzan con un determinado prefijo</li>
+<li><code>ends_with()</code>: permite seleccionar variables que terminan con un determinado sufijo</li>
+</ul>
+<p>Utilizadno estos <a href="https://dplyr.tidyverse.org/reference/select.html#overview-of-selection-features">operadores o funciones auxiliares</a> es posible seleccionar las <span class="math inline">\(20\)</span> variables correspondientes al conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-select-data-case-study-dplyr" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-select-data-case-study-dplyr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;10.7: Seleccionar columnas para obtener las variables del conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code>
+</figcaption>
+<div aria-describedby="lst-select-data-case-study-dplyr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Seleccionar ----</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024_faedis <span class="ot">&lt;-</span> saber_pro_genericas_2021_2024_faedis <span class="sc">|&gt;</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    ano,</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    estu_consecutivo,</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    estu_genero,</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>    estu_semestrecursa,</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>    fami_educacionmadre<span class="sc">:</span>fami_estratovivienda,</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ends_with</span>(<span class="st">"_presentacion"</span>),</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>    estu_snies_prgmacademico,</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>    estu_prgm_academico,</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ends_with</span>(<span class="st">"_punt"</span>) <span class="sc">|</span> <span class="fu">starts_with</span>(<span class="st">"punt_"</span>),</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>    mod_ingles_desem</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024_faedis</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,239 × 20
+     ano estu_consecutivo estu_genero estu_semestrecursa
+   &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;       &lt;chr&gt;             
+ 1  2021 EK202120262469   M           09                
+ 2  2021 EK202120116785   M           09                
+ 3  2021 EK202120116868   M           09                
+ 4  2021 EK202120116831   M           09                
+ 5  2021 EK202120116814   F           09                
+ 6  2021 EK202120117053   F           09                
+ 7  2021 EK202120262258   F           08                
+ 8  2021 EK202120262692   F           09                
+ 9  2021 EK202120117033   F           08                
+10  2021 EK202120117014   F           08                
+# ℹ 1,229 more rows
+# ℹ 16 more variables: fami_educacionmadre &lt;chr&gt;,
+#   fami_educacionpadre &lt;chr&gt;, fami_estratovivienda &lt;chr&gt;,
+#   estu_cod_depto_presentacion &lt;chr&gt;,
+#   estu_cod_mcpio_presentacion &lt;chr&gt;,
+#   estu_depto_presentacion &lt;chr&gt;,
+#   estu_mcpio_presentacion &lt;chr&gt;, …</code></pre>
+</div>
+</div>
+<p>En el <a href="#lst-select-data-case-study-dplyr" class="quarto-xref">Listado&nbsp;<span>10.7</span></a> se utiliza <code>:</code> como <code>fami_educacionmadre:fami_estratovivienda</code> para seleccionar las variables <code>fami_educacionmadre</code>, <code>fami_educacionpadre</code> y <code>fami_estratovivienda</code> teniendo en cuenta que son variables que se encuentra de manera consecutiva. En el caso de <code>ends_with()</code> está función se utiliza como <code>ends_with("_presentacion")</code> para seleccionar los nombres y los códigos de los departamentos y municipios de presentación del Saber-pro. Finalmente el operador lógico vectorizado <code>|</code> junto con las funciones <code>ends_with()</code> y <code>starts_with()</code> se utilizan como <code>ends_with("_punt") | starts_with("punt_")</code> para extraer el puntaje de los módulos correspondientes a las competencias genéricas así como el puntaje global.</p>
+</section>
+<section id="reubicar-relocate" class="level3" data-number="10.2.4">
+<h3 data-number="10.2.4" class="anchored" data-anchor-id="reubicar-relocate"><span class="header-section-number">10.2.4</span> Reubicar (<code>relocate()</code>)</h3>
+<p>El tercer paso para reconstruir el conjuntos de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> comprende reubicar algunas de las columnas relacionadas con las <span class="math inline">\(20\)</span> variables indicadas en la <a href="amounts.html#sec-data" class="quarto-xref"><span>Sección 6.2.1</span></a> utilizando la función <code>relocate</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-relocate-data-case-study-dplyr" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-relocate-data-case-study-dplyr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;10.8: Reubicar columnas para obtener el mismo ordenamiento de las variables del conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code>
+</figcaption>
+<div aria-describedby="lst-relocate-data-case-study-dplyr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reubicar ----</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024_faedis <span class="ot">&lt;-</span> saber_pro_genericas_2021_2024_faedis <span class="sc">|&gt;</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    fami_estratovivienda,</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">.before =</span> fami_educacionmadre</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>    fami_estratovivienda,</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">.before =</span> fami_educacionmadre</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>    estu_depto_presentacion,</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">.after =</span> estu_cod_depto_presentacion</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>    estu_mcpio_presentacion,</span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">.after =</span> estu_cod_mcpio_presentacion</span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(</span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>    mod_ingles_desem,</span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">.after =</span> mod_ingles_punt</span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024_faedis</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,239 × 20
+     ano estu_consecutivo estu_genero estu_semestrecursa
+   &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;       &lt;chr&gt;             
+ 1  2021 EK202120262469   M           09                
+ 2  2021 EK202120116785   M           09                
+ 3  2021 EK202120116868   M           09                
+ 4  2021 EK202120116831   M           09                
+ 5  2021 EK202120116814   F           09                
+ 6  2021 EK202120117053   F           09                
+ 7  2021 EK202120262258   F           08                
+ 8  2021 EK202120262692   F           09                
+ 9  2021 EK202120117033   F           08                
+10  2021 EK202120117014   F           08                
+# ℹ 1,229 more rows
+# ℹ 16 more variables: fami_estratovivienda &lt;chr&gt;,
+#   fami_educacionmadre &lt;chr&gt;, fami_educacionpadre &lt;chr&gt;,
+#   estu_cod_depto_presentacion &lt;chr&gt;,
+#   estu_depto_presentacion &lt;chr&gt;,
+#   estu_cod_mcpio_presentacion &lt;chr&gt;,
+#   estu_mcpio_presentacion &lt;chr&gt;, …</code></pre>
+</div>
+</div>
+<p>En el <a href="#lst-relocate-data-case-study-dplyr" class="quarto-xref">Listado&nbsp;<span>10.8</span></a> la reubicación de columnas tiene el objetivo de agrupar las variables por categorías de tal manera que al analizar el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> sea más fácil de organizar. En este caso la reubicación tiene como propósito la siguiente agrupación por categorías:</p>
+<ul>
+<li><strong>Periodo</strong>: <code>ano</code></li>
+<li><strong>Id</strong>: <code>estu_consecutivo</code></li>
+<li><strong>Caracteríticas de quien presenta la prueba</strong>: <code>estu_genero</code> y <code>estu_semestrecursa</code></li>
+<li><strong>Entorno familiar</strong>: <code>fami_estratovivienda</code>, <code>fami_educacionmadre</code>, y <code>fami_educacionpadre</code></li>
+<li><strong>Lugar de presentación de la prueba</strong>: <code>estu_cod_depto_presentacion</code>, <code>estu_depto_presentacion</code>, <code>estu_cod_mcpio_presentacion</code> y <code>estu_mcpio_presentacion</code></li>
+<li><strong>Programa académico</strong>: <code>estu_snies_prgmacademico</code> y <code>estu_prgm_academico</code></li>
+<li><strong>Resultados de la prueba</strong>:
+<ul>
+<li><strong>Ciudadanas</strong>: <code>mod_competen_ciudada_punt</code></li>
+<li><strong>Comunicación escrita</strong>: <code>mod_comuni_escrita_punt</code></li>
+<li><strong>Inglés</strong>: <code>mod_ingles_punt</code> y <code>mod_ingles_desem</code></li>
+<li><strong>Lectura crítica</strong>: <code>mod_lectura_critica_punt,</code></li>
+<li><strong>Razonamiento cuantitativo</strong>: <code>mod_razona_cuantitat_punt</code></li>
+<li><strong>Puntaje global</strong>: <code>punt_global</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="modificar-mutate" class="level3" data-number="10.2.5">
+<h3 data-number="10.2.5" class="anchored" data-anchor-id="modificar-mutate"><span class="header-section-number">10.2.5</span> Modificar (<code>mutate()</code>)</h3>
+<p>El cuarto paso para reconstruir el conjuntos de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> comprende modificar algunas de las columnas relacionadas con las <span class="math inline">\(20\)</span> variables indicadas en la <a href="amounts.html#sec-data" class="quarto-xref"><span>Sección 6.2.1</span></a> utilizando la función <code>mutate()</code>. Aunque la función <code>mutate()</code> se puede utilizar para generar nuevas variables el propósito en este caso es asociar el tipo adecuado de ciertas variables dentro de R. Algunas variables no son continuas sino discretas y en otros casos existen <a href="https://en.wikipedia.org/wiki/Categorical_variable">variables categóricas</a> que son <a href="https://en.wikipedia.org/wiki/Nominal_category">nominales</a> u <a href="https://en.wikipedia.org/wiki/Ordinal_data">ordinales</a> pero que están codificadas como caracteres.</p>
+<p>R implementa diferentes tipos de datos.</p>
+</section>
+<section id="collapsar-agrupar-y-desagrupar-summarise-group-y-ungroup" class="level3" data-number="10.2.6">
+<h3 data-number="10.2.6" class="anchored" data-anchor-id="collapsar-agrupar-y-desagrupar-summarise-group-y-ungroup"><span class="header-section-number">10.2.6</span> Collapsar, agrupar y desagrupar (<code>summarise()</code>, <code>group()</code> y <code>ungroup()</code>)</h3>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
@@ -1624,6 +2012,7 @@ Wickham, H. (2014). Tidy <span>Data</span>. <em>Journal of Statistical Software<
 Wickham, H. (2023). <em>R for <span>Data</span> <span>Science</span></em> (2.ª ed.). O’Reilly Media, Incorporated. <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a>
 </div>
 </div>
+</section>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>

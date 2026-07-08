@@ -423,7 +423,7 @@ window.Quarto = {
   <li><a href="#gráfico-de-líneas" id="toc-gráfico-de-líneas" class="nav-link" data-scroll-target="#gráfico-de-líneas"><span class="header-section-number">9.2</span> Gráfico de líneas</a>
   <ul class="collapse">
   <li><a href="#datos-mapeo-y-capas-1" id="toc-datos-mapeo-y-capas-1" class="nav-link" data-scroll-target="#datos-mapeo-y-capas-1"><span class="header-section-number">9.2.1</span> Datos, mapeo y capas</a></li>
-  <li><a href="#descripción-de-variables" id="toc-descripción-de-variables" class="nav-link" data-scroll-target="#descripción-de-variables"><span class="header-section-number">9.2.2</span> Descripción de variables</a></li>
+  <li><a href="#sec-data-geom-line" id="toc-sec-data-geom-line" class="nav-link" data-scroll-target="#sec-data-geom-line"><span class="header-section-number">9.2.2</span> Descripción de variables</a></li>
   <li><a href="#mapeo-y-capas" id="toc-mapeo-y-capas" class="nav-link" data-scroll-target="#mapeo-y-capas"><span class="header-section-number">9.2.3</span> Mapeo y capas</a></li>
   <li><a href="#sec-layers-scales" id="toc-sec-layers-scales" class="nav-link" data-scroll-target="#sec-layers-scales"><span class="header-section-number">9.2.4</span> Capas y escalas</a></li>
   <li><a href="#escalas-y-tema" id="toc-escalas-y-tema" class="nav-link" data-scroll-target="#escalas-y-tema"><span class="header-section-number">9.2.5</span> Escalas y tema</a></li>
@@ -1111,7 +1111,7 @@ Tabla&nbsp;9.1: Parámetros estimados utilizando la función <code>lm()</code> e
 </section>
 <section id="facetas" class="level3" data-number="9.1.2">
 <h3 data-number="9.1.2" class="anchored" data-anchor-id="facetas"><span class="header-section-number">9.1.2</span> Facetas</h3>
-<p>En el gráfico generado por el <a href="#lst-geom-smooth" class="quarto-xref">Listado&nbsp;<span>9.2</span></a> la asociación entre los resultados del los módulos razonamiento cuantitativo y lectura crítica se encuentran consolidados para cada uno de los programas académicos señalando una tendencia general. Para examinar si existe algún tipo de heterogeneidad entre los programas académicos es posible utilizar el componente de facetas correspondiente a la gramática de gráficos en capas. Este componente permite visualizar el mismo gráfico generado por el <a href="#lst-geom-smooth" class="quarto-xref">Listado&nbsp;<span>9.2</span></a> pero para cada programa académico en páneles individuales utilizando la función <code>facet_wrap()</code>. Para utilizar ésta función se requiere definir la variable que permitirá generar los grupos para generar cada gráfico utilizando el parámetro <code>facets</code> y como argumento la respectiva variable dentro de la función <code>vars()</code>. Además como en el <a href="amounts.html#lst-scales" class="quarto-xref">Listado&nbsp;<span>6.7</span></a> y el <a href="proportions.html#lst-stacked-bars" class="quarto-xref">Listado&nbsp;<span>8.1</span></a> es necesario limitar el ancho de los nombres de los programas donde este aspecto también se puede modificar mediante el parámetro <code>labeler</code> utilizando la función <code>label_wrap_gen()</code>, tal como se señala a continuación:</p>
+<p>En el gráfico generado por el <a href="#lst-geom-smooth" class="quarto-xref">Listado&nbsp;<span>9.2</span></a> la asociación entre los resultados del los módulos razonamiento cuantitativo y lectura crítica se encuentran consolidados para cada uno de los programas académicos señalando una tendencia general. Para examinar si existe algún tipo de heterogeneidad entre los programas académicos es posible utilizar el componente de facetas correspondiente a la gramática de gráficos en capas. Este componente permite visualizar el mismo gráfico generado por el <a href="#lst-geom-smooth" class="quarto-xref">Listado&nbsp;<span>9.2</span></a> pero para cada programa académico en páneles individuales utilizando la función <code>facet_wrap()</code>. Para utilizar ésta función se requiere definir la variable que permitirá generar los grupos para generar cada gráfico utilizando el parámetro <code>facets</code> y como argumento la respectiva variable dentro de la función <code>vars()</code>. Además como en el <a href="amounts.html#lst-scales" class="quarto-xref">Listado&nbsp;<span>6.8</span></a> y el <a href="proportions.html#lst-stacked-bars" class="quarto-xref">Listado&nbsp;<span>8.1</span></a> es necesario limitar el ancho de los nombres de los programas donde este aspecto también se puede modificar mediante el parámetro <code>labeler</code> utilizando la función <code>label_wrap_gen()</code>, tal como se señala a continuación:</p>
 <div class="cell">
 <div id="lst-facet-wrap" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
@@ -1729,7 +1729,7 @@ Figura&nbsp;9.2: Resultado final de un gráfico de líneas utilizando <code>ggpl
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"data/2021-2024_saber-pro-genericas_faedis_programas.rds"</span></span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Una vez importes el conjunto de datos, podrás darle un “vistazo” utilizando la functión <code>glimpse()</code> (ver Listado 4.5) para identificar el número y los tipos de variables que lo componen, así como la cantidad de observaciones disponibles.</p>
+<p>Una vez importes el conjunto de datos, podrás darle un “vistazo” utilizando la functión <code>glimpse()</code> para identificar el número y los tipos de variables que lo componen, así como la cantidad de observaciones disponibles.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspeccionar datos ----</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(saber_pro_genericas_faedis_2021_2024_programas)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1748,8 +1748,8 @@ $ punt_global               &lt;dbl&gt; 147, 151, 143, 149, 157,…</code></pre>
 </div>
 </div>
 </section>
-<section id="descripción-de-variables" class="level3" data-number="9.2.2">
-<h3 data-number="9.2.2" class="anchored" data-anchor-id="descripción-de-variables"><span class="header-section-number">9.2.2</span> Descripción de variables</h3>
+<section id="sec-data-geom-line" class="level3" data-number="9.2.2">
+<h3 data-number="9.2.2" class="anchored" data-anchor-id="sec-data-geom-line"><span class="header-section-number">9.2.2</span> Descripción de variables</h3>
 <p>Esta base de datos es construida a partir de <code>saber_pro_genericas_faedis_2021_2024</code> donde aprenderás acerca de como construirla en el <a href="single_table_verbs.html" class="quarto-xref"><span>Capítulo 10</span></a> utilizando verbos de una sola tabla con el paquete <code>dplyr</code> perteneciente al <code>tidyverse</code>. A continuación, se describen cada una de las variables en <code>saber_pro_genericas_faedis_2021_2024_programas</code>:</p>
 <ol type="1">
 <li><strong>ano</strong>: año correspondiente a los resultados del examen Saber Pro</li>
