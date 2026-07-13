@@ -138,14 +138,21 @@ Existen [diferentes recomendaciones para principiantes](https://github.com/posit
     "[quarto]": {
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "quarto.quarto"
-    }
+    },
+    "positron.r.defaultRepositories": "posit-ppm"
 }
 ```
 
-Con estos ajustes lograrás 2 objetivos:
+Con estos ajustes lograrás 3 objetivos:
 
 1. **Tema de color:** aplicar la interfaz oscura `Default Positron Dark` para reducir la fatiga visual.
 
 2. **Autoformateo al guardar:** aplicar automáticamente un estilo visual uniforme a tus archivos de R y Quarto utilizando las extensiones [Air](https://open-vsx.org/extension/posit/air-vscode) y [quarto-vscode](https://open-vsx.org/extension/quarto/quarto). Esto permite que el código se reorganice solo, manteniendo una estructura limpia y profesional sin aplicar un esfuerzo manual.
+
+3. **Instalación rápida de paquetes**: configurar [Posit Public Package Manager (PPM)](https://packagemanager.posit.co/) como el repositorio por defecto. Esto garantiza que, al instalar paquetes de R, se descarguen [versiones binarias](https://docs.posit.co/rspm/admin/appendix/package-ecosystem.html#binary) en lugar de compilar el código fuente desde cero. Como resultado, las instalaciones serán drásticamente más rápidas y estables.
+
+::: {#imp-3-chap-2 .callout-important}
+Una vez que hayas guardado los cambios en tu archivo `settings.json`, es necesario reiniciar Positron (cerrar y volver a abrir la aplicación). Esto asegura que se activen de inmediato todas las configuraciones recomendadas.
+:::
 
 En caso que hayas seguido las instrucciones descritas en la @sec-posit-workbench es posible que el administrador de la herramienta previamente haya fijado por defecto éstos aspectos. En caso contrario, puedes agregar ésta configuración.
