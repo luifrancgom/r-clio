@@ -1,1 +1,1 @@
-# Funciones anónimas {#anonymous-functions}
+# Funciones anónimas {#sec-anonymous-functions}

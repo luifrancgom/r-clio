@@ -467,7 +467,7 @@ En la sección **2. Periodo 2021 - 2024** del anterior documento, a partir de la
 
 ### Filtrar (`filter()`)
 
-El primer paso para reconstruir el conjuntos de datos `2021-2024_saber-pro-genericas_faedis.rds` comprende filtrar las filas relacionadas con las observaciones que se tienen en cuenta en el informe nacional de resultados del Saber-Pro a través de la variable `estu_agregado` así como de los programas de FAEDIS a partir de los códigos del SNIESs.
+El primer paso para reconstruir el conjuntos de datos `2021-2024_saber-pro-genericas_faedis.rds` comprende filtrar las filas relacionadas con las observaciones que se tienen en cuenta en el informe nacional de resultados del Saber-Pro a través de la variable `estu_agregado` así como de los programas de FAEDIS a partir de los códigos del SNIES.
 
 Inicialmente respecto al segundo aspecto, se podría adoptar una estrategia similar a la descrita en el @lst-example-use-pipe, generando un conjunto de condiciones lógicas mediante el operador lógico vectorizado `|` para obtener las observaciones correspondientes a los programas académicos de FAEDIS, verificando si la variable `estu_snies_prgmacademico` es igual a cada uno de los códigos SNIES de los programas de FAEDIS. Sin embargo, R cuenta con el operador binario `%in%`, el cual ofrece una interfaz más intuitiva al devolver un vector lógico que indica si existe o no una coincidencia para su operando izquierdo dentro del conjunto de elementos ubicado a la derecha, tal como se señala a continuación:
 
@@ -581,12 +581,189 @@ En el @lst-relocate-data-case-study-dplyr la reubicación de columnas tiene el o
   - **Razonamiento cuantitativo**: `mod_razona_cuantitat_punt`
   - **Puntaje global**: `punt_global`  
 
-### Modificar (`mutate()`)
+### Modificar (`mutate()`) {#sec-mutate-data-case-study-dplyr}
 
-El cuarto paso para reconstruir el conjuntos de datos `2021-2024_saber-pro-genericas_faedis.rds` comprende modificar algunas de las columnas relacionadas con las $20$ variables indicadas en la @sec-data utilizando la función `mutate()`. Aunque la función `mutate()` se puede utilizar para generar nuevas variables el propósito en este caso es asociar el tipo adecuado de ciertas variables dentro de R. Algunas variables no son continuas sino discretas y en otros casos existen [variables categóricas](https://en.wikipedia.org/wiki/Categorical_variable) que son [nominales](https://en.wikipedia.org/wiki/Nominal_category) u [ordinales](https://en.wikipedia.org/wiki/Ordinal_data) pero que están codificadas como caracteres.
+El cuarto paso para reconstruir el conjuntos de datos `2021-2024_saber-pro-genericas_faedis.rds` comprende modificar algunas de las columnas relacionadas con las $20$ variables indicadas en la @sec-data utilizando la función `mutate()`. Aunque la función `mutate()` tambien se puede utilizar para generar nuevas variables el propósito en este caso es asociar el tipo adecuado de ciertas variables dentro de R. Algunas variables no son continuas sino discretas y en otros casos existen [variables categóricas](https://en.wikipedia.org/wiki/Categorical_variable) que son [nominales](https://en.wikipedia.org/wiki/Nominal_category) u [ordinales](https://en.wikipedia.org/wiki/Ordinal_data) pero que están codificadas como caracteres.
 
-R implementa diferentes tipos de datos. 
+R implementa diferentes tipos de datos que se pueden utilizar para acomodar los aspectos mencionados anteriormente. Aunque no abarcaremos en la @sec-mutate-data-case-study-dplyr todos los tipos de datos que R implementa, en la @tbl-some-data-types-in-r se indican algunos de los tipos más comunes y que se utilizarán más adelante. El lector interesado en conocer en más detalle los tidos de datos más comunes y su funcionamiento puede consultar [@wickham_advanced_2019, , Cap. 3].
 
+| Clase | Tipo | Ejemplo | Etiqueta en `tibble` |
+| :--- | :--- | :--- | :--- |
+| Vector atómico | `logical` | `TRUE` | `<lgl>` |
+| | `integer` | `1L` | `<int>` |
+| | `double` | `152.35` | `<dbl>` |
+| | `character` | `"Ingeniería Civil"` | `<chr>` |
+| Lista | `list` | `list(TRUE, 1L, 152.35, "Ingeniería Civil")` | `<list>` |
+| Objeto integrado | `factor` | `factor(x = c("Femenino", "Masculino"))` | `<fct>` |
+| | `ordered` | `factor(x = c("10", "11", "12 o más"), ordered = TRUE)` | `<ord>` |
+| | `Date` | `ymd("2021-06-01")` | `<date>` |
 
+: Algunos tipos de datos en R {#tbl-some-data-types-in-r}
 
-### Collapsar, agrupar y desagrupar (`summarise()`, `group()` y `ungroup()`)
+En el @lst-mutate-data-case-study-dplyr se utilizan la funciones `as.integer()` y `factor()` junto con la función `mutate()` para transformar variables que son inicialmente continuas y caracteres a enteros y factores. La implementación en R de variables nominales y ordinales o en general de variables categóricas se realiza a través del concepto de factor (ver `?factor`). Para definir las categorias que abarca un factor se utiliza el parámetro `level` junto con un vector como argumento donde se puede especificar si existe o no un ordenamiento a través del parámetro `ordered` donde el argumento puede tomar el valor de `FALSE` (si es una variable nominal) o `TRUE` (si es una variable ordinal), tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-mutate-data-case-study-dplyr
+#| lst-cap: Transformar columnas para asociar el tipo de datos adecuado a cada variable del conjunto de datos `2021-2024_saber-pro-genericas_faedis.rds`
+
+# Transformar ----
+saber_pro_genericas_2021_2024_faedis <- saber_pro_genericas_2021_2024_faedis |>
+  mutate(
+    ano = as.integer(ano),
+    estu_snies_prgmacademico = as.integer(estu_snies_prgmacademico)
+  ) |>
+  mutate(
+    estu_genero = factor(
+      x = estu_genero,
+      ordered = FALSE
+    ),
+    estu_semestrecursa = factor(
+      x = estu_semestrecursa,
+      levels = c("06", "07", "08", "09", "10", "11", "12 o más"),
+      ordered = TRUE
+    ),
+    fami_estratovivienda = factor(
+      x = fami_estratovivienda,
+      levels = c(
+        "Sin Estrato",
+        "Estrato 1",
+        "Estrato 2",
+        "Estrato 3",
+        "Estrato 4",
+        "Estrato 5",
+        "Estrato 6"
+      ),
+      ordered = TRUE
+    ),
+    fami_educacionmadre = factor(
+      x = fami_educacionmadre,
+      levels = c(
+        "No sabe",
+        "No Aplica",
+        "Ninguno",
+        "Primaria incompleta",
+        "Primaria completa",
+        "Secundaria (Bachillerato) incompleta",
+        "Secundaria (Bachillerato) completa",
+        "Técnica o tecnológica incompleta",
+        "Técnica o tecnológica completa",
+        "Educación profesional incompleta",
+        "Educación profesional completa",
+        "Postgrado"
+      ),
+      ordered = TRUE
+    ),
+    fami_educacionpadre = factor(
+      x = fami_educacionpadre,
+      levels = c(
+        "No sabe",
+        "No Aplica",
+        "Ninguno",
+        "Primaria incompleta",
+        "Primaria completa",
+        "Secundaria (Bachillerato) incompleta",
+        "Secundaria (Bachillerato) completa",
+        "Técnica o tecnológica incompleta",
+        "Técnica o tecnológica completa",
+        "Educación profesional incompleta",
+        "Educación profesional completa",
+        "Postgrado"
+      ),
+      ordered = TRUE
+    ),
+    mod_ingles_desem = factor(
+      x = mod_ingles_desem,
+      levels = c(
+        "A1",
+        "A2",
+        "B1",
+        "B2"
+      ),
+      ordered = TRUE
+    )
+  )
+
+saber_pro_genericas_2021_2024_faedis |>
+  glimpse()
+```
+
+En el @lst-mutate-data-case-study-dplyr las variables `ano` y `estu_snies_prgmacademico` se transforman a enteros teniendo en cuenta la naturaleza de las mismas. Por otro lado, en primera instancia la variable `estu_genero` se codifica como un factor no ordenado teniendo en cuenta que se refiere al género del estudiante mientras que las variables `estu_semestrecursa`, `fami_estratovivienda`, `fami_educacionmadre`, `fami_educacionpadre` y `mod_ingles_desem` se codifican como factores ordenados. Cabe la pena señalar, que algunas categorías de las variables `fami_estratovivienda`, `fami_educacionmadre` y `fami_educacionpadre` como `"Sin Estrato"`, `"No sabe"` y `"No Aplica"` podrían codificarse como valores faltantes (en ingles **Not Avaiable** o **Missing values**), donde R codifica este tipo de casos con la lógica constante `NA` (ver `?NA`), pero en `2021-2024_saber-pro-genericas_faedis.rds` se mantienen estas etiquetas para entender la razón por la cuál se presentan estos casos de datos faltantes.
+
+:::: {#nte-3-chap-10 .callout-note}
+En este libro no abarcaremos a profundidad el manejo de datos faltantes, codificados en R como `NA`, así como las herramientas disponibles para llevar un análisis adecuado en presencia de este fenómeno, que es bastante común al realizar un análisis de datos.
+
+Si deseas profundizar en este tema más adelante, cuando estes familiarizado con R y Positron, puedes consultar [@buuren_flexible_2018] y la documentación oficial de los paquetes [`mice`](https://amices.org/mice/) y [`naniar`](https://naniar.njtierney.com/).
+::::
+
+### Collapsar, agrupar y desagrupar (`summarise()`, `group_by()` y `ungroup()`) {#sec-collapse-group-ungroup-data-case-study-dplyr}
+
+A partir de `2021-2024_saber-pro-genericas_faedis.rds` es posible obtener el conjunto de datos `2021-2024_saber-pro-genericas_faedis_programas.rds` utilizando las funciones `summarise()`, `group_by()` y `ungroup()`. Adicionalmente, en la @sec-collapse-group-ungroup-data-case-study-dplyr conocerás el uso de una nueva función denominada `across()` del paquete `dplyr`, la cual permite aplicar la misma transformación a múltiples columnas, de tal manera que no tengas que repetir un código similar para cada cada variable dentro de un grupo de variables de interés.
+
+El primer paso para reconstruir el conjuntos de datos `2021-2024_saber-pro-genericas_faedis_programas.rds` comprende agrupar las filas a partir de las variables `ano`, `estu_snies_prgmacademico` y `estu_prgm_academico`, de tal manera que se pueda obtener el puntaje promedio redondeado al entero más próximo de cada módulo de competencias genéricas y así como del puntaje total promedio también redondeado al entero más próximo, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-group-by-data-case-study-dplyr
+#| lst-cap: Agrupar filas a partir de un grupo de variables para generar el conjunto de datos `2021-2024_saber-pro-genericas_faedis_programas.rds`
+
+# Agrupar ----
+saber_pro_genericas_faedis_2021_2024_programas <- saber_pro_genericas_faedis_2021_2024 |>
+  group_by(
+    ano,
+    estu_snies_prgmacademico,
+    estu_prgm_academico
+  )
+
+saber_pro_genericas_faedis_2021_2024_programas
+```
+
+El segundo paso para reconstruir el conjuntos de datos `2021-2024_saber-pro-genericas_faedis_programas.rds` comprende calcular el puntaje promedio de cada módulo y del puntaje global de las competencias genéricas para luego redondear estos valores al entero más cercano. En primera instancia, se podría utilizar un enfoque similar al descrito en la @sec-verbs-collapse-group-ungroup definiendo el puntaje promedio de manera individual para cada variable de interés. Sin embargo, debido a que se requiere calcular el puntaje promedio aplicando una misma transformación, es posible utilizar la función `across()` que permite a través del parámetro `.cols` seleccionar un conjunto de variables y aplicar una misma función a través del parámetro `.funs` utilizando como argumento el valor `mean`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-summarise-mean-data-case-study-dplyr
+#| lst-cap: Collapsar filas a partir de un grupo de variables utilizando el valor `mean` para generar el conjunto de datos `2021-2024_saber-pro-genericas_faedis_programas.rds`
+#| message: false
+
+saber_pro_genericas_faedis_2021_2024_programas <- saber_pro_genericas_faedis_2021_2024_programas |>
+  summarise(
+    across(
+      .cols = ends_with("punt") | starts_with("punt"),
+      .fns = mean
+    )
+  )
+
+saber_pro_genericas_faedis_2021_2024_programas
+```
+
+El tercer paso para reconstruir el conjuntos de datos `2021-2024_saber-pro-genericas_faedis_programas.rds` comprende desagrupar las filas que se agruparon inicialmente por las variables de interés, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-ungroup-data-case-study-dplyr
+#| lst-cap: Desagrupar filas para generar el conjunto de datos `2021-2024_saber-pro-genericas_faedis_programas.rds`
+#| message: false
+
+saber_pro_genericas_faedis_2021_2024_programas <- saber_pro_genericas_faedis_2021_2024_programas |>
+  ungroup()
+
+saber_pro_genericas_faedis_2021_2024_programas
+```
+
+El cuarto paso para reconstruir el conjuntos de datos `2021-2024_saber-pro-genericas_faedis_programas.rds` comprende redondear los valores de las columnas que contienen los puntajes promedios tanto de los diferentes módulos como del puntaje global de las competencias específicas. En este caso, se posible utilizar nuevamente la función `across()` con el parámetro `.cols` para seleccionar las respectivas columnas y el parámetro `.fns` pero utilizando como argumento el valor `round` en conjunto con la función `mutate()`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-mutate-round-data-case-study-dplyr
+#| lst-cap: Transformar columnas utilizando la función `across()` y el valor `round` para generar el conjunto de datos `2021-2024_saber-pro-genericas_faedis_programas.rds`
+#| message: false
+
+saber_pro_genericas_faedis_2021_2024_programas <- saber_pro_genericas_faedis_2021_2024_programas |>
+  mutate(
+    across(
+      .cols = ends_with("punt") | starts_with("punt"),
+      .fns = round
+    )
+  )
+
+saber_pro_genericas_faedis_2021_2024_programas |>
+  glimpse()
+```
+
+En el @lst-summarise-mean-data-case-study-dplyr y el @lst-mutate-round-data-case-study-dplyr se separa el cálculo del puntaje promedio de cada módulo y del puntaje global de las competencias genéricas así como el proceso de redondear estos valores al entero más cercano. Sin embargo, es posible consolidar este aspecto en un sólo paso utilizando una herramienta denominada **funciones anónimas** donde este aspecto se abarcará en detalle más adelante en el @sec-anonymous-functions.
