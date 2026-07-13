@@ -426,8 +426,8 @@ window.Quarto = {
   <li><a href="#filtrar-filter" id="toc-filtrar-filter" class="nav-link" data-scroll-target="#filtrar-filter"><span class="header-section-number">10.2.2</span> Filtrar (<code>filter()</code>)</a></li>
   <li><a href="#seleccionar-select" id="toc-seleccionar-select" class="nav-link" data-scroll-target="#seleccionar-select"><span class="header-section-number">10.2.3</span> Seleccionar (<code>select()</code>)</a></li>
   <li><a href="#reubicar-relocate" id="toc-reubicar-relocate" class="nav-link" data-scroll-target="#reubicar-relocate"><span class="header-section-number">10.2.4</span> Reubicar (<code>relocate()</code>)</a></li>
-  <li><a href="#modificar-mutate" id="toc-modificar-mutate" class="nav-link" data-scroll-target="#modificar-mutate"><span class="header-section-number">10.2.5</span> Modificar (<code>mutate()</code>)</a></li>
-  <li><a href="#collapsar-agrupar-y-desagrupar-summarise-group-y-ungroup" id="toc-collapsar-agrupar-y-desagrupar-summarise-group-y-ungroup" class="nav-link" data-scroll-target="#collapsar-agrupar-y-desagrupar-summarise-group-y-ungroup"><span class="header-section-number">10.2.6</span> Collapsar, agrupar y desagrupar (<code>summarise()</code>, <code>group()</code> y <code>ungroup()</code>)</a></li>
+  <li><a href="#sec-mutate-data-case-study-dplyr" id="toc-sec-mutate-data-case-study-dplyr" class="nav-link" data-scroll-target="#sec-mutate-data-case-study-dplyr"><span class="header-section-number">10.2.5</span> Modificar (<code>mutate()</code>)</a></li>
+  <li><a href="#sec-collapse-group-ungroup-data-case-study-dplyr" id="toc-sec-collapse-group-ungroup-data-case-study-dplyr" class="nav-link" data-scroll-target="#sec-collapse-group-ungroup-data-case-study-dplyr"><span class="header-section-number">10.2.6</span> Collapsar, agrupar y desagrupar (<code>summarise()</code>, <code>group_by()</code> y <code>ungroup()</code>)</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/single_table_verbs.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/single_table_verbs.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
@@ -1798,7 +1798,7 @@ Nota&nbsp;10.3
 </section>
 <section id="filtrar-filter" class="level3" data-number="10.2.2">
 <h3 data-number="10.2.2" class="anchored" data-anchor-id="filtrar-filter"><span class="header-section-number">10.2.2</span> Filtrar (<code>filter()</code>)</h3>
-<p>El primer paso para reconstruir el conjuntos de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> comprende filtrar las filas relacionadas con las observaciones que se tienen en cuenta en el informe nacional de resultados del Saber-Pro a través de la variable <code>estu_agregado</code> así como de los programas de FAEDIS a partir de los códigos del SNIESs.</p>
+<p>El primer paso para reconstruir el conjuntos de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> comprende filtrar las filas relacionadas con las observaciones que se tienen en cuenta en el informe nacional de resultados del Saber-Pro a través de la variable <code>estu_agregado</code> así como de los programas de FAEDIS a partir de los códigos del SNIES.</p>
 <p>Inicialmente respecto al segundo aspecto, se podría adoptar una estrategia similar a la descrita en el <a href="#lst-example-use-pipe" class="quarto-xref">Listado&nbsp;<span>10.1</span></a>, generando un conjunto de condiciones lógicas mediante el operador lógico vectorizado <code>|</code> para obtener las observaciones correspondientes a los programas académicos de FAEDIS, verificando si la variable <code>estu_snies_prgmacademico</code> es igual a cada uno de los códigos SNIES de los programas de FAEDIS. Sin embargo, R cuenta con el operador binario <code>%in%</code>, el cual ofrece una interfaz más intuitiva al devolver un vector lógico que indica si existe o no una coincidencia para su operando izquierdo dentro del conjunto de elementos ubicado a la derecha, tal como se señala a continuación:</p>
 <div class="cell">
 <div id="lst-filter-data-case-study-dplyr" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
@@ -1992,21 +1992,392 @@ Listado&nbsp;10.8: Reubicar columnas para obtener el mismo ordenamiento de las v
 </ul></li>
 </ul>
 </section>
-<section id="modificar-mutate" class="level3" data-number="10.2.5">
-<h3 data-number="10.2.5" class="anchored" data-anchor-id="modificar-mutate"><span class="header-section-number">10.2.5</span> Modificar (<code>mutate()</code>)</h3>
-<p>El cuarto paso para reconstruir el conjuntos de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> comprende modificar algunas de las columnas relacionadas con las <span class="math inline">\(20\)</span> variables indicadas en la <a href="amounts.html#sec-data" class="quarto-xref"><span>Sección 6.2.1</span></a> utilizando la función <code>mutate()</code>. Aunque la función <code>mutate()</code> se puede utilizar para generar nuevas variables el propósito en este caso es asociar el tipo adecuado de ciertas variables dentro de R. Algunas variables no son continuas sino discretas y en otros casos existen <a href="https://en.wikipedia.org/wiki/Categorical_variable">variables categóricas</a> que son <a href="https://en.wikipedia.org/wiki/Nominal_category">nominales</a> u <a href="https://en.wikipedia.org/wiki/Ordinal_data">ordinales</a> pero que están codificadas como caracteres.</p>
-<p>R implementa diferentes tipos de datos.</p>
+<section id="sec-mutate-data-case-study-dplyr" class="level3" data-number="10.2.5">
+<h3 data-number="10.2.5" class="anchored" data-anchor-id="sec-mutate-data-case-study-dplyr"><span class="header-section-number">10.2.5</span> Modificar (<code>mutate()</code>)</h3>
+<p>El cuarto paso para reconstruir el conjuntos de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> comprende modificar algunas de las columnas relacionadas con las <span class="math inline">\(20\)</span> variables indicadas en la <a href="amounts.html#sec-data" class="quarto-xref"><span>Sección 6.2.1</span></a> utilizando la función <code>mutate()</code>. Aunque la función <code>mutate()</code> tambien se puede utilizar para generar nuevas variables el propósito en este caso es asociar el tipo adecuado de ciertas variables dentro de R. Algunas variables no son continuas sino discretas y en otros casos existen <a href="https://en.wikipedia.org/wiki/Categorical_variable">variables categóricas</a> que son <a href="https://en.wikipedia.org/wiki/Nominal_category">nominales</a> u <a href="https://en.wikipedia.org/wiki/Ordinal_data">ordinales</a> pero que están codificadas como caracteres.</p>
+<p>R implementa diferentes tipos de datos que se pueden utilizar para acomodar los aspectos mencionados anteriormente. Aunque no abarcaremos en la <a href="#sec-mutate-data-case-study-dplyr" class="quarto-xref"><span>Sección 10.2.5</span></a> todos los tipos de datos que R implementa, en la <a href="#tbl-some-data-types-in-r" class="quarto-xref">Tabla&nbsp;<span>10.2</span></a> se indican algunos de los tipos más comunes y que se utilizarán más adelante. El lector interesado en conocer en más detalle los tidos de datos más comunes y su funcionamiento puede consultar <span class="citation" data-cites="wickham_advanced_2019">(<a href="references.html#ref-wickham_advanced_2019" role="doc-biblioref">Wickham, 2019</a>, , Cap. 3)</span>.</p>
+<div id="tbl-some-data-types-in-r" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-some-data-types-in-r-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;10.2: Algunos tipos de datos en R
+</figcaption>
+<div aria-describedby="tbl-some-data-types-in-r-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Clase</th>
+<th style="text-align: left;">Tipo</th>
+<th style="text-align: left;">Ejemplo</th>
+<th style="text-align: left;">Etiqueta en <code>tibble</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Vector atómico</td>
+<td style="text-align: left;"><code>logical</code></td>
+<td style="text-align: left;"><code>TRUE</code></td>
+<td style="text-align: left;"><code>&lt;lgl&gt;</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>integer</code></td>
+<td style="text-align: left;"><code>1L</code></td>
+<td style="text-align: left;"><code>&lt;int&gt;</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>double</code></td>
+<td style="text-align: left;"><code>152.35</code></td>
+<td style="text-align: left;"><code>&lt;dbl&gt;</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>character</code></td>
+<td style="text-align: left;"><code>"Ingeniería Civil"</code></td>
+<td style="text-align: left;"><code>&lt;chr&gt;</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Lista</td>
+<td style="text-align: left;"><code>list</code></td>
+<td style="text-align: left;"><code>list(TRUE, 1L, 152.35, "Ingeniería Civil")</code></td>
+<td style="text-align: left;"><code>&lt;list&gt;</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Objeto integrado</td>
+<td style="text-align: left;"><code>factor</code></td>
+<td style="text-align: left;"><code>factor(x = c("Femenino", "Masculino"))</code></td>
+<td style="text-align: left;"><code>&lt;fct&gt;</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>ordered</code></td>
+<td style="text-align: left;"><code>factor(x = c("10", "11", "12 o más"), ordered = TRUE)</code></td>
+<td style="text-align: left;"><code>&lt;ord&gt;</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>Date</code></td>
+<td style="text-align: left;"><code>ymd("2021-06-01")</code></td>
+<td style="text-align: left;"><code>&lt;date&gt;</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>En el <a href="#lst-mutate-data-case-study-dplyr" class="quarto-xref">Listado&nbsp;<span>10.9</span></a> se utilizan la funciones <code>as.integer()</code> y <code>factor()</code> junto con la función <code>mutate()</code> para transformar variables que son inicialmente continuas y caracteres a enteros y factores. La implementación en R de variables nominales y ordinales o en general de variables categóricas se realiza a través del concepto de factor (ver <code>?factor</code>). Para definir las categorias que abarca un factor se utiliza el parámetro <code>level</code> junto con un vector como argumento donde se puede especificar si existe o no un ordenamiento a través del parámetro <code>ordered</code> donde el argumento puede tomar el valor de <code>FALSE</code> (si es una variable nominal) o <code>TRUE</code> (si es una variable ordinal), tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-mutate-data-case-study-dplyr" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-mutate-data-case-study-dplyr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;10.9: Transformar columnas para asociar el tipo de datos adecuado a cada variable del conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code>
+</figcaption>
+<div aria-describedby="lst-mutate-data-case-study-dplyr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Transformar ----</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024_faedis <span class="ot">&lt;-</span> saber_pro_genericas_2021_2024_faedis <span class="sc">|&gt;</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">ano =</span> <span class="fu">as.integer</span>(ano),</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">estu_snies_prgmacademico =</span> <span class="fu">as.integer</span>(estu_snies_prgmacademico)</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">estu_genero =</span> <span class="fu">factor</span>(</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> estu_genero,</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">ordered =</span> <span class="cn">FALSE</span></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">estu_semestrecursa =</span> <span class="fu">factor</span>(</span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> estu_semestrecursa,</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"06"</span>, <span class="st">"07"</span>, <span class="st">"08"</span>, <span class="st">"09"</span>, <span class="st">"10"</span>, <span class="st">"11"</span>, <span class="st">"12 o más"</span>),</span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">fami_estratovivienda =</span> <span class="fu">factor</span>(</span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> fami_estratovivienda,</span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(</span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Sin Estrato"</span>,</span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Estrato 1"</span>,</span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Estrato 2"</span>,</span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Estrato 3"</span>,</span>
+<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Estrato 4"</span>,</span>
+<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Estrato 5"</span>,</span>
+<span id="cb39-26"><a href="#cb39-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Estrato 6"</span></span>
+<span id="cb39-27"><a href="#cb39-27" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb39-28"><a href="#cb39-28" aria-hidden="true" tabindex="-1"></a>      <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb39-29"><a href="#cb39-29" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb39-30"><a href="#cb39-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">fami_educacionmadre =</span> <span class="fu">factor</span>(</span>
+<span id="cb39-31"><a href="#cb39-31" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> fami_educacionmadre,</span>
+<span id="cb39-32"><a href="#cb39-32" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(</span>
+<span id="cb39-33"><a href="#cb39-33" aria-hidden="true" tabindex="-1"></a>        <span class="st">"No sabe"</span>,</span>
+<span id="cb39-34"><a href="#cb39-34" aria-hidden="true" tabindex="-1"></a>        <span class="st">"No Aplica"</span>,</span>
+<span id="cb39-35"><a href="#cb39-35" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Ninguno"</span>,</span>
+<span id="cb39-36"><a href="#cb39-36" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Primaria incompleta"</span>,</span>
+<span id="cb39-37"><a href="#cb39-37" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Primaria completa"</span>,</span>
+<span id="cb39-38"><a href="#cb39-38" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Secundaria (Bachillerato) incompleta"</span>,</span>
+<span id="cb39-39"><a href="#cb39-39" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Secundaria (Bachillerato) completa"</span>,</span>
+<span id="cb39-40"><a href="#cb39-40" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Técnica o tecnológica incompleta"</span>,</span>
+<span id="cb39-41"><a href="#cb39-41" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Técnica o tecnológica completa"</span>,</span>
+<span id="cb39-42"><a href="#cb39-42" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Educación profesional incompleta"</span>,</span>
+<span id="cb39-43"><a href="#cb39-43" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Educación profesional completa"</span>,</span>
+<span id="cb39-44"><a href="#cb39-44" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Postgrado"</span></span>
+<span id="cb39-45"><a href="#cb39-45" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb39-46"><a href="#cb39-46" aria-hidden="true" tabindex="-1"></a>      <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb39-47"><a href="#cb39-47" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb39-48"><a href="#cb39-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">fami_educacionpadre =</span> <span class="fu">factor</span>(</span>
+<span id="cb39-49"><a href="#cb39-49" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> fami_educacionpadre,</span>
+<span id="cb39-50"><a href="#cb39-50" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(</span>
+<span id="cb39-51"><a href="#cb39-51" aria-hidden="true" tabindex="-1"></a>        <span class="st">"No sabe"</span>,</span>
+<span id="cb39-52"><a href="#cb39-52" aria-hidden="true" tabindex="-1"></a>        <span class="st">"No Aplica"</span>,</span>
+<span id="cb39-53"><a href="#cb39-53" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Ninguno"</span>,</span>
+<span id="cb39-54"><a href="#cb39-54" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Primaria incompleta"</span>,</span>
+<span id="cb39-55"><a href="#cb39-55" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Primaria completa"</span>,</span>
+<span id="cb39-56"><a href="#cb39-56" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Secundaria (Bachillerato) incompleta"</span>,</span>
+<span id="cb39-57"><a href="#cb39-57" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Secundaria (Bachillerato) completa"</span>,</span>
+<span id="cb39-58"><a href="#cb39-58" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Técnica o tecnológica incompleta"</span>,</span>
+<span id="cb39-59"><a href="#cb39-59" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Técnica o tecnológica completa"</span>,</span>
+<span id="cb39-60"><a href="#cb39-60" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Educación profesional incompleta"</span>,</span>
+<span id="cb39-61"><a href="#cb39-61" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Educación profesional completa"</span>,</span>
+<span id="cb39-62"><a href="#cb39-62" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Postgrado"</span></span>
+<span id="cb39-63"><a href="#cb39-63" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb39-64"><a href="#cb39-64" aria-hidden="true" tabindex="-1"></a>      <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb39-65"><a href="#cb39-65" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb39-66"><a href="#cb39-66" aria-hidden="true" tabindex="-1"></a>    <span class="at">mod_ingles_desem =</span> <span class="fu">factor</span>(</span>
+<span id="cb39-67"><a href="#cb39-67" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> mod_ingles_desem,</span>
+<span id="cb39-68"><a href="#cb39-68" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(</span>
+<span id="cb39-69"><a href="#cb39-69" aria-hidden="true" tabindex="-1"></a>        <span class="st">"A1"</span>,</span>
+<span id="cb39-70"><a href="#cb39-70" aria-hidden="true" tabindex="-1"></a>        <span class="st">"A2"</span>,</span>
+<span id="cb39-71"><a href="#cb39-71" aria-hidden="true" tabindex="-1"></a>        <span class="st">"B1"</span>,</span>
+<span id="cb39-72"><a href="#cb39-72" aria-hidden="true" tabindex="-1"></a>        <span class="st">"B2"</span></span>
+<span id="cb39-73"><a href="#cb39-73" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb39-74"><a href="#cb39-74" aria-hidden="true" tabindex="-1"></a>      <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb39-75"><a href="#cb39-75" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb39-76"><a href="#cb39-76" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb39-77"><a href="#cb39-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-78"><a href="#cb39-78" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024_faedis <span class="sc">|&gt;</span></span>
+<span id="cb39-79"><a href="#cb39-79" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,239
+Columns: 20
+$ ano                         &lt;int&gt; 2021, 2021, 2021, 2021…
+$ estu_consecutivo            &lt;chr&gt; "EK202120262469", "EK2…
+$ estu_genero                 &lt;fct&gt; M, M, M, M, F, F, F, F…
+$ estu_semestrecursa          &lt;ord&gt; 09, 09, 09, 09, 09, 09…
+$ fami_estratovivienda        &lt;ord&gt; Estrato 3, Estrato 4, …
+$ fami_educacionmadre         &lt;ord&gt; Técnica o tecnológica …
+$ fami_educacionpadre         &lt;ord&gt; Secundaria (Bachillera…
+$ estu_cod_depto_presentacion &lt;chr&gt; "11", "11", "11", "11"…
+$ estu_depto_presentacion     &lt;chr&gt; "BOGOTÁ", "BOGOTÁ", "B…
+$ estu_cod_mcpio_presentacion &lt;chr&gt; "11001", "11001", "110…
+$ estu_mcpio_presentacion     &lt;chr&gt; "BOGOTÁ D.C.", "BOGOTÁ…
+$ estu_snies_prgmacademico    &lt;int&gt; 6527, 11428, 11428, 11…
+$ estu_prgm_academico         &lt;chr&gt; "ADMINISTRACION DE EMP…
+$ mod_competen_ciudada_punt   &lt;dbl&gt; 162, 190, 154, 179, 17…
+$ mod_comuni_escrita_punt     &lt;dbl&gt; 133, 174, 85, 157, 154…
+$ mod_ingles_punt             &lt;dbl&gt; 151, 155, 150, 144, 14…
+$ mod_ingles_desem            &lt;ord&gt; A2, A2, A2, A2, A2, A2…
+$ mod_lectura_critica_punt    &lt;dbl&gt; 114, 168, 139, 148, 18…
+$ mod_razona_cuantitat_punt   &lt;dbl&gt; 135, 164, 113, 149, 16…
+$ punt_global                 &lt;dbl&gt; 139, 170, 128, 155, 16…</code></pre>
+</div>
+</div>
+<p>En el <a href="#lst-mutate-data-case-study-dplyr" class="quarto-xref">Listado&nbsp;<span>10.9</span></a> las variables <code>ano</code> y <code>estu_snies_prgmacademico</code> se transforman a enteros teniendo en cuenta la naturaleza de las mismas. Por otro lado, en primera instancia la variable <code>estu_genero</code> se codifica como un factor no ordenado teniendo en cuenta que se refiere al género del estudiante mientras que las variables <code>estu_semestrecursa</code>, <code>fami_estratovivienda</code>, <code>fami_educacionmadre</code>, <code>fami_educacionpadre</code> y <code>mod_ingles_desem</code> se codifican como factores ordenados. Cabe la pena señalar, que algunas categorías de las variables <code>fami_estratovivienda</code>, <code>fami_educacionmadre</code> y <code>fami_educacionpadre</code> como <code>"Sin Estrato"</code>, <code>"No sabe"</code> y <code>"No Aplica"</code> podrían codificarse como valores faltantes (en ingles <strong>Not Avaiable</strong> o <strong>Missing values</strong>), donde R codifica este tipo de casos con la lógica constante <code>NA</code> (ver <code>?NA</code>), pero en <code>2021-2024_saber-pro-genericas_faedis.rds</code> se mantienen estas etiquetas para entender la razón por la cuál se presentan estos casos de datos faltantes.</p>
+<div id="nte-3-chap-10" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota&nbsp;10.4
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En este libro no abarcaremos a profundidad el manejo de datos faltantes, codificados en R como <code>NA</code>, así como las herramientas disponibles para llevar un análisis adecuado en presencia de este fenómeno, que es bastante común al realizar un análisis de datos.</p>
+<p>Si deseas profundizar en este tema más adelante, cuando estes familiarizado con R y Positron, puedes consultar <span class="citation" data-cites="buuren_flexible_2018">(<a href="references.html#ref-buuren_flexible_2018" role="doc-biblioref">Buuren, 2018</a>)</span> y la documentación oficial de los paquetes <a href="https://amices.org/mice/"><code>mice</code></a> y <a href="https://naniar.njtierney.com/"><code>naniar</code></a>.</p>
+</div>
+</div>
 </section>
-<section id="collapsar-agrupar-y-desagrupar-summarise-group-y-ungroup" class="level3" data-number="10.2.6">
-<h3 data-number="10.2.6" class="anchored" data-anchor-id="collapsar-agrupar-y-desagrupar-summarise-group-y-ungroup"><span class="header-section-number">10.2.6</span> Collapsar, agrupar y desagrupar (<code>summarise()</code>, <code>group()</code> y <code>ungroup()</code>)</h3>
+<section id="sec-collapse-group-ungroup-data-case-study-dplyr" class="level3" data-number="10.2.6">
+<h3 data-number="10.2.6" class="anchored" data-anchor-id="sec-collapse-group-ungroup-data-case-study-dplyr"><span class="header-section-number">10.2.6</span> Collapsar, agrupar y desagrupar (<code>summarise()</code>, <code>group_by()</code> y <code>ungroup()</code>)</h3>
+<p>A partir de <code>2021-2024_saber-pro-genericas_faedis.rds</code> es posible obtener el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis_programas.rds</code> utilizando las funciones <code>summarise()</code>, <code>group_by()</code> y <code>ungroup()</code>. Adicionalmente, en la <a href="#sec-collapse-group-ungroup-data-case-study-dplyr" class="quarto-xref"><span>Sección 10.2.6</span></a> conocerás el uso de una nueva función denominada <code>across()</code> del paquete <code>dplyr</code>, la cual permite aplicar la misma transformación a múltiples columnas, de tal manera que no tengas que repetir un código similar para cada cada variable dentro de un grupo de variables de interés.</p>
+<p>El primer paso para reconstruir el conjuntos de datos <code>2021-2024_saber-pro-genericas_faedis_programas.rds</code> comprende agrupar las filas a partir de las variables <code>ano</code>, <code>estu_snies_prgmacademico</code> y <code>estu_prgm_academico</code>, de tal manera que se pueda obtener el puntaje promedio redondeado al entero más próximo de cada módulo de competencias genéricas y así como del puntaje total promedio también redondeado al entero más próximo, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-group-by-data-case-study-dplyr" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-group-by-data-case-study-dplyr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;10.10: Agrupar filas a partir de un grupo de variables para generar el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis_programas.rds</code>
+</figcaption>
+<div aria-describedby="lst-group-by-data-case-study-dplyr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Agrupar ----</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024_programas <span class="ot">&lt;-</span> saber_pro_genericas_faedis_2021_2024 <span class="sc">|&gt;</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    ano,</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>    estu_snies_prgmacademico,</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>    estu_prgm_academico</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024_programas</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,239 × 20
+# Groups:   ano, estu_snies_prgmacademico,
+#   estu_prgm_academico [26]
+     ano estu_consecutivo estu_genero estu_semestrecursa
+   &lt;int&gt; &lt;chr&gt;            &lt;fct&gt;       &lt;ord&gt;             
+ 1  2021 EK202120262469   M           09                
+ 2  2021 EK202120116785   M           09                
+ 3  2021 EK202120116868   M           09                
+ 4  2021 EK202120116831   M           09                
+ 5  2021 EK202120116814   F           09                
+ 6  2021 EK202120117053   F           09                
+ 7  2021 EK202120262258   F           08                
+ 8  2021 EK202120262692   F           09                
+ 9  2021 EK202120117033   F           08                
+10  2021 EK202120117014   F           08                
+# ℹ 1,229 more rows
+# ℹ 16 more variables: fami_estratovivienda &lt;ord&gt;,
+#   fami_educacionmadre &lt;ord&gt;, fami_educacionpadre &lt;ord&gt;,
+#   estu_cod_depto_presentacion &lt;chr&gt;,
+#   estu_depto_presentacion &lt;chr&gt;,
+#   estu_cod_mcpio_presentacion &lt;chr&gt;,
+#   estu_mcpio_presentacion &lt;chr&gt;, …</code></pre>
+</div>
+</div>
+<p>El segundo paso para reconstruir el conjuntos de datos <code>2021-2024_saber-pro-genericas_faedis_programas.rds</code> comprende calcular el puntaje promedio de cada módulo y del puntaje global de las competencias genéricas para luego redondear estos valores al entero más cercano. En primera instancia, se podría utilizar un enfoque similar al descrito en la <a href="#sec-verbs-collapse-group-ungroup" class="quarto-xref"><span>Sección 10.1.1.4</span></a> definiendo el puntaje promedio de manera individual para cada variable de interés. Sin embargo, debido a que se requiere calcular el puntaje promedio aplicando una misma transformación, es posible utilizar la función <code>across()</code> que permite a través del parámetro <code>.cols</code> seleccionar un conjunto de variables y aplicar una misma función a través del parámetro <code>.funs</code> utilizando como argumento el valor <code>mean</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-summarise-mean-data-case-study-dplyr" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-summarise-mean-data-case-study-dplyr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;10.11: Collapsar filas a partir de un grupo de variables utilizando el valor <code>mean</code> para generar el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis_programas.rds</code>
+</figcaption>
+<div aria-describedby="lst-summarise-mean-data-case-study-dplyr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024_programas <span class="ot">&lt;-</span> saber_pro_genericas_faedis_2021_2024_programas <span class="sc">|&gt;</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">.cols =</span> <span class="fu">ends_with</span>(<span class="st">"punt"</span>) <span class="sc">|</span> <span class="fu">starts_with</span>(<span class="st">"punt"</span>),</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">.fns =</span> mean</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024_programas</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 26 × 9
+# Groups:   ano, estu_snies_prgmacademico [26]
+     ano estu_snies_prgmacademico estu_prgm_academico       
+   &lt;int&gt;                    &lt;int&gt; &lt;chr&gt;                     
+ 1  2021                     6527 ADMINISTRACION DE EMPRESAS
+ 2  2021                    10963 RELACIONES INTERNACIONALE…
+ 3  2021                    11004 INGENIERIA CIVIL          
+ 4  2021                    11428 CONTADURIA PUBLICA        
+ 5  2021                    53703 INGENIERIA INDUSTRIAL     
+ 6  2021                   105142 INGENIERIA INFORMATICA    
+ 7  2022                     6527 ADMINISTRACION DE EMPRESAS
+ 8  2022                    10963 RELACIONES INTERNACIONALE…
+ 9  2022                    11004 INGENIERIA CIVIL          
+10  2022                    11428 CONTADURIA PUBLICA        
+# ℹ 16 more rows
+# ℹ 6 more variables: mod_competen_ciudada_punt &lt;dbl&gt;,
+#   mod_comuni_escrita_punt &lt;dbl&gt;, mod_ingles_punt &lt;dbl&gt;,
+#   mod_lectura_critica_punt &lt;dbl&gt;,
+#   mod_razona_cuantitat_punt &lt;dbl&gt;, punt_global &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>El tercer paso para reconstruir el conjuntos de datos <code>2021-2024_saber-pro-genericas_faedis_programas.rds</code> comprende desagrupar las filas que se agruparon inicialmente por las variables de interés, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-ungroup-data-case-study-dplyr" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-ungroup-data-case-study-dplyr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;10.12: Desagrupar filas para generar el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis_programas.rds</code>
+</figcaption>
+<div aria-describedby="lst-ungroup-data-case-study-dplyr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024_programas <span class="ot">&lt;-</span> saber_pro_genericas_faedis_2021_2024_programas <span class="sc">|&gt;</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024_programas</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 26 × 9
+     ano estu_snies_prgmacademico estu_prgm_academico       
+   &lt;int&gt;                    &lt;int&gt; &lt;chr&gt;                     
+ 1  2021                     6527 ADMINISTRACION DE EMPRESAS
+ 2  2021                    10963 RELACIONES INTERNACIONALE…
+ 3  2021                    11004 INGENIERIA CIVIL          
+ 4  2021                    11428 CONTADURIA PUBLICA        
+ 5  2021                    53703 INGENIERIA INDUSTRIAL     
+ 6  2021                   105142 INGENIERIA INFORMATICA    
+ 7  2022                     6527 ADMINISTRACION DE EMPRESAS
+ 8  2022                    10963 RELACIONES INTERNACIONALE…
+ 9  2022                    11004 INGENIERIA CIVIL          
+10  2022                    11428 CONTADURIA PUBLICA        
+# ℹ 16 more rows
+# ℹ 6 more variables: mod_competen_ciudada_punt &lt;dbl&gt;,
+#   mod_comuni_escrita_punt &lt;dbl&gt;, mod_ingles_punt &lt;dbl&gt;,
+#   mod_lectura_critica_punt &lt;dbl&gt;,
+#   mod_razona_cuantitat_punt &lt;dbl&gt;, punt_global &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>El cuarto paso para reconstruir el conjuntos de datos <code>2021-2024_saber-pro-genericas_faedis_programas.rds</code> comprende redondear los valores de las columnas que contienen los puntajes promedios tanto de los diferentes módulos como del puntaje global de las competencias específicas. En este caso, se posible utilizar nuevamente la función <code>across()</code> con el parámetro <code>.cols</code> para seleccionar las respectivas columnas y el parámetro <code>.fns</code> pero utilizando como argumento el valor <code>round</code> en conjunto con la función <code>mutate()</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-mutate-round-data-case-study-dplyr" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-mutate-round-data-case-study-dplyr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;10.13: Transformar columnas utilizando la función <code>across()</code> y el valor <code>round</code> para generar el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis_programas.rds</code>
+</figcaption>
+<div aria-describedby="lst-mutate-round-data-case-study-dplyr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024_programas <span class="ot">&lt;-</span> saber_pro_genericas_faedis_2021_2024_programas <span class="sc">|&gt;</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">.cols =</span> <span class="fu">ends_with</span>(<span class="st">"punt"</span>) <span class="sc">|</span> <span class="fu">starts_with</span>(<span class="st">"punt"</span>),</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">.fns =</span> round</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_faedis_2021_2024_programas <span class="sc">|&gt;</span></span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 26
+Columns: 9
+$ ano                       &lt;int&gt; 2021, 2021, 2021, 2021, …
+$ estu_snies_prgmacademico  &lt;int&gt; 6527, 10963, 11004, 1142…
+$ estu_prgm_academico       &lt;chr&gt; "ADMINISTRACION DE EMPRE…
+$ mod_competen_ciudada_punt &lt;dbl&gt; 142, 158, 144, 155, 159,…
+$ mod_comuni_escrita_punt   &lt;dbl&gt; 147, 149, 120, 145, 146,…
+$ mod_ingles_punt           &lt;dbl&gt; 157, 151, 155, 150, 170,…
+$ mod_lectura_critica_punt  &lt;dbl&gt; 142, 157, 141, 147, 150,…
+$ mod_razona_cuantitat_punt &lt;dbl&gt; 145, 138, 154, 149, 161,…
+$ punt_global               &lt;dbl&gt; 147, 151, 143, 149, 157,…</code></pre>
+</div>
+</div>
+<p>En el <a href="#lst-summarise-mean-data-case-study-dplyr" class="quarto-xref">Listado&nbsp;<span>10.11</span></a> y el <a href="#lst-mutate-round-data-case-study-dplyr" class="quarto-xref">Listado&nbsp;<span>10.13</span></a> se separa el cálculo del puntaje promedio de cada módulo y del puntaje global de las competencias genéricas así como el proceso de redondear estos valores al entero más cercano. Sin embargo, es posible consolidar este aspecto en un sólo paso utilizando una herramienta denominada <strong>funciones anónimas</strong> donde este aspecto se abarcará en detalle más adelante en el <a href="anonymous_functions.html" class="quarto-xref"><span>Capítulo 19</span></a>.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-buuren_flexible_2018" class="csl-entry" role="listitem">
+Buuren, S. van. (2018). <em>Flexible imputation of missing data</em> (Second edition). CRC Press, Taylor &amp; Francis Group. <a href="https://stefvanbuuren.name/fimd/">https://stefvanbuuren.name/fimd/</a>
+</div>
 <div id="ref-karlton_naming_2017" class="csl-entry" role="listitem">
 Karlton, D. P. (2017). <em>Naming things is hard <span></span> dk</em>. <a href="https://www.karlton.org/2017/12/naming-things-hard/">https://www.karlton.org/2017/12/naming-things-hard/</a>
 </div>
 <div id="ref-wickham_tidy_2014" class="csl-entry" role="listitem">
 Wickham, H. (2014). Tidy <span>Data</span>. <em>Journal of Statistical Software</em>, <em>59</em>(10). <a href="https://doi.org/10.18637/jss.v059.i10">https://doi.org/10.18637/jss.v059.i10</a>
+</div>
+<div id="ref-wickham_advanced_2019" class="csl-entry" role="listitem">
+Wickham, H. (2019). <em>Advanced <span>R</span></em> (Second edition). CRC Press/Taylor &amp; Francis Group.
 </div>
 <div id="ref-wickham_r_2023" class="csl-entry" role="listitem">
 Wickham, H. (2023). <em>R for <span>Data</span> <span>Science</span></em> (2.ª ed.). O’Reilly Media, Incorporated. <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a>
