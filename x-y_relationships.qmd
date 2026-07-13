@@ -421,10 +421,10 @@ Esta base de datos es construida a partir de `saber_pro_genericas_faedis_2021_20
 3. **estu_prgm_academico**: nombre del programa académico relacionado con los resultados del examen Saber Pro
 4. **mod_competen_ciudada_punt**: puntaje promedio redondeado al entero más próximo del módulo de competencias ciudadanas obtenido por los estudiantes del programa académico (el rango posible es $[0, 300]$)
 5. **mod_comuni_escrita_punt**: puntaje promedio redondeado al entero más próximo del módulo de comunicación escrita obtenido por los estudiantes del programa académico (el rango posible es $[0, 300]$)
-6. **mod_ingles_punt**: puntaje promedio redondeado al entero más próximo del módulo de inglés obtenido por los entudiantes del programa académico (el rango posible es $[0, 300]$)
+6. **mod_ingles_punt**: puntaje promedio redondeado al entero más próximo del módulo de inglés obtenido por los estudiantes del programa académico (el rango posible es $[0, 300]$)
 7. **mod_lectura_critica_punt**: puntaje promedio redondeado al entero más próximo del módulo de lectura crítica obtenido por los estudiantes del programa académico (el rango posible es $[0, 300]$)
 8. **mod_razona_cuantitat_punt**: puntaje promedio redondeado al entero más próximo del módulo de razonamiento cuantitativo obtenido por los estudiantes del programa académico (el rango posible es $[0, 300]$)
-9. **punt_global**: puntaje total promedio redondeado al entero más próximo obtenido por los entudiantes del programa académico en el grupo de competencias genéricas (este grupo comprenden los módulos de competencias ciudadanas, comunicación escrita, inglés, lectura crítica y razonamiento cuantitativo)
+9. **punt_global**: puntaje total promedio redondeado al entero más próximo obtenido por los estudiantes del programa académico en el grupo de competencias genéricas (este grupo comprenden los módulos de competencias ciudadanas, comunicación escrita, inglés, lectura crítica y razonamiento cuantitativo)
 
 ### Mapeo y capas
 
