@@ -533,6 +533,17 @@
     ]
   },
   {
+    "objectID": "two_table_verbs.html",
+    "href": "two_table_verbs.html",
+    "title": "11  Verbos de dos tablas",
+    "section": "",
+    "text": "Este capítulo se basa en (Wickham, 2023, Capítulo 19) así como en la documentación oficial de dplyr donde tiene como propósito … utilizando el paquete dplyr e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes al periodo 2021-2024 para Colombia.\nExploraremos los siguientes aspectos:\n\n\n\n\n\n\n\n\n\n\nNota 11.1\n\n\n\nPara desarrollar el contenido de este capítulo es necesario que descarges el archivo señalado a continuación y lo incluyas dentro de la carpeta data, respecto a lo descrito en la Nota 6.1:\n\n\n\n\n\n\nNone 2021_2024-saber_pro-genericas.csv.xz\n\n\n\n\n\n\nEn caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada 010_verbos-una-sola-tabla-en-r y dentro de ella genera el archivo 001_manipular-datos-una-sola-tabla.R, siguiendo las pautas de la Sección 4.4.\n\n\n\n\n\n\nWickham, H. (2023). R for Data Science (2.ª ed.). O’Reilly Media, Incorporated. https://r4ds.hadley.nz/",
+    "crumbs": [
+      "Manipulación de datos",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Verbos de dos tablas</span>"
+    ]
+  },
+  {
     "objectID": "data_import.html",
     "href": "data_import.html",
     "title": "Importación de datos",
@@ -601,7 +612,29 @@
     "href": "tidy_data.html",
     "title": "16  Datos ordenados",
     "section": "",
-    "text": "Este capítulo se basa en … donde tiene como propósito …\nExploraremos los siguientes aspectos:",
+    "text": "16.1 Definición de datos ordenados\nEste capítulo se basa en (Wickham, 2023, Capítulo 5) y (Wickham, 2014) así como en la documentación oficial de tidyr donde tiene como propósito introducir la forma de estructurar conjuntos de datos para facilitar su análisis utilizando el paquete tidyr e información de proyecciones de población de Colombia a nivel nacional por área geográfica (Cabecera y Centros poblados y rural disperso) según sexo (Masculino y Femenino) y edades simples (\\(0\\), \\(1\\), \\(2\\), \\(\\ldots\\), \\(98\\), \\(99\\), \\(100\\) o más) para el periodo 2018-2070.\nExploraremos los siguientes aspectos:",
+    "crumbs": [
+      "Organización y limpieza de datos",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Datos ordenados</span>"
+    ]
+  },
+  {
+    "objectID": "tidy_data.html#definición-de-datos-ordenados",
+    "href": "tidy_data.html#definición-de-datos-ordenados",
+    "title": "16  Datos ordenados",
+    "section": "",
+    "text": "16.1.1 Estructura de datos\n\n\n16.1.2 Semántica de datos\n\n\n16.1.3 Características de datos ordenados",
+    "crumbs": [
+      "Organización y limpieza de datos",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Datos ordenados</span>"
+    ]
+  },
+  {
+    "objectID": "tidy_data.html#problemas-más-comunes-con-datos-no-ordenados",
+    "href": "tidy_data.html#problemas-más-comunes-con-datos-no-ordenados",
+    "title": "16  Datos ordenados",
+    "section": "16.2 Problemas más comunes con datos no ordenados",
+    "text": "16.2 Problemas más comunes con datos no ordenados\n\n16.2.1 Nombres de columnas que son valores, no variables\n\n\n16.2.2 Múltiples variables en una sola columna\n\n\n16.2.3 Variables almacenadas tanto en filas como en columnas\n\n\n16.2.4 Diferentes unidades observacionales en una sola tabla\nNote: Remember Capítulo 11\n\n\n16.2.5 Una misma unidad observacional almacenada en múltiples tablas\nNote: Remember Capítulo 20\n\n\n\n\nWickham, H. (2014). Tidy Data. Journal of Statistical Software, 59(10). https://doi.org/10.18637/jss.v059.i10\n\n\nWickham, H. (2023). R for Data Science (2.ª ed.). O’Reilly Media, Incorporated. https://r4ds.hadley.nz/",
     "crumbs": [
       "Organización y limpieza de datos",
       "<span class='chapter-number'>16</span>  <span class='chapter-title'>Datos ordenados</span>"
