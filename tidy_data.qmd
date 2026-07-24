@@ -1,9 +1,66 @@
 # Datos ordenados {#sec-data-tidying}
 
-Este capítulo se basa en ... donde tiene como propósito ... 
+```{r}
+#| echo: false
+source("_common.R")
+```
 
+```{r}
+#| label: load-r-packages
+#| echo: false
+#| message: false
+```
+
+Este capítulo se basa en [@wickham_r_2023, Cap. 5] y [@wickham_tidy_2014] así como en la documentación oficial de [`tidyr`](https://tidyr.tidyverse.org/articles/tidy-data.html) donde tiene como propósito introducir la forma de estructurar conjuntos de datos para facilitar su análisis utilizando el paquete `tidyr` e información de proyecciones de población de Colombia a nivel nacional por área geográfica (Cabecera y Centros poblados y rural disperso) según sexo (Masculino y Femenino) y edades simples ($0$, $1$, $2$, $\ldots$, $98$, $99$, $100$ o más) para el periodo 2018-2070.   
 
 Exploraremos los siguientes aspectos:
 
-1. 
-2.
+1. ¿Qué son datos ordenados (**tidy data** en inglés)?
+2. ¿Cuáles son los problemas más comunes con datos no ordenados?
+
+:::: {#nte-1-chap-16 .callout-note}
+Para desarrollar el contenido de este capítulo es necesario que descarges el archivo señalado a continuación y lo incluyas dentro de la carpeta `data`, respecto a lo descrito en la @nte-1-chap-6:
+   
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2021_2024-saber_pro-genericas.csv.xz](https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/2021_2024-saber_pro-genericas.csv.xz)
+:::
+
+En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `010_verbos-una-sola-tabla-en-r` y dentro de ella genera el archivo `001_manipular-datos-una-sola-tabla.R`, siguiendo las pautas de la @sec-package-usage.
+
+::::
+
+## Definición de datos ordenados
+
+### Estructura de datos
+
+
+
+### Semántica de datos
+
+
+
+### Características de datos ordenados
+
+## Problemas más comunes con datos no ordenados
+
+
+
+### Nombres de columnas que son valores, no variables
+
+
+
+### Múltiples variables en una sola columna
+
+
+
+### Variables almacenadas tanto en filas como en columnas
+
+
+
+### Diferentes unidades observacionales en una sola tabla
+
+**Note**: Remember [@sec-two-table-verbs]
+
+### Una misma unidad observacional almacenada en múltiples tablas
+
+**Note**: Remember [@sec-map-functions]

@@ -1,1 +1,30 @@
 # Verbos de dos tablas {#sec-two-table-verbs}
+
+```{r}
+#| echo: false
+source("_common.R")
+```
+
+```{r}
+#| label: load-r-packages
+#| echo: false
+#| message: false
+```
+
+Este capítulo se basa en [@wickham_r_2023, Cap. 19] así como en la documentación oficial de [`dplyr`](https://dplyr.tidyverse.org/articles/two-table.html) donde tiene como propósito ... utilizando el paquete `dplyr` e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes al periodo 2021-2024 para Colombia.
+
+Exploraremos los siguientes aspectos:
+
+1.
+2.
+
+:::: {#nte-1-chap-11 .callout-note}
+Para desarrollar el contenido de este capítulo es necesario que descarges el archivo señalado a continuación y lo incluyas dentro de la carpeta `data`, respecto a lo descrito en la @nte-1-chap-6:
+   
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2021_2024-saber_pro-genericas.csv.xz](https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/2021_2024-saber_pro-genericas.csv.xz)
+:::
+
+En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `010_verbos-una-sola-tabla-en-r` y dentro de ella genera el archivo `001_manipular-datos-una-sola-tabla.R`, siguiendo las pautas de la @sec-package-usage.
+
+::::
