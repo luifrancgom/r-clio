@@ -142,19 +142,21 @@ Para examinar y en particular crear un gráfico a partir de un conjunto de datos
 5. **fami_estratovivienda**: estrato socioeconómico de la vivienda donde habita el estudiante según recibo de energía eléctrica
 6. **fami_educacionmadre**: nivel educativo más alto alcanzado por la madre del estudiante
 7. **fami_educacionpadre**: nivel educativo más alto alcanzado por el padre del estudiante
-8. **estu_cod_depto_presentacion**: código del departamento de presentación del examen según codificación [DIVIPOLA](https://www.dane.gov.co/index.php/sistema-estadistico-nacional-sen/normas-y-estandares/nomenclaturas-y-clasificaciones/nomenclaturas/codificacion-de-la-division-politica-administrativa-de-colombia-divipola)[^chap-6-footnote-1]
-9. **estu_depto_presentacion**: nombre del departamento de presentación del examen
-10. **estu_cod_mcpio_presentacion**: código del municipio de presentación del examen según codificación [DIVIPOLA](https://www.dane.gov.co/index.php/sistema-estadistico-nacional-sen/normas-y-estandares/nomenclaturas-y-clasificaciones/nomenclaturas/codificacion-de-la-division-politica-administrativa-de-colombia-divipola)
-11. **estu_mcpio_presentacion**: nombre del municipio de presentación del examen
-12. **estu_snies_prgmacademico**: código SNIES[^chap-6-footnote-2] del programa académico que cursa el estudiante y relacionado con el examen Saber Pro que presenta
-13. **estu_prgm_academico**: nombre del programa académico que cursa el estudiante y relacionado con el examen Saber Pro que presenta
-14. **mod_competen_ciudada_punt**: puntaje del módulo de competencias ciudadanas obtenido por el estudiante (el rango posible es $[0, 300]$)
-15. **mod_comuni_escrita_punt**: puntaje del módulo de comunicación escrita obtenido por el estudiante (el rango posible es $[0, 300]$)
-16. **mod_ingles_punt**: puntaje del módulo de inglés obtenido por el estudiante (el rango posible es $[0, 300]$)
-17. **mod_ingles_desem**: nivel de desempeño del módulo de inglés obtenido por el estudiante (el rango posible es $[A_1, A_2, B_1, B_2]$)
-18. **mod_lectura_critica_punt**: puntaje del módulo de lectura crítica obtenido por el estudiante (el rango posible es $[0, 300]$)
-19. **mod_razona_cuantitat_punt**: puntaje del módulo de razonamiento cuantitativo obtenido por el estudiante (el rango posible es $[0, 300]$)
-20. **punt_global**: puntaje total obtenido por el estudiante en el grupo de competencias genéricas (este grupo comprenden los módulos de competencias ciudadanas, comunicación escrita, inglés, lectura crítica y razonamiento cuantitativo y la variable se refiere al promedio simple del puntaje de estos módulos redondeado al entero más cercano)
+8. **estu_exterior**: indica si el estudiante presenta la prueba Saber Pro en el exterior (`SI` ó `NO`) 
+9. **estu_cod_depto_presentacion**: código del departamento de presentación del examen según codificación [DIVIPOLA](https://www.dane.gov.co/index.php/sistema-estadistico-nacional-sen/normas-y-estandares/nomenclaturas-y-clasificaciones/nomenclaturas/codificacion-de-la-division-politica-administrativa-de-colombia-divipola)[^chap-6-footnote-1]
+9
+10. **estu_depto_presentacion**: nombre del departamento de presentación del examen
+11. **estu_cod_mcpio_presentacion**: código del municipio de presentación del examen según codificación [DIVIPOLA](https://www.dane.gov.co/index.php/sistema-estadistico-nacional-sen/normas-y-estandares/nomenclaturas-y-clasificaciones/nomenclaturas/codificacion-de-la-division-politica-administrativa-de-colombia-divipola)
+12. **estu_mcpio_presentacion**: nombre del municipio de presentación del examen
+13. **estu_snies_prgmacademico**: código SNIES[^chap-6-footnote-2] del programa académico que cursa el estudiante y relacionado con el examen Saber Pro que presenta
+14. **estu_prgm_academico**: nombre del programa académico que cursa el estudiante y relacionado con el examen Saber Pro que presenta
+15. **mod_competen_ciudada_punt**: puntaje del módulo de competencias ciudadanas obtenido por el estudiante (el rango posible es $[0, 300]$)
+16. **mod_comuni_escrita_punt**: puntaje del módulo de comunicación escrita obtenido por el estudiante (el rango posible es $[0, 300]$)
+17. **mod_ingles_punt**: puntaje del módulo de inglés obtenido por el estudiante (el rango posible es $[0, 300]$)
+18. **mod_ingles_desem**: nivel de desempeño del módulo de inglés obtenido por el estudiante (el rango posible es $[A_1, A_2, B_1, B_2]$)
+19. **mod_lectura_critica_punt**: puntaje del módulo de lectura crítica obtenido por el estudiante (el rango posible es $[0, 300]$)
+20. **mod_razona_cuantitat_punt**: puntaje del módulo de razonamiento cuantitativo obtenido por el estudiante (el rango posible es $[0, 300]$)
+21. **punt_global**: puntaje total obtenido por el estudiante en el grupo de competencias genéricas (este grupo comprenden los módulos de competencias ciudadanas, comunicación escrita, inglés, lectura crítica y razonamiento cuantitativo y la variable se refiere al promedio simple del puntaje de estos módulos redondeado al entero más cercano)
 
 [^chap-6-footnote-1]: DIVIPOLA es el acrónimo de **Divi**sión **Pol**ítico **A**dministrativa de Colombia donde es una nomenclatura estandarizada, diseñada por el Departamento Administrativo Nacional de Estadística (DANE) para la identificación de Entidades Territoriales (departamentos, distritos y municipios), Áreas No Municipalizadas y Centros Poblados.
 

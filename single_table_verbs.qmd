@@ -519,6 +519,7 @@ saber_pro_genericas_2021_2024_faedis <- saber_pro_genericas_2021_2024_faedis |>
     estu_genero,
     estu_semestrecursa,
     fami_educacionmadre:fami_estratovivienda,
+    estu_exterior,
     ends_with("_presentacion"),
     estu_snies_prgmacademico,
     estu_prgm_academico,
@@ -571,7 +572,7 @@ En el @lst-relocate-data-case-study-dplyr la reubicación de columnas tiene el o
 - **Id**: `estu_consecutivo`
 - **Caracteríticas de quien presenta la prueba**: `estu_genero` y `estu_semestrecursa`
 - **Entorno familiar**: `fami_estratovivienda`, `fami_educacionmadre`, y `fami_educacionpadre`
-- **Lugar de presentación de la prueba**: `estu_cod_depto_presentacion`, `estu_depto_presentacion`, `estu_cod_mcpio_presentacion` y `estu_mcpio_presentacion`
+- **Lugar de presentación de la prueba**: `estu_exterior`, `estu_cod_depto_presentacion`, `estu_depto_presentacion`, `estu_cod_mcpio_presentacion` y `estu_mcpio_presentacion`
 - **Programa académico**: `estu_snies_prgmacademico` y ` estu_prgm_academico`
 - **Resultados de la prueba**:
   - **Ciudadanas**: `mod_competen_ciudada_punt`
@@ -687,7 +688,7 @@ saber_pro_genericas_2021_2024_faedis |>
   glimpse()
 ```
 
-En el @lst-mutate-data-case-study-dplyr las variables `ano` y `estu_snies_prgmacademico` se transforman a enteros teniendo en cuenta la naturaleza de las mismas. Por otro lado, en primera instancia la variable `estu_genero` se codifica como un factor no ordenado teniendo en cuenta que se refiere al género del estudiante mientras que las variables `estu_semestrecursa`, `fami_estratovivienda`, `fami_educacionmadre`, `fami_educacionpadre` y `mod_ingles_desem` se codifican como factores ordenados. Cabe la pena señalar, que algunas categorías de las variables `fami_estratovivienda`, `fami_educacionmadre` y `fami_educacionpadre` como `"Sin Estrato"`, `"No sabe"` y `"No Aplica"` podrían codificarse como valores faltantes (en ingles **Not Avaiable** o **Missing values**), donde R codifica este tipo de casos con la lógica constante `NA` (ver `?NA`), pero en `2021-2024_saber-pro-genericas_faedis.rds` se mantienen estas etiquetas para entender la razón por la cuál se presentan estos casos de datos faltantes.
+En el @lst-mutate-data-case-study-dplyr las variables `ano` y `estu_snies_prgmacademico` se transforman a enteros teniendo en cuenta la naturaleza de las mismas. Por otro lado, en primera instancia la variable `estu_genero` se codifica como un factor no ordenado teniendo en cuenta que se refiere al género del estudiante mientras que las variables `estu_semestrecursa`, `fami_estratovivienda`, `fami_educacionmadre`, `fami_educacionpadre` y `mod_ingles_desem` se codifican como factores ordenados. Cabe la pena señalar, que algunas categorías de las variables `fami_estratovivienda`, `fami_educacionmadre` y `fami_educacionpadre` como `"Sin Estrato"`, `"No sabe"` y `"No Aplica"` podrían codificarse como valores faltantes (en ingles **Not Available** o **Missing values**), donde R codifica este tipo de casos con la lógica constante `NA` (ver `?NA`), pero en `2021-2024_saber-pro-genericas_faedis.rds` se mantienen estas etiquetas para entender la razón por la cuál se presentan estos casos de datos faltantes.
 
 :::: {#nte-3-chap-10 .callout-note}
 En este libro no abarcaremos a profundidad el manejo de datos faltantes, codificados en R como `NA`, así como las herramientas disponibles para llevar un análisis adecuado en presencia de este fenómeno, que es bastante común al realizar un análisis de datos.
