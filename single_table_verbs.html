@@ -102,7 +102,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c1a6d16ba3500d8c701648cc236cc4b8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-98714a31b3ae9526786555a32f1b0b0e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/kbd/kbd.js"></script>
 <link href="site_libs/quarto-contrib/kbd/kbd.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -557,7 +557,7 @@ Figura&nbsp;10.1: Representación gráfica de la función <code>filter()</code>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  ano <span class="sc">==</span> <span class="dv">2022</span> <span class="sc">&amp;</span> estu_genero <span class="sc">==</span> <span class="st">"M"</span></span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 194 × 20
+<pre><code># A tibble: 194 × 21
      ano estu_consecutivo estu_genero estu_semestrecursa
    &lt;int&gt; &lt;chr&gt;            &lt;fct&gt;       &lt;ord&gt;             
  1  2022 EK202220120492   M           09                
@@ -571,9 +571,9 @@ Figura&nbsp;10.1: Representación gráfica de la función <code>filter()</code>
  9  2022 EK202220120507   M           10                
 10  2022 EK202220120496   M           08                
 # ℹ 184 more rows
-# ℹ 16 more variables: fami_estratovivienda &lt;ord&gt;,
+# ℹ 17 more variables: fami_estratovivienda &lt;ord&gt;,
 #   fami_educacionmadre &lt;ord&gt;, fami_educacionpadre &lt;ord&gt;,
-#   estu_cod_depto_presentacion &lt;chr&gt;,
+#   estu_exterior &lt;chr&gt;, estu_cod_depto_presentacion &lt;chr&gt;,
 #   estu_depto_presentacion &lt;chr&gt;,
 #   estu_cod_mcpio_presentacion &lt;chr&gt;,
 #   estu_mcpio_presentacion &lt;chr&gt;, …</code></pre>
@@ -598,15 +598,15 @@ Figura&nbsp;10.2: Representación gráfica de la función <code>slice()</code>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 20
+<pre><code># A tibble: 3 × 21
     ano estu_consecutivo estu_genero estu_semestrecursa
   &lt;int&gt; &lt;chr&gt;            &lt;fct&gt;       &lt;ord&gt;             
 1  2021 EK202120262469   M           09                
 2  2021 EK202120116868   M           09                
 3  2021 EK202120116814   F           09                
-# ℹ 16 more variables: fami_estratovivienda &lt;ord&gt;,
+# ℹ 17 more variables: fami_estratovivienda &lt;ord&gt;,
 #   fami_educacionmadre &lt;ord&gt;, fami_educacionpadre &lt;ord&gt;,
-#   estu_cod_depto_presentacion &lt;chr&gt;,
+#   estu_exterior &lt;chr&gt;, estu_cod_depto_presentacion &lt;chr&gt;,
 #   estu_depto_presentacion &lt;chr&gt;,
 #   estu_cod_mcpio_presentacion &lt;chr&gt;,
 #   estu_mcpio_presentacion &lt;chr&gt;,
@@ -638,7 +638,7 @@ Figura&nbsp;10.3: Representación gráfica de la función <code>arrange()</code>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  estu_semestrecursa</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,239 × 20
+<pre><code># A tibble: 1,239 × 21
      ano estu_consecutivo estu_genero estu_semestrecursa
    &lt;int&gt; &lt;chr&gt;            &lt;fct&gt;       &lt;ord&gt;             
  1  2024 EK202430030817   F           06                
@@ -652,9 +652,9 @@ Figura&nbsp;10.3: Representación gráfica de la función <code>arrange()</code>
  9  2024 EK202410129912   M           07                
 10  2024 EK202410129981   M           07                
 # ℹ 1,229 more rows
-# ℹ 16 more variables: fami_estratovivienda &lt;ord&gt;,
+# ℹ 17 more variables: fami_estratovivienda &lt;ord&gt;,
 #   fami_educacionmadre &lt;ord&gt;, fami_educacionpadre &lt;ord&gt;,
-#   estu_cod_depto_presentacion &lt;chr&gt;,
+#   estu_exterior &lt;chr&gt;, estu_cod_depto_presentacion &lt;chr&gt;,
 #   estu_depto_presentacion &lt;chr&gt;,
 #   estu_cod_mcpio_presentacion &lt;chr&gt;,
 #   estu_mcpio_presentacion &lt;chr&gt;, …</code></pre>
@@ -718,7 +718,7 @@ Figura&nbsp;10.5: Representación gráfica de la función <code>rename()</code>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id_saber_pro_estudiante =</span> estu_consecutivo</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,239 × 20
+<pre><code># A tibble: 1,239 × 21
      ano id_saber_pro_estudiante estu_genero
    &lt;int&gt; &lt;chr&gt;                   &lt;fct&gt;      
  1  2021 EK202120262469          M          
@@ -732,9 +732,9 @@ Figura&nbsp;10.5: Representación gráfica de la función <code>rename()</code>
  9  2021 EK202120117033          F          
 10  2021 EK202120117014          F          
 # ℹ 1,229 more rows
-# ℹ 17 more variables: estu_semestrecursa &lt;ord&gt;,
+# ℹ 18 more variables: estu_semestrecursa &lt;ord&gt;,
 #   fami_estratovivienda &lt;ord&gt;, fami_educacionmadre &lt;ord&gt;,
-#   fami_educacionpadre &lt;ord&gt;,
+#   fami_educacionpadre &lt;ord&gt;, estu_exterior &lt;chr&gt;,
 #   estu_cod_depto_presentacion &lt;chr&gt;,
 #   estu_depto_presentacion &lt;chr&gt;,
 #   estu_cod_mcpio_presentacion &lt;chr&gt;, …</code></pre>
@@ -795,7 +795,7 @@ Figura&nbsp;10.7: Representación gráfica de la función <code>relocate()</code
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">.after =</span> estu_consecutivo</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,239 × 20
+<pre><code># A tibble: 1,239 × 21
      ano estu_consecutivo punt_global estu_genero
    &lt;int&gt; &lt;chr&gt;                  &lt;dbl&gt; &lt;fct&gt;      
  1  2021 EK202120262469           139 M          
@@ -809,9 +809,9 @@ Figura&nbsp;10.7: Representación gráfica de la función <code>relocate()</code
  9  2021 EK202120117033           132 F          
 10  2021 EK202120117014           146 F          
 # ℹ 1,229 more rows
-# ℹ 16 more variables: estu_semestrecursa &lt;ord&gt;,
+# ℹ 17 more variables: estu_semestrecursa &lt;ord&gt;,
 #   fami_estratovivienda &lt;ord&gt;, fami_educacionmadre &lt;ord&gt;,
-#   fami_educacionpadre &lt;ord&gt;,
+#   fami_educacionpadre &lt;ord&gt;, estu_exterior &lt;chr&gt;,
 #   estu_cod_depto_presentacion &lt;chr&gt;,
 #   estu_depto_presentacion &lt;chr&gt;,
 #   estu_cod_mcpio_presentacion &lt;chr&gt;, …</code></pre>
@@ -1510,7 +1510,7 @@ Figura&nbsp;10.8: Representación gráfica de la función <code>group_by()</code
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    estu_genero</span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,239 × 20
+<pre><code># A tibble: 1,239 × 21
 # Groups:   ano, estu_genero [8]
      ano estu_consecutivo estu_genero estu_semestrecursa
    &lt;int&gt; &lt;chr&gt;            &lt;fct&gt;       &lt;ord&gt;             
@@ -1525,9 +1525,9 @@ Figura&nbsp;10.8: Representación gráfica de la función <code>group_by()</code
  9  2021 EK202120117033   F           08                
 10  2021 EK202120117014   F           08                
 # ℹ 1,229 more rows
-# ℹ 16 more variables: fami_estratovivienda &lt;ord&gt;,
+# ℹ 17 more variables: fami_estratovivienda &lt;ord&gt;,
 #   fami_educacionmadre &lt;ord&gt;, fami_educacionpadre &lt;ord&gt;,
-#   estu_cod_depto_presentacion &lt;chr&gt;,
+#   estu_exterior &lt;chr&gt;, estu_cod_depto_presentacion &lt;chr&gt;,
 #   estu_depto_presentacion &lt;chr&gt;,
 #   estu_cod_mcpio_presentacion &lt;chr&gt;,
 #   estu_mcpio_presentacion &lt;chr&gt;, …</code></pre>
@@ -1880,19 +1880,20 @@ Listado&nbsp;10.7: Seleccionar columnas para obtener las variables del conjunto 
 <span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    estu_genero,</span>
 <span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>    estu_semestrecursa,</span>
 <span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>    fami_educacionmadre<span class="sc">:</span>fami_estratovivienda,</span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ends_with</span>(<span class="st">"_presentacion"</span>),</span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>    estu_snies_prgmacademico,</span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>    estu_prgm_academico,</span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ends_with</span>(<span class="st">"_punt"</span>) <span class="sc">|</span> <span class="fu">starts_with</span>(<span class="st">"punt_"</span>),</span>
-<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>    mod_ingles_desem</span>
-<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024_faedis</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>    estu_exterior,</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ends_with</span>(<span class="st">"_presentacion"</span>),</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>    estu_snies_prgmacademico,</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>    estu_prgm_academico,</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ends_with</span>(<span class="st">"_punt"</span>) <span class="sc">|</span> <span class="fu">starts_with</span>(<span class="st">"punt_"</span>),</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>    mod_ingles_desem</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024_faedis</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,239 × 20
+<pre><code># A tibble: 1,239 × 21
      ano estu_consecutivo estu_genero estu_semestrecursa
    &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;       &lt;chr&gt;             
  1  2021 EK202120262469   M           09                
@@ -1906,9 +1907,9 @@ Listado&nbsp;10.7: Seleccionar columnas para obtener las variables del conjunto 
  9  2021 EK202120117033   F           08                
 10  2021 EK202120117014   F           08                
 # ℹ 1,229 more rows
-# ℹ 16 more variables: fami_educacionmadre &lt;chr&gt;,
+# ℹ 17 more variables: fami_educacionmadre &lt;chr&gt;,
 #   fami_educacionpadre &lt;chr&gt;, fami_estratovivienda &lt;chr&gt;,
-#   estu_cod_depto_presentacion &lt;chr&gt;,
+#   estu_exterior &lt;chr&gt;, estu_cod_depto_presentacion &lt;chr&gt;,
 #   estu_cod_mcpio_presentacion &lt;chr&gt;,
 #   estu_depto_presentacion &lt;chr&gt;,
 #   estu_mcpio_presentacion &lt;chr&gt;, …</code></pre>
@@ -1954,7 +1955,7 @@ Listado&nbsp;10.8: Reubicar columnas para obtener el mismo ordenamiento de las v
 </figure>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,239 × 20
+<pre><code># A tibble: 1,239 × 21
      ano estu_consecutivo estu_genero estu_semestrecursa
    &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;       &lt;chr&gt;             
  1  2021 EK202120262469   M           09                
@@ -1968,9 +1969,9 @@ Listado&nbsp;10.8: Reubicar columnas para obtener el mismo ordenamiento de las v
  9  2021 EK202120117033   F           08                
 10  2021 EK202120117014   F           08                
 # ℹ 1,229 more rows
-# ℹ 16 more variables: fami_estratovivienda &lt;chr&gt;,
+# ℹ 17 more variables: fami_estratovivienda &lt;chr&gt;,
 #   fami_educacionmadre &lt;chr&gt;, fami_educacionpadre &lt;chr&gt;,
-#   estu_cod_depto_presentacion &lt;chr&gt;,
+#   estu_exterior &lt;chr&gt;, estu_cod_depto_presentacion &lt;chr&gt;,
 #   estu_depto_presentacion &lt;chr&gt;,
 #   estu_cod_mcpio_presentacion &lt;chr&gt;,
 #   estu_mcpio_presentacion &lt;chr&gt;, …</code></pre>
@@ -1982,7 +1983,7 @@ Listado&nbsp;10.8: Reubicar columnas para obtener el mismo ordenamiento de las v
 <li><strong>Id</strong>: <code>estu_consecutivo</code></li>
 <li><strong>Caracteríticas de quien presenta la prueba</strong>: <code>estu_genero</code> y <code>estu_semestrecursa</code></li>
 <li><strong>Entorno familiar</strong>: <code>fami_estratovivienda</code>, <code>fami_educacionmadre</code>, y <code>fami_educacionpadre</code></li>
-<li><strong>Lugar de presentación de la prueba</strong>: <code>estu_cod_depto_presentacion</code>, <code>estu_depto_presentacion</code>, <code>estu_cod_mcpio_presentacion</code> y <code>estu_mcpio_presentacion</code></li>
+<li><strong>Lugar de presentación de la prueba</strong>: <code>estu_exterior</code>, <code>estu_cod_depto_presentacion</code>, <code>estu_depto_presentacion</code>, <code>estu_cod_mcpio_presentacion</code> y <code>estu_mcpio_presentacion</code></li>
 <li><strong>Programa académico</strong>: <code>estu_snies_prgmacademico</code> y <code>estu_prgm_academico</code></li>
 <li><strong>Resultados de la prueba</strong>:
 <ul>
@@ -2166,7 +2167,7 @@ Listado&nbsp;10.9: Transformar columnas para asociar el tipo de datos adecuado a
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 1,239
-Columns: 20
+Columns: 21
 $ ano                         &lt;int&gt; 2021, 2021, 2021, 2021…
 $ estu_consecutivo            &lt;chr&gt; "EK202120262469", "EK2…
 $ estu_genero                 &lt;fct&gt; M, M, M, M, F, F, F, F…
@@ -2174,6 +2175,7 @@ $ estu_semestrecursa          &lt;ord&gt; 09, 09, 09, 09, 09, 09…
 $ fami_estratovivienda        &lt;ord&gt; Estrato 3, Estrato 4, …
 $ fami_educacionmadre         &lt;ord&gt; Técnica o tecnológica …
 $ fami_educacionpadre         &lt;ord&gt; Secundaria (Bachillera…
+$ estu_exterior               &lt;chr&gt; "NO", "NO", "NO", "NO"…
 $ estu_cod_depto_presentacion &lt;chr&gt; "11", "11", "11", "11"…
 $ estu_depto_presentacion     &lt;chr&gt; "BOGOTÁ", "BOGOTÁ", "B…
 $ estu_cod_mcpio_presentacion &lt;chr&gt; "11001", "11001", "110…
@@ -2189,7 +2191,7 @@ $ mod_razona_cuantitat_punt   &lt;dbl&gt; 135, 164, 113, 149, 16…
 $ punt_global                 &lt;dbl&gt; 139, 170, 128, 155, 16…</code></pre>
 </div>
 </div>
-<p>En el <a href="#lst-mutate-data-case-study-dplyr" class="quarto-xref">Listado&nbsp;<span>10.9</span></a> las variables <code>ano</code> y <code>estu_snies_prgmacademico</code> se transforman a enteros teniendo en cuenta la naturaleza de las mismas. Por otro lado, en primera instancia la variable <code>estu_genero</code> se codifica como un factor no ordenado teniendo en cuenta que se refiere al género del estudiante mientras que las variables <code>estu_semestrecursa</code>, <code>fami_estratovivienda</code>, <code>fami_educacionmadre</code>, <code>fami_educacionpadre</code> y <code>mod_ingles_desem</code> se codifican como factores ordenados. Cabe la pena señalar, que algunas categorías de las variables <code>fami_estratovivienda</code>, <code>fami_educacionmadre</code> y <code>fami_educacionpadre</code> como <code>"Sin Estrato"</code>, <code>"No sabe"</code> y <code>"No Aplica"</code> podrían codificarse como valores faltantes (en ingles <strong>Not Avaiable</strong> o <strong>Missing values</strong>), donde R codifica este tipo de casos con la lógica constante <code>NA</code> (ver <code>?NA</code>), pero en <code>2021-2024_saber-pro-genericas_faedis.rds</code> se mantienen estas etiquetas para entender la razón por la cuál se presentan estos casos de datos faltantes.</p>
+<p>En el <a href="#lst-mutate-data-case-study-dplyr" class="quarto-xref">Listado&nbsp;<span>10.9</span></a> las variables <code>ano</code> y <code>estu_snies_prgmacademico</code> se transforman a enteros teniendo en cuenta la naturaleza de las mismas. Por otro lado, en primera instancia la variable <code>estu_genero</code> se codifica como un factor no ordenado teniendo en cuenta que se refiere al género del estudiante mientras que las variables <code>estu_semestrecursa</code>, <code>fami_estratovivienda</code>, <code>fami_educacionmadre</code>, <code>fami_educacionpadre</code> y <code>mod_ingles_desem</code> se codifican como factores ordenados. Cabe la pena señalar, que algunas categorías de las variables <code>fami_estratovivienda</code>, <code>fami_educacionmadre</code> y <code>fami_educacionpadre</code> como <code>"Sin Estrato"</code>, <code>"No sabe"</code> y <code>"No Aplica"</code> podrían codificarse como valores faltantes (en ingles <strong>Not Available</strong> o <strong>Missing values</strong>), donde R codifica este tipo de casos con la lógica constante <code>NA</code> (ver <code>?NA</code>), pero en <code>2021-2024_saber-pro-genericas_faedis.rds</code> se mantienen estas etiquetas para entender la razón por la cuál se presentan estos casos de datos faltantes.</p>
 <div id="nte-3-chap-10" class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -2229,7 +2231,7 @@ Listado&nbsp;10.10: Agrupar filas a partir de un grupo de variables para generar
 </figure>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,239 × 20
+<pre><code># A tibble: 1,239 × 21
 # Groups:   ano, estu_snies_prgmacademico,
 #   estu_prgm_academico [26]
      ano estu_consecutivo estu_genero estu_semestrecursa
@@ -2245,9 +2247,9 @@ Listado&nbsp;10.10: Agrupar filas a partir de un grupo de variables para generar
  9  2021 EK202120117033   F           08                
 10  2021 EK202120117014   F           08                
 # ℹ 1,229 more rows
-# ℹ 16 more variables: fami_estratovivienda &lt;ord&gt;,
+# ℹ 17 more variables: fami_estratovivienda &lt;ord&gt;,
 #   fami_educacionmadre &lt;ord&gt;, fami_educacionpadre &lt;ord&gt;,
-#   estu_cod_depto_presentacion &lt;chr&gt;,
+#   estu_exterior &lt;chr&gt;, estu_cod_depto_presentacion &lt;chr&gt;,
 #   estu_depto_presentacion &lt;chr&gt;,
 #   estu_cod_mcpio_presentacion &lt;chr&gt;,
 #   estu_mcpio_presentacion &lt;chr&gt;, …</code></pre>
