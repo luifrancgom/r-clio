@@ -61,9 +61,3 @@ programa_academico <- programa_pregrado_faedis
 
 programa_academico |>
   glimpse()
-
-
-municipio |>
-  select(
-    codigo_departamento:nombre_municipio
-  )
