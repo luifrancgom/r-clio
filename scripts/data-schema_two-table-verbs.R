@@ -61,3 +61,9 @@ programa_academico <- programa_pregrado_faedis
 
 programa_academico |>
   glimpse()
+
+# Export ---
+resultado_saber_pro |>
+  write_rds(
+    file = "data/resultados-saber-pro.rds"
+  )
