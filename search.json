@@ -547,7 +547,73 @@
     "href": "two_table_verbs.html",
     "title": "11  Verbos de dos tablas",
     "section": "",
-    "text": "Este capítulo se basa en (Wickham, 2023, Capítulo 19) así como en la documentación oficial de dplyr donde tiene como propósito introducir a través de la gramática de manipulación de datos un marco flexible para conectar o unir tablas de datos utilizando el paquete dplyr e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes al periodo 2021-2024 para Colombia.\nExploraremos los siguientes aspectos:\n\n¿Cómo entender la relación entre diferentes tablas de datos a través de un Diagrama Entidad-Relación (Entity-Relationship Diagram (ERD) en inglés)?\n¿Cómo interpretar las relaciones en un Diagrama Entidad-Relación utilizando la notación Crow’s Foot (“pata de cuervo” en español)\n\n¿Cuáles son los tipos de verbos de dos tablas?\n¿Cómo combinar variables de múltiples tablas utilizando Mutating Joins (“uniones de transformación” en español)?\n\n\n\n\n\n\n\nNota 11.1\n\n\n\nPara desarrollar el contenido de este capítulo es necesario que descarges los archivos señalados a continuación y los incluyas dentro de la carpeta data, respecto a lo descrito en la Nota 6.1:\n\n\n\n\n\n\nNone resultados-saber-pro.rds\n\n\n\n\n\n\n\n\n\n\n\n\nNone resultados-saber-pro.rds\n\n\n\n\n\n\nEn caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada 011_verbos-dos-tablas-en-r y dentro de ella genera el archivo 001_manipular-datos-dos-tabla.R, siguiendo las pautas de la Sección 4.4.\n\n\n\n\n\n\nWickham, H. (2023). R for Data Science (2.ª ed.). O’Reilly Media, Incorporated. https://r4ds.hadley.nz/",
+    "text": "11.1 Diagrama Entidad-Relación\nEste capítulo se basa en (Wickham, 2023, Capítulo 19) así como en la documentación oficial de dplyr donde tiene como propósito introducir a través de la gramática de manipulación de datos un marco flexible para conectar o unir tablas de datos utilizando el paquete dplyr e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes al periodo 2021-2024 para Colombia.\nExploraremos los siguientes aspectos:\nAl realizar un análisis de datos es habitual tener que combinar dos o más tablas, una necesidad que surge principalmente del diseño propio de las bases de datos relacionales. Aunque no se profundizará en cómo crearlas o conectarse a ellas (ver Nota 11.2), es conveniente conocer una representación gráfica que permita visualizar un conjunto de tablas de datos y las posibles relaciones que existen entre ellas para entender como se puede consolidar un terminado conjunto de información que se requiere para llevar a cabo un determinado análisis.\nUna representación gráfica que cumple con éste propósito es una Diagrama de Entidad-Relación que ilustra como una base de datos relacional compuesta por un conjunto de tablas se relacionan entre sí. Estos diagramas se componen de 3 elementos:\nEn la Figura 11.1 se indica un posible Diagrama de Entidad-Relación utilizando como insumo el conjunto de datos señalado en la Nota 6.1 y que se utilizó en la parte de visualización de datos para analizar los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de FAEDIS de la UMNG así como información adicional provenientes de los archivos señalados en la Nota 11.1.",
+    "crumbs": [
+      "Manipulación de datos",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Verbos de dos tablas</span>"
+    ]
+  },
+  {
+    "objectID": "two_table_verbs.html#diagrama-entidad-relación",
+    "href": "two_table_verbs.html#diagrama-entidad-relación",
+    "title": "11  Verbos de dos tablas",
+    "section": "",
+    "text": "Nota 11.2\n\n\n\nEn el tidyverse existe el paquete dbplyr que junto al paquete DBI permite interactuar con bases de datos en R usando la sintaxis de dplyr. Así como, consultar y transformar tablas dentro de ellas sin necesidad de escribir código SQL directamente, ya que dbplyr traduce la sintaxis de dplyr a consultas en lenguage SQL.\nEn ese sentido, cuando estes familiarizado con los verbos de dos tablas puedes explorar éste paquete si requieres conectarte más adelante a una base de datos relacional para realizar un anális utilizando lo aprendido acerca de dplyr.\n\n\n\n\nEntidades: representan cualquier objeto, concepto o evento.\nAtributos: son las características, rasgos o propiedades de cada entidad.\nRelaciones: es la asociación o vínculo lógico que existe entre dos o más entidades.\n\n\n\n\n\n\n\n\nFigura 11.1: Diagrama de Entidad-Relación correspondiente a los resultados del examen Saber Pro de competencias genéricas en programas de pregrado de FAEDIS",
+    "crumbs": [
+      "Manipulación de datos",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Verbos de dos tablas</span>"
+    ]
+  },
+  {
+    "objectID": "two_table_verbs.html#entidades",
+    "href": "two_table_verbs.html#entidades",
+    "title": "11  Verbos de dos tablas",
+    "section": "11.2 Entidades",
+    "text": "11.2 Entidades\nEn la Figura 11.1 se señalan 4 entidades para representar una base de datos relacional que tenga como objetivo almacenar información relacionada con los resultados del examen Saber Pro de competencias genéricas en programas de pregrado de FAEDIS:\n\nResultado Saber-Pro: corresponde a un evento donde modela la acción de un estudiante presentado las pruebas Saber-Pro en un periodo y lugar específico junto con sus características socioeconómicas y los resultados obtenidos.\nPrograma académico: representa los programas académicos de pregrado de FAEDIS a los cuales puede potencialmente pertenecer un estudiante.\nDepartamento: representa la división político-administrativa a nivel departamental para Colombia según la codificación DIVIPOLA donde permite enriquecer los resultados obtenidos en la prueba Saber-Pro con información geográfica a nivel departamental.\nMunicipio: representa la división político-administrativa a nivel municipal para Colombia según la codificación DIVIPOLA donde permite enriquecer los resultados obtenidos en la prueba Saber-Pro con información geográfica a nivel municipal.\n\n\n\n\n\n\n\nNota 11.3\n\n\n\nA un elemento específico y concreto de una entidad se le denomina instancia. Por ejemplo, respecto a la Figura 11.1 Amazonas es una instancia de la entidad Departamento.",
+    "crumbs": [
+      "Manipulación de datos",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Verbos de dos tablas</span>"
+    ]
+  },
+  {
+    "objectID": "two_table_verbs.html#atributos",
+    "href": "two_table_verbs.html#atributos",
+    "title": "11  Verbos de dos tablas",
+    "section": "11.3 Atributos",
+    "text": "11.3 Atributos\nCada entidad en la Figura 11.1 se puede describir a través de características, rasgos o propiedades que se recopilan en una variable y se almacenan en una columna dentro de una tabla. Por ejemplo, la entidad Departamento se describe a través de las variables ID Departamento que identifica\n\n11.3.1 Clave primaria\nDentro de los atributos se define una clave primaria (Primary Key (PK) en inglés) que tiene como propósito identificar de forma única cada registro dentro de una tabla. Es decir, no pueden existir dos filas con el mismo valor de la clave primaria. Adicionalmente una clave primaria debe cumplir con un conjunto de reglas fundamentales:\n\nUnicidad: cada valor debe ser único en cada tabla\nNo nulidad: no puede contener valores vacíos o ausentes (NA o NULL en R). Es decir, todo registro debe estar asociado a una entidad.\nInmutabilidad: Su valor no debe cambiar con el tiempo.\n\nPor otro lado, una clave primaria puede estar formada por una sola columna dentro de una tabla pero también se puede formar uniendo dos o más columnas cuando una sola no basta para garantizar unicidad. En el caso de la Figura 11.1 respecto a la entidad Resultado Saber-Pro se utilizan las variables Año y ID estudiante para identificar de manera única el evento relacionado con la acción de un estudiante presentado las pruebas Saber-Pro en un periodo determinado. Aunque también se puede utilizar una columna como en el caso de la entidad Departamento en la Figura 11.1 donde se utiliza la variable ID Departamento para identificar de manera única ésta identidad utilizando la codificación DIVIPOLA.\n\n\n11.3.2 Clave foránea\nUn atributo presente en una tabla cuyos valores hacen referencia directa a la clave primaria de otra tabla se conoce como clave foránea (Foreign Key (FK) en inglés). Este atributo es el puente que permite establecer una relación entre dos entidades así como vincular datos sin necesidad de duplicar toda la información. Por ejemplo, en lugar de repetir en la tabla relacionada con la entidad Resultado Saber-Pro el nombre del departamento así como su latitud y longitud, solo es necesario incluir la variable ID Departamento sin necesidad de repetir los demás atributos de la entidad Departamento.\nA diferencia de una clave primaria (PK), los valores de una clave foránea (FK) se pueden repetir en una tabla. Por ejemplo, diferentes instancias de la entidad Resultado Saber-Pro pueden tener una misma ID Departamento por qué muchos estudiantes pueden presentar el Saber-Pro en un mismo departamento. Adicionalmente, una clave foránea (FK) puede contener valores vacíos o ausentes. Por ejemplo, si un estudiante presenta el Saber-Pro en el exterior se esperaría que no tenga asociado un ID Departamento por qué el lugar donde lo presentó no se encuentra dentro del territorio colombiano (ver Warning 11.1).\n\n\n\n\n\n\nImportante 11.1\n\n\n\nEn la Sección 11.6 utilizando resultados-saber-pro.rds respecto a los archivos señalados en Nota 11.1 se ajustará este aspecto debido a que la fuente donde se obtuvieron los datos (Data Icfes), utiliza por defecto a Bogotá como departamento de presentación del examen cuando se presenta la prueba Saber Pro en el exterior. También ocurre un comportamiento similar en este contexto para el caso de ID Municipio. Con los ajustes respectivo es posible generar de manera consistente las tablas de las entidades Departamento y Municipio para que sean consistentes con la Figura 11.1.",
+    "crumbs": [
+      "Manipulación de datos",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Verbos de dos tablas</span>"
+    ]
+  },
+  {
+    "objectID": "two_table_verbs.html#relaciones",
+    "href": "two_table_verbs.html#relaciones",
+    "title": "11  Verbos de dos tablas",
+    "section": "11.4 Relaciones",
+    "text": "11.4 Relaciones\n\n11.4.1 Notación Crow’s Foot",
+    "crumbs": [
+      "Manipulación de datos",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Verbos de dos tablas</span>"
+    ]
+  },
+  {
+    "objectID": "two_table_verbs.html#sec-verbs-two-tables",
+    "href": "two_table_verbs.html#sec-verbs-two-tables",
+    "title": "11  Verbos de dos tablas",
+    "section": "11.5 Verbos",
+    "text": "11.5 Verbos",
+    "crumbs": [
+      "Manipulación de datos",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Verbos de dos tablas</span>"
+    ]
+  },
+  {
+    "objectID": "two_table_verbs.html#sec-mutating-joins",
+    "href": "two_table_verbs.html#sec-mutating-joins",
+    "title": "11  Verbos de dos tablas",
+    "section": "11.6 Mutating joins",
+    "text": "11.6 Mutating joins\n\n\n\n\nWickham, H. (2023). R for Data Science (2.ª ed.). O’Reilly Media, Incorporated. https://r4ds.hadley.nz/",
     "crumbs": [
       "Manipulación de datos",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Verbos de dos tablas</span>"

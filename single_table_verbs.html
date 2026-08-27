@@ -421,7 +421,7 @@ window.Quarto = {
   <ul>
   <li><a href="#gramática-de-manipulación-de-datos-en-dplyr" id="toc-gramática-de-manipulación-de-datos-en-dplyr" class="nav-link active" data-scroll-target="#gramática-de-manipulación-de-datos-en-dplyr"><span class="header-section-number">10.1</span> Gramática de manipulación de datos en <code>dplyr</code></a>
   <ul class="collapse">
-  <li><a href="#sec-verbs" id="toc-sec-verbs" class="nav-link" data-scroll-target="#sec-verbs"><span class="header-section-number">10.1.1</span> Verbos</a></li>
+  <li><a href="#sec-verbs-one-table" id="toc-sec-verbs-one-table" class="nav-link" data-scroll-target="#sec-verbs-one-table"><span class="header-section-number">10.1.1</span> Verbos</a></li>
   </ul></li>
   <li><a href="#sec-case-study-select" id="toc-sec-case-study-select" class="nav-link" data-scroll-target="#sec-case-study-select"><span class="header-section-number">10.2</span> Caso de estudio: obtención de datos de interés del Saber-Pro para FAEDIS</a>
   <ul class="collapse">
@@ -501,15 +501,15 @@ Nota&nbsp;10.1
 <li>Entre diferentes tablas de datos</li>
 </ol>
 <p>El primer nivel se abarcará en el <a href="#sec-single-table-verbs" class="quarto-xref"><span>Capítulo 10</span></a> y el segundo nivel se desarrollará en el <a href="two_table_verbs.html" class="quarto-xref"><span>Capítulo 11</span></a>. Al igual que en el caso de <code>ggplot2</code> (ver <a href="amounts.html#sec-layered-grammar-graphics" class="quarto-xref"><span>Sección 6.1</span></a>) el paquete <code>dplyr</code> funciona mejor si el conjunto de datos es ordenado (<a href="https://tidyr.tidyverse.org/articles/tidy-data.html">tidy data</a> en inglés, <span class="citation" data-cites="wickham_tidy_2014">(<a href="references.html#ref-wickham_tidy_2014" role="doc-biblioref">Wickham, 2014</a>)</span>) donde este concepto se tratará en más detalle en el <a href="tidy_data.html" class="quarto-xref"><span>Capítulo 16</span></a>.</p>
-<p>A medida que explores diferentes formas de manipular un conjunto de datos entenderás en más detalle la gramática de manipulación de datos propuesta en el paquete <code>dplyr</code>. Por ahora se describirán en la <a href="#sec-verbs" class="quarto-xref"><span>Sección 10.1.1</span></a> de manera general y gráfica los verbos más comunes que se utilizan para manipular datos en una sola tabla y que se utilizan en <code>dplyr</code>.</p>
+<p>A medida que explores diferentes formas de manipular un conjunto de datos entenderás en más detalle la gramática de manipulación de datos propuesta en el paquete <code>dplyr</code>. Por ahora se describirán en la <a href="#sec-verbs-one-table" class="quarto-xref"><span>Sección 10.1.1</span></a> de manera general y gráfica los verbos más comunes que se utilizan para manipular datos en una sola tabla y que se utilizan en <code>dplyr</code>.</p>
 <p>En el paquete <code>dplyr</code>, para mantener la consistencia de las funciones que lo componen, siempre se cumple que cada uno de los verbos obedece a los siguientes aspectos <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 3</a>)</span>:</p>
 <ol type="1">
 <li>El primer argumento es una tibble (o en su defecto un objeto de R similar).</li>
 <li>Los argumentos subsiguientes especifican las columnas, filas o expresiones que operarán sobre las filas o columnas.</li>
 <li>El resultado<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> de una función en <code>dplyr</code> es siempre una nueva tibble (o en su defecto un objeto de R similar).</li>
 </ol>
-<section id="sec-verbs" class="level3" data-number="10.1.1">
-<h3 data-number="10.1.1" class="anchored" data-anchor-id="sec-verbs"><span class="header-section-number">10.1.1</span> Verbos</h3>
+<section id="sec-verbs-one-table" class="level3" data-number="10.1.1">
+<h3 data-number="10.1.1" class="anchored" data-anchor-id="sec-verbs-one-table"><span class="header-section-number">10.1.1</span> Verbos</h3>
 <p>Los verbos para manipular datos en una sola tabla se encuentran organizados en 3 categorias teniendo en cuenta el elemento que se desea manipular:</p>
 <ol type="a">
 <li>Verbos para filas</li>
