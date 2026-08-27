@@ -10,6 +10,6 @@ El acceso a este [sitio web](https://luifrancgom.github.io/r-clio/) es libre y s
 
 Con base en los lineamientos para el uso de inteligencia artificial generativa [@equipo_proyecto_ia-uniandes_lineamientos_2024], la elaboración del libro contó con la asistencia de [Antigravity CLI](https://antigravity.google/product/antigravity-cli). En particular, se utilizó en el desarrollo de ideas y la exploración de argumentos aplicando los siguientes usos:
 
-- Apoyar con la generación de ideas, la planificación o estructuración del texto.
+- Apoyo con la generación de ideas, la planificación o estructuración del texto.
 
-- Sugerir explicaciones alternativas o críticas a los argumentos o ideas desarrolladas en el texto.
+- Sugerencia de explicaciones alternativas o críticas a los argumentos o ideas desarrolladas en el texto.
