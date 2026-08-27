@@ -42,7 +42,7 @@ El paquete `dplyr`, incluido en el `tidyverse`, permite manipular datos a partir
 
 El primer nivel se abarcará en el @sec-single-table-verbs y el segundo nivel se desarrollará en el @sec-two-table-verbs. Al igual que en el caso de `ggplot2` (ver @sec-layered-grammar-graphics) el paquete `dplyr` funciona mejor si el conjunto de datos es ordenado ([tidy data](https://tidyr.tidyverse.org/articles/tidy-data.html) en inglés, [@wickham_tidy_2014]) donde este concepto se tratará en más detalle en el @sec-data-tidying. 
 
-A medida que explores diferentes formas de manipular un conjunto de datos entenderás en más detalle la gramática de manipulación de datos propuesta en el paquete `dplyr`. Por ahora se describirán en la @sec-verbs de manera general y gráfica los verbos más comunes que se utilizan para manipular datos en una sola tabla y que se utilizan en `dplyr`.
+A medida que explores diferentes formas de manipular un conjunto de datos entenderás en más detalle la gramática de manipulación de datos propuesta en el paquete `dplyr`. Por ahora se describirán en la @sec-verbs-one-table de manera general y gráfica los verbos más comunes que se utilizan para manipular datos en una sola tabla y que se utilizan en `dplyr`.
 
 En el paquete `dplyr`, para mantener la consistencia de las funciones que lo componen, siempre se cumple que cada uno de los verbos obedece a los siguientes aspectos [@wickham_r_2023, Cap. 3]:
 
@@ -52,7 +52,7 @@ En el paquete `dplyr`, para mantener la consistencia de las funciones que lo com
 
 [^chap-10-footnote-1]: En la documentación de ayuda de R, al buscar por ejemplo información acerca de la función `filter()` (ver @lst-filter-relational-operators) con el comando `?filter` en la consola, la descripción del resultado se encuentra bajo la sección titulada **Value**. En este libro se usará el término "resultado" de la función y no "valor", con el fin de utilizar una expresión más intuitiva para el lector.
 
-### Verbos {#sec-verbs}
+### Verbos {#sec-verbs-one-table}
 
 Los verbos para manipular datos en una sola tabla se encuentran organizados en 3 categorias teniendo en cuenta el elemento que se desea manipular: 
 
