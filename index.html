@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Luis Francisco Gomez Lopez">
-<meta name="dcterms.date" content="2026-08-26">
+<meta name="dcterms.date" content="2026-08-27">
 
 <title>R para análisis de datos</title>
 <style>
@@ -28,7 +28,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -334,7 +354,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#bienvenidos" id="toc-bienvenidos" class="nav-link active" data-scroll-target="#bienvenidos">Bienvenidos</a></li>
+  <li><a href="#bienvenidos" id="toc-bienvenidos" class="nav-link active" data-scroll-target="#bienvenidos">Bienvenidos</a>
+  <ul class="collapse">
+  <li><a href="#uso-asistido-de-inteligencia-artificial" id="toc-uso-asistido-de-inteligencia-artificial" class="nav-link" data-scroll-target="#uso-asistido-de-inteligencia-artificial">Uso asistido de inteligencia artificial</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
@@ -368,7 +391,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Fecha de publicación</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2026-08-26</p>
+      <p class="date">2026-08-27</p>
     </div>
   </div>
   
@@ -385,9 +408,22 @@ ul.task-list li input[type="checkbox"] {
 <h1 class="unnumbered">Bienvenidos</h1><p><img src="images/front-cover.png" title="R para análisis de datos" class="quarto-cover-image nolightbox img-fluid"></p>
 <p>Este es el <a href="https://luifrancgom.github.io/r-clio/">sitio web</a> de <strong>R para análisis de datos</strong> aplicado para la comunidad CLIO (Coopera, Lidera, Innova y Orienta). El libro tiene como objetivo introducir a los participantes de la comunidad de aprendizaje CLIO al uso del lenguaje de programación <a href="https://www.r-project.org/">R</a> a través del entorno integrado de desarrollo <a href="https://positron.posit.co/welcome.html">Positron</a> para realizar análisis de datos y comunicar los resultados utilizando <a href="https://quarto.org/">Quarto</a>.</p>
 <p>A través del libro darás los primeros pasos en el uso de R y aprenderás a visualizar, manipular, organizar, limpiar e importar datos así como programar en este lenguaje y comunicar resultados en Quarto.</p>
-<p>El acceso a este <a href="https://luifrancgom.github.io/r-clio/">sitio web</a> es libre y siempre será libre, bajo los términos de la licencia <a href="https://github.com/luifrancgom/r-clio?tab=License-1-ov-file">CC BY-NC 4.0</a>. Las imágenes, figuras, diagramas e íconos dentro del libro se generaron utilizando <a href="https://gemini.google.com/">Gemini</a>, el paquete <a href="https://ggplot2.tidyverse.org/articles/ggplot2.html"><code>ggplot2</code></a>, fueron creados con <a href="https://inkscape.org/">Inkscape</a>, provienen de <a href="https://fontawesome.com/">Fontawesome</a> o son de dominio público. En particular, la portada del libro corresponde a la pintura del artista Christian Bernhard Rode (1725 - 1797) titulada <a href="https://commons.wikimedia.org/wiki/File:Christian_Bernhard_Rode_-_Die_Muse_Klio.jpg">Die Muse Klio</a>, una obra que personifica a Clío, la musa de la historia en la mitología griega.</p>
+<p>El acceso a este <a href="https://luifrancgom.github.io/r-clio/">sitio web</a> es libre y siempre será libre, bajo los términos de la licencia <a href="https://github.com/luifrancgom/r-clio?tab=License-1-ov-file">CC BY-NC 4.0</a>. Las imágenes, figuras, diagramas e íconos dentro del libro se generaron utilizando <a href="https://gemini.google.com/">Gemini</a>, el paquete <a href="https://ggplot2.tidyverse.org/articles/ggplot2.html"><code>ggplot2</code></a>, fueron creados con <a href="https://inkscape.org/">Inkscape</a> o <a href="https://lucid.co/lucidchart">Lucidchart</a>, provienen de <a href="https://fontawesome.com/">Fontawesome</a> o son de dominio público. En particular, la portada del libro corresponde a la pintura del artista Christian Bernhard Rode (1725 - 1797) titulada <a href="https://commons.wikimedia.org/wiki/File:Christian_Bernhard_Rode_-_Die_Muse_Klio.jpg">Die Muse Klio</a>, una obra que personifica a Clío, la musa de la historia en la mitología griega.</p>
+<section id="uso-asistido-de-inteligencia-artificial" class="level2">
+<h2 class="anchored" data-anchor-id="uso-asistido-de-inteligencia-artificial">Uso asistido de inteligencia artificial</h2>
+<p>Con base en los lineamientos para el uso de inteligencia artificial generativa <span class="citation" data-cites="equipo_proyecto_ia-uniandes_lineamientos_2024">(<a href="references.html#ref-equipo_proyecto_ia-uniandes_lineamientos_2024" role="doc-biblioref">IA-Uniandes, 2024</a>)</span>, la elaboración del libro contó con la asistencia de <a href="https://antigravity.google/product/antigravity-cli">Antigravity CLI</a>. En particular, se utilizó en el desarrollo de ideas y la exploración de argumentos aplicando los siguientes usos:</p>
+<ul>
+<li><p>Apoyar con la generación de ideas, la planificación o estructuración del texto.</p></li>
+<li><p>Sugerir explicaciones alternativas o críticas a los argumentos o ideas desarrolladas en el texto.</p></li>
+</ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-equipo_proyecto_ia-uniandes_lineamientos_2024" class="csl-entry" role="listitem">
+IA-Uniandes, E. proyecto. (2024). <em>Lineamientos para el uso de inteligencia artificial generativa (<span>IAG</span>) en la <span>Universidad</span> de los <span>Andes</span></em>. <a href="https://secretariageneral.uniandes.edu.co/images/documents/lineamientos-uso-inteligencia-artificial-generativa-IAG-uniandes.pdf">https://secretariageneral.uniandes.edu.co/images/documents/lineamientos-uso-inteligencia-artificial-generativa-IAG-uniandes.pdf</a>
+</div>
+</div>
+</section>
 </section>
 
 </main> <!-- /main -->
