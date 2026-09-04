@@ -294,7 +294,7 @@ aumento_costo_matricula <- c(
 costo_matricula + aumento_costo_matricula
 ```
 
-Debido a que R utiliza operaciones vectorizadas es posible llevar a cabo la operación señalada en el @lst-warning, aún si cada vector atómico (`costo_matricula` y `aumento_costo_matricula`) tiene un número diferente de elementos mediante un proceso que se conocer como **reciclaje de vectores** y que se escribe a continuación: 
+Debido a que R utiliza operaciones vectorizadas es posible llevar a cabo la operación señalada en el @lst-warning, aún si cada vector atómico (`costo_matricula` y `aumento_costo_matricula`) tiene un número diferente de elementos mediante un proceso que se conocer como **reciclaje de vectores** y que se describe a continuación: 
 
 - R repite el vector más corto (`aumento_costo_matricula`) hasta que tenga la misma longitud que el vector más largo (`costo_matricula`)
 - Luego realiza la operación matemática 
