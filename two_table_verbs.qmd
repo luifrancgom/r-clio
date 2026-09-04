@@ -99,7 +99,7 @@ Un atributo presente en una tabla cuyos valores hacen referencia directa a la cl
 A diferencia de una clave primaria (**PK**), los valores de una clave foránea (**FK**) se pueden repetir en una tabla. Por ejemplo, diferentes instancias de la entidad **Resultado Saber-Pro** pueden tener una misma `ID Departamento` porque muchos estudiantes pueden presentar el Saber-Pro en un mismo departamento. Adicionalmente, una clave foránea (**FK**) puede contener valores vacíos o ausentes. Por ejemplo, si un estudiante presenta el Saber-Pro en el exterior se esperaría que no tenga asociado un `ID Departamento` porque el lugar donde lo presentó no se encuentra dentro del territorio colombiano (ver @wrn-1-chap-11).
 
 ::: {#wrn-1-chap-11 .callout-warning}
-En la @sec-mutating-joins utilizando `resultados-saber-pro.rds` respecto a los archivos señalados en @nte-1-chap-11 se ajustará este aspecto debido a que la fuente donde se obtuvieron los datos (Data Icfes), utiliza por defecto a Bogotá como departamento de presentación del examen cuando se presenta la prueba Saber Pro en el exterior. También ocurre un comportamiento similar en este contexto para el caso de `ID Municipio`. Con los ajustes respectivos que aplicarás en la @sec-mutating-joins, es posible generar de manera consistente las tablas de las entidades `Departamento` y `Municipio` para que sean consistentes con la @fig-erd. 
+En la @sec-mutating-joins utilizando `resultados-saber-pro.rds` respecto a los archivos señalados en @nte-1-chap-11 se ajustará este aspecto debido a que la fuente donde se obtuvieron los datos (Data Icfes), utiliza por defecto a Bogotá como departamento de presentación del examen cuando se presenta la prueba Saber Pro en el exterior. También ocurre un comportamiento similar en este contexto para el caso de `ID Municipio`. Con los ajustes respectivos que aplicarás en la @sec-mutating-joins, es posible generar de manera consistente las tablas de las entidades `Departamento` y `Municipio` para que reflejen lo señalado en la @fig-erd. 
 :::
 
 ## Relaciones {#sec-relaciones}
@@ -151,17 +151,17 @@ A modo de ejemplo, la cardinalidad de la relación de la entidad **Departamento*
 
 ## Verbos {#sec-verbs-two-tables}
 
-En el paquete `dplyr` para manipular, conectar o unir 2 tablas de datos correspondientes a 2 entidades utilizando claves primarias y foráneas existen 3 tipos de verbos:
+En el paquete `dplyr`, para manipular, conectar o unir 2 tablas de datos correspondientes a 2 entidades utilizando claves primarias y foráneas, existen 3 tipos de verbos:
 
-1. **Mutating joins** (uniones de transformación en español)
-2. **Filtering joins** (uniones de filtrado en español)
-3. **Set operations** (operaciones de conjuntos)
+1. **Mutating joins** (uniones de transformación en español): permiten combinar variables de diferentes tablas correspondientes a 2 entidades. En la @sec-mutating-joins utilizarás este tipo de verbos junto con el esquema de la @fig-erd y los archivos señalados en la @nte-1-chap-11 para reconstruir el archivo `2021-2024_saber-pro-genericas_faedis.rds` pero teniendo en cuenta la @wrn-1-chap-11.
+2. **Filtering joins** (uniones de filtrado en español): buscan coincidencias entre registros de forma similar a las **Mutating joins**, pero afectan a las observaciones y no a las variables.
+3. **Set operations** (operaciones de conjuntos): esperan que ambas tablas compartan exactamente las mismas variables y tratan sus observaciones como conjuntos matemáticos mediante funciones como `intersect()`, `union()` y `setdiff()`.
 
-Las **Mutating joins** permiten combinar variables de diferentes tablas correspondientes a 2 entidades. En la @sec-mutating-joins utilizando el esquema de la @fig-erd a partir de los archivos señalados en la @nte-1-chap-11 reconstruirás el archivo `2021-2024_saber-pro-genericas_faedis.rds` que se indicó en la @nte-1-chap-6 utilizando este tipo de verbos.
+Debido a que las **Set operations** no se requieren para los análisis que desarrollaremos a lo largo del libro, no se profundizará en ellas en los siguientes apartados. No obstante, el lector interesado puede consultar la [documentación oficial]({{< var url.packages.dplyr_set_operations >}}) de `dplyr` para conocer más detalles sobre este tipo de operaciones.
 
-### **Filtering joins**
+### Filtering joins
 
-Las **Filtering joins** buscan coincidencias entre registros de la misma manera que las **Mutating joins**, pero afectan a las observaciones y no a las variables. Existen dos tipos:
+Existen dos tipos de **Filtering joins**:
 
 i. **Semi joins**: mantiene todas las observaciones de la tabla de una entidad que tienen una coincidencia en la tabla de otra entidad.
 ii. **Anti joins**: descarta todas las observaciones de la tabla de una entidad que tienen una coincidencia en la tabla de otra entidad.
@@ -203,5 +203,39 @@ Para utilizar los verbos de 2 tablas de `dplyr` una vez importadas las tablas es
 2. **nombre**: nombre oficial del departamento de acuerdo con la codificación DIVIPOLA. 
 3. **latitud**: coordenada geográfica en grados decimales que mide la distancia respecto a la línea ecuatorial, indicando la posición norte-sur del punto representativo de cada departamento.
 4. **longitud**: coordenada geográfica en grados decimales que mide la distancia respecto al meridiano de Greenwich, indicando la posición este-oeste del punto representativo de cada departamento.
+
+Respecto a las variables en `resultados-saber-pro.rds` estas corresponden a las señaladas en la @sec-variable-description pero donde se excluyen `estu_depto_presentacion`, `estu_mcpio_presentacion` y `estu_prgm_academico` debido a que de acuerdo a la @fig-erd son atributos que pertenecen a otras entidades.  
+
+Teniendo claridad sobre el significado de las variables de cada entidad, es posible identificar cuáles departamentos de `divipola_departamentos` registran al menos una presentación del examen en `resultado_saber_pro`. Para lograr esto, se vincula la clave primaria `codigo` de la primera tabla con la clave foránea `estu_cod_depto_presentacion` de la segunda mediante la función `semi_join()`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-semi-join
+#| lst-cap: Uso de la función `semi_join(x, y)` para filtrar las observaciones de `x` que coinciden con `y`
+
+semi_join(
+  x = divipola_departamentos,
+  y = resultado_saber_pro,
+  by = join_by(codigo == estu_cod_depto_presentacion)
+)
+```
+
+En el @lst-semi-join se conservan únicamente las filas de `divipola_departamentos` (tabla asignada al parámetro `x`) que tienen al menos una coincidencia en `resultado_saber_pro` (tabla asignada al parámetro `y`). Es importante destacar que la función `semi_join()` es una **Filtering join**. En ese sentido, no añade nuevas columnas de la tabla `y` ni duplica filas de `x` cuando existen múltiples coincidencias por departamento, sino que únicamente filtra las observaciones de `x`.
+
+Para conectar ambas tablas, el parámetro `by` se utiliza para indicar las claves que establecen la relación entre ellas. En este caso, a través de la función auxiliar `join_by()` como argumento de `by`, se señala qué clave de la primera tabla se relaciona con la clave de la segunda mediante la expresión `codigo == estu_cod_depto_presentacion` utilizando el operador relacional de igualdad `==` (ver @tbl-relational-operators), dado que las claves tienen nombres diferentes en cada tabla pero representan el mismo atributo.
+
+También es posible identificar de manera similar cuáles departamentos de `divipola_departamentos` no registran ninguna presentación del examen en `resultado_saber_pro`. Para lograr esto, se vincula nuevamente la clave primaria `codigo` de la primera tabla con la clave foránea `estu_cod_depto_presentacion` de la segunda, pero mediante la función `anti_join()`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-anti-join
+#| lst-cap: Uso de la función `anti_join(x, y)` para filtrar las observaciones de `x` que no coinciden con `y`
+
+anti_join(
+  x = divipola_departamentos,
+  y = resultado_saber_pro,
+  by = join_by(codigo == estu_cod_depto_presentacion)
+)
+```
+
+En el @lst-anti-join se conservan únicamente las filas de `divipola_departamentos` (tabla asignada al parámetro `x`) que no tienen ninguna coincidencia en `resultado_saber_pro` (tabla asignada al parámetro `y`). Al igual que en la función `semi_join()`, el parámetro `by` se utiliza para indicar las claves que establecen la relación entre ambas tablas.
 
 ## Mutating joins {#sec-mutating-joins}

@@ -50,6 +50,7 @@ url:
     dplyr: "https://dplyr.tidyverse.org/articles/dplyr.html"
     dplyr_programming: "https://dplyr.tidyverse.org/articles/programming.html"
     dplyr_two_table: "https://dplyr.tidyverse.org/articles/two-table.html"
+    dplyr_set_operations: "https://dplyr.tidyverse.org/articles/two-table.html#set-operations"
     dplyr_by: "https://dplyr.tidyverse.org/reference/dplyr_by.html"
     dplyr_select: "https://dplyr.tidyverse.org/reference/select.html#overview-of-selection-features"
     dplyr_slice: "https://dplyr.tidyverse.org/reference/slice.html"
