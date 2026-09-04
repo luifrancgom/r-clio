@@ -401,7 +401,7 @@ div.csl-indent {
   </ul></li>
   <li><a href="#sec-verbs-two-tables" id="toc-sec-verbs-two-tables" class="nav-link" data-scroll-target="#sec-verbs-two-tables"><span class="header-section-number">11.5</span> Verbos</a>
   <ul class="collapse">
-  <li><a href="#filtering-joins" id="toc-filtering-joins" class="nav-link" data-scroll-target="#filtering-joins"><span class="header-section-number">11.5.1</span> <strong>Filtering joins</strong></a></li>
+  <li><a href="#filtering-joins" id="toc-filtering-joins" class="nav-link" data-scroll-target="#filtering-joins"><span class="header-section-number">11.5.1</span> Filtering joins</a></li>
   </ul></li>
   <li><a href="#sec-mutating-joins" id="toc-sec-mutating-joins" class="nav-link" data-scroll-target="#sec-mutating-joins"><span class="header-section-number">11.6</span> Mutating joins</a></li>
   </ul>
@@ -589,7 +589,7 @@ Advertencia&nbsp;11.1
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>En la <a href="#sec-mutating-joins" class="quarto-xref"><span>Sección 11.6</span></a> utilizando <code>resultados-saber-pro.rds</code> respecto a los archivos señalados en <a href="#nte-1-chap-11" class="quarto-xref">Nota&nbsp;<span>11.1</span></a> se ajustará este aspecto debido a que la fuente donde se obtuvieron los datos (Data Icfes), utiliza por defecto a Bogotá como departamento de presentación del examen cuando se presenta la prueba Saber Pro en el exterior. También ocurre un comportamiento similar en este contexto para el caso de <code>ID Municipio</code>. Con los ajustes respectivos que aplicarás en la <a href="#sec-mutating-joins" class="quarto-xref"><span>Sección 11.6</span></a>, es posible generar de manera consistente las tablas de las entidades <code>Departamento</code> y <code>Municipio</code> para que sean consistentes con la <a href="#fig-erd" class="quarto-xref">Figura&nbsp;<span>11.1</span></a>.</p>
+<p>En la <a href="#sec-mutating-joins" class="quarto-xref"><span>Sección 11.6</span></a> utilizando <code>resultados-saber-pro.rds</code> respecto a los archivos señalados en <a href="#nte-1-chap-11" class="quarto-xref">Nota&nbsp;<span>11.1</span></a> se ajustará este aspecto debido a que la fuente donde se obtuvieron los datos (Data Icfes), utiliza por defecto a Bogotá como departamento de presentación del examen cuando se presenta la prueba Saber Pro en el exterior. También ocurre un comportamiento similar en este contexto para el caso de <code>ID Municipio</code>. Con los ajustes respectivos que aplicarás en la <a href="#sec-mutating-joins" class="quarto-xref"><span>Sección 11.6</span></a>, es posible generar de manera consistente las tablas de las entidades <code>Departamento</code> y <code>Municipio</code> para que reflejen lo señalado en la <a href="#fig-erd" class="quarto-xref">Figura&nbsp;<span>11.1</span></a>.</p>
 </div>
 </div>
 </section>
@@ -696,16 +696,16 @@ Tabla&nbsp;11.2: Cardinalidad de una relación y representación gráfica usando
 </section>
 <section id="sec-verbs-two-tables" class="level2" data-number="11.5">
 <h2 data-number="11.5" class="anchored" data-anchor-id="sec-verbs-two-tables"><span class="header-section-number">11.5</span> Verbos</h2>
-<p>En el paquete <code>dplyr</code> para manipular, conectar o unir 2 tablas de datos correspondientes a 2 entidades utilizando claves primarias y foráneas existen 3 tipos de verbos:</p>
+<p>En el paquete <code>dplyr</code>, para manipular, conectar o unir 2 tablas de datos correspondientes a 2 entidades utilizando claves primarias y foráneas, existen 3 tipos de verbos:</p>
 <ol type="1">
-<li><strong>Mutating joins</strong> (uniones de transformación en español)</li>
-<li><strong>Filtering joins</strong> (uniones de filtrado en español)</li>
-<li><strong>Set operations</strong> (operaciones de conjuntos)</li>
+<li><strong>Mutating joins</strong> (uniones de transformación en español): permiten combinar variables de diferentes tablas correspondientes a 2 entidades. En la <a href="#sec-mutating-joins" class="quarto-xref"><span>Sección 11.6</span></a> utilizarás este tipo de verbos junto con el esquema de la <a href="#fig-erd" class="quarto-xref">Figura&nbsp;<span>11.1</span></a> y los archivos señalados en la <a href="#nte-1-chap-11" class="quarto-xref">Nota&nbsp;<span>11.1</span></a> para reconstruir el archivo <code>2021-2024_saber-pro-genericas_faedis.rds</code> pero teniendo en cuenta la <a href="#wrn-1-chap-11" class="quarto-xref">Advertencia&nbsp;<span>11.1</span></a>.</li>
+<li><strong>Filtering joins</strong> (uniones de filtrado en español): buscan coincidencias entre registros de forma similar a las <strong>Mutating joins</strong>, pero afectan a las observaciones y no a las variables.</li>
+<li><strong>Set operations</strong> (operaciones de conjuntos): esperan que ambas tablas compartan exactamente las mismas variables y tratan sus observaciones como conjuntos matemáticos mediante funciones como <code>intersect()</code>, <code>union()</code> y <code>setdiff()</code>.</li>
 </ol>
-<p>Las <strong>Mutating joins</strong> permiten combinar variables de diferentes tablas correspondientes a 2 entidades. En la <a href="#sec-mutating-joins" class="quarto-xref"><span>Sección 11.6</span></a> utilizando el esquema de la <a href="#fig-erd" class="quarto-xref">Figura&nbsp;<span>11.1</span></a> a partir de los archivos señalados en la <a href="#nte-1-chap-11" class="quarto-xref">Nota&nbsp;<span>11.1</span></a> reconstruirás el archivo <code>2021-2024_saber-pro-genericas_faedis.rds</code> que se indicó en la <a href="amounts.html#nte-1-chap-6" class="quarto-xref">Nota&nbsp;<span>6.1</span></a> utilizando este tipo de verbos.</p>
+<p>Debido a que las <strong>Set operations</strong> no se requieren para los análisis que desarrollaremos a lo largo del libro, no se profundizará en ellas en los siguientes apartados. No obstante, el lector interesado puede consultar la <a href="https://dplyr.tidyverse.org/articles/two-table.html#set-operations">documentación oficial</a> de <code>dplyr</code> para conocer más detalles sobre este tipo de operaciones.</p>
 <section id="filtering-joins" class="level3" data-number="11.5.1">
-<h3 data-number="11.5.1" class="anchored" data-anchor-id="filtering-joins"><span class="header-section-number">11.5.1</span> <strong>Filtering joins</strong></h3>
-<p>Las <strong>Filtering joins</strong> buscan coincidencias entre registros de la misma manera que las <strong>Mutating joins</strong>, pero afectan a las observaciones y no a las variables. Existen dos tipos:</p>
+<h3 data-number="11.5.1" class="anchored" data-anchor-id="filtering-joins"><span class="header-section-number">11.5.1</span> Filtering joins</h3>
+<p>Existen dos tipos de <strong>Filtering joins</strong>:</p>
 <ol type="i">
 <li><strong>Semi joins</strong>: mantiene todas las observaciones de la tabla de una entidad que tienen una coincidencia en la tabla de otra entidad.</li>
 <li><strong>Anti joins</strong>: descarta todas las observaciones de la tabla de una entidad que tienen una coincidencia en la tabla de otra entidad.</li>
@@ -771,6 +771,74 @@ $ punt_global                 &lt;dbl&gt; 139, 170, 128, 155, 16…</code></pre>
 <li><strong>latitud</strong>: coordenada geográfica en grados decimales que mide la distancia respecto a la línea ecuatorial, indicando la posición norte-sur del punto representativo de cada departamento.</li>
 <li><strong>longitud</strong>: coordenada geográfica en grados decimales que mide la distancia respecto al meridiano de Greenwich, indicando la posición este-oeste del punto representativo de cada departamento.</li>
 </ol>
+<p>Respecto a las variables en <code>resultados-saber-pro.rds</code> estas corresponden a las señaladas en la <a href="amounts.html#sec-variable-description" class="quarto-xref"><span>Sección 6.2.1.1</span></a> pero donde se excluyen <code>estu_depto_presentacion</code>, <code>estu_mcpio_presentacion</code> y <code>estu_prgm_academico</code> debido a que de acuerdo a la <a href="#fig-erd" class="quarto-xref">Figura&nbsp;<span>11.1</span></a> son atributos que pertenecen a otras entidades.</p>
+<p>Teniendo claridad sobre el significado de las variables de cada entidad, es posible identificar cuáles departamentos de <code>divipola_departamentos</code> registran al menos una presentación del examen en <code>resultado_saber_pro</code>. Para lograr esto, se vincula la clave primaria <code>codigo</code> de la primera tabla con la clave foránea <code>estu_cod_depto_presentacion</code> de la segunda mediante la función <code>semi_join()</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-semi-join" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-semi-join-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;11.1: Uso de la función <code>semi_join(x, y)</code> para filtrar las observaciones de <code>x</code> que coinciden con <code>y</code>
+</figcaption>
+<div aria-describedby="lst-semi-join-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">semi_join</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> divipola_departamentos,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> resultado_saber_pro,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="fu">join_by</span>(codigo <span class="sc">==</span> estu_cod_depto_presentacion)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 24 × 4
+   codigo nombre       latitud longitud
+   &lt;chr&gt;  &lt;chr&gt;          &lt;dbl&gt;    &lt;dbl&gt;
+ 1 05     ANTIOQUIA      6.70     -75.5
+ 2 08     ATLÁNTICO     10.7      -75.0
+ 3 11     BOGOTÁ, D.C.   4.32     -74.2
+ 4 13     BOLÍVAR        8.08     -74.2
+ 5 15     BOYACÁ         5.89     -72.6
+ 6 17     CALDAS         5.28     -75.3
+ 7 18     CAQUETÁ        0.799    -74.0
+ 8 19     CAUCA          2.40     -76.8
+ 9 20     CESAR          9.54     -73.5
+10 23     CÓRDOBA        8.36     -75.8
+# ℹ 14 more rows</code></pre>
+</div>
+</div>
+<p>En el <a href="#lst-semi-join" class="quarto-xref">Listado&nbsp;<span>11.1</span></a> se conservan únicamente las filas de <code>divipola_departamentos</code> (tabla asignada al parámetro <code>x</code>) que tienen al menos una coincidencia en <code>resultado_saber_pro</code> (tabla asignada al parámetro <code>y</code>). Es importante destacar que la función <code>semi_join()</code> es una <strong>Filtering join</strong>. En ese sentido, no añade nuevas columnas de la tabla <code>y</code> ni duplica filas de <code>x</code> cuando existen múltiples coincidencias por departamento, sino que únicamente filtra las observaciones de <code>x</code>.</p>
+<p>Para conectar ambas tablas, el parámetro <code>by</code> se utiliza para indicar las claves que establecen la relación entre ellas. En este caso, a través de la función auxiliar <code>join_by()</code> como argumento de <code>by</code>, se señala qué clave de la primera tabla se relaciona con la clave de la segunda mediante la expresión <code>codigo == estu_cod_depto_presentacion</code> utilizando el operador relacional de igualdad <code>==</code> (ver <a href="how_to_code_in_r.html#tbl-relational-operators" class="quarto-xref">Tabla&nbsp;<span>5.2</span></a>), dado que las claves tienen nombres diferentes en cada tabla pero representan el mismo atributo.</p>
+<p>También es posible identificar de manera similar cuáles departamentos de <code>divipola_departamentos</code> no registran ninguna presentación del examen en <code>resultado_saber_pro</code>. Para lograr esto, se vincula nuevamente la clave primaria <code>codigo</code> de la primera tabla con la clave foránea <code>estu_cod_depto_presentacion</code> de la segunda, pero mediante la función <code>anti_join()</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-anti-join" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-anti-join-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;11.2: Uso de la función <code>anti_join(x, y)</code> para filtrar las observaciones de <code>x</code> que no coinciden con <code>y</code>
+</figcaption>
+<div aria-describedby="lst-anti-join-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anti_join</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> divipola_departamentos,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> resultado_saber_pro,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="fu">join_by</span>(codigo <span class="sc">==</span> estu_cod_depto_presentacion)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 4
+  codigo nombre     latitud longitud
+  &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;
+1 27     CHOCÓ        5.40     -76.9
+2 44     LA GUAJIRA  11.5      -72.4
+3 70     SUCRE        9.06     -75.1
+4 81     ARAUCA       6.57     -71.0
+5 91     AMAZONAS    -1.55     -71.5
+6 94     GUAINÍA      2.73     -68.8
+7 95     GUAVIARE     1.92     -72.1
+8 97     VAUPÉS       0.646    -70.6
+9 99     VICHADA      4.71     -69.4</code></pre>
+</div>
+</div>
+<p>En el <a href="#lst-anti-join" class="quarto-xref">Listado&nbsp;<span>11.2</span></a> se conservan únicamente las filas de <code>divipola_departamentos</code> (tabla asignada al parámetro <code>x</code>) que no tienen ninguna coincidencia en <code>resultado_saber_pro</code> (tabla asignada al parámetro <code>y</code>). Al igual que en la función <code>semi_join()</code>, el parámetro <code>by</code> se utiliza para indicar las claves que establecen la relación entre ambas tablas.</p>
 </section>
 </section>
 <section id="sec-mutating-joins" class="level2" data-number="11.6">
