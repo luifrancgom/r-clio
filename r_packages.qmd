@@ -74,7 +74,7 @@ Por ejemplo, si deseas cargar el paquete `tidyverse` escribe el siguiente comand
 library(tidyverse)
 ```
 
-Luego, presiona {{< kbd Enter >}}. Si el paquete `tidyverse` fue instalado de manera correcta se generará un texto (ver el @lst-load-tidyverse-message) igual o similar al que se muestra a continuación en la consola:
+Luego, presiona {{< kbd Enter >}}. Si el paquete `tidyverse` fue instalado de manera correcta se generará un texto (ver @lst-load-tidyverse-message) igual o similar al que se muestra a continuación en la consola:
 
 ::: {#lst-load-tidyverse-message}
 
