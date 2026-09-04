@@ -22,7 +22,7 @@ programas_pregrado_faedis_2026_1 <- read_csv(
 )
 ```
 
-Este capítulo se basa en [@ismay_statistical_2025, cap. 1], [@grolemund_hands-programming_2014, cap. 1] y [@wickham_advanced_2019, cap. 2] donde tiene como propósito introducir conceptos básicos del lenguaje de programación R utilizando datos de los programas de pregrado de la [Facultad de Estudios a Distancia (FAEDIS)](https://umng.edu.co/facultad/faedis/) de la Universidad Militar Nueva Granada (UMNG).
+Este capítulo se basa en [@ismay_statistical_2025, cap. 1], [@grolemund_hands-programming_2014, cap. 1] y [@wickham_advanced_2019, cap. 2] donde tiene como propósito introducir conceptos básicos del lenguaje de programación R utilizando datos de los programas de pregrado de la [Facultad de Estudios a Distancia (FAEDIS)]({{< var url.institution.umng_faedis >}}) de la Universidad Militar Nueva Granada (UMNG).
 
 Exploraremos los siguientes aspectos:
 
@@ -366,12 +366,12 @@ costo_matricula_pregrado <- tibble(
 costo_matricula_pregrado
 ```
 
-En la tibble del @lst-tibble respecto a las variables `ano`, `semestre` y `nivel_academico` R aplica el proceso de reciclaje de vectores (ver @sec-warnings) para ajustar el tamaño de las columnas. En el caso de la variable `codigo_snies` se fija un código establecido por el [Sistema Nacional de Información de la Educación Superior (SNIES)](https://snies.mineducacion.gov.co/portal/) para identificar y asociar de manera única a cada programa académico con el nombre señalado en la variable `nombre_programa`. Por último, es posible en una tibble utilizar un vector atómico previamente definido, como en el caso de `costo_matricula`, para generar una variable. En el @lst-tibble se utiliza el mismo nombre asociado al vector atómico que contiene el costo de matrícula para la columna que incluye dicha información.
+En la tibble del @lst-tibble respecto a las variables `ano`, `semestre` y `nivel_academico` R aplica el proceso de reciclaje de vectores (ver @sec-warnings) para ajustar el tamaño de las columnas. En el caso de la variable `codigo_snies` se fija un código establecido por el [Sistema Nacional de Información de la Educación Superior (SNIES)]({{< var url.institution.snies >}}) para identificar y asociar de manera única a cada programa académico con el nombre señalado en la variable `nombre_programa`. Por último, es posible en una tibble utilizar un vector atómico previamente definido, como en el caso de `costo_matricula`, para generar una variable. En el @lst-tibble se utiliza el mismo nombre asociado al vector atómico que contiene el costo de matrícula para la columna que incluye dicha información.
 
 ::: {#imp-1-chap-5 .callout-important}
 En el @lst-tibble y en el desarrollo del @sec-how-do-i-code-in-r, se utilizó una convención para nombrar variables similar a la descrita en la @sec-how-to-name-files-folders. Sin embargo, existe una excepción fundamental: no se utilizó el carácter `-`.
 
-En R, para que un nombre asociado a un objeto sea **sintácticamente válido**, debe cumplir con un conjunto de reglas que se pueden consultar con en el comando `?make.names` en la sección **Details**:
+En R, para que un nombre asociado a un objeto sea **sintácticamente válido**, debe cumplir con un conjunto de reglas que se pueden consultar con el comando `?make.names` en la sección **Details**:
 
 1. **Caracteres permitidos**: Solo puede contener letras, números, puntos (`.`) y guiones bajos, (`_`). El guion medio, (`-`), no está permitido porque R lo interpreta como el operador de resta.
 
@@ -379,7 +379,7 @@ En R, para que un nombre asociado a un objeto sea **sintácticamente válido**, 
 
 3. **Restricción del punto**: Si un nombre inicia con punto, el siguiente carácter no puede ser un número.
 
-4. **Palabras reservadas**: No pueden utilizarse términos del lenguaje de programación de R que están reservados, como por ejemplo `if`, `else`, `for`, `TRUE` o `FALSE`. La lista completa se puede consultar con en el comando `?Reserved` en la sección **Details**.
+4. **Palabras reservadas**: No pueden utilizarse términos del lenguaje de programación de R que están reservados, como por ejemplo `if`, `else`, `for`, `TRUE` o `FALSE`. La lista completa se puede consultar con el comando `?Reserved` en la sección **Details**.
 
 Aunque R permite técnicamente nombres como `.mi_variable`, `.Mi_Variable`, `ñi_variablé`, en este libro seguiremos las prácticas señaladas en la @sec-how-to-name-files-folders, pero ajustándolas para que generen nombres sintácticamente válidos.
 
@@ -388,7 +388,7 @@ Esto implica 2 cambios principales respecto a nombrar carpetas o archivos: no se
 
 ## Operadores relacionales {#sec-relational-operators}
 
-Los operadores relacionales son operadores binarios que permiten la comparación de valores en vectores atómicos. Estos operadores son útiles por qué establecen condiciones lógicas para filtrar filas de interés en una tibble. En la @tbl-relational-operators se señalan algunos de los operadores relacionales utilizados por R.
+Los operadores relacionales son operadores binarios que permiten la comparación de valores en vectores atómicos. Estos operadores son útiles porque establecen condiciones lógicas para filtrar filas de interés en una tibble. En la @tbl-relational-operators se señalan algunos de los operadores relacionales utilizados por R.
 
 | Operador | Nombre |
 |:---:|:---|
@@ -412,9 +412,9 @@ costo_matricula_pregrado$costo_matricula >
   mean(costo_matricula_pregrado$costo_matricula)
 ```
 
-En el @lst-relational-operator-logical-condition se utiliza el operador `$` para extraer de la tibble `costo_matricula_pregrado` los valores de la variable `costo_matricula` para identificar si son mayores a la media del costo de matrícula, utilizando la función `mean()`. El resultado, es un vector atómico con valores lógicos (`FALSE` o `TRUE`) que identifica que valores dentro de `costo_matricula_pregrado$costo_matricula` cumplen o no cumplen con la condición. En ese sentido, en el resultado del @lst-relational-operator-logical-condition aquellas posiciones con valores `TRUE` corresponden a las posiciones de `costo_matricula_pregrado$costo_matricula` que cumplen con la condición, es decir que son mayores a la media del costo de matrícula.
+En el @lst-relational-operator-logical-condition se utiliza el operador `$` para extraer de la tibble `costo_matricula_pregrado` los valores de la variable `costo_matricula` para identificar si son mayores a la media del costo de matrícula, utilizando la función `mean()`. El resultado, es un vector atómico con valores lógicos (`FALSE` o `TRUE`) que identifica qué valores dentro de `costo_matricula_pregrado$costo_matricula` cumplen o no cumplen con la condición. En ese sentido, en el resultado del @lst-relational-operator-logical-condition aquellas posiciones con valores `TRUE` corresponden a las posiciones de `costo_matricula_pregrado$costo_matricula` que cumplen con la condición, es decir que son mayores a la media del costo de matrícula.
 
-Al principio no pareciera claro cómo se puede utilizar el resultado generado en el  @lst-relational-operator-logical-condition. Sin embargo, a continuación se señalará como un resultado con valores lógicos de `TRUE` o `FALSE` permite ser el insumo para poder filtrar filas con base a una determinada condición lógica de interés.
+Al principio no pareciera claro cómo se puede utilizar el resultado generado en el  @lst-relational-operator-logical-condition. Sin embargo, a continuación se señalará cómo un resultado con valores lógicos de `TRUE` o `FALSE` permite ser el insumo para poder filtrar filas con base a una determinada condición lógica de interés.
 
 A modo de ejemplo, si buscaras identificar los programas académicos con sus respectivos atributos que cumplen con la condición señalada en el @lst-relational-operator-logical-condition, es posible utilizar la función `filter()` del paquete `dplyr` de la siguiente forma: 
 
@@ -427,7 +427,7 @@ filter(
 )
 ```
 
-En el @lst-filter-relational-operators, la función `filter()` requiere como primer argumento una tibble (o un objeto similar) y una expresión que resulte en un vector lógico. Los paquetes del `tidyverse` facilitan este proceso mediante el **enmascaramiento de datos** ([data masking](https://dplyr.tidyverse.org/articles/programming.html)). Este mecanismo permite que la expresión lógica (en este ejemplo, `costo_matricula > mean(costo_matricula)`) haga referencia directa a las columnas del objeto `costo_matricula_pregrado` como si fueran variables "independientes", eliminando la necesidad de utilizar el operador `$`. De esa manera requieres escribir menos texto al escribir código en R y es posible referirse a las variables de la tibble de una manera más natural al utilizar funciones del `tidyverse`.
+En el @lst-filter-relational-operators, la función `filter()` requiere como primer argumento una tibble (o un objeto similar) y una expresión que resulte en un vector lógico. Los paquetes del `tidyverse` facilitan este proceso mediante el **enmascaramiento de datos** ([data masking]({{< var url.packages.dplyr_programming >}})). Este mecanismo permite que la expresión lógica (en este ejemplo, `costo_matricula > mean(costo_matricula)`) haga referencia directa a las columnas del objeto `costo_matricula_pregrado` como si fueran variables "independientes", eliminando la necesidad de utilizar el operador `$`. De esa manera requieres escribir menos texto al escribir código en R y es posible referirse a las variables de la tibble de una manera más natural al utilizar funciones del `tidyverse`.
 
 ## Operadores lógicos vectorizados {#sec-vectorized-logical-operators}
 
@@ -441,7 +441,7 @@ Los operadores lógicos vectorizados son operadores que realizan comparaciones e
 
 : Operadores lógicos vectorizados en R {#tbl-vectorized-logical-operators}
 
-A modo de ejemplo, si buscaras identificar los programas académicos con sus respectivos atributos que cumplen con la condición señalada en el @lst-relational-operator-logical-condition y que además son menores al valor máximo respecto a la variable `costo_matrícula`, es posible utilizar la función `filter()` del paquete `dplyr` de la siguiente forma:
+A modo de ejemplo, si buscaras identificar los programas académicos con sus respectivos atributos que cumplen con la condición señalada en el @lst-relational-operator-logical-condition y que además son menores al valor máximo respecto a la variable `costo_matricula`, es posible utilizar la función `filter()` del paquete `dplyr` de la siguiente forma:
 
 ```{r}
 #| lst-label: lst-filter-logical-vectorized-operators

@@ -69,6 +69,7 @@ lang: es
 language: 
   crossref-nte-prefix: "Nota"
   crossref-imp-prefix: "Importante"
+  crossref-wrn-prefix: "Advertencia"
 editor: source
 
 format:

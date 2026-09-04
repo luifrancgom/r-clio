@@ -12,7 +12,7 @@ source("_common.R")
 library(tidyverse)
 ```
 
-Este capítulo se basa en [@wickham_ggplot2_2016] y [@wilke_fundamentals_2019] así como en la documentación oficial de [`ggplot2`](https://ggplot2.tidyverse.org/articles/ggplot2.html) donde tiene como propósito introducir el modelo mental de **la gramática de gráficos en capas** (**layered grammar of graphics**, [@wickham_layered_2010]) para visualizar variables numéricas a través de un conjunto de categorías utilizando el paquete `ggplot2` e información de los resultados del examen [Saber Pro](https://www.icfes.gov.co/evaluaciones-icfes/acerca-del-examen-saber-pro/) del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).
+Este capítulo se basa en [@wickham_ggplot2_2016] y [@wilke_fundamentals_2019] así como en la documentación oficial de [`ggplot2`]({{< var url.packages.ggplot2 >}}) donde tiene como propósito introducir el modelo mental de **la gramática de gráficos en capas** (**layered grammar of graphics**, [@wickham_layered_2010]) para visualizar variables numéricas a través de un conjunto de categorías utilizando el paquete `ggplot2` e información de los resultados del examen [Saber Pro]({{< var url.institution.icfes_saber_pro >}}) del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).
 
 Exploraremos los siguientes aspectos:
 
@@ -21,10 +21,10 @@ Exploraremos los siguientes aspectos:
 3. ¿Cómo visualizar variables numéricas para un conjunto de categorías?
 
 :::: {#nte-1-chap-6 .callout-note}
-Para desarrollar el contenido de este capítulo es necesario que descarges el archivo señalado a continuación:
+Para desarrollar el contenido de este capítulo es necesario que descargues el archivo señalado a continuación:
    
 ::: {.callout appearance="minimal"}
-## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2021-2024_saber-pro-genericas_faedis.rds](https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/2021-2024_saber-pro-genericas_faedis.rds)
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2021-2024_saber-pro-genericas_faedis.rds]({{< var url.data.saber_pro_faedis_rds >}})
 :::
 
 Luego, genera una carpeta con el nombre `data` y dentro de esta carpeta incluye el archivo `2021-2024_saber-pro-genericas_faedis.rds`. Finalmente, genera una carpeta con el nombre `006_visualizar-cantidades-en-r` y dentro de la carpeta crea un archivo con el nombre `001_visualizar-cantidades-datos-faedis.R`, siguiendo las indicaciones descritas en la @sec-package-usage.
@@ -40,7 +40,7 @@ A medida que explores diferentes formas de visualizar un conjunto de datos enten
 
 Para que `ggplot2` genere un gráfico requiere como mínimo los siguientes 3 componentes: Datos, Mapeo y Capas. Los demás elementos restantes (Escalas, Facetas, Coordenadas y Tema) cuentan con valores predeterminados que eliminan inicialmente la necesidad de fijar configuraciones adicionales.
 
-1. **Datos**: es el insumo principal que se requiere para generar un gráfico donde se refiere al conjunto de datos que se busca visualizar. `ggplot2` funciona mejor si el conjunto de datos es ordenado ([tidy data](https://tidyr.tidyverse.org/articles/tidy-data.html) en inglés, [@wickham_tidy_2014]) donde este concepto se tratará en más detalle en el @sec-data-tidying.   
+1. **Datos**: es el insumo principal que se requiere para generar un gráfico donde se refiere al conjunto de datos que se busca visualizar. `ggplot2` funciona mejor si el conjunto de datos es ordenado ([tidy data]({{< var url.packages.tidyr >}}) en inglés, [@wickham_tidy_2014]) donde este concepto se tratará en más detalle en el @sec-data-tidying.   
 
 2. **Mapeo**: es el conjunto de instrucciones que permiten mapear las variables de los datos a propiedades visuales denominadas atributos estéticos. En la @fig-aesthetics-attributes se indican algunos ejemplos de atributos estéticos.
 
@@ -48,9 +48,9 @@ Para que `ggplot2` genere un gráfico requiere como mínimo los siguientes 3 com
 
 3. **Capas**: es el componente que toma los datos mapeados para transformarlos en una representación visual comprensible. Cada capa se compone de 3 elementos:
 
-   a. Una **geometría** que determina como se muestran los datos a través de atributos estéticos.
+   a. Una **geometría** que determina cómo se muestran los datos a través de atributos estéticos.
 
-   b. Una **transformación estadística** donde calcula nuevas variables a partir de los datos y afecta que parte de ellos se muestran.
+   b. Una **transformación estadística** donde calcula nuevas variables a partir de los datos y afecta qué parte de ellos se muestra.
 
    c. Un **ajuste de posición** donde determina la ubicación en la que se presentará visualmente cada dato.   
 
@@ -64,7 +64,7 @@ Para que `ggplot2` genere un gráfico requiere como mínimo los siguientes 3 com
 
 5. **Facetas**: es el componente que permite visualizar diferentes subconjuntos de datos en paneles individuales, dividiendo el gráfico principal en función de variables categóricas. 
 
-6. **Coordenadas**: es el componente que determina cómo se combinan los atributos estéticos `x` y `y` para posicionar los elementos en el plano del gráfico. Por defecto, se utiliza el sistema de coordenadas cartesianas, pero existen [otras opciones](https://ggplot2.tidyverse.org/reference/index.html#coordinate-systems) dentro de `ggplot2`.
+6. **Coordenadas**: es el componente que determina cómo se combinan los atributos estéticos `x` y `y` para posicionar los elementos en el plano del gráfico. Por defecto, se utiliza el sistema de coordenadas cartesianas, pero existen [otras opciones]({{< var url.packages.ggplot2_coord >}}) dentro de `ggplot2`.
 
 7. **Tema**: es el componente que se encarga de controlar cualquier elemento visual del gráfico que sea ajeno a los datos. Su función principal es determinar la apariencia estética y el estilo general del diseño del gráfico.
 
@@ -133,7 +133,7 @@ glimpse(saber_pro_genericas_faedis_2021_2024)
 
 #### Descripción de variables {#sec-variable-description}
 
-Para examinar y en particular crear un gráfico a partir de un conjunto de datos es necesario entender a que se refieren cada una de las variables que lo componen. En ese sentido, a continuación se describen cada una de las variables en `2021-2024_saber-pro-genericas_faedis.rds`:
+Para examinar y en particular crear un gráfico a partir de un conjunto de datos es necesario entender a qué se refiere cada una de las variables que lo componen. En ese sentido, a continuación se describen cada una de las variables en `2021-2024_saber-pro-genericas_faedis.rds`:
 
 1. **ano**: año de presentación del examen Saber Pro
 2. **estu_consecutivo**: identificador (id) público del estudiante (los microdatos se encuentran anonimizados)
@@ -143,10 +143,9 @@ Para examinar y en particular crear un gráfico a partir de un conjunto de datos
 6. **fami_educacionmadre**: nivel educativo más alto alcanzado por la madre del estudiante
 7. **fami_educacionpadre**: nivel educativo más alto alcanzado por el padre del estudiante
 8. **estu_exterior**: indica si el estudiante presenta la prueba Saber Pro en el exterior (`SI` ó `NO`) 
-9. **estu_cod_depto_presentacion**: código del departamento de presentación del examen según codificación [DIVIPOLA](https://www.dane.gov.co/index.php/sistema-estadistico-nacional-sen/normas-y-estandares/nomenclaturas-y-clasificaciones/nomenclaturas/codificacion-de-la-division-politica-administrativa-de-colombia-divipola)[^chap-6-footnote-1]
-9
+9. **estu_cod_depto_presentacion**: código del departamento de presentación del examen según codificación [DIVIPOLA]({{< var url.institution.dane_divipola >}})[^chap-6-footnote-1]
 10. **estu_depto_presentacion**: nombre del departamento de presentación del examen
-11. **estu_cod_mcpio_presentacion**: código del municipio de presentación del examen según codificación [DIVIPOLA](https://www.dane.gov.co/index.php/sistema-estadistico-nacional-sen/normas-y-estandares/nomenclaturas-y-clasificaciones/nomenclaturas/codificacion-de-la-division-politica-administrativa-de-colombia-divipola)
+11. **estu_cod_mcpio_presentacion**: código del municipio de presentación del examen según codificación [DIVIPOLA]({{< var url.institution.dane_divipola >}})
 12. **estu_mcpio_presentacion**: nombre del municipio de presentación del examen
 13. **estu_snies_prgmacademico**: código SNIES[^chap-6-footnote-2] del programa académico que cursa el estudiante y relacionado con el examen Saber Pro que presenta
 14. **estu_prgm_academico**: nombre del programa académico que cursa el estudiante y relacionado con el examen Saber Pro que presenta

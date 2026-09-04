@@ -11,32 +11,32 @@ source("_common.R")
 #| message: false
 ```
 
-Este capítulo se basa en [@wickham_r_2023, Cap. 19] así como en la documentación oficial de [`dplyr`](https://dplyr.tidyverse.org/articles/two-table.html) donde tiene como propósito introducir a través de la **gramática de manipulación de datos** un marco flexible para conectar o unir tablas de datos utilizando el paquete `dplyr` e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes al periodo 2021-2024 para Colombia.
+Este capítulo se basa en [@wickham_r_2023, Cap. 19] así como en la documentación oficial de [`dplyr`]({{< var url.packages.dplyr_two_table >}}) donde tiene como propósito introducir a través de la **gramática de manipulación de datos** un marco flexible para conectar o unir tablas de datos utilizando el paquete `dplyr` e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes al periodo 2021-2024 para Colombia.
 
 Exploraremos los siguientes aspectos:
 
 1. ¿Cómo entender la relación entre diferentes tablas de datos a través de un Diagrama Entidad-Relación (Entity-Relationship Diagram (ERD) en inglés)?
-2. ¿Cómo interpretar las relaciones en un Diagrama Entidad-Relación utilizando la notación **Crow's Foot** ("pata de cuervo" en español)  
+2. ¿Cómo interpretar las relaciones en un Diagrama Entidad-Relación utilizando la notación **Crow's Foot** ("pata de cuervo" en español)?  
 3. ¿Cuáles son los tipos de verbos de dos tablas?
 4. ¿Cómo combinar variables de múltiples tablas utilizando **Mutating Joins** ("uniones de transformación" en español)?
 
 :::: {#nte-1-chap-11 .callout-note}
-Para desarrollar el contenido de este capítulo es necesario que descarges los archivos señalados a continuación y los incluyas dentro de la carpeta `data`, respecto a lo descrito en la @nte-1-chap-6:
+Para desarrollar el contenido de este capítulo es necesario que descargues los archivos señalados a continuación y los incluyas dentro de la carpeta `data`, respecto a lo descrito en la @nte-1-chap-6:
    
 ::: {.callout appearance="minimal"}
-## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [resultados-saber-pro.rds](https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/resultados-saber-pro.rds)
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [resultados-saber-pro.rds]({{< var url.data.resultados_saber_pro_rds >}})
 :::
 
 ::: {.callout appearance="minimal"}
-## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [divipola-departamentos.rds](https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/divipola-departamentos.rds)
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [divipola-departamentos.rds]({{< var url.data.divipola_deptos_rds >}})
 :::
 
 ::: {.callout appearance="minimal"}
-## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [divipola-municipios.rds](https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/divipola-municipios.rds)
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [divipola-municipios.rds]({{< var url.data.divipola_mpios_rds >}})
 :::
 
 ::: {.callout appearance="minimal"}
-## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [programas-pregrado-faedis.rds](https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/programas-pregrado-faedis.rds)
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [programas-pregrado-faedis.rds]({{< var url.data.programas_faedis_rds >}})
 :::
 
 En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `011_verbos-dos-tablas-en-r` y dentro de ella genera el archivo `001_manipular-datos-dos-tabla.R`, siguiendo las pautas de la @sec-package-usage.
@@ -44,21 +44,21 @@ En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta 
 
 ## Diagrama Entidad-Relación
 
-Al realizar un análisis de datos es habitual tener que combinar dos o más tablas, una necesidad que surge principalmente del diseño propio de las bases de datos relacionales. Aunque no se profundizará en cómo crearlas o conectarse a ellas (ver @nte-2-chap-11), es conveniente conocer una representación gráfica que permita visualizar un conjunto de tablas de datos y las posibles relaciones que existen entre ellas para entender como se puede consolidar un terminado conjunto de información que se requiere para llevar a cabo un determinado análisis.
+Al realizar un análisis de datos es habitual tener que combinar dos o más tablas, una necesidad que surge principalmente del diseño propio de las bases de datos relacionales. Aunque no se profundizará en cómo crearlas o conectarse a ellas (ver @nte-2-chap-11), es conveniente conocer una representación gráfica que permita visualizar un conjunto de tablas de datos y las posibles relaciones que existen entre ellas para entender cómo se puede consolidar un determinado conjunto de información que se requiere para llevar a cabo un determinado análisis.
 
 ::: {#nte-2-chap-11 .callout-note}
-En el tidyverse existe el paquete [`dbplyr`](https://dbplyr.tidyverse.org/) que junto al paquete [DBI](https://dbi.r-dbi.org/) permite interactuar con bases de datos en R usando la sintaxis de `dplyr`. Así como, consultar y transformar tablas dentro de ellas sin necesidad de escribir código SQL directamente, ya que `dbplyr` traduce la sintaxis de `dplyr` a consultas en lenguage SQL.
+En el tidyverse existe el paquete [`dbplyr`]({{< var url.packages.dbplyr >}}) que junto al paquete [DBI]({{< var url.packages.dbi >}}) permite interactuar con bases de datos en R usando la sintaxis de `dplyr`. Así como, consultar y transformar tablas dentro de ellas sin necesidad de escribir código SQL directamente, ya que `dbplyr` traduce la sintaxis de `dplyr` a consultas en lenguaje SQL.
 
-En ese sentido, cuando estes familiarizado con los verbos de dos tablas puedes explorar éste paquete si requieres conectarte más adelante a una base de datos relacional para realizar un anális utilizando lo aprendido acerca de `dplyr`. 
+En ese sentido, cuando estés familiarizado con los verbos de dos tablas puedes explorar este paquete si requieres conectarte más adelante a una base de datos relacional para realizar un análisis utilizando lo aprendido acerca de `dplyr`. 
 :::
 
-Una representación gráfica que cumple con éste propósito es una Diagrama de Entidad-Relación que ilustra como una base de datos relacional compuesta por un conjunto de tablas se relacionan entre sí. Estos diagramas se componen de 3 elementos:
+Una representación gráfica que cumple con este propósito es un Diagrama de Entidad-Relación que ilustra cómo una base de datos relacional compuesta por un conjunto de tablas se relacionan entre sí. Estos diagramas se componen de 3 elementos:
 
 1. **Entidades**: representan cualquier objeto, concepto o evento.
 2. **Atributos**: son las características, rasgos o propiedades de cada entidad.
 3. **Relaciones**: es la asociación o vínculo lógico que existe entre dos o más entidades.
 
-En la @fig-erd se indica un posible Diagrama de Entidad-Relación utilizando como insumo el conjunto de datos señalado en la @nte-1-chap-6 y que se utilizó en la parte de visualización de datos para analizar los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de FAEDIS de la UMNG así como información adicional provenientes de los archivos señalados en la @nte-1-chap-11.  
+En la @fig-erd se indica un posible Diagrama de Entidad-Relación utilizando como insumo el conjunto de datos señalado en la @nte-1-chap-6 y que se utilizó en la parte de visualización de datos para analizar los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de FAEDIS de la UMNG así como información adicional proveniente de los archivos señalados en la @nte-1-chap-11.  
 
 ![Diagrama de Entidad-Relación correspondiente a los resultados del examen Saber Pro de competencias genéricas en programas de pregrado de FAEDIS](/images/entity-relationship-diagram-with-crow-foot-notation.png){#fig-erd fig-alt="Diagrama Entidad-Relación con notación Crow's Foot que modela cuatro tablas: «Resultado Saber-Pro» en el centro (con claves primarias Año e ID estudiante, datos demográficos, puntajes y claves foráneas hacia departamento, municipio y programa), «Programa académico» a la izquierda (PK: ID Programa académico), «Departamento» arriba a la derecha (PK: ID Departamento) y «Municipio» abajo a la derecha (PK: ID Municipio y FK: ID Departamento). Las líneas conectan a Resultado Saber-Pro con las demás tablas mediante sus claves foráneas, y a Departamento con Municipio en una relación de uno a muchos. En la parte inferior, una leyenda describe las siglas PK (Clave primaria) y FK (Clave foránea), junto a los símbolos de cardinalidad: Cero o uno, Uno y solo uno, Uno o muchos, y Cero o muchos."}
 
@@ -66,7 +66,7 @@ En la @fig-erd se indica un posible Diagrama de Entidad-Relación utilizando com
 
 En la @fig-erd se señalan 4 entidades para representar una base de datos relacional que tenga como objetivo almacenar información relacionada con los resultados del examen Saber Pro de competencias genéricas en programas de pregrado de FAEDIS:
 
-a. **Resultado Saber-Pro**: corresponde a un evento donde modela la acción de un estudiante presentado las pruebas Saber-Pro en un periodo y lugar específico junto con sus características socioeconómicas y los resultados obtenidos.
+a. **Resultado Saber-Pro**: corresponde a un evento donde modela la acción de un estudiante presentando las pruebas Saber-Pro en un periodo y lugar específico junto con sus características socioeconómicas y los resultados obtenidos.
 
 b. **Programa académico**: representa los programas académicos de pregrado de FAEDIS a los cuales puede potencialmente pertenecer un estudiante.
 
@@ -90,28 +90,118 @@ a. **Unicidad**: cada valor debe ser único en cada tabla
 b. **No nulidad**: no puede contener valores vacíos o ausentes (`NA` o `NULL` en R). Es decir, todo registro debe estar asociado a una entidad.
 c. **Inmutabilidad**: Su valor no debe cambiar con el tiempo.
 
-Por otro lado, una clave primaria puede estar formada por una sola columna dentro de una tabla pero también se puede formar uniendo dos o más columnas cuando una sola no basta para garantizar unicidad. En el caso de la @fig-erd respecto a la entidad **Resultado Saber-Pro** se utilizan las variables `Año` y `ID estudiante` para identificar de manera única el evento relacionado con la acción de un estudiante presentado las pruebas Saber-Pro en un periodo determinado. Aunque también se puede utilizar una columna como en el caso de la entidad **Departamento** en la @fig-erd donde se utiliza la variable `ID Departamento` para identificar de manera única ésta identidad utilizando la codificación DIVIPOLA.
+Por otro lado, una clave primaria puede estar formada por una sola columna dentro de una tabla pero también se puede formar uniendo dos o más columnas cuando una sola no basta para garantizar unicidad. En el caso de la @fig-erd respecto a la entidad **Resultado Saber-Pro** se utilizan las variables `Año` y `ID estudiante` para identificar de manera única el evento relacionado con la acción de un estudiante presentando las pruebas Saber-Pro en un periodo determinado. Aunque también se puede utilizar una columna como en el caso de la entidad **Departamento** en la @fig-erd donde se utiliza la variable `ID Departamento` para identificar de manera única esta entidad utilizando la codificación DIVIPOLA.
 
 ### Clave foránea
 
 Un atributo presente en una tabla cuyos valores hacen referencia directa a la clave primaria de otra tabla se conoce como clave foránea (Foreign Key (**FK**) en inglés). Este atributo es el puente que permite establecer una relación entre dos entidades así como vincular datos sin necesidad de duplicar toda la información. Por ejemplo, en lugar de repetir en la tabla relacionada con la entidad **Resultado Saber-Pro** el nombre del departamento así como su latitud y longitud, solo es necesario incluir la variable `ID Departamento` sin necesidad de repetir los demás atributos de la entidad **Departamento**.
 
-A diferencia de una clave primaria (**PK**), los valores de una clave foránea (**FK**) se pueden repetir en una tabla. Por ejemplo, diferentes instancias de la entidad **Resultado Saber-Pro** pueden tener una misma `ID Departamento` por qué muchos estudiantes pueden presentar el Saber-Pro en un mismo departamento. Adicionalmente, una clave foránea (**FK**) puede contener valores vacíos o ausentes. Por ejemplo, si un estudiante presenta el Saber-Pro en el exterior se esperaría que no tenga asociado un `ID Departamento` por qué el lugar donde lo presentó no se encuentra dentro del territorio colombiano (ver @wrn-1-chap-11).
+A diferencia de una clave primaria (**PK**), los valores de una clave foránea (**FK**) se pueden repetir en una tabla. Por ejemplo, diferentes instancias de la entidad **Resultado Saber-Pro** pueden tener una misma `ID Departamento` porque muchos estudiantes pueden presentar el Saber-Pro en un mismo departamento. Adicionalmente, una clave foránea (**FK**) puede contener valores vacíos o ausentes. Por ejemplo, si un estudiante presenta el Saber-Pro en el exterior se esperaría que no tenga asociado un `ID Departamento` porque el lugar donde lo presentó no se encuentra dentro del territorio colombiano (ver @wrn-1-chap-11).
 
-::: {#wrn-1-chap-11 .callout-important}
-En la @sec-mutating-joins utilizando `resultados-saber-pro.rds` respecto a los archivos señalados en @nte-1-chap-11 se ajustará este aspecto debido a que la fuente donde se obtuvieron los datos (Data Icfes), utiliza por defecto a Bogotá como departamento de presentación del examen cuando se presenta la prueba Saber Pro en el exterior. También ocurre un comportamiento similar en este contexto para el caso de `ID Municipio`. Con los ajustes respectivo es posible generar de manera consistente las tablas de las entidades `Departamento` y `Municipio` para que sean consistentes con la @fig-erd. 
+::: {#wrn-1-chap-11 .callout-warning}
+En la @sec-mutating-joins utilizando `resultados-saber-pro.rds` respecto a los archivos señalados en @nte-1-chap-11 se ajustará este aspecto debido a que la fuente donde se obtuvieron los datos (Data Icfes), utiliza por defecto a Bogotá como departamento de presentación del examen cuando se presenta la prueba Saber Pro en el exterior. También ocurre un comportamiento similar en este contexto para el caso de `ID Municipio`. Con los ajustes respectivos que aplicarás en la @sec-mutating-joins, es posible generar de manera consistente las tablas de las entidades `Departamento` y `Municipio` para que sean consistentes con la @fig-erd. 
 :::
 
-## Relaciones
+## Relaciones {#sec-relaciones}
 
+Las relaciones definen cómo se vinculan lógicamente 2 entidades a través de las claves primarias (**PK**) y foráneas (**FK**) donde se utiliza el concepto de **cardinalidad**. La cardinalidad define las restricciones numéricas que gobiernan el vínculo lógico entre 2 entidades. En términos sencillos, la cardinalidad responde a la pregunta
 
+> ¿Con cuántas instancias de una entidad `A` se puede vincular una instancia de la entidad `B`?
+
+Para definir este aspecto, la cardinalidad se descompone en dos límites: mínimo y máximo. Por un lado, la cardinalidad mínima indica si la relación debería ser obligatoria u opcional:
+
+- `0` (opcional): una instancia de una entidad puede existir sin estar asociada a ninguna instancia de otra entidad
+- `1` (obligatoria): una instancia de una entidad debe estar asociada obligatoriamente a al menos una instancia de otra entidad
+
+Por ejemplo, respecto al contexto de FAEDIS en la UMNG con base en la @fig-erd un estudiante que presenta la prueba en un determinado periodo debe estar asociado a un programa académico. De lo contrario, si el estudiante realiza por su lado la prueba sin inscribirse a través de la universidad no se tienen en cuenta los resultados obtenidos para analizar el desempeño de FAEDIS. Es decir, la relación de la entidad **Resultados Saber-Pro** hacia la entidad **Programa académico** respecto a la cardinalidad mínima implica que una instancia de la primera está asociada obligatoriamente con al menos una instancia de la segunda entidad.
+
+En el otro sentido, un programa académico de FAEDIS no necesariamente está asociado con un estudiante que presenta la prueba del Saber-Pro en un determinado periodo dado que pueden existir programas académicos que se encuentran inactivos y no se tienen en cuenta en los resultados obtenidos para analizar el desempeño de FAEDIS. Es decir, la relación de la entidad **Programa académico** hacia la entidad **Resultados Saber-Pro** respecto a la cardinalidad mínima implica que una instancia de la primera no necesariamente está asociada con al menos una instancia de la segunda entidad.
+
+Por otro lado, la cardinalidad máxima indica el número "tope" de instancias con las que se debería vincular:
+
+- `1` (uno): como máximo una instancia de una entidad está asociada con una sola instancia de otra entidad
+- `N` (muchos): una instancia de una entidad se puede vincular con varias instancias de otra entidad
+
+Por ejemplo, respecto al contexto de FAEDIS en la UMNG con base en la @fig-erd un estudiante que presenta la prueba en un determinado periodo debe estar asociado a lo más con un programa académico. En el caso en que un estudiante realice dos o más programas académicos y presente la prueba dentro de los registros de DATA ICFES respecto a `resultados-saber-pro.rds`, se consideran como dos o más instancias diferentes dentro de **Resultados Saber-Pro**. Es decir, la relación de la entidad **Resultados Saber-Pro** hacia la entidad **Programa académico** respecto a la cardinalidad máxima implica que una instancia de la primera está asociada a lo más con una instancia de la segunda entidad.
+
+En el otro sentido, un programa académico de FAEDIS puede estar asociado con muchos estudiantes que presentan la prueba del Saber-Pro en un determinado periodo porque muchos estudiantes pertenecientes a un mismo programa académico presentan la prueba en un mismo año. Es decir, la relación de la entidad **Programa académico** hacia la entidad **Resultados Saber-Pro** respecto a la cardinalidad máxima implica que una instancia de la primera está asociada con muchas instancias de la segunda entidad.
 
 ### Notación Crow's Foot
 
+Respecto a los elementos señalados en la @sec-relaciones existen diferentes tipos de notación para representar de manera gráfica la cardinalidad de las relaciones y los vínculos que existen entre entidades a través de las claves primarias y foráneas. En la @fig-erd se utiliza la notación **Crow's foot** para representar los vínculos entre las entidades así como su cardinalidad tanto mínima como máxima donde en la @tbl-symbols-crow-foot-notation se señalan los símbolos utilizados por esta notación y en la @tbl-relation-cardinality-crow-foot-notation la representación gráfica de la cardinalidad.
 
+A modo de ejemplo, la cardinalidad de la relación de la entidad **Departamento** hacia la entidad **Municipio** así como la cardinalidad de la relación de la entidad **Municipio** hacia la entidad **Departamento** se puede representar de manera compacta como la unión de ![](images/one-many.png){fig-alt="Cardinalidad uno o muchos en notación crow's foot" height=25} y de ![](images/one-one.png){fig-alt="Cardinalidad uno y solo uno en notación crow's foot" height=25} como ![](images/one-many-one-one.png){fig-alt="Unión cardinalidad uno o muchos y uno y solo uno en notación crow's foot" height=25}, tal como se señala en la @fig-erd. Es decir, en el contexto de la codificación DIVIPOLA un departamento está vinculado con al menos un municipio y a lo más con muchos municipios pero un municipio está vinculado con uno y solo un departamento.
+
+| Símbolo | Representación gráfica|
+|:---|:---:|
+| `0` (cero) | ![](images/zero.png){fig-alt="Símbolo cero en notación crow's foot" height=50} |
+| `1` (uno) | ![](images/one.png){fig-alt="Símbolo uno en notación crow's foot" height=50} |
+| `N` (muchos) | ![](images/many.png){fig-alt="Símbolo muchos en notación crow's foot" height=50} |
+
+: Símbolos en la notación Crow's Foot {#tbl-symbols-crow-foot-notation}
+
+| Cardinalidad | Representación gráfica|
+|:---|:---:|
+| `0` o `1` (mínimo cero, máximo uno) | ![](images/zero-one.png){fig-alt="Cardinalidad cero o uno en notación crow's foot" height=50} |
+| `0` o `N` (mínimo cero, máximo muchos) | ![](images/zero-many.png){fig-alt="Cardinalidad cero o muchos en notación crow's foot" height=50} |
+| `1` y solo `1` (mínimo uno, máximo uno) | ![](images/one-one.png){fig-alt="Cardinalidad uno y solo uno en notación crow's foot" height=50} |
+| `1` o `N` (mínimo uno, máximo muchos) | ![](images/one-many.png){fig-alt="Cardinalidad uno o muchos en notación crow's foot" height=50} |
+
+: Cardinalidad de una relación y representación gráfica usando la notación Crow's Foot {#tbl-relation-cardinality-crow-foot-notation}
 
 ## Verbos {#sec-verbs-two-tables}
 
+En el paquete `dplyr` para manipular, conectar o unir 2 tablas de datos correspondientes a 2 entidades utilizando claves primarias y foráneas existen 3 tipos de verbos:
 
+1. **Mutating joins** (uniones de transformación en español)
+2. **Filtering joins** (uniones de filtrado en español)
+3. **Set operations** (operaciones de conjuntos)
+
+Las **Mutating joins** permiten combinar variables de diferentes tablas correspondientes a 2 entidades. En la @sec-mutating-joins utilizando el esquema de la @fig-erd a partir de los archivos señalados en la @nte-1-chap-11 reconstruirás el archivo `2021-2024_saber-pro-genericas_faedis.rds` que se indicó en la @nte-1-chap-6 utilizando este tipo de verbos.
+
+### **Filtering joins**
+
+Las **Filtering joins** buscan coincidencias entre registros de la misma manera que las **Mutating joins**, pero afectan a las observaciones y no a las variables. Existen dos tipos:
+
+i. **Semi joins**: mantiene todas las observaciones de la tabla de una entidad que tienen una coincidencia en la tabla de otra entidad.
+ii. **Anti joins**: descarta todas las observaciones de la tabla de una entidad que tienen una coincidencia en la tabla de otra entidad.
+
+Para ilustrar un ejemplo concreto utilizarás los archivos `divipola-departamentos.rds` y `resultados-saber-pro.rds` que corresponden a las tablas de las entidades **Departamento** y **Resultado Saber-Pro** en la @fig-erd, tal como se señala a continuación:
+
+```{r}
+#| message: false
+
+# Cargar paquetes ----
+library(tidyverse)
+
+# Importar datos ----
+divipola_departamentos <- read_rds(
+  file = "data/divipola-departamentos.rds"
+)
+
+resultado_saber_pro <- read_rds(
+  file = "data/resultados-saber-pro.rds"
+)
+```
+
+Una vez importes las tablas, podrás darle un "vistazo" a cada una de ellas, tal como se señala a continuación:
+
+```{r}
+# Inspeccionar datos ----
+divipola_departamentos |>
+  glimpse()
+```
+
+```{r}
+resultado_saber_pro |>
+  glimpse()
+```
+
+Para utilizar los verbos de 2 tablas de `dplyr` una vez importadas las tablas es necesario entender a qué se refieren cada una de las variables que las componen. En ese sentido, a continuación se describen cada una de las variables en `divipola-departamentos.rds`:
+
+1. **codigo**: código único asociado a cada departamento de acuerdo con la codificación DIVIPOLA donde Colombia se compone de 32 departamentos y adicionalmente para fines estadísticos se codifica como departamento el Distrito Capital de Bogotá.
+2. **nombre**: nombre oficial del departamento de acuerdo con la codificación DIVIPOLA. 
+3. **latitud**: coordenada geográfica en grados decimales que mide la distancia respecto a la línea ecuatorial, indicando la posición norte-sur del punto representativo de cada departamento.
+4. **longitud**: coordenada geográfica en grados decimales que mide la distancia respecto al meridiano de Greenwich, indicando la posición este-oeste del punto representativo de cada departamento.
 
 ## Mutating joins {#sec-mutating-joins}

@@ -13,12 +13,12 @@ library(tidyverse)
 library(scales)
 ```
 
-Este capítulo se basa en [@wickham_ggplot2_2016] y [@wilke_fundamentals_2019] así como en la documentación oficial de [`ggplot2`](https://ggplot2.tidyverse.org/articles/ggplot2.html) y [`scales`](https://scales.r-lib.org/index.html) donde tiene como propósito utilizar el modelo mental de la gramática de gráficos en capas para visualizar proporciones para un conjunto determinado de grupos utilizando el paquete `ggplot2` e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).
+Este capítulo se basa en [@wickham_ggplot2_2016] y [@wilke_fundamentals_2019] así como en la documentación oficial de [`ggplot2`]({{< var url.packages.ggplot2 >}}) y [`scales`]({{< var url.packages.scales >}}) donde tiene como propósito utilizar el modelo mental de la gramática de gráficos en capas para visualizar proporciones para un conjunto determinado de grupos utilizando el paquete `ggplot2` e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).
 
 Exploraremos los siguientes aspectos:
 
 1. ¿Cómo visualizar la composición de un determinado grupo donde cada parte representa una proporción? 
-2. ¿Cómo ordenar las etiquetas correspondientes al eje de un gráfico con base a otra variable?
+2. ¿Cómo ordenar las etiquetas correspondientes al eje de un gráfico con base en otra variable?
 3. ¿Cómo controlar el formato de las etiquetas de los ejes en un gráfico?  
 
 :::: {#nte-1-chap-8 .callout-note}
@@ -94,13 +94,13 @@ saber_pro_genericas_faedis_2021_2024 <- read_rds(
 )
 ```
 
-En la @sec-messages respecto al @lst-load-tidyverse-message se señaló que al utilizar `library(tidyverse)` se cargaban un conjunto de paquetes. Estos paquetes conforman el núcleo del `tidyverse`. Sin embargo, al instalar el paquete `tidyverse` (ver @sec-installing-packages), se incluye un conjunto adicional de paquetes con un uso más específico. Estos paquetes por fuera del núcleo del `tidyverse` no se cargan al ejecutar `library(tidyverse)`, donde en caso que se requieran utilizar se necesitan cargar por separado utilizando la función `library()`.
+En la @sec-messages respecto al @lst-load-tidyverse-message se señaló que al utilizar `library(tidyverse)` se cargaba un conjunto de paquetes. Estos paquetes conforman el núcleo del `tidyverse`. Sin embargo, al instalar el paquete `tidyverse` (ver @sec-installing-packages), se incluye un conjunto adicional de paquetes con un uso más específico. Estos paquetes por fuera del núcleo del `tidyverse` no se cargan al ejecutar `library(tidyverse)`, donde en caso que se requieran utilizar se necesitan cargar por separado utilizando la función `library()`.
 
 Uno de estos paquetes por fuera del núcleo del `tidyverse` es `scales`. Este paquete contiene herramientas para modificar los cortes, las etiquetas y aplicar transformaciones a los ejes de un gráfico así como especificar otras paletas de colores. En el @sec-proportions utilizarás el paquete `scales` para controlar el formato de las etiquetas del eje asociado con la coordenada `x`.
 
 ### Gráfico de barras apiladas
 
-Una vez se carguen los paquetes que se utilizarán y se importen los datos, es posible utilizar las ideas desarrolladas en el @lst-geometry así como el atributo estético `fill` junto con la variable `estu_genero` como `fill = estu_genero` dentro de `aes()`en la función `geom_bar()`. También se puede aplicar el ajuste mencionado en la @sec-scales respecto a la longitud de las etiquetas en el eje asociado con la coordenada `y`, tal como se señala a continuación:
+Una vez se carguen los paquetes que se utilizarán y se importen los datos, es posible utilizar las ideas desarrolladas en el @lst-geometry así como el atributo estético `fill` junto con la variable `estu_genero` como `fill = estu_genero` dentro de `aes()` en la función `geom_bar()`. También se puede aplicar el ajuste mencionado en la @sec-scales respecto a la longitud de las etiquetas en el eje asociado con la coordenada `y`, tal como se señala a continuación:
 
 ```{r}
 #| lst-label: lst-stacked-bars
@@ -159,11 +159,11 @@ Por otra parte, en R los vectores lógicos experimentan una coerción automátic
 mean(estu_genero_muestra == "F")
 ```
 
-El proceso descrito anteriormente puede aplicarse a la columna `estu_prgm_academico` en el conjunto de datos `saber_pro_genericas_faedis_2021_2024` haciendo uso de la función `fct_reorder()`. Esta función permite ordenar un vector de caracteres con base a otra variable y haciendo uso de una función que corresponda usualmente a una estadística descriptiva, tal como se señala a continuación:
+El proceso descrito anteriormente puede aplicarse a la columna `estu_prgm_academico` en el conjunto de datos `saber_pro_genericas_faedis_2021_2024` haciendo uso de la función `fct_reorder()`. Esta función permite ordenar un vector de caracteres con base en otra variable y haciendo uso de una función que corresponda usualmente a una estadística descriptiva, tal como se señala a continuación:
 
 ```{r}
 #| lst-label: lst-fct-reorder
-#| lst-cap: Ordenamiento de etiquetas de un eje asociado a una coordenada utilizando la function `fct_reorder()`
+#| lst-cap: Ordenamiento de etiquetas de un eje asociado a una coordenada utilizando la función `fct_reorder()`
 ggplot(
   data = saber_pro_genericas_faedis_2021_2024,
   mapping = aes(
@@ -183,7 +183,7 @@ ggplot(
 ```
  
 
-En el @lst-fct-reorder se utiliza la función `fct_reorder()` para reordenar `estu_prgm_academico` con base a la variable auxiliar `estu_genero == "F"` asociada al parámetro `.x`, y haciendo uso de la función `mean` asociada al parámetro `.fun`. Internamente, `ggplot2` junto con `fct_reorder()` genera un vector lógico con base en la condición `estu_genero == "F"` y calcula la media aritmética para cada programa académico, lo que en este caso es equivalente a la proporción de inscritos del género femenino para cada grupo. Con base en esta estadística descriptiva, R reordena las etiquetas del eje asociadas a la coordenada `y`.
+En el @lst-fct-reorder se utiliza la función `fct_reorder()` para reordenar `estu_prgm_academico` con base en la variable auxiliar `estu_genero == "F"` asociada al parámetro `.x`, y haciendo uso de la función `mean` asociada al parámetro `.fun`. Internamente, `ggplot2` junto con `fct_reorder()` genera un vector lógico con base en la condición `estu_genero == "F"` y calcula la media aritmética para cada programa académico, lo que en este caso es equivalente a la proporción de inscritos del género femenino para cada grupo. Con base en esta estadística descriptiva, R reordena las etiquetas del eje asociadas a la coordenada `y`.
 
 ### Modificación de etiquetas
 
@@ -221,11 +221,11 @@ ggplot(
   )
 ```
 
-En el paquete `scales` existe un [conjunto de funciones auxiliares](https://scales.r-lib.org/reference/index.html#axis-labels) que se utilizan con el parámetro `labels` dentro de `ggplot2` para controlar el formato de las etiquetas en los ejes y las leyendas. En el @lst-label-percent-scale-fill-discrete dentro de la función `scale_x_continuous()` se incluyó la función `label_percent()` como argumento del parámetro `labels` para expresar los cortes como porcentajes. 
+En el paquete `scales` existe un [conjunto de funciones auxiliares]({{< var url.packages.scales_axis_labels >}}) que se utilizan con el parámetro `labels` dentro de `ggplot2` para controlar el formato de las etiquetas en los ejes y las leyendas. En el @lst-label-percent-scale-fill-discrete dentro de la función `scale_x_continuous()` se incluyó la función `label_percent()` como argumento del parámetro `labels` para expresar los cortes como porcentajes. 
 
-También para que exista claridad respecto a las categorías de la leyenda asociada con el género, a través del parámeto `labels` dentro de la función `scale_fill_discrete()`, se utilizó como argumento un vector de caracteres que describiera mejor los colores asociados con el gráfico. El uso de la función `scale_fill_discrete()` se utiliza debido a que se requiere modificar un aspecto relacionado con el atributo estético `fill` y las categorías asociadas con el género toman valores discretos (`discrete` en inglés).
+También para que exista claridad respecto a las categorías de la leyenda asociada con el género, a través del parámetro `labels` dentro de la función `scale_fill_discrete()`, se utilizó como argumento un vector de caracteres que describiera mejor los colores asociados con el gráfico. El uso de la función `scale_fill_discrete()` se utiliza debido a que se requiere modificar un aspecto relacionado con el atributo estético `fill` y las categorías asociadas con el género toman valores discretos (`discrete` en inglés).
 
-En relación al segundo aspecto se pueden eliminar o modificar diferentes etiquetas en el gráfico para incluir información de contexto mediante la función `labs()` de manera similar a como se procedió en el @lst-labs y el @lst-scale-fill-manual-legend. Sin embargo, en este caso, adicionalmente se puede hacer uso de la función `str_wrap()` perteneciente al paquete [`stringr`](https://stringr.tidyverse.org/), que se incluye dentro del `tidyverse` (ver @sec-messages), para controlar la longitud del título del gráfico, tal como se señala a continuación:
+En relación al segundo aspecto se pueden eliminar o modificar diferentes etiquetas en el gráfico para incluir información de contexto mediante la función `labs()` de manera similar a como se procedió en el @lst-labs y el @lst-scale-fill-manual-legend. Sin embargo, en este caso, adicionalmente se puede hacer uso de la función `str_wrap()` perteneciente al paquete [`stringr`]({{< var url.packages.stringr >}}), que se incluye dentro del `tidyverse` (ver @sec-messages), para controlar la longitud del título del gráfico, tal como se señala a continuación:
 
 ```{r}
 #| lst-label: lst-labs-str-wrap
@@ -314,4 +314,4 @@ ggplot(
   )
 ```
 
-De esa manera con el código señalado en el @lst-proportions-legend-position, es posible recrear finalmente la @fig-1-chap-8 para ilustrar la proporción de inscritos por género y programa académico utilizanto las variables `estu_prgm_academico` y `estu_genero`.
+De esa manera con el código señalado en el @lst-proportions-legend-position, es posible recrear finalmente la @fig-1-chap-8 para ilustrar la proporción de inscritos por género y programa académico utilizando las variables `estu_prgm_academico` y `estu_genero`.
