@@ -102,7 +102,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-98714a31b3ae9526786555a32f1b0b0e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-378a8c86fc35e5b2859682ec4cd4f2d4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -844,12 +844,12 @@ Importante&nbsp;5.1
 </div>
 <div class="callout-body-container callout-body">
 <p>En el <a href="#lst-tibble" class="quarto-xref">Listado&nbsp;<span>5.8</span></a> y en el desarrollo del <a href="#sec-how-do-i-code-in-r" class="quarto-xref"><span>Capítulo 5</span></a>, se utilizó una convención para nombrar variables similar a la descrita en la <a href="project-oriented_workflow.html#sec-how-to-name-files-folders" class="quarto-xref"><span>Sección 3.3</span></a>. Sin embargo, existe una excepción fundamental: no se utilizó el carácter <code>-</code>.</p>
-<p>En R, para que un nombre asociado a un objeto sea <strong>sintácticamente válido</strong>, debe cumplir con un conjunto de reglas que se pueden consultar con en el comando <code>?make.names</code> en la sección <strong>Details</strong>:</p>
+<p>En R, para que un nombre asociado a un objeto sea <strong>sintácticamente válido</strong>, debe cumplir con un conjunto de reglas que se pueden consultar con el comando <code>?make.names</code> en la sección <strong>Details</strong>:</p>
 <ol type="1">
 <li><p><strong>Caracteres permitidos</strong>: Solo puede contener letras, números, puntos (<code>.</code>) y guiones bajos, (<code>_</code>). El guion medio, (<code>-</code>), no está permitido porque R lo interpreta como el operador de resta.</p></li>
 <li><p><strong>Inicio del nombre</strong>: Debe comenzar obligatoriamente con una letra o con un punto, (<code>.</code>).</p></li>
 <li><p><strong>Restricción del punto</strong>: Si un nombre inicia con punto, el siguiente carácter no puede ser un número.</p></li>
-<li><p><strong>Palabras reservadas</strong>: No pueden utilizarse términos del lenguaje de programación de R que están reservados, como por ejemplo <code>if</code>, <code>else</code>, <code>for</code>, <code>TRUE</code> o <code>FALSE</code>. La lista completa se puede consultar con en el comando <code>?Reserved</code> en la sección <strong>Details</strong>.</p></li>
+<li><p><strong>Palabras reservadas</strong>: No pueden utilizarse términos del lenguaje de programación de R que están reservados, como por ejemplo <code>if</code>, <code>else</code>, <code>for</code>, <code>TRUE</code> o <code>FALSE</code>. La lista completa se puede consultar con el comando <code>?Reserved</code> en la sección <strong>Details</strong>.</p></li>
 </ol>
 <p>Aunque R permite técnicamente nombres como <code>.mi_variable</code>, <code>.Mi_Variable</code>, <code>ñi_variablé</code>, en este libro seguiremos las prácticas señaladas en la <a href="project-oriented_workflow.html#sec-how-to-name-files-folders" class="quarto-xref"><span>Sección 3.3</span></a>, pero ajustándolas para que generen nombres sintácticamente válidos.</p>
 <p>Esto implica 2 cambios principales respecto a nombrar carpetas o archivos: no se utilizará el carácter <code>-</code> donde se reemplazará por <code>_</code> y nunca se iniciará un nombre con números. Esta diferencia radica en que un sistema operativo es más flexible al nombrar archivos o carpetas mientras que R, al ser un lenguaje de programación, requiere reglas estrictas para evitar ambigüedades al ejecutar código.</p>
@@ -858,7 +858,7 @@ Importante&nbsp;5.1
 </section>
 <section id="sec-relational-operators" class="level2" data-number="5.5">
 <h2 data-number="5.5" class="anchored" data-anchor-id="sec-relational-operators"><span class="header-section-number">5.5</span> Operadores relacionales</h2>
-<p>Los operadores relacionales son operadores binarios que permiten la comparación de valores en vectores atómicos. Estos operadores son útiles por qué establecen condiciones lógicas para filtrar filas de interés en una tibble. En la <a href="#tbl-relational-operators" class="quarto-xref">Tabla&nbsp;<span>5.2</span></a> se señalan algunos de los operadores relacionales utilizados por R.</p>
+<p>Los operadores relacionales son operadores binarios que permiten la comparación de valores en vectores atómicos. Estos operadores son útiles porque establecen condiciones lógicas para filtrar filas de interés en una tibble. En la <a href="#tbl-relational-operators" class="quarto-xref">Tabla&nbsp;<span>5.2</span></a> se señalan algunos de los operadores relacionales utilizados por R.</p>
 <div id="tbl-relational-operators" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-relational-operators-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -920,8 +920,8 @@ Listado&nbsp;5.9: Uso de operadores relacionales para identificar un conjunto de
 <pre><code>[1] FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE</code></pre>
 </div>
 </div>
-<p>En el <a href="#lst-relational-operator-logical-condition" class="quarto-xref">Listado&nbsp;<span>5.9</span></a> se utiliza el operador <code>$</code> para extraer de la tibble <code>costo_matricula_pregrado</code> los valores de la variable <code>costo_matricula</code> para identificar si son mayores a la media del costo de matrícula, utilizando la función <code>mean()</code>. El resultado, es un vector atómico con valores lógicos (<code>FALSE</code> o <code>TRUE</code>) que identifica que valores dentro de <code>costo_matricula_pregrado$costo_matricula</code> cumplen o no cumplen con la condición. En ese sentido, en el resultado del <a href="#lst-relational-operator-logical-condition" class="quarto-xref">Listado&nbsp;<span>5.9</span></a> aquellas posiciones con valores <code>TRUE</code> corresponden a las posiciones de <code>costo_matricula_pregrado$costo_matricula</code> que cumplen con la condición, es decir que son mayores a la media del costo de matrícula.</p>
-<p>Al principio no pareciera claro cómo se puede utilizar el resultado generado en el <a href="#lst-relational-operator-logical-condition" class="quarto-xref">Listado&nbsp;<span>5.9</span></a>. Sin embargo, a continuación se señalará como un resultado con valores lógicos de <code>TRUE</code> o <code>FALSE</code> permite ser el insumo para poder filtrar filas con base a una determinada condición lógica de interés.</p>
+<p>En el <a href="#lst-relational-operator-logical-condition" class="quarto-xref">Listado&nbsp;<span>5.9</span></a> se utiliza el operador <code>$</code> para extraer de la tibble <code>costo_matricula_pregrado</code> los valores de la variable <code>costo_matricula</code> para identificar si son mayores a la media del costo de matrícula, utilizando la función <code>mean()</code>. El resultado, es un vector atómico con valores lógicos (<code>FALSE</code> o <code>TRUE</code>) que identifica qué valores dentro de <code>costo_matricula_pregrado$costo_matricula</code> cumplen o no cumplen con la condición. En ese sentido, en el resultado del <a href="#lst-relational-operator-logical-condition" class="quarto-xref">Listado&nbsp;<span>5.9</span></a> aquellas posiciones con valores <code>TRUE</code> corresponden a las posiciones de <code>costo_matricula_pregrado$costo_matricula</code> que cumplen con la condición, es decir que son mayores a la media del costo de matrícula.</p>
+<p>Al principio no pareciera claro cómo se puede utilizar el resultado generado en el <a href="#lst-relational-operator-logical-condition" class="quarto-xref">Listado&nbsp;<span>5.9</span></a>. Sin embargo, a continuación se señalará cómo un resultado con valores lógicos de <code>TRUE</code> o <code>FALSE</code> permite ser el insumo para poder filtrar filas con base a una determinada condición lógica de interés.</p>
 <p>A modo de ejemplo, si buscaras identificar los programas académicos con sus respectivos atributos que cumplen con la condición señalada en el <a href="#lst-relational-operator-logical-condition" class="quarto-xref">Listado&nbsp;<span>5.9</span></a>, es posible utilizar la función <code>filter()</code> del paquete <code>dplyr</code> de la siguiente forma:</p>
 <div class="cell">
 <div id="lst-filter-relational-operators" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
@@ -987,7 +987,7 @@ Tabla&nbsp;5.3: Operadores lógicos vectorizados en R
 </div>
 </figure>
 </div>
-<p>A modo de ejemplo, si buscaras identificar los programas académicos con sus respectivos atributos que cumplen con la condición señalada en el <a href="#lst-relational-operator-logical-condition" class="quarto-xref">Listado&nbsp;<span>5.9</span></a> y que además son menores al valor máximo respecto a la variable <code>costo_matrícula</code>, es posible utilizar la función <code>filter()</code> del paquete <code>dplyr</code> de la siguiente forma:</p>
+<p>A modo de ejemplo, si buscaras identificar los programas académicos con sus respectivos atributos que cumplen con la condición señalada en el <a href="#lst-relational-operator-logical-condition" class="quarto-xref">Listado&nbsp;<span>5.9</span></a> y que además son menores al valor máximo respecto a la variable <code>costo_matricula</code>, es posible utilizar la función <code>filter()</code> del paquete <code>dplyr</code> de la siguiente forma:</p>
 <div class="cell">
 <div id="lst-filter-logical-vectorized-operators" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">

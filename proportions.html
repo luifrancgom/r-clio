@@ -102,7 +102,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-98714a31b3ae9526786555a32f1b0b0e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-378a8c86fc35e5b2859682ec4cd4f2d4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -455,7 +455,7 @@ window.Quarto = {
 <p>Exploraremos los siguientes aspectos:</p>
 <ol type="1">
 <li>¿Cómo visualizar la composición de un determinado grupo donde cada parte representa una proporción?</li>
-<li>¿Cómo ordenar las etiquetas correspondientes al eje de un gráfico con base a otra variable?</li>
+<li>¿Cómo ordenar las etiquetas correspondientes al eje de un gráfico con base en otra variable?</li>
 <li>¿Cómo controlar el formato de las etiquetas de los ejes en un gráfico?</li>
 </ol>
 <div id="nte-1-chap-8" class="callout callout-style-default callout-note callout-titled">
@@ -503,11 +503,11 @@ Figura&nbsp;8.1: Resultado final de un gráfico de barras apiladas y normalizada
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"data/2021-2024_saber-pro-genericas_faedis.rds"</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>En la <a href="how_to_code_in_r.html#sec-messages" class="quarto-xref"><span>Sección 5.3.1</span></a> respecto al <a href="r_packages.html#lst-load-tidyverse-message" class="quarto-xref">Listado&nbsp;<span>4.1</span></a> se señaló que al utilizar <code>library(tidyverse)</code> se cargaban un conjunto de paquetes. Estos paquetes conforman el núcleo del <code>tidyverse</code>. Sin embargo, al instalar el paquete <code>tidyverse</code> (ver <a href="r_packages.html#sec-installing-packages" class="quarto-xref"><span>Sección 4.2</span></a>), se incluye un conjunto adicional de paquetes con un uso más específico. Estos paquetes por fuera del núcleo del <code>tidyverse</code> no se cargan al ejecutar <code>library(tidyverse)</code>, donde en caso que se requieran utilizar se necesitan cargar por separado utilizando la función <code>library()</code>.</p>
+<p>En la <a href="how_to_code_in_r.html#sec-messages" class="quarto-xref"><span>Sección 5.3.1</span></a> respecto al <a href="r_packages.html#lst-load-tidyverse-message" class="quarto-xref">Listado&nbsp;<span>4.1</span></a> se señaló que al utilizar <code>library(tidyverse)</code> se cargaba un conjunto de paquetes. Estos paquetes conforman el núcleo del <code>tidyverse</code>. Sin embargo, al instalar el paquete <code>tidyverse</code> (ver <a href="r_packages.html#sec-installing-packages" class="quarto-xref"><span>Sección 4.2</span></a>), se incluye un conjunto adicional de paquetes con un uso más específico. Estos paquetes por fuera del núcleo del <code>tidyverse</code> no se cargan al ejecutar <code>library(tidyverse)</code>, donde en caso que se requieran utilizar se necesitan cargar por separado utilizando la función <code>library()</code>.</p>
 <p>Uno de estos paquetes por fuera del núcleo del <code>tidyverse</code> es <code>scales</code>. Este paquete contiene herramientas para modificar los cortes, las etiquetas y aplicar transformaciones a los ejes de un gráfico así como especificar otras paletas de colores. En el <a href="#sec-proportions" class="quarto-xref"><span>Capítulo 8</span></a> utilizarás el paquete <code>scales</code> para controlar el formato de las etiquetas del eje asociado con la coordenada <code>x</code>.</p>
 <section id="gráfico-de-barras-apiladas" class="level3" data-number="8.2.1">
 <h3 data-number="8.2.1" class="anchored" data-anchor-id="gráfico-de-barras-apiladas"><span class="header-section-number">8.2.1</span> Gráfico de barras apiladas</h3>
-<p>Una vez se carguen los paquetes que se utilizarán y se importen los datos, es posible utilizar las ideas desarrolladas en el <a href="amounts.html#lst-geometry" class="quarto-xref">Listado&nbsp;<span>6.5</span></a> así como el atributo estético <code>fill</code> junto con la variable <code>estu_genero</code> como <code>fill = estu_genero</code> dentro de <code>aes()</code>en la función <code>geom_bar()</code>. También se puede aplicar el ajuste mencionado en la <a href="amounts.html#sec-scales" class="quarto-xref"><span>Sección 6.2.4</span></a> respecto a la longitud de las etiquetas en el eje asociado con la coordenada <code>y</code>, tal como se señala a continuación:</p>
+<p>Una vez se carguen los paquetes que se utilizarán y se importen los datos, es posible utilizar las ideas desarrolladas en el <a href="amounts.html#lst-geometry" class="quarto-xref">Listado&nbsp;<span>6.5</span></a> así como el atributo estético <code>fill</code> junto con la variable <code>estu_genero</code> como <code>fill = estu_genero</code> dentro de <code>aes()</code> en la función <code>geom_bar()</code>. También se puede aplicar el ajuste mencionado en la <a href="amounts.html#sec-scales" class="quarto-xref"><span>Sección 6.2.4</span></a> respecto a la longitud de las etiquetas en el eje asociado con la coordenada <code>y</code>, tal como se señala a continuación:</p>
 <div class="cell">
 <div id="lst-stacked-bars" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
@@ -594,12 +594,12 @@ Levels: F M</code></pre>
 <pre><code>[1] 0.6</code></pre>
 </div>
 </div>
-<p>El proceso descrito anteriormente puede aplicarse a la columna <code>estu_prgm_academico</code> en el conjunto de datos <code>saber_pro_genericas_faedis_2021_2024</code> haciendo uso de la función <code>fct_reorder()</code>. Esta función permite ordenar un vector de caracteres con base a otra variable y haciendo uso de una función que corresponda usualmente a una estadística descriptiva, tal como se señala a continuación:</p>
+<p>El proceso descrito anteriormente puede aplicarse a la columna <code>estu_prgm_academico</code> en el conjunto de datos <code>saber_pro_genericas_faedis_2021_2024</code> haciendo uso de la función <code>fct_reorder()</code>. Esta función permite ordenar un vector de caracteres con base en otra variable y haciendo uso de una función que corresponda usualmente a una estadística descriptiva, tal como se señala a continuación:</p>
 <div class="cell">
 <div id="lst-fct-reorder" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-fct-reorder-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listado&nbsp;8.3: Ordenamiento de etiquetas de un eje asociado a una coordenada utilizando la function <code>fct_reorder()</code>
+Listado&nbsp;8.3: Ordenamiento de etiquetas de un eje asociado a una coordenada utilizando la función <code>fct_reorder()</code>
 </figcaption>
 <div aria-describedby="lst-fct-reorder-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
@@ -629,7 +629,7 @@ Listado&nbsp;8.3: Ordenamiento de etiquetas de un eje asociado a una coordenada 
 </div>
 </div>
 </div>
-<p>En el <a href="#lst-fct-reorder" class="quarto-xref">Listado&nbsp;<span>8.3</span></a> se utiliza la función <code>fct_reorder()</code> para reordenar <code>estu_prgm_academico</code> con base a la variable auxiliar <code>estu_genero == "F"</code> asociada al parámetro <code>.x</code>, y haciendo uso de la función <code>mean</code> asociada al parámetro <code>.fun</code>. Internamente, <code>ggplot2</code> junto con <code>fct_reorder()</code> genera un vector lógico con base en la condición <code>estu_genero == "F"</code> y calcula la media aritmética para cada programa académico, lo que en este caso es equivalente a la proporción de inscritos del género femenino para cada grupo. Con base en esta estadística descriptiva, R reordena las etiquetas del eje asociadas a la coordenada <code>y</code>.</p>
+<p>En el <a href="#lst-fct-reorder" class="quarto-xref">Listado&nbsp;<span>8.3</span></a> se utiliza la función <code>fct_reorder()</code> para reordenar <code>estu_prgm_academico</code> con base en la variable auxiliar <code>estu_genero == "F"</code> asociada al parámetro <code>.x</code>, y haciendo uso de la función <code>mean</code> asociada al parámetro <code>.fun</code>. Internamente, <code>ggplot2</code> junto con <code>fct_reorder()</code> genera un vector lógico con base en la condición <code>estu_genero == "F"</code> y calcula la media aritmética para cada programa académico, lo que en este caso es equivalente a la proporción de inscritos del género femenino para cada grupo. Con base en esta estadística descriptiva, R reordena las etiquetas del eje asociadas a la coordenada <code>y</code>.</p>
 </section>
 <section id="modificación-de-etiquetas" class="level3" data-number="8.2.4">
 <h3 data-number="8.2.4" class="anchored" data-anchor-id="modificación-de-etiquetas"><span class="header-section-number">8.2.4</span> Modificación de etiquetas</h3>
@@ -680,7 +680,7 @@ Listado&nbsp;8.4: Modificación de las etiquetas en los cortes en el eje asociad
 </div>
 </div>
 <p>En el paquete <code>scales</code> existe un <a href="https://scales.r-lib.org/reference/index.html#axis-labels">conjunto de funciones auxiliares</a> que se utilizan con el parámetro <code>labels</code> dentro de <code>ggplot2</code> para controlar el formato de las etiquetas en los ejes y las leyendas. En el <a href="#lst-label-percent-scale-fill-discrete" class="quarto-xref">Listado&nbsp;<span>8.4</span></a> dentro de la función <code>scale_x_continuous()</code> se incluyó la función <code>label_percent()</code> como argumento del parámetro <code>labels</code> para expresar los cortes como porcentajes.</p>
-<p>También para que exista claridad respecto a las categorías de la leyenda asociada con el género, a través del parámeto <code>labels</code> dentro de la función <code>scale_fill_discrete()</code>, se utilizó como argumento un vector de caracteres que describiera mejor los colores asociados con el gráfico. El uso de la función <code>scale_fill_discrete()</code> se utiliza debido a que se requiere modificar un aspecto relacionado con el atributo estético <code>fill</code> y las categorías asociadas con el género toman valores discretos (<code>discrete</code> en inglés).</p>
+<p>También para que exista claridad respecto a las categorías de la leyenda asociada con el género, a través del parámetro <code>labels</code> dentro de la función <code>scale_fill_discrete()</code>, se utilizó como argumento un vector de caracteres que describiera mejor los colores asociados con el gráfico. El uso de la función <code>scale_fill_discrete()</code> se utiliza debido a que se requiere modificar un aspecto relacionado con el atributo estético <code>fill</code> y las categorías asociadas con el género toman valores discretos (<code>discrete</code> en inglés).</p>
 <p>En relación al segundo aspecto se pueden eliminar o modificar diferentes etiquetas en el gráfico para incluir información de contexto mediante la función <code>labs()</code> de manera similar a como se procedió en el <a href="amounts.html#lst-labs" class="quarto-xref">Listado&nbsp;<span>6.9</span></a> y el <a href="distributions.html#lst-scale-fill-manual-legend" class="quarto-xref">Listado&nbsp;<span>7.6</span></a>. Sin embargo, en este caso, adicionalmente se puede hacer uso de la función <code>str_wrap()</code> perteneciente al paquete <a href="https://stringr.tidyverse.org/"><code>stringr</code></a>, que se incluye dentro del <code>tidyverse</code> (ver <a href="how_to_code_in_r.html#sec-messages" class="quarto-xref"><span>Sección 5.3.1</span></a>), para controlar la longitud del título del gráfico, tal como se señala a continuación:</p>
 <div class="cell">
 <div id="lst-labs-str-wrap" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
@@ -793,7 +793,7 @@ Listado&nbsp;8.6: Uso de la función <code>theme()</code> para modificar la posi
 </div>
 </div>
 </div>
-<p>De esa manera con el código señalado en el <a href="#lst-proportions-legend-position" class="quarto-xref">Listado&nbsp;<span>8.6</span></a>, es posible recrear finalmente la <a href="#fig-1-chap-8" class="quarto-xref">Figura&nbsp;<span>8.1</span></a> para ilustrar la proporción de inscritos por género y programa académico utilizanto las variables <code>estu_prgm_academico</code> y <code>estu_genero</code>.</p>
+<p>De esa manera con el código señalado en el <a href="#lst-proportions-legend-position" class="quarto-xref">Listado&nbsp;<span>8.6</span></a>, es posible recrear finalmente la <a href="#fig-1-chap-8" class="quarto-xref">Figura&nbsp;<span>8.1</span></a> para ilustrar la proporción de inscritos por género y programa académico utilizando las variables <code>estu_prgm_academico</code> y <code>estu_genero</code>.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">

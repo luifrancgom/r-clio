@@ -102,7 +102,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-98714a31b3ae9526786555a32f1b0b0e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-378a8c86fc35e5b2859682ec4cd4f2d4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/kbd/kbd.js"></script>
 <link href="site_libs/quarto-contrib/kbd/kbd.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -428,10 +428,10 @@ div.csl-indent {
 </ol>
 <section id="sec-what-are-r-packages" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="sec-what-are-r-packages"><span class="header-section-number">4.1</span> ¿Qué son los paquetes en R?</h2>
-<p>En R un paquete, en términos simples, es una carpeta organizada de cierta forma que alguién más creó que te brinda herramientas listas para usar con el objetivo de realizar una tarea específica o extender la funcionalidad base de R. De hecho, cuando instalas R por primera vez, este ya viene con un grupo de paquetes estandar (o de base) por defecto que le permiten funcionar y realizar ciertas tareas. Independientemente de si un paquete esta incluido en R por defecto o tiene como proposito extender su funcionalidad, su estructura siempre consta de 3 elementos <span class="citation" data-cites="wickham_r_2023-1">(<a href="references.html#ref-wickham_r_2023-1" role="doc-biblioref">Wickham &amp; Bryan, 2023</a>)</span>:</p>
+<p>En R un paquete, en términos simples, es una carpeta organizada de cierta forma que alguien más creó que te brinda herramientas listas para usar con el objetivo de realizar una tarea específica o extender la funcionalidad base de R. De hecho, cuando instalas R por primera vez, este ya viene con un grupo de paquetes estándar (o de base) por defecto que le permiten funcionar y realizar ciertas tareas. Independientemente de si un paquete está incluido en R por defecto o tiene como propósito extender su funcionalidad, su estructura siempre consta de 3 elementos <span class="citation" data-cites="wickham_r_2023-1">(<a href="references.html#ref-wickham_r_2023-1" role="doc-biblioref">Wickham &amp; Bryan, 2023</a>)</span>:</p>
 <ul>
 <li><p><strong>Funciones</strong>: son instrucciones predefinidas que reciben una información, la procesan y entregan un resultado para realizar una tarea específica de manera automática.</p></li>
-<li><p><strong>Documentación</strong>: es la guía que explica que hace cada función, que requiere para funcionar y que resultado genera.</p></li>
+<li><p><strong>Documentación</strong>: es la guía que explica qué hace cada función, qué requiere para funcionar y qué resultado genera.</p></li>
 <li><p><strong>Datos de muestra</strong>: son conjuntos de datos para ilustrar el funcionamiento de las funciones.</p></li>
 </ul>
 <p>Para entender cómo funcionan los paquetes en R se puede utilizar una analogía con las aplicaciones de un celular <span class="citation" data-cites="ismay_statistical_2025">(<a href="references.html#ref-ismay_statistical_2025" role="doc-biblioref">Ismay, 2025, Capítulo 1</a>)</span>. Cuando compras un celular nuevo, este viene por defecto con aplicaciones para que se pueda utilizar. Sin embargo, de acuerdo a las necesidades de cada usuario se instalan otras aplicaciones adicionales para extender la funcionalidad del celular de tal manera que se cubran los requerimientos que cada individuo necesita (ver <a href="how_to_code_in_r.html#fig-1-chap-4" class="quarto-xref">Figura&nbsp;<span>5.1</span></a>).</p>
@@ -480,7 +480,7 @@ Nota&nbsp;4.1
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>En caso que este utilizando Posit Workbench, de acuerdo a lo señalado en la <a href="welcome_to_r.html#sec-posit-workbench" class="quarto-xref"><span>Sección 2.3</span></a>, es posible que el proceso descrito a continuación no debas realizarlo. En algunas ocasiones el administrador de esta herramienta puede haber instalado ciertos paquetes con anterioridad.</p>
+<p>En caso de que estés utilizando Posit Workbench, de acuerdo a lo señalado en la <a href="welcome_to_r.html#sec-posit-workbench" class="quarto-xref"><span>Sección 2.3</span></a>, es posible que el proceso descrito a continuación no debas realizarlo. En algunas ocasiones el administrador de esta herramienta puede haber instalado ciertos paquetes con anterioridad.</p>
 <p>Para el caso de Posit Workbench ubica la pestaña <strong>Console</strong> en el <strong>Panel</strong> (Ver la <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) y, tras el símbolo <code>&gt;</code> escribe el comando <code>library(tidyverse)</code>, luego presiona <kbd title="Enter" aria-hidden="true">Enter</kbd><span class="visually-hidden">Enter</span>. Si te aparece un mensaje similar al señalado en el <a href="#lst-load-tidyverse-message" class="quarto-xref">Listado&nbsp;<span>4.1</span></a> no es necesario que realices alguna instalación y puedes dirigirte directamente a la <a href="#sec-load-packages" class="quarto-xref"><span>Sección 4.3</span></a>. En caso contrario, si se genera un mensaje igual o similar a:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Error<span class="sc">:</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>there is no package called ‘tidyverse’</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
@@ -500,7 +500,7 @@ Importante&nbsp;4.1
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Al instalar un paquete en R, asegúrate de escribir su nombre entre comillas (<code>""</code>). De lo contrario, la instalación fallará. Por ahora, no te preocupes por la razón detrás de éste aspecto. Lo importante es que te asegures que puedas saber cómo instalar un paquete en R.</p>
+<p>Al instalar un paquete en R, asegúrate de escribir su nombre entre comillas (<code>""</code>). De lo contrario, la instalación fallará. Por ahora, no te preocupes por la razón detrás de este aspecto. Lo importante es que te asegures que puedas saber cómo instalar un paquete en R.</p>
 </div>
 </div>
 </section>
@@ -546,15 +546,15 @@ Nota&nbsp;4.2
 </section>
 <section id="sec-package-usage" class="level2" data-number="4.4">
 <h2 data-number="4.4" class="anchored" data-anchor-id="sec-package-usage"><span class="header-section-number">4.4</span> Uso de paquetes</h2>
-<p>Para entender cómo utilizar un paquete, explorarás tu primer conjunto de datos en R utilizando el paquete <code>tidyverse</code>. Primero, cierra la ventana de Positron si seguiste las instrucciones descritas en la <a href="welcome_to_r.html#sec-how-to-install-r-positron" class="quarto-xref"><span>Sección 2.2</span></a> y abre la carpeta <code>r-analisis-datos</code> (ver <a href="project-oriented_workflow.html#sec-project-oriented-workflow-positron-r" class="quarto-xref"><span>Sección 3.2</span></a>) utilizando las opciones <strong>File &gt; Open Folder…</strong> que podrás encontrar en el menú superior izquierdo de la interfaz. En caso que estes utilizando Posit Workbench (ver <a href="welcome_to_r.html#sec-posit-workbench" class="quarto-xref"><span>Sección 2.3</span></a>) abre una sesión con el proyecto <code>r-analisis-datos</code>, creado de acuerdo a lo señalado en la <a href="project-oriented_workflow.html#sec-project-oriented-workflow-positron-r" class="quarto-xref"><span>Sección 3.2</span></a>.</p>
-<p>Luego, en la <strong>Barra de actividades</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) selecciona el ícono <img src="images/file-regular-full.png" alt="Ícono del explorador de archivos" height="25"> y párate con el puntero del ratón en la <strong>Barra lateral primaria</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) donde al lado izquierdo de la etiqueta <code>R-ANALISIS-DATOS</code> podrás encontrar en el segundo ícono de izquierda a derecha la opción de crear una carpeta. Crea la carpeta con el nombre <code>004_paquetes-r</code> y dentro de la carpeta también en la <strong>Barra lateral primaria</strong> utiliza el primer ícono de izquierda a derecha para crear un archivo con el nombre <code>001_uso-paquetes.R</code>. De esa manera podras abrirlo en el <strong>Editor</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) tal como se muestra en la <a href="#fig-2-chap-4" class="quarto-xref">Figura&nbsp;<span>4.2</span></a>:</p>
+<p>Para entender cómo utilizar un paquete, explorarás tu primer conjunto de datos en R utilizando el paquete <code>tidyverse</code>. Primero, cierra la ventana de Positron si seguiste las instrucciones descritas en la <a href="welcome_to_r.html#sec-how-to-install-r-positron" class="quarto-xref"><span>Sección 2.2</span></a> y abre la carpeta <code>r-analisis-datos</code> (ver <a href="project-oriented_workflow.html#sec-project-oriented-workflow-positron-r" class="quarto-xref"><span>Sección 3.2</span></a>) utilizando las opciones <strong>File &gt; Open Folder…</strong> que podrás encontrar en el menú superior izquierdo de la interfaz. En caso de que estés utilizando Posit Workbench (ver <a href="welcome_to_r.html#sec-posit-workbench" class="quarto-xref"><span>Sección 2.3</span></a>) abre una sesión con el proyecto <code>r-analisis-datos</code>, creado de acuerdo a lo señalado en la <a href="project-oriented_workflow.html#sec-project-oriented-workflow-positron-r" class="quarto-xref"><span>Sección 3.2</span></a>.</p>
+<p>Luego, en la <strong>Barra de actividades</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) selecciona el ícono <img src="images/file-regular-full.png" alt="Ícono del explorador de archivos" height="25"> y párate con el puntero del ratón en la <strong>Barra lateral primaria</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) donde al lado izquierdo de la etiqueta <code>R-ANALISIS-DATOS</code> podrás encontrar en el segundo ícono de izquierda a derecha la opción de crear una carpeta. Crea la carpeta con el nombre <code>004_paquetes-r</code> y dentro de la carpeta también en la <strong>Barra lateral primaria</strong> utiliza el primer ícono de izquierda a derecha para crear un archivo con el nombre <code>001_uso-paquetes.R</code>. De esa manera podrás abrirlo en el <strong>Editor</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) tal como se muestra en la <a href="#fig-2-chap-4" class="quarto-xref">Figura&nbsp;<span>4.2</span></a>:</p>
 <div id="fig-2-chap-4" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Captura de pantalla de Positron que muestra la carpeta 004_paquetes-r dentro del proyecto R-ANALISIS-DATOS, conteniendo el archivo 001_uso-paquetes.R abierto en el editor">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-2-chap-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/fig-2-chap-4.png" class="img-fluid figure-img" alt="Captura de pantalla de Positron que muestra la carpeta 004_paquetes-r dentro del proyecto R-ANALISIS-DATOS, conteniendo el archivo 001_uso-paquetes.R abierto en el editor">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-chap-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.2: Estructura de carpetas y archivos para explorar tu primer conjuntos de datos
+Figura&nbsp;4.2: Estructura de carpetas y archivos para explorar tu primer conjunto de datos
 </figcaption>
 </figure>
 </div>
@@ -583,18 +583,18 @@ Nota&nbsp;4.3
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Cada vez que requieras ver el resultado de una línea de código que se encuentra dentro de un archivo con extensión <code>.R</code> sitúa el cursor (<code>|</code>) sobre la línea de código y presiona la combinación de teclas <kbd title="linux: Ctrl-Enter, mac: Command-Enter, windows: Ctrl-Enter" aria-hidden="true" data-linux="Ctrl-Enter" data-mac="Command-Enter" data-windows="Ctrl-Enter"></kbd><span class="visually-hidden"></span>. De ahora en adelante nos referimos a éste proceso como <strong>ejecutar el código</strong>.</p>
+<p>Cada vez que requieras ver el resultado de una línea de código que se encuentra dentro de un archivo con extensión <code>.R</code> sitúa el cursor (<code>|</code>) sobre la línea de código y presiona la combinación de teclas <kbd title="linux: Ctrl-Enter, mac: Command-Enter, windows: Ctrl-Enter" aria-hidden="true" data-linux="Ctrl-Enter" data-mac="Command-Enter" data-windows="Ctrl-Enter"></kbd><span class="visually-hidden"></span>. De ahora en adelante nos referimos a este proceso como <strong>ejecutar el código</strong>.</p>
 </div>
 </div>
 <p>En el <a href="#lst-load-tidyverse" class="quarto-xref">Listado&nbsp;<span>4.2</span></a> el símbolo <code>#</code> permite agregar comentarios para entender los comandos que escribimos y <code>----</code> genera secciones para mantener organizado el contenido dentro de un archivo con extensión <code>.R</code> donde las señala en la <strong>Barra lateral primaria</strong> en la sección <strong>OUTLINE</strong> (ver <a href="#fig-3-chap-4" class="quarto-xref">Figura&nbsp;<span>4.3</span></a>) en Positron.</p>
-<p>Un archivo con extensión <code>.R</code> por si sólo no genera ningún resultado. Por ello, debes utilizar la combinación de teclas mencionada anteriormente para ejecutar los comandos en el <strong>Editor</strong> y mostrar el resultado señalado en el <a href="#lst-load-tidyverse-message" class="quarto-xref">Listado&nbsp;<span>4.1</span></a> en el <strong>Panel</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) dentro de la pestaña <strong>CONSOLE</strong>.</p>
+<p>Un archivo con extensión <code>.R</code> por sí solo no genera ningún resultado. Por ello, debes utilizar la combinación de teclas mencionada anteriormente para ejecutar los comandos en el <strong>Editor</strong> y mostrar el resultado señalado en el <a href="#lst-load-tidyverse-message" class="quarto-xref">Listado&nbsp;<span>4.1</span></a> en el <strong>Panel</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) dentro de la pestaña <strong>CONSOLE</strong>.</p>
 <div id="fig-3-chap-4" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Vista de la barra lateral primaria de Positron donde se observa la sección OUTLINE mostrando la etiqueta 'Cargar librerías', la cual se genera automáticamente a partir de los guiones en en el archivo '001_uso-paquetes.R'">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-3-chap-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/fig-3-chap-4.png" class="img-fluid figure-img" alt="Vista de la barra lateral primaria de Positron donde se observa la sección OUTLINE mostrando la etiqueta 'Cargar librerías', la cual se genera automáticamente a partir de los guiones en en el archivo '001_uso-paquetes.R'">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-chap-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.3: Sección OUTLINE dentro de la Barra laterla primaria de Positron
+Figura&nbsp;4.3: Sección OUTLINE dentro de la Barra lateral primaria de Positron
 </figcaption>
 </figure>
 </div>
@@ -650,8 +650,8 @@ Listado&nbsp;4.4: Uso del símbolo <code>?</code> para consultar documentación 
 </figure>
 </div>
 </div>
-<p>Si ejecutas éste código, en la <strong>Barra lateral secundaria</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) dentro de la pestaña <strong>HELP</strong>, se desplegará la documentación relacionada con <code>mpg</code>.</p>
-<p>En Positron también se puede utilizar una herramienta denominada <a href="https://positron.posit.co/data-explorer.html">Explorador de Datos</a> para visualizar la información en una cuadrícula similar a una hoja de cálculo, así como filtar y ordenar los datos temporalmente y obtener estadísticas de cada variable. Para utilizar ésta herramienta ejecuta el siguiente código:</p>
+<p>Si ejecutas este código, en la <strong>Barra lateral secundaria</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) dentro de la pestaña <strong>HELP</strong>, se desplegará la documentación relacionada con <code>mpg</code>.</p>
+<p>En Positron también se puede utilizar una herramienta denominada <a href="https://positron.posit.co/data-explorer.html">Explorador de Datos</a> para visualizar la información en una cuadrícula similar a una hoja de cálculo, así como filtrar y ordenar los datos temporalmente y obtener estadísticas de cada variable. Para utilizar esta herramienta ejecuta el siguiente código:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Uso del explorador de datos ----</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(mpg)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
@@ -667,7 +667,7 @@ Figura&nbsp;4.4: Interfaz del explorador de datos aplicado a <code>mpg</code>
 </figcaption>
 </figure>
 </div>
-<p>En ocasiones se hace necesario poder dar un “vistazo” a un conjunto de datos cuando se tiene un número considerable de columnas. En ese sentido, otra forma adicional de explorar un conjunto de datos, es mediante el uso de la función <code>glimpse()</code>. Esta función permite visualizar los nombres de las columnas verticalmente hacia abajo y los datos correspondientes a cada variable de manera horizontal. Para utilizar ésta herramienta ejecuta el siguiente código:</p>
+<p>En ocasiones se hace necesario poder dar un “vistazo” a un conjunto de datos cuando se tiene un número considerable de columnas. En ese sentido, otra forma adicional de explorar un conjunto de datos, es mediante el uso de la función <code>glimpse()</code>. Esta función permite visualizar los nombres de las columnas verticalmente hacia abajo y los datos correspondientes a cada variable de manera horizontal. Para utilizar esta herramienta ejecuta el siguiente código:</p>
 <div class="cell">
 <div id="lst-glimpse" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
@@ -697,7 +697,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "com…</code></pre>
 </div>
 </div>
 <p>De esa manera tal como se muestra anteriormente es posible visualizar en su totalidad los nombres de las columnas sin importar el ancho de la pantalla de tu equipo, así como el tipo de cada columna y una parte de los datos asociados a cada variable. Este aspecto es útil, particularmente cuando se tiene un conjunto de datos con una cantidad considerable de columnas.</p>
-<p>Por último, en ciertos contextos puede ser útil extraer y explorar sólo una variable dentro de un conjunto de datos. En R existen diversas formas de lograr esto. Sin embargo, señalaremos sólo 2 alternativas, enfocándonos en el uso del operador <code>$</code>, que está incluído por defecto en R, y la función <code>pull()</code> del paquete <code>dplyr</code>, que hace parte del paquete <code>tidyverse</code>.</p>
+<p>Por último, en ciertos contextos puede ser útil extraer y explorar solo una variable dentro de un conjunto de datos. En R existen diversas formas de lograr esto. Sin embargo, señalaremos solo 2 alternativas, enfocándonos en el uso del operador <code>$</code>, que está incluido por defecto en R, y la función <code>pull()</code> del paquete <code>dplyr</code>, que hace parte del paquete <code>tidyverse</code>.</p>
 <p>Si se buscara, por ejemplo, extraer la variable <code>manufacturer</code> de <code>mpg</code> con el operador <code>$</code> puedes ejecutar el siguiente código:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracción de columnas ----</span></span>

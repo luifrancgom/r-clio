@@ -67,7 +67,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-98714a31b3ae9526786555a32f1b0b0e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-378a8c86fc35e5b2859682ec4cd4f2d4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/kbd/kbd.js"></script>
 <link href="site_libs/quarto-contrib/kbd/kbd.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -443,7 +443,7 @@ Nota&nbsp;3.1
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>En la <a href="#sec-project-oriented-workflow-positron-r" class="quarto-xref"><span>Sección 3.2</span></a> abordaremos de manera práctica en Positron como se materializan los aspectos mencionados en ésta sección. Si algunos elementos no se entienden a profundidad con la generación de un proyecto de R en Positron quedarán más claros estos aspectos.</p>
+<p>En la <a href="#sec-project-oriented-workflow-positron-r" class="quarto-xref"><span>Sección 3.2</span></a> abordaremos de manera práctica en Positron cómo se materializan los aspectos mencionados en esta sección. Si algunos elementos no se entienden a profundidad con la generación de un proyecto de R en Positron quedarán más claros estos aspectos.</p>
 </div>
 </div>
 </section>
@@ -476,7 +476,7 @@ Nota&nbsp;3.3
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Si deseas profundizar en éstas opciones más adelante, cuando estes familiarizado con R y Positron, puedes consultar <span class="citation" data-cites="bryan_happy_2025">(<a href="references.html#ref-bryan_happy_2025" role="doc-biblioref">Bryan &amp; Hester, 2025</a>)</span> y la <a href="https://rstudio.github.io/renv/index.html">documentación oficial</a> de <code>renv</code></p>
+<p>Si deseas profundizar en estas opciones más adelante, cuando estés familiarizado con R y Positron, puedes consultar <span class="citation" data-cites="bryan_happy_2025">(<a href="references.html#ref-bryan_happy_2025" role="doc-biblioref">Bryan &amp; Hester, 2025</a>)</span> y la <a href="https://rstudio.github.io/renv/index.html">documentación oficial</a> de <code>renv</code>.</p>
 </div>
 </div>
 </section>
@@ -486,7 +486,7 @@ Nota&nbsp;3.3
 <ol type="1">
 <li><p><strong>Legible por máquinas:</strong> los nombres deben estar optimizados para el procesamiento automatizado, basándose en 2 pilares.</p>
 <ul>
-<li><p><strong>Compatibilidad con búsquedas y automatización</strong>: un nombre debe prescindir de espacios en blanco, signos de puntuación (p.&nbsp;ej., <code>.</code>, <code>,</code>, <code>;</code>, <code>:</code>)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> y caractéres acentuados (p.&nbsp;ej., <code>á</code>, <code>ñ</code>, <code>ü</code>) así como usar preferiblemente minúsculas.</p></li>
+<li><p><strong>Compatibilidad con búsquedas y automatización</strong>: un nombre debe prescindir de espacios en blanco, signos de puntuación (p.&nbsp;ej., <code>.</code>, <code>,</code>, <code>;</code>, <code>:</code>)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> y caracteres acentuados (p.&nbsp;ej., <code>á</code>, <code>ñ</code>, <code>ü</code>) así como usar preferiblemente minúsculas.</p></li>
 <li><p><strong>Facilidad de cómputo</strong>: es necesario utilizar de manera deliberada delimitadores como <code>_</code> o <code>-</code>, facilitando que el sistema operativo o R fragmente el nombre y recupere datos automáticamente.</p></li>
 </ul></li>
 </ol>
@@ -499,7 +499,7 @@ Nota&nbsp;3.3
 <li><p><strong>Compatible con el ordenamiento por defecto:</strong> un nombre debe permitir que aparezca en la secuencia lógica deseada de forma automática, basándose en 3 pilares.</p>
 <ul>
 <li><p><strong>Priorizar el uso de números al inicio:</strong> colocar un identificador numérico al comienzo del nombre garantiza que los archivos o carpetas se listen siguiendo una jerarquía del proyecto, en lugar de un orden alfabético aleatorio.</p></li>
-<li><p><strong>Utilizar el estándar <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> para fechas:</strong> si el nombre incluye fechas utilizar el formato <strong>AAAA-MM-DD</strong> (Año-Mes-Día).</p></li>
+<li><p><strong>Utilizar el estándar <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a></strong> para fechas: si el nombre incluye fechas utilizar el formato <strong>AAAA-MM-DD</strong> (Año-Mes-Día).</p></li>
 <li><p><strong>Rellenar números con ceros a la izquierda:</strong> para mantener el orden se deben usar ceros (p.&nbsp;ej., <code>000</code>, <code>001</code>, <code>002</code>, … , <code>010</code>, …) en lugar de números simples (<code>0</code>, <code>1</code>, <code>2</code>, … , <code>10</code>, …). Sin los ceros iniciales, un sistema operativo situará el <code>10</code> inmediatamente después del <code>1</code>, rompiendo la secuencia lógica.</p></li>
 </ul></li>
 </ol>
