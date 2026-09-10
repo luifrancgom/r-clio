@@ -222,15 +222,16 @@ ggplot(
 
 Como resultado de la ejecución del código del @lst-color-fill-fix-var se genera una visualización tanto del puntaje numérico como de los niveles de desempeño del módulo de inglés. Este aspecto es posible incluirlo debido a que la función `geom_histogram()` contiene un ajuste de posición (ver @sec-position) a través del parámetro `position` con el argumento `"stack"`, como `position = "stack"`. Si se consulta la documentación de esta función (`?geom_histogram`) en la sección **Usage**, se encontrará que esta es la configuración por defecto que se utiliza. Es decir, el ajuste de posición permite apilar contenedores cuando se agrupan los valores por una variable categórica como `mod_ingles_desem` y existen diferentes grupos que están incluidos dentro de un mismo contenedor.    
 
-Adicionalmente, en el gráfico generado por el código del @lst-color-fill-fix-var `ggplot2` utiliza una paleta de colores por defecto cuando se asocia el parámetro `fill` con el argumento `mod_ingles_desem`. En particular, la paleta de colores que utiliza `ggplot2` para una variable categórica con 4 valores como `mod_ingles_desem` es:
+Adicionalmente, en el gráfico generado por el código del @lst-color-fill-fix-var `ggplot2` utiliza una paleta de colores por defecto cuando se asocia el parámetro `fill` con el argumento `mod_ingles_desem`. En particular, la paleta de colores que utiliza `ggplot2` para una variable categórica ordenada con 4 valores como `mod_ingles_desem` es:
 
 ```{r}
 #| echo: false
 #| fig-height: 1.5
-# See the source code of scale_fill_discrete()
-# in relation to fallback.palette = pal_hue()
+# See the source code of scale_fill_viridis_d
+# from the scales package in relation to
+# palette = pal_viridis(alpha, begin, end, direction, option)
 show_palette(
-  hex_codes = pal_hue()(4),
+  hex_codes = pal_viridis()(4),
   n_col = 4,
   size = 4
 )
