@@ -401,7 +401,7 @@ div.csl-indent {
   </ul></li>
   <li><a href="#sec-verbs-two-tables" id="toc-sec-verbs-two-tables" class="nav-link" data-scroll-target="#sec-verbs-two-tables"><span class="header-section-number">11.5</span> Verbos</a>
   <ul class="collapse">
-  <li><a href="#filtering-joins" id="toc-filtering-joins" class="nav-link" data-scroll-target="#filtering-joins"><span class="header-section-number">11.5.1</span> Filtering joins</a></li>
+  <li><a href="#sec-filtering-joins" id="toc-sec-filtering-joins" class="nav-link" data-scroll-target="#sec-filtering-joins"><span class="header-section-number">11.5.1</span> Filtering joins</a></li>
   </ul></li>
   <li><a href="#sec-mutating-joins" id="toc-sec-mutating-joins" class="nav-link" data-scroll-target="#sec-mutating-joins"><span class="header-section-number">11.6</span> Mutating joins</a>
   <ul class="collapse">
@@ -409,6 +409,11 @@ div.csl-indent {
   <li><a href="#sec-left-joins" id="toc-sec-left-joins" class="nav-link" data-scroll-target="#sec-left-joins"><span class="header-section-number">11.6.2</span> Left joins</a></li>
   <li><a href="#sec-right-joins" id="toc-sec-right-joins" class="nav-link" data-scroll-target="#sec-right-joins"><span class="header-section-number">11.6.3</span> Right joins</a></li>
   <li><a href="#sec-full-joins" id="toc-sec-full-joins" class="nav-link" data-scroll-target="#sec-full-joins"><span class="header-section-number">11.6.4</span> Full joins</a></li>
+  </ul></li>
+  <li><a href="#sec-case-study-mutating-joins" id="toc-sec-case-study-mutating-joins" class="nav-link" data-scroll-target="#sec-case-study-mutating-joins"><span class="header-section-number">11.7</span> Caso de estudio: consolidación de resultados Saber-Pro para FAEDIS</a>
+  <ul class="collapse">
+  <li><a href="#sec-variable-description-case-study-mutating-joins" id="toc-sec-variable-description-case-study-mutating-joins" class="nav-link" data-scroll-target="#sec-variable-description-case-study-mutating-joins"><span class="header-section-number">11.7.1</span> Descripción de variables</a></li>
+  <li><a href="#ajuste-de-datos" id="toc-ajuste-de-datos" class="nav-link" data-scroll-target="#ajuste-de-datos"><span class="header-section-number">11.7.2</span> Ajuste de datos</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/two_table_verbs.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/two_table_verbs.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
@@ -595,7 +600,7 @@ Advertencia&nbsp;11.1
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>En la <a href="#sec-mutating-joins" class="quarto-xref"><span>Sección 11.6</span></a> utilizando <code>resultados-saber-pro.rds</code> respecto a los archivos señalados en <a href="#nte-1-chap-11" class="quarto-xref">Nota&nbsp;<span>11.1</span></a> se ajustará este aspecto debido a que la fuente donde se obtuvieron los datos (Data Icfes), utiliza por defecto a Bogotá como departamento de presentación del examen cuando se presenta la prueba Saber Pro en el exterior. También ocurre un comportamiento similar en este contexto para el caso de <code>ID Municipio</code>. Con los ajustes respectivos que aplicarás en la <a href="#sec-mutating-joins" class="quarto-xref"><span>Sección 11.6</span></a>, es posible generar de manera consistente las tablas de las entidades <code>Departamento</code> y <code>Municipio</code> para que reflejen lo señalado en la <a href="#fig-erd" class="quarto-xref">Figura&nbsp;<span>11.1</span></a>.</p>
+<p>En la <a href="#sec-case-study-mutating-joins" class="quarto-xref"><span>Sección 11.7</span></a> utilizando <code>resultados-saber-pro.rds</code> respecto a los archivos señalados en <a href="#nte-1-chap-11" class="quarto-xref">Nota&nbsp;<span>11.1</span></a> se ajustará este aspecto debido a que la fuente donde se obtuvieron los datos (Data Icfes), utiliza por defecto a Bogotá como departamento de presentación del examen cuando se presenta la prueba Saber Pro en el exterior. También ocurre un comportamiento similar en este contexto para el caso de <code>ID Municipio</code>. Con los ajustes respectivos que aplicarás en la <a href="#sec-case-study-mutating-joins" class="quarto-xref"><span>Sección 11.7</span></a>, es posible generar de manera consistente las tablas de las entidades <code>Departamento</code> y <code>Municipio</code> para que reflejen lo señalado en la <a href="#fig-erd" class="quarto-xref">Figura&nbsp;<span>11.1</span></a>.</p>
 </div>
 </div>
 </section>
@@ -709,8 +714,8 @@ Tabla&nbsp;11.2: Cardinalidad de una relación y representación gráfica usando
 <li><strong>Set operations</strong> (operaciones de conjuntos): esperan que ambas tablas compartan exactamente las mismas variables y tratan sus observaciones como conjuntos matemáticos mediante funciones como <code>intersect()</code>, <code>union()</code> y <code>setdiff()</code>.</li>
 </ol>
 <p>Debido a que las <strong>Set operations</strong> no se requieren para los análisis que desarrollaremos a lo largo del libro, no se profundizará en ellas en los siguientes apartados. No obstante, el lector interesado puede consultar la <a href="https://dplyr.tidyverse.org/articles/two-table.html#set-operations">documentación oficial</a> de <code>dplyr</code> para conocer más detalles sobre este tipo de operaciones.</p>
-<section id="filtering-joins" class="level3" data-number="11.5.1">
-<h3 data-number="11.5.1" class="anchored" data-anchor-id="filtering-joins"><span class="header-section-number">11.5.1</span> Filtering joins</h3>
+<section id="sec-filtering-joins" class="level3" data-number="11.5.1">
+<h3 data-number="11.5.1" class="anchored" data-anchor-id="sec-filtering-joins"><span class="header-section-number">11.5.1</span> Filtering joins</h3>
 <p>Existen dos tipos de <strong>Filtering joins</strong>:</p>
 <ol type="i">
 <li><strong>Semi joins</strong>: mantiene todas las observaciones de la tabla de una entidad que tienen una coincidencia en la tabla de otra entidad.</li>
@@ -849,14 +854,14 @@ Listado&nbsp;11.2: Uso de la función <code>anti_join(x, y)</code> para filtrar 
 </section>
 <section id="sec-mutating-joins" class="level2" data-number="11.6">
 <h2 data-number="11.6" class="anchored" data-anchor-id="sec-mutating-joins"><span class="header-section-number">11.6</span> Mutating joins</h2>
-<p>Las <strong>Mutating joins</strong> permiten combinar variables de 2 tablas correspondientes a 2 entidades emparejando sus filas mediante claves. En <code>dplyr</code> existen 4 tipos principales, los cuales difieren en su comportamiento cuando una observación no tiene coincidencia:</p>
+<p>Las <strong>Mutating joins</strong> permiten combinar variables de 2 tablas correspondientes a 2 entidades vinculando sus filas mediante claves. En <code>dplyr</code> existen 4 tipos principales, las cuales difieren en su comportamiento cuando una observación no tiene una coincidencia:</p>
 <ol type="1">
 <li><strong><code>inner_join()</code></strong>: conserva únicamente las observaciones que tienen una coincidencia en ambas tablas (<code>x</code> y <code>y</code>).</li>
 <li><strong><code>left_join()</code></strong>: conserva todas las observaciones de la tabla izquierda (<code>x</code>), incorporando las variables de la tabla derecha (<code>y</code>) donde exista una coincidencia.</li>
 <li><strong><code>right_join()</code></strong>: conserva todas las observaciones de la tabla derecha (<code>y</code>), incorporando las variables de la tabla izquierda (<code>x</code>) donde exista una coincidencia.</li>
 <li><strong><code>full_join()</code></strong>: conserva todas las observaciones de ambas tablas (<code>x</code> y <code>y</code>), manteniendo los registros independientemente de si tienen o no una coincidencia.</li>
 </ol>
-<p>Para comprender el funcionamiento de cada una de ellas, consideremos un ejemplo ilustrativo mínimo compuesto por dos tablas, <code>x</code> y <code>y</code>, vinculadas lógicamente mediante la clave <code>key</code>. La tabla <code>x</code> incluye las variables <code>key</code> y <code>z</code>, mientras que la tabla <code>y</code> cuenta con las variables <code>key</code>, <code>a</code> y <code>b</code>, tal como se señala a continuación:</p>
+<p>Para comprender el funcionamiento de cada una de ellas, se utilizará un ejemplo ilustrativo mínimo compuesto por 2 tablas, <code>x</code> y <code>y</code>, vinculadas lógicamente mediante la clave <code>key</code>. La tabla <code>x</code> incluye las variables <code>key</code> y <code>z</code>, mientras que la tabla <code>y</code> cuenta con las variables <code>key</code>, <code>a</code> y <code>b</code>, tal como se señala a continuación:</p>
 <div class="cell">
 <div id="lst-exm-mutating-joins" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
@@ -948,7 +953,7 @@ Figura&nbsp;11.2: Representación gráfica de la función <code>inner_join()</co
 </section>
 <section id="sec-left-joins" class="level3" data-number="11.6.2">
 <h3 data-number="11.6.2" class="anchored" data-anchor-id="sec-left-joins"><span class="header-section-number">11.6.2</span> Left joins</h3>
-<p>La función <code>left_join()</code> conserva todas las observaciones de la tabla izquierda (<code>x</code>), independientemente de si tienen o no coincidencia en la tabla derecha (<code>y</code>), e incorpora las variables de <code>y</code> donde exista una coincidencia con la clave de <code>x</code>, tal como se señala a continuación:</p>
+<p>La función <code>left_join()</code> conserva todas las observaciones de la tabla izquierda (<code>x</code>), independientemente de si tienen o no una coincidencia en la tabla derecha (<code>y</code>), e incorpora las variables de <code>y</code> donde exista una coincidencia con la clave de <code>x</code>, tal como se señala a continuación:</p>
 <div class="cell">
 <div id="lst-left-join" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
@@ -973,7 +978,7 @@ Listado&nbsp;11.6: Uso de la función <code>left_join(x, y)</code> para incluir 
 </div>
 </div>
 <p>En el <a href="#lst-left-join" class="quarto-xref">Listado&nbsp;<span>11.6</span></a>, al igual que en el <a href="#lst-inner-join" class="quarto-xref">Listado&nbsp;<span>11.5</span></a>, a través de la función auxiliar <code>join_by()</code> en el argumento <code>by</code>, se especifica directamente la variable <code>key</code> debido a que ambas tablas comparten el mismo nombre para dicho atributo.</p>
-<p>Al aplicar la función sobre el ejemplo ilustrativo, la tabla resultante conserva las 2 filas de la tabla <code>x</code> (<code>key = 1</code> y <code>key = 2</code>). Para la fila con <code>key = 1</code>, al existir coincidencia en <code>y</code>, se agregan los valores correspondientes de las columnas <code>a</code> (<code>10</code>) y <code>b</code> (<code>"s"</code>). Por el contrario, para la fila con <code>key = 2</code>, como no existe coincidencia en <code>y</code>, las variables <code>a</code> y <code>b</code> se rellenan automáticamente con valores faltantes (<code>NA</code>). Por su parte, la observación con <code>key = 3</code> de la tabla <code>y</code> se descarta al no estar presente en <code>x</code>.</p>
+<p>Al aplicar la función sobre el ejemplo ilustrativo, la tabla resultante conserva las 2 filas de la tabla <code>x</code> (<code>key = 1</code> y <code>key = 2</code>). Para la fila con <code>key = 1</code>, al existir una coincidencia en <code>y</code>, se agregan los valores correspondientes de las columnas <code>a</code> (<code>10</code>) y <code>b</code> (<code>"s"</code>). Por el contrario, para la fila con <code>key = 2</code>, como no existe una coincidencia en <code>y</code>, las variables <code>a</code> y <code>b</code> se rellenan automáticamente con valores faltantes (<code>NA</code>). Por su parte, la observación con <code>key = 3</code> de la tabla <code>y</code> se descarta al no estar presente en <code>x</code>.</p>
 <p>En la <a href="#fig-left-join" class="quarto-xref">Figura&nbsp;<span>11.3</span></a> se ilustra gráficamente este comportamiento. A la derecha se ubican las tablas de entrada <code>x</code> (arriba) y <code>y</code> (abajo), donde la fila con <code>key = 1</code> se enlaza con su coincidencia en <code>y</code>, mientras que la fila con <code>key = 2</code> se vincula con un registro de valores <code>NA</code>, generando a la izquierda la tabla resultante de 2 filas con las 4 variables consolidadas.</p>
 <div id="fig-left-join" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que muestra cómo la función left_join combina dos tablas conservando todas las filas de la tabla izquierda. A la derecha se presentan las dos tablas de entrada: arriba la tabla x con columnas key (valores 1 en marrón y 2 en naranja) y z (valores 3 y 4 en verde azulado), y abajo la tabla y con columnas key (valores 1 en marrón y 3 en azul claro), a (valores 10 en gris claro) y b (valores s en amarillo claro), junto a una columna adicional de valores NA en color salmón. La fila con key = 1 se conecta con su coincidencia en y, y la fila con key = 2 se conecta a los valores NA. Una flecha hacia la izquierda con el comando left_join genera a la izquierda una tabla de dos filas y cuatro columnas (key, z, a y b) donde la segunda fila contiene valores NA para a y b.">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1013,7 +1018,7 @@ Listado&nbsp;11.7: Uso de la función <code>right_join(x, y)</code> para incluir
 </div>
 </div>
 <p>En el <a href="#lst-right-join" class="quarto-xref">Listado&nbsp;<span>11.7</span></a>, al igual que en el <a href="#lst-inner-join" class="quarto-xref">Listado&nbsp;<span>11.5</span></a>, a través de la función auxiliar <code>join_by()</code> en el argumento <code>by</code>, se especifica directamente la variable <code>key</code> debido a que ambas tablas comparten el mismo nombre para dicho atributo.</p>
-<p>Al aplicar la función sobre el ejemplo ilustrativo, la tabla resultante conserva las 2 filas de la tabla <code>y</code> (<code>key = 3</code> y <code>key = 1</code>). Para la fila con <code>key = 3</code>, como no existe coincidencia en <code>x</code>, la variable <code>z</code> se rellena automáticamente con un valor faltante (<code>NA</code>). Por el contrario, para la fila con <code>key = 1</code>, al existir coincidencia en <code>x</code>, se agrega el valor correspondiente de la columna <code>z</code> (<code>3</code>). Por su parte, la observación con <code>key = 2</code> de la tabla <code>x</code> se descarta al no estar presente en <code>y</code>.</p>
+<p>Al aplicar la función sobre el ejemplo ilustrativo, la tabla resultante conserva las 2 filas de la tabla <code>y</code> (<code>key = 3</code> y <code>key = 1</code>). Para la fila con <code>key = 3</code>, como no existe una coincidencia en <code>x</code>, la variable <code>z</code> se rellena automáticamente con un valor faltante (<code>NA</code>). Por el contrario, para la fila con <code>key = 1</code>, al existir una coincidencia en <code>x</code>, se agrega el valor correspondiente de la columna <code>z</code> (<code>3</code>). Por su parte, la observación con <code>key = 2</code> de la tabla <code>x</code> se descarta al no estar presente en <code>y</code>.</p>
 <p>En la <a href="#fig-right-join" class="quarto-xref">Figura&nbsp;<span>11.4</span></a> se ilustra gráficamente este comportamiento. A la derecha se ubican las tablas de entrada <code>x</code> (arriba) y <code>y</code> (abajo), donde la fila con <code>key = 3</code> se vincula con un registro de valor <code>NA</code>, mientras que la fila con <code>key = 1</code> se enlaza con su coincidencia en <code>x</code>, generando a la izquierda la tabla resultante de 2 filas con las 4 variables consolidadas.</p>
 <div id="fig-right-join" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que muestra cómo la función right_join combina dos tablas conservando todas las filas de la tabla derecha. A la derecha se presentan las dos tablas de entrada: arriba la tabla x con columnas key (valores 1 en marrón y 2 en naranja) y z (valores 3 y 4 en verde azulado), junto a una columna de valor NA en color salmón, y abajo la tabla y con columnas key (valores 3 en azul claro y 1 en marrón), a (valores 10 en gris claro) y b (valores s en amarillo claro). La fila con key = 3 se conecta al valor NA y la fila con key = 1 se conecta con su coincidencia en x. Una flecha hacia la izquierda con el comando right_join genera a la izquierda una tabla de dos filas y cuatro columnas (key, z, a y b) donde la primera fila contiene el valor NA para z.">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1054,7 +1059,7 @@ Listado&nbsp;11.8: Uso de la función <code>full_join(x, y)</code> para incluir 
 </div>
 </div>
 <p>En el <a href="#lst-full-join" class="quarto-xref">Listado&nbsp;<span>11.8</span></a>, al igual que en el <a href="#lst-inner-join" class="quarto-xref">Listado&nbsp;<span>11.5</span></a>, a través de la función auxiliar <code>join_by()</code> en el argumento <code>by</code>, se especifica directamente la variable <code>key</code> debido a que ambas tablas comparten el mismo nombre para dicho atributo.</p>
-<p>Al aplicar la función sobre el ejemplo ilustrativo, la tabla resultante conserva las 3 filas correspondientes a todas las claves presentes (<code>key = 1</code>, <code>key = 2</code> y <code>key = 3</code>). Para la fila con <code>key = 1</code>, al existir coincidencia mutua, se integran las columnas <code>key</code> y <code>z</code> de <code>x</code> junto con las columnas <code>a</code> (<code>10</code>) y <code>b</code> (<code>"s"</code>) de <code>y</code>. En el caso de la fila con <code>key = 2</code>, como no existe coincidencia en <code>y</code>, las variables <code>a</code> y <code>b</code> se rellenan automáticamente con valores faltantes (<code>NA</code>). Por su parte, para la fila con <code>key = 3</code>, al no existir coincidencia en <code>x</code>, la variable <code>z</code> se completa con un valor faltante (<code>NA</code>).</p>
+<p>Al aplicar la función sobre el ejemplo ilustrativo, la tabla resultante conserva las 3 filas correspondientes a todas las claves presentes (<code>key = 1</code>, <code>key = 2</code> y <code>key = 3</code>). Para la fila con <code>key = 1</code>, al existir una coincidencia mutua, se integran las columnas <code>key</code> y <code>z</code> de <code>x</code> junto con las columnas <code>a</code> (<code>10</code>) y <code>b</code> (<code>"s"</code>) de <code>y</code>. En el caso de la fila con <code>key = 2</code>, como no existe una coincidencia en <code>y</code>, las variables <code>a</code> y <code>b</code> se rellenan automáticamente con valores faltantes (<code>NA</code>). Por su parte, para la fila con <code>key = 3</code>, al no existir una coincidencia en <code>x</code>, la variable <code>z</code> se completa con un valor faltante (<code>NA</code>).</p>
 <p>En la <a href="#fig-full-join" class="quarto-xref">Figura&nbsp;<span>11.5</span></a> se ilustra gráficamente este comportamiento. A la derecha se ubican las tablas de entrada <code>x</code> (arriba) y <code>y</code> (abajo), donde la fila con <code>key = 1</code> se enlaza con su coincidencia mutua, mientras que las filas no coincidentes (<code>key = 2</code> en <code>x</code> y <code>key = 3</code> en <code>y</code>) se vinculan con sus respectivos registros de valores <code>NA</code>, generando a la izquierda la tabla resultante de 3 filas con las 4 variables consolidadas.</p>
 <div id="fig-full-join" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que muestra cómo la función full_join combina dos tablas conservando todas las filas de ambas tablas. A la derecha se presentan las dos tablas de entrada: arriba la tabla x con columnas key (valores 1 en marrón y 2 en naranja) y z (valores 3 y 4 en verde azulado), junto a una columna de valor NA en color salmón, y abajo la tabla y con columnas key (valores 3 en azul claro y 1 en marrón), a (valores 10 en gris claro) y b (valores s en amarillo claro), junto a una columna adicional de valores NA en color salmón. La fila con key = 1 se conecta con su coincidencia en y, la fila con key = 2 se conecta a los valores NA de y, y la fila con key = 3 se conecta al valor NA de x. Una flecha hacia la izquierda con el comando full_join genera a la izquierda una tabla de tres filas y cuatro columnas (key, z, a y b) donde las filas no coincidentes se completan con valores NA.">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1065,6 +1070,178 @@ Listado&nbsp;11.8: Uso de la función <code>full_join(x, y)</code> para incluir 
 Figura&nbsp;11.5: Representación gráfica de la función <code>full_join()</code>
 </figcaption>
 </figure>
+</div>
+</section>
+</section>
+<section id="sec-case-study-mutating-joins" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="sec-case-study-mutating-joins"><span class="header-section-number">11.7</span> Caso de estudio: consolidación de resultados Saber-Pro para FAEDIS</h2>
+<p>El propósito de la <a href="#sec-case-study-mutating-joins" class="quarto-xref"><span>Sección 11.7</span></a> es combinar las tablas señaladas en la <a href="#nte-1-chap-11" class="quarto-xref">Nota&nbsp;<span>11.1</span></a>, teniendo en cuenta la <a href="#fig-erd" class="quarto-xref">Figura&nbsp;<span>11.1</span></a>, mediante el uso de las funciones señaladas en la <a href="#sec-mutating-joins" class="quarto-xref"><span>Sección 11.6</span></a>. De esa manera es posible reconstruir el archivo <code>2021-2024_saber-pro-genericas_faedis.rds</code> e incorporar los aspectos señalados en la <a href="#wrn-1-chap-11" class="quarto-xref">Advertencia&nbsp;<span>11.1</span></a>.</p>
+<p>Para alcanzar este objetivo en primera instancia se realizará una descripción de las variables respecto a las tablas asociadas con los archivos <code>divipola-municipios.rds</code> y <code>programas-pregrado-faedis.rds</code>, teniendo en cuenta que este mismo ejercicio se realizó previamente con las tablas restantes en la <a href="#sec-filtering-joins" class="quarto-xref"><span>Sección 11.5.1</span></a>. Posteriormente, se ajustarán los datos en el archivo <code>resultados-saber-pro.rds</code> para incorporar los aspectos señalados en la <a href="#wrn-1-chap-11" class="quarto-xref">Advertencia&nbsp;<span>11.1</span></a> introduciendo la función <code>replace_when()</code> del paquete <code>dplyr</code>. Finalmente se consolidarán los resultados del Saber-Pro para FAEDIS en un archivo denominado <code>2021-2024_saber-pro-genericas_faedis_ajustado.rds</code>.</p>
+<section id="sec-variable-description-case-study-mutating-joins" class="level3" data-number="11.7.1">
+<h3 data-number="11.7.1" class="anchored" data-anchor-id="sec-variable-description-case-study-mutating-joins"><span class="header-section-number">11.7.1</span> Descripción de variables</h3>
+<p>Para utilizar los verbos de 2 tablas de <code>dplyr</code> es necesario entender a qué se refieren cada una de las variables en los archivos <code>divipola-municipios.rds</code> y <code>programas-pregrado-faedis.rds</code>, que corresponden a las tablas de las entidades <strong>Municipio</strong> y <strong>Programa académico</strong>. En primera instancia, importarás los datos, tal como se señala a continuación:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>divipola_municipios <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"data/divipola-municipios.rds"</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>programas_pregrado_faedis <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"data/programas-pregrado-faedis.rds"</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Una vez importes las tablas, podrás darle un “vistazo” a cada una de ellas, tal como se señala a continuación:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspeccionar datos ----</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>divipola_municipios <span class="sc">|&gt;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,122
+Columns: 8
+$ codigo_departamento  &lt;chr&gt; "05", "05", "05", "05", "05",…
+$ codigo_municipio     &lt;chr&gt; "05001", "05002", "05004", "0…
+$ nombre_municipio     &lt;chr&gt; "MEDELLÍN", "ABEJORRAL", "ABR…
+$ tipo                 &lt;chr&gt; "Municipio", "Municipio", "Mu…
+$ longitud             &lt;dbl&gt; -75.58177, -75.42874, -76.064…
+$ latitud              &lt;dbl&gt; 6.246631, 5.789315, 6.632282,…
+$ notas                &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, N…
+$ ultima_actualizacion &lt;date&gt; 2025-12-30, 2025-12-30, 2025…</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>programas_pregrado_faedis <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 8
+Columns: 4
+$ codigo_snies_programa &lt;int&gt; 6527, 102005, 108241, 11428,…
+$ nombre_programa       &lt;chr&gt; "ADMINISTRACION DE EMPRESAS"…
+$ estado_programa       &lt;chr&gt; "Activo", "Inactivo", "Activ…
+$ ultima_actualizacion  &lt;date&gt; 2026-08-25, 2026-08-25, 202…</code></pre>
+</div>
+</div>
+<p>Teniendo en cuenta la inspección de datos, a continuación se describen cada una de las variables en <code>divipola-municipios.rds</code>:</p>
+<ol type="1">
+<li><strong>codigo_departamento</strong>: código único asociado al departamento al que pertenece cada municipio de acuerdo con la codificación DIVIPOLA.</li>
+<li><strong>codigo_municipio</strong>: código único asociado a cada municipio de acuerdo con la codificación DIVIPOLA.</li>
+<li><strong>nombre_municipio</strong>: nombre oficial del municipio de acuerdo con la codificación DIVIPOLA.</li>
+<li><strong>tipo</strong>: tipo de entidad territorial de acuerdo con la clasificación del DANE (<code>Municipio</code>, <code>Área no municipalizada</code> o <code>Isla</code>).</li>
+<li><strong>longitud</strong>: coordenada geográfica en grados decimales que mide la distancia respecto al meridiano de Greenwich, indicando la posición este-oeste del punto representativo de cada municipio.</li>
+<li><strong>latitud</strong>: coordenada geográfica en grados decimales que mide la distancia respecto a la línea ecuatorial, indicando la posición norte-sur del punto representativo de cada municipio.</li>
+<li><strong>notas</strong>: notas aclaratorias o precisiones sobre la delimitación o creación territorial de ciertos municipios o áreas geográficas de acuerdo con el DANE.</li>
+<li><strong>ultima_actualizacion</strong>: fecha de corte de la última consulta realizada en la base de datos DIVIPOLA del DANE.</li>
+</ol>
+<p>De la misma forma, a continuación se describen cada una de las variables en <code>programas-pregrado-faedis.rds</code>:</p>
+<ol type="1">
+<li><strong>codigo_snies_programa</strong>: código único asignado al programa académico de acuerdo con el SNIES.</li>
+<li><strong>nombre_programa</strong>: nombre oficial del programa académico de pregrado ofertado por FAEDIS.</li>
+<li><strong>estado_programa</strong>: estado del registro del programa académico ante el SNIES (<code>Activo</code> o <code>Inactivo</code>).</li>
+<li><strong>ultima_actualizacion</strong>: fecha de corte de la última consulta realizada en la base de datos del SNIES.</li>
+</ol>
+</section>
+<section id="ajuste-de-datos" class="level3" data-number="11.7.2">
+<h3 data-number="11.7.2" class="anchored" data-anchor-id="ajuste-de-datos"><span class="header-section-number">11.7.2</span> Ajuste de datos</h3>
+<p>Tal como se señaló en la <a href="#wrn-1-chap-11" class="quarto-xref">Advertencia&nbsp;<span>11.1</span></a>, la fuente original de datos (Data Icfes) asigna por defecto a Bogotá como lugar de presentación cuando el examen se realiza en el exterior. Esto genera una inconsistencia en las variables <code>estu_cod_depto_presentacion</code> y <code>estu_cod_mcpio_presentacion</code> para los registros donde los estudiantes presentaron la prueba por fuera de Colombia, tal como se señala a continuación:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>resultado_saber_pro <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(estu_exterior <span class="sc">==</span> <span class="st">"SI"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    ano,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    estu_consecutivo,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    estu_exterior,</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    estu_cod_depto_presentacion,</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    estu_cod_mcpio_presentacion</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 64
+Columns: 5
+$ ano                         &lt;int&gt; 2021, 2021, 2021, 2021…
+$ estu_consecutivo            &lt;chr&gt; "EK202130321539", "EK2…
+$ estu_exterior               &lt;chr&gt; "SI", "SI", "SI", "SI"…
+$ estu_cod_depto_presentacion &lt;chr&gt; "11", "11", "11", "11"…
+$ estu_cod_mcpio_presentacion &lt;chr&gt; "11001", "11001", "110…</code></pre>
+</div>
+</div>
+<p>Para corregir esta situación y asegurar la coherencia con el modelo relacional de la <a href="#fig-erd" class="quarto-xref">Figura&nbsp;<span>11.1</span></a>, es necesario reemplazar los códigos de departamento y municipio por valores faltantes (<code>NA</code>) cuando <code>estu_exterior == "SI"</code>.</p>
+<p>En el paquete <code>dplyr</code>, la función <code>replace_when()</code> permite actualizar de forma condicional los valores de un vector o columna existente. Para realizar este proceso, la función <code>replace_when()</code> utiliza los parámetros <code>x</code> y <code>...</code>, tal como se señala a continuación:</p>
+<ol type="i">
+<li><p><code>x</code>: especifica el vector o variable de entrada cuyos valores se desean modificar.</p></li>
+<li><p><code>...</code>: permite suministrar una secuencia de fórmulas de 2 lados (en inglés <strong>two-sided formulas</strong>) bajo la estructura <code>condición ~ valor_de_reemplazo</code> mediante el uso del operador virgulilla (<code>~</code>):</p>
+<ul>
+<li><strong>Lado izquierdo</strong> (en inglés <strong>Left-Hand Side (LHS)</strong>): define una condición lógica evaluada sobre cada observación para determinar cuáles cumplen el criterio (<code>TRUE</code>).</li>
+<li><strong>Lado derecho</strong> (en inglés <strong>Right-Hand Side (RHS)</strong>): indica el valor con el cual se reemplazarán las observaciones que satisfacen la condición lógica del lado izquierdo.</li>
+</ul></li>
+</ol>
+<p>A partir de estos parámetros, <code>replace_when()</code> evalúa las condiciones especificadas y actualiza únicamente los registros correspondientes, mientras que las observaciones que no cumplen ninguna condición conservan automáticamente su valor original desde <code>x</code> sin alterar el tipo de dato de la variable.</p>
+<p>Para aplicar este ajuste sobre las variables de interés en <code>resultado_saber_pro</code>, se utiliza la función <code>replace_when()</code> en conjunto con <code>mutate()</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-replace-when" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-replace-when-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;11.9: Uso de la función <code>replace_when()</code> junto con <code>mutate()</code> para actualizar parcialmente los valores de una variable dentro de una tibble
+</figcaption>
+<div aria-describedby="lst-replace-when-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>resultado_saber_pro <span class="ot">&lt;-</span> resultado_saber_pro <span class="sc">|&gt;</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">estu_cod_depto_presentacion =</span> <span class="fu">replace_when</span>(</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> estu_cod_depto_presentacion,</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>      estu_exterior <span class="sc">==</span> <span class="st">"SI"</span> <span class="sc">~</span> <span class="cn">NA</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">estu_cod_mcpio_presentacion =</span> <span class="fu">replace_when</span>(</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> estu_cod_mcpio_presentacion,</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>      estu_exterior <span class="sc">==</span> <span class="st">"SI"</span> <span class="sc">~</span> <span class="cn">NA</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<p>En el <a href="#lst-replace-when" class="quarto-xref">Listado&nbsp;<span>11.9</span></a>, dentro de la función <code>mutate()</code>, se aplica <code>replace_when()</code> a las columnas <code>estu_cod_depto_presentacion</code> y <code>estu_cod_mcpio_presentacion</code>. En ambos casos, el parámetro <code>x</code> recibe la columna correspondiente como vector de entrada y en el argumento <code>...</code> se define la fórmula <code>estu_exterior == "SI" ~ NA</code>. En esta expresión, la condición lógica (<strong>LHS</strong>) identifica a los estudiantes que presentaron la prueba en el exterior y el valor de reemplazo (<strong>RHS</strong>) les asigna <code>NA</code>, mientras que las observaciones restantes conservan intactos sus códigos originales.</p>
+<p>Para verificar que la transformación se aplicó de manera correcta, en primera instancia puedes inspeccionar los registros donde el examen se presentó en el exterior (<code>estu_exterior == "SI"</code>), comprobando que los códigos de departamento y municipio ahora contienen valores ausentes (<code>NA</code>), tal como se señala a continuación:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspeccionar registros ajustados en el exterior ----</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>resultado_saber_pro <span class="sc">|&gt;</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(estu_exterior <span class="sc">==</span> <span class="st">"SI"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    ano,</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    estu_consecutivo,</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    estu_exterior,</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    estu_cod_depto_presentacion,</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    estu_cod_mcpio_presentacion</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 64
+Columns: 5
+$ ano                         &lt;int&gt; 2021, 2021, 2021, 2021…
+$ estu_consecutivo            &lt;chr&gt; "EK202130321539", "EK2…
+$ estu_exterior               &lt;chr&gt; "SI", "SI", "SI", "SI"…
+$ estu_cod_depto_presentacion &lt;chr&gt; NA, NA, NA, NA, NA, NA…
+$ estu_cod_mcpio_presentacion &lt;chr&gt; NA, NA, NA, NA, NA, NA…</code></pre>
+</div>
+</div>
+<p>De igual forma, puedes verificar que los registros correspondientes a los estudiantes que presentaron el examen dentro del territorio nacional (<code>estu_exterior == "NO"</code>) conservaron sus códigos originales de departamento y municipio sin ninguna alteración, tal como se señala a continuación:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspeccionar registros en Colombia ----</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>resultado_saber_pro <span class="sc">|&gt;</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(estu_exterior <span class="sc">==</span> <span class="st">"NO"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    ano,</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    estu_consecutivo,</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    estu_exterior,</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    estu_cod_depto_presentacion,</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    estu_cod_mcpio_presentacion</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,175
+Columns: 5
+$ ano                         &lt;int&gt; 2021, 2021, 2021, 2021…
+$ estu_consecutivo            &lt;chr&gt; "EK202120262469", "EK2…
+$ estu_exterior               &lt;chr&gt; "NO", "NO", "NO", "NO"…
+$ estu_cod_depto_presentacion &lt;chr&gt; "11", "11", "11", "11"…
+$ estu_cod_mcpio_presentacion &lt;chr&gt; "11001", "11001", "110…</code></pre>
+</div>
 </div>
 
 
