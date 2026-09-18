@@ -99,7 +99,7 @@ Un atributo presente en una tabla cuyos valores hacen referencia directa a la cl
 A diferencia de una clave primaria (**PK**), los valores de una clave foránea (**FK**) se pueden repetir en una tabla. Por ejemplo, diferentes instancias de la entidad **Resultado Saber-Pro** pueden tener una misma `ID Departamento` porque muchos estudiantes pueden presentar el Saber-Pro en un mismo departamento. Adicionalmente, una clave foránea (**FK**) puede contener valores vacíos o ausentes. Por ejemplo, si un estudiante presenta el Saber-Pro en el exterior se esperaría que no tenga asociado un `ID Departamento` porque el lugar donde lo presentó no se encuentra dentro del territorio colombiano (ver @wrn-1-chap-11).
 
 ::: {#wrn-1-chap-11 .callout-warning}
-En la @sec-mutating-joins utilizando `resultados-saber-pro.rds` respecto a los archivos señalados en @nte-1-chap-11 se ajustará este aspecto debido a que la fuente donde se obtuvieron los datos (Data Icfes), utiliza por defecto a Bogotá como departamento de presentación del examen cuando se presenta la prueba Saber Pro en el exterior. También ocurre un comportamiento similar en este contexto para el caso de `ID Municipio`. Con los ajustes respectivos que aplicarás en la @sec-mutating-joins, es posible generar de manera consistente las tablas de las entidades `Departamento` y `Municipio` para que reflejen lo señalado en la @fig-erd. 
+En la @sec-case-study-mutating-joins utilizando `resultados-saber-pro.rds` respecto a los archivos señalados en @nte-1-chap-11 se ajustará este aspecto debido a que la fuente donde se obtuvieron los datos (Data Icfes), utiliza por defecto a Bogotá como departamento de presentación del examen cuando se presenta la prueba Saber Pro en el exterior. También ocurre un comportamiento similar en este contexto para el caso de `ID Municipio`. Con los ajustes respectivos que aplicarás en la @sec-case-study-mutating-joins, es posible generar de manera consistente las tablas de las entidades `Departamento` y `Municipio` para que reflejen lo señalado en la @fig-erd. 
 :::
 
 ## Relaciones {#sec-relaciones}
@@ -159,7 +159,7 @@ En el paquete `dplyr`, para manipular, conectar o unir 2 tablas de datos corresp
 
 Debido a que las **Set operations** no se requieren para los análisis que desarrollaremos a lo largo del libro, no se profundizará en ellas en los siguientes apartados. No obstante, el lector interesado puede consultar la [documentación oficial]({{< var url.packages.dplyr_set_operations >}}) de `dplyr` para conocer más detalles sobre este tipo de operaciones.
 
-### Filtering joins
+### Filtering joins {#sec-filtering-joins}
 
 Existen dos tipos de **Filtering joins**:
 
@@ -240,14 +240,14 @@ En el @lst-anti-join se conservan únicamente las filas de `divipola_departament
 
 ## Mutating joins {#sec-mutating-joins}
 
-Las **Mutating joins** permiten combinar variables de 2 tablas correspondientes a 2 entidades emparejando sus filas mediante claves. En `dplyr` existen 4 tipos principales, los cuales difieren en su comportamiento cuando una observación no tiene coincidencia:
+Las **Mutating joins** permiten combinar variables de 2 tablas correspondientes a 2 entidades vinculando sus filas mediante claves. En `dplyr` existen 4 tipos principales, las cuales difieren en su comportamiento cuando una observación no tiene una coincidencia:
 
 1. **`inner_join()`**: conserva únicamente las observaciones que tienen una coincidencia en ambas tablas (`x` y `y`).
 2. **`left_join()`**: conserva todas las observaciones de la tabla izquierda (`x`), incorporando las variables de la tabla derecha (`y`) donde exista una coincidencia.
 3. **`right_join()`**: conserva todas las observaciones de la tabla derecha (`y`), incorporando las variables de la tabla izquierda (`x`) donde exista una coincidencia.
 4. **`full_join()`**: conserva todas las observaciones de ambas tablas (`x` y `y`), manteniendo los registros independientemente de si tienen o no una coincidencia.
 
-Para comprender el funcionamiento de cada una de ellas, consideremos un ejemplo ilustrativo mínimo compuesto por dos tablas, `x` y `y`, vinculadas lógicamente mediante la clave `key`. La tabla `x` incluye las variables `key` y `z`, mientras que la tabla `y` cuenta con las variables `key`, `a` y `b`, tal como se señala a continuación:
+Para comprender el funcionamiento de cada una de ellas, se utilizará un ejemplo ilustrativo mínimo compuesto por 2 tablas, `x` y `y`, vinculadas lógicamente mediante la clave `key`. La tabla `x` incluye las variables `key` y `z`, mientras que la tabla `y` cuenta con las variables `key`, `a` y `b`, tal como se señala a continuación:
 
 ```{r}
 #| lst-label: lst-exm-mutating-joins
@@ -298,7 +298,7 @@ En la @fig-inner-join se ilustra gráficamente este comportamiento. A la derecha
 
 ### Left joins {#sec-left-joins}
 
-La función `left_join()` conserva todas las observaciones de la tabla izquierda (`x`), independientemente de si tienen o no coincidencia en la tabla derecha (`y`), e incorpora las variables de `y` donde exista una coincidencia con la clave de `x`, tal como se señala a continuación:
+La función `left_join()` conserva todas las observaciones de la tabla izquierda (`x`), independientemente de si tienen o no una coincidencia en la tabla derecha (`y`), e incorpora las variables de `y` donde exista una coincidencia con la clave de `x`, tal como se señala a continuación:
 
 ```{r}
 #| lst-label: lst-left-join
@@ -313,7 +313,7 @@ left_join(
 
 En el @lst-left-join, al igual que en el @lst-inner-join, a través de la función auxiliar `join_by()` en el argumento `by`, se especifica directamente la variable `key` debido a que ambas tablas comparten el mismo nombre para dicho atributo.
 
-Al aplicar la función sobre el ejemplo ilustrativo, la tabla resultante conserva las 2 filas de la tabla `x` (`key = 1` y `key = 2`). Para la fila con `key = 1`, al existir coincidencia en `y`, se agregan los valores correspondientes de las columnas `a` (`10`) y `b` (`"s"`). Por el contrario, para la fila con `key = 2`, como no existe coincidencia en `y`, las variables `a` y `b` se rellenan automáticamente con valores faltantes (`NA`). Por su parte, la observación con `key = 3` de la tabla `y` se descarta al no estar presente en `x`.
+Al aplicar la función sobre el ejemplo ilustrativo, la tabla resultante conserva las 2 filas de la tabla `x` (`key = 1` y `key = 2`). Para la fila con `key = 1`, al existir una coincidencia en `y`, se agregan los valores correspondientes de las columnas `a` (`10`) y `b` (`"s"`). Por el contrario, para la fila con `key = 2`, como no existe una coincidencia en `y`, las variables `a` y `b` se rellenan automáticamente con valores faltantes (`NA`). Por su parte, la observación con `key = 3` de la tabla `y` se descarta al no estar presente en `x`.
 
 En la @fig-left-join se ilustra gráficamente este comportamiento. A la derecha se ubican las tablas de entrada `x` (arriba) y `y` (abajo), donde la fila con `key = 1` se enlaza con su coincidencia en `y`, mientras que la fila con `key = 2` se vincula con un registro de valores `NA`, generando a la izquierda la tabla resultante de 2 filas con las 4 variables consolidadas.
 
@@ -336,7 +336,7 @@ right_join(
 
 En el @lst-right-join, al igual que en el @lst-inner-join, a través de la función auxiliar `join_by()` en el argumento `by`, se especifica directamente la variable `key` debido a que ambas tablas comparten el mismo nombre para dicho atributo.
 
-Al aplicar la función sobre el ejemplo ilustrativo, la tabla resultante conserva las 2 filas de la tabla `y` (`key = 3` y `key = 1`). Para la fila con `key = 3`, como no existe coincidencia en `x`, la variable `z` se rellena automáticamente con un valor faltante (`NA`). Por el contrario, para la fila con `key = 1`, al existir coincidencia en `x`, se agrega el valor correspondiente de la columna `z` (`3`). Por su parte, la observación con `key = 2` de la tabla `x` se descarta al no estar presente en `y`.
+Al aplicar la función sobre el ejemplo ilustrativo, la tabla resultante conserva las 2 filas de la tabla `y` (`key = 3` y `key = 1`). Para la fila con `key = 3`, como no existe una coincidencia en `x`, la variable `z` se rellena automáticamente con un valor faltante (`NA`). Por el contrario, para la fila con `key = 1`, al existir una coincidencia en `x`, se agrega el valor correspondiente de la columna `z` (`3`). Por su parte, la observación con `key = 2` de la tabla `x` se descarta al no estar presente en `y`.
 
 En la @fig-right-join se ilustra gráficamente este comportamiento. A la derecha se ubican las tablas de entrada `x` (arriba) y `y` (abajo), donde la fila con `key = 3` se vincula con un registro de valor `NA`, mientras que la fila con `key = 1` se enlaza con su coincidencia en `x`, generando a la izquierda la tabla resultante de 2 filas con las 4 variables consolidadas.
 
@@ -359,8 +359,141 @@ full_join(
 
 En el @lst-full-join, al igual que en el @lst-inner-join, a través de la función auxiliar `join_by()` en el argumento `by`, se especifica directamente la variable `key` debido a que ambas tablas comparten el mismo nombre para dicho atributo.
 
-Al aplicar la función sobre el ejemplo ilustrativo, la tabla resultante conserva las 3 filas correspondientes a todas las claves presentes (`key = 1`, `key = 2` y `key = 3`). Para la fila con `key = 1`, al existir coincidencia mutua, se integran las columnas `key` y `z` de `x` junto con las columnas `a` (`10`) y `b` (`"s"`) de `y`. En el caso de la fila con `key = 2`, como no existe coincidencia en `y`, las variables `a` y `b` se rellenan automáticamente con valores faltantes (`NA`). Por su parte, para la fila con `key = 3`, al no existir coincidencia en `x`, la variable `z` se completa con un valor faltante (`NA`).
+Al aplicar la función sobre el ejemplo ilustrativo, la tabla resultante conserva las 3 filas correspondientes a todas las claves presentes (`key = 1`, `key = 2` y `key = 3`). Para la fila con `key = 1`, al existir una coincidencia mutua, se integran las columnas `key` y `z` de `x` junto con las columnas `a` (`10`) y `b` (`"s"`) de `y`. En el caso de la fila con `key = 2`, como no existe una coincidencia en `y`, las variables `a` y `b` se rellenan automáticamente con valores faltantes (`NA`). Por su parte, para la fila con `key = 3`, al no existir una coincidencia en `x`, la variable `z` se completa con un valor faltante (`NA`).
 
 En la @fig-full-join se ilustra gráficamente este comportamiento. A la derecha se ubican las tablas de entrada `x` (arriba) y `y` (abajo), donde la fila con `key = 1` se enlaza con su coincidencia mutua, mientras que las filas no coincidentes (`key = 2` en `x` y `key = 3` en `y`) se vinculan con sus respectivos registros de valores `NA`, generando a la izquierda la tabla resultante de 3 filas con las 4 variables consolidadas.
 
 ![Representación gráfica de la función `full_join()`](images/full-join.png){#fig-full-join fig-alt="Diagrama conceptual que muestra cómo la función full_join combina dos tablas conservando todas las filas de ambas tablas. A la derecha se presentan las dos tablas de entrada: arriba la tabla x con columnas key (valores 1 en marrón y 2 en naranja) y z (valores 3 y 4 en verde azulado), junto a una columna de valor NA en color salmón, y abajo la tabla y con columnas key (valores 3 en azul claro y 1 en marrón), a (valores 10 en gris claro) y b (valores s en amarillo claro), junto a una columna adicional de valores NA en color salmón. La fila con key = 1 se conecta con su coincidencia en y, la fila con key = 2 se conecta a los valores NA de y, y la fila con key = 3 se conecta al valor NA de x. Una flecha hacia la izquierda con el comando full_join genera a la izquierda una tabla de tres filas y cuatro columnas (key, z, a y b) donde las filas no coincidentes se completan con valores NA."}
+
+## Caso de estudio: consolidación de resultados Saber-Pro para FAEDIS {#sec-case-study-mutating-joins}
+
+El propósito de la @sec-case-study-mutating-joins es combinar las tablas señaladas en la @nte-1-chap-11, teniendo en cuenta la @fig-erd, mediante el uso de las funciones señaladas en la @sec-mutating-joins. De esa manera es posible reconstruir el archivo `2021-2024_saber-pro-genericas_faedis.rds` e incorporar los aspectos señalados en la @wrn-1-chap-11. 
+
+Para alcanzar este objetivo en primera instancia se realizará una descripción de las variables respecto a las tablas asociadas con los archivos `divipola-municipios.rds` y `programas-pregrado-faedis.rds`, teniendo en cuenta que este mismo ejercicio se realizó previamente con las tablas restantes en la @sec-filtering-joins. Posteriormente, se ajustarán los datos en el archivo `resultados-saber-pro.rds` para incorporar los aspectos señalados en la @wrn-1-chap-11 introduciendo la función `replace_when()` del paquete `dplyr`. Finalmente se consolidaran los resultados del Saber-Pro para FAEDIS en un archivo denominado `2021-2024_saber-pro-genericas_faedis_ajustado.rds`.
+
+### Descripción de variables {#sec-variable-description-case-study-mutating-joins}
+
+Para utilizar los verbos de 2 tablas de `dplyr` es necesario entender a qué se refieren cada una de las variables en los archivos `divipola-municipios.rds` y `programas-pregrado-faedis.rds`, que corresponden a las tablas de las entidades **Municipio** y **Programa académico**. En primera instancia, importarás los datos, tal como se señala a continuación:
+
+```{r}
+divipola_municipios <- read_rds(
+  file = "data/divipola-municipios.rds"
+)
+
+programas_pregrado_faedis <- read_rds(
+  file = "data/programas-pregrado-faedis.rds"
+)
+```
+
+Una vez importes las tablas, podrás darle un "vistazo" a cada una de ellas, tal como se señala a continuación:
+
+```{r}
+# Inspeccionar datos ----
+divipola_municipios |>
+  glimpse()
+```
+
+```{r}
+programas_pregrado_faedis |>
+  glimpse()
+```
+
+Teniendo en cuenta la inspección de datos, a continuación se describen cada una de las variables en `divipola-municipios.rds`:
+
+1. **codigo_departamento**: código único asociado al departamento al que pertenece cada municipio de acuerdo con la codificación DIVIPOLA.
+2. **codigo_municipio**: código único asociado a cada municipio de acuerdo con la codificación DIVIPOLA.
+3. **nombre_municipio**: nombre oficial del municipio de acuerdo con la codificación DIVIPOLA.
+4. **tipo**: tipo de entidad territorial de acuerdo con la clasificación del DANE (`Municipio`, `Área no municipalizada` o `Isla`).
+5. **longitud**: coordenada geográfica en grados decimales que mide la distancia respecto al meridiano de Greenwich, indicando la posición este-oeste del punto representativo de cada municipio.
+6. **latitud**: coordenada geográfica en grados decimales que mide la distancia respecto a la línea ecuatorial, indicando la posición norte-sur del punto representativo de cada municipio.
+7. **notas**: notas aclaratorias o precisiones sobre la delimitación o creación territorial de ciertos municipios o áreas geográficas de acuerdo con el DANE.
+8. **ultima_actualizacion**: fecha de corte de la última consulta realizada en la base de datos DIVIPOLA del DANE.
+
+De la misma forma, a continuación se describen cada una de las variables en `programas-pregrado-faedis.rds`: 
+
+1. **codigo_snies_programa**: código único asignado al programa académico de acuerdo con el SNIES.
+2. **nombre_programa**: nombre oficial del programa académico de pregrado ofertado por FAEDIS.
+3. **estado_programa**: estado del registro del programa académico ante el SNIES (`Activo` o `Inactivo`).
+4. **ultima_actualizacion**: fecha de corte de la última consulta realizada en la base de datos del SNIES.
+
+### Ajuste de datos
+
+Tal como se señaló en la @wrn-1-chap-11, la fuente original de datos (Data Icfes) asigna por defecto a Bogotá como lugar de presentación cuando el examen se realiza en el exterior. Esto genera una inconsistencia en las variables `estu_cod_depto_presentacion` y `estu_cod_mcpio_presentacion` para los registros donde los estudiantes presentaron la prueba por fuera de Colombia, tal como se señala a continuación:
+
+```{r}
+resultado_saber_pro |>
+  filter(estu_exterior == "SI") |>
+  select(
+    ano,
+    estu_consecutivo,
+    estu_exterior,
+    estu_cod_depto_presentacion,
+    estu_cod_mcpio_presentacion
+  ) |>
+  glimpse()
+```
+
+Para corregir esta situación y asegurar la coherencia con el modelo relacional de la @fig-erd, es necesario reemplazar los códigos de departamento y municipio por valores faltantes (`NA`) cuando `estu_exterior == "SI"`. 
+
+En el paquete `dplyr`, la función `replace_when()` permite actualizar de forma condicional los valores de un vector o columna existente. Para realizar este proceso, la función `replace_when()` utiliza los parámetros `x` y `...`, tal como se señala a continuación:
+
+i. `x`: especifica el vector o variable de entrada cuyos valores se desean modificar.
+ii. `...`: permite suministrar una secuencia de fórmulas de 2 lados (en inglés **two-sided formulas**) bajo la estructura `condición ~ valor_de_reemplazo` mediante el uso del operador virgulilla (`~`):
+
+    - **Lado izquierdo** (en inglés **Left-Hand Side (LHS)**): define una condición lógica evaluada sobre cada observación para determinar cuáles cumplen el criterio (`TRUE`).
+    - **Lado derecho** (en inglés **Right-Hand Side (RHS)**): indica el valor con el cual se reemplazarán las observaciones que satisfacen la condición lógica del lado izquierdo.
+
+A partir de estos parámetros, `replace_when()` evalúa las condiciones especificadas y actualiza únicamente los registros correspondientes, mientras que las observaciones que no cumplen ninguna condición conservan automáticamente su valor original desde `x` sin alterar el tipo de dato de la variable.
+
+Para aplicar este ajuste sobre las variables de interés en `resultado_saber_pro`, se utiliza la función `replace_when()` en conjunto con `mutate()`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-replace-when
+#| lst-cap: Uso de la función `replace_when()` junto con `mutate()` para actualizar parcialmente los valores de una variable dentro de una tibble
+
+resultado_saber_pro <- resultado_saber_pro |>
+  mutate(
+    estu_cod_depto_presentacion = replace_when(
+      x = estu_cod_depto_presentacion,
+      estu_exterior == "SI" ~ NA
+    ),
+    estu_cod_mcpio_presentacion = replace_when(
+      x = estu_cod_mcpio_presentacion,
+      estu_exterior == "SI" ~ NA
+    )
+  )
+```
+
+En el @lst-replace-when, dentro de la función `mutate()`, se aplica `replace_when()` a las columnas `estu_cod_depto_presentacion` y `estu_cod_mcpio_presentacion`. En ambos casos, el parámetro `x` recibe la columna correspondiente como vector de entrada y en el argumento `...` se define la fórmula `estu_exterior == "SI" ~ NA`. En esta expresión, la condición lógica (**LHS**) identifica a los estudiantes que presentaron la prueba en el exterior y el valor de reemplazo (**RHS**) les asigna `NA`, mientras que las observaciones restantes conservan intactos sus códigos originales.
+
+Para verificar que la transformación se aplicó de manera correcta, en primera instancia puedes inspeccionar los registros donde el examen se presentó en el exterior (`estu_exterior == "SI"`), comprobando que los códigos de departamento y municipio ahora contienen valores ausentes (`NA`), tal como se señala a continuación:
+
+```{r}
+# Inspeccionar registros ajustados en el exterior ----
+resultado_saber_pro |>
+  filter(estu_exterior == "SI") |>
+  select(
+    ano,
+    estu_consecutivo,
+    estu_exterior,
+    estu_cod_depto_presentacion,
+    estu_cod_mcpio_presentacion
+  ) |>
+  glimpse()
+```
+
+De igual forma, puedes verificar que los registros correspondientes a los estudiantes que presentaron el examen dentro del territorio nacional (`estu_exterior == "NO"`) conservaron sus códigos originales de departamento y municipio sin ninguna alteración, tal como se señala a continuación:
+
+```{r}
+# Inspeccionar registros en Colombia ----
+resultado_saber_pro |>
+  filter(estu_exterior == "NO") |>
+  select(
+    ano,
+    estu_consecutivo,
+    estu_exterior,
+    estu_cod_depto_presentacion,
+    estu_cod_mcpio_presentacion
+  ) |>
+  glimpse()
+```
