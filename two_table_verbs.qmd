@@ -80,7 +80,7 @@ A un elemento específico y concreto de una entidad se le denomina **instancia**
 
 ## Atributos
 
-Cada entidad en la @fig-erd se puede describir a través de características, rasgos o propiedades que se recopilan en una variable y se almacenan en una columna dentro de una tabla. Por ejemplo, la entidad **Departamento** se describe a través de las variables `ID Departamento` que identifica  
+Cada entidad en la @fig-erd se puede describir a través de características, rasgos o propiedades que se recopilan en una variable y se almacenan en una columna dentro de una tabla. Por ejemplo, la entidad **Departamento** se describe a través de las variables `ID Departamento` que identifica de manera única a cada instancia, `Nombre` que corresponde a su denominación oficial y `Latitud` junto con `Longitud` que brindan información sobre su ubicación geográfica.
 
 ### Clave primaria
 
@@ -90,7 +90,7 @@ a. **Unicidad**: cada valor debe ser único en cada tabla
 b. **No nulidad**: no puede contener valores vacíos o ausentes (`NA` o `NULL` en R). Es decir, todo registro debe estar asociado a una entidad.
 c. **Inmutabilidad**: Su valor no debe cambiar con el tiempo.
 
-Por otro lado, una clave primaria puede estar formada por una sola columna dentro de una tabla pero también se puede formar uniendo dos o más columnas cuando una sola no basta para garantizar unicidad. En el caso de la @fig-erd respecto a la entidad **Resultado Saber-Pro** se utilizan las variables `Año` y `ID estudiante` para identificar de manera única el evento relacionado con la acción de un estudiante presentando las pruebas Saber-Pro en un periodo determinado. Aunque también se puede utilizar una columna como en el caso de la entidad **Departamento** en la @fig-erd donde se utiliza la variable `ID Departamento` para identificar de manera única esta entidad utilizando la codificación DIVIPOLA.
+Por otro lado, una clave primaria puede estar formada por una sola columna dentro de una tabla pero también se puede formar uniendo dos o más columnas cuando una sola no basta para garantizar unicidad. En el caso de la @fig-erd respecto a la entidad **Resultado Saber-Pro** se utilizan las variables `Año` y `ID estudiante` para identificar de manera única el evento relacionado con la acción de un estudiante presentando las pruebas Saber-Pro en un periodo determinado. Aunque también se puede utilizar una columna como en el caso de la entidad **Departamento** en la @fig-erd donde se hace uso de la variable `ID Departamento` para identificar de manera única esta entidad utilizando la codificación DIVIPOLA.
 
 ### Clave foránea
 
@@ -130,7 +130,7 @@ En el otro sentido, un programa académico de FAEDIS puede estar asociado con mu
 
 Respecto a los elementos señalados en la @sec-relaciones existen diferentes tipos de notación para representar de manera gráfica la cardinalidad de las relaciones y los vínculos que existen entre entidades a través de las claves primarias y foráneas. En la @fig-erd se utiliza la notación **Crow's foot** para representar los vínculos entre las entidades así como su cardinalidad tanto mínima como máxima donde en la @tbl-symbols-crow-foot-notation se señalan los símbolos utilizados por esta notación y en la @tbl-relation-cardinality-crow-foot-notation la representación gráfica de la cardinalidad.
 
-A modo de ejemplo, la cardinalidad de la relación de la entidad **Departamento** hacia la entidad **Municipio** así como la cardinalidad de la relación de la entidad **Municipio** hacia la entidad **Departamento** se puede representar de manera compacta como la unión de ![](images/one-many.png){fig-alt="Cardinalidad uno o muchos en notación crow's foot" height=25} y de ![](images/one-one.png){fig-alt="Cardinalidad uno y solo uno en notación crow's foot" height=25} como ![](images/one-many-one-one.png){fig-alt="Unión cardinalidad uno o muchos y uno y solo uno en notación crow's foot" height=25}, tal como se señala en la @fig-erd. Es decir, en el contexto de la codificación DIVIPOLA un departamento está vinculado con al menos un municipio y a lo más con muchos municipios pero un municipio está vinculado con uno y solo un departamento.
+A modo de ejemplo, la cardinalidad de la relación de la entidad **Departamento** hacia la entidad **Municipio** así como la cardinalidad de la relación de la entidad **Municipio** hacia la entidad **Departamento** se puede representar de manera compacta a través de la unión de ![](images/one-many.png){fig-alt="Cardinalidad uno o muchos en notación crow's foot" height=25} y de ![](images/one-one.png){fig-alt="Cardinalidad uno y solo uno en notación crow's foot" height=25} como ![](images/one-many-one-one.png){fig-alt="Unión cardinalidad uno o muchos y uno y solo uno en notación crow's foot" height=25}, tal como se señala en la @fig-erd. Es decir, en el contexto de la codificación DIVIPOLA un departamento está vinculado con al menos un municipio y a lo más con muchos municipios pero un municipio está vinculado con uno y solo un departamento.
 
 | Símbolo | Representación gráfica|
 |:---|:---:|
@@ -197,7 +197,7 @@ resultado_saber_pro |>
   glimpse()
 ```
 
-Para utilizar los verbos de 2 tablas de `dplyr` una vez importadas las tablas es necesario entender a qué se refieren cada una de las variables que las componen. En ese sentido, a continuación se describen cada una de las variables en `divipola-departamentos.rds`:
+Para utilizar los verbos de 2 tablas de `dplyr`, una vez importadas las tablas, es necesario entender a qué se refieren cada una de las variables que las componen. En ese sentido, a continuación se describen cada una de las variables en `divipola-departamentos.rds`:
 
 1. **codigo**: código único asociado a cada departamento de acuerdo con la codificación DIVIPOLA donde Colombia se compone de 32 departamentos y adicionalmente para fines estadísticos se codifica como departamento el Distrito Capital de Bogotá.
 2. **nombre**: nombre oficial del departamento de acuerdo con la codificación DIVIPOLA. 
@@ -239,3 +239,128 @@ anti_join(
 En el @lst-anti-join se conservan únicamente las filas de `divipola_departamentos` (tabla asignada al parámetro `x`) que no tienen ninguna coincidencia en `resultado_saber_pro` (tabla asignada al parámetro `y`). Al igual que en la función `semi_join()`, el parámetro `by` se utiliza para indicar las claves que establecen la relación entre ambas tablas.
 
 ## Mutating joins {#sec-mutating-joins}
+
+Las **Mutating joins** permiten combinar variables de 2 tablas correspondientes a 2 entidades emparejando sus filas mediante claves. En `dplyr` existen 4 tipos principales, los cuales difieren en su comportamiento cuando una observación no tiene coincidencia:
+
+1. **`inner_join()`**: conserva únicamente las observaciones que tienen una coincidencia en ambas tablas (`x` y `y`).
+2. **`left_join()`**: conserva todas las observaciones de la tabla izquierda (`x`), incorporando las variables de la tabla derecha (`y`) donde exista una coincidencia.
+3. **`right_join()`**: conserva todas las observaciones de la tabla derecha (`y`), incorporando las variables de la tabla izquierda (`x`) donde exista una coincidencia.
+4. **`full_join()`**: conserva todas las observaciones de ambas tablas (`x` y `y`), manteniendo los registros independientemente de si tienen o no una coincidencia.
+
+Para comprender el funcionamiento de cada una de ellas, consideremos un ejemplo ilustrativo mínimo compuesto por dos tablas, `x` y `y`, vinculadas lógicamente mediante la clave `key`. La tabla `x` incluye las variables `key` y `z`, mientras que la tabla `y` cuenta con las variables `key`, `a` y `b`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-exm-mutating-joins
+#| lst-cap: Ejemplo ilustrativo mínimo para entender las **Mutating joins** 
+
+# Tabla x ----
+x <- tibble(
+  key = c(1, 2),
+  z = c(3, 4)
+)
+
+x
+
+# Tabla y ----
+y <- tibble(
+  key = c(3, 1),
+  a = 10,
+  b = "s"
+)
+
+y
+```
+
+A partir de estas 2 tablas, a continuación se examinará cómo opera cada una de las **Mutating joins**, examinando su comportamiento tanto de forma gráfica como mediante el uso de las funciones correspondientes. Posteriormente, estos conceptos se aplicarán de manera práctica para reconstruir el archivo `2021-2024_saber-pro-genericas_faedis.rds`, teniendo en cuenta la @wrn-1-chap-11.
+
+### Inner joins {#sec-inner-joins}
+
+La función `inner_join()` incluye únicamente las observaciones cuyas claves coinciden simultáneamente en ambas tablas (`x` y `y`), combinando todas sus variables en una nueva tabla, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-inner-join
+#| lst-cap: Uso de la función `inner_join(x, y)` para combinar las observaciones que coinciden tanto en `x` como en `y`
+
+inner_join(
+  x = x,
+  y = y,
+  by = join_by(key)
+)
+```
+
+En el @lst-inner-join, a través de la función auxiliar `join_by()` en el argumento `by`, se especifica directamente la variable `key` debido a que ambas tablas comparten el mismo nombre para dicho atributo, a diferencia del @lst-semi-join donde fue necesario emplear el operador relacional de igualdad `==` al diferir los nombres.
+
+Al aplicar la función sobre el ejemplo ilustrativo, la tabla resultante conserva una única fila con la clave `key = 1`, la cual representa la única coincidencia mutua, integrando las columnas `key` y `z` de `x` junto con las columnas `a` y `b` de `y`. Por el contrario, las observaciones con `key = 2` en la tabla `x` y `key = 3` en la tabla `y` se descartan automáticamente al no tener una coincidencia en la otra tabla.
+
+En la @fig-inner-join se ilustra gráficamente este comportamiento. A la derecha se ubican las tablas de entrada `x` (arriba) y `y` (abajo), donde un nodo resalta la coincidencia exclusiva en `key = 1`, generando a la izquierda la tabla resultante con las 4 variables consolidadas.
+
+![Representación gráfica de la función `inner_join()`](images/inner-join.png){#fig-inner-join fig-alt="Diagrama conceptual que muestra cómo la función inner_join combina dos tablas a partir de una clave común. A la derecha se presentan las dos tablas de entrada: arriba la tabla x con columnas key (valores 1 en marrón y 2 en naranja) y z (valores 3 y 4 en verde azulado), y abajo la tabla y con columnas key (valores 1 en marrón y 3 en azul claro), a (valores 10 en gris claro) y b (valores s en amarillo claro), conectadas por un nodo en el valor coincidente 1 de key. Una flecha hacia la izquierda con el comando inner_join indica la unión por dicha clave, generando a la izquierda una nueva tabla con cuatro columnas (key, z, a y b) que contiene únicamente la fila coincidente (1 en marrón, 3 en verde azulado, 10 en gris claro y s en amarillo claro)."}
+
+### Left joins {#sec-left-joins}
+
+La función `left_join()` conserva todas las observaciones de la tabla izquierda (`x`), independientemente de si tienen o no coincidencia en la tabla derecha (`y`), e incorpora las variables de `y` donde exista una coincidencia con la clave de `x`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-left-join
+#| lst-cap: Uso de la función `left_join(x, y)` para incluir todas las observaciones en `x` e incorporar las variables de `y`
+
+left_join(
+  x = x,
+  y = y,
+  by = join_by(key)
+)
+```
+
+En el @lst-left-join, al igual que en el @lst-inner-join, a través de la función auxiliar `join_by()` en el argumento `by`, se especifica directamente la variable `key` debido a que ambas tablas comparten el mismo nombre para dicho atributo.
+
+Al aplicar la función sobre el ejemplo ilustrativo, la tabla resultante conserva las 2 filas de la tabla `x` (`key = 1` y `key = 2`). Para la fila con `key = 1`, al existir coincidencia en `y`, se agregan los valores correspondientes de las columnas `a` (`10`) y `b` (`"s"`). Por el contrario, para la fila con `key = 2`, como no existe coincidencia en `y`, las variables `a` y `b` se rellenan automáticamente con valores faltantes (`NA`). Por su parte, la observación con `key = 3` de la tabla `y` se descarta al no estar presente en `x`.
+
+En la @fig-left-join se ilustra gráficamente este comportamiento. A la derecha se ubican las tablas de entrada `x` (arriba) y `y` (abajo), donde la fila con `key = 1` se enlaza con su coincidencia en `y`, mientras que la fila con `key = 2` se vincula con un registro de valores `NA`, generando a la izquierda la tabla resultante de 2 filas con las 4 variables consolidadas.
+
+![Representación gráfica de la función `left_join()`](images/left-join.png){#fig-left-join fig-alt="Diagrama conceptual que muestra cómo la función left_join combina dos tablas conservando todas las filas de la tabla izquierda. A la derecha se presentan las dos tablas de entrada: arriba la tabla x con columnas key (valores 1 en marrón y 2 en naranja) y z (valores 3 y 4 en verde azulado), y abajo la tabla y con columnas key (valores 1 en marrón y 3 en azul claro), a (valores 10 en gris claro) y b (valores s en amarillo claro), junto a una columna adicional de valores NA en color salmón. La fila con key = 1 se conecta con su coincidencia en y, y la fila con key = 2 se conecta a los valores NA. Una flecha hacia la izquierda con el comando left_join genera a la izquierda una tabla de dos filas y cuatro columnas (key, z, a y b) donde la segunda fila contiene valores NA para a y b."}
+
+### Right joins {#sec-right-joins}
+
+La función `right_join()` conserva todas las observaciones de la tabla derecha (`y`), independientemente de si tienen o no coincidencia en la tabla izquierda (`x`), e incorpora las variables de `x` donde exista una coincidencia con la clave de `y`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-right-join
+#| lst-cap: Uso de la función `right_join(x, y)` para incluir todas las observaciones en `y` e incorporar las variables de `x`
+
+right_join(
+  x = x,
+  y = y,
+  by = join_by(key)
+)
+```
+
+En el @lst-right-join, al igual que en el @lst-inner-join, a través de la función auxiliar `join_by()` en el argumento `by`, se especifica directamente la variable `key` debido a que ambas tablas comparten el mismo nombre para dicho atributo.
+
+Al aplicar la función sobre el ejemplo ilustrativo, la tabla resultante conserva las 2 filas de la tabla `y` (`key = 3` y `key = 1`). Para la fila con `key = 3`, como no existe coincidencia en `x`, la variable `z` se rellena automáticamente con un valor faltante (`NA`). Por el contrario, para la fila con `key = 1`, al existir coincidencia en `x`, se agrega el valor correspondiente de la columna `z` (`3`). Por su parte, la observación con `key = 2` de la tabla `x` se descarta al no estar presente en `y`.
+
+En la @fig-right-join se ilustra gráficamente este comportamiento. A la derecha se ubican las tablas de entrada `x` (arriba) y `y` (abajo), donde la fila con `key = 3` se vincula con un registro de valor `NA`, mientras que la fila con `key = 1` se enlaza con su coincidencia en `x`, generando a la izquierda la tabla resultante de 2 filas con las 4 variables consolidadas.
+
+![Representación gráfica de la función `right_join()`](images/right-join.png){#fig-right-join fig-alt="Diagrama conceptual que muestra cómo la función right_join combina dos tablas conservando todas las filas de la tabla derecha. A la derecha se presentan las dos tablas de entrada: arriba la tabla x con columnas key (valores 1 en marrón y 2 en naranja) y z (valores 3 y 4 en verde azulado), junto a una columna de valor NA en color salmón, y abajo la tabla y con columnas key (valores 3 en azul claro y 1 en marrón), a (valores 10 en gris claro) y b (valores s en amarillo claro). La fila con key = 3 se conecta al valor NA y la fila con key = 1 se conecta con su coincidencia en x. Una flecha hacia la izquierda con el comando right_join genera a la izquierda una tabla de dos filas y cuatro columnas (key, z, a y b) donde la primera fila contiene el valor NA para z."}
+
+### Full joins {#sec-full-joins}
+
+La función `full_join()` conserva todas las observaciones de ambas tablas (`x` y `y`), manteniendo los registros independientemente de si tienen o no una coincidencia en la otra tabla, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-full-join
+#| lst-cap: Uso de la función `full_join(x, y)` para incluir todas las observaciones en `x` y `y`
+
+full_join(
+  x = x,
+  y = y,
+  by = join_by(key)
+)
+```
+
+En el @lst-full-join, al igual que en el @lst-inner-join, a través de la función auxiliar `join_by()` en el argumento `by`, se especifica directamente la variable `key` debido a que ambas tablas comparten el mismo nombre para dicho atributo.
+
+Al aplicar la función sobre el ejemplo ilustrativo, la tabla resultante conserva las 3 filas correspondientes a todas las claves presentes (`key = 1`, `key = 2` y `key = 3`). Para la fila con `key = 1`, al existir coincidencia mutua, se integran las columnas `key` y `z` de `x` junto con las columnas `a` (`10`) y `b` (`"s"`) de `y`. En el caso de la fila con `key = 2`, como no existe coincidencia en `y`, las variables `a` y `b` se rellenan automáticamente con valores faltantes (`NA`). Por su parte, para la fila con `key = 3`, al no existir coincidencia en `x`, la variable `z` se completa con un valor faltante (`NA`).
+
+En la @fig-full-join se ilustra gráficamente este comportamiento. A la derecha se ubican las tablas de entrada `x` (arriba) y `y` (abajo), donde la fila con `key = 1` se enlaza con su coincidencia mutua, mientras que las filas no coincidentes (`key = 2` en `x` y `key = 3` en `y`) se vinculan con sus respectivos registros de valores `NA`, generando a la izquierda la tabla resultante de 3 filas con las 4 variables consolidadas.
+
+![Representación gráfica de la función `full_join()`](images/full-join.png){#fig-full-join fig-alt="Diagrama conceptual que muestra cómo la función full_join combina dos tablas conservando todas las filas de ambas tablas. A la derecha se presentan las dos tablas de entrada: arriba la tabla x con columnas key (valores 1 en marrón y 2 en naranja) y z (valores 3 y 4 en verde azulado), junto a una columna de valor NA en color salmón, y abajo la tabla y con columnas key (valores 3 en azul claro y 1 en marrón), a (valores 10 en gris claro) y b (valores s en amarillo claro), junto a una columna adicional de valores NA en color salmón. La fila con key = 1 se conecta con su coincidencia en y, la fila con key = 2 se conecta a los valores NA de y, y la fila con key = 3 se conecta al valor NA de x. Una flecha hacia la izquierda con el comando full_join genera a la izquierda una tabla de tres filas y cuatro columnas (key, z, a y b) donde las filas no coincidentes se completan con valores NA."}

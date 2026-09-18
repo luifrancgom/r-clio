@@ -150,6 +150,12 @@ ggplot(
 
 Para visualizar una distribución de una variable numérica se requieren definir, de manera ex-ante, determinados argumentos para un conjunto de parámetros. Por ejemplo, al ejecutar el código del @lst-data-mapping-geom-histogram se genera un mensaje indicando el número de contenedores (ver `stat_bin() using bins = 30`) que por defecto se utiliza para generar el histograma y solicitando al usuario seleccionar un determinado ancho del contenedor (ver `Pick better value binwidth`). En la literatura se han propuesto diferentes criterios (ver @nte-2-chap-7) para determinar el número de contenedores o el ancho de cada contenedor pero en el caso del paquete `ggplot2` esta decisión se traslada al usuario respecto a qué valor finalmente desea fijar.
 
+<!-- 
+see
+https://github.com/tidyverse/ggplot2/blob/0ac300f2aeaf259c84e9205c53b3d1189452043a/R/bin.R#L266 
+in the source code
+-->
+
 ::: {#nte-2-chap-7 .callout-note}
 En la sección [Number of bins and width]({{< var url.education.histogram_bins_wiki >}}) del artículo de Wikipedia relacionado con el término [histogram]({{< var url.education.histogram_wiki >}}) se puede consultar la lista de criterios más conocidos que se han propuesto para definir el número de contenedores o el ancho de cada contenedor en un histograma.
 :::
