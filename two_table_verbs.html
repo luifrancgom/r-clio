@@ -403,7 +403,13 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#filtering-joins" id="toc-filtering-joins" class="nav-link" data-scroll-target="#filtering-joins"><span class="header-section-number">11.5.1</span> Filtering joins</a></li>
   </ul></li>
-  <li><a href="#sec-mutating-joins" id="toc-sec-mutating-joins" class="nav-link" data-scroll-target="#sec-mutating-joins"><span class="header-section-number">11.6</span> Mutating joins</a></li>
+  <li><a href="#sec-mutating-joins" id="toc-sec-mutating-joins" class="nav-link" data-scroll-target="#sec-mutating-joins"><span class="header-section-number">11.6</span> Mutating joins</a>
+  <ul class="collapse">
+  <li><a href="#sec-inner-joins" id="toc-sec-inner-joins" class="nav-link" data-scroll-target="#sec-inner-joins"><span class="header-section-number">11.6.1</span> Inner joins</a></li>
+  <li><a href="#sec-left-joins" id="toc-sec-left-joins" class="nav-link" data-scroll-target="#sec-left-joins"><span class="header-section-number">11.6.2</span> Left joins</a></li>
+  <li><a href="#sec-right-joins" id="toc-sec-right-joins" class="nav-link" data-scroll-target="#sec-right-joins"><span class="header-section-number">11.6.3</span> Right joins</a></li>
+  <li><a href="#sec-full-joins" id="toc-sec-full-joins" class="nav-link" data-scroll-target="#sec-full-joins"><span class="header-section-number">11.6.4</span> Full joins</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/two_table_verbs.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/two_table_verbs.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
@@ -564,7 +570,7 @@ Nota&nbsp;11.3
 </section>
 <section id="atributos" class="level2" data-number="11.3">
 <h2 data-number="11.3" class="anchored" data-anchor-id="atributos"><span class="header-section-number">11.3</span> Atributos</h2>
-<p>Cada entidad en la <a href="#fig-erd" class="quarto-xref">Figura&nbsp;<span>11.1</span></a> se puede describir a través de características, rasgos o propiedades que se recopilan en una variable y se almacenan en una columna dentro de una tabla. Por ejemplo, la entidad <strong>Departamento</strong> se describe a través de las variables <code>ID Departamento</code> que identifica</p>
+<p>Cada entidad en la <a href="#fig-erd" class="quarto-xref">Figura&nbsp;<span>11.1</span></a> se puede describir a través de características, rasgos o propiedades que se recopilan en una variable y se almacenan en una columna dentro de una tabla. Por ejemplo, la entidad <strong>Departamento</strong> se describe a través de las variables <code>ID Departamento</code> que identifica de manera única a cada instancia, <code>Nombre</code> que corresponde a su denominación oficial y <code>Latitud</code> junto con <code>Longitud</code> que brindan información sobre su ubicación geográfica.</p>
 <section id="clave-primaria" class="level3" data-number="11.3.1">
 <h3 data-number="11.3.1" class="anchored" data-anchor-id="clave-primaria"><span class="header-section-number">11.3.1</span> Clave primaria</h3>
 <p>Dentro de los atributos se define una clave primaria (Primary Key (<strong>PK</strong>) en inglés) que tiene como propósito identificar de forma única cada registro dentro de una tabla. Es decir, no pueden existir dos filas con el mismo valor de la clave primaria. Adicionalmente una clave primaria debe cumplir con un conjunto de reglas fundamentales:</p>
@@ -573,7 +579,7 @@ Nota&nbsp;11.3
 <li><strong>No nulidad</strong>: no puede contener valores vacíos o ausentes (<code>NA</code> o <code>NULL</code> en R). Es decir, todo registro debe estar asociado a una entidad.</li>
 <li><strong>Inmutabilidad</strong>: Su valor no debe cambiar con el tiempo.</li>
 </ol>
-<p>Por otro lado, una clave primaria puede estar formada por una sola columna dentro de una tabla pero también se puede formar uniendo dos o más columnas cuando una sola no basta para garantizar unicidad. En el caso de la <a href="#fig-erd" class="quarto-xref">Figura&nbsp;<span>11.1</span></a> respecto a la entidad <strong>Resultado Saber-Pro</strong> se utilizan las variables <code>Año</code> y <code>ID estudiante</code> para identificar de manera única el evento relacionado con la acción de un estudiante presentando las pruebas Saber-Pro en un periodo determinado. Aunque también se puede utilizar una columna como en el caso de la entidad <strong>Departamento</strong> en la <a href="#fig-erd" class="quarto-xref">Figura&nbsp;<span>11.1</span></a> donde se utiliza la variable <code>ID Departamento</code> para identificar de manera única esta entidad utilizando la codificación DIVIPOLA.</p>
+<p>Por otro lado, una clave primaria puede estar formada por una sola columna dentro de una tabla pero también se puede formar uniendo dos o más columnas cuando una sola no basta para garantizar unicidad. En el caso de la <a href="#fig-erd" class="quarto-xref">Figura&nbsp;<span>11.1</span></a> respecto a la entidad <strong>Resultado Saber-Pro</strong> se utilizan las variables <code>Año</code> y <code>ID estudiante</code> para identificar de manera única el evento relacionado con la acción de un estudiante presentando las pruebas Saber-Pro en un periodo determinado. Aunque también se puede utilizar una columna como en el caso de la entidad <strong>Departamento</strong> en la <a href="#fig-erd" class="quarto-xref">Figura&nbsp;<span>11.1</span></a> donde se hace uso de la variable <code>ID Departamento</code> para identificar de manera única esta entidad utilizando la codificación DIVIPOLA.</p>
 </section>
 <section id="clave-foránea" class="level3" data-number="11.3.2">
 <h3 data-number="11.3.2" class="anchored" data-anchor-id="clave-foránea"><span class="header-section-number">11.3.2</span> Clave foránea</h3>
@@ -617,7 +623,7 @@ Advertencia&nbsp;11.1
 <section id="notación-crows-foot" class="level3" data-number="11.4.1">
 <h3 data-number="11.4.1" class="anchored" data-anchor-id="notación-crows-foot"><span class="header-section-number">11.4.1</span> Notación Crow’s Foot</h3>
 <p>Respecto a los elementos señalados en la <a href="#sec-relaciones" class="quarto-xref"><span>Sección 11.4</span></a> existen diferentes tipos de notación para representar de manera gráfica la cardinalidad de las relaciones y los vínculos que existen entre entidades a través de las claves primarias y foráneas. En la <a href="#fig-erd" class="quarto-xref">Figura&nbsp;<span>11.1</span></a> se utiliza la notación <strong>Crow’s foot</strong> para representar los vínculos entre las entidades así como su cardinalidad tanto mínima como máxima donde en la <a href="#tbl-symbols-crow-foot-notation" class="quarto-xref">Tabla&nbsp;<span>11.1</span></a> se señalan los símbolos utilizados por esta notación y en la <a href="#tbl-relation-cardinality-crow-foot-notation" class="quarto-xref">Tabla&nbsp;<span>11.2</span></a> la representación gráfica de la cardinalidad.</p>
-<p>A modo de ejemplo, la cardinalidad de la relación de la entidad <strong>Departamento</strong> hacia la entidad <strong>Municipio</strong> así como la cardinalidad de la relación de la entidad <strong>Municipio</strong> hacia la entidad <strong>Departamento</strong> se puede representar de manera compacta como la unión de <img src="images/one-many.png" alt="Cardinalidad uno o muchos en notación crow's foot" height="25"> y de <img src="images/one-one.png" alt="Cardinalidad uno y solo uno en notación crow's foot" height="25"> como <img src="images/one-many-one-one.png" alt="Unión cardinalidad uno o muchos y uno y solo uno en notación crow's foot" height="25">, tal como se señala en la <a href="#fig-erd" class="quarto-xref">Figura&nbsp;<span>11.1</span></a>. Es decir, en el contexto de la codificación DIVIPOLA un departamento está vinculado con al menos un municipio y a lo más con muchos municipios pero un municipio está vinculado con uno y solo un departamento.</p>
+<p>A modo de ejemplo, la cardinalidad de la relación de la entidad <strong>Departamento</strong> hacia la entidad <strong>Municipio</strong> así como la cardinalidad de la relación de la entidad <strong>Municipio</strong> hacia la entidad <strong>Departamento</strong> se puede representar de manera compacta a través de la unión de <img src="images/one-many.png" alt="Cardinalidad uno o muchos en notación crow's foot" height="25"> y de <img src="images/one-one.png" alt="Cardinalidad uno y solo uno en notación crow's foot" height="25"> como <img src="images/one-many-one-one.png" alt="Unión cardinalidad uno o muchos y uno y solo uno en notación crow's foot" height="25">, tal como se señala en la <a href="#fig-erd" class="quarto-xref">Figura&nbsp;<span>11.1</span></a>. Es decir, en el contexto de la codificación DIVIPOLA un departamento está vinculado con al menos un municipio y a lo más con muchos municipios pero un municipio está vinculado con uno y solo un departamento.</p>
 <div id="tbl-symbols-crow-foot-notation" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-symbols-crow-foot-notation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -764,7 +770,7 @@ $ mod_razona_cuantitat_punt   &lt;dbl&gt; 135, 164, 113, 149, 16…
 $ punt_global                 &lt;dbl&gt; 139, 170, 128, 155, 16…</code></pre>
 </div>
 </div>
-<p>Para utilizar los verbos de 2 tablas de <code>dplyr</code> una vez importadas las tablas es necesario entender a qué se refieren cada una de las variables que las componen. En ese sentido, a continuación se describen cada una de las variables en <code>divipola-departamentos.rds</code>:</p>
+<p>Para utilizar los verbos de 2 tablas de <code>dplyr</code>, una vez importadas las tablas, es necesario entender a qué se refieren cada una de las variables que las componen. En ese sentido, a continuación se describen cada una de las variables en <code>divipola-departamentos.rds</code>:</p>
 <ol type="1">
 <li><strong>codigo</strong>: código único asociado a cada departamento de acuerdo con la codificación DIVIPOLA donde Colombia se compone de 32 departamentos y adicionalmente para fines estadísticos se codifica como departamento el Distrito Capital de Bogotá.</li>
 <li><strong>nombre</strong>: nombre oficial del departamento de acuerdo con la codificación DIVIPOLA.</li>
@@ -843,6 +849,223 @@ Listado&nbsp;11.2: Uso de la función <code>anti_join(x, y)</code> para filtrar 
 </section>
 <section id="sec-mutating-joins" class="level2" data-number="11.6">
 <h2 data-number="11.6" class="anchored" data-anchor-id="sec-mutating-joins"><span class="header-section-number">11.6</span> Mutating joins</h2>
+<p>Las <strong>Mutating joins</strong> permiten combinar variables de 2 tablas correspondientes a 2 entidades emparejando sus filas mediante claves. En <code>dplyr</code> existen 4 tipos principales, los cuales difieren en su comportamiento cuando una observación no tiene coincidencia:</p>
+<ol type="1">
+<li><strong><code>inner_join()</code></strong>: conserva únicamente las observaciones que tienen una coincidencia en ambas tablas (<code>x</code> y <code>y</code>).</li>
+<li><strong><code>left_join()</code></strong>: conserva todas las observaciones de la tabla izquierda (<code>x</code>), incorporando las variables de la tabla derecha (<code>y</code>) donde exista una coincidencia.</li>
+<li><strong><code>right_join()</code></strong>: conserva todas las observaciones de la tabla derecha (<code>y</code>), incorporando las variables de la tabla izquierda (<code>x</code>) donde exista una coincidencia.</li>
+<li><strong><code>full_join()</code></strong>: conserva todas las observaciones de ambas tablas (<code>x</code> y <code>y</code>), manteniendo los registros independientemente de si tienen o no una coincidencia.</li>
+</ol>
+<p>Para comprender el funcionamiento de cada una de ellas, consideremos un ejemplo ilustrativo mínimo compuesto por dos tablas, <code>x</code> y <code>y</code>, vinculadas lógicamente mediante la clave <code>key</code>. La tabla <code>x</code> incluye las variables <code>key</code> y <code>z</code>, mientras que la tabla <code>y</code> cuenta con las variables <code>key</code>, <code>a</code> y <code>b</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-exm-mutating-joins" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-exm-mutating-joins-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;11.3: Ejemplo ilustrativo mínimo para entender las <strong>Mutating joins</strong>
+</figcaption>
+<div aria-describedby="lst-exm-mutating-joins-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tabla x ----</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">key =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">z =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+    key     z
+  &lt;dbl&gt; &lt;dbl&gt;
+1     1     3
+2     2     4</code></pre>
+</div>
+<div id="lst-exm-mutating-joins" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-exm-mutating-joins-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;11.4: Ejemplo ilustrativo mínimo para entender las <strong>Mutating joins</strong>
+</figcaption>
+<div aria-describedby="lst-exm-mutating-joins-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tabla y ----</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">key =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>),</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">a =</span> <span class="dv">10</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">b =</span> <span class="st">"s"</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>y</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+    key     a b    
+  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+1     3    10 s    
+2     1    10 s    </code></pre>
+</div>
+</div>
+<p>A partir de estas 2 tablas, a continuación se examinará cómo opera cada una de las <strong>Mutating joins</strong>, examinando su comportamiento tanto de forma gráfica como mediante el uso de las funciones correspondientes. Posteriormente, estos conceptos se aplicarán de manera práctica para reconstruir el archivo <code>2021-2024_saber-pro-genericas_faedis.rds</code>, teniendo en cuenta la <a href="#wrn-1-chap-11" class="quarto-xref">Advertencia&nbsp;<span>11.1</span></a>.</p>
+<section id="sec-inner-joins" class="level3" data-number="11.6.1">
+<h3 data-number="11.6.1" class="anchored" data-anchor-id="sec-inner-joins"><span class="header-section-number">11.6.1</span> Inner joins</h3>
+<p>La función <code>inner_join()</code> incluye únicamente las observaciones cuyas claves coinciden simultáneamente en ambas tablas (<code>x</code> y <code>y</code>), combinando todas sus variables en una nueva tabla, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-inner-join" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-inner-join-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;11.5: Uso de la función <code>inner_join(x, y)</code> para combinar las observaciones que coinciden tanto en <code>x</code> como en <code>y</code>
+</figcaption>
+<div aria-describedby="lst-inner-join-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_join</span>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> x,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> y,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="fu">join_by</span>(key)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+    key     z     a b    
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+1     1     3    10 s    </code></pre>
+</div>
+</div>
+<p>En el <a href="#lst-inner-join" class="quarto-xref">Listado&nbsp;<span>11.5</span></a>, a través de la función auxiliar <code>join_by()</code> en el argumento <code>by</code>, se especifica directamente la variable <code>key</code> debido a que ambas tablas comparten el mismo nombre para dicho atributo, a diferencia del <a href="#lst-semi-join" class="quarto-xref">Listado&nbsp;<span>11.1</span></a> donde fue necesario emplear el operador relacional de igualdad <code>==</code> al diferir los nombres.</p>
+<p>Al aplicar la función sobre el ejemplo ilustrativo, la tabla resultante conserva una única fila con la clave <code>key = 1</code>, la cual representa la única coincidencia mutua, integrando las columnas <code>key</code> y <code>z</code> de <code>x</code> junto con las columnas <code>a</code> y <code>b</code> de <code>y</code>. Por el contrario, las observaciones con <code>key = 2</code> en la tabla <code>x</code> y <code>key = 3</code> en la tabla <code>y</code> se descartan automáticamente al no tener una coincidencia en la otra tabla.</p>
+<p>En la <a href="#fig-inner-join" class="quarto-xref">Figura&nbsp;<span>11.2</span></a> se ilustra gráficamente este comportamiento. A la derecha se ubican las tablas de entrada <code>x</code> (arriba) y <code>y</code> (abajo), donde un nodo resalta la coincidencia exclusiva en <code>key = 1</code>, generando a la izquierda la tabla resultante con las 4 variables consolidadas.</p>
+<div id="fig-inner-join" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que muestra cómo la función inner_join combina dos tablas a partir de una clave común. A la derecha se presentan las dos tablas de entrada: arriba la tabla x con columnas key (valores 1 en marrón y 2 en naranja) y z (valores 3 y 4 en verde azulado), y abajo la tabla y con columnas key (valores 1 en marrón y 3 en azul claro), a (valores 10 en gris claro) y b (valores s en amarillo claro), conectadas por un nodo en el valor coincidente 1 de key. Una flecha hacia la izquierda con el comando inner_join indica la unión por dicha clave, generando a la izquierda una nueva tabla con cuatro columnas (key, z, a y b) que contiene únicamente la fila coincidente (1 en marrón, 3 en verde azulado, 10 en gris claro y s en amarillo claro).">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-inner-join-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/inner-join.png" class="img-fluid figure-img" alt="Diagrama conceptual que muestra cómo la función inner_join combina dos tablas a partir de una clave común. A la derecha se presentan las dos tablas de entrada: arriba la tabla x con columnas key (valores 1 en marrón y 2 en naranja) y z (valores 3 y 4 en verde azulado), y abajo la tabla y con columnas key (valores 1 en marrón y 3 en azul claro), a (valores 10 en gris claro) y b (valores s en amarillo claro), conectadas por un nodo en el valor coincidente 1 de key. Una flecha hacia la izquierda con el comando inner_join indica la unión por dicha clave, generando a la izquierda una nueva tabla con cuatro columnas (key, z, a y b) que contiene únicamente la fila coincidente (1 en marrón, 3 en verde azulado, 10 en gris claro y s en amarillo claro).">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-inner-join-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;11.2: Representación gráfica de la función <code>inner_join()</code>
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-left-joins" class="level3" data-number="11.6.2">
+<h3 data-number="11.6.2" class="anchored" data-anchor-id="sec-left-joins"><span class="header-section-number">11.6.2</span> Left joins</h3>
+<p>La función <code>left_join()</code> conserva todas las observaciones de la tabla izquierda (<code>x</code>), independientemente de si tienen o no coincidencia en la tabla derecha (<code>y</code>), e incorpora las variables de <code>y</code> donde exista una coincidencia con la clave de <code>x</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-left-join" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-left-join-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;11.6: Uso de la función <code>left_join(x, y)</code> para incluir todas las observaciones en <code>x</code> e incorporar las variables de <code>y</code>
+</figcaption>
+<div aria-describedby="lst-left-join-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> x,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> y,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="fu">join_by</span>(key)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+    key     z     a b    
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+1     1     3    10 s    
+2     2     4    NA &lt;NA&gt; </code></pre>
+</div>
+</div>
+<p>En el <a href="#lst-left-join" class="quarto-xref">Listado&nbsp;<span>11.6</span></a>, al igual que en el <a href="#lst-inner-join" class="quarto-xref">Listado&nbsp;<span>11.5</span></a>, a través de la función auxiliar <code>join_by()</code> en el argumento <code>by</code>, se especifica directamente la variable <code>key</code> debido a que ambas tablas comparten el mismo nombre para dicho atributo.</p>
+<p>Al aplicar la función sobre el ejemplo ilustrativo, la tabla resultante conserva las 2 filas de la tabla <code>x</code> (<code>key = 1</code> y <code>key = 2</code>). Para la fila con <code>key = 1</code>, al existir coincidencia en <code>y</code>, se agregan los valores correspondientes de las columnas <code>a</code> (<code>10</code>) y <code>b</code> (<code>"s"</code>). Por el contrario, para la fila con <code>key = 2</code>, como no existe coincidencia en <code>y</code>, las variables <code>a</code> y <code>b</code> se rellenan automáticamente con valores faltantes (<code>NA</code>). Por su parte, la observación con <code>key = 3</code> de la tabla <code>y</code> se descarta al no estar presente en <code>x</code>.</p>
+<p>En la <a href="#fig-left-join" class="quarto-xref">Figura&nbsp;<span>11.3</span></a> se ilustra gráficamente este comportamiento. A la derecha se ubican las tablas de entrada <code>x</code> (arriba) y <code>y</code> (abajo), donde la fila con <code>key = 1</code> se enlaza con su coincidencia en <code>y</code>, mientras que la fila con <code>key = 2</code> se vincula con un registro de valores <code>NA</code>, generando a la izquierda la tabla resultante de 2 filas con las 4 variables consolidadas.</p>
+<div id="fig-left-join" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que muestra cómo la función left_join combina dos tablas conservando todas las filas de la tabla izquierda. A la derecha se presentan las dos tablas de entrada: arriba la tabla x con columnas key (valores 1 en marrón y 2 en naranja) y z (valores 3 y 4 en verde azulado), y abajo la tabla y con columnas key (valores 1 en marrón y 3 en azul claro), a (valores 10 en gris claro) y b (valores s en amarillo claro), junto a una columna adicional de valores NA en color salmón. La fila con key = 1 se conecta con su coincidencia en y, y la fila con key = 2 se conecta a los valores NA. Una flecha hacia la izquierda con el comando left_join genera a la izquierda una tabla de dos filas y cuatro columnas (key, z, a y b) donde la segunda fila contiene valores NA para a y b.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-left-join-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/left-join.png" class="img-fluid figure-img" alt="Diagrama conceptual que muestra cómo la función left_join combina dos tablas conservando todas las filas de la tabla izquierda. A la derecha se presentan las dos tablas de entrada: arriba la tabla x con columnas key (valores 1 en marrón y 2 en naranja) y z (valores 3 y 4 en verde azulado), y abajo la tabla y con columnas key (valores 1 en marrón y 3 en azul claro), a (valores 10 en gris claro) y b (valores s en amarillo claro), junto a una columna adicional de valores NA en color salmón. La fila con key = 1 se conecta con su coincidencia en y, y la fila con key = 2 se conecta a los valores NA. Una flecha hacia la izquierda con el comando left_join genera a la izquierda una tabla de dos filas y cuatro columnas (key, z, a y b) donde la segunda fila contiene valores NA para a y b.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-left-join-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;11.3: Representación gráfica de la función <code>left_join()</code>
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-right-joins" class="level3" data-number="11.6.3">
+<h3 data-number="11.6.3" class="anchored" data-anchor-id="sec-right-joins"><span class="header-section-number">11.6.3</span> Right joins</h3>
+<p>La función <code>right_join()</code> conserva todas las observaciones de la tabla derecha (<code>y</code>), independientemente de si tienen o no coincidencia en la tabla izquierda (<code>x</code>), e incorpora las variables de <code>x</code> donde exista una coincidencia con la clave de <code>y</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-right-join" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-right-join-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;11.7: Uso de la función <code>right_join(x, y)</code> para incluir todas las observaciones en <code>y</code> e incorporar las variables de <code>x</code>
+</figcaption>
+<div aria-describedby="lst-right-join-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">right_join</span>(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> x,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> y,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="fu">join_by</span>(key)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+    key     z     a b    
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+1     1     3    10 s    
+2     3    NA    10 s    </code></pre>
+</div>
+</div>
+<p>En el <a href="#lst-right-join" class="quarto-xref">Listado&nbsp;<span>11.7</span></a>, al igual que en el <a href="#lst-inner-join" class="quarto-xref">Listado&nbsp;<span>11.5</span></a>, a través de la función auxiliar <code>join_by()</code> en el argumento <code>by</code>, se especifica directamente la variable <code>key</code> debido a que ambas tablas comparten el mismo nombre para dicho atributo.</p>
+<p>Al aplicar la función sobre el ejemplo ilustrativo, la tabla resultante conserva las 2 filas de la tabla <code>y</code> (<code>key = 3</code> y <code>key = 1</code>). Para la fila con <code>key = 3</code>, como no existe coincidencia en <code>x</code>, la variable <code>z</code> se rellena automáticamente con un valor faltante (<code>NA</code>). Por el contrario, para la fila con <code>key = 1</code>, al existir coincidencia en <code>x</code>, se agrega el valor correspondiente de la columna <code>z</code> (<code>3</code>). Por su parte, la observación con <code>key = 2</code> de la tabla <code>x</code> se descarta al no estar presente en <code>y</code>.</p>
+<p>En la <a href="#fig-right-join" class="quarto-xref">Figura&nbsp;<span>11.4</span></a> se ilustra gráficamente este comportamiento. A la derecha se ubican las tablas de entrada <code>x</code> (arriba) y <code>y</code> (abajo), donde la fila con <code>key = 3</code> se vincula con un registro de valor <code>NA</code>, mientras que la fila con <code>key = 1</code> se enlaza con su coincidencia en <code>x</code>, generando a la izquierda la tabla resultante de 2 filas con las 4 variables consolidadas.</p>
+<div id="fig-right-join" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que muestra cómo la función right_join combina dos tablas conservando todas las filas de la tabla derecha. A la derecha se presentan las dos tablas de entrada: arriba la tabla x con columnas key (valores 1 en marrón y 2 en naranja) y z (valores 3 y 4 en verde azulado), junto a una columna de valor NA en color salmón, y abajo la tabla y con columnas key (valores 3 en azul claro y 1 en marrón), a (valores 10 en gris claro) y b (valores s en amarillo claro). La fila con key = 3 se conecta al valor NA y la fila con key = 1 se conecta con su coincidencia en x. Una flecha hacia la izquierda con el comando right_join genera a la izquierda una tabla de dos filas y cuatro columnas (key, z, a y b) donde la primera fila contiene el valor NA para z.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-right-join-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/right-join.png" class="img-fluid figure-img" alt="Diagrama conceptual que muestra cómo la función right_join combina dos tablas conservando todas las filas de la tabla derecha. A la derecha se presentan las dos tablas de entrada: arriba la tabla x con columnas key (valores 1 en marrón y 2 en naranja) y z (valores 3 y 4 en verde azulado), junto a una columna de valor NA en color salmón, y abajo la tabla y con columnas key (valores 3 en azul claro y 1 en marrón), a (valores 10 en gris claro) y b (valores s en amarillo claro). La fila con key = 3 se conecta al valor NA y la fila con key = 1 se conecta con su coincidencia en x. Una flecha hacia la izquierda con el comando right_join genera a la izquierda una tabla de dos filas y cuatro columnas (key, z, a y b) donde la primera fila contiene el valor NA para z.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-right-join-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;11.4: Representación gráfica de la función <code>right_join()</code>
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-full-joins" class="level3" data-number="11.6.4">
+<h3 data-number="11.6.4" class="anchored" data-anchor-id="sec-full-joins"><span class="header-section-number">11.6.4</span> Full joins</h3>
+<p>La función <code>full_join()</code> conserva todas las observaciones de ambas tablas (<code>x</code> y <code>y</code>), manteniendo los registros independientemente de si tienen o no una coincidencia en la otra tabla, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-full-join" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-full-join-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;11.8: Uso de la función <code>full_join(x, y)</code> para incluir todas las observaciones en <code>x</code> y <code>y</code>
+</figcaption>
+<div aria-describedby="lst-full-join-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">full_join</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> x,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> y,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="fu">join_by</span>(key)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+    key     z     a b    
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+1     1     3    10 s    
+2     2     4    NA &lt;NA&gt; 
+3     3    NA    10 s    </code></pre>
+</div>
+</div>
+<p>En el <a href="#lst-full-join" class="quarto-xref">Listado&nbsp;<span>11.8</span></a>, al igual que en el <a href="#lst-inner-join" class="quarto-xref">Listado&nbsp;<span>11.5</span></a>, a través de la función auxiliar <code>join_by()</code> en el argumento <code>by</code>, se especifica directamente la variable <code>key</code> debido a que ambas tablas comparten el mismo nombre para dicho atributo.</p>
+<p>Al aplicar la función sobre el ejemplo ilustrativo, la tabla resultante conserva las 3 filas correspondientes a todas las claves presentes (<code>key = 1</code>, <code>key = 2</code> y <code>key = 3</code>). Para la fila con <code>key = 1</code>, al existir coincidencia mutua, se integran las columnas <code>key</code> y <code>z</code> de <code>x</code> junto con las columnas <code>a</code> (<code>10</code>) y <code>b</code> (<code>"s"</code>) de <code>y</code>. En el caso de la fila con <code>key = 2</code>, como no existe coincidencia en <code>y</code>, las variables <code>a</code> y <code>b</code> se rellenan automáticamente con valores faltantes (<code>NA</code>). Por su parte, para la fila con <code>key = 3</code>, al no existir coincidencia en <code>x</code>, la variable <code>z</code> se completa con un valor faltante (<code>NA</code>).</p>
+<p>En la <a href="#fig-full-join" class="quarto-xref">Figura&nbsp;<span>11.5</span></a> se ilustra gráficamente este comportamiento. A la derecha se ubican las tablas de entrada <code>x</code> (arriba) y <code>y</code> (abajo), donde la fila con <code>key = 1</code> se enlaza con su coincidencia mutua, mientras que las filas no coincidentes (<code>key = 2</code> en <code>x</code> y <code>key = 3</code> en <code>y</code>) se vinculan con sus respectivos registros de valores <code>NA</code>, generando a la izquierda la tabla resultante de 3 filas con las 4 variables consolidadas.</p>
+<div id="fig-full-join" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que muestra cómo la función full_join combina dos tablas conservando todas las filas de ambas tablas. A la derecha se presentan las dos tablas de entrada: arriba la tabla x con columnas key (valores 1 en marrón y 2 en naranja) y z (valores 3 y 4 en verde azulado), junto a una columna de valor NA en color salmón, y abajo la tabla y con columnas key (valores 3 en azul claro y 1 en marrón), a (valores 10 en gris claro) y b (valores s en amarillo claro), junto a una columna adicional de valores NA en color salmón. La fila con key = 1 se conecta con su coincidencia en y, la fila con key = 2 se conecta a los valores NA de y, y la fila con key = 3 se conecta al valor NA de x. Una flecha hacia la izquierda con el comando full_join genera a la izquierda una tabla de tres filas y cuatro columnas (key, z, a y b) donde las filas no coincidentes se completan con valores NA.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-full-join-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/full-join.png" class="img-fluid figure-img" alt="Diagrama conceptual que muestra cómo la función full_join combina dos tablas conservando todas las filas de ambas tablas. A la derecha se presentan las dos tablas de entrada: arriba la tabla x con columnas key (valores 1 en marrón y 2 en naranja) y z (valores 3 y 4 en verde azulado), junto a una columna de valor NA en color salmón, y abajo la tabla y con columnas key (valores 3 en azul claro y 1 en marrón), a (valores 10 en gris claro) y b (valores s en amarillo claro), junto a una columna adicional de valores NA en color salmón. La fila con key = 1 se conecta con su coincidencia en y, la fila con key = 2 se conecta a los valores NA de y, y la fila con key = 3 se conecta al valor NA de x. Una flecha hacia la izquierda con el comando full_join genera a la izquierda una tabla de tres filas y cuatro columnas (key, z, a y b) donde las filas no coincidentes se completan con valores NA.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-full-join-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;11.5: Representación gráfica de la función <code>full_join()</code>
+</figcaption>
+</figure>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
@@ -850,6 +1073,7 @@ Listado&nbsp;11.2: Uso de la función <code>anti_join(x, y)</code> para filtrar 
 Wickham, H. (2023). <em>R for <span>Data</span> <span>Science</span></em> (2.ª ed.). O’Reilly Media, Incorporated. <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a>
 </div>
 </div>
+</section>
 </section>
 
 </main> <!-- /main -->

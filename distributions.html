@@ -531,6 +531,11 @@ Listado&nbsp;7.1: Uso de datos, mapeo y una geometría para ilustrar gráficamen
 </div>
 </div>
 <p>Para visualizar una distribución de una variable numérica se requieren definir, de manera ex-ante, determinados argumentos para un conjunto de parámetros. Por ejemplo, al ejecutar el código del <a href="#lst-data-mapping-geom-histogram" class="quarto-xref">Listado&nbsp;<span>7.1</span></a> se genera un mensaje indicando el número de contenedores (ver <code>stat_bin() using bins = 30</code>) que por defecto se utiliza para generar el histograma y solicitando al usuario seleccionar un determinado ancho del contenedor (ver <code>Pick better value binwidth</code>). En la literatura se han propuesto diferentes criterios (ver <a href="#nte-2-chap-7" class="quarto-xref">Nota&nbsp;<span>7.2</span></a>) para determinar el número de contenedores o el ancho de cada contenedor pero en el caso del paquete <code>ggplot2</code> esta decisión se traslada al usuario respecto a qué valor finalmente desea fijar.</p>
+<!-- 
+see
+https://github.com/tidyverse/ggplot2/blob/0ac300f2aeaf259c84e9205c53b3d1189452043a/R/bin.R#L266 
+in the source code
+-->
 <div id="nte-2-chap-7" class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
