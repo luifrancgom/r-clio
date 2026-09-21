@@ -416,7 +416,7 @@ De la misma forma, a continuación se describen cada una de las variables en `pr
 3. **estado_programa**: estado del registro del programa académico ante el SNIES (`Activo` o `Inactivo`).
 4. **ultima_actualizacion**: fecha de corte de la última consulta realizada en la base de datos del SNIES.
 
-### Ajuste de datos
+### Ajuste de datos {#sec-data-adjustment}
 
 Tal como se señaló en la @wrn-1-chap-11, la fuente original de datos (Data Icfes) asigna por defecto a Bogotá como lugar de presentación cuando el examen se realiza en el exterior. Esto genera una inconsistencia en las variables `estu_cod_depto_presentacion` y `estu_cod_mcpio_presentacion` para los registros donde los estudiantes presentaron la prueba por fuera de Colombia, tal como se señala a continuación:
 
@@ -451,7 +451,7 @@ Para aplicar este ajuste sobre las variables de interés en `resultado_saber_pro
 #| lst-label: lst-replace-when
 #| lst-cap: Uso de la función `replace_when()` junto con `mutate()` para actualizar parcialmente los valores de una variable dentro de una tibble
 
-resultado_saber_pro <- resultado_saber_pro |>
+resultado_saber_pro_ajustado <- resultado_saber_pro |>
   mutate(
     estu_cod_depto_presentacion = replace_when(
       x = estu_cod_depto_presentacion,
@@ -470,7 +470,7 @@ Para verificar que la transformación se aplicó de manera correcta, en primera 
 
 ```{r}
 # Inspeccionar registros ajustados en el exterior ----
-resultado_saber_pro |>
+resultado_saber_pro_ajustado |>
   filter(estu_exterior == "SI") |>
   select(
     ano,
@@ -486,7 +486,7 @@ De igual forma, puedes verificar que los registros correspondientes a los estudi
 
 ```{r}
 # Inspeccionar registros en Colombia ----
-resultado_saber_pro |>
+resultado_saber_pro_ajustado |>
   filter(estu_exterior == "NO") |>
   select(
     ano,
@@ -497,3 +497,120 @@ resultado_saber_pro |>
   ) |>
   glimpse()
 ```
+
+### Consolidación de tablas {#sec-table-consolidation}
+
+En la @sec-table-consolidation reconstruirás el archivo `2021-2024_saber-pro-genericas_faedis.rds` incorporando los aspectos señalados en la @wrn-1-chap-11.
+
+Para realizar este proceso utilizarás inicialmente verbos para filas (ver @sec-row-verbs) y verbos para columnas (ver @sec-column-verbs), así como la función `left_join()` (ver @sec-left-joins), para luego exportar los datos en un archivo denominado `2021-2024_saber-pro-genericas_faedis_ajustado.rds` en la carpeta `data`.
+
+En la @fig-erd, la entidad central que conecta cada una de las tablas es `Resultado Saber-Pro`, que corresponde al objeto `resultado_saber_pro_ajustado` (ver @sec-data-adjustment). A partir de esta tabla es necesario conectar la información que se encuentra en los objetos `divipola_departamentos`, `divipola_municipios` y `programas_pregrado_faedis`, pero filtrando y seleccionando la información de interés, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-select-filter-variables-case-study
+#| lst-cap: Selección y filtro de variables de interés
+programas_pregrado_faedis <- programas_pregrado_faedis |>
+  filter(estado_programa == "Activo") |>
+  select(
+    codigo_snies_programa,
+    nombre_programa
+  )
+
+divipola_departamentos <- divipola_departamentos |>
+  select(
+    codigo,
+    nombre
+  )
+
+divipola_municipios <- divipola_municipios |>
+  select(
+    codigo_municipio,
+    nombre_municipio
+  )
+```
+
+En el @lst-select-filter-variables-case-study solo es necesario tener en cuenta los programas académicos de pregrado que se encuentran activos, así como seleccionar los atributos relacionados con las claves que identifican a cada instancia junto con sus nombres, con el fin de reconstruir el archivo `2021-2024_saber-pro-genericas_faedis.rds` ajustado.
+
+Una vez aplicados estos filtros y selecciones, es posible integrar cada una de las tablas de manera secuencial, vinculando en cada paso 2 tablas de datos correspondientes a 2 entidades mediante claves primarias y foráneas, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-left-join-case-study
+#| lst-cap: Uso secuencial de la función `left_join()` para conectar o unir tablas de datos de diferentes entidades
+resultado_saber_pro_ajustado <- resultado_saber_pro_ajustado |>
+  left_join(
+    y = programas_pregrado_faedis,
+    by = join_by(
+      estu_snies_prgmacademico == codigo_snies_programa
+    )
+  ) |>
+  left_join(
+    y = divipola_departamentos,
+    by = join_by(
+      estu_cod_depto_presentacion == codigo
+    )
+  ) |>
+  left_join(
+    y = divipola_municipios,
+    by = join_by(
+      estu_cod_mcpio_presentacion == codigo_municipio
+    )
+  )
+
+resultado_saber_pro_ajustado |>
+  glimpse()
+```
+
+En el @lst-left-join-case-study, partiendo de la tabla `resultado_saber_pro_ajustado`, es posible unir de manera secuencial la información filtrada y seleccionada de las tablas `programas_pregrado_faedis`, `divipola_departamentos` y `divipola_municipios`, correspondientes a las entidades `Programa académico`, `Departamento` y `Municipio` (ver @fig-erd).
+
+A partir de la unión realizada en el @lst-left-join-case-study, es necesario renombrar y reorganizar las tres últimas columnas teniendo en cuenta que dicha información proviene de las tablas `programas_pregrado_faedis`, `divipola_departamentos` y `divipola_municipios`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-rename-case-study
+#| lst-cap: Uso de la función `rename()` para renombrar columnas que provienen de otras tablas
+
+resultado_saber_pro_ajustado <- resultado_saber_pro_ajustado |>
+  rename(
+    estu_prgm_academico = nombre_programa,
+    estu_depto_presentacion = nombre,
+    estu_mcpio_presentacion = nombre_municipio
+  )
+```
+
+```{r}
+#| lst-label: lst-relocate-case-study
+#| lst-cap: Uso de la función `relocate()` para reubicar columnas que provienen de otras tablas
+resultado_saber_pro_ajustado <- resultado_saber_pro_ajustado |>
+  relocate(
+    estu_prgm_academico,
+    .after = estu_snies_prgmacademico
+  ) |>
+  relocate(
+    estu_depto_presentacion,
+    .after = estu_cod_depto_presentacion
+  ) |>
+  relocate(
+    estu_mcpio_presentacion,
+    .after = estu_cod_mcpio_presentacion
+  )
+
+resultado_saber_pro_ajustado |>
+  glimpse()
+```
+
+Aplicando los cambios señalados en el @lst-rename-case-study y el @lst-relocate-case-study, se logra finalmente reconstruir el archivo `2021-2024_saber-pro-genericas_faedis.rds` ajustado. En ese sentido, es posible exportar el archivo y guardarlo en la carpeta `data` para un uso posterior, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-write-rds-case-study
+#| lst-cap: Uso de la función `write_rds()` para exportar y guardar el archivo de datos ajustado
+#| eval: false
+resultado_saber_pro_ajustado |>
+  write_rds(
+    file = "data/2021-2024_saber-pro-genericas_faedis_ajustado.rds"
+  )
+```
+
+En el @lst-write-rds-case-study se utiliza la función `write_rds()` junto con el parámetro `file` asociado con el argumento `"data/2021-2024_saber-pro-genericas_faedis_ajustado.rds"` para definir tanto la ruta como el nombre del archivo en el que se guardará la información.
+
+::: {#nte-4-chap-11 .callout-note}
+En el @sec-rds se abarcarán con más detalle los archivos con extensión `.rds` mediante la función `read_rds()`, así como la función análoga `write_rds()` para exportar datos, teniendo en cuenta lo indicado en el @lst-write-rds-case-study.
+:::

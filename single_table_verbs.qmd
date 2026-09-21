@@ -62,7 +62,7 @@ c. Verbos para colapsar, agrupar o desagrupar filas
 
 Debido a que la manipulación de datos requiere realizar un conjunto de operaciones de manera secuencial, se hace necesario contar con un operador que "encadene" de forma armónica cada una de las transformaciones deseadas. Para este propósito se utiliza el operador **pipe** (`|>`), el cual se abordará con mayor detalle en la @sec-pipe-operator.
 
-#### Verbos para filas
+#### Verbos para filas {#sec-row-verbs}
 
 Esta categoría incluye las funciones `filter()`, `slice()` y `arrange()`. La primera función, correspondiente a `filter()`, se utiliza para seleccionar filas con base en una expresión que retorne un vector lógico donde usualmente se hace uso de operadores relacionales (ver @sec-relational-operators). En la @fig-filter-verb se ilustra gráficamente la manipulación que se puede realizar con la función `filter()`.
 
@@ -122,7 +122,7 @@ arrange(
 )
 ```
 
-#### Verbos para columnas
+#### Verbos para columnas {#sec-column-verbs}
 
 Esta categoría incluye las funciones `select()`, `rename()`, `mutate()` y `relocate()`. La primera función, correspondiente a `select()`, se utiliza para determinar qué columnas se incluyen en una tibble. La selección de las columnas se realiza con base en el nombre de las variables o a su tipo donde se pueden utilizar [operadores o funciones auxiliares]({{< var url.packages.dplyr_select >}}). En la @fig-select-verb se ilustra gráficamente la manipulación que se puede realizar con la función `select()`.
 

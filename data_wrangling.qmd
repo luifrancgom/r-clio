@@ -1,3 +1,11 @@
 # Manipulación de datos
 
-Pendiente
+El objetivo de esta parte es presentar la **gramática de manipulación de datos** mediante un conjunto consistente de verbos cuando se requiere transformar una sola tabla o se busca conectar dos o más tablas de datos de manera secuencial en R utilizando el paquete [`dplyr`]({{< var url.packages.dplyr >}}), a través de los siguientes dos capítulos:
+
+- @sec-single-table-verbs: introduce la forma de manejar datos cuando se tiene una sola tabla mediante un conjunto consistente de verbos.
+
+- @sec-two-table-verbs: introduce la forma de conectar o unir tablas de datos de manera secuencial a través de un marco flexible.
+
+Una vez se entienda el funcionamiento del paquete `dplyr` a través de la **gramática de manipulación de datos**, el lector interesado en profundizar y explorar cómo conectarse a una base de datos y extraer datos mediante consultas [SQL](https://en.wikipedia.org/wiki/SQL) puede consultar los paquetes [`dbplyr`]({{< var url.packages.dbplyr >}}) y [`DBI`]({{< var url.packages.dbi >}}).
+
+El paquete `dbplyr` es el *backend* de bases de datos para `dplyr`, el cual permite trabajar con tablas de bases de datos remotas traduciendo automáticamente el código de `dplyr` a SQL, mientras que el paquete `DBI` facilita la conexión de R con **Sistemas de Gestión de Bases de Datos** (en inglés [Database Management Systems (DBMS)]({{< var url.education.dbms_wiki >}})).
