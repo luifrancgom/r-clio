@@ -413,7 +413,8 @@ div.csl-indent {
   <li><a href="#sec-case-study-mutating-joins" id="toc-sec-case-study-mutating-joins" class="nav-link" data-scroll-target="#sec-case-study-mutating-joins"><span class="header-section-number">11.7</span> Caso de estudio: consolidación de resultados Saber-Pro para FAEDIS</a>
   <ul class="collapse">
   <li><a href="#sec-variable-description-case-study-mutating-joins" id="toc-sec-variable-description-case-study-mutating-joins" class="nav-link" data-scroll-target="#sec-variable-description-case-study-mutating-joins"><span class="header-section-number">11.7.1</span> Descripción de variables</a></li>
-  <li><a href="#ajuste-de-datos" id="toc-ajuste-de-datos" class="nav-link" data-scroll-target="#ajuste-de-datos"><span class="header-section-number">11.7.2</span> Ajuste de datos</a></li>
+  <li><a href="#sec-data-adjustment" id="toc-sec-data-adjustment" class="nav-link" data-scroll-target="#sec-data-adjustment"><span class="header-section-number">11.7.2</span> Ajuste de datos</a></li>
+  <li><a href="#sec-table-consolidation" id="toc-sec-table-consolidation" class="nav-link" data-scroll-target="#sec-table-consolidation"><span class="header-section-number">11.7.3</span> Consolidación de tablas</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/two_table_verbs.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/two_table_verbs.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
@@ -1138,8 +1139,8 @@ $ ultima_actualizacion  &lt;date&gt; 2026-08-25, 2026-08-25, 202…</code></pre>
 <li><strong>ultima_actualizacion</strong>: fecha de corte de la última consulta realizada en la base de datos del SNIES.</li>
 </ol>
 </section>
-<section id="ajuste-de-datos" class="level3" data-number="11.7.2">
-<h3 data-number="11.7.2" class="anchored" data-anchor-id="ajuste-de-datos"><span class="header-section-number">11.7.2</span> Ajuste de datos</h3>
+<section id="sec-data-adjustment" class="level3" data-number="11.7.2">
+<h3 data-number="11.7.2" class="anchored" data-anchor-id="sec-data-adjustment"><span class="header-section-number">11.7.2</span> Ajuste de datos</h3>
 <p>Tal como se señaló en la <a href="#wrn-1-chap-11" class="quarto-xref">Advertencia&nbsp;<span>11.1</span></a>, la fuente original de datos (Data Icfes) asigna por defecto a Bogotá como lugar de presentación cuando el examen se realiza en el exterior. Esto genera una inconsistencia en las variables <code>estu_cod_depto_presentacion</code> y <code>estu_cod_mcpio_presentacion</code> para los registros donde los estudiantes presentaron la prueba por fuera de Colombia, tal como se señala a continuación:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>resultado_saber_pro <span class="sc">|&gt;</span></span>
@@ -1181,7 +1182,7 @@ $ estu_cod_mcpio_presentacion &lt;chr&gt; "11001", "11001", "110…</code></pre>
 Listado&nbsp;11.9: Uso de la función <code>replace_when()</code> junto con <code>mutate()</code> para actualizar parcialmente los valores de una variable dentro de una tibble
 </figcaption>
 <div aria-describedby="lst-replace-when-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>resultado_saber_pro <span class="ot">&lt;-</span> resultado_saber_pro <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>resultado_saber_pro_ajustado <span class="ot">&lt;-</span> resultado_saber_pro <span class="sc">|&gt;</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">estu_cod_depto_presentacion =</span> <span class="fu">replace_when</span>(</span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> estu_cod_depto_presentacion,</span>
@@ -1200,7 +1201,7 @@ Listado&nbsp;11.9: Uso de la función <code>replace_when()</code> junto con <cod
 <p>Para verificar que la transformación se aplicó de manera correcta, en primera instancia puedes inspeccionar los registros donde el examen se presentó en el exterior (<code>estu_exterior == "SI"</code>), comprobando que los códigos de departamento y municipio ahora contienen valores ausentes (<code>NA</code>), tal como se señala a continuación:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspeccionar registros ajustados en el exterior ----</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>resultado_saber_pro <span class="sc">|&gt;</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>resultado_saber_pro_ajustado <span class="sc">|&gt;</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(estu_exterior <span class="sc">==</span> <span class="st">"SI"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    ano,</span>
@@ -1223,7 +1224,7 @@ $ estu_cod_mcpio_presentacion &lt;chr&gt; NA, NA, NA, NA, NA, NA…</code></pre>
 <p>De igual forma, puedes verificar que los registros correspondientes a los estudiantes que presentaron el examen dentro del territorio nacional (<code>estu_exterior == "NO"</code>) conservaron sus códigos originales de departamento y municipio sin ninguna alteración, tal como se señala a continuación:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspeccionar registros en Colombia ----</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>resultado_saber_pro <span class="sc">|&gt;</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>resultado_saber_pro_ajustado <span class="sc">|&gt;</span></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(estu_exterior <span class="sc">==</span> <span class="st">"NO"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    ano,</span>
@@ -1241,6 +1242,202 @@ $ estu_consecutivo            &lt;chr&gt; "EK202120262469", "EK2…
 $ estu_exterior               &lt;chr&gt; "NO", "NO", "NO", "NO"…
 $ estu_cod_depto_presentacion &lt;chr&gt; "11", "11", "11", "11"…
 $ estu_cod_mcpio_presentacion &lt;chr&gt; "11001", "11001", "110…</code></pre>
+</div>
+</div>
+</section>
+<section id="sec-table-consolidation" class="level3" data-number="11.7.3">
+<h3 data-number="11.7.3" class="anchored" data-anchor-id="sec-table-consolidation"><span class="header-section-number">11.7.3</span> Consolidación de tablas</h3>
+<p>En la <a href="#sec-table-consolidation" class="quarto-xref"><span>Sección 11.7.3</span></a> reconstruirás el archivo <code>2021-2024_saber-pro-genericas_faedis.rds</code> incorporando los aspectos señalados en la <a href="#wrn-1-chap-11" class="quarto-xref">Advertencia&nbsp;<span>11.1</span></a>.</p>
+<p>Para realizar este proceso utilizarás inicialmente verbos para filas (ver <a href="single_table_verbs.html#sec-row-verbs" class="quarto-xref"><span>Sección 10.1.1.1</span></a>) y verbos para columnas (ver <a href="single_table_verbs.html#sec-column-verbs" class="quarto-xref"><span>Sección 10.1.1.2</span></a>), así como la función <code>left_join()</code> (ver <a href="#sec-left-joins" class="quarto-xref"><span>Sección 11.6.2</span></a>), para luego exportar los datos en un archivo denominado <code>2021-2024_saber-pro-genericas_faedis_ajustado.rds</code> en la carpeta <code>data</code>.</p>
+<p>En la <a href="#fig-erd" class="quarto-xref">Figura&nbsp;<span>11.1</span></a>, la entidad central que conecta cada una de las tablas es <code>Resultado Saber-Pro</code>, que corresponde al objeto <code>resultado_saber_pro_ajustado</code> (ver <a href="#sec-data-adjustment" class="quarto-xref"><span>Sección 11.7.2</span></a>). A partir de esta tabla es necesario conectar la información que se encuentra en los objetos <code>divipola_departamentos</code>, <code>divipola_municipios</code> y <code>programas_pregrado_faedis</code>, pero filtrando y seleccionando la información de interés, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-select-filter-variables-case-study" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-select-filter-variables-case-study-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;11.10: Selección y filtro de variables de interés
+</figcaption>
+<div aria-describedby="lst-select-filter-variables-case-study-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>programas_pregrado_faedis <span class="ot">&lt;-</span> programas_pregrado_faedis <span class="sc">|&gt;</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(estado_programa <span class="sc">==</span> <span class="st">"Activo"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    codigo_snies_programa,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    nombre_programa</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>divipola_departamentos <span class="ot">&lt;-</span> divipola_departamentos <span class="sc">|&gt;</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    codigo,</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>    nombre</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>divipola_municipios <span class="ot">&lt;-</span> divipola_municipios <span class="sc">|&gt;</span></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>    codigo_municipio,</span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>    nombre_municipio</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<p>En el <a href="#lst-select-filter-variables-case-study" class="quarto-xref">Listado&nbsp;<span>11.10</span></a> solo es necesario tener en cuenta los programas académicos de pregrado que se encuentran activos, así como seleccionar los atributos relacionados con las claves que identifican a cada instancia junto con sus nombres, con el fin de reconstruir el archivo <code>2021-2024_saber-pro-genericas_faedis.rds</code> ajustado.</p>
+<p>Una vez aplicados estos filtros y selecciones, es posible integrar cada una de las tablas de manera secuencial, vinculando en cada paso 2 tablas de datos correspondientes a 2 entidades mediante claves primarias y foráneas, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-left-join-case-study" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-left-join-case-study-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;11.11: Uso secuencial de la función <code>left_join()</code> para conectar o unir tablas de datos de diferentes entidades
+</figcaption>
+<div aria-describedby="lst-left-join-case-study-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>resultado_saber_pro_ajustado <span class="ot">&lt;-</span> resultado_saber_pro_ajustado <span class="sc">|&gt;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> programas_pregrado_faedis,</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="fu">join_by</span>(</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>      estu_snies_prgmacademico <span class="sc">==</span> codigo_snies_programa</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> divipola_departamentos,</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="fu">join_by</span>(</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>      estu_cod_depto_presentacion <span class="sc">==</span> codigo</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> divipola_municipios,</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="fu">join_by</span>(</span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>      estu_cod_mcpio_presentacion <span class="sc">==</span> codigo_municipio</span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>resultado_saber_pro_ajustado <span class="sc">|&gt;</span></span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,239
+Columns: 21
+$ ano                         &lt;int&gt; 2021, 2021, 2021, 2021…
+$ estu_consecutivo            &lt;chr&gt; "EK202120262469", "EK2…
+$ estu_genero                 &lt;fct&gt; M, M, M, M, F, F, F, F…
+$ estu_semestrecursa          &lt;ord&gt; 09, 09, 09, 09, 09, 09…
+$ fami_estratovivienda        &lt;ord&gt; Estrato 3, Estrato 4, …
+$ fami_educacionmadre         &lt;ord&gt; Técnica o tecnológica …
+$ fami_educacionpadre         &lt;ord&gt; Secundaria (Bachillera…
+$ estu_exterior               &lt;chr&gt; "NO", "NO", "NO", "NO"…
+$ estu_cod_depto_presentacion &lt;chr&gt; "11", "11", "11", "11"…
+$ estu_cod_mcpio_presentacion &lt;chr&gt; "11001", "11001", "110…
+$ estu_snies_prgmacademico    &lt;int&gt; 6527, 11428, 11428, 11…
+$ mod_competen_ciudada_punt   &lt;dbl&gt; 162, 190, 154, 179, 17…
+$ mod_comuni_escrita_punt     &lt;dbl&gt; 133, 174, 85, 157, 154…
+$ mod_ingles_punt             &lt;dbl&gt; 151, 155, 150, 144, 14…
+$ mod_ingles_desem            &lt;ord&gt; A2, A2, A2, A2, A2, A2…
+$ mod_lectura_critica_punt    &lt;dbl&gt; 114, 168, 139, 148, 18…
+$ mod_razona_cuantitat_punt   &lt;dbl&gt; 135, 164, 113, 149, 16…
+$ punt_global                 &lt;dbl&gt; 139, 170, 128, 155, 16…
+$ nombre_programa             &lt;chr&gt; "ADMINISTRACION DE EMP…
+$ nombre                      &lt;chr&gt; "BOGOTÁ, D.C.", "BOGOT…
+$ nombre_municipio            &lt;chr&gt; "BOGOTÁ, D.C.", "BOGOT…</code></pre>
+</div>
+</div>
+<p>En el <a href="#lst-left-join-case-study" class="quarto-xref">Listado&nbsp;<span>11.11</span></a>, partiendo de la tabla <code>resultado_saber_pro_ajustado</code>, es posible unir de manera secuencial la información filtrada y seleccionada de las tablas <code>programas_pregrado_faedis</code>, <code>divipola_departamentos</code> y <code>divipola_municipios</code>, correspondientes a las entidades <code>Programa académico</code>, <code>Departamento</code> y <code>Municipio</code> (ver <a href="#fig-erd" class="quarto-xref">Figura&nbsp;<span>11.1</span></a>).</p>
+<p>A partir de la unión realizada en el <a href="#lst-left-join-case-study" class="quarto-xref">Listado&nbsp;<span>11.11</span></a>, es necesario renombrar y reorganizar las tres últimas columnas teniendo en cuenta que dicha información proviene de las tablas <code>programas_pregrado_faedis</code>, <code>divipola_departamentos</code> y <code>divipola_municipios</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-rename-case-study" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-rename-case-study-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;11.12: Uso de la función <code>rename()</code> para renombrar columnas que provienen de otras tablas
+</figcaption>
+<div aria-describedby="lst-rename-case-study-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>resultado_saber_pro_ajustado <span class="ot">&lt;-</span> resultado_saber_pro_ajustado <span class="sc">|&gt;</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">estu_prgm_academico =</span> nombre_programa,</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">estu_depto_presentacion =</span> nombre,</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">estu_mcpio_presentacion =</span> nombre_municipio</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<div class="cell">
+<div id="lst-relocate-case-study" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-relocate-case-study-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;11.13: Uso de la función <code>relocate()</code> para reubicar columnas que provienen de otras tablas
+</figcaption>
+<div aria-describedby="lst-relocate-case-study-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>resultado_saber_pro_ajustado <span class="ot">&lt;-</span> resultado_saber_pro_ajustado <span class="sc">|&gt;</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    estu_prgm_academico,</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">.after =</span> estu_snies_prgmacademico</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>    estu_depto_presentacion,</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">.after =</span> estu_cod_depto_presentacion</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>    estu_mcpio_presentacion,</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">.after =</span> estu_cod_mcpio_presentacion</span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>resultado_saber_pro_ajustado <span class="sc">|&gt;</span></span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,239
+Columns: 21
+$ ano                         &lt;int&gt; 2021, 2021, 2021, 2021…
+$ estu_consecutivo            &lt;chr&gt; "EK202120262469", "EK2…
+$ estu_genero                 &lt;fct&gt; M, M, M, M, F, F, F, F…
+$ estu_semestrecursa          &lt;ord&gt; 09, 09, 09, 09, 09, 09…
+$ fami_estratovivienda        &lt;ord&gt; Estrato 3, Estrato 4, …
+$ fami_educacionmadre         &lt;ord&gt; Técnica o tecnológica …
+$ fami_educacionpadre         &lt;ord&gt; Secundaria (Bachillera…
+$ estu_exterior               &lt;chr&gt; "NO", "NO", "NO", "NO"…
+$ estu_cod_depto_presentacion &lt;chr&gt; "11", "11", "11", "11"…
+$ estu_depto_presentacion     &lt;chr&gt; "BOGOTÁ, D.C.", "BOGOT…
+$ estu_cod_mcpio_presentacion &lt;chr&gt; "11001", "11001", "110…
+$ estu_mcpio_presentacion     &lt;chr&gt; "BOGOTÁ, D.C.", "BOGOT…
+$ estu_snies_prgmacademico    &lt;int&gt; 6527, 11428, 11428, 11…
+$ estu_prgm_academico         &lt;chr&gt; "ADMINISTRACION DE EMP…
+$ mod_competen_ciudada_punt   &lt;dbl&gt; 162, 190, 154, 179, 17…
+$ mod_comuni_escrita_punt     &lt;dbl&gt; 133, 174, 85, 157, 154…
+$ mod_ingles_punt             &lt;dbl&gt; 151, 155, 150, 144, 14…
+$ mod_ingles_desem            &lt;ord&gt; A2, A2, A2, A2, A2, A2…
+$ mod_lectura_critica_punt    &lt;dbl&gt; 114, 168, 139, 148, 18…
+$ mod_razona_cuantitat_punt   &lt;dbl&gt; 135, 164, 113, 149, 16…
+$ punt_global                 &lt;dbl&gt; 139, 170, 128, 155, 16…</code></pre>
+</div>
+</div>
+<p>Aplicando los cambios señalados en el <a href="#lst-rename-case-study" class="quarto-xref">Listado&nbsp;<span>11.12</span></a> y el <a href="#lst-relocate-case-study" class="quarto-xref">Listado&nbsp;<span>11.13</span></a>, se logra finalmente reconstruir el archivo <code>2021-2024_saber-pro-genericas_faedis.rds</code> ajustado. En ese sentido, es posible exportar el archivo y guardarlo en la carpeta <code>data</code> para un uso posterior, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-write-rds-case-study" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-write-rds-case-study-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;11.14: Uso de la función <code>write_rds()</code> para exportar y guardar el archivo de datos ajustado
+</figcaption>
+<div aria-describedby="lst-write-rds-case-study-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>resultado_saber_pro_ajustado <span class="sc">|&gt;</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_rds</span>(</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">file =</span> <span class="st">"data/2021-2024_saber-pro-genericas_faedis_ajustado.rds"</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<p>En el <a href="#lst-write-rds-case-study" class="quarto-xref">Listado&nbsp;<span>11.14</span></a> se utiliza la función <code>write_rds()</code> junto con el parámetro <code>file</code> asociado con el argumento <code>"data/2021-2024_saber-pro-genericas_faedis_ajustado.rds"</code> para definir tanto la ruta como el nombre del archivo en el que se guardará la información.</p>
+<div id="nte-4-chap-11" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota&nbsp;11.4
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En el <a href="r_data_serialization.html" class="quarto-xref"><span>Capítulo 12</span></a> se abarcarán con más detalle los archivos con extensión <code>.rds</code> mediante la función <code>read_rds()</code>, así como la función análoga <code>write_rds()</code> para exportar datos, teniendo en cuenta lo indicado en el <a href="#lst-write-rds-case-study" class="quarto-xref">Listado&nbsp;<span>11.14</span></a>.</p>
 </div>
 </div>
 
