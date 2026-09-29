@@ -66,6 +66,7 @@ url:
     dbi: "https://dbi.r-dbi.org/"
     mice: "https://amices.org/mice/"
     naniar: "https://naniar.njtierney.com/"
+    readr: "https://readr.tidyverse.org/"
 
   tools:
     gemini: "https://gemini.google.com/"

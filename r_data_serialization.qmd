@@ -1,8 +1,40 @@
 # Serialización de datos en R {#sec-rds}
 
-Este capítulo se basa en ... donde tiene como propósito ... 
+```{r}
+#| echo: false
+source("_common.R")
+```
+
+```{r}
+#| label: load-r-packages
+#| echo: false
+#| message: false
+```
+
+Este capítulo se basa en [@wickham_r_2023, Cap. 7] así como en la documentación oficial de [`readr`]({{< var url.packages.readr >}}) donde tiene como propósito introducir la importación y exportación de datos en el formato nativo de R a través de la extensión `.rds` utilizando el paquete `readr` e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).
 
 Exploraremos los siguientes aspectos:
 
-1. 
-2.
+1. ¿Qué es el formato `.rds` y cuál es su propósito al almacenar e importar datos en R? 
+2. ¿Cúales son las ventajas y desventajas al utilizar archivos `.rds` frente a otros formatos en R?
+3. ¿Cómo importar datos almacenados en formato `.rds` a R?
+4. ¿Cómo exportar datos en formato `.rds` desde R?
+
+:::: {#nte-1-chap-11 .callout-note}
+Para desarrollar el contenido de este capítulo es necesario que descargues el archivo señalado a continuación y lo incluyas dentro de la carpeta `data`, respecto a lo descrito en la @nte-1-chap-6:
+   
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2021-2024_saber-pro-genericas_faedis_ajustado.csv]({{< var url.data.saber-pro-genericas_faedis_ajustado_csv >}})
+:::
+
+Adicionalmente, es necesario que hayas exportado y guardado el archivo `2021-2024_saber-pro-genericas_faedis_ajustado.rds` en la carpeta `data`, tal como se señaló en el @lst-write-rds-case-study. En caso que no lo hayas hecho es necesario que lo descargues y lo incluyas dentro de la carpeta `data`:
+
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2021-2024_saber-pro-genericas_faedis_ajustado.rds]({{< var url.data.saber-pro-genericas_faedis_ajustado_rds >}})
+:::
+
+En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `012_importar-datos-rds-en-r` y dentro de ella genera el archivo `001_importar-datos-formato-rds.R`, siguiendo las pautas de la @sec-package-usage.
+::::
+
+## El formato `.rds`
+
