@@ -24,13 +24,13 @@ Exploraremos los siguientes aspectos:
 Para desarrollar el contenido de este capítulo es necesario que descargues el archivo señalado a continuación y lo incluyas dentro de la carpeta `data`, respecto a lo descrito en la @nte-1-chap-6:
    
 ::: {.callout appearance="minimal"}
-## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2021-2024_saber-pro-genericas_faedis_ajustado.csv]({{< var url.data.saber-pro-genericas_faedis_ajustado_csv >}})
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2021-2024_saber-pro-genericas_faedis_ajustado.csv]({{< var url.data.saber_pro_faedis_ajustado_csv >}}){download="2021-2024_saber-pro-genericas_faedis_ajustado.csv"}
 :::
 
 Adicionalmente, es necesario que hayas exportado y guardado el archivo `2021-2024_saber-pro-genericas_faedis_ajustado.rds` en la carpeta `data`, tal como se señaló en el @lst-write-rds-case-study. En caso que no lo hayas hecho es necesario que lo descargues y lo incluyas dentro de la carpeta `data`:
 
 ::: {.callout appearance="minimal"}
-## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2021-2024_saber-pro-genericas_faedis_ajustado.rds]({{< var url.data.saber-pro-genericas_faedis_ajustado_rds >}})
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2021-2024_saber-pro-genericas_faedis_ajustado.rds]({{< var url.data.saber_pro_faedis_ajustado_rds >}})
 :::
 
 En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `012_importar-datos-rds-en-r` y dentro de ella genera el archivo `001_importar-datos-formato-rds.R`, siguiendo las pautas de la @sec-package-usage.
