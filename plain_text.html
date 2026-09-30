@@ -26,7 +26,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -328,8 +383,24 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#sec-csv-files" id="toc-sec-csv-files" class="nav-link active" data-scroll-target="#sec-csv-files"><span class="header-section-number">13.1</span> Archivos de valores separados por comas (<code>.csv</code>)</a>
+  <ul class="collapse">
+  <li><a href="#sec-csv-arguments" id="toc-sec-csv-arguments" class="nav-link" data-scroll-target="#sec-csv-arguments"><span class="header-section-number">13.1.1</span> Parámetros comunes al importar datos</a></li>
+  </ul></li>
+  <li><a href="#sec-other-plain-text-formats" id="toc-sec-other-plain-text-formats" class="nav-link" data-scroll-target="#sec-other-plain-text-formats"><span class="header-section-number">13.2</span> Otros formatos de archivos de texto plano</a></li>
+  <li><a href="#sec-control-col-types-problems" id="toc-sec-control-col-types-problems" class="nav-link" data-scroll-target="#sec-control-col-types-problems"><span class="header-section-number">13.3</span> Control de tipos de columnas y resolución de problemas</a>
+  <ul class="collapse">
+  <li><a href="#sec-col-types" id="toc-sec-col-types" class="nav-link" data-scroll-target="#sec-col-types"><span class="header-section-number">13.3.1</span> Especificación explícita de tipos con <code>col_types</code></a></li>
+  <li><a href="#sec-problems" id="toc-sec-problems" class="nav-link" data-scroll-target="#sec-problems"><span class="header-section-number">13.3.2</span> Diagnóstico de errores con <code>problems()</code></a></li>
+  </ul></li>
+  <li><a href="#sec-export-plain-text" id="toc-sec-export-plain-text" class="nav-link" data-scroll-target="#sec-export-plain-text"><span class="header-section-number">13.4</span> Exportación de archivos de texto plano</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/plain_text.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/plain_text.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -353,14 +424,519 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Este capítulo se basa en … donde tiene como propósito …</p>
+<p>Este capítulo se basa en <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 7</a>)</span> así como en la documentación oficial de <a href="https://readr.tidyverse.org/"><code>readr</code></a> donde tiene como propósito introducir la importación y exportación de datos de archivos de texto plano rectangulares.</p>
 <p>Exploraremos los siguientes aspectos:</p>
 <ol type="1">
-<li></li>
-<li></li>
+<li>¿Qué es un archivo <code>.csv</code>, por qué se usa <code>I()</code> para leer cadenas en memoria y cómo utilizar argumentos clave como <code>skip</code>, <code>comment</code>, <code>col_names</code> y <code>na</code> con <code>read_csv()</code>?</li>
+<li>¿Cómo importar otros formatos de archivos de texto plano rectangulares (<code>.tsv</code>, archivos delimitados por punto y coma, delimitadores personalizados y archivos de ancho fijo)?</li>
+<li>¿Cómo controlar los tipos de datos en las columnas mediante <code>col_types</code> y diagnosticar problemas de importación con <code>problems()</code>?</li>
+<li>¿Cómo exportar tablas de datos a archivos de texto plano desde R?</li>
 </ol>
+<div id="nte-1-chap-13" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota&nbsp;13.1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para desarrollar el contenido de este capítulo, procede a crear una nueva carpeta llamada <code>013_importar-datos-texto-plano-en-r</code> y dentro de ella genera el archivo <code>001_importar-datos-formato-texto-plano.R</code>, siguiendo las pautas de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>.</p>
+</div>
+</div>
+<section id="sec-csv-files" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="sec-csv-files"><span class="header-section-number">13.1</span> Archivos de valores separados por comas (<code>.csv</code>)</h2>
+<p>Un archivo con formato <code>.csv</code> (en inglés <a href="https://en.wikipedia.org/wiki/Comma-separated_values">comma-separated values</a>) es un archivo de texto plano estructurado de forma rectangular donde cada línea del archivo representa una fila o registro y las columnas o campos se encuentran separados por comas (<code>,</code>). Generalmente, la primera línea del archivo contiene los encabezados o nombres de las variables.</p>
+<p>Cuando uno de los campos de texto contiene una coma dentro de su propio contenido, dicho campo se delimita entre comillas dobles (<code>"</code>) para evitar que la coma interna sea interpretada erróneamente como un separador de columnas.</p>
+<p>Para importar archivos <code>.csv</code> a R se utiliza la función <code>read_csv()</code> del paquete <code>readr</code>. El primer parámetro de esta función es <code>file</code>, el cual usualmente recibe una ruta hacia un archivo almacenado en disco (por ejemplo, <code>"data/programas.csv"</code>). No obstante, para realizar pruebas o construir ejemplos ilustrativos, también es posible suministrar datos directamente desde una cadena de texto en memoria.</p>
+<p>Para que <code>readr</code> distinga explícitamente que la cadena contiene datos literales en lugar de una ruta a un archivo en disco, se utiliza la función <code>I()</code> (<em>As-Is</em>) de R base al asociar el argumento con <code>file</code>, tal como se ilustra a continuación:</p>
+<div class="cell">
+<div id="lst-read-csv-toy-example" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-read-csv-toy-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;13.1: Importación de una cadena literal en formato <code>.csv</code> utilizando <code>read_csv()</code> e <code>I()</code>
+</figcaption>
+<div aria-describedby="lst-read-csv-toy-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar paquetes ----</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Definir datos en formato .csv ----</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>pregrado_faedis_csv <span class="ot">&lt;-</span> <span class="st">"codigo_snies,nombre_programa</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="st">6527,Administración de Empresas</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="st">108241,</span><span class="sc">\"</span><span class="st">Administración de Riesgos, Seguridad y Salud en el Trabajo</span><span class="sc">\"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">11428,Contaduría Pública</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st">11004,Ingeniería Civil</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="st">53703,Ingeniería Industrial</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="st">105142,Ingeniería Informática</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="st">10963,Relaciones Internacionales y Estudios Políticos"</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar datos en formato .csv ----</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>pregrado_faedis_tbl <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_faedis_csv)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 7 Columns: 2
+── Column specification ────────────────────────────────────
+Delimiter: ","
+chr (1): nombre_programa
+dbl (1): codigo_snies
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<p>En el <a href="#lst-read-csv-toy-example" class="quarto-xref">Listado&nbsp;<span>13.1</span></a>, la cadena <code>pregrado_faedis_csv</code> define dos columnas (<code>codigo_snies</code> y <code>nombre_programa</code>). Observa los siguientes detalles:</p>
+<ol type="1">
+<li><strong>Uso de <code>I()</code></strong>: envolver la variable como <code>I(pregrado_faedis_csv)</code> le indica a <code>read_csv()</code> que interprete el contenido del objeto como los datos mismos (<em>literal data</em>) y no como el nombre de un archivo que deba buscar en disco.</li>
+<li><strong>Campos con comas internas</strong>: el programa <code>"Administración de Riesgos, Seguridad y Salud en el Trabajo"</code> se encuentra entre comillas escapadas (<code>\"</code>) para que la coma no divida el texto en columnas adicionales.</li>
+<li><strong>Especificación de columnas</strong>: al ejecutar la función, <code>readr</code> imprime un mensaje informativo (<code>Column specification</code>) indicando que <code>codigo_snies</code> fue inferido como número real (<code>&lt;dbl&gt;</code>) y <code>nombre_programa</code> como carácter (<code>&lt;chr&gt;</code>).</li>
+</ol>
+<section id="sec-csv-arguments" class="level3" data-number="13.1.1">
+<h3 data-number="13.1.1" class="anchored" data-anchor-id="sec-csv-arguments"><span class="header-section-number">13.1.1</span> Parámetros comunes al importar datos</h3>
+<p>Los archivos de texto plano en escenarios reales suelen contener metadatos, comentarios o estructuras no convencionales. La función <code>read_csv()</code> proporciona diversos parámetros para controlar el proceso de importación:</p>
+<ol type="1">
+<li><strong><code>skip</code></strong>: permite omitir un número determinado de líneas al inicio del archivo antes de comenzar la lectura de los datos. Resulta útil cuando el archivo incluye metadatos o encabezados explicativos:</li>
+</ol>
+<div class="cell">
+<div id="lst-read-csv-skip" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-read-csv-skip-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;13.2: Uso del parámetro <code>skip</code> para ignorar líneas iniciales de metadatos
+</figcaption>
+<div aria-describedby="lst-read-csv-skip-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Archivo con metadatos en las dos primeras líneas ----</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>pregrado_skip_csv <span class="ot">&lt;-</span> <span class="st">"Facultad de Estudios a Distancia - FAEDIS</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="st">Programas de pregrado vigentes</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="st">codigo_snies,nombre_programa</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="st">6527,Administración de Empresas</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="st">11428,Contaduría Pública"</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Omitir las dos primeras líneas ----</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_skip_csv),</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">skip =</span> <span class="dv">2</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 2 Columns: 2
+── Column specification ────────────────────────────────────
+Delimiter: ","
+chr (1): nombre_programa
+dbl (1): codigo_snies
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  codigo_snies nombre_programa           
+         &lt;dbl&gt; &lt;chr&gt;                     
+1         6527 Administración de Empresas
+2        11428 Contaduría Pública        </code></pre>
+</div>
+</div>
+<ol start="2" type="1">
+<li><strong><code>comment</code></strong>: permite especificar un carácter (comúnmente <code>#</code>) para que <code>read_csv()</code> ignore por completo todas las líneas que inicien con ese prefijo:</li>
+</ol>
+<div class="cell">
+<div id="lst-read-csv-comment" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-read-csv-comment-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;13.3: Uso del parámetro <code>comment</code> para omitir líneas comentadas
+</figcaption>
+<div aria-describedby="lst-read-csv-comment-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Archivo con comentarios intercalados ----</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>pregrado_comment_csv <span class="ot">&lt;-</span> <span class="st">"# Listado de programas FAEDIS</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="st">codigo_snies,nombre_programa</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="st">6527,Administración de Empresas</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st"># 108241 en proceso de renovación curricular</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="st">11428,Contaduría Pública"</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ignorar líneas que inician con # ----</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_comment_csv),</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">comment =</span> <span class="st">"#"</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 2 Columns: 2
+── Column specification ────────────────────────────────────
+Delimiter: ","
+chr (1): nombre_programa
+dbl (1): codigo_snies
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  codigo_snies nombre_programa           
+         &lt;dbl&gt; &lt;chr&gt;                     
+1         6527 Administración de Empresas
+2        11428 Contaduría Pública        </code></pre>
+</div>
+</div>
+<ol start="3" type="1">
+<li><strong><code>col_names</code></strong>: controla los nombres de las columnas. Si el archivo no incluye una fila de encabezado, se especifica <code>col_names = FALSE</code> (lo que asigna nombres automáticos <code>X1</code>, <code>X2</code>, etc.) o se proporciona un vector de caracteres con los nombres deseados:</li>
+</ol>
+<div class="cell">
+<div id="lst-read-csv-col-names" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-read-csv-col-names-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;13.4: Uso del parámetro <code>col_names</code> para archivos sin encabezados
+</figcaption>
+<div aria-describedby="lst-read-csv-col-names-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Archivo sin fila de encabezado ----</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>pregrado_no_header_csv <span class="ot">&lt;-</span> <span class="st">"6527,Administración de Empresas</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="st">11428,Contaduría Pública"</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Suministrar nombres explícitos de columnas ----</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_no_header_csv),</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">"snies"</span>, <span class="st">"programa"</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 2 Columns: 2
+── Column specification ────────────────────────────────────
+Delimiter: ","
+chr (1): programa
+dbl (1): snies
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  snies programa                  
+  &lt;dbl&gt; &lt;chr&gt;                     
+1  6527 Administración de Empresas
+2 11428 Contaduría Pública        </code></pre>
+</div>
+</div>
+<ol start="4" type="1">
+<li><strong><code>na</code></strong>: define qué valores de texto deben interpretarse como datos faltantes (<code>NA</code>), por defecto <code>na = c("", "NA")</code>. Si un archivo representa los valores ausentes con expresiones como <code>"Sin dato"</code> o <code>"N/D"</code>, pueden indicarse explícitamente mediante <code>na = c("", "NA", "Sin dato", "N/D")</code>.</li>
+</ol>
+</section>
+</section>
+<section id="sec-other-plain-text-formats" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="sec-other-plain-text-formats"><span class="header-section-number">13.2</span> Otros formatos de archivos de texto plano</h2>
+<p>Además de los archivos <code>.csv</code>, el paquete <code>readr</code> proporciona funciones dedicadas para importar otros formatos rectangulares de texto plano de uso común:</p>
+<ul>
+<li><strong>Valores separados por tabulaciones (<code>read_tsv()</code>)</strong>: se utiliza cuando el delimitador entre columnas es una tabulación (<code>\t</code>):</li>
+</ul>
+<div class="cell">
+<div id="lst-read-tsv" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-read-tsv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;13.5: Importación de datos separados por tabulaciones con <code>read_tsv()</code>
+</figcaption>
+<div aria-describedby="lst-read-tsv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pregrado_tsv <span class="ot">&lt;-</span> <span class="st">"codigo_snies</span><span class="sc">\t</span><span class="st">nombre_programa</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="st">6527</span><span class="sc">\t</span><span class="st">Administración de Empresas</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="st">11428</span><span class="sc">\t</span><span class="st">Contaduría Pública"</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">read_tsv</span>(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_tsv)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 2 Columns: 2
+── Column specification ────────────────────────────────────
+Delimiter: "\t"
+chr (1): nombre_programa
+dbl (1): codigo_snies
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  codigo_snies nombre_programa           
+         &lt;dbl&gt; &lt;chr&gt;                     
+1         6527 Administración de Empresas
+2        11428 Contaduría Pública        </code></pre>
+</div>
+</div>
+<ul>
+<li><strong>Archivos delimitados por punto y coma (<code>read_csv2()</code>)</strong>: en países hispanohablantes y europeos donde la coma (<code>,</code>) se utiliza como separador decimal, los archivos CSV suelen utilizar el punto y coma (<code>;</code>) como separador de columnas. La función <code>read_csv2()</code> gestiona automáticamente esta convención:</li>
+</ul>
+<div class="cell">
+<div id="lst-read-csv2" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-read-csv2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;13.6: Importación de datos delimitados por punto y coma con <code>read_csv2()</code>
+</figcaption>
+<div aria-describedby="lst-read-csv2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pregrado_csv2 <span class="ot">&lt;-</span> <span class="st">"codigo_snies;nombre_programa;duracion_semestres</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="st">6527;Administración de Empresas;9,5</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="st">11428;Contaduría Pública;10,0"</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv2</span>(</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_csv2)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ Using "','" as decimal and "'.'" as grouping mark. Use `read_delim()` for more control.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 2 Columns: 3
+── Column specification ────────────────────────────────────
+Delimiter: ";"
+chr (1): nombre_programa
+dbl (2): codigo_snies, duracion_semestres
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  codigo_snies nombre_programa            duracion_semestres
+         &lt;dbl&gt; &lt;chr&gt;                                   &lt;dbl&gt;
+1         6527 Administración de Empresas                9.5
+2        11428 Contaduría Pública                       10  </code></pre>
+</div>
+</div>
+<ul>
+<li><strong>Delimitadores personalizados (<code>read_delim()</code>)</strong>: permite leer archivos con cualquier delimitador arbitrario mediante el parámetro <code>delim</code> (por ejemplo, barra vertical <code>|</code>, dos puntos <code>:</code>, o guiones):</li>
+</ul>
+<div class="cell">
+<div id="lst-read-delim" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-read-delim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;13.7: Importación con delimitadores personalizados utilizando <code>read_delim()</code>
+</figcaption>
+<div aria-describedby="lst-read-delim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>pregrado_pipe <span class="ot">&lt;-</span> <span class="st">"codigo_snies|nombre_programa</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="st">6527|Administración de Empresas</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="st">11428|Contaduría Pública"</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">read_delim</span>(</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_pipe),</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">delim =</span> <span class="st">"|"</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 2 Columns: 2
+── Column specification ────────────────────────────────────
+Delimiter: "|"
+chr (1): nombre_programa
+dbl (1): codigo_snies
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  codigo_snies nombre_programa           
+         &lt;dbl&gt; &lt;chr&gt;                     
+1         6527 Administración de Empresas
+2        11428 Contaduría Pública        </code></pre>
+</div>
+</div>
+<ul>
+<li><p><strong>Archivos de ancho fijo (<code>read_fwf()</code>) y tablas alineadas (<code>read_table()</code>)</strong>: en archivos donde las columnas no utilizan delimitadores sino que ocupan posiciones y longitudes fijas de caracteres, se utiliza <code>read_fwf()</code> junto con asistentes como <code>fwf_widths()</code> o <code>fwf_positions()</code>. Si los campos están separados por uno o más espacios en blanco, <code>read_table()</code> permite realizar la importación directamente.</p></li>
+<li><p><strong>Lectura de texto plano no estructurado (<code>read_lines()</code>)</strong>: cuando se requiere leer un archivo línea por línea como un vector de caracteres simple sin imponer una estructura tabular, se utiliza la función <code>read_lines()</code>.</p></li>
+</ul>
+</section>
+<section id="sec-control-col-types-problems" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="sec-control-col-types-problems"><span class="header-section-number">13.3</span> Control de tipos de columnas y resolución de problemas</h2>
+<p>Al importar un archivo de texto plano, <code>readr</code> lee de forma predeterminada las primeras 1000 filas para inferir el tipo de dato más apropiado para cada columna (<code>col_guess()</code>). Para consultar la especificación que <code>readr</code> ha determinado, se utiliza la función <code>spec()</code>:</p>
+<div class="cell">
+<div id="lst-spec" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-spec-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;13.8: Inspección de la especificación de tipos con <code>spec()</code>
+</figcaption>
+<div aria-describedby="lst-spec-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spec</span>(pregrado_faedis_tbl)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>cols(
+  codigo_snies = col_double(),
+  nombre_programa = col_character()
+)</code></pre>
+</div>
+</div>
+<section id="sec-col-types" class="level3" data-number="13.3.1">
+<h3 data-number="13.3.1" class="anchored" data-anchor-id="sec-col-types"><span class="header-section-number">13.3.1</span> Especificación explícita de tipos con <code>col_types</code></h3>
+<p>Cuando las primeras 1000 filas no son representativas o cuando se desea asegurar un esquema de datos reproducible y robusto, es recomendable definir explícitamente los tipos de cada columna mediante el parámetro <code>col_types</code> y la función <code>cols()</code>:</p>
+<ul>
+<li><code>col_integer()</code>: enteros (<code>&lt;int&gt;</code>).</li>
+<li><code>col_double()</code>: números reales (<code>&lt;dbl&gt;</code>).</li>
+<li><code>col_character()</code>: texto (<code>&lt;chr&gt;</code>).</li>
+<li><code>col_logical()</code>: booleanos (<code>&lt;lgl&gt;</code>).</li>
+<li><code>col_factor()</code>: variables categóricas o factores (<code>&lt;fct&gt;</code>).</li>
+<li><code>col_date()</code> / <code>col_datetime()</code> / <code>col_time()</code>: fechas y horas.</li>
+<li><code>col_skip()</code> (o <code>_</code> / <code>-</code>): omite la columna durante la importación.</li>
+</ul>
+<div class="cell">
+<div id="lst-col-types-explicit" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-col-types-explicit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;13.9: Especificación explícita de tipos de columna con <code>cols()</code>
+</figcaption>
+<div aria-describedby="lst-col-types-explicit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_faedis_csv),</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">codigo_snies =</span> <span class="fu">col_integer</span>(),</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">nombre_programa =</span> <span class="fu">col_character</span>()</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 2
+  codigo_snies nombre_programa                              
+         &lt;int&gt; &lt;chr&gt;                                        
+1         6527 Administración de Empresas                   
+2       108241 Administración de Riesgos, Seguridad y Salud…
+3        11428 Contaduría Pública                           
+4        11004 Ingeniería Civil                             
+5        53703 Ingeniería Industrial                        
+6       105142 Ingeniería Informática                       
+7        10963 Relaciones Internacionales y Estudios Políti…</code></pre>
+</div>
+</div>
+<p>Asimismo, <code>readr</code> permite una sintaxis compacta de cadena de texto (<em>shorthand</em>), donde cada letra representa el tipo de una columna en orden posicional (por ejemplo, <code>"ic"</code> indica un entero seguido de una cadena de caracteres):</p>
+<div class="cell">
+<div id="lst-col-types-shorthand" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-col-types-shorthand-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;13.10: Especificación de tipos mediante sintaxis compacta (<em>shorthand</em>)
+</figcaption>
+<div aria-describedby="lst-col-types-shorthand-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_faedis_csv),</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="st">"ic"</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 2
+  codigo_snies nombre_programa                              
+         &lt;int&gt; &lt;chr&gt;                                        
+1         6527 Administración de Empresas                   
+2       108241 Administración de Riesgos, Seguridad y Salud…
+3        11428 Contaduría Pública                           
+4        11004 Ingeniería Civil                             
+5        53703 Ingeniería Industrial                        
+6       105142 Ingeniería Informática                       
+7        10963 Relaciones Internacionales y Estudios Políti…</code></pre>
+</div>
+</div>
+</section>
+<section id="sec-problems" class="level3" data-number="13.3.2">
+<h3 data-number="13.3.2" class="anchored" data-anchor-id="sec-problems"><span class="header-section-number">13.3.2</span> Diagnóstico de errores con <code>problems()</code></h3>
+<p>Si el archivo contiene registros con formatos inesperados (por ejemplo, texto en una columna que fue declarada o inferida como numérica), <code>readr</code> reemplaza el valor conflictivo con <code>NA</code> y emite un mensaje de advertencia. La función <code>problems()</code> permite inspeccionar exactamente en qué fila, columna y valor ocurrió la anomalía:</p>
+<div class="cell">
+<div id="lst-problems" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-problems-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;13.11: Detección y diagnóstico de problemas de lectura con <code>problems()</code>
+</figcaption>
+<div aria-describedby="lst-problems-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Datos con un valor de texto en la columna numérica ----</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>pregrado_invalido_csv <span class="ot">&lt;-</span> <span class="st">"codigo_snies,nombre_programa</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="st">6527,Administración de Empresas</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="st">Sin código,Contaduría Pública"</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar forzando la columna a entero ----</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>pregrado_invalido_tbl <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_invalido_csv),</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">codigo_snies =</span> <span class="fu">col_integer</span>(),</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">nombre_programa =</span> <span class="fu">col_character</span>()</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: One or more parsing issues, call `problems()` on your data
+frame for details, e.g.:
+  dat &lt;- vroom(...)
+  problems(dat)</code></pre>
+</div>
+<div id="lst-problems" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-problems-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;13.12: Detección y diagnóstico de problemas de lectura con <code>problems()</code>
+</figcaption>
+<div aria-describedby="lst-problems-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagnosticar filas con problemas de conversión ----</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">problems</span>(pregrado_invalido_tbl)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 5
+    row   col expected   actual     file                    
+  &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;                   
+1     3     1 an integer Sin código /tmp/RtmpqA6U3g/vroom-c…</code></pre>
+</div>
+</div>
+<p>Para resolver discrepancias relacionadas con formatos de fecha, separadores decimales o codificación de caracteres (por ejemplo, <code>UTF-8</code> frente a <code>latin1</code>), se puede emplear el parámetro <code>locale = locale(...)</code>, definiendo explícitamente aspectos como <code>decimal_mark = ","</code> o formatos de fecha con <code>col_date(format = "%d/%m/%Y")</code>.</p>
+</section>
+</section>
+<section id="sec-export-plain-text" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="sec-export-plain-text"><span class="header-section-number">13.4</span> Exportación de archivos de texto plano</h2>
+<p>Para guardar tibbles o marcos de datos de R en archivos de texto plano rectangulares, el paquete <code>readr</code> provee las funciones <code>write_csv()</code>, <code>write_tsv()</code> y <code>write_delim()</code>.</p>
+<p>Los parámetros más relevantes al exportar datos son:</p>
+<ul>
+<li><strong><code>x</code></strong>: el objeto de R (tibble o data frame) que se desea guardar.</li>
+<li><strong><code>file</code></strong>: la ruta y nombre del archivo de destino.</li>
+<li><strong><code>na</code></strong>: la cadena de texto utilizada para escribir los valores faltantes (por defecto <code>"NA"</code>).</li>
+<li><strong><code>col_names</code></strong>: valor lógico que indica si se escriben los encabezados de columna en la primera línea (por defecto <code>TRUE</code>).</li>
+<li><strong><code>quote</code></strong>: especifica la regla para entrecomillar campos de texto (<code>"needed"</code>, <code>"all"</code> o <code>"none"</code>).</li>
+<li><strong><code>append</code></strong>: valor lógico que indica si las filas deben agregarse al final de un archivo existente (<code>FALSE</code> por defecto).</li>
+</ul>
+<div class="cell">
+<div id="lst-write-csv" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-write-csv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;13.13: Exportación de un objeto a un archivo <code>.csv</code> utilizando <code>write_csv()</code>
+</figcaption>
+<div aria-describedby="lst-write-csv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exportar datos a un archivo .csv ----</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> pregrado_faedis_tbl,</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"data/programas_pregrado_faedis.csv"</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<p>En comparación con el formato binario <code>.rds</code> (visto en el <a href="r_data_serialization.html" class="quarto-xref"><span>Capítulo 12</span></a>), los archivos de texto plano (<code>.csv</code>, <code>.tsv</code>) ofrecen la ventaja de ser universales e interoperables con cualquier herramienta de análisis, lenguaje de programación (como Python o Julia) y gestores de bases de datos. No obstante, dado que no almacenan los metadatos propios de R (como el orden de los factores o las clases personalizadas), al volver a importarlos será necesario especificar nuevamente sus tipos de columna.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-wickham_r_2023" class="csl-entry" role="listitem">
+Wickham, H. (2023). <em>R for <span>Data</span> <span>Science</span></em> (2.ª ed.). O’Reilly Media, Incorporated. <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a>
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -780,4 +1356,4 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/plain_text.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/plain_text.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/plain_text.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/plain_text.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></div></div></footer></body></html>
