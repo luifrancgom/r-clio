@@ -20,7 +20,7 @@ Exploraremos los siguientes aspectos:
 3. ¿Cómo importar datos almacenados en formato `.rds` a R?
 4. ¿Cómo exportar datos en formato `.rds` desde R?
 
-:::: {#nte-1-chap-11 .callout-note}
+:::: {#nte-1-chap-12 .callout-note}
 Para desarrollar el contenido de este capítulo es necesario que descargues el archivo señalado a continuación y lo incluyas dentro de la carpeta `data`, respecto a lo descrito en la @nte-1-chap-6:
    
 ::: {.callout appearance="minimal"}
@@ -36,5 +36,75 @@ Adicionalmente, es necesario que hayas exportado y guardado el archivo `2021-202
 En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `012_importar-datos-rds-en-r` y dentro de ella genera el archivo `001_importar-datos-formato-rds.R`, siguiendo las pautas de la @sec-package-usage.
 ::::
 
-## El formato `.rds`
+## El formato `.rds` {#sec-rds-format}
 
+El formato con extensión `.rds` es el formato nativo de R diseñado para guardar un único objeto en un archivo y restaurarlo cuando sea necesario. Al ser un formato propio de R, permite almacenar cualquier estructura de datos conservando sus componentes originales.
+
+Este proceso se basa en el concepto de [serialización]({{< var url.education.serialization_wiki >}}), que es el proceso de traducir una estructura de datos o el estado de un objeto a un formato que pueda almacenarse o transmitirse y reconstruirse más adelante.
+
+Dado que el archivo `.rds` almacena únicamente el contenido y la estructura de un solo objeto y no el nombre con el que fue creado, al momento de importarlo a R puedes asociarle cualquier nombre **sintácticamente válido** que desees (ver @imp-1-chap-5).
+
+## Ventajas y desventajas de utilizar archivos `.rds` {#sec-advantages-disadvantages-rds} 
+
+Al trabajar con el formato `.rds` dentro de R, es conveniente considerar tanto sus aspectos favorables como sus limitaciones al momento de almacenar información en un flujo de trabajo orientado a proyectos.
+
+Por un lado, entre sus principales ventajas se destaca la capacidad de conservar de forma íntegra los tipos de datos y los atributos de cada objeto, garantizando que no se pierda la estructura original de los datos en R. Asimismo, al tratarse de un [archivo binario]({{< var url.education.binary_file_wiki >}}) que incorpora compresión por defecto, ofrece una mayor eficiencia en el espacio de almacenamiento ocupado en disco y una mayor velocidad en los procesos de lectura y escritura.
+
+Por otro lado, entre sus principales desventajas se resalta su falta de interoperabilidad, debido a que es un formato propio de R que no puede ser utilizado de manera directa por otras herramientas o lenguajes sin dependencias adicionales. Además, al ser un archivo binario, no es posible inspeccionar su contenido directamente desde un editor de texto convencional, requiriendo cargarlo en una sesión activa de R para examinar la información.
+
+## Importación de datos en formato `.rds` {#sec-import-rds}
+
+Para importar un archivo en formato `.rds` a R, se utiliza la función `read_rds()` del paquete `readr`. Dado que `readr` forma parte del `tidyverse`, es necesario cargar previamente el paquete `tidyverse` mediante `library(tidyverse)` (ver @sec-load-packages) en el archivo `001_importar-datos-formato-rds.R`. Para realizar la importación, la función `read_rds()` utiliza el parámetro `file`, en el cual se especifica como argumento la ruta y el nombre del archivo con extensión `.rds` que se desea leer.
+
+Para importar el conjunto de datos ajustado de FAEDIS en formato `.rds` (ver @nte-1-chap-12) y asignarlo a una variable denominada `resultado_saber_pro_ajustado_rds`, se utiliza la función `read_rds()`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-read-rds
+#| lst-cap: Uso de la función `read_rds()` para importar un archivo de datos en formato `.rds`
+
+# Cargar paquetes ----
+library(tidyverse)
+
+# Importar datos ----
+resultado_saber_pro_ajustado_rds <- read_rds(
+  file = "data/2021-2024_saber-pro-genericas_faedis_ajustado.rds"
+)
+```
+
+En el @lst-read-rds, primero se carga el `tidyverse` mediante `library(tidyverse)`. Posteriormente, se utiliza la función `read_rds()` con el parámetro `file` asociado al argumento `"data/2021-2024_saber-pro-genericas_faedis_ajustado.rds"` para leer el archivo y asignar explícitamente el objeto resultante a la variable `resultado_saber_pro_ajustado_rds` (ver @sec-rds-format).
+
+Con el propósito de contrastar la preservación de los tipos de datos frente a un formato `.csv`, es posible importar de forma análoga el archivo `2021-2024_saber-pro-genericas_faedis_ajustado.csv` utilizando la función `read_csv()` y asignarlo a la variable `resultado_saber_pro_ajustado_csv`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-read-csv-comparison
+#| lst-cap: Uso de la función `read_csv()` para importar el archivo de datos en formato `.csv`
+
+# Importar datos en formato .csv ----
+resultado_saber_pro_ajustado_csv <- read_csv(
+  file = "data/2021-2024_saber-pro-genericas_faedis_ajustado.csv"
+)
+```
+
+En el @lst-read-csv-comparison, al ejecutar la función `read_csv()`, R genera un mensaje informativo en la consola con la especificación de columnas (`Column specification`). Dado que los archivos de `.csv` no contienen metadatos sobre la estructura interna de los datos, `read_csv()` requiere identificar un delimitador (en este caso, `Delimiter: ","`) e inferir el tipo de dato de cada variable a partir de los primeros valores del archivo, clasificándolas en caracteres (`chr`) y números reales (`dbl`). En contraste, `read_rds()` no requiere delimitadores ni realiza inferencias, ya que lee directamente la representación binaria con los tipos originales almacenados en el archivo.
+
+Al inspeccionar ambas tibbles con la función `glimpse()`, es posible examinar las diferencias en la estructura de los datos:
+
+```{r}
+# Inspeccionar datos en rds ----
+resultado_saber_pro_ajustado_rds |>
+  glimpse()
+```
+
+```{r}
+# Inspeccionar datos en .csv ----
+resultado_saber_pro_ajustado_csv |>
+  glimpse()
+```
+
+Al comparar ambos resultados, se observa que en `resultado_saber_pro_ajustado_rds` se preservan las variables categóricas como variables nominales (`<fct>`) y ordinales (`<ord>`) conservando sus niveles y orden, así como los números enteros (`<int>`). En contraste, al importar el archivo `.csv` en `resultado_saber_pro_ajustado_csv`, las columnas categóricas se convierten en caracteres (`<chr>`) y los enteros se interpretan como números reales (`<dbl>`), perdiendo los atributos originales definidos en R.
+
+## Exportación de datos en formato `.rds` {#sec-export-rds}
+
+De forma análoga a la importación de datos con `read_rds()`, para exportar y guardar objetos de R en formato `.rds` se utiliza la función `write_rds()` del paquete `readr`. Esta función permite serializar cualquier estructura u objeto de datos directamente en un archivo binario mediante el parámetro `file`, en el cual se especifica la ruta y el nombre del archivo de destino.
+
+El uso de esta función fue abordado en el @lst-write-rds-case-study del @sec-two-table-verbs, en el cual se empleó `write_rds()` para exportar y guardar el conjunto de datos ajustado tras la aplicación de los verbos de dos tablas.
