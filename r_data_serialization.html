@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -353,7 +388,10 @@ div.csl-indent {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#el-formato-.rds" id="toc-el-formato-.rds" class="nav-link active" data-scroll-target="#el-formato-.rds"><span class="header-section-number">12.1</span> El formato <code>.rds</code></a></li>
+  <li><a href="#sec-rds-format" id="toc-sec-rds-format" class="nav-link active" data-scroll-target="#sec-rds-format"><span class="header-section-number">12.1</span> El formato <code>.rds</code></a></li>
+  <li><a href="#sec-advantages-disadvantages-rds" id="toc-sec-advantages-disadvantages-rds" class="nav-link" data-scroll-target="#sec-advantages-disadvantages-rds"><span class="header-section-number">12.2</span> Ventajas y desventajas de utilizar archivos <code>.rds</code></a></li>
+  <li><a href="#sec-import-rds" id="toc-sec-import-rds" class="nav-link" data-scroll-target="#sec-import-rds"><span class="header-section-number">12.3</span> Importación de datos en formato <code>.rds</code></a></li>
+  <li><a href="#sec-export-rds" id="toc-sec-export-rds" class="nav-link" data-scroll-target="#sec-export-rds"><span class="header-section-number">12.4</span> Exportación de datos en formato <code>.rds</code></a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/r_data_serialization.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/r_data_serialization.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
@@ -387,7 +425,7 @@ div.csl-indent {
 <li>¿Cómo importar datos almacenados en formato <code>.rds</code> a R?</li>
 <li>¿Cómo exportar datos en formato <code>.rds</code> desde R?</li>
 </ol>
-<div id="nte-1-chap-11" class="callout callout-style-default callout-note callout-titled">
+<div id="nte-1-chap-12" class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -428,8 +466,155 @@ Nota&nbsp;12.1
 <p>En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada <code>012_importar-datos-rds-en-r</code> y dentro de ella genera el archivo <code>001_importar-datos-formato-rds.R</code>, siguiendo las pautas de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>.</p>
 </div>
 </div>
-<section id="el-formato-.rds" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="el-formato-.rds"><span class="header-section-number">12.1</span> El formato <code>.rds</code></h2>
+<section id="sec-rds-format" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="sec-rds-format"><span class="header-section-number">12.1</span> El formato <code>.rds</code></h2>
+<p>El formato con extensión <code>.rds</code> es el formato nativo de R diseñado para guardar un único objeto en un archivo y restaurarlo cuando sea necesario. Al ser un formato propio de R, permite almacenar cualquier estructura de datos conservando sus componentes originales.</p>
+<p>Este proceso se basa en el concepto de <a href="https://en.wikipedia.org/wiki/Serialization">serialización</a>, que es el proceso de traducir una estructura de datos o el estado de un objeto a un formato que pueda almacenarse o transmitirse y reconstruirse más adelante.</p>
+<p>Dado que el archivo <code>.rds</code> almacena únicamente el contenido y la estructura de un solo objeto y no el nombre con el que fue creado, al momento de importarlo a R puedes asociarle cualquier nombre <strong>sintácticamente válido</strong> que desees (ver <a href="how_to_code_in_r.html#imp-1-chap-5" class="quarto-xref">Importante&nbsp;<span>5.1</span></a>).</p>
+</section>
+<section id="sec-advantages-disadvantages-rds" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="sec-advantages-disadvantages-rds"><span class="header-section-number">12.2</span> Ventajas y desventajas de utilizar archivos <code>.rds</code></h2>
+<p>Al trabajar con el formato <code>.rds</code> dentro de R, es conveniente considerar tanto sus aspectos favorables como sus limitaciones al momento de almacenar información en un flujo de trabajo orientado a proyectos.</p>
+<p>Por un lado, entre sus principales ventajas se destaca la capacidad de conservar de forma íntegra los tipos de datos y los atributos de cada objeto, garantizando que no se pierda la estructura original de los datos en R. Asimismo, al tratarse de un <a href="https://en.wikipedia.org/wiki/Binary_file">archivo binario</a> que incorpora compresión por defecto, ofrece una mayor eficiencia en el espacio de almacenamiento ocupado en disco y una mayor velocidad en los procesos de lectura y escritura.</p>
+<p>Por otro lado, entre sus principales desventajas se resalta su falta de interoperabilidad, debido a que es un formato propio de R que no puede ser utilizado de manera directa por otras herramientas o lenguajes sin dependencias adicionales. Además, al ser un archivo binario, no es posible inspeccionar su contenido directamente desde un editor de texto convencional, requiriendo cargarlo en una sesión activa de R para examinar la información.</p>
+</section>
+<section id="sec-import-rds" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="sec-import-rds"><span class="header-section-number">12.3</span> Importación de datos en formato <code>.rds</code></h2>
+<p>Para importar un archivo en formato <code>.rds</code> a R, se utiliza la función <code>read_rds()</code> del paquete <code>readr</code>. Dado que <code>readr</code> forma parte del <code>tidyverse</code>, es necesario cargar previamente el paquete <code>tidyverse</code> mediante <code>library(tidyverse)</code> (ver <a href="r_packages.html#sec-load-packages" class="quarto-xref"><span>Sección 4.3</span></a>) en el archivo <code>001_importar-datos-formato-rds.R</code>. Para realizar la importación, la función <code>read_rds()</code> utiliza el parámetro <code>file</code>, en el cual se especifica como argumento la ruta y el nombre del archivo con extensión <code>.rds</code> que se desea leer.</p>
+<p>Para importar el conjunto de datos ajustado de FAEDIS en formato <code>.rds</code> (ver <a href="#nte-1-chap-12" class="quarto-xref">Nota&nbsp;<span>12.1</span></a>) y asignarlo a una variable denominada <code>resultado_saber_pro_ajustado_rds</code>, se utiliza la función <code>read_rds()</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-read-rds" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-read-rds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;12.1: Uso de la función <code>read_rds()</code> para importar un archivo de datos en formato <code>.rds</code>
+</figcaption>
+<div aria-describedby="lst-read-rds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar paquetes ----</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div id="lst-read-rds" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-read-rds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;12.2: Uso de la función <code>read_rds()</code> para importar un archivo de datos en formato <code>.rds</code>
+</figcaption>
+<div aria-describedby="lst-read-rds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar datos ----</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>resultado_saber_pro_ajustado_rds <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"data/2021-2024_saber-pro-genericas_faedis_ajustado.rds"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<p>En el <a href="#lst-read-rds" class="quarto-xref">Listado&nbsp;<span>12.2</span></a>, primero se carga el <code>tidyverse</code> mediante <code>library(tidyverse)</code>. Posteriormente, se utiliza la función <code>read_rds()</code> con el parámetro <code>file</code> asociado al argumento <code>"data/2021-2024_saber-pro-genericas_faedis_ajustado.rds"</code> para leer el archivo y asignar explícitamente el objeto resultante a la variable <code>resultado_saber_pro_ajustado_rds</code> (ver <a href="#sec-rds-format" class="quarto-xref"><span>Sección 12.1</span></a>).</p>
+<p>Con el propósito de contrastar la preservación de los tipos de datos frente a un formato <code>.csv</code>, es posible importar de forma análoga el archivo <code>2021-2024_saber-pro-genericas_faedis_ajustado.csv</code> utilizando la función <code>read_csv()</code> y asignarlo a la variable <code>resultado_saber_pro_ajustado_csv</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-read-csv-comparison" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-read-csv-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;12.3: Uso de la función <code>read_csv()</code> para importar el archivo de datos en formato <code>.csv</code>
+</figcaption>
+<div aria-describedby="lst-read-csv-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar datos en formato .csv ----</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>resultado_saber_pro_ajustado_csv <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"data/2021-2024_saber-pro-genericas_faedis_ajustado.csv"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 1239 Columns: 21
+── Column specification ────────────────────────────────────
+Delimiter: ","
+chr (13): estu_consecutivo, estu_genero, estu_semestrecu...
+dbl  (8): ano, estu_snies_prgmacademico, mod_competen_ci...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<p>En el <a href="#lst-read-csv-comparison" class="quarto-xref">Listado&nbsp;<span>12.3</span></a>, al ejecutar la función <code>read_csv()</code>, R genera un mensaje informativo en la consola con la especificación de columnas (<code>Column specification</code>). Dado que los archivos de <code>.csv</code> no contienen metadatos sobre la estructura interna de los datos, <code>read_csv()</code> requiere identificar un delimitador (en este caso, <code>Delimiter: ","</code>) e inferir el tipo de dato de cada variable a partir de los primeros valores del archivo, clasificándolas en caracteres (<code>chr</code>) y números reales (<code>dbl</code>). En contraste, <code>read_rds()</code> no requiere delimitadores ni realiza inferencias, ya que lee directamente la representación binaria con los tipos originales almacenados en el archivo.</p>
+<p>Al inspeccionar ambas tibbles con la función <code>glimpse()</code>, es posible examinar las diferencias en la estructura de los datos:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspeccionar datos en rds ----</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>resultado_saber_pro_ajustado_rds <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,239
+Columns: 21
+$ ano                         &lt;int&gt; 2021, 2021, 2021, 2021…
+$ estu_consecutivo            &lt;chr&gt; "EK202120262469", "EK2…
+$ estu_genero                 &lt;fct&gt; M, M, M, M, F, F, F, F…
+$ estu_semestrecursa          &lt;ord&gt; 09, 09, 09, 09, 09, 09…
+$ fami_estratovivienda        &lt;ord&gt; Estrato 3, Estrato 4, …
+$ fami_educacionmadre         &lt;ord&gt; Técnica o tecnológica …
+$ fami_educacionpadre         &lt;ord&gt; Secundaria (Bachillera…
+$ estu_exterior               &lt;chr&gt; "NO", "NO", "NO", "NO"…
+$ estu_cod_depto_presentacion &lt;chr&gt; "11", "11", "11", "11"…
+$ estu_depto_presentacion     &lt;chr&gt; "BOGOTÁ, D.C.", "BOGOT…
+$ estu_cod_mcpio_presentacion &lt;chr&gt; "11001", "11001", "110…
+$ estu_mcpio_presentacion     &lt;chr&gt; "BOGOTÁ, D.C.", "BOGOT…
+$ estu_snies_prgmacademico    &lt;int&gt; 6527, 11428, 11428, 11…
+$ estu_prgm_academico         &lt;chr&gt; "ADMINISTRACION DE EMP…
+$ mod_competen_ciudada_punt   &lt;dbl&gt; 162, 190, 154, 179, 17…
+$ mod_comuni_escrita_punt     &lt;dbl&gt; 133, 174, 85, 157, 154…
+$ mod_ingles_punt             &lt;dbl&gt; 151, 155, 150, 144, 14…
+$ mod_ingles_desem            &lt;ord&gt; A2, A2, A2, A2, A2, A2…
+$ mod_lectura_critica_punt    &lt;dbl&gt; 114, 168, 139, 148, 18…
+$ mod_razona_cuantitat_punt   &lt;dbl&gt; 135, 164, 113, 149, 16…
+$ punt_global                 &lt;dbl&gt; 139, 170, 128, 155, 16…</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspeccionar datos en .csv ----</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>resultado_saber_pro_ajustado_csv <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,239
+Columns: 21
+$ ano                         &lt;dbl&gt; 2021, 2021, 2021, 2021…
+$ estu_consecutivo            &lt;chr&gt; "EK202120262469", "EK2…
+$ estu_genero                 &lt;chr&gt; "M", "M", "M", "M", "F…
+$ estu_semestrecursa          &lt;chr&gt; "09", "09", "09", "09"…
+$ fami_estratovivienda        &lt;chr&gt; "Estrato 3", "Estrato …
+$ fami_educacionmadre         &lt;chr&gt; "Técnica o tecnológica…
+$ fami_educacionpadre         &lt;chr&gt; "Secundaria (Bachiller…
+$ estu_exterior               &lt;chr&gt; "NO", "NO", "NO", "NO"…
+$ estu_cod_depto_presentacion &lt;chr&gt; "11", "11", "11", "11"…
+$ estu_depto_presentacion     &lt;chr&gt; "BOGOTÁ, D.C.", "BOGOT…
+$ estu_cod_mcpio_presentacion &lt;chr&gt; "11001", "11001", "110…
+$ estu_mcpio_presentacion     &lt;chr&gt; "BOGOTÁ, D.C.", "BOGOT…
+$ estu_snies_prgmacademico    &lt;dbl&gt; 6527, 11428, 11428, 11…
+$ estu_prgm_academico         &lt;chr&gt; "ADMINISTRACION DE EMP…
+$ mod_competen_ciudada_punt   &lt;dbl&gt; 162, 190, 154, 179, 17…
+$ mod_comuni_escrita_punt     &lt;dbl&gt; 133, 174, 85, 157, 154…
+$ mod_ingles_punt             &lt;dbl&gt; 151, 155, 150, 144, 14…
+$ mod_ingles_desem            &lt;chr&gt; "A2", "A2", "A2", "A2"…
+$ mod_lectura_critica_punt    &lt;dbl&gt; 114, 168, 139, 148, 18…
+$ mod_razona_cuantitat_punt   &lt;dbl&gt; 135, 164, 113, 149, 16…
+$ punt_global                 &lt;dbl&gt; 139, 170, 128, 155, 16…</code></pre>
+</div>
+</div>
+<p>Al comparar ambos resultados, se observa que en <code>resultado_saber_pro_ajustado_rds</code> se preservan las variables categóricas como variables nominales (<code>&lt;fct&gt;</code>) y ordinales (<code>&lt;ord&gt;</code>) conservando sus niveles y orden, así como los números enteros (<code>&lt;int&gt;</code>). En contraste, al importar el archivo <code>.csv</code> en <code>resultado_saber_pro_ajustado_csv</code>, las columnas categóricas se convierten en caracteres (<code>&lt;chr&gt;</code>) y los enteros se interpretan como números reales (<code>&lt;dbl&gt;</code>), perdiendo los atributos originales definidos en R.</p>
+</section>
+<section id="sec-export-rds" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="sec-export-rds"><span class="header-section-number">12.4</span> Exportación de datos en formato <code>.rds</code></h2>
+<p>De forma análoga a la importación de datos con <code>read_rds()</code>, para exportar y guardar objetos de R en formato <code>.rds</code> se utiliza la función <code>write_rds()</code> del paquete <code>readr</code>. Esta función permite serializar cualquier estructura u objeto de datos directamente en un archivo binario mediante el parámetro <code>file</code>, en el cual se especifica la ruta y el nombre del archivo de destino.</p>
+<p>El uso de esta función fue abordado en el <a href="two_table_verbs.html#lst-write-rds-case-study" class="quarto-xref">Listado&nbsp;<span>11.14</span></a> del <a href="two_table_verbs.html" class="quarto-xref"><span>Capítulo 11</span></a>, en el cual se empleó <code>write_rds()</code> para exportar y guardar el conjunto de datos ajustado tras la aplicación de los verbos de dos tablas.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
