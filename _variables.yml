@@ -111,6 +111,7 @@ url:
     sql_wiki: "https://en.wikipedia.org/wiki/SQL"
     serialization_wiki: "https://en.wikipedia.org/wiki/Serialization"
     binary_file_wiki: "https://en.wikipedia.org/wiki/Binary_file"
+    csv_wiki: "https://en.wikipedia.org/wiki/Comma-separated_values"
 
   media:
     muse_klio_artwork: "https://commons.wikimedia.org/wiki/File:Christian_Bernhard_Rode_-_Die_Muse_Klio.jpg"

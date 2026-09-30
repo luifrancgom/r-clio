@@ -11,7 +11,7 @@ source("_common.R")
 #| message: false
 ```
 
-Este capítulo se basa en [@wickham_r_2023, Cap. 7] así como en la documentación oficial de [`readr`]({{< var url.packages.readr >}}) donde tiene como propósito introducir la importación y exportación de datos en el formato nativo de R a través de la extensión `.rds` utilizando el paquete `readr` e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).
+Este capítulo se basa en [@wickham_r_2023, Cap. 7] así como en la documentación oficial de [`readr`]({{< var url.packages.readr >}}) donde tiene como propósito introducir la importación y exportación de datos en el formato nativo de R a través de la extensión `.rds` utilizando el paquete `readr` e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes al periodo 2021-2024 para Colombia.
 
 Exploraremos los siguientes aspectos:
 
