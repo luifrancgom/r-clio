@@ -8,8 +8,11 @@ El acceso a este [sitio web]({{< var repo.site_url >}}) es libre y siempre será
 
 ## Uso asistido de inteligencia artificial
 
-Con base en los lineamientos para el uso de inteligencia artificial generativa [@equipo_proyecto_ia-uniandes_lineamientos_2024], la elaboración del libro contó con la asistencia de [Antigravity CLI]({{< var url.tools.antigravity_cli >}}). En particular, se utilizó en el desarrollo de ideas y la exploración de argumentos aplicando los siguientes usos:
+Con base en los lineamientos para el uso de inteligencia artificial generativa en la educación superior [@equipo_proyecto_ia-uniandes_lineamientos_2024], la elaboración y desarrollo técnico de este libro contó con la asistencia de [Antigravity CLI]({{< var url.tools.antigravity_cli >}}). En particular, se utilizó en los siguientes ámbitos:
 
-- Apoyo con la generación de ideas, la planificación o estructuración del texto.
+- **Desarrollo de ideas y estructuración**: Apoyo en la generación de ideas, planificación y diseño de la estructura pedagógica de los capítulos.
+- **Exploración conceptual y argumentativa**: Sugerencia de explicaciones alternativas, revisiones conceptuales y refinamiento de la narrativa técnica.
+- **Asistencia en programación y código reproducible**: Apoyo en la depuración, verificación y optimización de ejemplos de código en R y configuraciones técnicas de Quarto.
+- **Revisión y edición de estilo**: Asistencia en la claridad de redacción, consistencia terminológica y corrección ortotipográfica.
 
-- Sugerencia de explicaciones alternativas o críticas a los argumentos o ideas desarrolladas en el texto.
+En concordancia con los principios éticos e institucionales de autoría y transparencia académica, el autor asume la plena y exclusiva responsabilidad por el contenido, la veracidad de los análisis, los códigos y los materiales presentados en este libro.
