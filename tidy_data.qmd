@@ -11,7 +11,7 @@ source("_common.R")
 #| message: false
 ```
 
-Este capítulo se basa en [@wickham_r_2023, Cap. 5] y [@wickham_tidy_2014] así como en la documentación oficial de [`tidyr`](https://tidyr.tidyverse.org/articles/tidy-data.html) donde tiene como propósito introducir la forma de estructurar conjuntos de datos para facilitar su análisis utilizando el paquete `tidyr` e información de proyecciones de población de Colombia a nivel nacional por área geográfica (Cabecera y Centros poblados y rural disperso) según sexo (Masculino y Femenino) y edades simples ($0$, $1$, $2$, $\ldots$, $98$, $99$, $100$ o más) para el periodo 2018-2070.   
+Este capítulo se basa en [@wickham_r_2023, Cap. 5] y [@wickham_tidy_2014] así como en la documentación oficial de [`tidyr`]({{< var url.packages.tidyr >}}) donde tiene como propósito introducir la forma de estructurar conjuntos de datos para facilitar su análisis utilizando el paquete `tidyr` e información de proyecciones de población de Colombia a nivel nacional por área geográfica (Cabecera y Centros poblados y rural disperso) según sexo (Masculino y Femenino) y edades simples ($0$, $1$, $2$, $\ldots$, $98$, $99$, $100$ o más) para el periodo 2018-2070.   
 
 Exploraremos los siguientes aspectos:
 
@@ -22,7 +22,7 @@ Exploraremos los siguientes aspectos:
 Para desarrollar el contenido de este capítulo es necesario que descarges el archivo señalado a continuación y lo incluyas dentro de la carpeta `data`, respecto a lo descrito en la @nte-1-chap-6:
    
 ::: {.callout appearance="minimal"}
-## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2021_2024-saber_pro-genericas.csv.xz](https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/2021_2024-saber_pro-genericas.csv.xz)
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2021_2024-saber_pro-genericas.csv.xz]({{< var url.data.saber_pro_csv_xz >}})
 :::
 
 En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `010_verbos-una-sola-tabla-en-r` y dentro de ella genera el archivo `001_manipular-datos-una-sola-tabla.R`, siguiendo las pautas de la @sec-package-usage.
