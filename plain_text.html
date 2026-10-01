@@ -131,6 +131,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -399,6 +428,14 @@ div.csl-indent {
   <li><a href="#sec-problems" id="toc-sec-problems" class="nav-link" data-scroll-target="#sec-problems"><span class="header-section-number">13.3.2</span> Diagnóstico de errores con <code>problems()</code></a></li>
   </ul></li>
   <li><a href="#sec-export-plain-text" id="toc-sec-export-plain-text" class="nav-link" data-scroll-target="#sec-export-plain-text"><span class="header-section-number">13.4</span> Exportación de archivos de texto plano</a></li>
+  <li><a href="#sec-case-study-plain-text" id="toc-sec-case-study-plain-text" class="nav-link" data-scroll-target="#sec-case-study-plain-text"><span class="header-section-number">13.5</span> Caso de estudio: importación de datos del Saber-Pro para el año 2021 en Colombia</a>
+  <ul class="collapse">
+  <li><a href="#importación-inicial-e-inspección-de-tipos" id="toc-importación-inicial-e-inspección-de-tipos" class="nav-link" data-scroll-target="#importación-inicial-e-inspección-de-tipos"><span class="header-section-number">13.5.1</span> Importación inicial e inspección de tipos</a></li>
+  <li><a href="#naturaleza-de-la-variable-y-formato-de-fecha" id="toc-naturaleza-de-la-variable-y-formato-de-fecha" class="nav-link" data-scroll-target="#naturaleza-de-la-variable-y-formato-de-fecha"><span class="header-section-number">13.5.2</span> Naturaleza de la variable y formato de fecha</a></li>
+  <li><a href="#intento-inicial-con-col_date-y-diagnóstico-con-problems" id="toc-intento-inicial-con-col_date-y-diagnóstico-con-problems" class="nav-link" data-scroll-target="#intento-inicial-con-col_date-y-diagnóstico-con-problems"><span class="header-section-number">13.5.3</span> Intento inicial con <code>col_date()</code> y diagnóstico con <code>problems()</code></a></li>
+  <li><a href="#solución-con-el-parámetro-format-en-col_date" id="toc-solución-con-el-parámetro-format-en-col_date" class="nav-link" data-scroll-target="#solución-con-el-parámetro-format-en-col_date"><span class="header-section-number">13.5.4</span> Solución con el parámetro <code>format</code> en <code>col_date()</code></a></li>
+  <li><a href="#especificaciones-de-formato-para-fechas-en-readr" id="toc-especificaciones-de-formato-para-fechas-en-readr" class="nav-link" data-scroll-target="#especificaciones-de-formato-para-fechas-en-readr"><span class="header-section-number">13.5.5</span> Especificaciones de formato para fechas en <code>readr</code></a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/plain_text.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/plain_text.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
@@ -424,10 +461,10 @@ div.csl-indent {
 </header>
 
 
-<p>Este capítulo se basa en <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 7</a>)</span> así como en la documentación oficial de <a href="https://readr.tidyverse.org/"><code>readr</code></a> donde tiene como propósito introducir la importación y exportación de datos de archivos de texto plano rectangulares.</p>
+<p>Este capítulo se basa en <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 7</a>)</span> así como en la documentación oficial de <a href="https://readr.tidyverse.org/"><code>readr</code></a> donde tiene como propósito introducir la importación y exportación de datos de archivos de texto plano rectangulares utilizando el paquete <code>readr</code> e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes al periodo 2021 para Colombia.</p>
 <p>Exploraremos los siguientes aspectos:</p>
 <ol type="1">
-<li>¿Qué es un archivo <code>.csv</code>, por qué se usa <code>I()</code> para leer cadenas en memoria y cómo utilizar argumentos como <code>skip</code>, <code>comment</code>, <code>col_names</code> y <code>na</code> con <code>read_csv()</code>?</li>
+<li>¿Qué es un archivo <code>.csv</code> y cómo utilizar argumentos como <code>skip</code>, <code>comment</code>, <code>col_names</code> y <code>na</code> con <code>read_csv()</code>?</li>
 <li>¿Cómo importar otros formatos de archivos de texto plano rectangulares (<code>.tsv</code>, archivos delimitados por punto y coma (<code>;</code>) o delimitadores personalizados)?</li>
 <li>¿Cómo controlar los tipos de datos en las columnas mediante <code>col_types</code> y diagnosticar problemas de importación con <code>problems()</code>?</li>
 <li>¿Cómo exportar tablas de datos a archivos de texto plano desde R?</li>
@@ -442,6 +479,20 @@ Nota&nbsp;13.1
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<p>Para desarrollar el contenido de este capítulo es necesario que descargues el archivo señalado a continuación y lo incluyas dentro de la carpeta <code>data</code>, respecto a lo descrito en la <a href="amounts.html#nte-1-chap-6" class="quarto-xref">Nota&nbsp;<span>6.1</span></a>:</p>
+<div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span><img src="images/download-solid-full.png" alt="Ícono del explorador de archivos" height="25"> <a href="https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/2021-saber_pro-genericas.txt.xz">2021_2024-saber_pro-genericas.csv.xz</a>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
 <p>En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada <code>013_importar-datos-texto-plano-en-r</code> y dentro de ella genera el archivo <code>001_importar-datos-formato-texto-plano.R</code>, siguiendo las pautas de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>.</p>
 </div>
 </div>
@@ -449,8 +500,8 @@ Nota&nbsp;13.1
 <h2 data-number="13.1" class="anchored" data-anchor-id="sec-csv-files"><span class="header-section-number">13.1</span> Archivos de valores separados por comas (<code>.csv</code>)</h2>
 <p>Un archivo con formato <code>.csv</code> (en inglés <a href="https://en.wikipedia.org/wiki/Comma-separated_values">comma-separated values</a>) es un archivo de texto plano estructurado de forma rectangular donde cada línea del archivo representa una fila o registro y las columnas o campos se encuentran separados por comas (<code>,</code>). Generalmente, la primera línea del archivo contiene los encabezados o nombres de las variables.</p>
 <p>Cuando uno de los campos de texto contiene una coma dentro de su propio contenido, dicho campo se delimita entre comillas dobles (<code>"</code>) para evitar que la coma interna sea interpretada erróneamente como un separador de columnas.</p>
-<p>Para importar archivos <code>.csv</code> a R se utiliza la función <code>read_csv()</code> del paquete <code>readr</code>. El primer parámetro de esta función es <code>file</code>, el cual usualmente recibe una ruta hacia un archivo almacenado en disco (por ejemplo, <code>"data/2021-2024_saber-pro-genericas_faedis_ajustado.csv"</code>). No obstante, para realizar pruebas o construir ejemplos ilustrativos, también es posible suministrar datos directamente desde una cadena de texto en memoria.</p>
-<p>Para que <code>readr</code> distinga explícitamente que la cadena contiene datos literales en lugar de una ruta a un archivo en disco, se utiliza la función <code>I()</code> (<strong>as is</strong>) de R al asociar el argumento con <code>file</code>, tal como se ilustra a continuación:</p>
+<p>Para importar archivos <code>.csv</code> a R se utiliza la función <code>read_csv()</code> del paquete <code>readr</code>. El primer parámetro de esta función es <code>file</code>, el cual usualmente recibe una ruta hacia un archivo almacenado en disco (p.&nbsp;ej., <code>"data/2021-2024_saber-pro-genericas_faedis_ajustado.csv"</code>). No obstante, para realizar pruebas o construir ejemplos ilustrativos, también es posible suministrar datos directamente desde una cadena de texto en memoria.</p>
+<p>Para que <code>readr</code> distinga explícitamente que la cadena contiene datos literales en lugar de una ruta a un archivo en disco, se utiliza la función <code>I()</code> (<strong>“as is”</strong>) de R al asociar el argumento con <code>file</code>, tal como se ilustra a continuación:</p>
 <div class="cell">
 <div id="lst-read-csv-toy-example" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
@@ -488,65 +539,42 @@ dbl (1): codigo_snies
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div id="lst-read-csv-toy-example" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
-<figure class="quarto-float quarto-float-lst figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-read-csv-toy-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listado&nbsp;13.2: Importación de una cadena literal en formato <code>.csv</code> utilizando <code>read_csv()</code> e <code>I()</code>
-</figcaption>
-<div aria-describedby="lst-read-csv-toy-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pregrado_faedis_tbl</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</figure>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 7 × 2
-  codigo_snies nombre_programa                              
-         &lt;dbl&gt; &lt;chr&gt;                                        
-1         6527 Administración de Empresas                   
-2       108241 Administración de Riesgos, Seguridad y Salud…
-3        11428 Contaduría Pública                           
-4        11004 Ingeniería Civil                             
-5        53703 Ingeniería Industrial                        
-6       105142 Ingeniería Informática                       
-7        10963 Relaciones Internacionales y Estudios Políti…</code></pre>
-</div>
-</div>
-<p>En el <a href="#lst-read-csv-toy-example" class="quarto-xref">Listado&nbsp;<span>13.2</span></a>, la cadena <code>pregrado_faedis_csv</code> define dos columnas (<code>codigo_snies</code> y <code>nombre_programa</code>). Observa los siguientes detalles:</p>
+<p>En el <a href="#lst-read-csv-toy-example" class="quarto-xref">Listado&nbsp;<span>13.1</span></a>, la cadena <code>pregrado_faedis_csv</code> define dos columnas (<code>codigo_snies</code> y <code>nombre_programa</code>). Observa los siguientes detalles:</p>
 <ol type="1">
 <li><strong>Uso de <code>I()</code></strong>: envolver la variable como <code>I(pregrado_faedis_csv)</code> le indica a <code>read_csv()</code> que interprete el contenido del objeto como los datos mismos y no como el nombre de un archivo que deba buscar en disco.</li>
 <li><strong>Campos con comas internas</strong>: el programa <code>"Administración de Riesgos, Seguridad y Salud en el Trabajo"</code> se encuentra entre comillas escapadas (<code>\"</code>) para que la coma no divida el texto en columnas adicionales.</li>
-<li><strong>Especificación de columnas</strong>: al ejecutar la función, <code>readr</code> imprime un mensaje informativo (<code>Column specification</code>) indicando que <code>codigo_snies</code> fue inferido como número real (<code>&lt;dbl&gt;</code>) y <code>nombre_programa</code> como carácter (<code>&lt;chr&gt;</code>).</li>
+<li><strong>Especificación de columnas</strong>: al ejecutar la función, <code>readr</code> imprime un mensaje informativo (<code>Column specification</code>) indicando que <code>nombre_programa</code> fue inferido como carácter (<code>&lt;chr&gt;</code>) y <code>codigo_snies</code> como número real (<code>&lt;dbl&gt;</code>).</li>
 </ol>
 <section id="sec-csv-arguments" class="level3" data-number="13.1.1">
 <h3 data-number="13.1.1" class="anchored" data-anchor-id="sec-csv-arguments"><span class="header-section-number">13.1.1</span> Parámetros comunes al importar datos</h3>
 <p>Los archivos de texto plano pueden contener metadatos, comentarios o estructuras no convencionales. La función <code>read_csv()</code> proporciona diversos parámetros para controlar el proceso de importación:</p>
 <ol type="1">
-<li><strong><code>skip</code></strong>: permite omitir un número determinado de líneas al inicio del archivo antes de comenzar la lectura de los datos. Resulta útil cuando el archivo incluye metadatos o encabezados explicativos:</li>
-</ol>
+<li><p><strong><code>skip</code></strong>: permite omitir un número determinado de líneas al inicio del archivo antes de comenzar la lectura de los datos. Resulta útil cuando el archivo incluye metadatos o encabezados explicativos:</p>
 <div class="cell">
 <div id="lst-read-csv-skip" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-read-csv-skip-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listado&nbsp;13.3: Uso del parámetro <code>skip</code> para ignorar líneas iniciales de metadatos
+Listado&nbsp;13.2: Uso del parámetro <code>skip</code> para ignorar líneas iniciales de metadatos
 </figcaption>
 <div aria-describedby="lst-read-csv-skip-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Archivo con metadatos en las dos primeras líneas ----</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>pregrado_skip_csv <span class="ot">&lt;-</span> <span class="st">"Facultad de Estudios a Distancia - FAEDIS</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="st">Programas de pregrado vigentes</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="st">codigo_snies,nombre_programa</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="st">6527,Administración de Empresas</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="st">108241,</span><span class="sc">\"</span><span class="st">Administración de Riesgos, Seguridad y Salud en el Trabajo</span><span class="sc">\"</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="st">11428,Contaduría Pública</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="st">11004,Ingeniería Civil</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="st">53703,Ingeniería Industrial</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="st">105142,Ingeniería Informática</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="st">10963,Relaciones Internacionales y Estudios Políticos"</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Omitir las dos primeras líneas ----</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_skip_csv),</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">skip =</span> <span class="dv">2</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Archivo con metadatos en las dos primeras líneas ----</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>pregrado_skip_csv <span class="ot">&lt;-</span> <span class="st">"Facultad de Estudios a Distancia - FAEDIS</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="st">Programas de pregrado vigentes</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="st">codigo_snies,nombre_programa</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="st">6527,Administración de Empresas</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="st">108241,</span><span class="sc">\"</span><span class="st">Administración de Riesgos, Seguridad y Salud en el Trabajo</span><span class="sc">\"</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="st">11428,Contaduría Pública</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="st">11004,Ingeniería Civil</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="st">53703,Ingeniería Industrial</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="st">105142,Ingeniería Informática</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="st">10963,Relaciones Internacionales y Estudios Políticos"</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Omitir las dos primeras líneas ----</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_skip_csv),</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">skip =</span> <span class="dv">2</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
@@ -572,34 +600,32 @@ dbl (1): codigo_snies
 6       105142 Ingeniería Informática                       
 7        10963 Relaciones Internacionales y Estudios Políti…</code></pre>
 </div>
-</div>
-<ol start="2" type="1">
-<li><strong><code>comment</code></strong>: permite especificar un carácter (comúnmente <code>#</code>) para que <code>read_csv()</code> ignore por completo todas las líneas que inicien con ese prefijo:</li>
-</ol>
+</div></li>
+<li><p><strong><code>comment</code></strong>: permite especificar un carácter (comúnmente <code>#</code>) para que <code>read_csv()</code> ignore por completo todas las líneas que inicien con ese prefijo:</p>
 <div class="cell">
 <div id="lst-read-csv-comment" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-read-csv-comment-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listado&nbsp;13.4: Uso del parámetro <code>comment</code> para omitir líneas comentadas
+Listado&nbsp;13.3: Uso del parámetro <code>comment</code> para omitir líneas comentadas
 </figcaption>
 <div aria-describedby="lst-read-csv-comment-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Archivo con comentarios intercalados ----</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>pregrado_comment_csv <span class="ot">&lt;-</span> <span class="st">"# Listado de programas FAEDIS</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="st">codigo_snies,nombre_programa</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="st">6527,Administración de Empresas</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="st"># 6527 en proceso de renovación registro calificado</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="st">108241,</span><span class="sc">\"</span><span class="st">Administración de Riesgos, Seguridad y Salud en el Trabajo</span><span class="sc">\"</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="st">11428,Contaduría Pública</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="st">11004,Ingeniería Civil</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="st">53703,Ingeniería Industrial</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="st">105142,Ingeniería Informática</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="st">10963,Relaciones Internacionales y Estudios Políticos"</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Ignorar líneas que inician con # ----</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_comment_csv),</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">comment =</span> <span class="st">"#"</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Archivo con comentarios intercalados ----</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>pregrado_comment_csv <span class="ot">&lt;-</span> <span class="st">"# Listado de programas FAEDIS</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="st">codigo_snies,nombre_programa</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="st">6527,Administración de Empresas</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st"># 6527 en proceso de renovación registro calificado</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="st">108241,</span><span class="sc">\"</span><span class="st">Administración de Riesgos, Seguridad y Salud en el Trabajo</span><span class="sc">\"</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="st">11428,Contaduría Pública</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="st">11004,Ingeniería Civil</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="st">53703,Ingeniería Industrial</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="st">105142,Ingeniería Informática</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="st">10963,Relaciones Internacionales y Estudios Políticos"</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Ignorar líneas que inician con # ----</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_comment_csv),</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">comment =</span> <span class="st">"#"</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
@@ -625,84 +651,79 @@ dbl (1): codigo_snies
 6       105142 Ingeniería Informática                       
 7        10963 Relaciones Internacionales y Estudios Políti…</code></pre>
 </div>
-</div>
-<ol start="3" type="1">
-<li><strong><code>col_names</code></strong>: controla los nombres de las columnas. Si el archivo no incluye una fila de encabezado, se especifica <code>col_names = FALSE</code> (lo que asigna nombres automáticos <code>X1</code>, <code>X2</code>, etc.) o se proporciona un vector de caracteres con los nombres deseados:</li>
-</ol>
+</div></li>
+<li><p><strong><code>col_names</code></strong>: controla los nombres de las columnas. Si el archivo no incluye una fila de encabezado, se especifica <code>col_names = FALSE</code> (lo que asigna nombres automáticos <code>X1</code>, <code>X2</code>, etc.) o se proporciona un vector de caracteres con los nombres deseados:</p>
 <div class="cell">
 <div id="lst-read-csv-col-names" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-read-csv-col-names-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listado&nbsp;13.5: Uso del parámetro <code>col_names</code> para archivos sin encabezados
+Listado&nbsp;13.4: Uso del parámetro <code>col_names</code> para archivos sin encabezados
 </figcaption>
 <div aria-describedby="lst-read-csv-col-names-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Archivo sin fila de encabezado ----</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>pregrado_no_header_csv <span class="ot">&lt;-</span> <span class="st">"codigo_snies,nombre_programa</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="st">6527,Administración de Empresas</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="st">108241,</span><span class="sc">\"</span><span class="st">Administración de Riesgos, Seguridad y Salud en el Trabajo</span><span class="sc">\"</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="st">11428,Contaduría Pública</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="st">11004,Ingeniería Civil</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="st">53703,Ingeniería Industrial</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="st">105142,Ingeniería Informática</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="st">10963,Relaciones Internacionales y Estudios Políticos"</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Suministrar nombres explícitos de columnas ----</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_no_header_csv),</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">"codigo_snies"</span>, <span class="st">"nombre_programa"</span>)</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Archivo sin fila de encabezado ----</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>pregrado_no_header_csv <span class="ot">&lt;-</span> <span class="st">"6527,Administración de Empresas</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="st">108241,</span><span class="sc">\"</span><span class="st">Administración de Riesgos, Seguridad y Salud en el Trabajo</span><span class="sc">\"</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="st">11428,Contaduría Pública</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="st">11004,Ingeniería Civil</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="st">53703,Ingeniería Industrial</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="st">105142,Ingeniería Informática</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="st">10963,Relaciones Internacionales y Estudios Políticos"</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Suministrar nombres explícitos de columnas ----</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_no_header_csv),</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">"codigo_snies"</span>, <span class="st">"nombre_programa"</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 8 Columns: 2
+<pre><code>Rows: 7 Columns: 2
 ── Column specification ────────────────────────────────────
 Delimiter: ","
-chr (2): codigo_snies, nombre_programa
+chr (1): nombre_programa
+dbl (1): codigo_snies
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 8 × 2
+<pre><code># A tibble: 7 × 2
   codigo_snies nombre_programa                              
-  &lt;chr&gt;        &lt;chr&gt;                                        
-1 codigo_snies nombre_programa                              
-2 6527         Administración de Empresas                   
-3 108241       Administración de Riesgos, Seguridad y Salud…
-4 11428        Contaduría Pública                           
-5 11004        Ingeniería Civil                             
-6 53703        Ingeniería Industrial                        
-7 105142       Ingeniería Informática                       
-8 10963        Relaciones Internacionales y Estudios Políti…</code></pre>
+         &lt;dbl&gt; &lt;chr&gt;                                        
+1         6527 Administración de Empresas                   
+2       108241 Administración de Riesgos, Seguridad y Salud…
+3        11428 Contaduría Pública                           
+4        11004 Ingeniería Civil                             
+5        53703 Ingeniería Industrial                        
+6       105142 Ingeniería Informática                       
+7        10963 Relaciones Internacionales y Estudios Políti…</code></pre>
 </div>
-</div>
-<ol start="4" type="1">
-<li><strong><code>na</code></strong>: define qué valores de texto deben interpretarse como datos faltantes (<code>NA</code>), por defecto <code>na = c("", "NA")</code>. Si un archivo representa los valores ausentes con expresiones como <code>"Sin dato"</code> o <code>"N/D"</code>, pueden indicarse explícitamente mediante <code>na = c("", "NA", "Sin dato", "N/D")</code>.</li>
-</ol>
+</div></li>
+<li><p><strong><code>na</code></strong>: define qué valores de texto deben interpretarse como datos faltantes (<code>NA</code>), por defecto <code>na = c("", "NA")</code>. Si un archivo representa los valores ausentes con expresiones como <code>"Sin dato"</code> o <code>"N/D"</code>, pueden indicarse explícitamente mediante <code>na = c("", "NA", "Sin dato", "N/D")</code>.</p>
 <div class="cell">
 <div id="lst-read-csv-na" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-read-csv-na-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listado&nbsp;13.6: Uso del parámetro <code>na</code> para archivos con datos faltantes y con expresiones personalizadas
+Listado&nbsp;13.5: Uso del parámetro <code>na</code> para archivos con datos faltantes y con expresiones personalizadas
 </figcaption>
 <div aria-describedby="lst-read-csv-na-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Archivo sin fila de encabezado ----</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>pregrado_no_header_csv <span class="ot">&lt;-</span> <span class="st">"codigo_snies,nombre_programa</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="st">6527,</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="st">108241,</span><span class="sc">\"</span><span class="st">Administración de Riesgos, Seguridad y Salud en el Trabajo</span><span class="sc">\"</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="st">11428,Contaduría Pública</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="st">11004,Ingeniería Civil</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="st">NA,Ingeniería Industrial</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="st">105142,N/D</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="st">10963,Relaciones Internacionales y Estudios Políticos</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="st">102005,Sin dato"</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Suministrar nombres explícitos de columnas ----</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_no_header_csv),</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">na =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"NA"</span>, <span class="st">"Sin dato"</span>, <span class="st">"N/D"</span>)</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Archivo sin fila de encabezado ----</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>pregrado_no_header_csv <span class="ot">&lt;-</span> <span class="st">"codigo_snies,nombre_programa</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="st">6527,</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="st">108241,</span><span class="sc">\"</span><span class="st">Administración de Riesgos, Seguridad y Salud en el Trabajo</span><span class="sc">\"</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="st">11428,Contaduría Pública</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="st">11004,Ingeniería Civil</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="st">NA,Ingeniería Industrial</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="st">105142,N/D</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="st">10963,Relaciones Internacionales y Estudios Políticos</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="st">102005,Sin dato"</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Suministrar nombres explícitos de columnas ----</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_no_header_csv),</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">na =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"NA"</span>, <span class="st">"Sin dato"</span>, <span class="st">"N/D"</span>)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
@@ -729,34 +750,34 @@ dbl (1): codigo_snies
 7        10963 Relaciones Internacionales y Estudios Políti…
 8       102005 &lt;NA&gt;                                         </code></pre>
 </div>
-</div>
+</div></li>
+</ol>
 </section>
 </section>
 <section id="sec-other-plain-text-formats" class="level2" data-number="13.2">
 <h2 data-number="13.2" class="anchored" data-anchor-id="sec-other-plain-text-formats"><span class="header-section-number">13.2</span> Otros formatos de archivos de texto plano</h2>
 <p>Además de los archivos <code>.csv</code>, el paquete <code>readr</code> proporciona funciones dedicadas para importar otros formatos rectangulares de texto plano de uso común:</p>
 <ul>
-<li><strong>Valores separados por tabulaciones (<code>read_tsv()</code>)</strong>: se utiliza cuando el delimitador entre columnas es una tabulación (<code>\t</code>):</li>
-</ul>
+<li><p><strong>Valores separados por tabulaciones (<code>read_tsv()</code>)</strong>: se utiliza cuando el delimitador entre columnas es una tabulación (<code>\t</code>):</p>
 <div class="cell">
 <div id="lst-read-tsv" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-read-tsv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listado&nbsp;13.7: Importación de datos separados por tabulaciones con <code>read_tsv()</code>
+Listado&nbsp;13.6: Importación de datos separados por tabulaciones con <code>read_tsv()</code>
 </figcaption>
 <div aria-describedby="lst-read-tsv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pregrado_faedis_tsv <span class="ot">&lt;-</span> <span class="st">"codigo_snies</span><span class="sc">\t</span><span class="st">nombre_programa</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="st">6527</span><span class="sc">\t</span><span class="st">Administración de Empresas</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="st">108241</span><span class="sc">\t\"</span><span class="st">Administración de Riesgos, Seguridad y Salud en el Trabajo</span><span class="sc">\"</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="st">11428</span><span class="sc">\t</span><span class="st">Contaduría Pública</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="st">11004</span><span class="sc">\t</span><span class="st">Ingeniería Civil</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="st">53703</span><span class="sc">\t</span><span class="st">Ingeniería Industrial</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="st">105142</span><span class="sc">\t</span><span class="st">Ingeniería Informática</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="st">10963</span><span class="sc">\t</span><span class="st">Relaciones Internacionales y Estudios Políticos"</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="fu">read_tsv</span>(</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_faedis_tsv)</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pregrado_faedis_tsv <span class="ot">&lt;-</span> <span class="st">"codigo_snies</span><span class="sc">\t</span><span class="st">nombre_programa</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="st">6527</span><span class="sc">\t</span><span class="st">Administración de Empresas</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="st">108241</span><span class="sc">\t\"</span><span class="st">Administración de Riesgos, Seguridad y Salud en el Trabajo</span><span class="sc">\"</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="st">11428</span><span class="sc">\t</span><span class="st">Contaduría Pública</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="st">11004</span><span class="sc">\t</span><span class="st">Ingeniería Civil</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="st">53703</span><span class="sc">\t</span><span class="st">Ingeniería Industrial</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="st">105142</span><span class="sc">\t</span><span class="st">Ingeniería Informática</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="st">10963</span><span class="sc">\t</span><span class="st">Relaciones Internacionales y Estudios Políticos"</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="fu">read_tsv</span>(</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_faedis_tsv)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
@@ -782,29 +803,27 @@ dbl (1): codigo_snies
 6       105142 Ingeniería Informática                       
 7        10963 Relaciones Internacionales y Estudios Políti…</code></pre>
 </div>
-</div>
-<ul>
-<li><strong>Archivos delimitados por punto y coma (<code>read_csv2()</code>)</strong>: en países hispanohablantes y europeos donde la coma (<code>,</code>) se utiliza como separador decimal, los archivos CSV suelen utilizar el punto y coma (<code>;</code>) como separador de columnas. La función <code>read_csv2()</code> gestiona automáticamente esta convención:</li>
-</ul>
+</div></li>
+<li><p><strong>Archivos delimitados por punto y coma (<code>read_csv2()</code>)</strong>: en países hispanohablantes y europeos donde la coma (<code>,</code>) se utiliza como separador decimal, los archivos <code>csv</code> suelen utilizar el punto y coma (<code>;</code>) como separador de columnas. La función <code>read_csv2()</code> gestiona automáticamente esta convención:</p>
 <div class="cell">
 <div id="lst-read-csv2" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-read-csv2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listado&nbsp;13.8: Importación de datos delimitados por punto y coma con <code>read_csv2()</code>
+Listado&nbsp;13.7: Importación de datos delimitados por punto y coma con <code>read_csv2()</code>
 </figcaption>
 <div aria-describedby="lst-read-csv2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>pregrado_faedis_csv2 <span class="ot">&lt;-</span> <span class="st">"codigo_snies;nombre_programa</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="st">6527;Administración de Empresas</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="st">108241;</span><span class="sc">\"</span><span class="st">Administración de Riesgos, Seguridad y Salud en el Trabajo</span><span class="sc">\"</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="st">11428;Contaduría Pública</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="st">11004;Ingeniería Civil</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="st">53703;Ingeniería Industrial</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="st">105142;Ingeniería Informática</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="st">10963;Relaciones Internacionales y Estudios Políticos"</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv2</span>(</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_faedis_csv2)</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>pregrado_faedis_csv2 <span class="ot">&lt;-</span> <span class="st">"codigo_snies;nombre_programa</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="st">6527;Administración de Empresas</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="st">108241;</span><span class="sc">\"</span><span class="st">Administración de Riesgos, Seguridad y Salud en el Trabajo</span><span class="sc">\"</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="st">11428;Contaduría Pública</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="st">11004;Ingeniería Civil</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="st">53703;Ingeniería Industrial</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="st">105142;Ingeniería Informática</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="st">10963;Relaciones Internacionales y Estudios Políticos"</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv2</span>(</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_faedis_csv2)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
@@ -833,30 +852,28 @@ dbl (1): codigo_snies
 6       105142 Ingeniería Informática                       
 7        10963 Relaciones Internacionales y Estudios Políti…</code></pre>
 </div>
-</div>
-<ul>
-<li><strong>Delimitadores personalizados (<code>read_delim()</code>)</strong>: permite leer archivos con cualquier delimitador arbitrario mediante el parámetro <code>delim</code> (por ejemplo, barra vertical <code>|</code>, dos puntos <code>:</code>, o guiones):</li>
-</ul>
+</div></li>
+<li><p><strong>Delimitadores personalizados (<code>read_delim()</code>)</strong>: permite leer archivos con cualquier delimitador arbitrario mediante el parámetro <code>delim</code> (p.&nbsp;ej., barra vertical (<code>|</code>), dos puntos (<code>:</code>), o guiones (<code>-</code>)):</p>
 <div class="cell">
 <div id="lst-read-delim" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-read-delim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listado&nbsp;13.9: Importación con delimitadores personalizados utilizando <code>read_delim()</code>
+Listado&nbsp;13.8: Importación con delimitadores personalizados utilizando <code>read_delim()</code>
 </figcaption>
 <div aria-describedby="lst-read-delim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>pregrado_faedis_delim <span class="ot">&lt;-</span> <span class="st">"codigo_snies|nombre_programa</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="st">6527|Administración de Empresas</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="st">108241|</span><span class="sc">\"</span><span class="st">Administración de Riesgos, Seguridad y Salud en el Trabajo</span><span class="sc">\"</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="st">11428|Contaduría Pública</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="st">11004|Ingeniería Civil</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="st">53703|Ingeniería Industrial</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="st">105142|Ingeniería Informática</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="st">10963|Relaciones Internacionales y Estudios Políticos"</span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">read_delim</span>(</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_faedis_delim),</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">delim =</span> <span class="st">"|"</span></span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>pregrado_faedis_delim <span class="ot">&lt;-</span> <span class="st">"codigo_snies|nombre_programa</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="st">6527|Administración de Empresas</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="st">108241|</span><span class="sc">\"</span><span class="st">Administración de Riesgos, Seguridad y Salud en el Trabajo</span><span class="sc">\"</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="st">11428|Contaduría Pública</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="st">11004|Ingeniería Civil</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="st">53703|Ingeniería Industrial</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="st">105142|Ingeniería Informática</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="st">10963|Relaciones Internacionales y Estudios Políticos"</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="fu">read_delim</span>(</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_faedis_delim),</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">delim =</span> <span class="st">"|"</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
@@ -882,19 +899,24 @@ dbl (1): codigo_snies
 6       105142 Ingeniería Informática                       
 7        10963 Relaciones Internacionales y Estudios Políti…</code></pre>
 </div>
-</div>
+</div></li>
+</ul>
 </section>
 <section id="sec-control-col-types-problems" class="level2" data-number="13.3">
 <h2 data-number="13.3" class="anchored" data-anchor-id="sec-control-col-types-problems"><span class="header-section-number">13.3</span> Control de tipos de columnas y resolución de problemas</h2>
-<p>Al importar un archivo de texto plano, <code>readr</code> lee de forma predeterminada las primeras 1000 filas para inferir el tipo de dato más apropiado para cada columna (<code>col_guess()</code>). Para consultar la especificación que <code>readr</code> ha determinado, se utiliza la función <code>spec()</code>:</p>
+<p>Al importar un archivo de texto plano sin especificar explícitamente los tipos de columna con <code>col_types</code>, <code>readr</code> intenta inferirlos mediante una <a href="https://en.wikipedia.org/wiki/Heuristic">heurística</a>, tal como se señala a continuación:</p>
+<blockquote class="blockquote">
+<p>De forma predeterminada, inspecciona <span class="math inline">\(1000\)</span> valores, distribuidos uniformemente desde la primera hasta la última fila. Esta es una heurística diseñada para ser siempre rápida sin importar qué tan grande sea el archivo y funciona bien en la mayoría de los casos de acuerdo a los autores de <code>readr</code>.</p>
+</blockquote>
+<p>Para consultar la especificación que <code>readr</code> ha determinado se utiliza la función <code>spec()</code>, tal como se señala a continuación utilizando <code>pregrado_faedis_tbl</code> correspondiente al <a href="#lst-read-csv-toy-example" class="quarto-xref">Listado&nbsp;<span>13.1</span></a>:</p>
 <div class="cell">
 <div id="lst-spec" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-spec-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listado&nbsp;13.10: Inspección de la especificación de tipos con <code>spec()</code>
+Listado&nbsp;13.9: Inspección de la especificación de tipos con <code>spec()</code>
 </figcaption>
 <div aria-describedby="lst-spec-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spec</span>(pregrado_faedis_tbl)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spec</span>(pregrado_faedis_tbl)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
@@ -907,7 +929,7 @@ Listado&nbsp;13.10: Inspección de la especificación de tipos con <code>spec()<
 </div>
 <section id="sec-col-types" class="level3" data-number="13.3.1">
 <h3 data-number="13.3.1" class="anchored" data-anchor-id="sec-col-types"><span class="header-section-number">13.3.1</span> Especificación explícita de tipos con <code>col_types</code></h3>
-<p>Cuando las primeras 1000 filas no son representativas o cuando se desea asegurar un esquema de datos reproducible y robusto, es recomendable definir explícitamente los tipos de cada columna mediante el parámetro <code>col_types</code> y la función <code>cols()</code>:</p>
+<p>Cuando los valores inspeccionados por dicha heurística no son representativos o cuando se desea asegurar un esquema de datos reproducible y robusto, es recomendable definir explícitamente los tipos de cada columna mediante el parámetro <code>col_types</code> y la función <code>cols()</code>:</p>
 <ul>
 <li><code>col_integer()</code>: enteros (<code>&lt;int&gt;</code>).</li>
 <li><code>col_double()</code>: números reales (<code>&lt;dbl&gt;</code>).</li>
@@ -921,16 +943,16 @@ Listado&nbsp;13.10: Inspección de la especificación de tipos con <code>spec()<
 <div id="lst-col-types-explicit" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-col-types-explicit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listado&nbsp;13.11: Especificación explícita de tipos de columna con <code>cols()</code>
+Listado&nbsp;13.10: Especificación explícita de tipos de columna con <code>cols()</code>
 </figcaption>
 <div aria-describedby="lst-col-types-explicit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_faedis_csv),</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">codigo_snies =</span> <span class="fu">col_integer</span>(),</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">nombre_programa =</span> <span class="fu">col_character</span>()</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_faedis_csv),</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">codigo_snies =</span> <span class="fu">col_integer</span>(),</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">nombre_programa =</span> <span class="fu">col_character</span>()</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
@@ -955,27 +977,27 @@ Listado&nbsp;13.11: Especificación explícita de tipos de columna con <code>col
 <div id="lst-problems" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-problems-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listado&nbsp;13.12: Detección y diagnóstico de problemas de lectura con <code>problems()</code>
+Listado&nbsp;13.11: Detección y diagnóstico de problemas de lectura con <code>problems()</code>
 </figcaption>
 <div aria-describedby="lst-problems-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Datos con un valor de texto en la columna numérica ----</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>pregrado_invalido_csv <span class="ot">&lt;-</span> <span class="st">"codigo_snies,nombre_programa</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="st">Sin código,Administración de Empresas</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="st">108241,</span><span class="sc">\"</span><span class="st">Administración de Riesgos, Seguridad y Salud en el Trabajo</span><span class="sc">\"</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="st">11428,Contaduría Pública</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="st">11004,Ingeniería Civil</span></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="st">53703,Ingeniería Industrial</span></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="st">105142,Ingeniería Informática</span></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="st">10963,Relaciones Internacionales y Estudios Políticos"</span></span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar forzando la columna a entero ----</span></span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>pregrado_faedis_invalido <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_invalido_csv),</span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">codigo_snies =</span> <span class="fu">col_integer</span>(),</span>
-<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">nombre_programa =</span> <span class="fu">col_character</span>()</span>
-<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Datos con un valor de texto en la columna numérica ----</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>pregrado_invalido_csv <span class="ot">&lt;-</span> <span class="st">"codigo_snies,nombre_programa</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="st">Sin código,Administración de Empresas</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="st">108241,</span><span class="sc">\"</span><span class="st">Administración de Riesgos, Seguridad y Salud en el Trabajo</span><span class="sc">\"</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="st">11428,Contaduría Pública</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="st">11004,Ingeniería Civil</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="st">53703,Ingeniería Industrial</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="st">105142,Ingeniería Informática</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="st">10963,Relaciones Internacionales y Estudios Políticos"</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar forzando la columna a entero ----</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>pregrado_faedis_invalido <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="fu">I</span>(pregrado_invalido_csv),</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">codigo_snies =</span> <span class="fu">col_integer</span>(),</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">nombre_programa =</span> <span class="fu">col_character</span>()</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
@@ -988,11 +1010,11 @@ frame for details, e.g.:
 <div id="lst-problems" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-problems-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listado&nbsp;13.13: Detección y diagnóstico de problemas de lectura con <code>problems()</code>
+Listado&nbsp;13.12: Detección y diagnóstico de problemas de lectura con <code>problems()</code>
 </figcaption>
 <div aria-describedby="lst-problems-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagnosticar filas con problemas de conversión ----</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">problems</span>(pregrado_faedis_invalido)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagnosticar filas con problemas de conversión ----</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">problems</span>(pregrado_faedis_invalido)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
@@ -1000,7 +1022,21 @@ Listado&nbsp;13.13: Detección y diagnóstico de problemas de lectura con <code>
 <pre><code># A tibble: 1 × 5
     row   col expected   actual     file                    
   &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;                   
-1     2     1 an integer Sin código /tmp/RtmpgOWJfa/vroom-c…</code></pre>
+1     2     1 an integer Sin código /tmp/Rtmpokp8Od/vroom-c…</code></pre>
+</div>
+</div>
+<div id="wrn-1-chap-13" class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Advertencia&nbsp;13.1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En el <a href="#lst-problems" class="quarto-xref">Listado&nbsp;<span>13.12</span></a>, la columna <code>row</code> reportada por <code>problems()</code> indica el valor <code>2</code>. Es importante señalar que este número corresponde a la línea del archivo u objeto de origen y no a la fila de la tibble en R. La línea <code>1</code> contiene los encabezados y la línea <code>2</code> el registro problemático, que en la tibble pasa a ser la fila <code>1</code>.</p>
+<p>Esta distinción es esencial al depurar datos ya que si examinas la fila <code>2</code> de la tibble, encontrarás un registro válido. La columna <code>row</code> de <code>problems()</code> está diseñada específicamente para ubicar y corregir la anomalía directamente en la fuente original.</p>
 </div>
 </div>
 </section>
@@ -1011,7 +1047,7 @@ Listado&nbsp;13.13: Detección y diagnóstico de problemas de lectura con <code>
 <p>Los parámetros más relevantes al exportar datos son:</p>
 <ul>
 <li><strong><code>x</code></strong>: el objeto de R (usualmente una tibble o un objeto similar) que se desea guardar.</li>
-<li><strong><code>file</code></strong>: la ruta y nombre del archivo de destino.</li>
+<li><strong><code>file</code></strong>: la ruta y nombre del archivo de destino con su correspondiente extensión.</li>
 <li><strong><code>na</code></strong>: la cadena de texto utilizada para escribir los valores faltantes (por defecto <code>"NA"</code>).</li>
 <li><strong><code>col_names</code></strong>: valor lógico que indica si se escriben los encabezados de columna en la primera línea (por defecto <code>TRUE</code>).</li>
 </ul>
@@ -1019,21 +1055,305 @@ Listado&nbsp;13.13: Detección y diagnóstico de problemas de lectura con <code>
 <div id="lst-write-csv" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-write-csv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listado&nbsp;13.14: Exportación de un objeto a un archivo <code>.csv</code> utilizando <code>write_csv()</code>
+Listado&nbsp;13.13: Exportación de un objeto a un archivo <code>.csv</code> utilizando <code>write_csv()</code>
 </figcaption>
 <div aria-describedby="lst-write-csv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exportar datos a un archivo .csv ----</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> pregrado_faedis_invalido,</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"data/pregrado_faedis_invalido.csv"</span>,</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">na =</span> <span class="st">"NA"</span>,</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">colnames =</span> <span class="cn">TRUE</span></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exportar datos a un archivo .csv ----</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> pregrado_faedis_invalido,</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"data/pregrado_faedis_invalido.csv"</span>,</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">na =</span> <span class="st">"NA"</span>,</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">colnames =</span> <span class="cn">TRUE</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
 </div>
 <p>En comparación con el formato <code>.rds</code> (ver <a href="r_data_serialization.html" class="quarto-xref"><span>Capítulo 12</span></a>), los archivos de texto plano (p.&nbsp;ej., <code>.csv</code>, <code>.tsv</code>) ofrecen la ventaja de ser universales e interoperables con cualquier herramienta de análisis, lenguaje de programación y gestores de bases de datos. No obstante, dado que no almacenan los metadatos propios de R, al volver a importarlos será necesario especificar nuevamente sus tipos de columna.</p>
+</section>
+<section id="sec-case-study-plain-text" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="sec-case-study-plain-text"><span class="header-section-number">13.5</span> Caso de estudio: importación de datos del Saber-Pro para el año 2021 en Colombia</h2>
+<p>El propósito de esta sección es aplicar los conceptos desarrollados a lo largo del <a href="#sec-plain-text" class="quarto-xref"><span>Capítulo 13</span></a> para importar y depurar los datos en el archivo <code>2021-saber_pro-genericas.txt.xz</code> (ver <a href="#nte-1-chap-13" class="quarto-xref">Nota&nbsp;<span>13.1</span></a>).</p>
+<p>Tal como se indicó en la <a href="single_table_verbs.html#nte-2-chap-10" class="quarto-xref">Nota&nbsp;<span>10.2</span></a>, el sufijo <code>.xz</code> en el nombre del archivo <code>2021-saber_pro-genericas.txt.xz</code> señala que se trata de un archivo comprimido mediante un algoritmo de alta eficiencia para reducir drásticamente su tamaño en el disco y facilitar su descarga. Al igual que con <code>read_csv()</code>, las funciones de importación de <code>readr</code> detectan automáticamente esta extensión y realizan la descompresión en memoria de manera transparente, sin necesidad de descomprimir previamente el archivo de forma manual.</p>
+<p>Asimismo, es fundamental señalar que en el portal <a href="https://www.icfes.gov.co/investigaciones/data-icfes/">DataIcfes</a> los microdatos originales suelen publicarse con la extensión de texto plano <code>.txt</code>, utilizando como delimitador de columnas el punto y coma (<code>;</code>). Por esta razón, la función apropiada del paquete <code>readr</code> para leer este archivo es <code>read_csv2()</code>, diseñada específicamente para satisfacer estas convenciones regionales.</p>
+<section id="importación-inicial-e-inspección-de-tipos" class="level3" data-number="13.5.1">
+<h3 data-number="13.5.1" class="anchored" data-anchor-id="importación-inicial-e-inspección-de-tipos"><span class="header-section-number">13.5.1</span> Importación inicial e inspección de tipos</h3>
+<p>Para comenzar, procederás a importar el archivo <code>2021-saber_pro-genericas.txt.xz</code> utilizando la función <code>read_csv2()</code> sin suministrar tipos de columna explícitos. De esta manera, <code>readr</code> aplica su heurística predeterminada para inferir el tipo de cada variable. Posteriormente, se utiliza la función <code>spec()</code> para examinar la especificación resultante, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-case-study-read-csv2" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-case-study-read-csv2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;13.14: Importación inicial con <code>read_csv2()</code> y consulta de especificación de tipos con <code>spec()</code>
+</figcaption>
+<div aria-describedby="lst-case-study-read-csv2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar datos ----</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021 <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"data/2021-saber_pro-genericas.txt.xz"</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ Using "','" as decimal and "'.'" as grouping mark. Use `read_delim()` for more control.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 253568 Columns: 95
+── Column specification ────────────────────────────────────
+Delimiter: ";"
+chr (62): estu_consecutivo, estu_estudiante, estu_tipodo...
+dbl (32): periodo, estu_cod_cole_mcpio_termino, estu_cod...
+num  (1): estu_inse_individual
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div id="lst-case-study-read-csv2" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-case-study-read-csv2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;13.15: Importación inicial con <code>read_csv2()</code> y consulta de especificación de tipos con <code>spec()</code>
+</figcaption>
+<div aria-describedby="lst-case-study-read-csv2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Consultar especificación de columnas ----</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">spec</span>(saber_pro_genericas_2021)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>cols(
+  periodo = col_double(),
+  estu_consecutivo = col_character(),
+  estu_estudiante = col_character(),
+  estu_tipodocumento = col_character(),
+  estu_nacionalidad = col_character(),
+  estu_actividadrefuerzoareas = col_character(),
+  estu_actividadrefuerzogeneric = col_character(),
+  estu_agregado = col_character(),
+  estu_areareside = col_character(),
+  estu_cod_cole_mcpio_termino = col_double(),
+  estu_cod_depto_presentacion = col_double(),
+  estu_cod_mcpio_presentacion = col_double(),
+  estu_cod_reside_depto = col_double(),
+  estu_cod_reside_mcpio = col_double(),
+  estu_coddane_cole_termino = col_double(),
+  estu_cole_termino = col_character(),
+  estu_comocapacitoexamensb11 = col_character(),
+  estu_cursodocentesies = col_character(),
+  estu_cursoiesapoyoexterno = col_character(),
+  estu_cursoiesexterna = col_character(),
+  estu_depto_presentacion = col_character(),
+  estu_depto_reside = col_character(),
+  estu_estadocivil = col_character(),
+  estu_etnia = col_character(),
+  estu_exterior = col_character(),
+  estu_fechanacimiento = col_character(),
+  estu_genero = col_character(),
+  estu_horassemanatrabaja = col_character(),
+  estu_inse_individual = col_number(),
+  estu_inst_codmunicipio = col_double(),
+  estu_inst_departamento = col_character(),
+  estu_inst_municipio = col_character(),
+  estu_mcpio_presentacion = col_character(),
+  estu_mcpio_reside = col_character(),
+  estu_metodo_prgm = col_character(),
+  estu_nivel_prgm_academico = col_character(),
+  estu_nse_individual = col_double(),
+  estu_nucleo_pregrado = col_character(),
+  estu_otrocole_termino = col_character(),
+  estu_pagomatriculabeca = col_character(),
+  estu_pagomatriculacredito = col_character(),
+  estu_pagomatriculapadres = col_character(),
+  estu_pagomatriculapropio = col_character(),
+  estu_pais_reside = col_character(),
+  estu_prgm_academico = col_character(),
+  estu_prgm_codmunicipio = col_double(),
+  estu_prgm_departamento = col_character(),
+  estu_prgm_municipio = col_character(),
+  estu_privado_libertad = col_character(),
+  estu_semestrecursa = col_character(),
+  estu_simulacrotipoicfes = col_character(),
+  estu_snies_prgmacademico = col_double(),
+  estu_tieneetnia = col_character(),
+  estu_tipodocumentosb11 = col_character(),
+  estu_tituloobtenidobachiller = col_character(),
+  estu_valormatriculauniversidad = col_character(),
+  fami_cuantoscompartebaño = col_character(),
+  fami_educacionmadre = col_character(),
+  fami_educacionpadre = col_character(),
+  fami_estratovivienda = col_character(),
+  fami_ocupacionmadre = col_character(),
+  fami_ocupacionpadre = col_character(),
+  fami_tieneautomovil = col_character(),
+  fami_tienecomputador = col_character(),
+  fami_tieneconsolavideojuegos = col_character(),
+  fami_tienehornomicroogas = col_character(),
+  fami_tieneinternet = col_character(),
+  fami_tienelavadora = col_character(),
+  fami_tienemotocicleta = col_character(),
+  fami_tieneserviciotv = col_character(),
+  inst_caracter_academico = col_character(),
+  inst_cod_institucion = col_double(),
+  inst_nombre_institucion = col_character(),
+  inst_origen = col_character(),
+  mod_competen_ciudada_desem = col_double(),
+  mod_competen_ciudada_pnal = col_double(),
+  mod_competen_ciudada_pnbc = col_double(),
+  mod_competen_ciudada_punt = col_double(),
+  mod_comuni_escrita_desem = col_double(),
+  mod_comuni_escrita_pnal = col_double(),
+  mod_comuni_escrita_pnbc = col_double(),
+  mod_comuni_escrita_punt = col_double(),
+  mod_ingles_desem = col_character(),
+  mod_ingles_pnal = col_double(),
+  mod_ingles_pnbc = col_double(),
+  mod_ingles_punt = col_double(),
+  mod_lectura_critica_desem = col_double(),
+  mod_lectura_critica_pnal = col_double(),
+  mod_lectura_critica_pnbc = col_double(),
+  mod_lectura_critica_punt = col_double(),
+  mod_razona_cuantitat_punt = col_double(),
+  mod_razona_cuantitativo_pnal = col_double(),
+  mod_razona_cuantitativo_pnbc = col_double(),
+  percentil_global = col_double(),
+  punt_global = col_double()
+)</code></pre>
+</div>
+</div>
+<p>Al inspeccionar el resultado de <code>spec(saber_pro_genericas_2021)</code>, puedes observar que entre las columnas identificadas, la variable <code>estu_fechanacimiento</code> fue interpretada como una columna de texto (<code>col_character()</code>):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>  estu_fechanacimiento <span class="ot">=</span> <span class="fu">col_character</span>(),</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="naturaleza-de-la-variable-y-formato-de-fecha" class="level3" data-number="13.5.2">
+<h3 data-number="13.5.2" class="anchored" data-anchor-id="naturaleza-de-la-variable-y-formato-de-fecha"><span class="header-section-number">13.5.2</span> Naturaleza de la variable y formato de fecha</h3>
+<p>De acuerdo con la documentación oficial de <a href="https://www.icfes.gov.co/investigaciones/data-icfes/">DataIcfes</a>, la variable <code>estu_fechanacimiento</code> corresponde a la fecha de nacimiento de cada individuo que presenta el Saber-Pro. En la <a href="single_table_verbs.html#nte-3-chap-10" class="quarto-xref">Nota&nbsp;<span>10.4</span></a> del <a href="single_table_verbs.html" class="quarto-xref"><span>Capítulo 10</span></a> se indicó que es posible descargar el diccionario de datos oficial publicado en el portal <a href="https://www.icfes.gov.co/investigaciones/data-icfes/">DataIcfes</a>. En dicho documento y al examinar los primeros registros del archivo (p.&nbsp;ej., <code>"05/10/1992"</code>, <code>"02/05/1994"</code>, <code>"09/11/1996"</code>) puedes identificar que las fechas se encuentran registradas en el formato <strong>día/mes/año</strong> (<code>DD/MM/AAAA</code>).</p>
+<p>Mantener una fecha como cadena de texto (<code>&lt;chr&gt;</code>) dificulta realizar operaciones cronológicas como calcular la edad de los individuos, filtrar por año de nacimiento o agrupar temporalmente los registros. Por ello, lo ideal es transformarla en un tipo fecha (<code>&lt;date&gt;</code>) directamente durante la lectura.</p>
+</section>
+<section id="intento-inicial-con-col_date-y-diagnóstico-con-problems" class="level3" data-number="13.5.3">
+<h3 data-number="13.5.3" class="anchored" data-anchor-id="intento-inicial-con-col_date-y-diagnóstico-con-problems"><span class="header-section-number">13.5.3</span> Intento inicial con <code>col_date()</code> y diagnóstico con <code>problems()</code></h3>
+<p>Una primera alternativa consiste en definir explícitamente el tipo de la columna <code>estu_fechanacimiento</code> empleando <code>col_types = cols()</code> junto con la función <code>col_date()</code> con sus opciones predeterminadas, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-case-study-col-date-naive" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-case-study-col-date-naive-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;13.16: Intento de conversión a fecha con <code>col_date()</code> predeterminado y diagnóstico con <code>problems()</code>
+</figcaption>
+<div aria-describedby="lst-case-study-col-date-naive-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar especificando col_date() ----</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021 <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"data/2021-saber_pro-genericas.txt.xz"</span>,</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">estu_fechanacimiento =</span> <span class="fu">col_date</span>()</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ Using "','" as decimal and "'.'" as grouping mark. Use `read_delim()` for more control.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: One or more parsing issues, call `problems()` on your data
+frame for details, e.g.:
+  dat &lt;- vroom(...)
+  problems(dat)</code></pre>
+</div>
+<div id="lst-case-study-col-date-naive" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-case-study-col-date-naive-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;13.17: Intento de conversión a fecha con <code>col_date()</code> predeterminado y diagnóstico con <code>problems()</code>
+</figcaption>
+<div aria-describedby="lst-case-study-col-date-naive-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagnosticar problemas ----</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">problems</span>(saber_pro_genericas_2021)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 253,568 × 5
+     row   col expected        actual     file 
+   &lt;int&gt; &lt;int&gt; &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt;
+ 1     2    26 date in ISO8601 05/10/1992 ""   
+ 2     3    26 date in ISO8601 02/05/1994 ""   
+ 3     4    26 date in ISO8601 09/11/1996 ""   
+ 4     5    26 date in ISO8601 09/04/1986 ""   
+ 5     6    26 date in ISO8601 14/05/1993 ""   
+ 6     7    26 date in ISO8601 21/06/1996 ""   
+ 7     8    26 date in ISO8601 07/12/2000 ""   
+ 8     9    26 date in ISO8601 27/02/1993 ""   
+ 9    10    26 date in ISO8601 20/02/1986 ""   
+10    11    26 date in ISO8601 09/08/1996 ""   
+# ℹ 253,558 more rows</code></pre>
+</div>
+</div>
+<p>Al ejecutar el <a href="#lst-case-study-col-date-naive" class="quarto-xref">Listado&nbsp;<span>13.17</span></a>, <code>readr</code> emite una advertencia señalando problemas de lectura (<code>One or more parsing issues, ...</code>). Al evaluar <code>problems(saber_pro_genericas_2021)</code>, la tibble de diagnósticos revela que en la columna 26 (<code>estu_fechanacimiento</code>) <code>readr</code> esperaba fechas bajo el estándar internacional ISO 8601 (<code>"date in ISO8601"</code>, es decir, en formato <code>AAAA-MM-DD</code> o <code>YYYY-MM-DD</code>), pero encontró caracteres como <code>"05/10/1992"</code>, <code>"02/05/1994"</code> o <code>"109/11/1996"</code>.</p>
+<p>Dado que el formato predeterminado de <code>col_date()</code> no coincide con la convención <strong>día/mes/año</strong> empleada en el archivo, <code>readr</code> no logra interpretar los valores y los sustituye por valores ausentes (<code>NA</code>), identificando anomalías para la totalidad de registros con fecha de nacimiento.</p>
+</section>
+<section id="solución-con-el-parámetro-format-en-col_date" class="level3" data-number="13.5.4">
+<h3 data-number="13.5.4" class="anchored" data-anchor-id="solución-con-el-parámetro-format-en-col_date"><span class="header-section-number">13.5.4</span> Solución con el parámetro <code>format</code> en <code>col_date()</code></h3>
+<p>Para resolver este problema sin alterar la fuente original, <code>col_date()</code> incluye el parámetro <code>format</code>, el cual permite definir el patrón de fecha exacto que debe reconocer <code>readr</code>. Dado que las fechas se encuentran en formato <code>DD/MM/AAAA</code>, la especificación correspondiente es <code>"%d/%m/%Y"</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-case-study-col-date-format" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-case-study-col-date-format-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;13.18: Importación exitosa especificando el formato de fecha con <code>col_date()</code> y el parámetro <code>format</code>
+</figcaption>
+<div aria-describedby="lst-case-study-col-date-format-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar especificando formato de fecha ----</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021 <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"data/2021-saber_pro-genericas.txt.xz"</span>,</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">estu_fechanacimiento =</span> <span class="fu">col_date</span>(<span class="at">format =</span> <span class="st">"%d/%m/%Y"</span>)</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ Using "','" as decimal and "'.'" as grouping mark. Use `read_delim()` for more control.</code></pre>
+</div>
+<div id="lst-case-study-col-date-format" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-case-study-col-date-format-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;13.19: Importación exitosa especificando el formato de fecha con <code>col_date()</code> y el parámetro <code>format</code>
+</figcaption>
+<div aria-describedby="lst-case-study-col-date-format-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagnosticar problemas ----</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">problems</span>(saber_pro_genericas_2021)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 0 × 5
+# ℹ 5 variables: row &lt;int&gt;, col &lt;int&gt;, expected &lt;chr&gt;,
+#   actual &lt;chr&gt;, file &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>Al consultar nuevamente <code>problems(saber_pro_genericas_2021)</code>, se obtiene una tibble vacía con cero filas, lo que confirma que todos los registros de fecha de nacimiento fueron procesados y convertidos correctamente al tipo <code>&lt;date&gt;</code>.</p>
+</section>
+<section id="especificaciones-de-formato-para-fechas-en-readr" class="level3" data-number="13.5.5">
+<h3 data-number="13.5.5" class="anchored" data-anchor-id="especificaciones-de-formato-para-fechas-en-readr"><span class="header-section-number">13.5.5</span> Especificaciones de formato para fechas en <code>readr</code></h3>
+<p>El parámetro <code>format</code> de <code>col_date()</code> utiliza códigos de conversión estándar que se pueden consultar en la documentación con <code>?readr::col_date</code>, para indicar la estructura de los componentes temporales de año, mes y día así como sus separadores, tal como se señala a continuación:</p>
+<ul>
+<li><strong>Día</strong>:
+<ul>
+<li><code>%d</code>: día del mes expresado como un número decimal de 2 dígitos (<code>01</code> a <code>31</code>).</li>
+<li><code>%e</code>: día del mes en el que los valores del <code>1</code> al <code>9</code> pueden incluir un espacio inicial opcional en lugar de un cero.</li>
+</ul></li>
+<li><strong>Mes</strong>:
+<ul>
+<li><code>%m</code>: mes expresado como un número decimal de 2 dígitos (<code>01</code> a <code>12</code>).</li>
+<li><code>%b</code>: nombre abreviado del mes (p.&nbsp;ej., <code>"ene"</code>, <code>"feb"</code>, según la configuración local).</li>
+<li><code>%B</code>: nombre completo del mes (p.&nbsp;ej., <code>"enero"</code>, <code>"febrero"</code>).</li>
+</ul></li>
+<li><strong>Año</strong>:
+<ul>
+<li><code>%Y</code>: año completo con cuatro dígitos (p.&nbsp;ej., <code>2021</code>, <code>2022</code>).</li>
+<li><code>%y</code>: año con 2 dígitos (<code>00</code> a <code>99</code>, donde habitualmente <code>00</code> a <code>69</code> corresponden a <strong>2000–2069</strong> y <code>70</code> a <code>99</code> a <strong>1970–1999</strong>).</li>
+</ul></li>
+<li><strong>Separadores literales</strong>:
+<ul>
+<li>Los signos de puntuación como la barra inclinada (<code>/</code>), el guión (<code>-</code>) o el punto (<code>.</code>) representan literalmente los caracteres separadores entre día, mes y año.</li>
+</ul></li>
+</ul>
+<p>En la especificación <code>format = "%d/%m/%Y"</code>, <code>%d</code> indica que los primeros dígitos representan el día del mes, las barras diagonales <code>/</code> reconocen el separador literal, <code>%m</code> lee el mes de dos dígitos y <code>%Y</code> captura el año de cuatro dígitos. Con esta configuración, R almacena la columna <code>estu_fechanacimiento</code> como un vector de clase <code>Date</code>, garantizando una coherencia y facilitando análisis posteriores sin que exista pérdida de información.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
@@ -1041,6 +1361,7 @@ Listado&nbsp;13.14: Exportación de un objeto a un archivo <code>.csv</code> uti
 Wickham, H. (2023). <em>R for <span>Data</span> <span>Science</span></em> (2.ª ed.). O’Reilly Media, Incorporated. <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a>
 </div>
 </div>
+</section>
 </section>
 
 </main> <!-- /main -->
