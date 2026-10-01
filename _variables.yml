@@ -77,6 +77,7 @@ url:
 
   data:
     saber_pro_csv_xz: "https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/2021_2024-saber_pro-genericas.csv.xz"
+    saber_pro_csv_xz_2021: "https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/2021-saber_pro-genericas.txt.xz"
     saber_pro_faedis_rds: "https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/2021-2024_saber-pro-genericas_faedis.rds"
     saber_pro_programas_rds: "https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/2021-2024_saber-pro-genericas_faedis_programas.rds"
     saber_pro_faedis_ajustado_csv: "data/2021-2024_saber-pro-genericas_faedis_ajustado.csv"
@@ -112,6 +113,7 @@ url:
     serialization_wiki: "https://en.wikipedia.org/wiki/Serialization"
     binary_file_wiki: "https://en.wikipedia.org/wiki/Binary_file"
     csv_wiki: "https://en.wikipedia.org/wiki/Comma-separated_values"
+    heuristic_wiki: "https://en.wikipedia.org/wiki/Heuristic"
 
   media:
     muse_klio_artwork: "https://commons.wikimedia.org/wiki/File:Christian_Bernhard_Rode_-_Die_Muse_Klio.jpg"

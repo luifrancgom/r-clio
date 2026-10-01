@@ -12,16 +12,22 @@ source("_common.R")
 library(tidyverse)
 ```
 
-Este capítulo se basa en [@wickham_r_2023, Cap. 7] así como en la documentación oficial de [`readr`]({{< var url.packages.readr >}}) donde tiene como propósito introducir la importación y exportación de datos de archivos de texto plano rectangulares.  
+Este capítulo se basa en [@wickham_r_2023, Cap. 7] así como en la documentación oficial de [`readr`]({{< var url.packages.readr >}}) donde tiene como propósito introducir la importación y exportación de datos de archivos de texto plano rectangulares utilizando el paquete `readr` e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes al periodo 2021 para Colombia.  
 
 Exploraremos los siguientes aspectos:
 
-1. ¿Qué es un archivo `.csv`, por qué se usa `I()` para leer cadenas en memoria y cómo utilizar argumentos como `skip`, `comment`, `col_names` y `na` con `read_csv()`?
+1. ¿Qué es un archivo `.csv` y cómo utilizar argumentos como `skip`, `comment`, `col_names` y `na` con `read_csv()`?
 2. ¿Cómo importar otros formatos de archivos de texto plano rectangulares (`.tsv`, archivos delimitados por punto y coma (`;`) o delimitadores personalizados)?
 3. ¿Cómo controlar los tipos de datos en las columnas mediante `col_types` y diagnosticar problemas de importación con `problems()`?
 4. ¿Cómo exportar tablas de datos a archivos de texto plano desde R?
 
 :::: {#nte-1-chap-13 .callout-note}
+Para desarrollar el contenido de este capítulo es necesario que descargues el archivo señalado a continuación y lo incluyas dentro de la carpeta `data`, respecto a lo descrito en la @nte-1-chap-6:
+   
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2021_2024-saber_pro-genericas.csv.xz]({{< var url.data.saber_pro_csv_xz_2021 >}})
+:::
+
 En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `013_importar-datos-texto-plano-en-r` y dentro de ella genera el archivo `001_importar-datos-formato-texto-plano.R`, siguiendo las pautas de la @sec-package-usage.
 ::::
 
@@ -31,9 +37,9 @@ Un archivo con formato `.csv` (en inglés [comma-separated values]({{< var url.e
 
 Cuando uno de los campos de texto contiene una coma dentro de su propio contenido, dicho campo se delimita entre comillas dobles (`"`) para evitar que la coma interna sea interpretada erróneamente como un separador de columnas.
 
-Para importar archivos `.csv` a R se utiliza la función `read_csv()` del paquete `readr`. El primer parámetro de esta función es `file`, el cual usualmente recibe una ruta hacia un archivo almacenado en disco (por ejemplo, `"data/2021-2024_saber-pro-genericas_faedis_ajustado.csv"`). No obstante, para realizar pruebas o construir ejemplos ilustrativos, también es posible suministrar datos directamente desde una cadena de texto en memoria. 
+Para importar archivos `.csv` a R se utiliza la función `read_csv()` del paquete `readr`. El primer parámetro de esta función es `file`, el cual usualmente recibe una ruta hacia un archivo almacenado en disco (p. ej., `"data/2021-2024_saber-pro-genericas_faedis_ajustado.csv"`). No obstante, para realizar pruebas o construir ejemplos ilustrativos, también es posible suministrar datos directamente desde una cadena de texto en memoria. 
 
-Para que `readr` distinga explícitamente que la cadena contiene datos literales en lugar de una ruta a un archivo en disco, se utiliza la función `I()` (**as is**) de R al asociar el argumento con `file`, tal como se ilustra a continuación:
+Para que `readr` distinga explícitamente que la cadena contiene datos literales en lugar de una ruta a un archivo en disco, se utiliza la función `I()` (**"as is"**) de R al asociar el argumento con `file`, tal como se ilustra a continuación:
 
 ```{r}
 #| lst-label: lst-read-csv-toy-example
@@ -56,15 +62,13 @@ pregrado_faedis_csv <- "codigo_snies,nombre_programa
 pregrado_faedis_tbl <- read_csv(
   file = I(pregrado_faedis_csv)
 )
-
-pregrado_faedis_tbl
 ```
 
 En el @lst-read-csv-toy-example, la cadena `pregrado_faedis_csv` define dos columnas (`codigo_snies` y `nombre_programa`). Observa los siguientes detalles:
 
 1. **Uso de `I()`**: envolver la variable como `I(pregrado_faedis_csv)` le indica a `read_csv()` que interprete el contenido del objeto como los datos mismos y no como el nombre de un archivo que deba buscar en disco.
 2. **Campos con comas internas**: el programa `"Administración de Riesgos, Seguridad y Salud en el Trabajo"` se encuentra entre comillas escapadas (`\"`) para que la coma no divida el texto en columnas adicionales.
-3. **Especificación de columnas**: al ejecutar la función, `readr` imprime un mensaje informativo (`Column specification`) indicando que `codigo_snies` fue inferido como número real (`<dbl>`) y `nombre_programa` como carácter (`<chr>`).
+3. **Especificación de columnas**: al ejecutar la función, `readr` imprime un mensaje informativo (`Column specification`) indicando que `nombre_programa` fue inferido como carácter (`<chr>`) y `codigo_snies` como número real (`<dbl>`).
 
 ### Parámetros comunes al importar datos {#sec-csv-arguments}
 
@@ -72,100 +76,99 @@ Los archivos de texto plano pueden contener metadatos, comentarios o estructuras
 
 1. **`skip`**: permite omitir un número determinado de líneas al inicio del archivo antes de comenzar la lectura de los datos. Resulta útil cuando el archivo incluye metadatos o encabezados explicativos:
 
-```{r}
-#| lst-label: lst-read-csv-skip
-#| lst-cap: Uso del parámetro `skip` para ignorar líneas iniciales de metadatos
+   ```{r}
+   #| lst-label: lst-read-csv-skip
+   #| lst-cap: Uso del parámetro `skip` para ignorar líneas iniciales de metadatos
 
-# Archivo con metadatos en las dos primeras líneas ----
-pregrado_skip_csv <- "Facultad de Estudios a Distancia - FAEDIS
-Programas de pregrado vigentes
-codigo_snies,nombre_programa
-6527,Administración de Empresas
-108241,\"Administración de Riesgos, Seguridad y Salud en el Trabajo\"
-11428,Contaduría Pública
-11004,Ingeniería Civil
-53703,Ingeniería Industrial
-105142,Ingeniería Informática
-10963,Relaciones Internacionales y Estudios Políticos"
+   # Archivo con metadatos en las dos primeras líneas ----
+   pregrado_skip_csv <- "Facultad de Estudios a Distancia - FAEDIS
+   Programas de pregrado vigentes
+   codigo_snies,nombre_programa
+   6527,Administración de Empresas
+   108241,\"Administración de Riesgos, Seguridad y Salud en el Trabajo\"
+   11428,Contaduría Pública
+   11004,Ingeniería Civil
+   53703,Ingeniería Industrial
+   105142,Ingeniería Informática
+   10963,Relaciones Internacionales y Estudios Políticos"
 
-# Omitir las dos primeras líneas ----
-read_csv(
-  file = I(pregrado_skip_csv),
-  skip = 2
-)
-```
+   # Omitir las dos primeras líneas ----
+   read_csv(
+     file = I(pregrado_skip_csv),
+     skip = 2
+   )
+   ```
 
 2. **`comment`**: permite especificar un carácter (comúnmente `#`) para que `read_csv()` ignore por completo todas las líneas que inicien con ese prefijo:
 
-```{r}
-#| lst-label: lst-read-csv-comment
-#| lst-cap: Uso del parámetro `comment` para omitir líneas comentadas
+   ```{r}
+   #| lst-label: lst-read-csv-comment
+   #| lst-cap: Uso del parámetro `comment` para omitir líneas comentadas
 
-# Archivo con comentarios intercalados ----
-pregrado_comment_csv <- "# Listado de programas FAEDIS
-codigo_snies,nombre_programa
-6527,Administración de Empresas
-# 6527 en proceso de renovación registro calificado
-108241,\"Administración de Riesgos, Seguridad y Salud en el Trabajo\"
-11428,Contaduría Pública
-11004,Ingeniería Civil
-53703,Ingeniería Industrial
-105142,Ingeniería Informática
-10963,Relaciones Internacionales y Estudios Políticos"
+   # Archivo con comentarios intercalados ----
+   pregrado_comment_csv <- "# Listado de programas FAEDIS
+   codigo_snies,nombre_programa
+   6527,Administración de Empresas
+   # 6527 en proceso de renovación registro calificado
+   108241,\"Administración de Riesgos, Seguridad y Salud en el Trabajo\"
+   11428,Contaduría Pública
+   11004,Ingeniería Civil
+   53703,Ingeniería Industrial
+   105142,Ingeniería Informática
+   10963,Relaciones Internacionales y Estudios Políticos"
 
-# Ignorar líneas que inician con # ----
-read_csv(
-  file = I(pregrado_comment_csv),
-  comment = "#"
-)
-```
+   # Ignorar líneas que inician con # ----
+   read_csv(
+     file = I(pregrado_comment_csv),
+     comment = "#"
+   )
+   ```
 
 3. **`col_names`**: controla los nombres de las columnas. Si el archivo no incluye una fila de encabezado, se especifica `col_names = FALSE` (lo que asigna nombres automáticos `X1`, `X2`, etc.) o se proporciona un vector de caracteres con los nombres deseados:
 
-```{r}
-#| lst-label: lst-read-csv-col-names
-#| lst-cap: Uso del parámetro `col_names` para archivos sin encabezados
+   ```{r}
+   #| lst-label: lst-read-csv-col-names
+   #| lst-cap: Uso del parámetro `col_names` para archivos sin encabezados
 
-# Archivo sin fila de encabezado ----
-pregrado_no_header_csv <- "codigo_snies,nombre_programa
-6527,Administración de Empresas
-108241,\"Administración de Riesgos, Seguridad y Salud en el Trabajo\"
-11428,Contaduría Pública
-11004,Ingeniería Civil
-53703,Ingeniería Industrial
-105142,Ingeniería Informática
-10963,Relaciones Internacionales y Estudios Políticos"
+   # Archivo sin fila de encabezado ----
+   pregrado_no_header_csv <- "6527,Administración de Empresas
+   108241,\"Administración de Riesgos, Seguridad y Salud en el Trabajo\"
+   11428,Contaduría Pública
+   11004,Ingeniería Civil
+   53703,Ingeniería Industrial
+   105142,Ingeniería Informática
+   10963,Relaciones Internacionales y Estudios Políticos"
 
-# Suministrar nombres explícitos de columnas ----
-read_csv(
-  file = I(pregrado_no_header_csv),
-  col_names = c("codigo_snies", "nombre_programa")
-)
-```
+   # Suministrar nombres explícitos de columnas ----
+   read_csv(
+     file = I(pregrado_no_header_csv),
+     col_names = c("codigo_snies", "nombre_programa")
+   )
+   ```
 
 4. **`na`**: define qué valores de texto deben interpretarse como datos faltantes (`NA`), por defecto `na = c("", "NA")`. Si un archivo representa los valores ausentes con expresiones como `"Sin dato"` o `"N/D"`, pueden indicarse explícitamente mediante `na = c("", "NA", "Sin dato", "N/D")`.
 
-```{r}
-#| lst-label: lst-read-csv-na
-#| lst-cap: Uso del parámetro `na` para archivos con datos faltantes y con expresiones personalizadas
+   ```{r}
+   #| lst-label: lst-read-csv-na
+   #| lst-cap: Uso del parámetro `na` para archivos con datos faltantes y con expresiones personalizadas
 
-# Archivo sin fila de encabezado ----
-pregrado_no_header_csv <- "codigo_snies,nombre_programa
-6527,
-108241,\"Administración de Riesgos, Seguridad y Salud en el Trabajo\"
-11428,Contaduría Pública
-11004,Ingeniería Civil
-NA,Ingeniería Industrial
-105142,N/D
-10963,Relaciones Internacionales y Estudios Políticos
-102005,Sin dato"
+   # Archivo sin fila de encabezado ----
+   pregrado_no_header_csv <- "codigo_snies,nombre_programa
+   6527,
+   108241,\"Administración de Riesgos, Seguridad y Salud en el Trabajo\"
+   11428,Contaduría Pública
+   11004,Ingeniería Civil
+   NA,Ingeniería Industrial
+   105142,N/D
+   10963,Relaciones Internacionales y Estudios Políticos
+   102005,Sin dato"
 
-# Suministrar nombres explícitos de columnas ----
-read_csv(
-  file = I(pregrado_no_header_csv),
-  na = c("", "NA", "Sin dato", "N/D")
-)
-```
+   # Suministrar nombres explícitos de columnas ----
+   read_csv(
+     file = I(pregrado_no_header_csv),
+     na = c("", "NA", "Sin dato", "N/D")
+   )
+   ```
 
 ## Otros formatos de archivos de texto plano {#sec-other-plain-text-formats}
 
@@ -173,68 +176,72 @@ Además de los archivos `.csv`, el paquete `readr` proporciona funciones dedicad
 
 - **Valores separados por tabulaciones (`read_tsv()`)**: se utiliza cuando el delimitador entre columnas es una tabulación (`\t`):
 
-```{r}
-#| lst-label: lst-read-tsv
-#| lst-cap: Importación de datos separados por tabulaciones con `read_tsv()`
+  ```{r}
+  #| lst-label: lst-read-tsv
+  #| lst-cap: Importación de datos separados por tabulaciones con `read_tsv()`
 
-pregrado_faedis_tsv <- "codigo_snies\tnombre_programa
-6527\tAdministración de Empresas
-108241\t\"Administración de Riesgos, Seguridad y Salud en el Trabajo\"
-11428\tContaduría Pública
-11004\tIngeniería Civil
-53703\tIngeniería Industrial
-105142\tIngeniería Informática
-10963\tRelaciones Internacionales y Estudios Políticos"
+  pregrado_faedis_tsv <- "codigo_snies\tnombre_programa
+  6527\tAdministración de Empresas
+  108241\t\"Administración de Riesgos, Seguridad y Salud en el Trabajo\"
+  11428\tContaduría Pública
+  11004\tIngeniería Civil
+  53703\tIngeniería Industrial
+  105142\tIngeniería Informática
+  10963\tRelaciones Internacionales y Estudios Políticos"
 
-read_tsv(
-  file = I(pregrado_faedis_tsv)
-)
-```
+  read_tsv(
+    file = I(pregrado_faedis_tsv)
+  )
+  ```
 
-- **Archivos delimitados por punto y coma (`read_csv2()`)**: en países hispanohablantes y europeos donde la coma (`,`) se utiliza como separador decimal, los archivos CSV suelen utilizar el punto y coma (`;`) como separador de columnas. La función `read_csv2()` gestiona automáticamente esta convención:
+- **Archivos delimitados por punto y coma (`read_csv2()`)**: en países hispanohablantes y europeos donde la coma (`,`) se utiliza como separador decimal, los archivos `csv` suelen utilizar el punto y coma (`;`) como separador de columnas. La función `read_csv2()` gestiona automáticamente esta convención:
 
-```{r}
-#| lst-label: lst-read-csv2
-#| lst-cap: Importación de datos delimitados por punto y coma con `read_csv2()`
+  ```{r}
+  #| lst-label: lst-read-csv2
+  #| lst-cap: Importación de datos delimitados por punto y coma con `read_csv2()`
 
-pregrado_faedis_csv2 <- "codigo_snies;nombre_programa
-6527;Administración de Empresas
-108241;\"Administración de Riesgos, Seguridad y Salud en el Trabajo\"
-11428;Contaduría Pública
-11004;Ingeniería Civil
-53703;Ingeniería Industrial
-105142;Ingeniería Informática
-10963;Relaciones Internacionales y Estudios Políticos"
+  pregrado_faedis_csv2 <- "codigo_snies;nombre_programa
+  6527;Administración de Empresas
+  108241;\"Administración de Riesgos, Seguridad y Salud en el Trabajo\"
+  11428;Contaduría Pública
+  11004;Ingeniería Civil
+  53703;Ingeniería Industrial
+  105142;Ingeniería Informática
+  10963;Relaciones Internacionales y Estudios Políticos"
 
-read_csv2(
-  file = I(pregrado_faedis_csv2)
-)
-```
+  read_csv2(
+    file = I(pregrado_faedis_csv2)
+  )
+  ```
 
-- **Delimitadores personalizados (`read_delim()`)**: permite leer archivos con cualquier delimitador arbitrario mediante el parámetro `delim` (por ejemplo, barra vertical `|`, dos puntos `:`, o guiones):
+- **Delimitadores personalizados (`read_delim()`)**: permite leer archivos con cualquier delimitador arbitrario mediante el parámetro `delim` (p. ej., barra vertical (`|`), dos puntos (`:`), o guiones (`-`)):
 
-```{r}
-#| lst-label: lst-read-delim
-#| lst-cap: Importación con delimitadores personalizados utilizando `read_delim()`
+  ```{r}
+  #| lst-label: lst-read-delim
+  #| lst-cap: Importación con delimitadores personalizados utilizando `read_delim()`
 
-pregrado_faedis_delim <- "codigo_snies|nombre_programa
-6527|Administración de Empresas
-108241|\"Administración de Riesgos, Seguridad y Salud en el Trabajo\"
-11428|Contaduría Pública
-11004|Ingeniería Civil
-53703|Ingeniería Industrial
-105142|Ingeniería Informática
-10963|Relaciones Internacionales y Estudios Políticos"
+  pregrado_faedis_delim <- "codigo_snies|nombre_programa
+  6527|Administración de Empresas
+  108241|\"Administración de Riesgos, Seguridad y Salud en el Trabajo\"
+  11428|Contaduría Pública
+  11004|Ingeniería Civil
+  53703|Ingeniería Industrial
+  105142|Ingeniería Informática
+  10963|Relaciones Internacionales y Estudios Políticos"
 
-read_delim(
-  file = I(pregrado_faedis_delim),
-  delim = "|"
-)
-```
+  read_delim(
+    file = I(pregrado_faedis_delim),
+    delim = "|"
+  )
+  ```
 
 ## Control de tipos de columnas y resolución de problemas {#sec-control-col-types-problems}
 
-Al importar un archivo de texto plano, `readr` lee de forma predeterminada las primeras 1000 filas para inferir el tipo de dato más apropiado para cada columna (`col_guess()`). Para consultar la especificación que `readr` ha determinado, se utiliza la función `spec()`:
+Al importar un archivo de texto plano sin especificar explícitamente los tipos de columna con `col_types`, `readr` intenta inferirlos mediante una [heurística]({{< var url.education.heuristic_wiki >}}), tal como se señala a continuación:
+
+> De forma predeterminada, inspecciona $1000$ valores, distribuidos uniformemente desde la primera hasta la última fila. Esta es una heurística diseñada para ser siempre rápida sin importar qué tan grande sea el archivo y funciona bien en la mayoría de los casos de acuerdo a los autores de `readr`.
+
+Para consultar la especificación que `readr` ha determinado se utiliza la función `spec()`, tal como se señala a continuación utilizando `pregrado_faedis_tbl` correspondiente al @lst-read-csv-toy-example:
 
 ```{r}
 #| lst-label: lst-spec
@@ -245,7 +252,7 @@ spec(pregrado_faedis_tbl)
 
 ### Especificación explícita de tipos con `col_types` {#sec-col-types}
 
-Cuando las primeras 1000 filas no son representativas o cuando se desea asegurar un esquema de datos reproducible y robusto, es recomendable definir explícitamente los tipos de cada columna mediante el parámetro `col_types` y la función `cols()`:
+Cuando los valores inspeccionados por dicha heurística no son representativos o cuando se desea asegurar un esquema de datos reproducible y robusto, es recomendable definir explícitamente los tipos de cada columna mediante el parámetro `col_types` y la función `cols()`:
 
 - `col_integer()`: enteros (`<int>`).
 - `col_double()`: números reales (`<dbl>`).
@@ -299,6 +306,12 @@ pregrado_faedis_invalido <- read_csv(
 problems(pregrado_faedis_invalido)
 ```
 
+::: {#wrn-1-chap-13 .callout-warning}
+En el @lst-problems, la columna `row` reportada por `problems()` indica el valor `2`. Es importante señalar que este número corresponde a la línea del archivo u objeto de origen y no a la fila de la tibble en R. La línea `1` contiene los encabezados y la línea `2` el registro problemático, que en la tibble pasa a ser la fila `1`.
+
+Esta distinción es esencial al depurar datos ya que si examinas la fila `2` de la tibble, encontrarás un registro válido. La columna `row` de `problems()` está diseñada específicamente para ubicar y corregir la anomalía directamente en la fuente original.
+:::
+
 ## Exportación de archivos de texto plano {#sec-export-plain-text}
 
 Para guardar tibbles en archivos de texto plano rectangulares, el paquete `readr` provee las funciones `write_csv()`, `write_tsv()`, `write_csv2()` y `write_delim()`.
@@ -306,7 +319,7 @@ Para guardar tibbles en archivos de texto plano rectangulares, el paquete `readr
 Los parámetros más relevantes al exportar datos son:
 
 - **`x`**: el objeto de R (usualmente una tibble o un objeto similar) que se desea guardar.
-- **`file`**: la ruta y nombre del archivo de destino.
+- **`file`**: la ruta y nombre del archivo de destino con su correspondiente extensión.
 - **`na`**: la cadena de texto utilizada para escribir los valores faltantes (por defecto `"NA"`).
 - **`col_names`**: valor lógico que indica si se escriben los encabezados de columna en la primera línea (por defecto `TRUE`).
 
@@ -325,3 +338,105 @@ write_csv(
 ```
 
 En comparación con el formato `.rds` (ver @sec-rds), los archivos de texto plano (p. ej., `.csv`, `.tsv`) ofrecen la ventaja de ser universales e interoperables con cualquier herramienta de análisis, lenguaje de programación y gestores de bases de datos. No obstante, dado que no almacenan los metadatos propios de R, al volver a importarlos será necesario especificar nuevamente sus tipos de columna.
+
+## Caso de estudio: importación de datos del Saber-Pro para el año 2021 en Colombia {#sec-case-study-plain-text}
+
+El propósito de esta sección es aplicar los conceptos desarrollados a lo largo del @sec-plain-text para importar y depurar los datos en el archivo `2021-saber_pro-genericas.txt.xz` (ver @nte-1-chap-13).
+
+Tal como se indicó en la @nte-2-chap-10, el sufijo `.xz` en el nombre del archivo `2021-saber_pro-genericas.txt.xz` señala que se trata de un archivo comprimido mediante un algoritmo de alta eficiencia para reducir drásticamente su tamaño en el disco y facilitar su descarga. Al igual que con `read_csv()`, las funciones de importación de `readr` detectan automáticamente esta extensión y realizan la descompresión en memoria de manera transparente, sin necesidad de descomprimir previamente el archivo de forma manual.
+
+Asimismo, es fundamental señalar que en el portal [DataIcfes]({{< var url.institution.icfes_data >}}) los microdatos originales suelen publicarse con la extensión de texto plano `.txt`, utilizando como delimitador de columnas el punto y coma (`;`). Por esta razón, la función apropiada del paquete `readr` para leer este archivo es `read_csv2()`, diseñada específicamente para satisfacer estas convenciones regionales.
+
+### Importación inicial e inspección de tipos
+
+Para comenzar, procederás a importar el archivo `2021-saber_pro-genericas.txt.xz` utilizando la función `read_csv2()` sin suministrar tipos de columna explícitos. De esta manera, `readr` aplica su heurística predeterminada para inferir el tipo de cada variable. Posteriormente, se utiliza la función `spec()` para examinar la especificación resultante, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-case-study-read-csv2
+#| lst-cap: Importación inicial con `read_csv2()` y consulta de especificación de tipos con `spec()`
+
+# Importar datos ----
+saber_pro_genericas_2021 <- read_csv2(
+  file = "data/2021-saber_pro-genericas.txt.xz"
+)
+
+# Consultar especificación de columnas ----
+spec(saber_pro_genericas_2021)
+```
+
+Al inspeccionar el resultado de `spec(saber_pro_genericas_2021)`, puedes observar que entre las columnas identificadas, la variable `estu_fechanacimiento` fue interpretada como una columna de texto (`col_character()`):
+
+```r
+  estu_fechanacimiento = col_character(),
+```
+
+### Naturaleza de la variable y formato de fecha
+
+De acuerdo con la documentación oficial de [DataIcfes]({{< var url.institution.icfes_data >}}), la variable `estu_fechanacimiento` corresponde a la fecha de nacimiento de cada individuo que presenta el Saber-Pro. En la @nte-3-chap-10 del @sec-single-table-verbs se indicó que es posible descargar el diccionario de datos oficial publicado en el portal [DataIcfes]({{< var url.institution.icfes_data >}}). En dicho documento y al examinar los primeros registros del archivo (p. ej., `"05/10/1992"`, `"02/05/1994"`, `"09/11/1996"`) puedes identificar que las fechas se encuentran registradas en el formato **día/mes/año** (`DD/MM/AAAA`).
+
+Mantener una fecha como cadena de texto (`<chr>`) dificulta realizar operaciones cronológicas como calcular la edad de los individuos, filtrar por año de nacimiento o agrupar temporalmente los registros. Por ello, lo ideal es transformarla en un tipo fecha (`<date>`) directamente durante la lectura.
+
+### Intento inicial con `col_date()` y diagnóstico con `problems()`
+
+Una primera alternativa consiste en definir explícitamente el tipo de la columna `estu_fechanacimiento` empleando `col_types = cols()` junto con la función `col_date()` con sus opciones predeterminadas, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-case-study-col-date-naive
+#| lst-cap: Intento de conversión a fecha con `col_date()` predeterminado y diagnóstico con `problems()`
+
+# Importar especificando col_date() ----
+saber_pro_genericas_2021 <- read_csv2(
+  file = "data/2021-saber_pro-genericas.txt.xz",
+  col_types = cols(
+    estu_fechanacimiento = col_date()
+  )
+)
+
+# Diagnosticar problemas ----
+problems(saber_pro_genericas_2021)
+```
+
+Al ejecutar el @lst-case-study-col-date-naive, `readr` emite una advertencia señalando problemas de lectura (`One or more parsing issues, ...`). Al evaluar `problems(saber_pro_genericas_2021)`, la tibble de diagnósticos revela que en la columna 26 (`estu_fechanacimiento`) `readr` esperaba fechas bajo el estándar internacional ISO 8601 (`"date in ISO8601"`, es decir, en formato `AAAA-MM-DD` o `YYYY-MM-DD`), pero encontró caracteres como `"05/10/1992"`, `"02/05/1994"` o `"109/11/1996"`. 
+
+Dado que el formato predeterminado de `col_date()` no coincide con la convención **día/mes/año** empleada en el archivo, `readr` no logra interpretar los valores y los sustituye por valores ausentes (`NA`), identificando anomalías para la totalidad de registros con fecha de nacimiento.
+
+### Solución con el parámetro `format` en `col_date()`
+
+Para resolver este problema sin alterar la fuente original, `col_date()` incluye el parámetro `format`, el cual permite definir el patrón de fecha exacto que debe reconocer `readr`. Dado que las fechas se encuentran en formato `DD/MM/AAAA`, la especificación correspondiente es `"%d/%m/%Y"`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-case-study-col-date-format
+#| lst-cap: Importación exitosa especificando el formato de fecha con `col_date()` y el parámetro `format`
+
+# Importar especificando formato de fecha ----
+saber_pro_genericas_2021 <- read_csv2(
+  file = "data/2021-saber_pro-genericas.txt.xz",
+  col_types = cols(
+    estu_fechanacimiento = col_date(format = "%d/%m/%Y")
+  )
+)
+
+# Diagnosticar problemas ----
+problems(saber_pro_genericas_2021)
+```
+
+Al consultar nuevamente `problems(saber_pro_genericas_2021)`, se obtiene una tibble vacía con cero filas, lo que confirma que todos los registros de fecha de nacimiento fueron procesados y convertidos correctamente al tipo `<date>`.
+
+### Especificaciones de formato para fechas en `readr`
+
+El parámetro `format` de `col_date()` utiliza códigos de conversión estándar que se pueden consultar en la documentación con `?readr::col_date`, para indicar la estructura de los componentes temporales de año, mes y día así como sus separadores, tal como se señala a continuación:
+
+- **Día**:
+  - `%d`: día del mes expresado como un número decimal de 2 dígitos (`01` a `31`).
+  - `%e`: día del mes en el que los valores del `1` al `9` pueden incluir un espacio inicial opcional en lugar de un cero.
+- **Mes**:
+  - `%m`: mes expresado como un número decimal de 2 dígitos (`01` a `12`).
+  - `%b`: nombre abreviado del mes (p. ej., `"ene"`, `"feb"`, según la configuración local).
+  - `%B`: nombre completo del mes (p. ej., `"enero"`, `"febrero"`).
+- **Año**:
+  - `%Y`: año completo con cuatro dígitos (p. ej., `2021`, `2022`).
+  - `%y`: año con 2 dígitos (`00` a `99`, donde habitualmente `00` a `69` corresponden a **2000–2069** y `70` a `99` a **1970–1999**).
+- **Separadores literales**:
+  - Los signos de puntuación como la barra inclinada (`/`), el guión (`-`) o el punto (`.`) representan literalmente los caracteres separadores entre día, mes y año.
+
+En la especificación `format = "%d/%m/%Y"`, `%d` indica que los primeros dígitos representan el día del mes, las barras diagonales `/` reconocen el separador literal, `%m` lee el mes de dos dígitos y `%Y` captura el año de cuatro dígitos. Con esta configuración, R almacena la columna `estu_fechanacimiento` como un vector de clase `Date`, garantizando una coherencia y facilitando análisis posteriores sin que exista pérdida de información.
