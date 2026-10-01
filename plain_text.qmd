@@ -16,13 +16,13 @@ Este capítulo se basa en [@wickham_r_2023, Cap. 7] así como en la documentaci�
 
 Exploraremos los siguientes aspectos:
 
-1. ¿Qué es un archivo `.csv`, por qué se usa `I()` para leer cadenas en memoria y cómo utilizar argumentos clave como `skip`, `comment`, `col_names` y `na` con `read_csv()`?
-2. ¿Cómo importar otros formatos de archivos de texto plano rectangulares (`.tsv`, archivos delimitados por punto y coma, delimitadores personalizados y archivos de ancho fijo)?
+1. ¿Qué es un archivo `.csv`, por qué se usa `I()` para leer cadenas en memoria y cómo utilizar argumentos como `skip`, `comment`, `col_names` y `na` con `read_csv()`?
+2. ¿Cómo importar otros formatos de archivos de texto plano rectangulares (`.tsv`, archivos delimitados por punto y coma (`;`) o delimitadores personalizados)?
 3. ¿Cómo controlar los tipos de datos en las columnas mediante `col_types` y diagnosticar problemas de importación con `problems()`?
 4. ¿Cómo exportar tablas de datos a archivos de texto plano desde R?
 
 :::: {#nte-1-chap-13 .callout-note}
-Para desarrollar el contenido de este capítulo, procede a crear una nueva carpeta llamada `013_importar-datos-texto-plano-en-r` y dentro de ella genera el archivo `001_importar-datos-formato-texto-plano.R`, siguiendo las pautas de la @sec-package-usage.
+En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `013_importar-datos-texto-plano-en-r` y dentro de ella genera el archivo `001_importar-datos-formato-texto-plano.R`, siguiendo las pautas de la @sec-package-usage.
 ::::
 
 ## Archivos de valores separados por comas (`.csv`) {#sec-csv-files}
@@ -31,9 +31,9 @@ Un archivo con formato `.csv` (en inglés [comma-separated values]({{< var url.e
 
 Cuando uno de los campos de texto contiene una coma dentro de su propio contenido, dicho campo se delimita entre comillas dobles (`"`) para evitar que la coma interna sea interpretada erróneamente como un separador de columnas.
 
-Para importar archivos `.csv` a R se utiliza la función `read_csv()` del paquete `readr`. El primer parámetro de esta función es `file`, el cual usualmente recibe una ruta hacia un archivo almacenado en disco (por ejemplo, `"data/programas.csv"`). No obstante, para realizar pruebas o construir ejemplos ilustrativos, también es posible suministrar datos directamente desde una cadena de texto en memoria. 
+Para importar archivos `.csv` a R se utiliza la función `read_csv()` del paquete `readr`. El primer parámetro de esta función es `file`, el cual usualmente recibe una ruta hacia un archivo almacenado en disco (por ejemplo, `"data/2021-2024_saber-pro-genericas_faedis_ajustado.csv"`). No obstante, para realizar pruebas o construir ejemplos ilustrativos, también es posible suministrar datos directamente desde una cadena de texto en memoria. 
 
-Para que `readr` distinga explícitamente que la cadena contiene datos literales en lugar de una ruta a un archivo en disco, se utiliza la función `I()` (*As-Is*) de R base al asociar el argumento con `file`, tal como se ilustra a continuación:
+Para que `readr` distinga explícitamente que la cadena contiene datos literales en lugar de una ruta a un archivo en disco, se utiliza la función `I()` (**as is**) de R al asociar el argumento con `file`, tal como se ilustra a continuación:
 
 ```{r}
 #| lst-label: lst-read-csv-toy-example
@@ -56,17 +56,19 @@ pregrado_faedis_csv <- "codigo_snies,nombre_programa
 pregrado_faedis_tbl <- read_csv(
   file = I(pregrado_faedis_csv)
 )
+
+pregrado_faedis_tbl
 ```
 
 En el @lst-read-csv-toy-example, la cadena `pregrado_faedis_csv` define dos columnas (`codigo_snies` y `nombre_programa`). Observa los siguientes detalles:
 
-1. **Uso de `I()`**: envolver la variable como `I(pregrado_faedis_csv)` le indica a `read_csv()` que interprete el contenido del objeto como los datos mismos (*literal data*) y no como el nombre de un archivo que deba buscar en disco.
+1. **Uso de `I()`**: envolver la variable como `I(pregrado_faedis_csv)` le indica a `read_csv()` que interprete el contenido del objeto como los datos mismos y no como el nombre de un archivo que deba buscar en disco.
 2. **Campos con comas internas**: el programa `"Administración de Riesgos, Seguridad y Salud en el Trabajo"` se encuentra entre comillas escapadas (`\"`) para que la coma no divida el texto en columnas adicionales.
 3. **Especificación de columnas**: al ejecutar la función, `readr` imprime un mensaje informativo (`Column specification`) indicando que `codigo_snies` fue inferido como número real (`<dbl>`) y `nombre_programa` como carácter (`<chr>`).
 
 ### Parámetros comunes al importar datos {#sec-csv-arguments}
 
-Los archivos de texto plano en escenarios reales suelen contener metadatos, comentarios o estructuras no convencionales. La función `read_csv()` proporciona diversos parámetros para controlar el proceso de importación:
+Los archivos de texto plano pueden contener metadatos, comentarios o estructuras no convencionales. La función `read_csv()` proporciona diversos parámetros para controlar el proceso de importación:
 
 1. **`skip`**: permite omitir un número determinado de líneas al inicio del archivo antes de comenzar la lectura de los datos. Resulta útil cuando el archivo incluye metadatos o encabezados explicativos:
 
@@ -79,7 +81,12 @@ pregrado_skip_csv <- "Facultad de Estudios a Distancia - FAEDIS
 Programas de pregrado vigentes
 codigo_snies,nombre_programa
 6527,Administración de Empresas
-11428,Contaduría Pública"
+108241,\"Administración de Riesgos, Seguridad y Salud en el Trabajo\"
+11428,Contaduría Pública
+11004,Ingeniería Civil
+53703,Ingeniería Industrial
+105142,Ingeniería Informática
+10963,Relaciones Internacionales y Estudios Políticos"
 
 # Omitir las dos primeras líneas ----
 read_csv(
@@ -98,8 +105,13 @@ read_csv(
 pregrado_comment_csv <- "# Listado de programas FAEDIS
 codigo_snies,nombre_programa
 6527,Administración de Empresas
-# 108241 en proceso de renovación curricular
-11428,Contaduría Pública"
+# 6527 en proceso de renovación registro calificado
+108241,\"Administración de Riesgos, Seguridad y Salud en el Trabajo\"
+11428,Contaduría Pública
+11004,Ingeniería Civil
+53703,Ingeniería Industrial
+105142,Ingeniería Informática
+10963,Relaciones Internacionales y Estudios Políticos"
 
 # Ignorar líneas que inician con # ----
 read_csv(
@@ -115,17 +127,45 @@ read_csv(
 #| lst-cap: Uso del parámetro `col_names` para archivos sin encabezados
 
 # Archivo sin fila de encabezado ----
-pregrado_no_header_csv <- "6527,Administración de Empresas
-11428,Contaduría Pública"
+pregrado_no_header_csv <- "codigo_snies,nombre_programa
+6527,Administración de Empresas
+108241,\"Administración de Riesgos, Seguridad y Salud en el Trabajo\"
+11428,Contaduría Pública
+11004,Ingeniería Civil
+53703,Ingeniería Industrial
+105142,Ingeniería Informática
+10963,Relaciones Internacionales y Estudios Políticos"
 
 # Suministrar nombres explícitos de columnas ----
 read_csv(
   file = I(pregrado_no_header_csv),
-  col_names = c("snies", "programa")
+  col_names = c("codigo_snies", "nombre_programa")
 )
 ```
 
 4. **`na`**: define qué valores de texto deben interpretarse como datos faltantes (`NA`), por defecto `na = c("", "NA")`. Si un archivo representa los valores ausentes con expresiones como `"Sin dato"` o `"N/D"`, pueden indicarse explícitamente mediante `na = c("", "NA", "Sin dato", "N/D")`.
+
+```{r}
+#| lst-label: lst-read-csv-na
+#| lst-cap: Uso del parámetro `na` para archivos con datos faltantes y con expresiones personalizadas
+
+# Archivo sin fila de encabezado ----
+pregrado_no_header_csv <- "codigo_snies,nombre_programa
+6527,
+108241,\"Administración de Riesgos, Seguridad y Salud en el Trabajo\"
+11428,Contaduría Pública
+11004,Ingeniería Civil
+NA,Ingeniería Industrial
+105142,N/D
+10963,Relaciones Internacionales y Estudios Políticos
+102005,Sin dato"
+
+# Suministrar nombres explícitos de columnas ----
+read_csv(
+  file = I(pregrado_no_header_csv),
+  na = c("", "NA", "Sin dato", "N/D")
+)
+```
 
 ## Otros formatos de archivos de texto plano {#sec-other-plain-text-formats}
 
@@ -137,12 +177,17 @@ Además de los archivos `.csv`, el paquete `readr` proporciona funciones dedicad
 #| lst-label: lst-read-tsv
 #| lst-cap: Importación de datos separados por tabulaciones con `read_tsv()`
 
-pregrado_tsv <- "codigo_snies\tnombre_programa
+pregrado_faedis_tsv <- "codigo_snies\tnombre_programa
 6527\tAdministración de Empresas
-11428\tContaduría Pública"
+108241\t\"Administración de Riesgos, Seguridad y Salud en el Trabajo\"
+11428\tContaduría Pública
+11004\tIngeniería Civil
+53703\tIngeniería Industrial
+105142\tIngeniería Informática
+10963\tRelaciones Internacionales y Estudios Políticos"
 
 read_tsv(
-  file = I(pregrado_tsv)
+  file = I(pregrado_faedis_tsv)
 )
 ```
 
@@ -152,12 +197,17 @@ read_tsv(
 #| lst-label: lst-read-csv2
 #| lst-cap: Importación de datos delimitados por punto y coma con `read_csv2()`
 
-pregrado_csv2 <- "codigo_snies;nombre_programa;duracion_semestres
-6527;Administración de Empresas;9,5
-11428;Contaduría Pública;10,0"
+pregrado_faedis_csv2 <- "codigo_snies;nombre_programa
+6527;Administración de Empresas
+108241;\"Administración de Riesgos, Seguridad y Salud en el Trabajo\"
+11428;Contaduría Pública
+11004;Ingeniería Civil
+53703;Ingeniería Industrial
+105142;Ingeniería Informática
+10963;Relaciones Internacionales y Estudios Políticos"
 
 read_csv2(
-  file = I(pregrado_csv2)
+  file = I(pregrado_faedis_csv2)
 )
 ```
 
@@ -167,19 +217,20 @@ read_csv2(
 #| lst-label: lst-read-delim
 #| lst-cap: Importación con delimitadores personalizados utilizando `read_delim()`
 
-pregrado_pipe <- "codigo_snies|nombre_programa
+pregrado_faedis_delim <- "codigo_snies|nombre_programa
 6527|Administración de Empresas
-11428|Contaduría Pública"
+108241|\"Administración de Riesgos, Seguridad y Salud en el Trabajo\"
+11428|Contaduría Pública
+11004|Ingeniería Civil
+53703|Ingeniería Industrial
+105142|Ingeniería Informática
+10963|Relaciones Internacionales y Estudios Políticos"
 
 read_delim(
-  file = I(pregrado_pipe),
+  file = I(pregrado_faedis_delim),
   delim = "|"
 )
 ```
-
-- **Archivos de ancho fijo (`read_fwf()`) y tablas alineadas (`read_table()`)**: en archivos donde las columnas no utilizan delimitadores sino que ocupan posiciones y longitudes fijas de caracteres, se utiliza `read_fwf()` junto con asistentes como `fwf_widths()` o `fwf_positions()`. Si los campos están separados por uno o más espacios en blanco, `read_table()` permite realizar la importación directamente.
-
-- **Lectura de texto plano no estructurado (`read_lines()`)**: cuando se requiere leer un archivo línea por línea como un vector de caracteres simple sin imponer una estructura tabular, se utiliza la función `read_lines()`.
 
 ## Control de tipos de columnas y resolución de problemas {#sec-control-col-types-problems}
 
@@ -201,8 +252,8 @@ Cuando las primeras 1000 filas no son representativas o cuando se desea asegurar
 - `col_character()`: texto (`<chr>`).
 - `col_logical()`: booleanos (`<lgl>`).
 - `col_factor()`: variables categóricas o factores (`<fct>`).
-- `col_date()` / `col_datetime()` / `col_time()`: fechas y horas.
-- `col_skip()` (o `_` / `-`): omite la columna durante la importación.
+- `col_date()`, `col_datetime()` o `col_time()`: fechas y horas.
+- `col_skip()`: omite la columna durante la importación.
 
 ```{r}
 #| lst-label: lst-col-types-explicit
@@ -217,18 +268,6 @@ read_csv(
 )
 ```
 
-Asimismo, `readr` permite una sintaxis compacta de cadena de texto (*shorthand*), donde cada letra representa el tipo de una columna en orden posicional (por ejemplo, `"ic"` indica un entero seguido de una cadena de caracteres):
-
-```{r}
-#| lst-label: lst-col-types-shorthand
-#| lst-cap: Especificación de tipos mediante sintaxis compacta (*shorthand*)
-
-read_csv(
-  file = I(pregrado_faedis_csv),
-  col_types = "ic"
-)
-```
-
 ### Diagnóstico de errores con `problems()` {#sec-problems}
 
 Si el archivo contiene registros con formatos inesperados (por ejemplo, texto en una columna que fue declarada o inferida como numérica), `readr` reemplaza el valor conflictivo con `NA` y emite un mensaje de advertencia. La función `problems()` permite inspeccionar exactamente en qué fila, columna y valor ocurrió la anomalía:
@@ -239,11 +278,16 @@ Si el archivo contiene registros con formatos inesperados (por ejemplo, texto en
 
 # Datos con un valor de texto en la columna numérica ----
 pregrado_invalido_csv <- "codigo_snies,nombre_programa
-6527,Administración de Empresas
-Sin código,Contaduría Pública"
+Sin código,Administración de Empresas
+108241,\"Administración de Riesgos, Seguridad y Salud en el Trabajo\"
+11428,Contaduría Pública
+11004,Ingeniería Civil
+53703,Ingeniería Industrial
+105142,Ingeniería Informática
+10963,Relaciones Internacionales y Estudios Políticos"
 
 # Importar forzando la columna a entero ----
-pregrado_invalido_tbl <- read_csv(
+pregrado_faedis_invalido <- read_csv(
   file = I(pregrado_invalido_csv),
   col_types = cols(
     codigo_snies = col_integer(),
@@ -252,23 +296,19 @@ pregrado_invalido_tbl <- read_csv(
 )
 
 # Diagnosticar filas con problemas de conversión ----
-problems(pregrado_invalido_tbl)
+problems(pregrado_faedis_invalido)
 ```
-
-Para resolver discrepancias relacionadas con formatos de fecha, separadores decimales o codificación de caracteres (por ejemplo, `UTF-8` frente a `latin1`), se puede emplear el parámetro `locale = locale(...)`, definiendo explícitamente aspectos como `decimal_mark = ","` o formatos de fecha con `col_date(format = "%d/%m/%Y")`.
 
 ## Exportación de archivos de texto plano {#sec-export-plain-text}
 
-Para guardar tibbles o marcos de datos de R en archivos de texto plano rectangulares, el paquete `readr` provee las funciones `write_csv()`, `write_tsv()` y `write_delim()`.
+Para guardar tibbles en archivos de texto plano rectangulares, el paquete `readr` provee las funciones `write_csv()`, `write_tsv()`, `write_csv2()` y `write_delim()`.
 
 Los parámetros más relevantes al exportar datos son:
 
-- **`x`**: el objeto de R (tibble o data frame) que se desea guardar.
+- **`x`**: el objeto de R (usualmente una tibble o un objeto similar) que se desea guardar.
 - **`file`**: la ruta y nombre del archivo de destino.
 - **`na`**: la cadena de texto utilizada para escribir los valores faltantes (por defecto `"NA"`).
 - **`col_names`**: valor lógico que indica si se escriben los encabezados de columna en la primera línea (por defecto `TRUE`).
-- **`quote`**: especifica la regla para entrecomillar campos de texto (`"needed"`, `"all"` o `"none"`).
-- **`append`**: valor lógico que indica si las filas deben agregarse al final de un archivo existente (`FALSE` por defecto).
 
 ```{r}
 #| lst-label: lst-write-csv
@@ -277,9 +317,11 @@ Los parámetros más relevantes al exportar datos son:
 
 # Exportar datos a un archivo .csv ----
 write_csv(
-  x = pregrado_faedis_tbl,
-  file = "data/programas_pregrado_faedis.csv"
+  x = pregrado_faedis_invalido,
+  file = "data/pregrado_faedis_invalido.csv",
+  na = "NA",
+  colnames = TRUE
 )
 ```
 
-En comparación con el formato binario `.rds` (visto en el @sec-rds), los archivos de texto plano (`.csv`, `.tsv`) ofrecen la ventaja de ser universales e interoperables con cualquier herramienta de análisis, lenguaje de programación (como Python o Julia) y gestores de bases de datos. No obstante, dado que no almacenan los metadatos propios de R (como el orden de los factores o las clases personalizadas), al volver a importarlos será necesario especificar nuevamente sus tipos de columna.
+En comparación con el formato `.rds` (ver @sec-rds), los archivos de texto plano (p. ej., `.csv`, `.tsv`) ofrecen la ventaja de ser universales e interoperables con cualquier herramienta de análisis, lenguaje de programación y gestores de bases de datos. No obstante, dado que no almacenan los metadatos propios de R, al volver a importarlos será necesario especificar nuevamente sus tipos de columna.
