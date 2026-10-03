@@ -214,7 +214,7 @@ Además de los archivos `.csv`, el paquete `readr` proporciona funciones dedicad
   )
   ```
 
-- **Delimitadores personalizados (`read_delim()`)**: permite leer archivos con cualquier delimitador arbitrario mediante el parámetro `delim` (p. ej., barra vertical (`|`), dos puntos (`:`), o guiones (`-`)):
+- **Delimitadores personalizados (`read_delim()`)**: permite leer archivos con cualquier delimitador arbitrario mediante el parámetro `delim` (p. ej., barra vertical (`|`), 2 puntos (`:`), o guiones (`-`)):
 
   ```{r}
   #| lst-label: lst-read-delim
@@ -239,7 +239,9 @@ Además de los archivos `.csv`, el paquete `readr` proporciona funciones dedicad
 
 Al importar un archivo de texto plano sin especificar explícitamente los tipos de columna con `col_types`, `readr` intenta inferirlos mediante una [heurística]({{< var url.education.heuristic_wiki >}}), tal como se señala a continuación:
 
-> De forma predeterminada, inspecciona $1000$ valores, distribuidos uniformemente desde la primera hasta la última fila. Esta es una heurística diseñada para ser siempre rápida sin importar qué tan grande sea el archivo y funciona bien en la mayoría de los casos de acuerdo a los autores de `readr`.
+> De forma predeterminada, inspecciona $1000$ valores, distribuidos uniformemente desde la primera hasta la última fila. 
+
+Esta es una heurística diseñada para ser siempre rápida sin importar qué tan grande sea el archivo y funciona bien en la mayoría de los casos de acuerdo a los autores de `readr`.
 
 Para consultar la especificación que `readr` ha determinado se utiliza la función `spec()`, tal como se señala a continuación utilizando `pregrado_faedis_tbl` correspondiente al @lst-read-csv-toy-example:
 
@@ -277,11 +279,13 @@ read_csv(
 
 ### Diagnóstico de errores con `problems()` {#sec-problems}
 
-Si el archivo contiene registros con formatos inesperados (por ejemplo, texto en una columna que fue declarada o inferida como numérica), `readr` reemplaza el valor conflictivo con `NA` y emite un mensaje de advertencia. La función `problems()` permite inspeccionar exactamente en qué fila, columna y valor ocurrió la anomalía:
+Si el archivo contiene registros con formatos inesperados (por ejemplo, texto en una columna que fue declarada o inferida como numérica), `readr` no detiene la ejecución, sino que reemplaza el valor conflictivo con `NA` y emite un mensaje de advertencia (en inglés **warning**). 
+
+Por ejemplo, en la siguiente estructura de datos, la segunda fila del archivo contiene el texto `"Sin código"` en la columna `codigo_snies`, la cual se intenta forzar como un entero (`col_integer()`), tal como se señala a continuación:
 
 ```{r}
-#| lst-label: lst-problems
-#| lst-cap: Detección y diagnóstico de problemas de lectura con `problems()`
+#| lst-label: lst-read-csv-warning
+#| lst-cap: Advertencia por incompatibilidad de tipos al importar datos con `read_csv()`
 
 # Datos con un valor de texto en la columna numérica ----
 pregrado_invalido_csv <- "codigo_snies,nombre_programa
@@ -301,6 +305,15 @@ pregrado_faedis_invalido <- read_csv(
     nombre_programa = col_character()
   )
 )
+```
+
+Al ejecutar el @lst-read-csv-warning, `readr` emite una advertencia indicando que se encontraron problemas de análisis sintáctico (en inglés **parsing issues**). Esto ocurre porque en la segunda fila del archivo se incluye `"Sin código"`, el cual es una cadena de caracteres (`<chr>`) y no un número entero (`<int>`), por lo que no puede convertirse al tipo definido en `col_integer()`.
+
+A partir de esta advertencia, se puede aplicar la función `problems()` sobre el objeto importado para diagnosticar e inspeccionar con exactitud en qué fila, columna y valor ocurrió la anomalía, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-problems
+#| lst-cap: Detección y diagnóstico de problemas de lectura con `problems()`
 
 # Diagnosticar filas con problemas de conversión ----
 problems(pregrado_faedis_invalido)
@@ -382,7 +395,7 @@ Una primera alternativa consiste en definir explícitamente el tipo de la column
 
 ```{r}
 #| lst-label: lst-case-study-col-date-naive
-#| lst-cap: Intento de conversión a fecha con `col_date()` predeterminado y diagnóstico con `problems()`
+#| lst-cap: Intento de conversión a fecha con `col_date()` predeterminado
 
 # Importar especificando col_date() ----
 saber_pro_genericas_2021 <- read_csv2(
@@ -391,18 +404,46 @@ saber_pro_genericas_2021 <- read_csv2(
     estu_fechanacimiento = col_date()
   )
 )
+```
+
+Al ejecutar el @lst-case-study-col-date-naive, `readr` emite una advertencia señalando problemas de lectura (`One or more parsing issues, ...`). Esto ocurre porque, de forma predeterminada, `col_date()` espera que las fechas cumplan con el estándar internacional ISO 8601 (ver @nte-2-chap-13), el cual no coincide con la convención **día/mes/año** (`DD/MM/AAAA`) empleada en el archivo. Como consecuencia, `readr` no logra interpretar los valores y los sustituye por valores ausentes (`NA`).
+
+::: {#nte-2-chap-13 .callout-note}
+El estándar internacional [ISO 8601]({{< var url.education.iso_8601_wiki >}}) establece una norma técnica global para la representación de fechas y horas organizada jerárquicamente de mayor a menor unidad temporal: 
+
+- Año con 4 dígitos
+- Mes con 2 dígitos
+- Día con 2 dígitos 
+
+Es decir, en formato `AAAA-MM-DD` (en inglés `YYYY-MM-DD`), como por ejemplo `1992-10-05`, `1994-05-02` o `1996-11-09`.
+
+Por defecto, la función `col_date()` del paquete `readr` asume el estándar ISO 8601. Por esta razón, cuando los datos utilizan convenciones locales o regionales distintas, como el formato **día/mes/año** (`DD/MM/AAAA`), `readr` no puede interpretarlas automáticamente con la configuración predeterminada.
+:::
+
+A partir de esta advertencia, se puede aplicar la función `problems()` para diagnosticar con exactitud las discrepancias encontradas durante la importación, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-case-study-problems-naive
+#| lst-cap: Diagnóstico de problemas de conversión en fechas mediante `problems()`
 
 # Diagnosticar problemas ----
 problems(saber_pro_genericas_2021)
 ```
 
-Al ejecutar el @lst-case-study-col-date-naive, `readr` emite una advertencia señalando problemas de lectura (`One or more parsing issues, ...`). Al evaluar `problems(saber_pro_genericas_2021)`, la tibble de diagnósticos revela que en la columna 26 (`estu_fechanacimiento`) `readr` esperaba fechas bajo el estándar internacional ISO 8601 (`"date in ISO8601"`, es decir, en formato `AAAA-MM-DD` o `YYYY-MM-DD`), pero encontró caracteres como `"05/10/1992"`, `"02/05/1994"` o `"109/11/1996"`. 
-
-Dado que el formato predeterminado de `col_date()` no coincide con la convención **día/mes/año** empleada en el archivo, `readr` no logra interpretar los valores y los sustituye por valores ausentes (`NA`), identificando anomalías para la totalidad de registros con fecha de nacimiento.
+Al examinar el @lst-case-study-problems-naive, la tibble de diagnósticos revela que en la columna $26$ (`estu_fechanacimiento`), `readr` esperaba valores de tipo `"date in ISO8601"`, pero encontró cadenas de caracteres como `"05/10/1992"`, `"02/05/1994"` o `"09/11/1996"`, identificando anomalías para la totalidad de registros con fecha de nacimiento.
 
 ### Solución con el parámetro `format` en `col_date()`
 
-Para resolver este problema sin alterar la fuente original, `col_date()` incluye el parámetro `format`, el cual permite definir el patrón de fecha exacto que debe reconocer `readr`. Dado que las fechas se encuentran en formato `DD/MM/AAAA`, la especificación correspondiente es `"%d/%m/%Y"`, tal como se señala a continuación:
+Para resolver este problema sin alterar el archivo original, la función `col_date()` incluye el parámetro `format`, el cual permite definir el patrón o máscara exacta que `readr` debe utilizar para interpretar las fechas.
+
+En R, los formatos de fecha no se describen con texto libre (como `"día/mes/año"`), sino mediante especificadores de formato estandarizados. En estas especificaciones, el símbolo de porcentaje (`%`) actúa como un prefijo o marcador especial que le indica a la función qué componente temporal (día, mes o año) debe extraer de esa posición:
+
+- **`%d`**: representa el **día** del mes expresado en 2 dígitos (p. ej., `05`, `02` o `09`).
+- **`%m`**: representa el **mes** expresado en 2 dígitos (p. ej., `10`, `05` u `11`).
+- **`%Y`**: representa el **año** expresado con sus 4 dígitos (p. ej., `1992`, `1994` o `1996`).
+- **Caracteres literales**: cualquier carácter que no esté precedido por `%`, como la barra inclinada (`/`), el guión (`-`) o el punto (`.`), se interpreta como un separador literal que debe coincidir exactamente con el texto del archivo.
+
+De este modo, para leer registros como `"05/10/1992"`, `"02/05/1994"` o `"09/11/1996"` se construye la cadena de formato `"%d/%m/%Y"`, donde `%d` extrae el día, la primera `/` coincide con el separador, `%m` extrae el mes, la segunda `/` coincide con el segundo separador y `%Y` extrae el año de 4 dígitos, tal como se señala a continuación:
 
 ```{r}
 #| lst-label: lst-case-study-col-date-format
@@ -415,28 +456,35 @@ saber_pro_genericas_2021 <- read_csv2(
     estu_fechanacimiento = col_date(format = "%d/%m/%Y")
   )
 )
+```
+
+Para verificar que la importación se realizó de manera exitosa y sin incompatibilidades en los datos, puedes aplicar nuevamente la función `problems()` sobre el objeto importado, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-case-study-problems-format
+#| lst-cap: Verificación de importación exitosa mediante `problems()`
 
 # Diagnosticar problemas ----
 problems(saber_pro_genericas_2021)
 ```
 
-Al consultar nuevamente `problems(saber_pro_genericas_2021)`, se obtiene una tibble vacía con cero filas, lo que confirma que todos los registros de fecha de nacimiento fueron procesados y convertidos correctamente al tipo `<date>`.
+Al consultar el @lst-case-study-problems-format, se obtiene una tibble vacía con `0` filas y `5` columas (`A tibble: 0 × 5`), lo que confirma que todos los registros de fecha de nacimiento fueron procesados y convertidos correctamente al tipo `<date>`. Con esta configuración, R almacena la columna `estu_fechanacimiento` como un vector de fechas, garantizando una coherencia y facilitando análisis cronológicos posteriores sin que exista pérdida de información.
 
-### Especificaciones de formato para fechas en `readr`
+### Especificaciones comunes de formato para fechas en `readr`
 
-El parámetro `format` de `col_date()` utiliza códigos de conversión estándar que se pueden consultar en la documentación con `?readr::col_date`, para indicar la estructura de los componentes temporales de año, mes y día así como sus separadores, tal como se señala a continuación:
+Además de los especificadores utilizados anteriormente (`%d`, `%m` y `%Y`), `readr` soporta un conjunto amplio de códigos de conversión estándar que se pueden consultar en la documentación de la función `col_date()` con `?readr::col_date` (ver @nte-2-chap-5), para indicar la estructura de los componentes temporales de año, mes y día así como sus separadores:
 
 - **Día**:
   - `%d`: día del mes expresado como un número decimal de 2 dígitos (`01` a `31`).
   - `%e`: día del mes en el que los valores del `1` al `9` pueden incluir un espacio inicial opcional en lugar de un cero.
 - **Mes**:
   - `%m`: mes expresado como un número decimal de 2 dígitos (`01` a `12`).
-  - `%b`: nombre abreviado del mes (p. ej., `"ene"`, `"feb"`, según la configuración local).
-  - `%B`: nombre completo del mes (p. ej., `"enero"`, `"febrero"`).
+  - `%b`: nombre abreviado del mes según la configuración local activa (p. ej., `"ene."`, `"feb."` en español o `"Jan"`, `"Feb"` en inglés)[^chap-13-footnote-1].
+  - `%B`: nombre completo del mes (p. ej., `"enero"`, `"febrero"` en español o `"January"`, `"February"` en inglés).
 - **Año**:
   - `%Y`: año completo con cuatro dígitos (p. ej., `2021`, `2022`).
   - `%y`: año con 2 dígitos (`00` a `99`, donde habitualmente `00` a `69` corresponden a **2000–2069** y `70` a `99` a **1970–1999**).
-- **Separadores literales**:
-  - Los signos de puntuación como la barra inclinada (`/`), el guión (`-`) o el punto (`.`) representan literalmente los caracteres separadores entre día, mes y año.
+- **Caracteres literales**:
+  - Los signos de puntuación como la barra inclinada (`/`), el guión (`-`) el punto (`.`) u otro tipo de separador adecuado que se utilice representan literalmente los caracteres separadores entre día, mes y año.
 
-En la especificación `format = "%d/%m/%Y"`, `%d` indica que los primeros dígitos representan el día del mes, las barras diagonales `/` reconocen el separador literal, `%m` lee el mes de dos dígitos y `%Y` captura el año de cuatro dígitos. Con esta configuración, R almacena la columna `estu_fechanacimiento` como un vector de clase `Date`, garantizando una coherencia y facilitando análisis posteriores sin que exista pérdida de información.
+[^chap-13-footnote-1]: En la configuración regional en español de `readr`, las abreviaturas de los meses incluyen el punto final (p. ej., `"ene."`o `"feb."`). Puedes consultar la lista completa de abreviaturas ejecutando en la consola `readr::locale("es")$date_names`. 

@@ -273,7 +273,17 @@ La segunda parte indica que existen 2 funciones en el paquete `dplyr` que tienen
 
 :::
 
-En el @lst-load-tidyverse-conflicts las funciones con el mismo nombre en `dplyr` y `stats` son `filter()` y `lag()`. Si utilizas de manera directa alguna de las funciones, el mensaje indica que estas funciones corresponderan al paquete `dplyr`. En caso que quieras utilizar las funciones del paquete `stat` deberás indicarlo de manera explíctia utilizando la sintáxis `stats::filter()` o `stats::lag()`, según el caso.
+En el @lst-load-tidyverse-conflicts las funciones con el mismo nombre en `dplyr` y `stats` son `filter()` y `lag()`. Si utilizas de manera directa alguna de las funciones, el mensaje indica que estas funciones corresponderán al paquete `dplyr`. En caso de que quieras utilizar las funciones del paquete `stats`, deberás indicarlo de manera explícita utilizando la sintaxis `stats::filter()` o `stats::lag()` (ver @nte-2-chap-5), según el caso.
+
+::: {#nte-2-chap-5 .callout-note}
+La sintaxis `paquete::funcion()` utiliza el operador de 2 puntos dobles (`::`) para indicarle a R de forma explícita a qué paquete pertenece una función.
+
+Esto resulta útil en 2 casos:
+
+1. **Resolver conflictos de nombres**: cuando 2 paquetes tienen una función llamada igual como `dplyr::filter()` y `stats::filter()`, escribir `paquete::funcion()` le dice a R con exactitud cuál de ellas utilizar.
+
+2. **Consultar la ayuda**: permite consultar la documentación oficial de una función en un paquete específico escribiendo `?paquete::funcion` (por ejemplo, `?dplyr::filter` o `?stats::filter`) en la consola.
+:::
 
 ### Advertencias {#sec-warnings}
 
