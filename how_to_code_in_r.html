@@ -699,7 +699,25 @@ Listado&nbsp;5.5
 </div>
 </figure>
 </div>
-<p>En el <a href="#lst-load-tidyverse-conflicts" class="quarto-xref">Listado&nbsp;<span>5.5</span></a> las funciones con el mismo nombre en <code>dplyr</code> y <code>stats</code> son <code>filter()</code> y <code>lag()</code>. Si utilizas de manera directa alguna de las funciones, el mensaje indica que estas funciones corresponderan al paquete <code>dplyr</code>. En caso que quieras utilizar las funciones del paquete <code>stat</code> deberás indicarlo de manera explíctia utilizando la sintáxis <code>stats::filter()</code> o <code>stats::lag()</code>, según el caso.</p>
+<p>En el <a href="#lst-load-tidyverse-conflicts" class="quarto-xref">Listado&nbsp;<span>5.5</span></a> las funciones con el mismo nombre en <code>dplyr</code> y <code>stats</code> son <code>filter()</code> y <code>lag()</code>. Si utilizas de manera directa alguna de las funciones, el mensaje indica que estas funciones corresponderán al paquete <code>dplyr</code>. En caso de que quieras utilizar las funciones del paquete <code>stats</code>, deberás indicarlo de manera explícita utilizando la sintaxis <code>stats::filter()</code> o <code>stats::lag()</code> (ver <a href="#nte-2-chap-5" class="quarto-xref">Nota&nbsp;<span>5.2</span></a>), según el caso.</p>
+<div id="nte-2-chap-5" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota&nbsp;5.2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La sintaxis <code>paquete::funcion()</code> utiliza el operador de 2 puntos dobles (<code>::</code>) para indicarle a R de forma explícita a qué paquete pertenece una función.</p>
+<p>Esto resulta útil en 2 casos:</p>
+<ol type="1">
+<li><p><strong>Resolver conflictos de nombres</strong>: cuando 2 paquetes tienen una función llamada igual como <code>dplyr::filter()</code> y <code>stats::filter()</code>, escribir <code>paquete::funcion()</code> le dice a R con exactitud cuál de ellas utilizar.</p></li>
+<li><p><strong>Consultar la ayuda</strong>: permite consultar la documentación oficial de una función en un paquete específico escribiendo <code>?paquete::funcion</code> (por ejemplo, <code>?dplyr::filter</code> o <code>?stats::filter</code>) en la consola.</p></li>
+</ol>
+</div>
+</div>
 </section>
 <section id="sec-warnings" class="level3" data-number="5.3.2">
 <h3 data-number="5.3.2" class="anchored" data-anchor-id="sec-warnings"><span class="header-section-number">5.3.2</span> Advertencias</h3>
