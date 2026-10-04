@@ -67,6 +67,7 @@ url:
     mice: "https://amices.org/mice/"
     naniar: "https://naniar.njtierney.com/"
     readr: "https://readr.tidyverse.org/"
+    readxl: "https://readxl.tidyverse.org/"
 
   tools:
     gemini: "https://gemini.google.com/"
@@ -86,6 +87,7 @@ url:
     divipola_mpios_rds: "https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/divipola-municipios.rds"
     programas_faedis_rds: "https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/programas-pregrado-faedis.rds"
     resultados_saber_pro_rds: "https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/resultados-saber-pro.rds"
+    poblacion_xlsx_2018_2070: "https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/serie-nacional-de-poblacion_area-sexo-edad_2018-2070_2025-07-18.xlsx"
     diccionario_saber_pro_pdf: "https://github.com/luifrancgom/r-clio/raw/main/documentation/diccionario-datos-examen-saber-pro.pdf"
     manual_identidad_umng_pdf: "https://github.com/luifrancgom/r-clio/raw/main/documentation/manual-identidad-visual-umng_2024-09.pdf"
 
@@ -114,6 +116,8 @@ url:
     binary_file_wiki: "https://en.wikipedia.org/wiki/Binary_file"
     csv_wiki: "https://en.wikipedia.org/wiki/Comma-separated_values"
     heuristic_wiki: "https://en.wikipedia.org/wiki/Heuristic"
+    excel_file_formats_wiki: "https://en.wikipedia.org/wiki/Microsoft_Excel#File_formats"
+    excel_binary_format_wiki: "https://en.wikipedia.org/wiki/Microsoft_Excel#File_formats"
 
   media:
     muse_klio_artwork: "https://commons.wikimedia.org/wiki/File:Christian_Bernhard_Rode_-_Die_Muse_Klio.jpg"

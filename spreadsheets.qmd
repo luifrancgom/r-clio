@@ -1,9 +1,34 @@
 # Hojas de cálculo {#sec-spreadsheets}
 
-Este capítulo se basa en ... donde tiene como propósito ... 
+Este capítulo se basa en [@wickham_r_2023, Cap. 20] así como en la documentación oficial de [`readxl`]({{< var url.packages.readxl >}}) donde tiene como propósito introducir la importación y exportación de datos de archivos de texto plano rectangulares utilizando el paquete `readxl` e información de proyecciones y retroproyecciones de población nacional para el periodo 2018-2070 de Colombia con base en el Censo Nacional de Población y Vivienda (CNPV) 2018.
 
 Exploraremos los siguientes aspectos:
 
-1. 
-2.
+1. ¿Cómo importar archivos u hojas de cálculo de Excel (`.xls` y `.xlsx`)?
+2. ¿Cómo listar e importar hojas de trabajo individuales dentro de un archivo de Excel?
+3. ¿Cómo importar solo una parte de una hoja de trabajo definiendo rangos de celdas específicos?
+
+:::: {#nte-1-chap-14 .callout-note}
+Para desarrollar el contenido de este capítulo es necesario que descargues el archivo señalado a continuación y lo incluyas dentro de la carpeta `data`, respecto a lo descrito en la @nte-1-chap-6:
+   
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [serie-nacional-de-poblacion_area-sexo-edad_2018-2070_2025-07-18.xlsx]({{< var url.data.poblacion_xlsx_2018_2070 >}})
+:::
+
+En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `014_importar-datos-hojas-calculo-en-r` y dentro de ella genera el archivo `001_importar-datos-hojas-calculo.R`, siguiendo las pautas de la @sec-package-usage.
+::::
+
+## Archivos con extensión `.xls` y `.xlsx` {#sec-xls-xlsx-files}
+
+Para importar archivos `.xls` o `.xlsx` a R existen 3 funciones en el paquete `readxl`: 
+
+1. `read_xls()`: se utiliza para importar archivos con extensión `.xls`. Hasta la versión de 2007, Microsoft Excel utilizaba como formato principal un formato binario propietario denominado [**Excel Binary File Format**]({{< var url.education.excel_file_formats_wiki >}}).
+2. `read_xlsx()`: se utiliza para importar archivos con extensión `.xlsx` donde fue introducido a partir de Microsoft Excel 2007.
+3. `read_excel()`: se utiliza para importar archivos tanto en formato `.xls` como `.xlsx`. Esta función infiere de forma automática el formato del archivo delegando internamente la lectura a `read_xls()` o `read_xlsx()` según corresponda.
+
+:::: {#nte-2-chap-14 .callout-note}
+En la práctica, `read_excel()` es la función que usualmente se utiliza porque identifica automáticamente el formato del archivo sin que tengas que preocuparte por su extensión. Las funciones específicas `read_xls()` y `read_xlsx()` existen para los casos en los que deseas asegurarte de que tu código trabaje estrictamente con un formato determinado, alertándote con un error si por equivocación se suministra un tipo de archivo distinto.
+::::
+
+El primer parámetro de estas funciones es `path`, el cual recibe una ruta hacia un archivo con extensión `.xls` o `.xlsx` almacenado en disco (p. ej., `"data/serie-nacional-de-poblacion_area-sexo-edad_2018-2070_2025-07-18.xlsx"`).
 
