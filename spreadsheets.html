@@ -26,7 +26,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -328,8 +348,14 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#sec-xls-xlsx-files" id="toc-sec-xls-xlsx-files" class="nav-link active" data-scroll-target="#sec-xls-xlsx-files"><span class="header-section-number">14.1</span> Archivos con extensión <code>.xls</code> y <code>.xlsx</code></a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/spreadsheets.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/spreadsheets.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -353,14 +379,70 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Este capítulo se basa en … donde tiene como propósito …</p>
+<p>Este capítulo se basa en <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 20</a>)</span> así como en la documentación oficial de <a href="https://readxl.tidyverse.org/"><code>readxl</code></a> donde tiene como propósito introducir la importación y exportación de datos de archivos de texto plano rectangulares utilizando el paquete <code>readxl</code> e información de proyecciones y retroproyecciones de población nacional para el periodo 2018-2070 de Colombia con base en el Censo Nacional de Población y Vivienda (CNPV) 2018.</p>
 <p>Exploraremos los siguientes aspectos:</p>
 <ol type="1">
-<li></li>
-<li></li>
+<li>¿Cómo importar archivos u hojas de cálculo de Excel (<code>.xls</code> y <code>.xlsx</code>)?</li>
+<li>¿Cómo listar e importar hojas de trabajo individuales dentro de un archivo de Excel?</li>
+<li>¿Cómo importar solo una parte de una hoja de trabajo definiendo rangos de celdas específicos?</li>
 </ol>
+<div id="nte-1-chap-14" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota&nbsp;14.1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para desarrollar el contenido de este capítulo es necesario que descargues el archivo señalado a continuación y lo incluyas dentro de la carpeta <code>data</code>, respecto a lo descrito en la <a href="amounts.html#nte-1-chap-6" class="quarto-xref">Nota&nbsp;<span>6.1</span></a>:</p>
+<div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span><img src="images/download-solid-full.png" alt="Ícono del explorador de archivos" height="25"> <a href="https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/serie-nacional-de-poblacion_area-sexo-edad_2018-2070_2025-07-18.xlsx">serie-nacional-de-poblacion_area-sexo-edad_2018-2070_2025-07-18.xlsx</a>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<p>En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada <code>014_importar-datos-hojas-calculo-en-r</code> y dentro de ella genera el archivo <code>001_importar-datos-hojas-calculo.R</code>, siguiendo las pautas de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>.</p>
+</div>
+</div>
+<section id="sec-xls-xlsx-files" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="sec-xls-xlsx-files"><span class="header-section-number">14.1</span> Archivos con extensión <code>.xls</code> y <code>.xlsx</code></h2>
+<p>Para importar archivos <code>.xls</code> o <code>.xlsx</code> a R existen 3 funciones en el paquete <code>readxl</code>:</p>
+<ol type="1">
+<li><code>read_xls()</code>: se utiliza para importar archivos con extensión <code>.xls</code>. Hasta la versión de 2007, Microsoft Excel utilizaba como formato principal un formato binario propietario denominado <a href="https://en.wikipedia.org/wiki/Microsoft_Excel#File_formats"><strong>Excel Binary File Format</strong></a>.</li>
+<li><code>read_xlsx()</code>: se utiliza para importar archivos con extensión <code>.xlsx</code> donde fue introducido a partir de Microsoft Excel 2007.</li>
+<li><code>read_excel()</code>: se utiliza para importar archivos tanto en formato <code>.xls</code> como <code>.xlsx</code>. Esta función infiere de forma automática el formato del archivo delegando internamente la lectura a <code>read_xls()</code> o <code>read_xlsx()</code> según corresponda.</li>
+</ol>
+<div id="nte-2-chap-14" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota&nbsp;14.2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En la práctica, <code>read_excel()</code> es la función que usualmente se utiliza porque identifica automáticamente el formato del archivo sin que tengas que preocuparte por su extensión. Las funciones específicas <code>read_xls()</code> y <code>read_xlsx()</code> existen para los casos en los que deseas asegurarte de que tu código trabaje estrictamente con un formato determinado, alertándote con un error si por equivocación se suministra un tipo de archivo distinto.</p>
+</div>
+</div>
+<p>El primer parámetro de estas funciones es <code>path</code>, el cual recibe una ruta hacia un archivo con extensión <code>.xls</code> o <code>.xlsx</code> almacenado en disco (p.&nbsp;ej., <code>"data/serie-nacional-de-poblacion_area-sexo-edad_2018-2070_2025-07-18.xlsx"</code>).</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-wickham_r_2023" class="csl-entry" role="listitem">
+Wickham, H. (2023). <em>R for <span>Data</span> <span>Science</span></em> (2.ª ed.). O’Reilly Media, Incorporated. <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a>
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -780,4 +862,4 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/spreadsheets.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/spreadsheets.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/spreadsheets.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/spreadsheets.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></div></div></footer></body></html>
