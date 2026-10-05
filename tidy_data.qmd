@@ -11,7 +11,7 @@ source("_common.R")
 #| message: false
 ```
 
-Este capítulo se basa en [@wickham_r_2023, Cap. 5] y [@wickham_tidy_2014] así como en la documentación oficial de [`tidyr`]({{< var url.packages.tidyr >}}) donde tiene como propósito introducir la forma de estructurar conjuntos de datos para facilitar su análisis utilizando el paquete `tidyr` e información de proyecciones de población de Colombia a nivel nacional por área geográfica (Cabecera y Centros poblados y rural disperso) según sexo (Masculino y Femenino) y edades simples ($0$, $1$, $2$, $\ldots$, $98$, $99$, $100$ o más) para el periodo 2018-2070.   
+Este capítulo se basa en [@wickham_r_2023, Cap. 5] y [@wickham_tidy_2014] así como en la documentación oficial de [`tidyr`]({{< var url.packages.tidyr >}}) donde tiene como propósito introducir la forma de estructurar conjuntos de datos para facilitar su análisis utilizando el paquete `tidyr` e información de proyecciones de población de Colombia a nivel nacional por área geográfica (Cabecera y Centros poblados y rural disperso) según sexo (Masculino y Femenino) y edades simples ($0$, $1$, $2$, $\ldots$, $98$, $99$, $100$ o más) para el periodo 2018-2070 con base en el Censo Nacional de Población y Vivienda (CNPV) 2018.   
 
 Exploraremos los siguientes aspectos:
 
