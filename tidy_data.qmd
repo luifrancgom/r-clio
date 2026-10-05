@@ -19,14 +19,9 @@ Exploraremos los siguientes aspectos:
 2. ¿Cuáles son los problemas más comunes con datos no ordenados?
 
 :::: {#nte-1-chap-16 .callout-note}
-Para desarrollar el contenido de este capítulo es necesario que descarges el archivo señalado a continuación y lo incluyas dentro de la carpeta `data`, respecto a lo descrito en la @nte-1-chap-6:
-   
-::: {.callout appearance="minimal"}
-## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2021_2024-saber_pro-genericas.csv.xz]({{< var url.data.saber_pro_csv_xz >}})
-:::
+Para desarrollar el contenido de este capítulo es necesario que hayas completado la descarga y ubicación del archivo `serie-nacional-de-poblacion_area-sexo-edad_2018-2070_2025-07-18.xlsx` dentro de la carpeta `data`, respecto a lo descrito en la @nte-1-chap-14.
 
-En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `010_verbos-una-sola-tabla-en-r` y dentro de ella genera el archivo `001_manipular-datos-una-sola-tabla.R`, siguiendo las pautas de la @sec-package-usage.
-
+En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `016_datos-ordenados-en-r` y dentro de ella genera el archivo `001_datos-ordenados.R`, siguiendo las pautas de la @sec-package-usage.
 ::::
 
 ## Definición de datos ordenados
