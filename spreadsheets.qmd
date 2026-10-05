@@ -1,6 +1,17 @@
 # Hojas de cálculo {#sec-spreadsheets}
 
-Este capítulo se basa en [@wickham_r_2023, Cap. 20] así como en la documentación oficial de [`readxl`]({{< var url.packages.readxl >}}) donde tiene como propósito introducir la importación y exportación de datos de archivos de texto plano rectangulares utilizando el paquete `readxl` e información de proyecciones y retroproyecciones de población nacional para el periodo 2018-2070 de Colombia con base en el Censo Nacional de Población y Vivienda (CNPV) 2018.
+```{r}
+#| echo: false
+source("_common.R")
+```
+
+```{r}
+#| label: load-r-packages
+#| echo: false
+#| message: false
+```
+
+Este capítulo se basa en [@wickham_r_2023, Cap. 20], así como en la documentación oficial de [`readxl`]({{< var url.packages.readxl >}}) donde tiene como propósito introducir la importación de datos de hojas de cálculo de Excel (`.xls` y `.xlsx`) utilizando el paquete `readxl` e información de proyecciones y retroproyecciones de población nacional por área, sexo y edad para el periodo 2018-2070 de Colombia con base en el Censo Nacional de Población y Vivienda (CNPV) 2018.
 
 Exploraremos los siguientes aspectos:
 
@@ -23,12 +34,150 @@ En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta 
 Para importar archivos `.xls` o `.xlsx` a R existen 3 funciones en el paquete `readxl`: 
 
 1. `read_xls()`: se utiliza para importar archivos con extensión `.xls`. Hasta la versión de 2007, Microsoft Excel utilizaba como formato principal un formato binario propietario denominado [**Excel Binary File Format**]({{< var url.education.excel_file_formats_wiki >}}).
-2. `read_xlsx()`: se utiliza para importar archivos con extensión `.xlsx` donde fue introducido a partir de Microsoft Excel 2007.
+2. `read_xlsx()`: se utiliza para importar archivos con extensión `.xlsx`, formato que fue introducido a partir de Microsoft Excel 2007.
 3. `read_excel()`: se utiliza para importar archivos tanto en formato `.xls` como `.xlsx`. Esta función infiere de forma automática el formato del archivo delegando internamente la lectura a `read_xls()` o `read_xlsx()` según corresponda.
 
 :::: {#nte-2-chap-14 .callout-note}
-En la práctica, `read_excel()` es la función que usualmente se utiliza porque identifica automáticamente el formato del archivo sin que tengas que preocuparte por su extensión. Las funciones específicas `read_xls()` y `read_xlsx()` existen para los casos en los que deseas asegurarte de que tu código trabaje estrictamente con un formato determinado, alertándote con un error si por equivocación se suministra un tipo de archivo distinto.
+En la práctica, `read_excel()` es la función que usualmente se utiliza porque identifica automáticamente el formato del archivo sin que tengas que preocuparte por su extensión. Las funciones específicas `read_xls()` y `read_xlsx()` existen para los casos en los que deseas asegurarte que tu código trabaje estrictamente con un formato determinado, alertándote con un error si por equivocación se suministra un tipo de archivo distinto.
 ::::
 
 El primer parámetro de estas funciones es `path`, el cual recibe una ruta hacia un archivo con extensión `.xls` o `.xlsx` almacenado en disco (p. ej., `"data/serie-nacional-de-poblacion_area-sexo-edad_2018-2070_2025-07-18.xlsx"`).
 
+## Importación de datos en formato `.xlsx`
+
+Para importar un archivo en formato `.xlsx` a R, se utiliza la función `read_excel()` del paquete `readxl`. Dado que `readxl` no forma parte del núcleo base de paquetes del `tidyverse`, es necesario cargar previamente el paquete mediante `library(readxl)` (ver @sec-load-packages) en el archivo `001_importar-datos-hojas-calculo.R`. Para realizar la importación, la función `read_excel()` utiliza el parámetro `path`, en el cual se especifica como argumento la ruta y el nombre del archivo con extensión `.xlsx`.
+
+Para importar inicialmente el conjunto de datos en formato `.xlsx` (ver @nte-1-chap-14) y asignarlo a una variable denominada `poblacion_col_2018_2070` ejecutarás el siguiente código, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-read-xlsx
+#| lst-cap: Uso de la función `read_excel()` para importar un archivo de datos en formato `.xlsx`
+#| message: false
+
+# Cargar paquetes ----
+library(readxl)
+
+# Importar datos ----
+path <- "data/serie-nacional-de-poblacion_area-sexo-edad_2018-2070_2025-07-18.xlsx"
+
+poblacion_col_2018_2070 <- read_excel(
+  path = path
+)
+
+poblacion_col_2018_2070
+```
+
+En el @lst-read-xlsx, primero se carga el paquete `readxl` mediante `library(readxl)`. Posteriormente, se define la ruta asociándole el nombre `path` y se utiliza la función `read_excel()` con el parámetro `path` asociado al argumento `path` para leer el archivo y asignar explícitamente el objeto resultante a la variable `poblacion_col_2018_2070`.
+
+## Estructura de archivos con extensión `.xlsx`
+
+Un aspecto que diferencia a las hojas de cálculo de los archivos planos (ver @sec-plain-text), es la noción de múltiples hojas de trabajo. El archivo `serie-nacional-de-poblacion_area-sexo-edad_2018-2070_2025-07-18.xlsx` contiene múltiples hojas de cálculo y por ese motivo obtienes el resultado señalado en el @lst-read-xlsx dado que es necesario definir cuál es la hoja de trabajo que se desea importar.
+
+Debido a que no se definió la hoja de trabajo que se deseaba importar, la función `read_excel()` importa por defecto la primera hoja de trabajo que se encuentre en el archivo. Para listar el nombre de las hojas de trabajo en un determinado archivo con extensión `.xlsx` el paquete `readxl` incluye la función `excel_sheets()`, la cual se puede utilizar tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-list-sheet-names
+#| lst-cap: Uso de la función `excel_sheets()` para listar los nombres de las hojas de trabajo en un archivo en formato `.xlsx`
+#| message: false
+
+# Listar hojas de trabajo ----
+excel_sheets(
+  path = path
+)
+```
+
+En el @lst-list-sheet-names se utiliza la función `excel_sheets()` con el parámetro `path` asociado al argumento `path` para identificar los nombres de las 3 hojas de trabajo que componen el archivo `serie-nacional-de-poblacion_area-sexo-edad_2018-2070_2025-07-18.xlsx`.
+
+## Importar datos de una hoja de trabajo {#sec-read-sheet}
+
+Una vez identificadas las hojas de trabajo correspondientes, es posible utilizar nuevamente la función `read_excel()` con el parámetro `sheet` asociado al argumento `"PobNacionalxÁreaSexoEdad"` para importar los datos de población por área, sexo y edad para el periodo 2018-2070 de Colombia, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-read-sheet
+#| lst-cap: Uso del parámetro `sheet` en la función `read_excel()` para importar datos de una hoja de trabajo particular
+#| message: false
+
+# Importar datos hoja de trabajo ----
+poblacion_col_2018_2070 <- read_excel(
+  path = path,
+  sheet = "PobNacionalxÁreaSexoEdad"
+)
+
+poblacion_col_2018_2070
+```
+
+Usualmente, los archivos con extensión `.xlsx` se utilizan para compartir datos con el público en general, por lo que contienen encabezados con imágenes, celdas combinadas, anotaciones, así como otros elementos que pueden ser útiles para inspeccionar la información de manera visual, pero que no son adecuados para manipular datos.
+
+En el @lst-read-sheet se importan todos los datos disponibles en la hoja de trabajo seleccionada por lo que se obtiene el resultado correspondiente. Sin embargo, una revisión visual de la hoja de trabajo asociada con el nombre `"PobNacionalxÁreaSexoEdad"` permite identificar que los datos de interés se encuentran a partir de la fila 9. Para importar los datos de interés es posible utilizar el parámetro `skip` asociado al argumento `8` de manera similar a como se hizo en el caso de archivos de texto plano rectangulares (ver @sec-csv-arguments), tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-read-sheet-skip
+#| lst-cap: Uso del parámetro `skip` en la función `read_excel()` para omitir un número mínimo de filas antes de leer el contenido
+#| message: false
+
+# Omitir filas al importar datos ----
+poblacion_col_2018_2070 <- read_excel(
+  path = path,
+  sheet = "PobNacionalxÁreaSexoEdad",
+  skip = 8
+)
+
+poblacion_col_2018_2070
+```
+
+En el @lst-read-sheet-skip es posible finalmente importar los datos de interés con su respectiva información relacionada única y exclusivamente con la población por área, sexo y edad para el periodo 2018-2070 de Colombia. Sin embargo, debido a que el archivo contiene celdas combinadas relacionadas con las primeras 3 columnas no es posible extraer los nombres de estas. Debido a lo anterior la función `read_excel()` genera nombres genéricos como `...1`, `...2` y `...3`. Por ello, es posible renombrar estas columnas utilizando la función `rename()` (ver @sec-column-verbs), tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-read-sheet-rename
+#| lst-cap: Uso de la función `rename()` para cambiar el nombre de un conjunto de columnas
+#| message: false
+
+# Cargar paquetes ----
+library(tidyverse)
+
+# Renombrar columnas ----
+poblacion_col_2018_2070 <- read_excel(
+  path = path,
+  sheet = "PobNacionalxÁreaSexoEdad",
+  skip = 8
+) |>
+  rename(
+    territorio = `...1`,
+    ano = `...2`,
+    area_geografica = `...3`
+  )
+
+poblacion_col_2018_2070
+```
+
+::: {#wrn-1-chap-14 .callout-warning}
+En el @lst-read-sheet-rename los datos relacionados con la población por área, sexo y edad para el periodo 2018-2070 de Colombia se encuentran organizados de forma rectangular. Sin embargo, en el @sec-data-tidying explorarás el concepto de datos ordenados (**tidy data** en inglés) debido a que la estructura en la que se encuentran genera dificultades para manipularlos y visualizarlos.
+:::
+
+## Importar datos de parte de una hoja de trabajo
+
+Tal como se mencionó en la @sec-read-sheet, los archivos con extensión `.xlsx` usualmente contienen elementos que no son parte de los datos que se desean importar a R o que no se requieren para realizar un análisis determinado. La función `read_excel()` incluye el parámetro `range`, que permite tener un mejor control sobre el rango de celdas que se desean importar de una determinada hoja de trabajo.
+
+A modo de ejemplo, si se desea importar el conjunto de datos asociado con la hoja de trabajo `"PobNacionalxÁreaSexoEdad"` correspondiente al territorio, año, área geográfica y el total de población así como su división por sexo, es posible utilizar el parámetro `range` asociado al argumento `"A9:F128"` como alternativa al uso del parámetro `skip` (ver @lst-read-sheet-skip) para tener un mayor control, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-read-sheet-range
+#| lst-cap: Uso del parámetro `range` en la función `read_excel()` para controlar el rango de celdas que se desean importar
+#| message: false
+
+# Importar datos de un rango de celdas ----
+poblacion_col_2018_2070 <- read_excel(
+  path = path,
+  sheet = "PobNacionalxÁreaSexoEdad",
+  range = "A9:F128"
+) |>
+  rename(
+    territorio = `...1`,
+    ano = `...2`,
+    area_geografica = `...3`
+  )
+
+poblacion_col_2018_2070
+```
+
+En el @lst-read-sheet-range, el argumento `"A9:F128"` asociado con el parámetro `range` establece el rango de celdas que se desean importar de la hoja de trabajo `"PobNacionalxÁreaSexoEdad"` especificando la celda del extremo superior izquierdo `A9` junto con la celda del extremo inferior derecho `F128` e integrando ambos extremos con el operador `:`.
