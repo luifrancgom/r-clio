@@ -1,6 +1,6 @@
 # Manipulación de datos
 
-El objetivo de esta parte es presentar la **gramática de manipulación de datos** mediante un conjunto consistente de verbos cuando se requiere transformar una sola tabla o se busca conectar dos o más tablas de datos de manera secuencial en R utilizando el paquete [`dplyr`]({{< var url.packages.dplyr >}}), a través de los siguientes dos capítulos:
+El objetivo de esta parte, es presentar la **gramática de manipulación de datos** mediante un conjunto consistente de verbos cuando se requiere transformar una sola tabla o se busca conectar dos o más tablas de datos de manera secuencial en R utilizando el paquete [`dplyr`]({{< var url.packages.dplyr >}}), a través de los siguientes dos capítulos:
 
 - @sec-single-table-verbs: introduce la forma de manejar datos cuando se tiene una sola tabla mediante un conjunto consistente de verbos.
 
