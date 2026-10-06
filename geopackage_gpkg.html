@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.10.19">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -26,7 +26,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -44,7 +99,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-13eb8e2fc86d17b67f83116d69f6ada2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -328,8 +383,17 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#mapa-coroplético" id="toc-mapa-coroplético" class="nav-link active" data-scroll-target="#mapa-coroplético"><span class="header-section-number">15.1</span> Mapa coroplético</a></li>
+  <li><a href="#el-formato-.gpkg" id="toc-el-formato-.gpkg" class="nav-link" data-scroll-target="#el-formato-.gpkg"><span class="header-section-number">15.2</span> El formato <code>.gpkg</code></a></li>
+  <li><a href="#importación-de-datos-en-formato-.gpkg" id="toc-importación-de-datos-en-formato-.gpkg" class="nav-link" data-scroll-target="#importación-de-datos-en-formato-.gpkg"><span class="header-section-number">15.3</span> Importación de datos en formato <code>.gpkg</code></a></li>
+  <li><a href="#visualización-de-datos-geoespaciales" id="toc-visualización-de-datos-geoespaciales" class="nav-link" data-scroll-target="#visualización-de-datos-geoespaciales"><span class="header-section-number">15.4</span> Visualización de datos geoespaciales</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/geopackage_gpkg.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/geopackage_gpkg.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -353,14 +417,97 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Este capítulo se basa en … donde tiene como propósito …</p>
+<p>Este capítulo se basa en <span class="citation" data-cites="lovelace_geocomputation_2025">(<a href="references.html#ref-lovelace_geocomputation_2025" role="doc-biblioref">Lovelace et&nbsp;al., 2025</a>)</span>, <span class="citation" data-cites="popovic_mapping_2025">(<a href="references.html#ref-popovic_mapping_2025" role="doc-biblioref">Popovic, 2025</a>)</span> y <span class="citation" data-cites="wilke_fundamentals_2019">(<a href="references.html#ref-wilke_fundamentals_2019" role="doc-biblioref">Wilke, 2019</a>)</span> así como en la documentación oficial de <a href="https://ggplot2.tidyverse.org/articles/ggplot2.html"><code>ggplot2</code></a> y <a href="https://r-spatial.github.io/sf/"><code>sf</code></a> donde tiene como propósito introducir la importación y posterior visualización de datos geoestadísticos a través del formato <a href="https://en.wikipedia.org/wiki/GeoPackage">GeoPackage (<code>.gpkg</code>)</a> utilizando el paquete <code>sf</code> y <code>ggplot2</code> con información del <a href="https://geoportal.dane.gov.co/servicios/descarga-y-metadatos/datos-geoestadisticos/">Geoportal del Departamento Administrativo Nacional de Estadística (DANE)</a> y los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).</p>
 <p>Exploraremos los siguientes aspectos:</p>
 <ol type="1">
-<li></li>
-<li></li>
+<li>¿Qué es el formato GeoPackage (<code>.gpkg</code>)?<br>
+</li>
+<li>¿Cómo importar datos geoestadísticos a través del formato GeoPackage (<code>.gpkg</code>)?</li>
+<li>¿Cómo visualizar datos geoestadísticos integrándolos con otras variables a través de un <a href="https://en.wikipedia.org/wiki/Choropleth_map">mapa coroplético</a> (en inglés <strong>choropleth map</strong>)?</li>
 </ol>
+<div id="nte-1-chap-15" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota&nbsp;15.1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para desarrollar el contenido de este capítulo es necesario que instales el paquete <code>sf</code> teniendo en cuenta la <a href="r_packages.html#sec-installing-packages" class="quarto-xref"><span>Sección 4.2</span></a>, tal como se señala a continuación:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"sf"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>También es necesario que descargues el archivo señalado a continuación y lo incluyas dentro de la carpeta <code>data</code>, respecto a lo descrito en la <a href="amounts.html#nte-1-chap-6" class="quarto-xref">Nota&nbsp;<span>6.1</span></a>:</p>
+<div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span><img src="images/download-solid-full.png" alt="Ícono del explorador de archivos" height="25"> <a href="https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/nivel-departamento_version-mgn-2025_geopackage.gpkg">nivel-departamento_version-mgn-2025_geopackage.gpkg</a>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<p>Adicionalmente, es necesario que hayas exportado y guardado el archivo <code>2021-2024_saber-pro-genericas_faedis_ajustado.rds</code> en la carpeta <code>data</code>, tal como se señaló en el <a href="two_table_verbs.html#lst-write-rds-case-study" class="quarto-xref">Listado&nbsp;<span>11.14</span></a>. En caso que no lo hayas hecho es necesario que lo descargues y lo incluyas dentro de la carpeta <code>data</code>:</p>
+<div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span><img src="images/download-solid-full.png" alt="Ícono del explorador de archivos" height="25"> <a href="https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/2021-2024_saber-pro-genericas_faedis_ajustado.rds">2021-2024_saber-pro-genericas_faedis_ajustado.rds</a>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<p>En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada <code>015_importar-datos-gpkg-en-r</code> y dentro de ella genera el archivo <code>001_importar-datos-formato-gpkg.R</code>, siguiendo las pautas de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>.</p>
+</div>
+</div>
+<section id="mapa-coroplético" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="mapa-coroplético"><span class="header-section-number">15.1</span> Mapa coroplético</h2>
+<p>En este capítulo realizarás un mapa coroplético señalando el número de inscritos a la prueba Saber Pro por departamento para los programas de pregrado de la Facultad de Estudios a Distancia de la Universidad Militar en el periodo 2021-2024, tal como se indica en la <a href="#fig-1-chap-15" class="quarto-xref">Figura&nbsp;<span>15.1</span></a>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-1-chap-15" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-1-chap-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="geopackage_gpkg_files/figure-html/fig-1-chap-15-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-chap-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;15.1: Resultado final de un mapa coroplético elaborado con <code>sf</code> y <code>ggplot2</code> a partir de datos geoestadísticos en formato <code>.gpkg</code>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="el-formato-.gpkg" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="el-formato-.gpkg"><span class="header-section-number">15.2</span> El formato <code>.gpkg</code></h2>
+</section>
+<section id="importación-de-datos-en-formato-.gpkg" class="level2" data-number="15.3">
+<h2 data-number="15.3" class="anchored" data-anchor-id="importación-de-datos-en-formato-.gpkg"><span class="header-section-number">15.3</span> Importación de datos en formato <code>.gpkg</code></h2>
+</section>
+<section id="visualización-de-datos-geoespaciales" class="level2" data-number="15.4">
+<h2 data-number="15.4" class="anchored" data-anchor-id="visualización-de-datos-geoespaciales"><span class="header-section-number">15.4</span> Visualización de datos geoespaciales</h2>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-lovelace_geocomputation_2025" class="csl-entry" role="listitem">
+Lovelace, R., Nowosad, J., &amp; Münchow, J. (2025). <em>Geocomputation with <span>R</span></em> (2.ª ed.). CRC Press, Taylor &amp; Francis Group. <a href="https://r.geocompx.org/">https://r.geocompx.org/</a>
+</div>
+<div id="ref-popovic_mapping_2025" class="csl-entry" role="listitem">
+Popovic, M. (2025). <em>Mapping <span>Worlds</span> with <span>R</span></em> (1.ª ed.).
+</div>
+<div id="ref-wilke_fundamentals_2019" class="csl-entry" role="listitem">
+Wilke, C. (2019). <em>Fundamentals of data visualization: a primer on making informative and compelling figures</em> (First edition). O’Reilly. <a href="https://clauswilke.com/dataviz/">https://clauswilke.com/dataviz/</a>
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -780,4 +927,4 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/geopackage_gpkg.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/geopackage_gpkg.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/geopackage_gpkg.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/geopackage_gpkg.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></div></div></footer></body></html>

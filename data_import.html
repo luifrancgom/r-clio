@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.10.19">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -44,7 +44,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-13eb8e2fc86d17b67f83116d69f6ada2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -353,7 +353,21 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Pendiente</p>
+<p>El objetivo de esta parte, es presentar cómo importar datos en R donde es el primer paso que se debe aplicar cuando se requiere realizar un análisis de datos sin importar el lenguaje de programación o herramienta que se utilice. En particular, se utilizará inicialmente el paquete <a href="https://readr.tidyverse.org/"><code>readr</code></a> y posteriormente otros paquetes, a través de los siguientes 4 capítulos:</p>
+<ul>
+<li><p><a href="r_data_serialization.html" class="quarto-xref"><span>12&nbsp; Serialización de datos en R</span></a>: introduce la importación y exportación de datos en el formato nativo de R a través de la extensión <code>.rds</code> utilizando el paquete <code>readr</code>.</p></li>
+<li><p><a href="plain_text.html" class="quarto-xref"><span>13&nbsp; Texto plano</span></a>: introduce la importación y exportación de datos de archivos de texto plano rectangulares utilizando el paquete <code>readr</code>.</p></li>
+<li><p><a href="spreadsheets.html" class="quarto-xref"><span>14&nbsp; Hojas de cálculo</span></a>: introduce la importación de datos de hojas de cálculo de Excel (<code>.xls</code> y <code>.xlsx</code>) utilizando el paquete <code>readxl</code>.</p></li>
+<li><p><a href="geopackage_gpkg.html" class="quarto-xref"><span>15&nbsp; GeoPackage (.gpkg)</span></a>: introduce la importación y posterior visualización de datos geoestadísticos a través del formato GeoPackage (<code>.gpkg</code>) utilizando los paquetes <code>sf</code> y <code>ggplot2</code>.</p></li>
+</ul>
+<p>Una vez se entienda el funcionamiento del paquete <code>readr</code> así como de los otros paquetes utilizados, si estos no cubren tus necesidades o buscas una alternativa unificada para importar y exportar múltiples formatos con una sintaxis simple, puedes explorar el paquete <a href="https://gesistsa.github.io/rio/"><code>rio</code></a> (en inglés <strong>R</strong> <strong>I</strong>nput/<strong>O</strong>utput). El paquete <code>rio</code> simplifica el flujo de trabajo mediante 2 funciones principales: <code>import()</code> y <code>export()</code>. Estas funciones detectan automáticamente la extensión del archivo y seleccionan internamente el paquete adecuado en caso que exista.</p>
+<p>Por otra parte, si requieres importar datos desde fuentes o formatos especializados, puedes también consultar los <a href="https://cran.r-project.org/web/views/">CRAN Task Views</a>. Estas son guías temáticas curadas por la comunidad de R que agrupan y describen los paquetes más importantes según el área de trabajo. Entre las guías más útiles que contemplan la importación de datos, se destacan:</p>
+<ul>
+<li><a href="https://cran.r-project.org/view=Databases">Databases</a>: paquetes para conectar R con bases de datos relacionales y no relacionales.</li>
+<li><a href="https://cran.r-project.org/view=Spatial">Analysis of Spatial Data</a>: herramientas para leer, escribir y manipular datos espaciales y geográficos.</li>
+<li><a href="https://cran.r-project.org/view=WebTechnologies">Web Technologies and Services</a>: paquetes orientados a la descarga directa e ingestión de datos (en inglés <strong>direct data download and ingestion</strong>), interacción con APIs y extracción de datos desde la web.</li>
+<li><a href="https://cran.r-project.org/view=OfficialStatistics">Official Statistics &amp; Survey Statistics</a>: herramientas especializadas para importar datos de oficinas y organismos oficiales de estadística, censos y encuestas.</li>
+</ul>
 
 
 
