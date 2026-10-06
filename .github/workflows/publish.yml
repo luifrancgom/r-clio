@@ -28,7 +28,17 @@ jobs:
           use-public-rspm: true
 
       - name: Install Linux System Libraries
-        run: sudo apt-get update && sudo apt-get install -y libnode-dev libcurl4-openssl-dev
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libnode-dev \
+            libcurl4-openssl-dev \
+            libudunits2-dev \
+            libgdal-dev \
+            gdal-bin \
+            libgeos-dev \
+            libproj-dev \
+            cmake
 
       - name: Install R Dependencies
         uses: r-lib/actions/setup-renv@v2
