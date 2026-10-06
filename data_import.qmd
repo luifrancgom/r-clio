@@ -1,3 +1,20 @@
 # Importación de datos
 
-Pendiente
+El objetivo de esta parte, es presentar cómo importar datos en R donde es el primer paso que se debe aplicar cuando se requiere realizar un análisis de datos sin importar el lenguaje de programación o herramienta que se utilice. En particular, se utilizará inicialmente el paquete [`readr`]({{< var url.packages.readr >}}) y posteriormente otros paquetes, a través de los siguientes 4 capítulos:
+
+- @sec-rds: introduce la importación y exportación de datos en el formato nativo de R a través de la extensión `.rds` utilizando el paquete `readr`.
+
+- @sec-plain-text: introduce la importación y exportación de datos de archivos de texto plano rectangulares utilizando el paquete `readr`.
+
+- @sec-spreadsheets: introduce la importación de datos de hojas de cálculo de Excel (`.xls` y `.xlsx`) utilizando el paquete `readxl`.
+
+- @sec-gpkg: introduce la importación y posterior visualización de datos geoestadísticos a través del formato GeoPackage (`.gpkg`) utilizando los paquetes `sf` y `ggplot2`.
+
+Una vez se entienda el funcionamiento del paquete `readr` así como de los otros paquetes utilizados, si estos no cubren tus necesidades o buscas una alternativa unificada para importar y exportar múltiples formatos con una sintaxis simple, puedes explorar el paquete [`rio`]({{< var url.packages.rio >}}) (en inglés **R** **I**nput/**O**utput). El paquete `rio` simplifica el flujo de trabajo mediante 2 funciones principales: `import()` y `export()`. Estas funciones detectan automáticamente la extensión del archivo y seleccionan internamente el paquete adecuado en caso que exista.
+
+Por otra parte, si requieres importar datos desde fuentes o formatos especializados, puedes también consultar los [CRAN Task Views]({{< var url.software.cran_task_views >}}). Estas son guías temáticas curadas por la comunidad de R que agrupan y describen los paquetes más importantes según el área de trabajo. Entre las guías más útiles que contemplan la importación de datos, se destacan:
+
+- [Databases]({{< var url.software.cran_task_views_databases >}}): paquetes para conectar R con bases de datos relacionales y no relacionales.
+- [Analysis of Spatial Data]({{< var url.software.cran_task_views_spatial >}}): herramientas para leer, escribir y manipular datos espaciales y geográficos.
+- [Web Technologies and Services]({{< var url.software.cran_task_views_web_technologies >}}): paquetes orientados a la descarga directa e ingestión de datos (en inglés **direct data download and ingestion**), interacción con APIs y extracción de datos desde la web.
+- [Official Statistics & Survey Statistics]({{< var url.software.cran_task_views_official_statistics >}}): herramientas especializadas para importar datos de oficinas y organismos oficiales de estadística, censos y encuestas.
