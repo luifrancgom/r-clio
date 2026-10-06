@@ -16,6 +16,7 @@ url:
     snies: "https://snies.mineducacion.gov.co/portal/"
     dane_divipola: "https://www.dane.gov.co/index.php/sistema-estadistico-nacional-sen/normas-y-estandares/nomenclaturas-y-clasificaciones/nomenclaturas/codificacion-de-la-division-politica-administrativa-de-colombia-divipola"
     dane_proyecciones: "https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/proyecciones-de-poblacion"
+    dane_geoportal: "https://geoportal.dane.gov.co/servicios/descarga-y-metadatos/datos-geoestadisticos/"
     icfes_saber_pro: "https://www.icfes.gov.co/evaluaciones-icfes/acerca-del-examen-saber-pro/"
     icfes_data: "https://www.icfes.gov.co/investigaciones/data-icfes/"
 
@@ -24,6 +25,11 @@ url:
     r_intro_manual: "https://cran.r-project.org/doc/manuals/r-release/R-intro.html#Index-vectors_003b-selecting-and-modifying-subsets-of-a-data-set"
     python: "https://www.python.org/"
     cran_download: "https://cloud.r-project.org/"
+    cran_task_views: "https://cran.r-project.org/web/views/"
+    cran_task_views_databases: "https://cran.r-project.org/view=Databases"
+    cran_task_views_spatial: "https://cran.r-project.org/view=Spatial"
+    cran_task_views_web_technologies: "https://cran.r-project.org/view=WebTechnologies"
+    cran_task_views_official_statistics: "https://cran.r-project.org/view=OfficialStatistics"
     positron_download: "https://positron.posit.co/download.html"
     positron_prerequisites: "https://positron.posit.co/download.html#prerequisites"
     positron_welcome: "https://positron.posit.co/welcome.html"
@@ -68,6 +74,8 @@ url:
     naniar: "https://naniar.njtierney.com/"
     readr: "https://readr.tidyverse.org/"
     readxl: "https://readxl.tidyverse.org/"
+    sf: "https://r-spatial.github.io/sf/"
+    rio: "https://gesistsa.github.io/rio/"
 
   tools:
     gemini: "https://gemini.google.com/"
@@ -88,6 +96,7 @@ url:
     programas_faedis_rds: "https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/programas-pregrado-faedis.rds"
     resultados_saber_pro_rds: "https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/resultados-saber-pro.rds"
     poblacion_xlsx_2018_2070: "https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/serie-nacional-de-poblacion_area-sexo-edad_2018-2070_2025-07-18.xlsx"
+    nivel-departamento_version-mgn-2025_gpkg: "https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/nivel-departamento_version-mgn-2025_geopackage.gpkg"
     diccionario_saber_pro_pdf: "https://github.com/luifrancgom/r-clio/raw/main/documentation/diccionario-datos-examen-saber-pro.pdf"
     manual_identidad_umng_pdf: "https://github.com/luifrancgom/r-clio/raw/main/documentation/manual-identidad-visual-umng_2024-09.pdf"
 
@@ -118,6 +127,8 @@ url:
     heuristic_wiki: "https://en.wikipedia.org/wiki/Heuristic"
     excel_file_formats_wiki: "https://en.wikipedia.org/wiki/Microsoft_Excel#File_formats"
     excel_binary_format_wiki: "https://en.wikipedia.org/wiki/Microsoft_Excel#File_formats"
+    gpkg_wiki: "https://en.wikipedia.org/wiki/GeoPackage"
+    choropleth_map_wiki: "https://en.wikipedia.org/wiki/Choropleth_map"
 
   media:
     muse_klio_artwork: "https://commons.wikimedia.org/wiki/File:Christian_Bernhard_Rode_-_Die_Muse_Klio.jpg"

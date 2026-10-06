@@ -1,8 +1,164 @@
 # GeoPackage (`.gpkg`) {#sec-gpkg}
 
-Este capítulo se basa en ... donde tiene como propósito ... 
+```{r}
+#| echo: false
+source("_common.R")
+```
+
+```{r}
+#| label: load-r-packages
+#| echo: false
+#| message: false
+library(tidyverse)
+library(sf)
+```
+
+Este capítulo se basa en [@lovelace_geocomputation_2025], [@popovic_mapping_2025] y [@wilke_fundamentals_2019] así como en la documentación oficial de [`ggplot2`]({{< var url.packages.ggplot2 >}}) y [`sf`]({{< var url.packages.sf >}}) donde tiene como propósito introducir la importación y posterior visualización de datos geoestadísticos a través del formato [GeoPackage (`.gpkg`)]({{< var url.education.gpkg_wiki >}}) utilizando el paquete `sf` y `ggplot2` con información del [Geoportal del Departamento Administrativo Nacional de Estadística (DANE)]({{< var url.institution.dane_geoportal >}}) y los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).  
 
 Exploraremos los siguientes aspectos:
 
-1. 
-2.
+1. ¿Qué es el formato GeoPackage (`.gpkg`)?   
+2. ¿Cómo importar datos geoestadísticos a través del formato GeoPackage (`.gpkg`)?
+3. ¿Cómo visualizar datos geoestadísticos integrándolos con otras variables a través de un [mapa coroplético]({{< var url.education.choropleth_map_wiki >}}) (en inglés **choropleth map**)?  
+
+:::: {#nte-1-chap-15 .callout-note}
+Para desarrollar el contenido de este capítulo es necesario que instales el paquete `sf` teniendo en cuenta la @sec-installing-packages, tal como se señala a continuación:
+
+```r
+install.packages("sf")
+```
+
+También es necesario que descargues el archivo señalado a continuación y lo incluyas dentro de la carpeta `data`, respecto a lo descrito en la @nte-1-chap-6:
+   
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [nivel-departamento_version-mgn-2025_geopackage.gpkg]({{< var url.data.nivel-departamento_version-mgn-2025_gpkg >}})
+:::
+
+Adicionalmente, es necesario que hayas exportado y guardado el archivo `2021-2024_saber-pro-genericas_faedis_ajustado.rds` en la carpeta `data`, tal como se señaló en el @lst-write-rds-case-study. En caso que no lo hayas hecho es necesario que lo descargues y lo incluyas dentro de la carpeta `data`:
+
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2021-2024_saber-pro-genericas_faedis_ajustado.rds]({{< var url.data.saber_pro_faedis_ajustado_rds >}})
+:::
+
+En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `015_importar-datos-gpkg-en-r` y dentro de ella genera el archivo `001_importar-datos-formato-gpkg.R`, siguiendo las pautas de la @sec-package-usage.
+::::
+
+## Mapa coroplético
+
+En este capítulo realizarás un mapa coroplético señalando el número de inscritos a la prueba Saber Pro por departamento para los programas de pregrado de la Facultad de Estudios a Distancia de la Universidad Militar en el periodo 2021-2024, tal como se indica en la @fig-1-chap-15.
+
+```{r}
+#| label: fig-1-chap-15
+#| fig-cap: Resultado final de un mapa coroplético elaborado con `sf` y `ggplot2` a partir de datos geoestadísticos en formato `.gpkg`
+#| fig-height: 6
+#| echo: false
+
+# Import data ----
+col_dpto_sf <- read_sf(
+  dsn = "data/nivel-departamento_version-mgn-2025_geopackage.gpkg"
+)
+
+resultado_saber_pro_ajustado <- read_rds(
+  file = "data/2021-2024_saber-pro-genericas_faedis_ajustado.rds"
+)
+
+# Select ----
+col_dpto_sf <- col_dpto_sf |>
+  select(
+    dpto_ccdgo,
+    dpto_cnmbr,
+    geom
+  )
+
+resultado_saber_pro_ajustado <- resultado_saber_pro_ajustado |>
+  count(
+    estu_cod_depto_presentacion
+  )
+
+## Auxiliary variables ----
+n_na <- resultado_saber_pro_ajustado |>
+  pull(n) |>
+  last()
+
+n_total <- resultado_saber_pro_ajustado |>
+  pull(n) |>
+  sum()
+
+# Mutating joins ----
+col_dpto_saber_pro_n <- col_dpto_sf |>
+  left_join(
+    y = resultado_saber_pro_ajustado,
+    by = join_by(
+      dpto_ccdgo == estu_cod_depto_presentacion
+    )
+  )
+
+# Clean ----
+col_dpto_saber_pro_n <- col_dpto_saber_pro_n |>
+  replace_na(
+    replace = list(
+      n = 0
+    )
+  )
+
+## Auxiliary variables ----
+n_min <- col_dpto_saber_pro_n |>
+  pull(n) |>
+  min()
+
+n_max <- col_dpto_saber_pro_n |>
+  pull(n) |>
+  max()
+
+# Visualization ----
+## Breaks
+breaks <- seq.int(
+  from = log1p(n_min),
+  to = log1p(n_max),
+  length.out = 5
+) |>
+  expm1() |>
+  round()
+
+col_dpto_saber_pro_n |>
+  ggplot() +
+  geom_sf(
+    mapping = aes(
+      geometry = geom,
+      fill = n
+    ),
+    color = "black"
+  ) +
+  scale_fill_distiller(
+    palette = "Blues",
+    direction = 1,
+    transform = "log1p",
+    breaks = breaks
+  ) +
+  labs(
+    fill = str_glue(
+      "Número estudiantes
+  (Escala logarítmica)"
+    ),
+    title = str_glue(
+      "Número inscritos Saber Pro FAEDIS por departamento (n = {n_total - n_na})"
+    ),
+    subtitle = str_glue(
+      "Periodo: 2021-2024
+    Nota: Excluye inscritos en el exterior (n = {n_na})"
+    ),
+    caption = "Fuente: Data Icfes"
+  ) +
+  theme_void()
+```
+
+## El formato `.gpkg`
+
+
+
+## Importación de datos en formato `.gpkg`
+
+
+
+## Visualización de datos geoespaciales  
+
