@@ -131,6 +131,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -390,8 +419,12 @@ div.csl-indent {
   <ul>
   <li><a href="#mapa-coroplético" id="toc-mapa-coroplético" class="nav-link active" data-scroll-target="#mapa-coroplético"><span class="header-section-number">15.1</span> Mapa coroplético</a></li>
   <li><a href="#el-formato-.gpkg" id="toc-el-formato-.gpkg" class="nav-link" data-scroll-target="#el-formato-.gpkg"><span class="header-section-number">15.2</span> El formato <code>.gpkg</code></a></li>
-  <li><a href="#importación-de-datos-en-formato-.gpkg" id="toc-importación-de-datos-en-formato-.gpkg" class="nav-link" data-scroll-target="#importación-de-datos-en-formato-.gpkg"><span class="header-section-number">15.3</span> Importación de datos en formato <code>.gpkg</code></a></li>
-  <li><a href="#visualización-de-datos-geoespaciales" id="toc-visualización-de-datos-geoespaciales" class="nav-link" data-scroll-target="#visualización-de-datos-geoespaciales"><span class="header-section-number">15.4</span> Visualización de datos geoespaciales</a></li>
+  <li><a href="#sec-import-gpkg" id="toc-sec-import-gpkg" class="nav-link" data-scroll-target="#sec-import-gpkg"><span class="header-section-number">15.3</span> Importación de datos en formato <code>.gpkg</code></a>
+  <ul class="collapse">
+  <li><a href="#sec-sf-structure" id="toc-sec-sf-structure" class="nav-link" data-scroll-target="#sec-sf-structure"><span class="header-section-number">15.3.1</span> Estructura de un objeto <code>sf</code></a></li>
+  <li><a href="#sec-import-non-geo-data-and-data-manipulation" id="toc-sec-import-non-geo-data-and-data-manipulation" class="nav-link" data-scroll-target="#sec-import-non-geo-data-and-data-manipulation"><span class="header-section-number">15.3.2</span> Importación de variables no espaciales y manipulación de datos</a></li>
+  </ul></li>
+  <li><a href="#sec-geo-data-visualization" id="toc-sec-geo-data-visualization" class="nav-link" data-scroll-target="#sec-geo-data-visualization"><span class="header-section-number">15.4</span> Visualización de datos geoespaciales</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/geopackage_gpkg.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/geopackage_gpkg.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
@@ -488,15 +521,272 @@ Figura&nbsp;15.1: Resultado final de un mapa coroplético elaborado con <code>sf
 </section>
 <section id="el-formato-.gpkg" class="level2" data-number="15.2">
 <h2 data-number="15.2" class="anchored" data-anchor-id="el-formato-.gpkg"><span class="header-section-number">15.2</span> El formato <code>.gpkg</code></h2>
+<p>Cuando trabajes con datos espaciales es necesario utilizar un formato para almacenarlos y compartirlos. Durante muchos años, el estándar más utilizado en los Sistemas de Información Geográfica (SIG) fue el formato <strong>Shapefile</strong> (<code>.shp</code>). Sin embargo, el <code>.shp</code> presentaba limitaciones para el análisis de datos moderno (ver <span class="citation" data-cites="jachym_shapefile_2017">Jachym (<a href="references.html#ref-jachym_shapefile_2017" role="doc-biblioref">2017</a>)</span>).</p>
+<p>Para superar estas restricciones fue creado el formato <a href="https://en.wikipedia.org/wiki/GeoPackage">GeoPackage (<code>.gpkg</code>)</a>. A diferencia de otros formatos tradicionales, GeoPackage almacena toda la información espacial y sus tablas asociadas dentro de un único archivo. Por “debajo”, un archivo <code>.gpkg</code> es en realidad una base de datos <a href="https://en.wikipedia.org/wiki/SQLite">SQLite</a> ligera y portable.</p>
+<p>Una de las mayores fortalezas del formato <code>.gpkg</code> es su naturaleza abierta, no propietaria e independiente de plataforma. Esto significa que cualquier persona puede utilizarlo sin necesidad de adquirir licencias comerciales de software y puede abrirse con las mismas garantías en lenguajes de programación como R.</p>
+<p>Esta apertura es promovida y regulada por el <a href="https://www.ogc.org/about/overview/">Open Geospatial Consortium (OGC)</a>. El OGC es un consorcio internacional sin fines de lucro fundado en 1994, integrado por cientos de organizaciones de gobiernos, empresas comerciales y entidades académicas alrededor del mundo. Su misión es definir consensos técnicos y estándares abiertos para que los datos de localización sean fáciles de encontrar, accesibles, interoperables y reutilizables. Dentro de este marco, el estándar oficial <a href="https://www.ogc.org/standards/geopackage/">OGC GeoPackage</a> fue diseñado para garantizar la interoperabilidad universal, permitiendo que la información geoespacial fluya sin fricciones entre diferentes herramientas y sistemas.</p>
+<p>Para acceder a datos geoestadísticos de Colombia, existen 2 plataformas institucionales donde es posible consultar y descargar información geográfica oficial en formatos abiertos como GeoPackage (<code>.gpkg</code>):</p>
+<ol type="1">
+<li><p><a href="https://geoportal.dane.gov.co/servicios/descarga-y-metadatos/datos-geoestadisticos/">Geoportal del Departamento Administrativo Nacional de Estadística (DANE)</a>: a través del Marco Geoestadístico Nacional (MGN), el DANE ofrece un sistema diseñado para referenciar la información estadística con su localización geográfica en el país. Este marco estructura el territorio en áreas geoestadísticas como departamentos, municipios, cabeceras y centros poblados, abarcando los <span class="math inline">\(1102\)</span> municipios, <span class="math inline">\(18\)</span> áreas no municipalizadas y la isla de San Andrés. El archivo cartográfico departamental que utilizaremos a lo largo de este capítulo proviene de este sistema.</p></li>
+<li><p><a href="https://www.colombiaenmapas.gov.co/inicio/">Portal de información geoespacial - Colombia en Mapas</a>: es una plataforma administrada por el Instituto Geográfico Agustín Codazzi (IGAC) en conjunto con la Infraestructura Colombiana de Datos Espaciales (ICDE). Centraliza la información geográfica de Colombia y permite explorar y descargar capas temáticas de múltiples entidades públicas en formatos abiertos.</p></li>
+</ol>
 </section>
-<section id="importación-de-datos-en-formato-.gpkg" class="level2" data-number="15.3">
-<h2 data-number="15.3" class="anchored" data-anchor-id="importación-de-datos-en-formato-.gpkg"><span class="header-section-number">15.3</span> Importación de datos en formato <code>.gpkg</code></h2>
+<section id="sec-import-gpkg" class="level2" data-number="15.3">
+<h2 data-number="15.3" class="anchored" data-anchor-id="sec-import-gpkg"><span class="header-section-number">15.3</span> Importación de datos en formato <code>.gpkg</code></h2>
+<p>Para importar un archivo en formato <code>.gpkg</code> a R, se utiliza la función <code>read_sf()</code> del paquete <code>sf</code>. Dado que <code>sf</code> no hace parte del <code>tidyverse</code>, es necesario cargar previamente el paquete mediante <code>library(sf)</code> (ver <a href="r_packages.html#sec-load-packages" class="quarto-xref"><span>Sección 4.3</span></a>) en el archivo <code>001_importar-datos-formato-gpkg.R</code>. Para realizar la importación, la función <code>read_sf()</code> utiliza el parámetro <code>dsn</code> (en inglés <strong>Data Source Name</strong>), en el cual se especifica como argumento la ruta y el nombre del archivo con extensión <code>.gpkg</code> que se desea leer.</p>
+<p>Para importar el conjunto de datos de departamentos de Colombia en formato <code>.gpkg</code> (ver <a href="#nte-1-chap-15" class="quarto-xref">Nota&nbsp;<span>15.1</span></a>) y asignarlo a una variable denominada <code>col_dpto_sf</code>, ejecutarás el siguiente código, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-read-gpkg" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-read-gpkg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;15.1: Uso de la función <code>read_sf()</code> para importar un archivo de datos espaciales en formato <code>.gpkg</code>
+</figcaption>
+<div aria-describedby="lst-read-gpkg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar paquetes ----</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar datos ----</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>col_dpto_sf <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">dsn =</span> <span class="st">"data/nivel-departamento_version-mgn-2025_geopackage.gpkg"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>col_dpto_sf</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 33 features and 8 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -81.73562 ymin: -4.229406 xmax: -66.84722 ymax: 13.39473
+Geodetic CRS:  WGS 84
+# A tibble: 33 × 9
+   dpto_ccdgo dpto_cnmbr   dpto_ano_c dpto_act_a  dpto_narea
+   &lt;chr&gt;      &lt;chr&gt;             &lt;int&gt; &lt;chr&gt;            &lt;dbl&gt;
+ 1 05         ANTIOQUIA          1886 Constituci…     62789.
+ 2 08         ATLÁNTICO          1910 Ley 21 de …      3324.
+ 3 11         BOGOTÁ, D.C.       1538 Constituci…      1621.
+ 4 13         BOLÍVAR            1886 Constituci…     26681.
+ 5 15         BOYACÁ             1886 Constituci…     23073.
+ 6 17         CALDAS             1905 11 de Abri…      7422.
+ 7 18         CAQUETÁ            1981 Ley 78 del…     92709.
+ 8 19         CAUCA              1857 15 de juni…     31261.
+ 9 20         CESAR              1967 Ley 25  21…     22498.
+10 23         CÓRDOBA            1951 Ley 9 del …     25083.
+# ℹ 23 more rows
+# ℹ 4 more variables: dpto_nano &lt;int&gt;, shape_Leng &lt;dbl&gt;,
+#   shape_Area &lt;dbl&gt;, geom &lt;MULTIPOLYGON [°]&gt;</code></pre>
+</div>
+</div>
+<p>En el <a href="#lst-read-gpkg" class="quarto-xref">Listado&nbsp;<span>15.1</span></a>, primero se carga el paquete <code>sf</code> mediante <code>library(sf)</code>. Posteriormente, se utiliza la función <code>read_sf()</code> con el parámetro <code>dsn</code> asociado al argumento <code>"data/nivel-departamento_version-mgn-2025_geopackage.gpkg"</code> para leer la capa cartográfica y asignar explícitamente el objeto resultante a la variable <code>col_dpto_sf</code>. Finalmente, al evaluar <code>col_dpto_sf</code> se imprime en la consola tanto el resumen de metadatos espaciales como las primeras observaciones. El objeto resultante <code>col_dpto_sf</code> se conoce como un objeto <code>sf</code> en R (ver <a href="#sec-sf-structure" class="quarto-xref"><span>Sección 15.3.1</span></a>), el cual extiende el concepto de <code>tibble</code> (ver <a href="how_to_code_in_r.html#sec-tibbles" class="quarto-xref"><span>Sección 5.4</span></a>) al incluir adicionalmente información geográfica.</p>
+<section id="sec-sf-structure" class="level3" data-number="15.3.1">
+<h3 data-number="15.3.1" class="anchored" data-anchor-id="sec-sf-structure"><span class="header-section-number">15.3.1</span> Estructura de un objeto <code>sf</code></h3>
+<p>El paquete <code>sf</code> recibe su nombre del estándar <a href="https://www.ogc.org/standards/sfa/"><strong>Simple Features</strong></a>, un estándar internacional abierto definido por el OGC. Este estándar describe una forma unificada de representar objetos geográficos del mundo real a través de geometrías y atributos. Al inspeccionar <code>col_dpto_sf</code> en la consola, notarás 2 componentes principales:</p>
+<ol type="1">
+<li><p>Un <strong>encabezado de metadatos espaciales</strong></p>
+<pre class="text"><code>Simple feature collection with 33 features and 8 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -81.73562 ymin: -4.229406 xmax: -66.84722 ymax: 13.39473
+Geodetic CRS:  WGS 84
+# A tibble: 33 × 9</code></pre></li>
+<li><p>Una <strong>tabla de datos</strong></p></li>
+</ol>
+<p>El encabezado inicial resume las propiedades cartográficas fundamentales de la capa geográfica:</p>
+<ul>
+<li><p><code>Simple feature collection with 33 features and 8 fields</code>: señala que el objeto contiene <span class="math inline">\(33\)</span> observaciones espaciales correspondientes a los <span class="math inline">\(32\)</span> departamentos de Colombia más Bogotá y <span class="math inline">\(8\)</span> variables adicionales.</p></li>
+<li><p><code>Geometry type: MULTIPOLYGON</code>: indica que las geometrías son multipolígonos. Se utiliza este tipo porque varias entidades territoriales del país están conformadas por más de un fragmento de tierra discontinuo (p.&nbsp;ej., el archipiélago de San Andrés, Providencia y Santa Catalina).</p></li>
+<li><p><code>Dimension: XY</code>: define que las coordenadas espaciales se representan en 2 dimensiones: longitud <span class="math inline">\(X\)</span> y latitud <span class="math inline">\(Y\)</span>.</p></li>
+<li><p><code>Bounding box</code>: es la “caja” delimitadora que abarca los puntos geográficos extremos con occidente <code>xmin</code>, sur <code>ymin</code>, oriente <code>xmax</code> y norte <code>ymax</code>, dentro de los cuales se ubican todas las geometrías de la capa.</p></li>
+<li><p><code>Geodetic CRS: WGS 84</code>: indica el <a href="https://en.wikipedia.org/wiki/Spatial_reference_system">Sistema de Referencia de Coordenadas</a> (en inglés <strong>Coordinate Reference System (CRS)</strong>).</p></li>
+</ul>
+<div id="nte-2-chap-15" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota&nbsp;15.2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En caso que no entiendas a profundidad algunos elementos descritos anteriormente respecto al encabezado inicial del objeto <code>sf</code> relacionado con <code>col_dpto_sf</code>, puedes consultar una explicación detallada en <span class="citation" data-cites="lovelace_geocomputation_2025">(<a href="references.html#ref-lovelace_geocomputation_2025" role="doc-biblioref">Lovelace et&nbsp;al., 2025, Capítulo 2</a>)</span>.</p>
+<p>Sin embargo, esta lectura no es un requisito para comprender los temas abordados en el <a href="#sec-gpkg" class="quarto-xref"><span>Capítulo 15</span></a> debido a que no se pretende desarrollar una explicación exhaustiva de sistemas de información geográfica en el libro. Más bien, se busca proporcionar al lector las bases prácticas necesarias para importar, transformar y visualizar datos espaciales combinándolos con otras variables de interés.</p>
+</div>
+</div>
+<section id="una-tibble-con-una-columna-geométrica" class="level4" data-number="15.3.1.1">
+<h4 data-number="15.3.1.1" class="anchored" data-anchor-id="una-tibble-con-una-columna-geométrica"><span class="header-section-number">15.3.1.1</span> Una <code>tibble</code> con una columna geométrica</h4>
+<p>Inmediatamente después del encabezado de metadatos espaciales, el resultado muestra <code># A tibble: 33 × 9</code>. Esto evidencia una de las mayores ventajas del paquete <code>sf</code>:</p>
+<blockquote class="blockquote">
+<p>Un objeto <code>sf</code> es en esencia una <code>tibble</code> (o un objeto similar) de R, extendido con capacidades geográficas.</p>
+</blockquote>
+<p>Las <span class="math inline">\(9\)</span> columnas de la <code>tibble</code> corresponden a las <span class="math inline">\(8\)</span> variables no espaciales más una columna especial denominada <strong>geometry list-column</strong> donde en el caso de <code>col_dpto_sf</code> tiene asociada el nombre de <code>geom</code>. A diferencia de las columnas tradicionales que almacenan números o texto, la columna <code>geom</code>:</p>
+<ol type="a">
+<li><p>Es una <strong>columna de lista</strong> (en inglés <strong>list-column</strong>): cada celda contiene una lista (ver <a href="#nte-2-chap-15" class="quarto-xref">Nota&nbsp;<span>15.3</span></a>) con todas las secuencias de coordenadas necesarias para dibujar los límites geográficos del departamento correspondiente.</p></li>
+<li><p>Tiene una clase especial <code>&lt;MULTIPOLYGON [°]&gt;</code>: donde <code>MULTIPOLYGON</code> especifica el tipo de figura geométrica y el símbolo <code>[°]</code> indica que las unidades de medida son <strong>grados decimales</strong> (latitud y longitud en grados decimales), en concordancia con el Sistema de Referencia de Coordenadas <code>WGS 84</code>.</p></li>
+</ol>
+<div id="nte-2-chap-15" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota&nbsp;15.3
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En el <a href="map_functions.html" class="quarto-xref"><span>Capítulo 20</span></a> se abarcará con más detalle el concepto de <strong>lista</strong>, un tipo de dato señalado de manera superficial en la <a href="single_table_verbs.html#tbl-some-data-types-in-r" class="quarto-xref">Tabla&nbsp;<span>10.2</span></a>.</p>
+</div>
+</div>
+<p>Gracias a esta arquitectura, no es necesario aprender un conjunto totalmente diferente de herramientas para manipular información geográfica. Puedes aplicar sobre un objeto <code>sf</code> las mismas funciones del <code>tidyverse</code> relacionadas con manipulación de datos (ver <a href="#sec-import-non-geo-data-and-data-manipulation" class="quarto-xref"><span>Sección 15.3.2</span></a>). Además haciendo uso del paquete <code>ggplot2</code> es posible visualizar datos geoestadísticos integrándolos con otras variables de interés (ver <a href="#sec-geo-data-visualization" class="quarto-xref"><span>Sección 15.4</span></a>)</p>
+<p>Finalmente, con respecto a la tabla de datos, a continuación se describe cada una de las variables en <code>nivel-departamento_version-mgn-2025_geopackage.gpkg</code>:</p>
+<ol type="1">
+<li><strong>dpto_ccdgo</strong>: código del departamento según codificación DIVIPOLA</li>
+<li><strong>dpto_cnmbr</strong>: nombre del departamento de acuerdo a DIVIPOLA</li>
+<li><strong>dpto_ano_c</strong>: año en el que fue creado el departamento</li>
+<li><strong>dpto_act_a</strong>: acto administrativo con el que fue creado el departamento</li>
+<li><strong>dpto_narea</strong>: área del departamento en kilómetros cuadrados</li>
+<li><strong>dpto_nano</strong>: año de la versión de la información del departamento</li>
+<li><strong>shape_Leng</strong>: perímetro del departamento calculado en las unidades del sistema de referencia de coordenadas que en este caso corresponden a grados decimales</li>
+<li><strong>shape_Area</strong>: superficie o área del departamento calculada en las unidades del sistema de referencia de coordenadas que en este caso corresponden a grados decimales cuadrados</li>
+<li><strong>geom</strong>: columna de geometría espacial que almacena las coordenadas y formas geométricas mediante el uso de multipolígonos que delimitan el territorio de cada departamento</li>
+</ol>
+<p>Donde para la realización de la <a href="#fig-1-chap-15" class="quarto-xref">Figura&nbsp;<span>15.1</span></a> utilizarás sólo las variables <code>dpto_ccdgo</code>, <code>dpto_cnmbr</code> y <code>geom</code>.</p>
 </section>
-<section id="visualización-de-datos-geoespaciales" class="level2" data-number="15.4">
-<h2 data-number="15.4" class="anchored" data-anchor-id="visualización-de-datos-geoespaciales"><span class="header-section-number">15.4</span> Visualización de datos geoespaciales</h2>
+</section>
+<section id="sec-import-non-geo-data-and-data-manipulation" class="level3" data-number="15.3.2">
+<h3 data-number="15.3.2" class="anchored" data-anchor-id="sec-import-non-geo-data-and-data-manipulation"><span class="header-section-number">15.3.2</span> Importación de variables no espaciales y manipulación de datos</h3>
+<p>Para incorporar los resultados del examen Saber Pro y llevar a cabo la manipulación de datos, primero es necesario cargar el paquete <code>tidyverse</code> e importar el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis_ajustado.rds</code> (ver <a href="r_data_serialization.html#sec-rds-format" class="quarto-xref"><span>Sección 12.1</span></a>) mediante la función <code>read_rds()</code> del paquete <code>readr</code>, tal como se indica a continuación:</p>
+<div class="cell">
+<div id="lst-load-packages-import-rds" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-load-packages-import-rds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;15.2: Cargar el paquete <code>tidyverse</code> e importar el conjunto de datos de variables no espaciales
+</figcaption>
+<div aria-describedby="lst-load-packages-import-rds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar paquetes ----</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar datos ----</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>resultado_saber_pro_ajustado <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"data/2021-2024_saber-pro-genericas_faedis_ajustado.rds"</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<p>En el <a href="#lst-load-packages-import-rds" class="quarto-xref">Listado&nbsp;<span>15.2</span></a>, se carga el paquete <code>tidyverse</code> y se utiliza la función <code>read_rds()</code> asignando la ruta del archivo <code>.rds</code> al parámetro <code>file</code> para asociar el conjunto de datos con el nombre <code>resultado_saber_pro_ajustado</code>.</p>
+<section id="selección-y-creación-de-variables-de-interés" class="level4" data-number="15.3.2.1">
+<h4 data-number="15.3.2.1" class="anchored" data-anchor-id="selección-y-creación-de-variables-de-interés"><span class="header-section-number">15.3.2.1</span> Selección y creación de variables de interés</h4>
+<p>Una vez importados los datos espaciales y no espaciales, el siguiente paso consiste en preparar las variables requeridas para construir el mapa coroplético de la <a href="#fig-1-chap-15" class="quarto-xref">Figura&nbsp;<span>15.1</span></a>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-select-count-data" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-select-count-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;15.3: Selección de variables en el objeto espacial y conteo de observaciones con <code>count()</code>
+</figcaption>
+<div aria-describedby="lst-select-count-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Seleccionar ----</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>col_dpto_sf <span class="ot">&lt;-</span> col_dpto_sf <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    dpto_ccdgo,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    dpto_cnmbr,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    geom</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Contar ----</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>resultado_saber_pro_ajustado <span class="ot">&lt;-</span> resultado_saber_pro_ajustado <span class="sc">|&gt;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    estu_cod_depto_presentacion</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<p>Respecto al <a href="#lst-select-count-data" class="quarto-xref">Listado&nbsp;<span>15.3</span></a> en <code>col_dpto_sf</code>, se conservan únicamente el código del departamento (<code>dpto_ccdgo</code>), el nombre del departamento (<code>dpto_cnmbr</code>) y la geometría (<code>geom</code>) utilizando la función <code>select()</code> de <code>dplyr</code> (ver <a href="single_table_verbs.html#sec-column-verbs" class="quarto-xref"><span>Sección 10.1.1.2</span></a>). Luego en <code>resultado_saber_pro_ajustado</code>, se calcula el número de estudiantes que presentaron la prueba en cada departamento utilizando la función <code>count()</code> de <code>dplyr</code>.</p>
+<p>La función <code>count()</code> de <code>dplyr</code> permite contabilizar de forma rápida el número de observaciones asociadas a los valores de una o más variables. Al suministrarle como argumento <code>estu_cod_depto_presentacion</code>, <code>count()</code> agrupa las observaciones por departamento y crea automáticamente una nueva columna denominada <code>n</code>, la cual contiene la cantidad total de estudiantes que presentaron el Saber Pro en cada departamento. Cabe resaltar que la función <code>count()</code> no descarta los valores ausentes (<code>NA</code>), sino que también los contabiliza y los incluye por defecto en la última fila de la tabla resultante, lo cual corresponde a los estudiantes que presentaron el examen en el exterior.</p>
+</section>
+<section id="creación-de-variables-auxiliares" class="level4" data-number="15.3.2.2">
+<h4 data-number="15.3.2.2" class="anchored" data-anchor-id="creación-de-variables-auxiliares"><span class="header-section-number">15.3.2.2</span> Creación de variables auxiliares</h4>
+<p>Para generar parte del título y subtítulo del mapa coroplético en la <a href="#fig-1-chap-15" class="quarto-xref">Figura&nbsp;<span>15.1</span></a> de forma dinámica y reproducible, es conveniente calcular 2 valores:</p>
+<ol type="1">
+<li><p>El total de estudiantes inscritos</p></li>
+<li><p>El número de estudiantes que presentaron el examen en el exterior donde el código del departamento no se encuentra disponible y se registra como <code>NA</code>.</p></li>
+</ol>
+<p>Para ello, se crean 2 variables auxiliares denominadas <code>n_na</code> y <code>n_total</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-auxiliary-vars-labels" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-auxiliary-vars-labels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;15.4: Creación de variables auxiliares para generar parte del título y subtítulo del mapa coroplético
+</figcaption>
+<div aria-describedby="lst-auxiliary-vars-labels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variables auxiliares ----</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>n_na <span class="ot">&lt;-</span> resultado_saber_pro_ajustado <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(n) <span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">last</span>()</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>n_total <span class="ot">&lt;-</span> resultado_saber_pro_ajustado <span class="sc">|&gt;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(n) <span class="sc">|&gt;</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<p>En el <a href="#lst-auxiliary-vars-labels" class="quarto-xref">Listado&nbsp;<span>15.4</span></a>, se utiliza la función <code>pull()</code>, la cual se introdujo al final de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a> con el propósito de extraer una columna de una tabla de datos y convertirla en un vector atómico de R. La lógica detrás del uso de <code>last()</code> y <code>sum()</code> junto con <code>pull()</code> comprende los siguientes aspectos:</p>
+<ul>
+<li><p>Al aplicar <code>resultado_saber_pro_ajustado |&gt; pull(n)</code>, se extrae la columna con los conteos en forma de vector numérico.</p></li>
+<li><p>La función <code>last()</code> extrae el último elemento de dicho vector. Dado que <code>count()</code> ubica por defecto los valores faltantes (<code>NA</code>) en la última fila del conteo, <code>last()</code> recupera directamente el número de estudiantes inscritos en el exterior (<code>n_na</code>).</p></li>
+<li><p>Por su parte, la función <code>sum()</code> suma todos los elementos del vector numérico obtenido con <code>pull(n)</code>, permitiendo calcular el total general de estudiantes inscritos (<code>n_total</code>).</p></li>
+</ul>
+</section>
+<section id="consolidación-y-limpieza-de-datos" class="level4" data-number="15.3.2.3">
+<h4 data-number="15.3.2.3" class="anchored" data-anchor-id="consolidación-y-limpieza-de-datos"><span class="header-section-number">15.3.2.3</span> Consolidación y limpieza de datos</h4>
+<p>El siguiente paso consiste en consolidar la información cartográfica con los conteos de estudiantes. Para ello, se utilizan <strong>Mutating joins</strong> (ver <a href="two_table_verbs.html#sec-mutating-joins" class="quarto-xref"><span>Sección 11.6</span></a>) mediante la función <code>left_join()</code> (ver <a href="two_table_verbs.html#sec-left-joins" class="quarto-xref"><span>Sección 11.6.2</span></a>), tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-join-clean-na" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-join-clean-na-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;15.5: Consolidación mediante <code>left_join()</code> y tratamiento de valores ausentes con <code>replace_na()</code>
+</figcaption>
+<div aria-describedby="lst-join-clean-na-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Consolidar tablas ----</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>col_dpto_saber_pro_n <span class="ot">&lt;-</span> col_dpto_sf <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> resultado_saber_pro_ajustado,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="fu">join_by</span>(</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>      dpto_ccdgo <span class="sc">==</span> estu_cod_depto_presentacion</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Limpiar valores ausentes ----</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>col_dpto_saber_pro_n <span class="ot">&lt;-</span> col_dpto_saber_pro_n <span class="sc">|&gt;</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">replace_na</span>(</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">replace =</span> <span class="fu">list</span>(</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">n =</span> <span class="dv">0</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<p>En el <a href="#lst-join-clean-na" class="quarto-xref">Listado&nbsp;<span>15.5</span></a> se llevan a cabo 2 tareas fundamentales:</p>
+<ol type="1">
+<li><p><strong>Unión de tablas con <code>left_join()</code></strong>: se conservan todas las entidades espaciales de la capa geográfica <code>col_dpto_sf</code> a la izquierda, incorporando a la derecha la columna <code>n</code> de <code>resultado_saber_pro_ajustado</code>. La correspondencia entre ambas tablas se define a través de la función <code>join_by()</code>, emparejando el código del departamento <code>dpto_ccdgo</code> con el código de presentación <code>estu_cod_depto_presentacion</code>.</p></li>
+<li><p><strong>Tratamiento de valores ausentes con <code>replace_na()</code></strong>: en aquellos departamentos donde ningún estudiante presentó la prueba Saber Pro no existe una fila correspondiente en la tabla de conteos, por lo que <code>left_join()</code> les asigna inicialmente un valor ausente (<code>NA</code>) en la columna <code>n</code>. Para corregir este aspecto y reflejar que en esos departamentos hubo <span class="math inline">\(0\)</span> estudiantes, se utiliza la función <code>replace_na()</code> del paquete <code>tidyr</code>.</p></li>
+</ol>
+<p>El propósito de la función <code>replace_na()</code> es reemplazar los valores ausentes (<code>NA</code>) por un valor específico en una o más columnas. Para ello, se utiliza el parámetro <code>replace</code>, el cual recibe como argumento un objeto de tipo lista (ver <a href="#nte-2-chap-15" class="quarto-xref">Nota&nbsp;<span>15.3</span></a>). Al especificar <code>replace = list(n = 0)</code>, se indica de forma explícita que cualquier valor <code>NA</code> en la columna <code>n</code> debe sustituirse por <code>0</code>.</p>
+</section>
+</section>
+</section>
+<section id="sec-geo-data-visualization" class="level2" data-number="15.4">
+<h2 data-number="15.4" class="anchored" data-anchor-id="sec-geo-data-visualization"><span class="header-section-number">15.4</span> Visualización de datos geoespaciales</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-jachym_shapefile_2017" class="csl-entry" role="listitem">
+Jachym, C. (2017). <em>Shapefile must die!</em> <a href="http://switchfromshapefile.org/">http://switchfromshapefile.org/</a>
+</div>
 <div id="ref-lovelace_geocomputation_2025" class="csl-entry" role="listitem">
 Lovelace, R., Nowosad, J., &amp; Münchow, J. (2025). <em>Geocomputation with <span>R</span></em> (2.ª ed.). CRC Press, Taylor &amp; Francis Group. <a href="https://r.geocompx.org/">https://r.geocompx.org/</a>
 </div>
