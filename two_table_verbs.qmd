@@ -87,7 +87,7 @@ Cada entidad en la @fig-erd se puede describir a través de características, ra
 Dentro de los atributos se define una clave primaria (Primary Key (**PK**) en inglés) que tiene como propósito identificar de forma única cada registro dentro de una tabla. Es decir, no pueden existir dos filas con el mismo valor de la clave primaria. Adicionalmente una clave primaria debe cumplir con un conjunto de reglas fundamentales:
 
 a. **Unicidad**: cada valor debe ser único en cada tabla
-b. **No nulidad**: no puede contener valores vacíos o ausentes (`NA` o `NULL` en R). Es decir, todo registro debe estar asociado a una entidad.
+b. **No nulidad**: no puede contener valores ausentes o vacíos (`NA` o `NULL` en R). Es decir, todo registro debe estar asociado a una entidad.
 c. **Inmutabilidad**: Su valor no debe cambiar con el tiempo.
 
 Por otro lado, una clave primaria puede estar formada por una sola columna dentro de una tabla pero también se puede formar uniendo dos o más columnas cuando una sola no basta para garantizar unicidad. En el caso de la @fig-erd respecto a la entidad **Resultado Saber-Pro** se utilizan las variables `Año` y `ID estudiante` para identificar de manera única el evento relacionado con la acción de un estudiante presentando las pruebas Saber-Pro en un periodo determinado. Aunque también se puede utilizar una columna como en el caso de la entidad **Departamento** en la @fig-erd donde se hace uso de la variable `ID Departamento` para identificar de manera única esta entidad utilizando la codificación DIVIPOLA.
