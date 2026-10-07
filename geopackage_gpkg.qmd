@@ -154,11 +154,226 @@ col_dpto_saber_pro_n |>
 
 ## El formato `.gpkg`
 
+Cuando trabajes con datos espaciales es necesario utilizar un formato para almacenarlos y compartirlos. Durante muchos años, el estándar más utilizado en los Sistemas de Información Geográfica (SIG) fue el formato **Shapefile** (`.shp`). Sin embargo, el `.shp` presentaba limitaciones para el análisis de datos moderno (ver @jachym_shapefile_2017).
 
+Para superar estas restricciones fue creado el formato [GeoPackage (`.gpkg`)]({{< var url.education.gpkg_wiki >}}). A diferencia de otros formatos tradicionales, GeoPackage almacena toda la información espacial y sus tablas asociadas dentro de un único archivo. Por "debajo", un archivo `.gpkg` es en realidad una base de datos [SQLite]({{< var url.education.sqlite_wiki >}}) ligera y portable.
 
-## Importación de datos en formato `.gpkg`
+Una de las mayores fortalezas del formato `.gpkg` es su naturaleza abierta, no propietaria e independiente de plataforma. Esto significa que cualquier persona puede utilizarlo sin necesidad de adquirir licencias comerciales de software y puede abrirse con las mismas garantías en lenguajes de programación como R.
 
+Esta apertura es promovida y regulada por el [Open Geospatial Consortium (OGC)]({{< var url.institution.ogc >}}). El OGC es un consorcio internacional sin fines de lucro fundado en 1994, integrado por cientos de organizaciones de gobiernos, empresas comerciales y entidades académicas alrededor del mundo. Su misión es definir consensos técnicos y estándares abiertos para que los datos de localización sean fáciles de encontrar, accesibles, interoperables y reutilizables. Dentro de este marco, el estándar oficial [OGC GeoPackage]({{< var url.institution.ogc_geopackage >}}) fue diseñado para garantizar la interoperabilidad universal, permitiendo que la información geoespacial fluya sin fricciones entre diferentes herramientas y sistemas.
 
+Para acceder a datos geoestadísticos de Colombia, existen 2 plataformas institucionales donde es posible consultar y descargar información geográfica oficial en formatos abiertos como GeoPackage (`.gpkg`):
 
-## Visualización de datos geoespaciales  
+1. [Geoportal del Departamento Administrativo Nacional de Estadística (DANE)]({{< var url.institution.dane_geoportal >}}): a través del Marco Geoestadístico Nacional (MGN), el DANE ofrece un sistema diseñado para referenciar la información estadística con su localización geográfica en el país. Este marco estructura el territorio en áreas geoestadísticas como departamentos, municipios, cabeceras y centros poblados, abarcando los $1102$ municipios, $18$ áreas no municipalizadas y la isla de San Andrés. El archivo cartográfico departamental que utilizaremos a lo largo de este capítulo proviene de este sistema.
+
+2. [Portal de información geoespacial - Colombia en Mapas]({{< var url.institution.colombia_en_mapas >}}): es una plataforma administrada por el Instituto Geográfico Agustín Codazzi (IGAC) en conjunto con la Infraestructura Colombiana de Datos Espaciales (ICDE). Centraliza la información geográfica de Colombia y permite explorar y descargar capas temáticas de múltiples entidades públicas en formatos abiertos.
+
+## Importación de datos en formato `.gpkg` {#sec-import-gpkg}
+
+Para importar un archivo en formato `.gpkg` a R, se utiliza la función `read_sf()` del paquete `sf`. Dado que `sf` no hace parte del `tidyverse`, es necesario cargar previamente el paquete mediante `library(sf)` (ver @sec-load-packages) en el archivo `001_importar-datos-formato-gpkg.R`. Para realizar la importación, la función `read_sf()` utiliza el parámetro `dsn` (en inglés **Data Source Name**), en el cual se especifica como argumento la ruta y el nombre del archivo con extensión `.gpkg` que se desea leer.
+
+Para importar el conjunto de datos de departamentos de Colombia en formato `.gpkg` (ver @nte-1-chap-15) y asignarlo a una variable denominada `col_dpto_sf`, ejecutarás el siguiente código, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-read-gpkg
+#| lst-cap: Uso de la función `read_sf()` para importar un archivo de datos espaciales en formato `.gpkg`
+#| message: false
+
+# Cargar paquetes ----
+library(sf)
+
+# Importar datos ----
+col_dpto_sf <- read_sf(
+  dsn = "data/nivel-departamento_version-mgn-2025_geopackage.gpkg"
+)
+
+col_dpto_sf
+```
+
+En el @lst-read-gpkg, primero se carga el paquete `sf` mediante `library(sf)`. Posteriormente, se utiliza la función `read_sf()` con el parámetro `dsn` asociado al argumento `"data/nivel-departamento_version-mgn-2025_geopackage.gpkg"` para leer la capa cartográfica y asignar explícitamente el objeto resultante a la variable `col_dpto_sf`. Finalmente, al evaluar `col_dpto_sf` se imprime en la consola tanto el resumen de metadatos espaciales como las primeras observaciones. El objeto resultante `col_dpto_sf` se conoce como un objeto `sf` en R (ver @sec-sf-structure), el cual extiende el concepto de `tibble` (ver @sec-tibbles) al incluir adicionalmente información geográfica.
+
+### Estructura de un objeto `sf` {#sec-sf-structure}
+
+El paquete `sf` recibe su nombre del estándar [**Simple Features**]({{< var url.institution.ogc_sfa >}}), un estándar internacional abierto definido por el OGC. Este estándar describe una forma unificada de representar objetos geográficos del mundo real a través de geometrías y atributos. Al inspeccionar `col_dpto_sf` en la consola, notarás 2 componentes principales: 
+
+1. Un **encabezado de metadatos espaciales**
+
+    ```text
+    Simple feature collection with 33 features and 8 fields
+    Geometry type: MULTIPOLYGON
+    Dimension:     XY
+    Bounding box:  xmin: -81.73562 ymin: -4.229406 xmax: -66.84722 ymax: 13.39473
+    Geodetic CRS:  WGS 84
+    # A tibble: 33 × 9
+    ```
+
+2. Una **tabla de datos**
+
+El encabezado inicial resume las propiedades cartográficas fundamentales de la capa geográfica:
+
+-  `Simple feature collection with 33 features and 8 fields`: señala que el objeto contiene $33$ observaciones espaciales correspondientes a los $32$ departamentos de Colombia más Bogotá y $8$ variables adicionales.
+
+-  `Geometry type: MULTIPOLYGON`: indica que las geometrías son multipolígonos. Se utiliza este tipo porque varias entidades territoriales del país están conformadas por más de un fragmento de tierra discontinuo (p. ej., el archipiélago de San Andrés, Providencia y Santa Catalina).
+
+- `Dimension: XY`: define que las coordenadas espaciales se representan en 2 dimensiones: longitud $X$ y latitud $Y$.
+
+- `Bounding box`: es la "caja" delimitadora que abarca los puntos geográficos extremos con occidente `xmin`, sur `ymin`, oriente `xmax` y norte `ymax`, dentro de los cuales se ubican todas las geometrías de la capa.
+
+-  `Geodetic CRS: WGS 84`: indica el [Sistema de Referencia de Coordenadas]({{< var url.education.crs_wiki >}}) (en inglés **Coordinate Reference System (CRS)**).
+
+::: {#nte-2-chap-15 .callout-note}
+En caso que no entiendas a profundidad algunos elementos descritos anteriormente respecto al encabezado inicial del objeto `sf` relacionado con `col_dpto_sf`, puedes consultar una explicación detallada en [@lovelace_geocomputation_2025, Cap. 2]. 
+
+Sin embargo, esta lectura no es un requisito para comprender los temas abordados en el @sec-gpkg debido a que no se pretende desarrollar una explicación exhaustiva de sistemas de información geográfica en el libro. Más bien, se busca proporcionar al lector las bases prácticas necesarias para importar, transformar y visualizar datos espaciales combinándolos con otras variables de interés.
+:::
+
+#### Una `tibble` con una columna geométrica
+
+Inmediatamente después del encabezado de metadatos espaciales, el resultado muestra `# A tibble: 33 × 9`. Esto evidencia una de las mayores ventajas del paquete `sf`: 
+
+> Un objeto `sf` es en esencia una `tibble` (o un objeto similar) de R, extendido con capacidades geográficas.
+
+Las $9$ columnas de la `tibble` corresponden a las $8$ variables no espaciales más una columna especial denominada **geometry list-column** donde en el caso de `col_dpto_sf` tiene asociada el nombre de `geom`. A diferencia de las columnas tradicionales que almacenan números o texto, la columna `geom`:
+
+a. Es una **columna de lista** (en inglés **list-column**): cada celda contiene una lista (ver @nte-2-chap-15) con todas las secuencias de coordenadas necesarias para dibujar los límites geográficos del departamento correspondiente.
+
+b. Tiene una clase especial `<MULTIPOLYGON [°]>`: donde `MULTIPOLYGON` especifica el tipo de figura geométrica y el símbolo `[°]` indica que las unidades de medida son **grados decimales** (latitud y longitud en grados decimales), en concordancia con el Sistema de Referencia de Coordenadas `WGS 84`.
+
+::: {#nte-2-chap-15 .callout-note}
+En el @sec-map-functions se abarcará con más detalle el concepto de **lista**, un tipo de dato señalado de manera superficial en la @tbl-some-data-types-in-r.
+::: 
+
+Gracias a esta arquitectura, no es necesario aprender un conjunto totalmente diferente de herramientas para manipular información geográfica. Puedes aplicar sobre un objeto `sf` las mismas funciones del `tidyverse` relacionadas con manipulación de datos (ver @sec-import-non-geo-data-and-data-manipulation). Además haciendo uso del paquete `ggplot2` es posible visualizar datos geoestadísticos integrándolos con otras variables de interés (ver @sec-geo-data-visualization)
+
+Finalmente, con respecto a la tabla de datos, a continuación se describe cada una de las variables en `nivel-departamento_version-mgn-2025_geopackage.gpkg`:
+
+1. **dpto_ccdgo**: código del departamento según codificación DIVIPOLA
+2. **dpto_cnmbr**: nombre del departamento de acuerdo a DIVIPOLA
+3. **dpto_ano_c**: año en el que fue creado el departamento
+4. **dpto_act_a**: acto administrativo con el que fue creado el departamento
+5. **dpto_narea**: área del departamento en kilómetros cuadrados
+6. **dpto_nano**: año de la versión de la información del departamento
+7. **shape_Leng**: perímetro del departamento calculado en las unidades del sistema de referencia de coordenadas que en este caso corresponden a grados decimales
+8. **shape_Area**: superficie o área del departamento calculada en las unidades del sistema de referencia de coordenadas que en este caso corresponden a grados decimales cuadrados
+9. **geom**: columna de geometría espacial que almacena las coordenadas y formas geométricas mediante el uso de multipolígonos que delimitan el territorio de cada departamento
+
+Donde para la realización de la @fig-1-chap-15 utilizarás sólo las variables `dpto_ccdgo`, `dpto_cnmbr` y `geom`.
+
+### Importación de variables no espaciales y manipulación de datos {#sec-import-non-geo-data-and-data-manipulation}
+
+Para incorporar los resultados del examen Saber Pro y llevar a cabo la manipulación de datos, primero es necesario cargar el paquete `tidyverse` e importar el conjunto de datos `2021-2024_saber-pro-genericas_faedis_ajustado.rds` (ver @sec-rds-format) mediante la función `read_rds()` del paquete `readr`, tal como se indica a continuación:
+
+```{r}
+#| lst-label: lst-load-packages-import-rds
+#| lst-cap: Cargar el paquete `tidyverse` e importar el conjunto de datos de variables no espaciales
+#| eval: false
+
+# Cargar paquetes ----
+library(tidyverse)
+
+# Importar datos ----
+resultado_saber_pro_ajustado <- read_rds(
+  file = "data/2021-2024_saber-pro-genericas_faedis_ajustado.rds"
+)
+```
+
+En el @lst-load-packages-import-rds, se carga el paquete `tidyverse` y se utiliza la función `read_rds()` asignando la ruta del archivo `.rds` al parámetro `file` para asociar el conjunto de datos con el nombre `resultado_saber_pro_ajustado`.
+
+#### Selección y creación de variables de interés
+
+Una vez importados los datos espaciales y no espaciales, el siguiente paso consiste en preparar las variables requeridas para construir el mapa coroplético de la @fig-1-chap-15, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-select-count-data
+#| lst-cap: Selección de variables en el objeto espacial y conteo de observaciones con `count()`
+#| eval: false
+
+# Seleccionar ----
+col_dpto_sf <- col_dpto_sf |>
+  select(
+    dpto_ccdgo,
+    dpto_cnmbr,
+    geom
+  )
+
+# Contar ----
+resultado_saber_pro_ajustado <- resultado_saber_pro_ajustado |>
+  count(
+    estu_cod_depto_presentacion
+  )
+```
+
+Respecto al @lst-select-count-data en `col_dpto_sf`, se conservan únicamente el código del departamento (`dpto_ccdgo`), el nombre del departamento (`dpto_cnmbr`) y la geometría (`geom`) utilizando la función `select()` de `dplyr` (ver @sec-column-verbs). Luego en `resultado_saber_pro_ajustado`, se calcula el número de estudiantes que presentaron la prueba en cada departamento utilizando la función `count()` de `dplyr`.
+
+La función `count()` de `dplyr` permite contabilizar de forma rápida el número de observaciones asociadas a los valores de una o más variables. Al suministrarle como argumento `estu_cod_depto_presentacion`, `count()` agrupa las observaciones por departamento y crea automáticamente una nueva columna denominada `n`, la cual contiene la cantidad total de estudiantes que presentaron el Saber Pro en cada departamento. Cabe resaltar que la función `count()` no descarta los valores ausentes (`NA`), sino que también los contabiliza y los incluye por defecto en la última fila de la tabla resultante, lo cual corresponde a los estudiantes que presentaron el examen en el exterior.
+
+#### Creación de variables auxiliares
+
+Para generar parte del título y subtítulo del mapa coroplético en la @fig-1-chap-15 de forma dinámica y reproducible, es conveniente calcular 2 valores: 
+
+1. El total de estudiantes inscritos
+
+2. El número de estudiantes que presentaron el examen en el exterior donde el código del departamento no se encuentra disponible y se registra como `NA`.
+
+Para ello, se crean 2 variables auxiliares denominadas `n_na` y `n_total`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-auxiliary-vars-labels
+#| lst-cap: Creación de variables auxiliares para generar parte del título y subtítulo del mapa coroplético
+#| eval: false
+
+# Variables auxiliares ----
+n_na <- resultado_saber_pro_ajustado |>
+  pull(n) |>
+  last()
+
+n_total <- resultado_saber_pro_ajustado |>
+  pull(n) |>
+  sum()
+```
+
+En el @lst-auxiliary-vars-labels, se utiliza la función `pull()`, la cual se introdujo al final de la @sec-package-usage con el propósito de extraer una columna de una tabla de datos y convertirla en un vector atómico de R. La lógica detrás del uso de `last()` y `sum()` junto con `pull()` comprende los siguientes aspectos:
+
+- Al aplicar `resultado_saber_pro_ajustado |> pull(n)`, se extrae la columna con los conteos en forma de vector numérico.
+
+- La función `last()` extrae el último elemento de dicho vector. Dado que `count()` ubica por defecto los valores faltantes (`NA`) en la última fila del conteo, `last()` recupera directamente el número de estudiantes inscritos en el exterior (`n_na`).
+
+- Por su parte, la función `sum()` suma todos los elementos del vector numérico obtenido con `pull(n)`, permitiendo calcular el total general de estudiantes inscritos (`n_total`).
+
+#### Consolidación y limpieza de datos
+
+El siguiente paso consiste en consolidar la información cartográfica con los conteos de estudiantes. Para ello, se utilizan **Mutating joins** (ver @sec-mutating-joins) mediante la función `left_join()` (ver @sec-left-joins), tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-join-clean-na
+#| lst-cap: Consolidación mediante `left_join()` y tratamiento de valores ausentes con `replace_na()`
+#| eval: false
+
+# Consolidar tablas ----
+col_dpto_saber_pro_n <- col_dpto_sf |>
+  left_join(
+    y = resultado_saber_pro_ajustado,
+    by = join_by(
+      dpto_ccdgo == estu_cod_depto_presentacion
+    )
+  )
+
+# Limpiar valores ausentes ----
+col_dpto_saber_pro_n <- col_dpto_saber_pro_n |>
+  replace_na(
+    replace = list(
+      n = 0
+    )
+  )
+```
+
+En el @lst-join-clean-na se llevan a cabo 2 tareas fundamentales:
+
+1. **Unión de tablas con `left_join()`**: se conservan todas las entidades espaciales de la capa geográfica `col_dpto_sf` a la izquierda, incorporando a la derecha la columna `n` de `resultado_saber_pro_ajustado`. La correspondencia entre ambas tablas se define a través de la función `join_by()`, emparejando el código del departamento `dpto_ccdgo` con el código de presentación `estu_cod_depto_presentacion`.
+
+2. **Tratamiento de valores ausentes con `replace_na()`**: en aquellos departamentos donde ningún estudiante presentó la prueba Saber Pro no existe una fila correspondiente en la tabla de conteos, por lo que `left_join()` les asigna inicialmente un valor ausente (`NA`) en la columna `n`. Para corregir este aspecto y reflejar que en esos departamentos hubo $0$ estudiantes, se utiliza la función `replace_na()` del paquete `tidyr`.
+
+  El propósito de la función `replace_na()` es reemplazar los valores ausentes (`NA`) por un valor específico en una o más columnas. Para ello, se utiliza el parámetro `replace`, el cual recibe como argumento un objeto de tipo lista (ver @nte-2-chap-15). Al especificar `replace = list(n = 0)`, se indica de forma explícita que cualquier valor `NA` en la columna `n` debe sustituirse por `0`.
+
+## Visualización de datos geoespaciales {#sec-geo-data-visualization}  
 

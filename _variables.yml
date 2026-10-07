@@ -17,6 +17,10 @@ url:
     dane_divipola: "https://www.dane.gov.co/index.php/sistema-estadistico-nacional-sen/normas-y-estandares/nomenclaturas-y-clasificaciones/nomenclaturas/codificacion-de-la-division-politica-administrativa-de-colombia-divipola"
     dane_proyecciones: "https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/proyecciones-de-poblacion"
     dane_geoportal: "https://geoportal.dane.gov.co/servicios/descarga-y-metadatos/datos-geoestadisticos/"
+    colombia_en_mapas: "https://www.colombiaenmapas.gov.co/inicio/"
+    ogc: "https://www.ogc.org/about/overview/"
+    ogc_geopackage: "https://www.ogc.org/standards/geopackage/"
+    ogc_sfa: "https://www.ogc.org/standards/sfa/"
     icfes_saber_pro: "https://www.icfes.gov.co/evaluaciones-icfes/acerca-del-examen-saber-pro/"
     icfes_data: "https://www.icfes.gov.co/investigaciones/data-icfes/"
 
@@ -121,6 +125,7 @@ url:
     w3schools_colors_hex: "https://www.w3schools.com/html/html_colors_hex.asp"
     dbms_wiki: "https://en.wikipedia.org/wiki/Database#Database_management_system"
     sql_wiki: "https://en.wikipedia.org/wiki/SQL"
+    sqlite_wiki: "https://en.wikipedia.org/wiki/SQLite"
     serialization_wiki: "https://en.wikipedia.org/wiki/Serialization"
     binary_file_wiki: "https://en.wikipedia.org/wiki/Binary_file"
     csv_wiki: "https://en.wikipedia.org/wiki/Comma-separated_values"
@@ -129,6 +134,7 @@ url:
     excel_binary_format_wiki: "https://en.wikipedia.org/wiki/Microsoft_Excel#File_formats"
     gpkg_wiki: "https://en.wikipedia.org/wiki/GeoPackage"
     choropleth_map_wiki: "https://en.wikipedia.org/wiki/Choropleth_map"
+    crs_wiki: "https://en.wikipedia.org/wiki/Spatial_reference_system"
 
   media:
     muse_klio_artwork: "https://commons.wikimedia.org/wiki/File:Christian_Bernhard_Rode_-_Die_Muse_Klio.jpg"
