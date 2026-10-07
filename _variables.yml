@@ -118,6 +118,7 @@ url:
     histogram_bins_wiki: "https://en.wikipedia.org/wiki/Histogram#Number_of_bins_and_width"
     statquest_youtube: "https://www.youtube.com/%40statquest"
     statquest_linear_models: "https://youtube.com/playlist?list=PLblh5JKOoLUIzaEkCLIUxQFjPIlapw8nU&si=42dIKCT3xe3HmlpB"
+    statquest_logarithms: "https://youtu.be/VSi0Z04fWj0?si=7jzQYZtubEtJNPvx"
     python_zero_index_blog: "https://python-history.blogspot.com/2013/10/why-python-uses-0-based-indexing.html"
     julia_differences: "https://docs.julialang.org/en/v1/manual/noteworthy-differences/#Noteworthy-differences-from-Python"
     r_graph_gallery: "https://r-graph-gallery.com/"
@@ -135,6 +136,7 @@ url:
     gpkg_wiki: "https://en.wikipedia.org/wiki/GeoPackage"
     choropleth_map_wiki: "https://en.wikipedia.org/wiki/Choropleth_map"
     crs_wiki: "https://en.wikipedia.org/wiki/Spatial_reference_system"
+    colorbrewer_wiki: "https://en.wikipedia.org/wiki/ColorBrewer"
 
   media:
     muse_klio_artwork: "https://commons.wikimedia.org/wiki/File:Christian_Bernhard_Rode_-_Die_Muse_Klio.jpg"

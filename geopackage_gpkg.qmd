@@ -11,6 +11,7 @@ source("_common.R")
 #| message: false
 library(tidyverse)
 library(sf)
+library(latex2exp)
 ```
 
 Este capítulo se basa en [@lovelace_geocomputation_2025], [@popovic_mapping_2025] y [@wilke_fundamentals_2019] así como en la documentación oficial de [`ggplot2`]({{< var url.packages.ggplot2 >}}) y [`sf`]({{< var url.packages.sf >}}) donde tiene como propósito introducir la importación y posterior visualización de datos geoestadísticos a través del formato [GeoPackage (`.gpkg`)]({{< var url.education.gpkg_wiki >}}) utilizando el paquete `sf` y `ggplot2` con información del [Geoportal del Departamento Administrativo Nacional de Estadística (DANE)]({{< var url.institution.dane_geoportal >}}) y los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Facultad de Estudios a Distancia (FAEDIS) de la Universidad Militar Nueva Granada (UMNG).  
@@ -311,9 +312,9 @@ La función `count()` de `dplyr` permite contabilizar de forma rápida el númer
 
 Para generar parte del título y subtítulo del mapa coroplético en la @fig-1-chap-15 de forma dinámica y reproducible, es conveniente calcular 2 valores: 
 
-1. El total de estudiantes inscritos
+1. El número de estudiantes que presentaron el examen en el exterior donde el código del departamento no se encuentra disponible y se registra como `NA`.
 
-2. El número de estudiantes que presentaron el examen en el exterior donde el código del departamento no se encuentra disponible y se registra como `NA`.
+2. El total de estudiantes inscritos
 
 Para ello, se crean 2 variables auxiliares denominadas `n_na` y `n_total`, tal como se señala a continuación:
 
@@ -373,7 +374,269 @@ En el @lst-join-clean-na se llevan a cabo 2 tareas fundamentales:
 
 2. **Tratamiento de valores ausentes con `replace_na()`**: en aquellos departamentos donde ningún estudiante presentó la prueba Saber Pro no existe una fila correspondiente en la tabla de conteos, por lo que `left_join()` les asigna inicialmente un valor ausente (`NA`) en la columna `n`. Para corregir este aspecto y reflejar que en esos departamentos hubo $0$ estudiantes, se utiliza la función `replace_na()` del paquete `tidyr`.
 
-  El propósito de la función `replace_na()` es reemplazar los valores ausentes (`NA`) por un valor específico en una o más columnas. Para ello, se utiliza el parámetro `replace`, el cual recibe como argumento un objeto de tipo lista (ver @nte-2-chap-15). Al especificar `replace = list(n = 0)`, se indica de forma explícita que cualquier valor `NA` en la columna `n` debe sustituirse por `0`.
+  El propósito de la función `replace_na()` es reemplazar los valores ausentes (`NA`) por un valor específico en una o más columnas. Para ello, se utiliza el parámetro `replace`, el cual recibe como argumento un objeto de tipo lista (ver @nte-2-chap-15). Al especificar `replace = list(n = 0)`, se indica de forma explícita que cualquier valor ausente (`NA`) en la columna `n` debe sustituirse por `0`.
 
-## Visualización de datos geoespaciales {#sec-geo-data-visualization}  
+#### Inspección del objeto espacial consolidado
 
+Una vez finalizado el proceso de selección, conteo, unión y limpieza, puedes darle un "vistazo" al objeto final `col_dpto_saber_pro_n` mediante la función `glimpse()` del paquete `dplyr` (ver @lst-glimpse). De esta manera, podrás verificar la estructura de las variables y cerciorarte de que la tabla espacial esté lista para ser utilizada en la construcción del mapa coroplético de la @fig-1-chap-15:
+
+```{r}
+#| lst-label: lst-glimpse-col-dpto-saber-pro-n
+#| lst-cap: Inspección del objeto espacial consolidado `col_dpto_saber_pro_n` con `glimpse()`
+
+# Inspeccionar datos ----
+glimpse(col_dpto_saber_pro_n)
+```
+
+Como se observa en el @lst-glimpse-col-dpto-saber-pro-n, `col_dpto_saber_pro_n` conserva las $33$ observaciones correspondientes a las entidades territoriales departamentales de Colombia y contiene exactamente las $4$ variables que se emplearán en la visualización:
+
+1. **dpto_ccdgo**: código del departamento según codificación DIVIPOLA
+2. **dpto_cnmbr**: nombre del departamento de acuerdo a DIVIPOLA
+3. **geom**: columna de geometría espacial que almacena las coordenadas y formas geométricas mediante el uso de multipolígonos que delimitan el territorio de cada departamento
+4. **n**: número total de estudiantes inscritos al examen Saber Pro, donde aquellos departamentos sin estudiantes inscritos ahora tienen el valor de $0$.
+
+## Visualización de datos geoespaciales {#sec-geo-data-visualization}
+
+Una vez consolidados los datos geoestadísticos con las variables de interés en el objeto `col_dpto_saber_pro_n`, el siguiente paso consiste en representar visualmente dicha información mediante un mapa coroplético (ver @fig-1-chap-15). Para construir este gráfico utilizarás el paquete `ggplot2` siguiendo el modelo mental de la **gramática de gráficos en capas** (ver @sec-layered-grammar-graphics).
+
+En las siguientes secciones se dividirá la construcción del mapa en 3 fases secuenciales:
+
+1. **Datos, mapeo y capas**: allí se establece el conjunto de datos espaciales, el mapeo de las variables a las geometrías y la representación gráfica de los departamentos en el plano mediante la geometría `geom_sf()`.
+2. **Escalas**: en esta parte ajustarás la escala del relleno y se definen etiquetas informativas para el título, subtítulo y la leyenda.
+3. **Tema**: finalmente en esta sección simplificarás el aspecto visual removiendo ejes y cuadrículas innecesarias para obtener un mapa limpio y profesional.
+
+### Datos, mapeo y capas
+
+Para iniciar la construcción del mapa coroplético, se define el objeto `col_dpto_saber_pro_n` como el insumo de datos y se añade la capa geométrica `geom_sf()`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-data-mapping-layers
+#| lst-cap: Representación base del mapa coroplético utilizando `geom_sf()` con relleno según el número de estudiantes
+#| fig-height: 6
+
+# Visualización ----
+col_dpto_saber_pro_n |>
+  ggplot() +
+  geom_sf(
+    mapping = aes(
+      geometry = geom,
+      fill = n
+    ),
+    color = "black"
+  )
+```
+
+En el @lst-data-mapping-layers intervienen varios aspectos clave de la gramática de gráficos aplicada a datos espaciales. En primer lugar, la función `geom_sf()` es la geometría especializada de `ggplot2` para visualizar objetos espaciales que cumplen con el estándar Simple Features (`sf`). A diferencia de geometrías convencionales como `geom_point()` o `geom_col()`, `geom_sf()` es capaz de interpretar automáticamente geometrías complejas compuestas por ejemplo por multipolígonos.
+
+Asimismo, mientras que en gráficos tradicionales es necesario especificar de forma separada las posiciones horizontal y vertical mediante los atributos `x` e `y` (p. ej., `aes(x = ..., y = ...)`), en datos espaciales `geom_sf()` utiliza el atributo estético `geometry`. Al asociarle la columna `geom` mediante `geometry = geom`, se define el atributo estético único que encapsula toda la información geográfica del objeto, correspondiente a las secuencias de coordenadas que delimitan cada departamento.
+
+Con respecto al componente de **Coordenadas** (ver @sec-layered-grammar-graphics), en gráficos estándar `ggplot2` utiliza por defecto el sistema de coordenadas cartesianas. Sin embargo, los datos geoespaciales no se ubican sobre un plano cartesiano arbitrario, sino que se rigen por un Sistema de Referencia de Coordenadas (CRS) sobre la superficie curva de la Tierra. De forma automática, `geom_sf()` añade e integra la función de coordenadas `coord_sf()`, la cual asegura que las proporciones del mapa no se distorsionen y que los polígonos se proyecten respetando el CRS de los datos.
+
+Finalmente, en relación con la apariencia visual de los departamentos, se utilizan de manera combinada los parámetros `fill` y `color`. Por un lado, `fill = n` se define dentro de `aes()` como un mapeo estético dependiente de los datos, asignando un color de relleno al interior de cada multipolígono en función del número de estudiantes inscritos. Por otro lado, `color = "black"` se define fuera de la función `aes()` como un parámetro que no depende de los datos, lo que permite trazar el perímetro de todos los departamentos con una línea negra constante para delimitar las fronteras territoriales.
+
+### Escalas
+
+Al examinar el mapa base que se obtiene en el @lst-data-mapping-layers, surge un problema común en la visualización de datos en relación a la presencia de valores atípicos (en inglés **outliers**). En el conjunto de datos Bogotá D.C. cuenta con $825$ estudiantes inscritos, mientras que la mayoría de los departamentos presentan valores considerablemente menores (p. ej., Guaviare con $0$, Córdoba con $3$, Cauca con $6$, Antioquia con $24$ o Boyacá con $34$).
+
+Con una escala lineal convencional, la amplia distancia entre $0$ y $825$ comprime todos los valores bajos e intermedios hacia el mismo extremo de la paleta. Como resultado, casi todos los departamentos se perciben con un tono idéntico y prácticamente indistinguible, impidiendo al lector apreciar las diferencias relativas entre departamentos con $0$, $3$, $6$, $24$ o $34$ inscritos. Además, la paleta cromática por defecto requiere invertirse para que los valores cercanos a $0$ se asocien a tonalidades claras y los valores cercanos al máximo se representen con tonos progresivamente más oscuros.
+
+Para resolver esta limitación y lograr una discriminación visual adecuada en presencia de distribuciones altamente asimétricas, es necesario transformar la variable numérica mediante una **escala logarítmica en base $e$** ($\log_e$ o logaritmo natural).
+
+#### La transformación logarítmica y el caso del cero
+
+A diferencia de una escala lineal que mide incrementos aditivos constantes ($+10, +20, +30$), una escala logarítmica mide incrementos multiplicativos por órdenes de magnitud ($\times 10, \times 100$). Sin embargo, la función logarítmica presenta una restricción matemática fundamental ya que el logaritmo de $0$ no está definido ($\log_e(0) \to -\infty$). Dado que en el conjunto de datos existen departamentos donde ningún estudiante presentó la prueba ($n = 0$), no es posible aplicar directamente la función logarítmica convencional $\log_e(x)$.
+
+Para solucionar esta restricción se utiliza la transformación $\log_e(x + 1)$, conocida en R como `log1p`. Al sumar $1$ a cada observación antes de calcular el logaritmo, se garantiza que:
+
+$$
+\log_e(0 + 1) = \log_e(1) = 0
+$$
+
+De este modo, el valor $0$ permanece fijo en $0$, mientras que los valores positivos se transforman de manera suave y continua. Para comprender intuitivamente el efecto de esta transformación, considera un vector de ejemplo con valores en distintos órdenes de magnitud: `c(0, 10, 100, 1000)`. En la @fig-comparison-linear-log-scales se compara cómo se distribuyen estos mismos datos sobre una escala lineal frente a una escala logarítmica $\log_e(x + 1)$.
+
+```{r}
+#| echo: false
+#| label: fig-comparison-linear-log-scales
+#| fig-cap: Comparación gráfica entre la distribución de valores en una escala lineal (superior) y una escala logarítmica transformada con $\log_e(x + 1)$ (inferior)
+#| fig-height: 5
+
+scales_demo <- tibble(
+  valor = c(0, 10, 100, 1000),
+  x_lineal = valor,
+  x_log = log1p(valor)
+)
+
+scales_data_plot <- bind_rows(
+  scales_demo |>
+    mutate(
+      escala = "Escala lineal: $x$",
+      pos = x_lineal,
+      valor_label = as.character(valor),
+      .keep = "none"
+    ),
+  scales_demo |>
+    mutate(
+      escala = "Escala logarítmica: $\\log_e(x + 1)$",
+      pos = x_log,
+      valor_label = str_glue("{valor} ({round(pos, 2)})"),
+      .keep = "none"
+    )
+) |>
+  mutate(
+    escala = factor(
+      x = escala,
+      levels = unique(escala)
+    )
+  )
+
+scales_data_plot |>
+  ggplot(
+    aes(x = pos, y = 0)
+  ) +
+  geom_hline(
+    yintercept = 0,
+    color = "#2c3e50",
+    linewidth = 0.8
+  ) +
+  geom_point(
+    color = "black",
+    fill = "#18bc9c",
+    shape = 21,
+    size = 2
+  ) +
+  geom_text(
+    aes(label = valor_label),
+    angle = 90,
+    hjust = 0,
+    vjust = 0.5,
+    nudge_y = 0.05,
+    size = 2
+  ) +
+  scale_y_continuous(
+    limits = c(-0.1, 0.8)
+  ) +
+  facet_wrap(
+    facets = vars(escala),
+    scales = "free_x",
+    ncol = 1,
+    labeller = as_labeller(
+      x = TeX,
+      default = label_parsed
+    )
+  ) +
+  labs(
+    x = NULL,
+    y = NULL
+  ) +
+  theme(
+    axis.ticks = element_blank(),
+    axis.text.y = element_blank()
+  )
+```
+
+Como se evidencia en la @fig-comparison-linear-log-scales, en la escala lineal los valores $0$ y $10$ quedan completamente comprimidos e indistinguibles en el extremo izquierdo debido a la influencia del valor extremo $1000$. En contraste, en la escala logarítmica $\log_e(x + 1)$ los valores se distribuyen de manera equilibrada y proporcional a sus órdenes de magnitud, haciendo visibles las diferencias entre magnitudes pequeñas sin perder la información de los valores altos.
+
+Matemáticamente, la transformación directa que asigna cada valor original $x$ a su posición en la escala logarítmica $y$ se expresa como:
+
+$$
+y = \log_e(x + 1)
+$$
+
+Para recuperar el valor original a partir de su posición logarítmica, donde este aspecto es indispensable para ubicar e interpretar los cortes (en inglés **breaks**) de la leyenda en las unidades originales de los datos, se aplica la función exponencial inversa:
+
+$$
+e^y = x + 1 \iff x = e^y - 1
+$$
+
+En R, esta relación inversa se implementa mediante la función `expm1(y)` ($e^y - 1$), la cual revierte con exactitud la transformación realizada por `log1p(x)`.
+
+::: {#nte-3-chap-15 .callout-note}
+Para una introducción intuitiva y visual a los conceptos fundamentales de los logaritmos y su aplicación en el análisis de datos, puedes consultar el video explicativo sobre [logaritmos]({{< var url.education.statquest_logarithms >}}) del canal [StatQuest with Josh Starmer]({{< var url.education.statquest_youtube >}}).
+:::
+
+#### Definición de variables auxiliares y puntos de corte
+
+Para aplicar esta transformación a la escala de color y construir una leyenda legible con marcas distribuidas uniformemente a lo largo del espectro de color, primero se calculan los límites inferior y superior de la variable `n` a través de las funciones `min()` y `max()` combinadas con `pull()`:
+
+```{r}
+#| lst-label: lst-aux-breaks-scales
+#| lst-cap: Creación de variables auxiliares y cálculo de puntos de corte equidistantes en la escala logarítmica
+
+# Variables auxiliares ----
+## Mínimo y máximo ----
+n_min <- col_dpto_saber_pro_n |>
+  pull(n) |>
+  min()
+
+n_max <- col_dpto_saber_pro_n |>
+  pull(n) |>
+  max()
+
+## Breaks ----
+breaks <- seq.int(
+  from = log1p(n_min),
+  to = log1p(n_max),
+  length.out = 5
+) |>
+  expm1() |>
+  round()
+```
+
+En el @lst-aux-breaks-scales se obtiene `n_min` ($0$) y `n_max` ($825$). Posteriormente, se construye el vector `breaks` con $5$ valores. Para que los cortes queden repartidos de forma equidistante en el espacio perceptivo del color logarítmico, la función `seq.int()` genera una secuencia regular desde `log1p(n_min)` hasta `log1p(n_max)`. Luego, el resultado se devuelve a la escala natural de conteos mediante la función inversa `expm1()` y se redondea a números enteros con `round()`, produciendo cortes interpretables por el usuario.
+
+#### Aplicación de la escala de color y etiquetas informativas
+
+Con los cortes calculados, se incorpora la función `scale_fill_distiller()` junto con la capa `labs()` al gráfico base previamente definido, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-scales-distiller-labs
+#| lst-cap: Incorporación de `scale_fill_distiller()` con transformación `log1p` y etiquetas descriptivas mediante `labs()`
+#| fig-height: 6
+
+col_dpto_saber_pro_n |>
+  ggplot() +
+  geom_sf(
+    mapping = aes(
+      geometry = geom,
+      fill = n
+    ),
+    color = "black"
+  ) +
+  scale_fill_distiller(
+    palette = "Blues",
+    direction = 1,
+    transform = "log1p",
+    breaks = breaks
+  ) +
+  labs(
+    fill = str_glue(
+      "Número estudiantes
+  (Escala logarítmica)"
+    ),
+    title = str_glue(
+      "Número inscritos Saber Pro FAEDIS 
+    por departamento (n = {n_total - n_na})"
+    ),
+    subtitle = str_glue(
+      "Periodo: 2021-2024
+    Nota: Excluye inscritos en el exterior (n = {n_na})"
+    ),
+    caption = "Fuente: Data Icfes"
+  )
+```
+
+En el @lst-scales-distiller-labs se configuran varios aspectos fundamentales de la escala de relleno y de las etiquetas informativas del mapa.
+
+En primer lugar, la función `scale_fill_distiller()` se utiliza para interpolar paletas de colores provenientes del proyecto [ColorBrewer]({{< var url.education.colorbrewer_wiki >}}) sobre variables numéricas continuas. En el contexto del mapa coroplético, esta función permite generar un esquema de colores secuencial, el cual resulta idóneo para representar magnitudes numéricas ordenadas como el número de estudiantes inscritos. A través de una gradación cromática continua, el lector puede identificar de manera intuitiva el incremento o la concentración de individuos en cada territorio.
+
+Para este fin, se utiliza el parámetro `palette = "Blues"`, el cual aplica una paleta compuesta por diversas tonalidades de azul. No obstante, por defecto las paletas de ColorBrewer en `ggplot2` asignan los colores más oscuros a las magnitudes bajas y los colores claros a las altas, tal como se observaba de forma poco intuitiva en el mapa del @lst-data-mapping-layers. Por esta razón, se especifica el parámetro `direction = 1`, el cual invierte el sentido de la paleta para que los departamentos con valores cercanos a cero se representen con tonalidades azules mas claras y a medida que el número de estudiantes se incrementa, el color evolucione hacia azules progresivamente más oscuros.
+
+Asimismo, para mitigar la compresión visual originada por el valor atípico de Bogotá D.C y distinguir los departamentos con pocos inscritos, se aplica la transformación logarítmica a través del parámetro `transform = "log1p"`. Este parámetro instruye internamente a `ggplot2` para calcular el valor $\log_e(x + 1)$ antes de asignar el color a cada polígono. Complementariamente, mediante el parámetro `breaks = breaks` se suministra el vector de cortes previamente calculado, asegurando que en la barra continua de la leyenda se visualicen marcas numéricas exactas, legibles y expresadas en las unidades originales de los datos.
+
+Por último, la capa `labs()` se encarga de contextualizar la visualización mediante títulos y descripciones informativas. En esta capa se utiliza la función `str_glue()` del paquete `stringr` perteneciente al `tidyverse`. 
+
+Construir cadenas de texto dinámicas suele requerir combinaciones engorrosas de texto y variables. La función `str_glue()` simplifica este proceso permitiendo intercalar texto literal con código de R evaluado dentro de llaves `{ }`. Por ejemplo, en la expresión `str_glue("... (n = {n_total - n_na})")`, R detecta las llaves, ejecuta internamente la operación matemática con las variables auxiliares `n_total` y `n_na`, e incrusta el resultado numérico directamente en el título sin necesidad de digitarlo manualmente 
+
+Además, `str_glue()` admite saltos de línea de forma natural al presionar la tecla {{< kbd mac=Return win=Enter linux=Enter >}} dentro de la cadena de texto en el editor, evitando tener que recurrir a símbolos especiales. De este modo, mediante los argumentos `fill`, `title`, `subtitle` y `caption`, el mapa queda documentado de forma clara, reproducible y profesional.
+
+### Tema
