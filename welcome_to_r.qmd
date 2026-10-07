@@ -56,7 +56,7 @@ Una vez instales R es importante que verifiques la instalación. La forma más f
 
 ![Ícono de R](images/r-project-logo.png){#fig-r-logo width=20% fig-alt="Ícono del proyecto R"}
 
-Si observas que se abre una ventana con la consola de R (en los casos de Windows y Mac) o que en el terminal aparece el texto de bienvenida de la versión {{< var versions.min_r >}} o superior (en el caso de Linux), la instalación ha sido exitosa. Para finalizar la verificación, simplemente cierra la ventana de la aplicación en Windows/Mac, o en el caso de Linux, escribe el comando `q()` y presiona la tecla {{< kbd Enter >}} para salir de la sesión de R en el terminal.
+Si observas que se abre una ventana con la consola de R (en los casos de Windows y Mac) o que en el terminal aparece el texto de bienvenida de la versión {{< var versions.min_r >}} o superior (en el caso de Linux), la instalación ha sido exitosa. Para finalizar la verificación, simplemente cierra la ventana de la aplicación en Windows/Mac, o en el caso de Linux, escribe el comando `q()` y presiona la tecla {{< kbd mac=Return win=Enter linux=Enter >}} para salir de la sesión de R en el terminal.
 
 ### Positron {#sec-install-positron}
 
