@@ -25,7 +25,7 @@ Exploraremos los siguientes aspectos:
 Para desarrollar el contenido de este capítulo es necesario que descargues el archivo señalado a continuación y lo incluyas dentro de la carpeta `data`, respecto a lo descrito en la @nte-1-chap-6:
    
 ::: {.callout appearance="minimal"}
-## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2021_2024-saber_pro-genericas.csv.xz]({{< var url.data.saber_pro_csv_xz_2021 >}})
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2021-saber_pro-genericas.txt.xz]({{< var url.data.saber_pro_txt_xz_2021 >}})
 :::
 
 En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `013_importar-datos-texto-plano-en-r` y dentro de ella genera el archivo `001_importar-datos-formato-texto-plano.R`, siguiendo las pautas de la @sec-package-usage.
