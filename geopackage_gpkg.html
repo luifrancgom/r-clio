@@ -103,6 +103,8 @@ div.csl-indent {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-13eb8e2fc86d17b67f83116d69f6ada2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/kbd/kbd.js"></script>
+<link href="site_libs/quarto-contrib/kbd/kbd.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -424,7 +426,12 @@ window.Quarto = {
   <li><a href="#sec-sf-structure" id="toc-sec-sf-structure" class="nav-link" data-scroll-target="#sec-sf-structure"><span class="header-section-number">15.3.1</span> Estructura de un objeto <code>sf</code></a></li>
   <li><a href="#sec-import-non-geo-data-and-data-manipulation" id="toc-sec-import-non-geo-data-and-data-manipulation" class="nav-link" data-scroll-target="#sec-import-non-geo-data-and-data-manipulation"><span class="header-section-number">15.3.2</span> Importación de variables no espaciales y manipulación de datos</a></li>
   </ul></li>
-  <li><a href="#sec-geo-data-visualization" id="toc-sec-geo-data-visualization" class="nav-link" data-scroll-target="#sec-geo-data-visualization"><span class="header-section-number">15.4</span> Visualización de datos geoespaciales</a></li>
+  <li><a href="#sec-geo-data-visualization" id="toc-sec-geo-data-visualization" class="nav-link" data-scroll-target="#sec-geo-data-visualization"><span class="header-section-number">15.4</span> Visualización de datos geoespaciales</a>
+  <ul class="collapse">
+  <li><a href="#datos-mapeo-y-capas" id="toc-datos-mapeo-y-capas" class="nav-link" data-scroll-target="#datos-mapeo-y-capas"><span class="header-section-number">15.4.1</span> Datos, mapeo y capas</a></li>
+  <li><a href="#escalas" id="toc-escalas" class="nav-link" data-scroll-target="#escalas"><span class="header-section-number">15.4.2</span> Escalas</a></li>
+  <li><a href="#tema" id="toc-tema" class="nav-link" data-scroll-target="#tema"><span class="header-section-number">15.4.3</span> Tema</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/geopackage_gpkg.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/geopackage_gpkg.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
@@ -710,8 +717,8 @@ Listado&nbsp;15.3: Selección de variables en el objeto espacial y conteo de obs
 <h4 data-number="15.3.2.2" class="anchored" data-anchor-id="creación-de-variables-auxiliares"><span class="header-section-number">15.3.2.2</span> Creación de variables auxiliares</h4>
 <p>Para generar parte del título y subtítulo del mapa coroplético en la <a href="#fig-1-chap-15" class="quarto-xref">Figura&nbsp;<span>15.1</span></a> de forma dinámica y reproducible, es conveniente calcular 2 valores:</p>
 <ol type="1">
-<li><p>El total de estudiantes inscritos</p></li>
 <li><p>El número de estudiantes que presentaron el examen en el exterior donde el código del departamento no se encuentra disponible y se registra como <code>NA</code>.</p></li>
+<li><p>El total de estudiantes inscritos</p></li>
 </ol>
 <p>Para ello, se crean 2 variables auxiliares denominadas <code>n_na</code> y <code>n_total</code>, tal como se señala a continuación:</p>
 <div class="cell">
@@ -775,12 +782,234 @@ Listado&nbsp;15.5: Consolidación mediante <code>left_join()</code> y tratamient
 <li><p><strong>Unión de tablas con <code>left_join()</code></strong>: se conservan todas las entidades espaciales de la capa geográfica <code>col_dpto_sf</code> a la izquierda, incorporando a la derecha la columna <code>n</code> de <code>resultado_saber_pro_ajustado</code>. La correspondencia entre ambas tablas se define a través de la función <code>join_by()</code>, emparejando el código del departamento <code>dpto_ccdgo</code> con el código de presentación <code>estu_cod_depto_presentacion</code>.</p></li>
 <li><p><strong>Tratamiento de valores ausentes con <code>replace_na()</code></strong>: en aquellos departamentos donde ningún estudiante presentó la prueba Saber Pro no existe una fila correspondiente en la tabla de conteos, por lo que <code>left_join()</code> les asigna inicialmente un valor ausente (<code>NA</code>) en la columna <code>n</code>. Para corregir este aspecto y reflejar que en esos departamentos hubo <span class="math inline">\(0\)</span> estudiantes, se utiliza la función <code>replace_na()</code> del paquete <code>tidyr</code>.</p></li>
 </ol>
-<p>El propósito de la función <code>replace_na()</code> es reemplazar los valores ausentes (<code>NA</code>) por un valor específico en una o más columnas. Para ello, se utiliza el parámetro <code>replace</code>, el cual recibe como argumento un objeto de tipo lista (ver <a href="#nte-2-chap-15" class="quarto-xref">Nota&nbsp;<span>15.3</span></a>). Al especificar <code>replace = list(n = 0)</code>, se indica de forma explícita que cualquier valor <code>NA</code> en la columna <code>n</code> debe sustituirse por <code>0</code>.</p>
+<p>El propósito de la función <code>replace_na()</code> es reemplazar los valores ausentes (<code>NA</code>) por un valor específico en una o más columnas. Para ello, se utiliza el parámetro <code>replace</code>, el cual recibe como argumento un objeto de tipo lista (ver <a href="#nte-2-chap-15" class="quarto-xref">Nota&nbsp;<span>15.3</span></a>). Al especificar <code>replace = list(n = 0)</code>, se indica de forma explícita que cualquier valor ausente (<code>NA</code>) en la columna <code>n</code> debe sustituirse por <code>0</code>.</p>
+</section>
+<section id="inspección-del-objeto-espacial-consolidado" class="level4" data-number="15.3.2.4">
+<h4 data-number="15.3.2.4" class="anchored" data-anchor-id="inspección-del-objeto-espacial-consolidado"><span class="header-section-number">15.3.2.4</span> Inspección del objeto espacial consolidado</h4>
+<p>Una vez finalizado el proceso de selección, conteo, unión y limpieza, puedes darle un “vistazo” al objeto final <code>col_dpto_saber_pro_n</code> mediante la función <code>glimpse()</code> del paquete <code>dplyr</code> (ver <a href="r_packages.html#lst-glimpse" class="quarto-xref">Listado&nbsp;<span>4.5</span></a>). De esta manera, podrás verificar la estructura de las variables y cerciorarte de que la tabla espacial esté lista para ser utilizada en la construcción del mapa coroplético de la <a href="#fig-1-chap-15" class="quarto-xref">Figura&nbsp;<span>15.1</span></a>:</p>
+<div class="cell">
+<div id="lst-glimpse-col-dpto-saber-pro-n" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-glimpse-col-dpto-saber-pro-n-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;15.6: Inspección del objeto espacial consolidado <code>col_dpto_saber_pro_n</code> con <code>glimpse()</code>
+</figcaption>
+<div aria-describedby="lst-glimpse-col-dpto-saber-pro-n-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspeccionar datos ----</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(col_dpto_saber_pro_n)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 33
+Columns: 4
+$ dpto_ccdgo &lt;chr&gt; "05", "08", "11", "13", "15", "17", "18…
+$ dpto_cnmbr &lt;chr&gt; "ANTIOQUIA", "ATLÁNTICO", "BOGOTÁ, D.C.…
+$ geom       &lt;MULTIPOLYGON [°]&gt; MULTIPOLYGON (((-76.41355 …
+$ n          &lt;int&gt; 24, 3, 825, 8, 34, 6, 14, 6, 4, 3, 102,…</code></pre>
+</div>
+</div>
+<p>Como se observa en el <a href="#lst-glimpse-col-dpto-saber-pro-n" class="quarto-xref">Listado&nbsp;<span>15.6</span></a>, <code>col_dpto_saber_pro_n</code> conserva las <span class="math inline">\(33\)</span> observaciones correspondientes a las entidades territoriales departamentales de Colombia y contiene exactamente las <span class="math inline">\(4\)</span> variables que se emplearán en la visualización:</p>
+<ol type="1">
+<li><strong>dpto_ccdgo</strong>: código del departamento según codificación DIVIPOLA</li>
+<li><strong>dpto_cnmbr</strong>: nombre del departamento de acuerdo a DIVIPOLA</li>
+<li><strong>geom</strong>: columna de geometría espacial que almacena las coordenadas y formas geométricas mediante el uso de multipolígonos que delimitan el territorio de cada departamento</li>
+<li><strong>n</strong>: número total de estudiantes inscritos al examen Saber Pro, donde aquellos departamentos sin estudiantes inscritos ahora tienen el valor de <span class="math inline">\(0\)</span>.</li>
+</ol>
 </section>
 </section>
 </section>
 <section id="sec-geo-data-visualization" class="level2" data-number="15.4">
 <h2 data-number="15.4" class="anchored" data-anchor-id="sec-geo-data-visualization"><span class="header-section-number">15.4</span> Visualización de datos geoespaciales</h2>
+<p>Una vez consolidados los datos geoestadísticos con las variables de interés en el objeto <code>col_dpto_saber_pro_n</code>, el siguiente paso consiste en representar visualmente dicha información mediante un mapa coroplético (ver <a href="#fig-1-chap-15" class="quarto-xref">Figura&nbsp;<span>15.1</span></a>). Para construir este gráfico utilizarás el paquete <code>ggplot2</code> siguiendo el modelo mental de la <strong>gramática de gráficos en capas</strong> (ver <a href="amounts.html#sec-layered-grammar-graphics" class="quarto-xref"><span>Sección 6.1</span></a>).</p>
+<p>En las siguientes secciones se dividirá la construcción del mapa en 3 fases secuenciales:</p>
+<ol type="1">
+<li><strong>Datos, mapeo y capas</strong>: allí se establece el conjunto de datos espaciales, el mapeo de las variables a las geometrías y la representación gráfica de los departamentos en el plano mediante la geometría <code>geom_sf()</code>.</li>
+<li><strong>Escalas</strong>: en esta parte ajustarás la escala del relleno y se definen etiquetas informativas para el título, subtítulo y la leyenda.</li>
+<li><strong>Tema</strong>: finalmente en esta sección simplificarás el aspecto visual removiendo ejes y cuadrículas innecesarias para obtener un mapa limpio y profesional.</li>
+</ol>
+<section id="datos-mapeo-y-capas" class="level3" data-number="15.4.1">
+<h3 data-number="15.4.1" class="anchored" data-anchor-id="datos-mapeo-y-capas"><span class="header-section-number">15.4.1</span> Datos, mapeo y capas</h3>
+<p>Para iniciar la construcción del mapa coroplético, se define el objeto <code>col_dpto_saber_pro_n</code> como el insumo de datos y se añade la capa geométrica <code>geom_sf()</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-data-mapping-layers" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-data-mapping-layers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;15.7: Representación base del mapa coroplético utilizando <code>geom_sf()</code> con relleno según el número de estudiantes
+</figcaption>
+<div aria-describedby="lst-data-mapping-layers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualización ----</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>col_dpto_saber_pro_n <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">geometry =</span> geom,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> n</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="geopackage_gpkg_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>En el <a href="#lst-data-mapping-layers" class="quarto-xref">Listado&nbsp;<span>15.7</span></a> intervienen varios aspectos clave de la gramática de gráficos aplicada a datos espaciales. En primer lugar, la función <code>geom_sf()</code> es la geometría especializada de <code>ggplot2</code> para visualizar objetos espaciales que cumplen con el estándar Simple Features (<code>sf</code>). A diferencia de geometrías convencionales como <code>geom_point()</code> o <code>geom_col()</code>, <code>geom_sf()</code> es capaz de interpretar automáticamente geometrías complejas compuestas por ejemplo por multipolígonos.</p>
+<p>Asimismo, mientras que en gráficos tradicionales es necesario especificar de forma separada las posiciones horizontal y vertical mediante los atributos <code>x</code> e <code>y</code> (p.&nbsp;ej., <code>aes(x = ..., y = ...)</code>), en datos espaciales <code>geom_sf()</code> utiliza el atributo estético <code>geometry</code>. Al asociarle la columna <code>geom</code> mediante <code>geometry = geom</code>, se define el atributo estético único que encapsula toda la información geográfica del objeto, correspondiente a las secuencias de coordenadas que delimitan cada departamento.</p>
+<p>Con respecto al componente de <strong>Coordenadas</strong> (ver <a href="amounts.html#sec-layered-grammar-graphics" class="quarto-xref"><span>Sección 6.1</span></a>), en gráficos estándar <code>ggplot2</code> utiliza por defecto el sistema de coordenadas cartesianas. Sin embargo, los datos geoespaciales no se ubican sobre un plano cartesiano arbitrario, sino que se rigen por un Sistema de Referencia de Coordenadas (CRS) sobre la superficie curva de la Tierra. De forma automática, <code>geom_sf()</code> añade e integra la función de coordenadas <code>coord_sf()</code>, la cual asegura que las proporciones del mapa no se distorsionen y que los polígonos se proyecten respetando el CRS de los datos.</p>
+<p>Finalmente, en relación con la apariencia visual de los departamentos, se utilizan de manera combinada los parámetros <code>fill</code> y <code>color</code>. Por un lado, <code>fill = n</code> se define dentro de <code>aes()</code> como un mapeo estético dependiente de los datos, asignando un color de relleno al interior de cada multipolígono en función del número de estudiantes inscritos. Por otro lado, <code>color = "black"</code> se define fuera de la función <code>aes()</code> como un parámetro que no depende de los datos, lo que permite trazar el perímetro de todos los departamentos con una línea negra constante para delimitar las fronteras territoriales.</p>
+</section>
+<section id="escalas" class="level3" data-number="15.4.2">
+<h3 data-number="15.4.2" class="anchored" data-anchor-id="escalas"><span class="header-section-number">15.4.2</span> Escalas</h3>
+<p>Al examinar el mapa base que se obtiene en el <a href="#lst-data-mapping-layers" class="quarto-xref">Listado&nbsp;<span>15.7</span></a>, surge un problema común en la visualización de datos en relación a la presencia de valores atípicos (en inglés <strong>outliers</strong>). En el conjunto de datos Bogotá D.C. cuenta con <span class="math inline">\(825\)</span> estudiantes inscritos, mientras que la mayoría de los departamentos presentan valores considerablemente menores (p.&nbsp;ej., Guaviare con <span class="math inline">\(0\)</span>, Córdoba con <span class="math inline">\(3\)</span>, Cauca con <span class="math inline">\(6\)</span>, Antioquia con <span class="math inline">\(24\)</span> o Boyacá con <span class="math inline">\(34\)</span>).</p>
+<p>Con una escala lineal convencional, la amplia distancia entre <span class="math inline">\(0\)</span> y <span class="math inline">\(825\)</span> comprime todos los valores bajos e intermedios hacia el mismo extremo de la paleta. Como resultado, casi todos los departamentos se perciben con un tono idéntico y prácticamente indistinguible, impidiendo al lector apreciar las diferencias relativas entre departamentos con <span class="math inline">\(0\)</span>, <span class="math inline">\(3\)</span>, <span class="math inline">\(6\)</span>, <span class="math inline">\(24\)</span> o <span class="math inline">\(34\)</span> inscritos. Además, la paleta cromática por defecto requiere invertirse para que los valores cercanos a <span class="math inline">\(0\)</span> se asocien a tonalidades claras y los valores cercanos al máximo se representen con tonos progresivamente más oscuros.</p>
+<p>Para resolver esta limitación y lograr una discriminación visual adecuada en presencia de distribuciones altamente asimétricas, es necesario transformar la variable numérica mediante una <strong>escala logarítmica en base <span class="math inline">\(e\)</span></strong> (<span class="math inline">\(\log_e\)</span> o logaritmo natural).</p>
+<section id="la-transformación-logarítmica-y-el-caso-del-cero" class="level4" data-number="15.4.2.1">
+<h4 data-number="15.4.2.1" class="anchored" data-anchor-id="la-transformación-logarítmica-y-el-caso-del-cero"><span class="header-section-number">15.4.2.1</span> La transformación logarítmica y el caso del cero</h4>
+<p>A diferencia de una escala lineal que mide incrementos aditivos constantes (<span class="math inline">\(+10, +20, +30\)</span>), una escala logarítmica mide incrementos multiplicativos por órdenes de magnitud (<span class="math inline">\(\times 10, \times 100\)</span>). Sin embargo, la función logarítmica presenta una restricción matemática fundamental ya que el logaritmo de <span class="math inline">\(0\)</span> no está definido (<span class="math inline">\(\log_e(0) \to -\infty\)</span>). Dado que en el conjunto de datos existen departamentos donde ningún estudiante presentó la prueba (<span class="math inline">\(n = 0\)</span>), no es posible aplicar directamente la función logarítmica convencional <span class="math inline">\(\log_e(x)\)</span>.</p>
+<p>Para solucionar esta restricción se utiliza la transformación <span class="math inline">\(\log_e(x + 1)\)</span>, conocida en R como <code>log1p</code>. Al sumar <span class="math inline">\(1\)</span> a cada observación antes de calcular el logaritmo, se garantiza que:</p>
+<p><span class="math display">\[
+\log_e(0 + 1) = \log_e(1) = 0
+\]</span></p>
+<p>De este modo, el valor <span class="math inline">\(0\)</span> permanece fijo en <span class="math inline">\(0\)</span>, mientras que los valores positivos se transforman de manera suave y continua. Para comprender intuitivamente el efecto de esta transformación, considera un vector de ejemplo con valores en distintos órdenes de magnitud: <code>c(0, 10, 100, 1000)</code>. En la <a href="#fig-comparison-linear-log-scales" class="quarto-xref">Figura&nbsp;<span>15.2</span></a> se compara cómo se distribuyen estos mismos datos sobre una escala lineal frente a una escala logarítmica <span class="math inline">\(\log_e(x + 1)\)</span>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-comparison-linear-log-scales" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-comparison-linear-log-scales-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="geopackage_gpkg_files/figure-html/fig-comparison-linear-log-scales-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-comparison-linear-log-scales-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;15.2: Comparación gráfica entre la distribución de valores en una escala lineal (superior) y una escala logarítmica transformada con <span class="math inline">\(\log_e(x + 1)\)</span> (inferior)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Como se evidencia en la <a href="#fig-comparison-linear-log-scales" class="quarto-xref">Figura&nbsp;<span>15.2</span></a>, en la escala lineal los valores <span class="math inline">\(0\)</span> y <span class="math inline">\(10\)</span> quedan completamente comprimidos e indistinguibles en el extremo izquierdo debido a la influencia del valor extremo <span class="math inline">\(1000\)</span>. En contraste, en la escala logarítmica <span class="math inline">\(\log_e(x + 1)\)</span> los valores se distribuyen de manera equilibrada y proporcional a sus órdenes de magnitud, haciendo visibles las diferencias entre magnitudes pequeñas sin perder la información de los valores altos.</p>
+<p>Matemáticamente, la transformación directa que asigna cada valor original <span class="math inline">\(x\)</span> a su posición en la escala logarítmica <span class="math inline">\(y\)</span> se expresa como:</p>
+<p><span class="math display">\[
+y = \log_e(x + 1)
+\]</span></p>
+<p>Para recuperar el valor original a partir de su posición logarítmica, donde este aspecto es indispensable para ubicar e interpretar los cortes (en inglés <strong>breaks</strong>) de la leyenda en las unidades originales de los datos, se aplica la función exponencial inversa:</p>
+<p><span class="math display">\[
+e^y = x + 1 \iff x = e^y - 1
+\]</span></p>
+<p>En R, esta relación inversa se implementa mediante la función <code>expm1(y)</code> (<span class="math inline">\(e^y - 1\)</span>), la cual revierte con exactitud la transformación realizada por <code>log1p(x)</code>.</p>
+<div id="nte-3-chap-15" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota&nbsp;15.4
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para una introducción intuitiva y visual a los conceptos fundamentales de los logaritmos y su aplicación en el análisis de datos, puedes consultar el video explicativo sobre <a href="https://youtu.be/VSi0Z04fWj0?si=7jzQYZtubEtJNPvx">logaritmos</a> del canal <a href="https://www.youtube.com/%40statquest">StatQuest with Josh Starmer</a>.</p>
+</div>
+</div>
+</section>
+<section id="definición-de-variables-auxiliares-y-puntos-de-corte" class="level4" data-number="15.4.2.2">
+<h4 data-number="15.4.2.2" class="anchored" data-anchor-id="definición-de-variables-auxiliares-y-puntos-de-corte"><span class="header-section-number">15.4.2.2</span> Definición de variables auxiliares y puntos de corte</h4>
+<p>Para aplicar esta transformación a la escala de color y construir una leyenda legible con marcas distribuidas uniformemente a lo largo del espectro de color, primero se calculan los límites inferior y superior de la variable <code>n</code> a través de las funciones <code>min()</code> y <code>max()</code> combinadas con <code>pull()</code>:</p>
+<div class="cell">
+<div id="lst-aux-breaks-scales" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-aux-breaks-scales-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;15.8: Creación de variables auxiliares y cálculo de puntos de corte equidistantes en la escala logarítmica
+</figcaption>
+<div aria-describedby="lst-aux-breaks-scales-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variables auxiliares ----</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Mínimo y máximo ----</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>n_min <span class="ot">&lt;-</span> col_dpto_saber_pro_n <span class="sc">|&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(n) <span class="sc">|&gt;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">min</span>()</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>n_max <span class="ot">&lt;-</span> col_dpto_saber_pro_n <span class="sc">|&gt;</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(n) <span class="sc">|&gt;</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">max</span>()</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Breaks ----</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>breaks <span class="ot">&lt;-</span> <span class="fu">seq.int</span>(</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="fu">log1p</span>(n_min),</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> <span class="fu">log1p</span>(n_max),</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">length.out =</span> <span class="dv">5</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expm1</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<p>En el <a href="#lst-aux-breaks-scales" class="quarto-xref">Listado&nbsp;<span>15.8</span></a> se obtiene <code>n_min</code> (<span class="math inline">\(0\)</span>) y <code>n_max</code> (<span class="math inline">\(825\)</span>). Posteriormente, se construye el vector <code>breaks</code> con <span class="math inline">\(5\)</span> valores. Para que los cortes queden repartidos de forma equidistante en el espacio perceptivo del color logarítmico, la función <code>seq.int()</code> genera una secuencia regular desde <code>log1p(n_min)</code> hasta <code>log1p(n_max)</code>. Luego, el resultado se devuelve a la escala natural de conteos mediante la función inversa <code>expm1()</code> y se redondea a números enteros con <code>round()</code>, produciendo cortes interpretables por el usuario.</p>
+</section>
+<section id="aplicación-de-la-escala-de-color-y-etiquetas-informativas" class="level4" data-number="15.4.2.3">
+<h4 data-number="15.4.2.3" class="anchored" data-anchor-id="aplicación-de-la-escala-de-color-y-etiquetas-informativas"><span class="header-section-number">15.4.2.3</span> Aplicación de la escala de color y etiquetas informativas</h4>
+<p>Con los cortes calculados, se incorpora la función <code>scale_fill_distiller()</code> junto con la capa <code>labs()</code> al gráfico base previamente definido, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-scales-distiller-labs" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-scales-distiller-labs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;15.9: Incorporación de <code>scale_fill_distiller()</code> con transformación <code>log1p</code> y etiquetas descriptivas mediante <code>labs()</code>
+</figcaption>
+<div aria-describedby="lst-scales-distiller-labs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>col_dpto_saber_pro_n <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">geometry =</span> geom,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> n</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_distiller</span>(</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="st">"Blues"</span>,</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">direction =</span> <span class="dv">1</span>,</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">transform =</span> <span class="st">"log1p"</span>,</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> breaks</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="fu">str_glue</span>(</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Número estudiantes</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="st">  (Escala logarítmica)"</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">str_glue</span>(</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Número inscritos Saber Pro FAEDIS </span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="st">    por departamento (n = {n_total - n_na})"</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">str_glue</span>(</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Periodo: 2021-2024</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="st">    Nota: Excluye inscritos en el exterior (n = {n_na})"</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Fuente: Data Icfes"</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="geopackage_gpkg_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>En el <a href="#lst-scales-distiller-labs" class="quarto-xref">Listado&nbsp;<span>15.9</span></a> se configuran varios aspectos fundamentales de la escala de relleno y de las etiquetas informativas del mapa.</p>
+<p>En primer lugar, la función <code>scale_fill_distiller()</code> se utiliza para interpolar paletas de colores provenientes del proyecto <a href="https://en.wikipedia.org/wiki/ColorBrewer">ColorBrewer</a> sobre variables numéricas continuas. En el contexto del mapa coroplético, esta función permite generar un esquema de colores secuencial, el cual resulta idóneo para representar magnitudes numéricas ordenadas como el número de estudiantes inscritos. A través de una gradación cromática continua, el lector puede identificar de manera intuitiva el incremento o la concentración de individuos en cada territorio.</p>
+<p>Para este fin, se utiliza el parámetro <code>palette = "Blues"</code>, el cual aplica una paleta compuesta por diversas tonalidades de azul. No obstante, por defecto las paletas de ColorBrewer en <code>ggplot2</code> asignan los colores más oscuros a las magnitudes bajas y los colores claros a las altas, tal como se observaba de forma poco intuitiva en el mapa del <a href="#lst-data-mapping-layers" class="quarto-xref">Listado&nbsp;<span>15.7</span></a>. Por esta razón, se especifica el parámetro <code>direction = 1</code>, el cual invierte el sentido de la paleta para que los departamentos con valores cercanos a cero se representen con tonalidades azules mas claras y a medida que el número de estudiantes se incrementa, el color evolucione hacia azules progresivamente más oscuros.</p>
+<p>Asimismo, para mitigar la compresión visual originada por el valor atípico de Bogotá D.C y distinguir los departamentos con pocos inscritos, se aplica la transformación logarítmica a través del parámetro <code>transform = "log1p"</code>. Este parámetro instruye internamente a <code>ggplot2</code> para calcular el valor <span class="math inline">\(\log_e(x + 1)\)</span> antes de asignar el color a cada polígono. Complementariamente, mediante el parámetro <code>breaks = breaks</code> se suministra el vector de cortes previamente calculado, asegurando que en la barra continua de la leyenda se visualicen marcas numéricas exactas, legibles y expresadas en las unidades originales de los datos.</p>
+<p>Por último, la capa <code>labs()</code> se encarga de contextualizar la visualización mediante títulos y descripciones informativas. En esta capa se utiliza la función <code>str_glue()</code> del paquete <code>stringr</code> perteneciente al <code>tidyverse</code>.</p>
+<p>Construir cadenas de texto dinámicas suele requerir combinaciones engorrosas de texto y variables. La función <code>str_glue()</code> simplifica este proceso permitiendo intercalar texto literal con código de R evaluado dentro de llaves <code>{ }</code>. Por ejemplo, en la expresión <code>str_glue("... (n = {n_total - n_na})")</code>, R detecta las llaves, ejecuta internamente la operación matemática con las variables auxiliares <code>n_total</code> y <code>n_na</code>, e incrusta el resultado numérico directamente en el título sin necesidad de digitarlo manualmente</p>
+<p>Además, <code>str_glue()</code> admite saltos de línea de forma natural al presionar la tecla <kbd title="linux: Enter, mac: Return, windows: Enter" aria-hidden="true" data-linux="Enter" data-mac="Return" data-windows="Enter"></kbd><span class="visually-hidden"></span> dentro de la cadena de texto en el editor, evitando tener que recurrir a símbolos especiales. De este modo, mediante los argumentos <code>fill</code>, <code>title</code>, <code>subtitle</code> y <code>caption</code>, el mapa queda documentado de forma clara, reproducible y profesional.</p>
+</section>
+</section>
+<section id="tema" class="level3" data-number="15.4.3">
+<h3 data-number="15.4.3" class="anchored" data-anchor-id="tema"><span class="header-section-number">15.4.3</span> Tema</h3>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
@@ -797,6 +1026,7 @@ Popovic, M. (2025). <em>Mapping <span>Worlds</span> with <span>R</span></em> (1.
 Wilke, C. (2019). <em>Fundamentals of data visualization: a primer on making informative and compelling figures</em> (First edition). O’Reilly. <a href="https://clauswilke.com/dataviz/">https://clauswilke.com/dataviz/</a>
 </div>
 </div>
+</section>
 </section>
 
 </main> <!-- /main -->
