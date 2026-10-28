@@ -499,6 +499,22 @@ Figura&nbsp;17.1: Resultado final de un gráfico de pirámides poblaciones utili
 </section>
 <section id="exportar-datos-en-formato-largo" class="level3" data-number="17.4.5">
 <h3 data-number="17.4.5" class="anchored" data-anchor-id="exportar-datos-en-formato-largo"><span class="header-section-number">17.4.5</span> Exportar datos en formato largo</h3>
+<div class="cell">
+<div id="lst-write-rds-longer-format" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-write-rds-longer-format-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;17.1: Uso de la función <code>write_rds()</code> para exportar y guardar el archivo de datos en formato largo
+</figcaption>
+<div aria-describedby="lst-write-rds-longer-format-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>poblacion_col_2018_2070_largo <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_rds</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">file =</span> <span class="st">"data/poblacion_col_2018_2070_largo.rds"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<p>En el <a href="#lst-write-rds-longer-format" class="quarto-xref">Listado&nbsp;<span>17.1</span></a> se utiliza la función <code>write_rds()</code> junto con el parámetro <code>file</code> asociado con el argumento <code>"data/poblacion_col_2018_2070_largo.rds"</code> para definir tanto la ruta como el nombre del archivo en el que se guardará la información en formato largo.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
