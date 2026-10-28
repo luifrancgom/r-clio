@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -67,7 +102,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-13eb8e2fc86d17b67f83116d69f6ada2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5d82b1d0c18e482852369f18114d791b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -96,35 +131,6 @@ div.csl-indent {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -421,7 +427,7 @@ window.Quarto = {
 </header>
 
 
-<p>Este capítulo se basa en <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 5</a>)</span> y <span class="citation" data-cites="wickham_tidy_2014">(<a href="references.html#ref-wickham_tidy_2014" role="doc-biblioref">Wickham, 2014</a>)</span> así como en la documentación oficial de <a href="https://tidyr.tidyverse.org/articles/tidy-data.html"><code>tidyr</code></a> donde tiene como propósito introducir la forma de estructurar conjuntos de datos para facilitar su análisis utilizando el paquete <code>tidyr</code> e información de proyecciones de población de Colombia a nivel nacional por área geográfica (Cabecera y Centros poblados y rural disperso) según sexo (Masculino y Femenino) y edades simples (<span class="math inline">\(0\)</span>, <span class="math inline">\(1\)</span>, <span class="math inline">\(2\)</span>, <span class="math inline">\(\ldots\)</span>, <span class="math inline">\(98\)</span>, <span class="math inline">\(99\)</span>, <span class="math inline">\(100\)</span> o más) para el periodo 2018-2070 con base en el Censo Nacional de Población y Vivienda (CNPV) 2018.</p>
+<p>Este capítulo se basa en <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 5</a>)</span> y <span class="citation" data-cites="wickham_tidy_2014">(<a href="references.html#ref-wickham_tidy_2014" role="doc-biblioref">Wickham, 2014</a>)</span> así como en la documentación oficial de <a href="https://tidyr.tidyverse.org/articles/tidy-data.html"><code>tidyr</code></a> donde tiene como propósito introducir la forma de estructurar conjuntos de datos para facilitar su análisis utilizando el paquete <code>tidyr</code>.</p>
 <p>Exploraremos los siguientes aspectos:</p>
 <ol type="1">
 <li>¿Qué son datos ordenados (<strong>tidy data</strong> en inglés)?</li>
@@ -437,40 +443,504 @@ Nota&nbsp;16.1
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Para desarrollar el contenido de este capítulo es necesario que hayas completado la descarga y ubicación del archivo <code>serie-nacional-de-poblacion_area-sexo-edad_2018-2070_2025-07-18.xlsx</code> dentro de la carpeta <code>data</code>, respecto a lo descrito en la <a href="spreadsheets.html#nte-1-chap-14" class="quarto-xref">Nota&nbsp;<span>14.1</span></a>.</p>
-<p>En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada <code>016_datos-ordenados-en-r</code> y dentro de ella genera el archivo <code>001_datos-ordenados.R</code>, siguiendo las pautas de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>.</p>
+<p>Para desarrollar el contenido de este capítulo es necesario que crees una nueva carpeta llamada <code>016_datos-ordenados-en-r</code> y dentro de ella genera el archivo <code>001_datos-ordenados.R</code>, siguiendo las pautas de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>.</p>
 </div>
 </div>
 <section id="definición-de-datos-ordenados" class="level2" data-number="16.1">
 <h2 data-number="16.1" class="anchored" data-anchor-id="definición-de-datos-ordenados"><span class="header-section-number">16.1</span> Definición de datos ordenados</h2>
+<p>El concepto de datos ordenados, propuesto por Hadley Wickham <span class="citation" data-cites="wickham_tidy_2014">(<a href="references.html#ref-wickham_tidy_2014" role="doc-biblioref">Wickham, 2014</a>)</span>, proporciona un marco para vincular la <strong>estructura</strong> de un conjunto de datos (su disposición visual en filas y columnas) con su <strong>semántica</strong> (su significado real). Este estándar simplifica las etapas iniciales de limpieza, facilita la exploración y análisis de la información y permite que los paquetes pertenecientes al <code>tidyverse</code> o que comparten su filosofía interactúen sin fricciones.</p>
 <section id="estructura-de-datos" class="level3" data-number="16.1.1">
 <h3 data-number="16.1.1" class="anchored" data-anchor-id="estructura-de-datos"><span class="header-section-number">16.1.1</span> Estructura de datos</h3>
+<p>Gran parte de los conjuntos de datos se organizan en tablas rectangulares compuestas por <strong>filas</strong> y <strong>columnas</strong>. En la práctica las columnas casi siempre se encuentran identificadas mediante encabezados mientras que las filas a veces cuentan con etiquetas que las distinguen <span class="citation" data-cites="wickham_tidy_2014">(<a href="references.html#ref-wickham_tidy_2014" role="doc-biblioref">Wickham, 2014</a>)</span>.</p>
+<p>Para ilustrar este principio considera los datos de un experimento médico hipotético analizado en <span class="citation" data-cites="wickham_tidy_2014">(<a href="references.html#ref-wickham_tidy_2014" role="doc-biblioref">Wickham, 2014</a>)</span>, donde se evalúa el resultado de 2 tratamientos (<strong>a</strong> y <strong>b</strong>) en 3 individuos. En la <a href="#tbl-datos-presentacion-experimento" class="quarto-xref">Tabla&nbsp;<span>16.1</span></a> se presenta la estructura típica con la que frecuentemente se diseñan las tablas para reportes o de presentación visual.</p>
+<div id="tbl-datos-presentacion-experimento" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-datos-presentacion-experimento-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;16.1: Tabla de presentación con filas y columnas etiquetadas
+</figcaption>
+<div aria-describedby="tbl-datos-presentacion-experimento-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">individuo</th>
+<th style="text-align: center;"><strong>a</strong></th>
+<th style="text-align: center;"><strong>b</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">John Smith</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jane Doe</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">11</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mary Johnson</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Esta misma información puede organizarse de múltiples formas. Por ejemplo, en la <a href="#tbl-datos-transpuestos-experimento" class="quarto-xref">Tabla&nbsp;<span>16.2</span></a> se muestran los mismos datos del experimento, pero con las filas y las columnas transpuestas:</p>
+<div id="tbl-datos-transpuestos-experimento" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-datos-transpuestos-experimento-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;16.2: Los mismos datos del experimento pero organizados de forma transpuesta
+</figcaption>
+<div aria-describedby="tbl-datos-transpuestos-experimento-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">tratamiento</th>
+<th style="text-align: center;">John Smith</th>
+<th style="text-align: center;">Jane Doe</th>
+<th style="text-align: center;">Mary Johnson</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>a</strong></td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>b</strong></td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>A pesar de que ambas tablas transmiten exactamente la misma información, su disposición física y espacial es totalmente distinta. Esto evidencia que el vocabulario habitual de “filas” y “columnas” no es suficiente para explicar por qué ambas tablas representan el mismo conjunto de datos ni cómo un computador debe interpretarlos <span class="citation" data-cites="wickham_tidy_2014">(<a href="references.html#ref-wickham_tidy_2014" role="doc-biblioref">Wickham, 2014</a>)</span>. Por esta razón, más allá de la apariencia, se requiere examinar la <strong>semántica</strong> de los datos.</p>
 </section>
 <section id="semántica-de-datos" class="level3" data-number="16.1.2">
 <h3 data-number="16.1.2" class="anchored" data-anchor-id="semántica-de-datos"><span class="header-section-number">16.1.2</span> Semántica de datos</h3>
+<p>Un conjunto de datos es una colección de <strong>valores</strong> (en inglés <strong>values</strong>), los cuales usualmente corresponden a números o a cadenas de texto <span class="citation" data-cites="wickham_tidy_2014">(<a href="references.html#ref-wickham_tidy_2014" role="doc-biblioref">Wickham, 2014</a>)</span>. En la semántica de datos, todo valor pertenece simultáneamente a 2 conceptos fundamentales una <strong>variable</strong> y una <strong>observación</strong>:</p>
+<ol type="1">
+<li><strong>Variable</strong>: contiene todos los valores que miden un mismo atributo o característica como la estatura, la temperatura, la duración o el resultado de una prueba a través de distintas unidades de análisis.</li>
+<li><strong>Observación</strong>: contiene todos los valores medidos sobre una misma unidad de análisis como una persona, un día específico o una muestra médica a través de diferentes atributos.</li>
+<li><strong>Valor</strong>: corresponde a la medición individual de un atributo específico registrada en una celda.</li>
+</ol>
+<p>Si reorganizamos los datos del experimento médico vinculando de forma unívoca su estructura con su semántica, obtenemos la disposición mostrada en la <a href="#tbl-datos-ordenados-experimento" class="quarto-xref">Tabla&nbsp;<span>16.3</span></a>.</p>
+<div id="tbl-datos-ordenados-experimento" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-datos-ordenados-experimento-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;16.3: Los mismos datos del experimento con variables en columnas y observaciones en filas
+</figcaption>
+<div aria-describedby="tbl-datos-ordenados-experimento-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">individuo</th>
+<th style="text-align: center;">tratamiento</th>
+<th style="text-align: center;">resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">John Smith</td>
+<td style="text-align: center;">a</td>
+<td style="text-align: center;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jane Doe</td>
+<td style="text-align: center;">a</td>
+<td style="text-align: center;">16</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mary Johnson</td>
+<td style="text-align: center;">a</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">John Smith</td>
+<td style="text-align: center;">b</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Jane Doe</td>
+<td style="text-align: center;">b</td>
+<td style="text-align: center;">11</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mary Johnson</td>
+<td style="text-align: center;">b</td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>La <a href="#tbl-datos-ordenados-experimento" class="quarto-xref">Tabla&nbsp;<span>16.3</span></a> hace explícitos los 18 valores que componen el conjunto de datos correspondientes a 3 variables y 6 observaciones:</p>
+<ol type="a">
+<li><code>individuo</code> : con 3 valores posibles (<code>John Smith</code>, <code>Jane Doe</code> y <code>Mary Johnson</code>).</li>
+<li><code>tratamiento</code> : con 2 valores posibles (<code>a</code> y <code>b</code>).</li>
+<li><code>resultado</code> : con los valores cuantitativos registrados y el valor ausente (<code>NA</code>, <code>16</code>, <code>3</code>, <code>2</code>, <code>11</code>, <code>1</code>).</li>
+</ol>
+<p>El diseño experimental ofrece pautas esenciales sobre la estructura de las observaciones. En este caso particular, cada combinación entre persona y tratamiento fue medida. Asimismo, el diseño experimental determina cómo deben gestionarse los valores ausentes:</p>
+<ul>
+<li><strong>Valores ausentes estructurales</strong>: representan mediciones que no pueden ocurrir por la propia naturaleza del fenómeno (por ejemplo, el número de partos en individuos masculinos). Estos registros pueden descartarse sin pérdida de rigor.</li>
+<li><strong>Valores ausentes explícitos</strong>: representan observaciones que debieron haberse registrado pero por alguna circunstancia se omitieron o no se obtuvieron, como el tratamiento <code>a</code> en <code>John Smith</code> en la <a href="#tbl-datos-ordenados-experimento" class="quarto-xref">Tabla&nbsp;<span>16.3</span></a>. En estos casos, es fundamental conservarlos como valores ausentes (<code>NA</code> en R).</li>
+</ul>
 </section>
 <section id="características-de-datos-ordenados" class="level3" data-number="16.1.3">
 <h3 data-number="16.1.3" class="anchored" data-anchor-id="características-de-datos-ordenados"><span class="header-section-number">16.1.3</span> Características de datos ordenados</h3>
+<p>Los datos ordenados constituyen un estándar para vincular la semántica de un conjunto de datos con su estructura. De acuerdo con <span class="citation" data-cites="wickham_tidy_2014">(<a href="references.html#ref-wickham_tidy_2014" role="doc-biblioref">Wickham, 2014</a>)</span> y <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023</a>)</span>, un conjunto de datos es ordenado si satisface las siguientes reglas fundamentales:</p>
+<ol type="1">
+<li>Cada variable forma una columna.</li>
+<li>Cada observación forma una fila.</li>
+<li>Cada valor es una celda.</li>
+<li>Cada tipo de unidad observacional forma una tabla.</li>
+</ol>
+<p>Cualquier disposición física de los datos que no cumpla con estas reglas se clasifica como <strong>datos no ordenados</strong> (en inglés <strong>non-tidy data</strong>).</p>
 </section>
 </section>
 <section id="problemas-más-comunes-con-datos-no-ordenados" class="level2" data-number="16.2">
 <h2 data-number="16.2" class="anchored" data-anchor-id="problemas-más-comunes-con-datos-no-ordenados"><span class="header-section-number">16.2</span> Problemas más comunes con datos no ordenados</h2>
+<p>En la práctica es usual encontrar los conjuntos de datos en un formato no ordenado. Aunque los datos no ordenados pueden adoptar diversas formas, la gran mayoría de las dificultades estructurales se reducen a 5 problemas habituales identificados por en <span class="citation" data-cites="wickham_tidy_2014">(<a href="references.html#ref-wickham_tidy_2014" role="doc-biblioref">Wickham, 2014</a>)</span>:</p>
+<ol type="1">
+<li>Nombres de columnas que representan valores y no nombres de variables.</li>
+<li>Múltiples variables combinadas en una sola columna.</li>
+<li>Variables distribuidas simultáneamente en filas y en columnas.</li>
+<li>Múltiples unidades observacionales mezcladas en una sola tabla.</li>
+<li>Una misma unidad observacional fragmentada en múltiples tablas o archivos.</li>
+</ol>
+<p>Para resolver estos problemas, el paquete <code>tidyr</code> proporciona un conjunto pequeño, consistente y potente de herramientas de reestructuración, encabezado por las funciones <code>pivot_longer()</code> y <code>pivot_wider()</code>. A continuación se examina cada uno de estos problemas a partir de los ejemplos destacados en la documentación de <a href="https://tidyr.tidyverse.org/articles/tidy-data.html"><code>tidyr</code></a> o señalados en <span class="citation" data-cites="wickham_tidy_2014">(<a href="references.html#ref-wickham_tidy_2014" role="doc-biblioref">Wickham, 2014</a>)</span>.</p>
 <section id="nombres-de-columnas-que-son-valores-no-variables" class="level3" data-number="16.2.1">
 <h3 data-number="16.2.1" class="anchored" data-anchor-id="nombres-de-columnas-que-son-valores-no-variables"><span class="header-section-number">16.2.1</span> Nombres de columnas que son valores, no variables</h3>
+<p>Un caso muy común de datos no ordenados ocurre en tablas elaboradas para presentaciones visuales o resúmenes ejecutivos, donde los encabezados de las columnas no son nombres de variables sino valores específicos de una variable.</p>
+<p>El paquete <code>tidyr</code> incluye el conjunto de datos <code>relig_income</code>, derivado de una encuesta sobre la distribución del ingreso en diversas confesiones religiosas en los Estados Unidos, tal como se señala a continuación:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>relig_income</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 18 × 11
+   religion  `&lt;$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k`
+   &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+ 1 Agnostic       27        34        60        81        76
+ 2 Atheist        12        27        37        52        35
+ 3 Buddhist       27        21        30        34        33
+ 4 Catholic      418       617       732       670       638
+ 5 Don’t kn…      15        14        15        11        10
+ 6 Evangeli…     575       869      1064       982       881
+ 7 Hindu           1         9         7         9        11
+ 8 Historic…     228       244       236       238       197
+ 9 Jehovah'…      20        27        24        24        21
+10 Jewish         19        19        25        25        30
+11 Mainline…     289       495       619       655       651
+12 Mormon         29        40        48        51        56
+13 Muslim          6         7         9        10         9
+14 Orthodox       13        17        23        32        32
+15 Other Ch…       9         7        11        13        13
+16 Other Fa…      20        33        40        46        49
+17 Other Wo…       5         2         3         4         2
+18 Unaffili…     217       299       374       365       341
+# ℹ 5 more variables: `$50-75k` &lt;dbl&gt;, `$75-100k` &lt;dbl&gt;,
+#   `$100-150k` &lt;dbl&gt;, `&gt;150k` &lt;dbl&gt;,
+#   `Don't know/refused` &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>En este conjunto de datos existen 3 variables:</p>
+<ul>
+<li><code>religion</code>: confesión religiosa del encuestado.</li>
+<li><code>ingreso</code> (<code>income</code>): rango o nivel socioeconómico de ingresos.</li>
+<li><code>frecuencia</code> (<code>frequency</code>): cantidad de individuos ubicados en cada intersección.</li>
+</ul>
+<p>Sin embargo, los encabezados de las columnas (<code>&lt;$10k</code>, <code>$10-20k</code>, <code>$20-30k</code>, … , <code>Don't know/refused</code>) representan en realidad categorías o valores de la variable ingreso. Para ordenar esta tabla se utiliza la función <code>pivot_longer()</code>, la cual transforma múltiples columnas en un par de columnas <code>nombre</code>-<code>valor</code> (en inglés <code>name</code>-<code>value</code>) aumentando el número de filas y reduciendo el de columnas, tal como se señala en el <a href="#lst-pivot-longer-relig-income" class="quarto-xref">Listado&nbsp;<span>16.1</span></a>.</p>
+<div class="cell">
+<div id="lst-pivot-longer-relig-income" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-pivot-longer-relig-income-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;16.1: Reestructuración del conjunto de datos <code>relig_income</code> utilizando <code>pivot_longer()</code>
+</figcaption>
+<div aria-describedby="lst-pivot-longer-relig-income-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>relig_income <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="st">`</span><span class="at">&lt;$10k</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">Don't know/refused</span><span class="st">`</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"ingreso"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"frecuencia"</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 180 × 3
+   religion ingreso            frecuencia
+   &lt;chr&gt;    &lt;chr&gt;                   &lt;dbl&gt;
+ 1 Agnostic &lt;$10k                      27
+ 2 Agnostic $10-20k                    34
+ 3 Agnostic $20-30k                    60
+ 4 Agnostic $30-40k                    81
+ 5 Agnostic $40-50k                    76
+ 6 Agnostic $50-75k                   137
+ 7 Agnostic $75-100k                  122
+ 8 Agnostic $100-150k                 109
+ 9 Agnostic &gt;150k                      84
+10 Agnostic Don't know/refused         96
+# ℹ 170 more rows</code></pre>
+</div>
+</div>
+<p>Otro ejemplo, corresponde al conjunto de datos <code>billboard</code>, el cual registra la posición en el ranking musical <strong>Billboard Top 100</strong> durante el año 2000, tal como se señala a continuación:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>billboard</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 317 × 79
+   artist   track date.entered   wk1   wk2   wk3   wk4   wk5
+   &lt;chr&gt;    &lt;chr&gt; &lt;date&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 2 Pac    Baby… 2000-02-26      87    82    72    77    87
+ 2 2Ge+her  The … 2000-09-02      91    87    92    NA    NA
+ 3 3 Doors… Kryp… 2000-04-08      81    70    68    67    66
+ 4 3 Doors… Loser 2000-10-21      76    76    72    69    67
+ 5 504 Boyz Wobb… 2000-04-15      57    34    25    17    17
+ 6 98^0     Give… 2000-08-19      51    39    34    26    26
+ 7 A*Teens  Danc… 2000-07-08      97    97    96    95   100
+ 8 Aaliyah  I Do… 2000-01-29      84    62    51    41    38
+ 9 Aaliyah  Try … 2000-03-18      59    53    38    28    21
+10 Adams, … Open… 2000-08-26      76    76    74    69    68
+# ℹ 307 more rows
+# ℹ 71 more variables: wk6 &lt;dbl&gt;, wk7 &lt;dbl&gt;, wk8 &lt;dbl&gt;,
+#   wk9 &lt;dbl&gt;, wk10 &lt;dbl&gt;, wk11 &lt;dbl&gt;, wk12 &lt;dbl&gt;,
+#   wk13 &lt;dbl&gt;, wk14 &lt;dbl&gt;, wk15 &lt;dbl&gt;, wk16 &lt;dbl&gt;,
+#   wk17 &lt;dbl&gt;, wk18 &lt;dbl&gt;, wk19 &lt;dbl&gt;, wk20 &lt;dbl&gt;,
+#   wk21 &lt;dbl&gt;, wk22 &lt;dbl&gt;, wk23 &lt;dbl&gt;, wk24 &lt;dbl&gt;,
+#   wk25 &lt;dbl&gt;, wk26 &lt;dbl&gt;, wk27 &lt;dbl&gt;, wk28 &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<p>En este conjunto, el ranking semanal de cada canción se encuentra disperso en 76 columnas: <code>wk1</code> hasta <code>wk76</code>. Los encabezados (<code>wk1</code>, <code>wk2</code>, … , <code>wk76</code>), no son nombres de variables diferentes sino valores temporales de una única variable que corresponde a la semana en la lista. En ese sentido, es posible ordenar este conjunto de datos transformando las 76 columnas en nuevas variables (<code>semana</code> y <code>posicion</code>) y empleando el parámetro <code>values_drop_na = TRUE</code> para descartar las semanas en que la canción no figuraba en la lista, tal como se señala en el <a href="#lst-pivot-longer-billboard" class="quarto-xref">Listado&nbsp;<span>16.2</span></a>:</p>
+<div class="cell">
+<div id="lst-pivot-longer-billboard" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-pivot-longer-billboard-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;16.2: Reestructuración del conjunto de datos <code>billboard</code> utilizando <code>pivot_longer()</code>
+</figcaption>
+<div aria-describedby="lst-pivot-longer-billboard-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>billboard <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> wk1<span class="sc">:</span>wk76,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"semana"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"posicion"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_drop_na =</span> <span class="cn">TRUE</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5,307 × 5
+   artist  track                date.entered semana posicion
+   &lt;chr&gt;   &lt;chr&gt;                &lt;date&gt;       &lt;chr&gt;     &lt;dbl&gt;
+ 1 2 Pac   Baby Don't Cry (Kee… 2000-02-26   wk1          87
+ 2 2 Pac   Baby Don't Cry (Kee… 2000-02-26   wk2          82
+ 3 2 Pac   Baby Don't Cry (Kee… 2000-02-26   wk3          72
+ 4 2 Pac   Baby Don't Cry (Kee… 2000-02-26   wk4          77
+ 5 2 Pac   Baby Don't Cry (Kee… 2000-02-26   wk5          87
+ 6 2 Pac   Baby Don't Cry (Kee… 2000-02-26   wk6          94
+ 7 2 Pac   Baby Don't Cry (Kee… 2000-02-26   wk7          99
+ 8 2Ge+her The Hardest Part Of… 2000-09-02   wk1          91
+ 9 2Ge+her The Hardest Part Of… 2000-09-02   wk2          87
+10 2Ge+her The Hardest Part Of… 2000-09-02   wk3          92
+# ℹ 5,297 more rows</code></pre>
+</div>
+</div>
 </section>
 <section id="múltiples-variables-en-una-sola-columna" class="level3" data-number="16.2.2">
 <h3 data-number="16.2.2" class="anchored" data-anchor-id="múltiples-variables-en-una-sola-columna"><span class="header-section-number">16.2.2</span> Múltiples variables en una sola columna</h3>
+<p>Otro problema surge cuando los encabezados de las columnas unen 2 o más variables distintas dentro de una sola etiqueta compuesta.</p>
+<p>Un ejemplo clásico es el conjunto de datos de casos confirmados de tuberculosis (<code>tb</code>), recopilado por la Organización Mundial de la Salud (OMS). En este conjunto, los datos se encuentran discriminados por país, año y grupo demográfico, tal como se señala en el <a href="#lst-create-tb-sample" class="quarto-xref">Listado&nbsp;<span>16.3</span></a>:</p>
+<div class="cell">
+<div id="lst-create-tb-sample" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-create-tb-sample-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;16.3: Muestra representativa del conjunto de datos de tuberculosis (OMS)
+</figcaption>
+<div aria-describedby="lst-create-tb-sample-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>tb_muestra <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>iso2 , <span class="sc">~</span>year , <span class="sc">~</span>m_014 , <span class="sc">~</span>m_1524 , <span class="sc">~</span>f_014 , <span class="sc">~</span>f_1524 ,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"AD"</span>  ,  <span class="dv">2000</span> ,      <span class="dv">0</span> ,       <span class="dv">0</span> ,      <span class="dv">1</span> ,       <span class="dv">1</span> ,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"AE"</span>  ,  <span class="dv">2000</span> ,      <span class="dv">2</span> ,       <span class="dv">4</span> ,      <span class="dv">3</span> ,       <span class="dv">4</span> ,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"AF"</span>  ,  <span class="dv">2000</span> ,     <span class="dv">52</span> ,     <span class="dv">228</span> ,     <span class="dv">93</span> ,     <span class="dv">140</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>tb_muestra</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 6
+  iso2   year m_014 m_1524 f_014 f_1524
+  &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+1 AD     2000     0      0     1      1
+2 AE     2000     2      4     3      4
+3 AF     2000    52    228    93    140</code></pre>
+</div>
+</div>
+<p>Las columnas como <code>m_014</code> o <code>f_1524</code> agrupan 2 variables diferentes:</p>
+<ol type="a">
+<li>El sexo: <code>m</code> para masculino y <code>f</code> para femenino.</li>
+<li>El rango de edad: <code>014</code> para 0 a 14 años o <code>1524</code> para 15 a 24 años.</li>
+</ol>
+<p>Para ordenar estos datos:</p>
+<ol type="1">
+<li>Se aplica <code>pivot_longer()</code> sobre las columnas compuestas para agruparlas en una variable temporal denominada <code>demo</code>.</li>
+<li>Se utiliza la función <code>separate_wider_delim()</code> de <code>tidyr</code> para dividir la cadena de texto de la columna <code>demo</code> en 2 variables independientes (<code>sexo</code> y <code>edad</code>) con base al delimitador <code>_</code>, tal como se señala en el <a href="#lst-tidy-tb-two-steps" class="quarto-xref">Listado&nbsp;<span>16.4</span></a>:</li>
+</ol>
+<div class="cell">
+<div id="lst-tidy-tb-two-steps" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-tidy-tb-two-steps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;16.4: Reestructuración y separación de variables compuestas en <code>tb_muestra</code> con <code>pivot_longer()</code> y <code>separate_wider_delim()</code>
+</figcaption>
+<div aria-describedby="lst-tidy-tb-two-steps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>tb_muestra <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="sc">!</span><span class="fu">c</span>(iso2, year),</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"demo"</span>,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"casos"</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_wider_delim</span>(</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> demo,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">delim =</span> <span class="st">"_"</span>,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"sexo"</span>, <span class="st">"edad"</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 5
+   iso2   year sexo  edad  casos
+   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
+ 1 AD     2000 m     014       0
+ 2 AD     2000 m     1524      0
+ 3 AD     2000 f     014       1
+ 4 AD     2000 f     1524      1
+ 5 AE     2000 m     014       2
+ 6 AE     2000 m     1524      4
+ 7 AE     2000 f     014       3
+ 8 AE     2000 f     1524      4
+ 9 AF     2000 m     014      52
+10 AF     2000 m     1524    228
+11 AF     2000 f     014      93
+12 AF     2000 f     1524    140</code></pre>
+</div>
+</div>
+<p>Ordenar este conjuntos de datos permite por ejemplo incorporar con facilidad variables adicionales como la población de cada país y calcular de manera directa tasas de incidencia por grupo etario y sexo.</p>
 </section>
 <section id="variables-almacenadas-tanto-en-filas-como-en-columnas" class="level3" data-number="16.2.3">
 <h3 data-number="16.2.3" class="anchored" data-anchor-id="variables-almacenadas-tanto-en-filas-como-en-columnas"><span class="header-section-number">16.2.3</span> Variables almacenadas tanto en filas como en columnas</h3>
+<p>La forma más compleja de datos no ordenados ocurre cuando ciertas variables se encuentran distribuidas a lo largo de las columnas, mientras que otras variables tienen sus nombres almacenados como valores dentro de filas.</p>
+<p>Este patrón se evidencia en los registros meteorológicos diarios de la estación climatológica MX17004 en México provenientes de la Global Historical Climatology Network para el año 2010, tal como se señala en el <a href="#lst-create-weather-sample" class="quarto-xref">Listado&nbsp;<span>16.5</span></a>:</p>
+<div class="cell">
+<div id="lst-create-weather-sample" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-create-weather-sample-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;16.5: Muestra representativa del registro meteorológico diario
+</figcaption>
+<div aria-describedby="lst-create-weather-sample-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>clima_muestra <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>id       , <span class="sc">~</span>ano , <span class="sc">~</span>mes , <span class="sc">~</span>element , <span class="sc">~</span><span class="st">`</span><span class="at">1</span><span class="st">`</span> , <span class="sc">~</span><span class="st">`</span><span class="at">2</span><span class="st">`</span> , <span class="sc">~</span><span class="st">`</span><span class="at">3</span><span class="st">`</span> ,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MX17004"</span> , <span class="dv">2010</span> ,    <span class="dv">1</span> , <span class="st">"tmax"</span>   , <span class="cn">NA</span>   , <span class="cn">NA</span>   , <span class="cn">NA</span>   ,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MX17004"</span> , <span class="dv">2010</span> ,    <span class="dv">1</span> , <span class="st">"tmin"</span>   , <span class="cn">NA</span>   , <span class="cn">NA</span>   , <span class="cn">NA</span>   ,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MX17004"</span> , <span class="dv">2010</span> ,    <span class="dv">2</span> , <span class="st">"tmax"</span>   , <span class="cn">NA</span>   , <span class="fl">27.3</span> , <span class="fl">24.1</span> ,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MX17004"</span> , <span class="dv">2010</span> ,    <span class="dv">2</span> , <span class="st">"tmin"</span>   , <span class="cn">NA</span>   , <span class="fl">14.4</span> , <span class="fl">14.4</span> ,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MX17004"</span> , <span class="dv">2010</span> ,    <span class="dv">3</span> , <span class="st">"tmax"</span>   , <span class="cn">NA</span>   , <span class="cn">NA</span>   , <span class="cn">NA</span>   ,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MX17004"</span> , <span class="dv">2010</span> ,    <span class="dv">3</span> , <span class="st">"tmin"</span>   , <span class="cn">NA</span>   , <span class="cn">NA</span>   , <span class="cn">NA</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>clima_muestra</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 7
+  id        ano   mes element `1`     `2`   `3`
+  &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;lgl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 MX17004  2010     1 tmax    NA     NA    NA  
+2 MX17004  2010     1 tmin    NA     NA    NA  
+3 MX17004  2010     2 tmax    NA     27.3  24.1
+4 MX17004  2010     2 tmin    NA     14.4  14.4
+5 MX17004  2010     3 tmax    NA     NA    NA  
+6 MX17004  2010     3 tmin    NA     NA    NA  </code></pre>
+</div>
+</div>
+<p>En esta tabla coexisten 2 problemas estructurales:</p>
+<ul>
+<li>Los días del mes se encuentran dispersos en columnas (<code>1</code>, <code>2</code>, <code>3</code>).</li>
+<li>La columna <code>element</code> no es una variable en sí misma ya que almacena los nombres de 2 variables meteorológicas medidas: la temperatura máxima (<code>tmax</code>) y la temperatura mínima (<code>tmin</code>).</li>
+</ul>
+<p>Para ordenar este conjunto se combina el uso de <code>pivot_longer()</code> y <code>pivot_wider()</code>, tal como se señala en el <a href="#lst-tidy-weather" class="quarto-xref">Listado&nbsp;<span>16.6</span></a>:</p>
+<ol type="1">
+<li><strong>Colapsar los días</strong>: se aplica <code>pivot_longer()</code> sobre las columnas de días para recopilarlas en una sola variable <code>dia</code>.</li>
+<li><strong>Pivote inverso</strong>: se utiliza <code>pivot_wider()</code> para transformar los valores de <code>element</code> (<code>tmax</code> y <code>tmin</code>) en columnas independientes, asignando a cada una su respectiva medición tomada de la columna <code>valor</code>.</li>
+</ol>
+<div class="cell">
+<div id="lst-tidy-weather" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-tidy-weather-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;16.6: Reestructuración de <code>clima_muestra</code> combinando <code>pivot_longer()</code> y <code>pivot_wider()</code>
+</figcaption>
+<div aria-describedby="lst-tidy-weather-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>clima_muestra <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="st">`</span><span class="at">1</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">3</span><span class="st">`</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"dia"</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"valor"</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_drop_na =</span> <span class="cn">TRUE</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> element,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> valor</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 6
+  id        ano   mes dia    tmax  tmin
+  &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 MX17004  2010     2 2      27.3  14.4
+2 MX17004  2010     2 3      24.1  14.4</code></pre>
+</div>
+</div>
+<p>En la tabla resultante del <a href="#lst-tidy-weather" class="quarto-xref">Listado&nbsp;<span>16.6</span></a>, cada fila representa un día específico de observación y cada columna una variable medida, cumpliendo con el formato de datos ordenados.</p>
 </section>
 <section id="diferentes-unidades-observacionales-en-una-sola-tabla" class="level3" data-number="16.2.4">
 <h3 data-number="16.2.4" class="anchored" data-anchor-id="diferentes-unidades-observacionales-en-una-sola-tabla"><span class="header-section-number">16.2.4</span> Diferentes unidades observacionales en una sola tabla</h3>
-<p><strong>Note</strong>: Remember <a href="two_table_verbs.html" class="quarto-xref"><span>Capítulo 11</span></a></p>
+<p>En ocasiones, un conjunto de datos recopila información de diferentes unidades observacionales dentro de una misma tabla. Esta práctica genera duplicación redundante de registros y aumenta el riesgo de inconsistencias.</p>
+<p>Un ejemplo representativo de esta situación se ilustró en la <a href="two_table_verbs.html" class="quarto-xref"><span>Capítulo 11</span></a> mediante el modelo relacional del examen Saber Pro (ver <a href="two_table_verbs.html#fig-erd" class="quarto-xref">Figura&nbsp;<span>11.1</span></a>). Si todos los datos estuviesen consolidados en una única tabla no ordenada, por cada evaluación de un estudiante se repetirían innecesariamente los atributos correspondientes a las entidades <strong>Departamento</strong>, <strong>Municipio</strong> y <strong>Programa académico</strong>.</p>
+<p>Para que el conjunto de datos sea ordenado los datos se estructuran en tablas independientes conectadas por claves primarias (<strong>PK</strong>) y foráneas (<strong>FK</strong>):</p>
+<ol type="1">
+<li>Una tabla central de eventos (<strong>Resultado Saber-Pro</strong>), donde cada fila representa una evaluación individual identificada por el año y el consecutivo del estudiante.</li>
+<li>Tablas complementarias para cada entidad u observación particular: <strong>Departamento</strong>, <strong>Municipio</strong> y <strong>Programa académico</strong>.</li>
+</ol>
+<p>Como se exploró en la <a href="two_table_verbs.html" class="quarto-xref"><span>Capítulo 11</span></a>, esta separación evita redundancias y permite recuperar la información integrada cuando sea necesario mediante <strong>Mutating joins</strong> como por ejemplo <code>left_join()</code>.</p>
 </section>
 <section id="una-misma-unidad-observacional-almacenada-en-múltiples-tablas" class="level3" data-number="16.2.5">
 <h3 data-number="16.2.5" class="anchored" data-anchor-id="una-misma-unidad-observacional-almacenada-en-múltiples-tablas"><span class="header-section-number">16.2.5</span> Una misma unidad observacional almacenada en múltiples tablas</h3>
-<p><strong>Note</strong>: Remember <a href="map_functions.html" class="quarto-xref"><span>Capítulo 20</span></a></p>
+<p>El caso opuesto ocurre cuando los datos correspondientes a una misma unidad observacional se encuentran fragmentados en múltiples tablas o archivos independientes.</p>
+<p>Un escenario común se presenta con los resultados del examen Saber-Pro. Es habitual que la información de cada periodo se publique y almacene en archivos separados por año, como por ejemplo:</p>
+<ul>
+<li><code>2021-saber_pro-genericas.csv</code></li>
+<li><code>2022-saber_pro-genericas.csv</code></li>
+<li><code>2023-saber_pro-genericas.csv</code></li>
+<li><code>2024-saber_pro-genericas.csv</code>.</li>
+</ul>
+<p>Aunque estos archivos comparten variables comunes y la misma unidad observacional, su fragmentación dificulta realizar análisis longitudinales o comparativos. Para ordenar y consolidar este tipo de datos, el flujo de trabajo estándar comprende:</p>
+<ol type="1">
+<li>Identificar las rutas de cada uno de los archivos.</li>
+<li>Leer de forma iterativa cada archivo asegurando registrar el año o archivo de origen.</li>
+<li>Unir todas las filas en una única tabla consolidada como <code>2021_2024-saber_pro-genericas.csv</code> identificando las variables en común para el conjunto de tablas que se buscan consolidar.</li>
+</ol>
+<p>En la <a href="map_functions.html" class="quarto-xref"><span>Capítulo 20</span></a> se abordará en detalle cómo automatizar este proceso utilizando las herramientas de programación funcional del paquete <code>purrr</code> de tal manera que se puedan consolidar múltiples archivos en una única tabla ordenada para su posterior análisis utilizando el <code>tidyverse</code>.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
