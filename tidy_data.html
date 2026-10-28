@@ -102,7 +102,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-13eb8e2fc86d17b67f83116d69f6ada2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5d82b1d0c18e482852369f18114d791b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -339,8 +339,8 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./splitting_combining.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Separación y unión de columnas</span></span></a>
+  <a href="./split_unite_characters_cols.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Separación y unión de caracteres en columnas</span></span></a>
   </div>
 </li>
       </ul>
@@ -617,7 +617,7 @@ Tabla&nbsp;16.3: Los mismos datos del experimento con variables en columnas y ob
 <li>Múltiples unidades observacionales mezcladas en una sola tabla.</li>
 <li>Una misma unidad observacional fragmentada en múltiples tablas o archivos.</li>
 </ol>
-<p>Para resolver estos problemas, el paquete <code>tidyr</code> proporciona un conjunto pequeño, consistente y potente de herramientas de reestructuración, encabezado por las funciones <code>pivot_longer()</code> y <code>pivot_wider()</code>. A continuación se examina cada uno de estos problemas a partir de los ejemplos destacados en la documentación de <a href="https://tidyr.tidyverse.org/articles/tidy-data.html"><code>tidyr</code></a> o señalados en <span class="citation" data-cites="wickham_tidy_2014">(<a href="references.html#ref-wickham_tidy_2014" role="doc-biblioref">Wickham, 2014</a>)</span>.</p>
+<p>Para resolver estos problemas, el paquete <code>tidyr</code> proporciona un conjunto pequeño, consistente y potente de herramientas de reestructuración, encabezado por las funciones <code>pivot_longer()</code> y <code>pivot_wider()</code>. A continuación se examina cada uno de estos problemas a partir de los ejemplos destacados en la documentación de <a href="https://tidyr.tidyverse.org/index.html"><code>tidyr</code></a> o señalados en <span class="citation" data-cites="wickham_tidy_2014">(<a href="references.html#ref-wickham_tidy_2014" role="doc-biblioref">Wickham, 2014</a>)</span>.</p>
 <section id="nombres-de-columnas-que-son-valores-no-variables" class="level3" data-number="16.2.1">
 <h3 data-number="16.2.1" class="anchored" data-anchor-id="nombres-de-columnas-que-son-valores-no-variables"><span class="header-section-number">16.2.1</span> Nombres de columnas que son valores, no variables</h3>
 <p>Un caso muy común de datos no ordenados ocurre en tablas elaboradas para presentaciones visuales o resúmenes ejecutivos, donde los encabezados de las columnas no son nombres de variables sino valores específicos de una variable.</p>
@@ -913,19 +913,20 @@ Listado&nbsp;16.6: Reestructuración de <code>clima_muestra</code> combinando <c
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"valor"</span>,</span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_drop_na =</span> <span class="cn">TRUE</span></span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> element,</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> valor</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dia =</span> <span class="fu">as.integer</span>(dia)) <span class="sc">|&gt;</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> element,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> valor</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 6
-  id        ano   mes dia    tmax  tmin
-  &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 MX17004  2010     2 2      27.3  14.4
-2 MX17004  2010     2 3      24.1  14.4</code></pre>
+  id        ano   mes   dia  tmax  tmin
+  &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 MX17004  2010     2     2  27.3  14.4
+2 MX17004  2010     2     3  24.1  14.4</code></pre>
 </div>
 </div>
 <p>En la tabla resultante del <a href="#lst-tidy-weather" class="quarto-xref">Listado&nbsp;<span>16.6</span></a>, cada fila representa un día específico de observación y cada columna una variable medida, cumpliendo con el formato de datos ordenados.</p>

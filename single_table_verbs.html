@@ -102,7 +102,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-13eb8e2fc86d17b67f83116d69f6ada2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5d82b1d0c18e482852369f18114d791b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/kbd/kbd.js"></script>
 <link href="site_libs/quarto-contrib/kbd/kbd.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -370,8 +370,8 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./splitting_combining.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Separación y unión de columnas</span></span></a>
+  <a href="./split_unite_characters_cols.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Separación y unión de caracteres en columnas</span></span></a>
   </div>
 </li>
       </ul>
@@ -419,7 +419,7 @@ window.Quarto = {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#gramática-de-manipulación-de-datos-en-dplyr" id="toc-gramática-de-manipulación-de-datos-en-dplyr" class="nav-link active" data-scroll-target="#gramática-de-manipulación-de-datos-en-dplyr"><span class="header-section-number">10.1</span> Gramática de manipulación de datos en <code>dplyr</code></a>
+  <li><a href="#sec-data-manipulation-syntax" id="toc-sec-data-manipulation-syntax" class="nav-link active" data-scroll-target="#sec-data-manipulation-syntax"><span class="header-section-number">10.1</span> Gramática de manipulación de datos en <code>dplyr</code></a>
   <ul class="collapse">
   <li><a href="#sec-verbs-one-table" id="toc-sec-verbs-one-table" class="nav-link" data-scroll-target="#sec-verbs-one-table"><span class="header-section-number">10.1.1</span> Verbos</a></li>
   </ul></li>
@@ -493,14 +493,14 @@ Nota&nbsp;10.1
 <p>En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada <code>010_verbos-una-sola-tabla-en-r</code> y dentro de ella genera el archivo <code>001_manipular-datos-una-sola-tabla.R</code>, siguiendo las pautas de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>.</p>
 </div>
 </div>
-<section id="gramática-de-manipulación-de-datos-en-dplyr" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="gramática-de-manipulación-de-datos-en-dplyr"><span class="header-section-number">10.1</span> Gramática de manipulación de datos en <code>dplyr</code></h2>
+<section id="sec-data-manipulation-syntax" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="sec-data-manipulation-syntax"><span class="header-section-number">10.1</span> Gramática de manipulación de datos en <code>dplyr</code></h2>
 <p>El paquete <code>dplyr</code>, incluido en el <code>tidyverse</code>, permite manipular datos a partir de un conjunto de datos en 2 niveles:</p>
 <ol type="1">
 <li>Dentro de una sola tabla de datos</li>
 <li>Entre diferentes tablas de datos</li>
 </ol>
-<p>El primer nivel se abarcará en el <a href="#sec-single-table-verbs" class="quarto-xref"><span>Capítulo 10</span></a> y el segundo nivel se desarrollará en el <a href="two_table_verbs.html" class="quarto-xref"><span>Capítulo 11</span></a>. Al igual que en el caso de <code>ggplot2</code> (ver <a href="amounts.html#sec-layered-grammar-graphics" class="quarto-xref"><span>Sección 6.1</span></a>) el paquete <code>dplyr</code> funciona mejor si el conjunto de datos es ordenado (<a href="https://tidyr.tidyverse.org/articles/tidy-data.html">tidy data</a> en inglés, <span class="citation" data-cites="wickham_tidy_2014">(<a href="references.html#ref-wickham_tidy_2014" role="doc-biblioref">Wickham, 2014</a>)</span>) donde este concepto se tratará en más detalle en el <a href="tidy_data.html" class="quarto-xref"><span>Capítulo 16</span></a>.</p>
+<p>El primer nivel se abarcará en el <a href="#sec-single-table-verbs" class="quarto-xref"><span>Capítulo 10</span></a> y el segundo nivel se desarrollará en el <a href="two_table_verbs.html" class="quarto-xref"><span>Capítulo 11</span></a>. Al igual que en el caso de <code>ggplot2</code> (ver <a href="amounts.html#sec-layered-grammar-graphics" class="quarto-xref"><span>Sección 6.1</span></a>) el paquete <code>dplyr</code> funciona mejor si el conjunto de datos es ordenado (<a href="https://tidyr.tidyverse.org/index.html">tidy data</a> en inglés, <span class="citation" data-cites="wickham_tidy_2014">(<a href="references.html#ref-wickham_tidy_2014" role="doc-biblioref">Wickham, 2014</a>)</span>) donde este concepto se tratará en más detalle en el <a href="tidy_data.html" class="quarto-xref"><span>Capítulo 16</span></a>.</p>
 <p>A medida que explores diferentes formas de manipular un conjunto de datos entenderás en más detalle la gramática de manipulación de datos propuesta en el paquete <code>dplyr</code>. Por ahora se describirán en la <a href="#sec-verbs-one-table" class="quarto-xref"><span>Sección 10.1.1</span></a> de manera general y gráfica los verbos más comunes que se utilizan para manipular datos en una sola tabla y que se utilizan en <code>dplyr</code>.</p>
 <p>En el paquete <code>dplyr</code>, para mantener la consistencia de las funciones que lo componen, siempre se cumple que cada uno de los verbos obedece a los siguientes aspectos <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 3</a>)</span>:</p>
 <ol type="1">

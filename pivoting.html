@@ -26,7 +26,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -36,7 +91,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./splitting_combining.html" rel="next">
+<link href="./split_unite_characters_cols.html" rel="next">
 <link href="./tidy_data.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -47,7 +102,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-13eb8e2fc86d17b67f83116d69f6ada2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5d82b1d0c18e482852369f18114d791b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -284,8 +339,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./splitting_combining.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Separación y unión de columnas</span></span></a>
+  <a href="./split_unite_characters_cols.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Separación y unión de caracteres en columnas</span></span></a>
   </div>
 </li>
       </ul>
@@ -328,15 +383,31 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#pirámides-poblacionales" id="toc-pirámides-poblacionales" class="nav-link active" data-scroll-target="#pirámides-poblacionales"><span class="header-section-number">17.1</span> Pirámides poblacionales</a></li>
+  <li><a href="#formato-largo" id="toc-formato-largo" class="nav-link" data-scroll-target="#formato-largo"><span class="header-section-number">17.2</span> Formato largo</a></li>
+  <li><a href="#formato-ancho" id="toc-formato-ancho" class="nav-link" data-scroll-target="#formato-ancho"><span class="header-section-number">17.3</span> Formato ancho</a></li>
+  <li><a href="#caso-de-estudio-estructurar-datos-en-formato-largo-para-generar-pirámides-poblacionales-en-colombia" id="toc-caso-de-estudio-estructurar-datos-en-formato-largo-para-generar-pirámides-poblacionales-en-colombia" class="nav-link" data-scroll-target="#caso-de-estudio-estructurar-datos-en-formato-largo-para-generar-pirámides-poblacionales-en-colombia"><span class="header-section-number">17.4</span> Caso de estudio: estructurar datos en formato largo para generar pirámides poblacionales en Colombia</a>
+  <ul class="collapse">
+  <li><a href="#limpieza-de-nombres" id="toc-limpieza-de-nombres" class="nav-link" data-scroll-target="#limpieza-de-nombres"><span class="header-section-number">17.4.1</span> Limpieza de nombres</a></li>
+  <li><a href="#filtrar-categoría-de-interés" id="toc-filtrar-categoría-de-interés" class="nav-link" data-scroll-target="#filtrar-categoría-de-interés"><span class="header-section-number">17.4.2</span> Filtrar categoría de interés</a></li>
+  <li><a href="#seleccionar-variables-de-interés" id="toc-seleccionar-variables-de-interés" class="nav-link" data-scroll-target="#seleccionar-variables-de-interés"><span class="header-section-number">17.4.3</span> Seleccionar variables de interés</a></li>
+  <li><a href="#ordenar-datos-en-formato-largo" id="toc-ordenar-datos-en-formato-largo" class="nav-link" data-scroll-target="#ordenar-datos-en-formato-largo"><span class="header-section-number">17.4.4</span> Ordenar datos en formato largo</a></li>
+  <li><a href="#exportar-datos-en-formato-largo" id="toc-exportar-datos-en-formato-largo" class="nav-link" data-scroll-target="#exportar-datos-en-formato-largo"><span class="header-section-number">17.4.5</span> Exportar datos en formato largo</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/pivoting.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/pivoting.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data_tidy.html">Organización y limpieza de datos</a></li><li class="breadcrumb-item"><a href="./pivoting.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Pivoteo</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Pivoteo</span></h1>
+<h1 class="title"><span id="sec-pivoting" class="quarto-section-identifier"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Pivoteo</span></span></h1>
 </div>
 
 
@@ -353,8 +424,90 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>Este capítulo se basa en <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 5</a>)</span> así como en la documentación oficial de <a href="https://tidyr.tidyverse.org/articles/pivot.html"><code>tidyr</code></a> donde tiene como propósito introducir la forma de estructurar un conjuntos de datos en formato largo y ancho (en inglés <strong>longer</strong> y <strong>wider</strong>) mediante las funciones <code>pivot_longer()</code> y <code>pivot_wider()</code> utilizando el paquete <code>tidyr</code> e información de proyecciones y retroproyecciones de población nacional por área, sexo y edad para el periodo 2018-2070 de Colombia con base en el Censo Nacional de Población y Vivienda (CNPV) 2018.</p>
+<p>Exploraremos los siguientes aspectos:</p>
+<ol type="1">
+<li></li>
+<li></li>
+</ol>
+<div id="nte-1-chap-17" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota&nbsp;17.1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para desarrollar el contenido de este capítulo es necesario que hayas guardado el archivo <code>serie-nacional-de-poblacion_area-sexo-edad_2018-2070_2025-07-18.xlsx</code> en la carpeta <code>data</code>, tal como se señaló en la <a href="spreadsheets.html#nte-1-chap-14" class="quarto-xref">Nota&nbsp;<span>14.1</span></a>. En caso que no lo hayas hecho es necesario que lo descargues y lo incluyas dentro de la carpeta <code>data</code>:</p>
+<div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span><img src="images/download-solid-full.png" alt="Ícono del explorador de archivos" height="25"> <a href="https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/serie-nacional-de-poblacion_area-sexo-edad_2018-2070_2025-07-18.xlsx">serie-nacional-de-poblacion_area-sexo-edad_2018-2070_2025-07-18.xlsx</a>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<p>También es necesario que instales el paquete <code>janitor</code> teniendo en cuenta la <a href="r_packages.html#sec-installing-packages" class="quarto-xref"><span>Sección 4.2</span></a>, tal como se señala a continuación:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"janitor"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada <code>017_pivotear-datos-en-r</code> y dentro de ella genera el archivo <code>001_pivotear.R</code>, siguiendo las pautas de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>.</p>
+</div>
+</div>
+<section id="pirámides-poblacionales" class="level2" data-number="17.1">
+<h2 data-number="17.1" class="anchored" data-anchor-id="pirámides-poblacionales"><span class="header-section-number">17.1</span> Pirámides poblacionales</h2>
+<p>En el <a href="#sec-pivoting" class="quarto-xref"><span>Capítulo 17</span></a> y en el <a href="split_unite_characters_cols.html" class="quarto-xref"><span>Capítulo 18</span></a> ordenarás un conjunto de datos utilizando el paquete <code>tidyr</code> y utilizarás tanto la <strong>gramática de manipulación de datos</strong> (ver <a href="single_table_verbs.html#sec-data-manipulation-syntax" class="quarto-xref"><span>Sección 10.1</span></a>) como la <strong>gramática de gráficos en capas</strong> (ver <a href="amounts.html#sec-layered-grammar-graphics" class="quarto-xref"><span>Sección 6.1</span></a>) para realizar un gráfico de pirámides de población señalando la participación en la población por grupos etareos en Colombia para los años 2018, 2035, 2052 y 2070, tal como se indica en la <a href="#fig-1-chap-17" class="quarto-xref">Figura&nbsp;<span>17.1</span></a>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-1-chap-17" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-1-chap-17-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="pivoting_files/figure-html/fig-1-chap-17-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-chap-17-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;17.1: Resultado final de un gráfico de pirámides poblaciones utilizando <code>readxl</code>, <code>janitor</code>, <code>tidyr</code>, <code>ggplot2</code> y <code>scales</code>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="formato-largo" class="level2" data-number="17.2">
+<h2 data-number="17.2" class="anchored" data-anchor-id="formato-largo"><span class="header-section-number">17.2</span> Formato largo</h2>
+</section>
+<section id="formato-ancho" class="level2" data-number="17.3">
+<h2 data-number="17.3" class="anchored" data-anchor-id="formato-ancho"><span class="header-section-number">17.3</span> Formato ancho</h2>
+</section>
+<section id="caso-de-estudio-estructurar-datos-en-formato-largo-para-generar-pirámides-poblacionales-en-colombia" class="level2" data-number="17.4">
+<h2 data-number="17.4" class="anchored" data-anchor-id="caso-de-estudio-estructurar-datos-en-formato-largo-para-generar-pirámides-poblacionales-en-colombia"><span class="header-section-number">17.4</span> Caso de estudio: estructurar datos en formato largo para generar pirámides poblacionales en Colombia</h2>
+<section id="limpieza-de-nombres" class="level3" data-number="17.4.1">
+<h3 data-number="17.4.1" class="anchored" data-anchor-id="limpieza-de-nombres"><span class="header-section-number">17.4.1</span> Limpieza de nombres</h3>
+</section>
+<section id="filtrar-categoría-de-interés" class="level3" data-number="17.4.2">
+<h3 data-number="17.4.2" class="anchored" data-anchor-id="filtrar-categoría-de-interés"><span class="header-section-number">17.4.2</span> Filtrar categoría de interés</h3>
+</section>
+<section id="seleccionar-variables-de-interés" class="level3" data-number="17.4.3">
+<h3 data-number="17.4.3" class="anchored" data-anchor-id="seleccionar-variables-de-interés"><span class="header-section-number">17.4.3</span> Seleccionar variables de interés</h3>
+</section>
+<section id="ordenar-datos-en-formato-largo" class="level3" data-number="17.4.4">
+<h3 data-number="17.4.4" class="anchored" data-anchor-id="ordenar-datos-en-formato-largo"><span class="header-section-number">17.4.4</span> Ordenar datos en formato largo</h3>
+</section>
+<section id="exportar-datos-en-formato-largo" class="level3" data-number="17.4.5">
+<h3 data-number="17.4.5" class="anchored" data-anchor-id="exportar-datos-en-formato-largo"><span class="header-section-number">17.4.5</span> Exportar datos en formato largo</h3>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-wickham_r_2023" class="csl-entry" role="listitem">
+Wickham, H. (2023). <em>R for <span>Data</span> <span>Science</span></em> (2.ª ed.). O’Reilly Media, Incorporated. <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a>
+</div>
+</div>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -764,8 +917,8 @@ ul.task-list li input[type="checkbox"] {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./splitting_combining.html" class="pagination-link" aria-label="Separación y unión de columnas">
-        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Separación y unión de columnas</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./split_unite_characters_cols.html" class="pagination-link" aria-label="Separación y unión de caracteres en columnas">
+        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Separación y unión de caracteres en columnas</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -774,4 +927,4 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/pivoting.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/pivoting.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/pivoting.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/pivoting.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></div></div></footer></body></html>

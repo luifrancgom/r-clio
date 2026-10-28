@@ -102,7 +102,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-13eb8e2fc86d17b67f83116d69f6ada2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5d82b1d0c18e482852369f18114d791b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -368,8 +368,8 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./splitting_combining.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Separación y unión de columnas</span></span></a>
+  <a href="./split_unite_characters_cols.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Separación y unión de caracteres en columnas</span></span></a>
   </div>
 </li>
       </ul>
@@ -500,7 +500,7 @@ Figura&nbsp;6.1: Modelo mental de la gramática de gráficos en capas
 </div>
 <p>Para que <code>ggplot2</code> genere un gráfico requiere como mínimo los siguientes 3 componentes: Datos, Mapeo y Capas. Los demás elementos restantes (Escalas, Facetas, Coordenadas y Tema) cuentan con valores predeterminados que eliminan inicialmente la necesidad de fijar configuraciones adicionales.</p>
 <ol type="1">
-<li><p><strong>Datos</strong>: es el insumo principal que se requiere para generar un gráfico donde se refiere al conjunto de datos que se busca visualizar. <code>ggplot2</code> funciona mejor si el conjunto de datos es ordenado (<a href="https://tidyr.tidyverse.org/articles/tidy-data.html">tidy data</a> en inglés, <span class="citation" data-cites="wickham_tidy_2014">(<a href="references.html#ref-wickham_tidy_2014" role="doc-biblioref">Wickham, 2014</a>)</span>) donde este concepto se tratará en más detalle en el <a href="tidy_data.html" class="quarto-xref"><span>Capítulo 16</span></a>.</p></li>
+<li><p><strong>Datos</strong>: es el insumo principal que se requiere para generar un gráfico donde se refiere al conjunto de datos que se busca visualizar. <code>ggplot2</code> funciona mejor si el conjunto de datos es ordenado (<a href="https://tidyr.tidyverse.org/index.html">tidy data</a> en inglés, <span class="citation" data-cites="wickham_tidy_2014">(<a href="references.html#ref-wickham_tidy_2014" role="doc-biblioref">Wickham, 2014</a>)</span>) donde este concepto se tratará en más detalle en el <a href="tidy_data.html" class="quarto-xref"><span>Capítulo 16</span></a>.</p></li>
 <li><p><strong>Mapeo</strong>: es el conjunto de instrucciones que permiten mapear las variables de los datos a propiedades visuales denominadas atributos estéticos. En la <a href="#fig-aesthetics-attributes" class="quarto-xref">Figura&nbsp;<span>6.2</span></a> se indican algunos ejemplos de atributos estéticos.</p></li>
 </ol>
 <div id="fig-aesthetics-attributes" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama de seis cuadrantes que representan visualmente los atributos estéticos fundamentales: Posición (x, y) mediante ejes coordenados, Color (color) en los bordes, Relleno (fill) en el interior, Opacidad (alpha) con diferentes niveles de transparencia, Tamaño (size) con círculos de distinto diámetro y Forma (shape) con figuras de un círculo, un cuadrado y un triángulo.">
