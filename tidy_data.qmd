@@ -9,9 +9,10 @@ source("_common.R")
 #| label: load-r-packages
 #| echo: false
 #| message: false
+library(tidyverse)
 ```
 
-Este capítulo se basa en [@wickham_r_2023, Cap. 5] y [@wickham_tidy_2014] así como en la documentación oficial de [`tidyr`]({{< var url.packages.tidyr >}}) donde tiene como propósito introducir la forma de estructurar conjuntos de datos para facilitar su análisis utilizando el paquete `tidyr` e información de proyecciones de población de Colombia a nivel nacional por área geográfica (Cabecera y Centros poblados y rural disperso) según sexo (Masculino y Femenino) y edades simples ($0$, $1$, $2$, $\ldots$, $98$, $99$, $100$ o más) para el periodo 2018-2070 con base en el Censo Nacional de Población y Vivienda (CNPV) 2018.   
+Este capítulo se basa en [@wickham_r_2023, Cap. 5] y [@wickham_tidy_2014] así como en la documentación oficial de [`tidyr`]({{< var url.packages.tidyr >}}) donde tiene como propósito introducir la forma de estructurar conjuntos de datos para facilitar su análisis utilizando el paquete `tidyr`.   
 
 Exploraremos los siguientes aspectos:
 
@@ -19,43 +20,266 @@ Exploraremos los siguientes aspectos:
 2. ¿Cuáles son los problemas más comunes con datos no ordenados?
 
 :::: {#nte-1-chap-16 .callout-note}
-Para desarrollar el contenido de este capítulo es necesario que hayas completado la descarga y ubicación del archivo `serie-nacional-de-poblacion_area-sexo-edad_2018-2070_2025-07-18.xlsx` dentro de la carpeta `data`, respecto a lo descrito en la @nte-1-chap-14.
-
-En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `016_datos-ordenados-en-r` y dentro de ella genera el archivo `001_datos-ordenados.R`, siguiendo las pautas de la @sec-package-usage.
+Para desarrollar el contenido de este capítulo es necesario que crees una nueva carpeta llamada `016_datos-ordenados-en-r` y dentro de ella genera el archivo `001_datos-ordenados.R`, siguiendo las pautas de la @sec-package-usage.
 ::::
 
 ## Definición de datos ordenados
 
+El concepto de datos ordenados, propuesto por Hadley Wickham [@wickham_tidy_2014], proporciona un marco para vincular la **estructura** de un conjunto de datos (su disposición visual en filas y columnas) con su **semántica** (su significado real). Este estándar simplifica las etapas iniciales de limpieza, facilita la exploración y análisis de la información y permite que los paquetes pertenecientes al `tidyverse` o que comparten su filosofía interactúen sin fricciones.
+
 ### Estructura de datos
 
+Gran parte de los conjuntos de datos se organizan en tablas rectangulares compuestas por **filas** y **columnas**. En la práctica las columnas casi siempre se encuentran identificadas mediante encabezados mientras que las filas a veces cuentan con etiquetas que las distinguen [@wickham_tidy_2014].
 
+Para ilustrar este principio considera los datos de un experimento médico hipotético analizado en [@wickham_tidy_2014], donde se evalúa el resultado de 2 tratamientos (**a** y **b**) en 3 individuos. En la @tbl-datos-presentacion-experimento se presenta la estructura típica con la que frecuentemente se diseñan las tablas para reportes o de presentación visual.
+
+| individuo | **a** | **b** |
+| :--- | :---: | :---: |
+| John Smith | NA | 2 |
+| Jane Doe | 16 | 11 |
+| Mary Johnson | 3 | 1 |
+: Tabla de presentación con filas y columnas etiquetadas {#tbl-datos-presentacion-experimento}
+
+Esta misma información puede organizarse de múltiples formas. Por ejemplo, en la @tbl-datos-transpuestos-experimento se muestran los mismos datos del experimento, pero con las filas y las columnas transpuestas:
+
+| tratamiento | John Smith | Jane Doe | Mary Johnson |
+| :--- | :---: | :---: | :---: |
+| **a** | NA | 16 | 3 |
+| **b** | 2 | 11 | 1 |
+: Los mismos datos del experimento pero organizados de forma transpuesta {#tbl-datos-transpuestos-experimento}
+
+A pesar de que ambas tablas transmiten exactamente la misma información, su disposición física y espacial es totalmente distinta. Esto evidencia que el vocabulario habitual de "filas" y "columnas" no es suficiente para explicar por qué ambas tablas representan el mismo conjunto de datos ni cómo un computador debe interpretarlos [@wickham_tidy_2014]. Por esta razón, más allá de la apariencia, se requiere examinar la **semántica** de los datos.
 
 ### Semántica de datos
 
+Un conjunto de datos es una colección de **valores** (en inglés **values**), los cuales usualmente corresponden a números o a cadenas de texto [@wickham_tidy_2014]. En la semántica de datos, todo valor pertenece simultáneamente a 2 conceptos fundamentales una **variable** y una **observación**:
 
+1. **Variable**: contiene todos los valores que miden un mismo atributo o característica como la estatura, la temperatura, la duración o el resultado de una prueba a través de distintas unidades de análisis.
+2. **Observación**: contiene todos los valores medidos sobre una misma unidad de análisis como una persona, un día específico o una muestra médica a través de diferentes atributos.
+3. **Valor**: corresponde a la medición individual de un atributo específico registrada en una celda.
+
+Si reorganizamos los datos del experimento médico vinculando de forma unívoca su estructura con su semántica, obtenemos la disposición mostrada en la @tbl-datos-ordenados-experimento.
+
+| individuo | tratamiento | resultado |
+| :--- | :---: | :---: |
+| John Smith | a | NA |
+| Jane Doe | a | 16 |
+| Mary Johnson | a | 3 |
+| John Smith | b | 2 |
+| Jane Doe | b | 11 |
+| Mary Johnson | b | 1 |
+: Los mismos datos del experimento con variables en columnas y observaciones en filas {#tbl-datos-ordenados-experimento}
+
+La @tbl-datos-ordenados-experimento hace explícitos los 18 valores que componen el conjunto de datos correspondientes a 3 variables y 6 observaciones:
+
+a. `individuo` : con 3 valores posibles (`John Smith`, `Jane Doe` y `Mary Johnson`).
+b. `tratamiento` : con 2 valores posibles (`a` y `b`).
+c. `resultado` : con los valores cuantitativos registrados y el valor ausente (`NA`, `16`, `3`, `2`, `11`, `1`).
+
+El diseño experimental ofrece pautas esenciales sobre la estructura de las observaciones. En este caso particular, cada combinación entre persona y tratamiento fue medida. Asimismo, el diseño experimental determina cómo deben gestionarse los valores ausentes:
+
+* **Valores ausentes estructurales**: representan mediciones que no pueden ocurrir por la propia naturaleza del fenómeno (por ejemplo, el número de partos en individuos masculinos). Estos registros pueden descartarse sin pérdida de rigor.
+* **Valores ausentes explícitos**: representan observaciones que debieron haberse registrado pero por alguna circunstancia se omitieron o no se obtuvieron, como el tratamiento `a` en `John Smith` en la @tbl-datos-ordenados-experimento. En estos casos, es fundamental conservarlos como valores ausentes (`NA` en R).
 
 ### Características de datos ordenados
 
+Los datos ordenados constituyen un estándar para vincular la semántica de un conjunto de datos con su estructura. De acuerdo con [@wickham_tidy_2014] y [@wickham_r_2023], un conjunto de datos es ordenado si satisface las siguientes reglas fundamentales:
+
+1. Cada variable forma una columna.
+2. Cada observación forma una fila.
+3. Cada valor es una celda.
+4. Cada tipo de unidad observacional forma una tabla.
+
+Cualquier disposición física de los datos que no cumpla con estas reglas se clasifica como **datos no ordenados** (en inglés **non-tidy data**).
+
 ## Problemas más comunes con datos no ordenados
 
+En la práctica es usual encontrar los conjuntos de datos en un formato no ordenado. Aunque los datos no ordenados pueden adoptar diversas formas, la gran mayoría de las dificultades estructurales se reducen a 5 problemas habituales identificados por en [@wickham_tidy_2014]:
 
+1. Nombres de columnas que representan valores y no nombres de variables.
+2. Múltiples variables combinadas en una sola columna.
+3. Variables distribuidas simultáneamente en filas y en columnas.
+4. Múltiples unidades observacionales mezcladas en una sola tabla.
+5. Una misma unidad observacional fragmentada en múltiples tablas o archivos.
+
+Para resolver estos problemas, el paquete `tidyr` proporciona un conjunto pequeño, consistente y potente de herramientas de reestructuración, encabezado por las funciones `pivot_longer()` y `pivot_wider()`. A continuación se examina cada uno de estos problemas a partir de los ejemplos destacados en la documentación de [`tidyr`]({{< var url.packages.tidyr >}}) o señalados en [@wickham_tidy_2014].
 
 ### Nombres de columnas que son valores, no variables
 
+Un caso muy común de datos no ordenados ocurre en tablas elaboradas para presentaciones visuales o resúmenes ejecutivos, donde los encabezados de las columnas no son nombres de variables sino valores específicos de una variable.
 
+El paquete `tidyr` incluye el conjunto de datos `relig_income`, derivado de una encuesta sobre la distribución del ingreso en diversas confesiones religiosas en los Estados Unidos, tal como se señala a continuación:
+
+```{r}
+#| label: view-relig-income
+relig_income
+```
+
+En este conjunto de datos existen 3 variables:
+
+* `religion`: confesión religiosa del encuestado.
+* `ingreso` (`income`): rango o nivel socioeconómico de ingresos.
+* `frecuencia` (`frequency`): cantidad de individuos ubicados en cada intersección.
+
+Sin embargo, los encabezados de las columnas (`<$10k`, `$10-20k`, `$20-30k`, ... , `Don't know/refused`) representan en realidad categorías o valores de la variable ingreso. Para ordenar esta tabla se utiliza la función `pivot_longer()`, la cual transforma múltiples columnas en un par de columnas `nombre`-`valor` (en inglés `name`-`value`) aumentando el número de filas y reduciendo el de columnas, tal como se señala en el @lst-pivot-longer-relig-income.
+
+```{r}
+#| lst-label: lst-pivot-longer-relig-income
+#| lst-cap: Reestructuración del conjunto de datos `relig_income` utilizando `pivot_longer()`
+relig_income |>
+  pivot_longer(
+    cols = `<$10k`:`Don't know/refused`,
+    names_to = "ingreso",
+    values_to = "frecuencia"
+  )
+```
+
+Otro ejemplo, corresponde al conjunto de datos `billboard`, el cual registra la posición en el ranking musical **Billboard Top 100** durante el año 2000, tal como se señala a continuación:
+
+```{r}
+#| label: view-billboard
+billboard
+```
+
+En este conjunto, el ranking semanal de cada canción se encuentra disperso en 76 columnas: `wk1` hasta `wk76`. Los encabezados (`wk1`, `wk2`, ... , `wk76`), no son nombres de variables diferentes sino valores temporales de una única variable que corresponde a la semana en la lista. En ese sentido, es posible ordenar este conjunto de datos transformando las 76 columnas en nuevas variables (`semana` y `posicion`) y empleando el parámetro `values_drop_na = TRUE` para descartar las semanas en que la canción no figuraba en la lista, tal como se señala en el @lst-pivot-longer-billboard:
+
+```{r}
+#| lst-label: lst-pivot-longer-billboard
+#| lst-cap: Reestructuración del conjunto de datos `billboard` utilizando `pivot_longer()`
+billboard |>
+  pivot_longer(
+    cols = wk1:wk76,
+    names_to = "semana",
+    values_to = "posicion",
+    values_drop_na = TRUE
+  )
+```
 
 ### Múltiples variables en una sola columna
 
+Otro problema surge cuando los encabezados de las columnas unen 2 o más variables distintas dentro de una sola etiqueta compuesta.
 
+Un ejemplo clásico es el conjunto de datos de casos confirmados de tuberculosis (`tb`), recopilado por la Organización Mundial de la Salud (OMS). En este conjunto, los datos se encuentran discriminados por país, año y grupo demográfico, tal como se señala en el @lst-create-tb-sample:
+
+```{r}
+#| lst-label: lst-create-tb-sample
+#| lst-cap: Muestra representativa del conjunto de datos de tuberculosis (OMS)
+tb_muestra <- tribble(
+  ~iso2 , ~year , ~m_014 , ~m_1524 , ~f_014 , ~f_1524 ,
+  "AD"  ,  2000 ,      0 ,       0 ,      1 ,       1 ,
+  "AE"  ,  2000 ,      2 ,       4 ,      3 ,       4 ,
+  "AF"  ,  2000 ,     52 ,     228 ,     93 ,     140
+)
+
+tb_muestra
+```
+
+Las columnas como `m_014` o `f_1524` agrupan 2 variables diferentes: 
+
+a. El sexo: `m` para masculino y `f` para femenino.
+b. El rango de edad: `014` para 0 a 14 años o `1524` para 15 a 24 años.
+
+Para ordenar estos datos:
+
+1. Se aplica `pivot_longer()` sobre las columnas compuestas para agruparlas en una variable temporal denominada `demo`.
+2. Se utiliza la función `separate_wider_delim()` de `tidyr` para dividir la cadena de texto de la columna `demo` en 2 variables independientes (`sexo` y `edad`) con base al delimitador `_`, tal como se señala en el @lst-tidy-tb-two-steps:
+
+```{r}
+#| lst-label: lst-tidy-tb-two-steps
+#| lst-cap: Reestructuración y separación de variables compuestas en `tb_muestra` con `pivot_longer()` y `separate_wider_delim()`
+tb_muestra |>
+  pivot_longer(
+    cols = !c(iso2, year),
+    names_to = "demo",
+    values_to = "casos"
+  ) |>
+  separate_wider_delim(
+    cols = demo,
+    delim = "_",
+    names = c("sexo", "edad")
+  )
+```
+
+Ordenar este conjuntos de datos permite por ejemplo incorporar con facilidad variables adicionales como la población de cada país y calcular de manera directa tasas de incidencia por grupo etario y sexo.
 
 ### Variables almacenadas tanto en filas como en columnas
 
+La forma más compleja de datos no ordenados ocurre cuando ciertas variables se encuentran distribuidas a lo largo de las columnas, mientras que otras variables tienen sus nombres almacenados como valores dentro de filas.
 
+Este patrón se evidencia en los registros meteorológicos diarios de la estación climatológica MX17004 en México provenientes de la  Global Historical Climatology Network para el año 2010, tal como se señala en el @lst-create-weather-sample:
+
+```{r}
+#| lst-label: lst-create-weather-sample
+#| lst-cap: Muestra representativa del registro meteorológico diario
+clima_muestra <- tribble(
+  ~id       , ~ano , ~mes , ~element , ~`1` , ~`2` , ~`3` ,
+  "MX17004" , 2010 ,    1 , "tmax"   , NA   , NA   , NA   ,
+  "MX17004" , 2010 ,    1 , "tmin"   , NA   , NA   , NA   ,
+  "MX17004" , 2010 ,    2 , "tmax"   , NA   , 27.3 , 24.1 ,
+  "MX17004" , 2010 ,    2 , "tmin"   , NA   , 14.4 , 14.4 ,
+  "MX17004" , 2010 ,    3 , "tmax"   , NA   , NA   , NA   ,
+  "MX17004" , 2010 ,    3 , "tmin"   , NA   , NA   , NA
+)
+
+clima_muestra
+```
+
+En esta tabla coexisten 2 problemas estructurales:
+
+* Los días del mes se encuentran dispersos en columnas (`1`, `2`, `3`).
+* La columna `element` no es una variable en sí misma ya que almacena los nombres de 2 variables meteorológicas medidas: la temperatura máxima (`tmax`) y la temperatura mínima (`tmin`).
+
+Para ordenar este conjunto se combina el uso de `pivot_longer()` y `pivot_wider()`, tal como se señala en el @lst-tidy-weather:
+
+1. **Colapsar los días**: se aplica `pivot_longer()` sobre las columnas de días para recopilarlas en una sola variable `dia`.
+2. **Pivote inverso**: se utiliza `pivot_wider()` para transformar los valores de `element` (`tmax` y `tmin`) en columnas independientes, asignando a cada una su respectiva medición tomada de la columna `valor`.
+
+```{r}
+#| lst-label: lst-tidy-weather
+#| lst-cap: Reestructuración de `clima_muestra` combinando `pivot_longer()` y `pivot_wider()`
+clima_muestra |>
+  pivot_longer(
+    cols = `1`:`3`,
+    names_to = "dia",
+    values_to = "valor",
+    values_drop_na = TRUE
+  ) |>
+  pivot_wider(
+    names_from = element,
+    values_from = valor
+  )
+```
+
+En la tabla resultante del @lst-tidy-weather, cada fila representa un día específico de observación y cada columna una variable medida, cumpliendo con el formato de datos ordenados.
 
 ### Diferentes unidades observacionales en una sola tabla
 
-**Note**: Remember [@sec-two-table-verbs]
+En ocasiones, un conjunto de datos recopila información de diferentes unidades observacionales dentro de una misma tabla. Esta práctica genera duplicación redundante de registros y aumenta el riesgo de inconsistencias.
+
+Un ejemplo representativo de esta situación se ilustró en la @sec-two-table-verbs mediante el modelo relacional del examen Saber Pro (ver @fig-erd). Si todos los datos estuviesen consolidados en una única tabla no ordenada, por cada evaluación de un estudiante se repetirían innecesariamente los atributos correspondientes a las entidades **Departamento**, **Municipio** y **Programa académico**.
+
+Para que el conjunto de datos sea ordenado los datos se estructuran en tablas independientes conectadas por claves primarias (**PK**) y foráneas (**FK**):
+
+1. Una tabla central de eventos (**Resultado Saber-Pro**), donde cada fila representa una evaluación individual identificada por el año y el consecutivo del estudiante.
+2. Tablas complementarias para cada entidad u observación particular: **Departamento**, **Municipio** y **Programa académico**.
+
+Como se exploró en la @sec-two-table-verbs, esta separación evita redundancias y permite recuperar la información integrada cuando sea necesario mediante **Mutating joins** como por ejemplo `left_join()`.
 
 ### Una misma unidad observacional almacenada en múltiples tablas
 
-**Note**: Remember [@sec-map-functions]
+El caso opuesto ocurre cuando los datos correspondientes a una misma unidad observacional se encuentran fragmentados en múltiples tablas o archivos independientes.
+
+Un escenario común se presenta con los resultados del examen Saber-Pro. Es habitual que la información de cada periodo se publique y almacene en archivos separados por año, como por ejemplo:
+
+* `2021-saber_pro-genericas.csv`
+* `2022-saber_pro-genericas.csv`
+* `2023-saber_pro-genericas.csv`
+* `2024-saber_pro-genericas.csv`. 
+
+Aunque estos archivos comparten variables comunes y la misma unidad observacional, su fragmentación dificulta realizar análisis longitudinales o comparativos. Para ordenar y consolidar este tipo de datos, el flujo de trabajo estándar comprende:
+
+1. Identificar las rutas de cada uno de los archivos.
+2. Leer de forma iterativa cada archivo asegurando registrar el año o archivo de origen.
+3. Unir todas las filas en una única tabla consolidada como `2021_2024-saber_pro-genericas.csv` identificando las variables en común para el conjunto de tablas que se buscan consolidar.
+
+En la @sec-map-functions se abordará en detalle cómo automatizar este proceso utilizando las herramientas de programación funcional del paquete `purrr` de tal manera que se puedan consolidar múltiples archivos en una única tabla ordenada para su posterior análisis utilizando el `tidyverse`.
