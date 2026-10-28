@@ -20,7 +20,7 @@ Exploraremos los siguientes aspectos:
 2. ¿Cuáles son los problemas más comunes con datos no ordenados?
 
 :::: {#nte-1-chap-16 .callout-note}
-Para desarrollar el contenido de este capítulo es necesario que crees una nueva carpeta llamada `016_datos-ordenados-en-r` y dentro de ella genera el archivo `001_datos-ordenados.R`, siguiendo las pautas de la @sec-package-usage.
+Para desarrollar el contenido de este capítulo es necesario que crees una nueva carpeta llamada `016_datos-ordenados-en-r` y dentro de ella generes el archivo `001_datos-ordenados.R`, siguiendo las pautas de la @sec-package-usage.
 ::::
 
 ## Definición de datos ordenados
@@ -173,6 +173,13 @@ tb_muestra <- tribble(
 
 tb_muestra
 ```
+
+::: {#nte-2-chap-16 .callout-note}
+En el @lst-create-tb-sample se utiliza la función `tribble()` del paquete `tibble` para construir una tibble fila por fila. A diferencia de la función `tibble()` introducida en la @sec-tibbles (ver @lst-tibble), que organiza los datos columna por columna, `tribble()` resulta idónea para ingresar tablas pequeñas o ejemplos demostrativos en el código:
+
+1. Los nombres de las columnas se especifican anteponiendo una virgulilla (`~`).
+2. Los valores se ingresan secuencialmente a lo largo de las filas separados por comas.
+:::
 
 Las columnas como `m_014` o `f_1524` agrupan 2 variables diferentes: 
 
