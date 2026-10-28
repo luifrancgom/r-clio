@@ -468,14 +468,14 @@ scales_demo <- tibble(
 scales_data_plot <- bind_rows(
   scales_demo |>
     mutate(
-      escala = "Escala lineal: x",
+      escala = 'paste("Escala lineal: ", italic(x))',
       pos = x_lineal,
       valor_label = as.character(valor),
       .keep = "none"
     ),
   scales_demo |>
     mutate(
-      escala = "Escala logarítmica: logₑ(x + 1)",
+      escala = 'paste("Escala logarítmica: ", log[e](italic(x) + 1))',
       pos = x_log,
       valor_label = str_glue("{valor} ({round(pos, 2)})"),
       .keep = "none"
@@ -517,7 +517,8 @@ scales_data_plot |>
   facet_wrap(
     facets = vars(escala),
     scales = "free_x",
-    ncol = 1
+    ncol = 1,
+    labeller = label_parsed
   ) +
   labs(
     x = NULL,
