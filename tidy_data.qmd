@@ -12,7 +12,7 @@ source("_common.R")
 library(tidyverse)
 ```
 
-Este capítulo se basa en [@wickham_r_2023, Cap. 5] y [@wickham_tidy_2014] así como en la documentación oficial de [`tidyr`]({{< var url.packages.tidyr >}}) donde tiene como propósito introducir la forma de estructurar conjuntos de datos para facilitar su análisis utilizando el paquete `tidyr`.   
+Este capítulo se basa en [@wickham_r_2023, Cap. 5] y [@wickham_tidy_2014] así como en la documentación oficial de [`tidyr`]({{< var url.packages.tidyr_tidy_data >}}) donde tiene como propósito introducir la forma de estructurar conjuntos de datos para facilitar su análisis utilizando el paquete `tidyr`.   
 
 Exploraremos los siguientes aspectos:
 
@@ -251,6 +251,7 @@ clima_muestra |>
     values_to = "valor",
     values_drop_na = TRUE
   ) |>
+  mutate(dia = as.integer(dia)) |>
   pivot_wider(
     names_from = element,
     values_from = valor

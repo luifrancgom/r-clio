@@ -33,7 +33,7 @@ En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta 
 
 ::::
 
-## Gramática de manipulación de datos en `dplyr`
+## Gramática de manipulación de datos en `dplyr` {#sec-data-manipulation-syntax}
 
 El paquete `dplyr`, incluido en el `tidyverse`, permite manipular datos a partir de un conjunto de datos en 2 niveles:
 

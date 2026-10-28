@@ -1,1 +1,226 @@
-# Pivoteo
+# Pivoteo {#sec-pivoting}
+
+```{r}
+#| echo: false
+source("_common.R")
+```
+
+```{r}
+#| label: load-r-packages
+#| echo: false
+#| message: false
+library(readxl)
+library(janitor)
+library(tidyverse)
+library(scales)
+```
+
+Este capítulo se basa en [@wickham_r_2023, Cap. 5] así como en la documentación oficial de [`tidyr`]({{< var url.packages.tidyr_pivoting >}}) donde tiene como propósito introducir la forma de estructurar un conjuntos de datos en formato largo y ancho (en inglés **longer** y **wider**) mediante las funciones `pivot_longer()` y `pivot_wider()` utilizando el paquete `tidyr` e información de proyecciones y retroproyecciones de población nacional por área, sexo y edad para el periodo 2018-2070 de Colombia con base en el Censo Nacional de Población y Vivienda (CNPV) 2018. 
+
+Exploraremos los siguientes aspectos:
+
+1.
+2.
+
+:::: {#nte-1-chap-17 .callout-note}
+Para desarrollar el contenido de este capítulo es necesario que hayas guardado el archivo `serie-nacional-de-poblacion_area-sexo-edad_2018-2070_2025-07-18.xlsx` en la carpeta `data`, tal como se señaló en la @nte-1-chap-14. En caso que no lo hayas hecho es necesario que lo descargues y lo incluyas dentro de la carpeta `data`:
+   
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [serie-nacional-de-poblacion_area-sexo-edad_2018-2070_2025-07-18.xlsx]({{< var url.data.poblacion_xlsx_2018_2070 >}})
+:::
+
+También es necesario que instales el paquete `janitor` teniendo en cuenta la @sec-installing-packages, tal como se señala a continuación:
+
+```r
+install.packages("janitor")
+```
+
+En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `017_pivotear-datos-en-r` y dentro de ella genera el archivo `001_pivotear.R`, siguiendo las pautas de la @sec-package-usage.
+::::
+
+## Pirámides poblacionales
+
+En el @sec-pivoting y en el @sec-split-unite-characters-cols ordenarás un conjunto de datos utilizando el paquete `tidyr` y utilizarás tanto la **gramática de manipulación de datos** (ver @sec-data-manipulation-syntax) como la **gramática de gráficos en capas** (ver @sec-layered-grammar-graphics) para realizar un gráfico de pirámides de población señalando la participación en la población por grupos etareos en Colombia para los años 2018, 2035, 2052 y 2070, tal como se indica en la @fig-1-chap-17.
+
+```{r}
+#| label: fig-1-chap-17
+#| fig-cap: Resultado final de un gráfico de pirámides poblaciones utilizando `readxl`, `janitor`, `tidyr`, `ggplot2` y `scales`
+#| fig-height: 7
+#| echo: false
+#| message: false
+# Import datos ----
+path <- "data/serie-nacional-de-poblacion_area-sexo-edad_2018-2070_2025-07-18.xlsx"
+
+poblacion_col_2018_2070 <- read_excel(
+  path = path,
+  sheet = "PobNacionalxÁreaSexoEdad",
+  skip = 8
+) |>
+  rename(
+    territorio = `...1`,
+    ano = `...2`,
+    area_geografica = `...3`
+  )
+
+# Limpiar nombres ----
+poblacion_col_2018_2070_limpiar_nombres <- poblacion_col_2018_2070 |>
+  clean_names()
+
+# Filtrar ----
+poblacion_col_2018_2070_filtrar_total <- poblacion_col_2018_2070_limpiar_nombres |>
+  filter(
+    area_geografica == "Total"
+  )
+
+# Seleccionar ----
+poblacion_col_2018_2070_seleccionar <- poblacion_col_2018_2070_filtrar_total |>
+  select(
+    ano,
+    total,
+    hombres_0_anos:mujeres_100_anos_y_mas
+  )
+
+# Tidy ----
+poblacion_col_2018_2070_largo <- poblacion_col_2018_2070_filtrar_total |>
+  pivot_longer(
+    cols = hombres_0_anos:mujeres_100_anos_y_mas,
+    names_to = "genero_edad",
+    values_to = "poblacion"
+  )
+
+# Separar ----
+poblacion_col_2018_2070_separar <- poblacion_col_2018_2070_largo |>
+  separate_wider_delim(
+    cols = genero_edad,
+    delim = "_",
+    names = c("genero", "edad"),
+    too_many = "drop"
+  )
+
+# Transformar ----
+poblacion_col_2018_2070_transformar <- poblacion_col_2018_2070_separar |>
+  mutate(
+    ano = as.integer(ano),
+    edad = as.integer(edad),
+    poblacion_pct = poblacion / total
+  )
+
+# Preparar datos ----
+poblacion_col_2018_2070_preparar <- poblacion_col_2018_2070_transformar |>
+  group_by(ano, genero) |>
+  mutate(
+    rango_edad = cut(
+      edad,
+      breaks = c(seq.int(0, 85, 5), "Inf"),
+      labels = c(
+        str_c(seq(0, 80, 5), seq(4, 85, 5), sep = "-"),
+        "85+"
+      ),
+      right = FALSE
+    )
+  ) |>
+  ungroup() |>
+  group_by(ano, genero, rango_edad) |>
+  summarize(
+    poblacion = sum(poblacion),
+    poblacion_pct = sum(poblacion_pct)
+  ) |>
+  ungroup()
+
+# Filtrar ----
+## Variables auxiliares ----
+ano <- poblacion_col_2018_2070_preparar |>
+  pull(ano)
+
+ano_min <- min(ano)
+ano_max <- max(ano)
+
+filtrar_ano <- seq.int(
+  from = ano_min,
+  to = ano_max,
+  length.out = 4
+) |>
+  as.integer()
+
+poblacion_col_filtrar <- poblacion_col_2018_2070_preparar |>
+  filter(
+    ano %in% filtrar_ano
+  )
+
+# Visualización ----
+## Variables auxiliares ----
+poblacion_pct_breaks <- seq.int(
+  from = -0.04,
+  to = 0.04,
+  by = 0.01
+)
+
+actualizacion_fecha <- ymd("2025-07-18")
+
+poblacion_col_filtrar |>
+  ggplot(
+    aes(
+      x = ifelse(
+        test = genero == "hombres",
+        yes = poblacion_pct,
+        no = -poblacion_pct
+      ),
+      y = rango_edad
+    )
+  ) +
+  geom_col(
+    aes(fill = genero),
+    color = "black"
+  ) +
+  scale_x_continuous(
+    breaks = poblacion_pct_breaks,
+    labels = \(x) label_percent(accuracy = 1)(abs(x))
+  ) +
+  scale_fill_discrete(
+    labels = str_to_title
+  ) +
+  facet_wrap(
+    facets = vars(ano)
+  ) +
+  labs(
+    x = NULL,
+    y = NULL,
+    fill = NULL,
+    title = "Pirámides poblaciones de Colombia",
+    subtitle = str_glue("Actualización: {actualizacion_fecha}"),
+    caption = "Fuente: Dane - Proyecciones de Población y Estudios Demográficos (PPED)"
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+## Formato largo
+
+
+
+## Formato corto
+
+
+
+## Caso de estudio: estructurar datos en formato largo para generar pirámides poblacionales en Colombia 
+
+### Limpieza de nombres
+
+
+
+### Filtrar categoría de interés
+
+
+
+### Seleccionar variables de interés
+
+
+
+### Ordenar datos en formato largo
+
+
+
+### Exportar datos en formato largo
+
+

@@ -57,7 +57,7 @@ book:
       chapters: 
         - tidy_data.qmd
         - pivoting.qmd
-        - splitting_combining.qmd
+        - split_unite_characters_cols.qmd
     - part: functional_programming.qmd
       chapters:
         - anonymous_functions.qmd

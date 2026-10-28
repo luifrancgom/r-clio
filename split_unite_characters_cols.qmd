@@ -1,0 +1,2 @@
+# Separación y unión de caracteres en columnas {#sec-split-unite-characters-cols}
+
