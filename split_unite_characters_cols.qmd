@@ -1,2 +1,79 @@
 # Separación y unión de caracteres en columnas {#sec-split-unite-characters-cols}
 
+```{r}
+#| echo: false
+source("_common.R")
+```
+
+```{r}
+#| label: load-r-packages
+#| echo: false
+#| message: false
+library(tidyverse)
+library(scales)
+```
+
+Este capítulo se basa en [@wickham_r_2023, Cap. 5] así como en la documentación oficial de `tidyr` respecto a la familia de funciones [`separate_wider_*()`]({{< var url.packages.tidyr_split_string_cols >}}) y la función [`unite()`]({{< var url.packages.tidyr_unite_string_cols >}}) donde tiene como propósito introducir la forma de separar caracteres en columnas o unir múltiples columnas en una sola mediante concatenación de caracteres, utilizando el paquete `tidyr` e información de proyecciones y retroproyecciones de población nacional por área, sexo y edad para el periodo 2018-2070 de Colombia con base en el Censo Nacional de Población y Vivienda (CNPV) 2018. 
+
+Exploraremos los siguientes aspectos:
+
+1.
+2.
+
+:::: {#nte-1-chap-18 .callout-note}
+Para desarrollar el contenido de este capítulo es necesario que hayas exportado y guardado el archivo `poblacion_col_2018_2070_largo.rds` en la carpeta `data`, tal como se señaló en el @lst-write-rds-longer-format. En caso que no lo hayas hecho es necesario que lo descargues y lo incluyas dentro de la carpeta data:
+   
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [poblacion_col_2018_2070_largo.rds]({{< var url.data.poblacion_rds_2018_2070_largo >}})
+:::
+
+En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `018_separar-unir-caracteres-cols-en-r` y dentro de ella genera el archivo `001_separar-unir-caracteres-cols.R`, siguiendo las pautas de la @sec-package-usage.
+::::
+
+## Separar caracteres en columnas
+
+
+
+## Unir múltiples columnas mediante contatenación de caracteres
+
+
+
+## Caso de estudio: separar caracteres en columnas, transformar y prepapar datos para generar pirámides poblacionales en Colombia
+
+
+
+### Separar caracteres en columnas
+
+
+
+### Transformar variables
+
+
+
+### Preparar datos para visualizarlos
+
+
+
+## Caso de estudio: visualizar datos a través de pirámides poblacionales en Colombia
+
+
+### Creación de variables auxiliares para selección de años de interés
+
+
+### Creación de pirámides poblacionales
+
+
+
+#### Datos, mapeo y capas
+
+
+
+#### Facetas
+
+
+
+#### Escalas
+
+
+
+#### Tema

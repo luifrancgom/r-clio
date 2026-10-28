@@ -172,15 +172,15 @@ poblacion_col_filtrar |>
     aes(fill = genero),
     color = "black"
   ) +
+  facet_wrap(
+    facets = vars(ano)
+  ) +
   scale_x_continuous(
     breaks = poblacion_pct_breaks,
     labels = \(x) label_percent(accuracy = 1)(abs(x))
   ) +
   scale_fill_discrete(
     labels = str_to_title
-  ) +
-  facet_wrap(
-    facets = vars(ano)
   ) +
   labs(
     x = NULL,
@@ -224,3 +224,14 @@ poblacion_col_filtrar |>
 ### Exportar datos en formato largo
 
 
+```{r}
+#| lst-label: lst-write-rds-longer-format
+#| lst-cap: Uso de la función `write_rds()` para exportar y guardar el archivo de datos en formato largo
+#| eval: false
+poblacion_col_2018_2070_largo |>
+  write_rds(
+    file = "data/poblacion_col_2018_2070_largo.rds"
+  )
+```
+
+En el @lst-write-rds-longer-format se utiliza la función `write_rds()` junto con el parámetro `file` asociado con el argumento `"data/poblacion_col_2018_2070_largo.rds"` para definir tanto la ruta como el nombre del archivo en el que se guardará la información en formato largo.
