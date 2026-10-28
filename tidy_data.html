@@ -102,7 +102,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-5d82b1d0c18e482852369f18114d791b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-13eb8e2fc86d17b67f83116d69f6ada2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -443,7 +443,7 @@ Nota&nbsp;16.1
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Para desarrollar el contenido de este capítulo es necesario que crees una nueva carpeta llamada <code>016_datos-ordenados-en-r</code> y dentro de ella genera el archivo <code>001_datos-ordenados.R</code>, siguiendo las pautas de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>.</p>
+<p>Para desarrollar el contenido de este capítulo es necesario que crees una nueva carpeta llamada <code>016_datos-ordenados-en-r</code> y dentro de ella generes el archivo <code>001_datos-ordenados.R</code>, siguiendo las pautas de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>.</p>
 </div>
 </div>
 <section id="definición-de-datos-ordenados" class="level2" data-number="16.1">
@@ -782,6 +782,23 @@ Listado&nbsp;16.3: Muestra representativa del conjunto de datos de tuberculosis 
 1 AD     2000     0      0     1      1
 2 AE     2000     2      4     3      4
 3 AF     2000    52    228    93    140</code></pre>
+</div>
+</div>
+<div id="nte-2-chap-16" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota&nbsp;16.2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En el <a href="#lst-create-tb-sample" class="quarto-xref">Listado&nbsp;<span>16.3</span></a> se utiliza la función <code>tribble()</code> del paquete <code>tibble</code> para construir una tibble fila por fila. A diferencia de la función <code>tibble()</code> introducida en la <a href="how_to_code_in_r.html#sec-tibbles" class="quarto-xref"><span>Sección 5.4</span></a> (ver <a href="how_to_code_in_r.html#lst-tibble" class="quarto-xref">Listado&nbsp;<span>5.8</span></a>), que organiza los datos columna por columna, <code>tribble()</code> resulta idónea para ingresar tablas pequeñas o ejemplos demostrativos en el código:</p>
+<ol type="1">
+<li>Los nombres de las columnas se especifican anteponiendo una virgulilla (<code>~</code>).</li>
+<li>Los valores se ingresan secuencialmente a lo largo de las filas separados por comas.</li>
+</ol>
 </div>
 </div>
 <p>Las columnas como <code>m_014</code> o <code>f_1524</code> agrupan 2 variables diferentes:</p>
