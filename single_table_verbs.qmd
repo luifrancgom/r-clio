@@ -71,6 +71,7 @@ Esta categoría incluye las funciones `filter()`, `slice()` y `arrange()`. La pr
 Para utilizar un ejemplo concreto puedes utilizar el conjunto de datos utilizados en el @sec-amounts respecto a `2021-2024_saber-pro-genericas_faedis.rds` para identificar las filas correspondientes al año $2022$ y de estudiantes pertenecientes al género masculino:
 
 ```{r}
+#| message: false
 # Cargar paquetes ----
 library(tidyverse)
 

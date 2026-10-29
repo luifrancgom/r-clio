@@ -18,12 +18,12 @@ Este capítulo se basa en [@wickham_r_2023, Cap. 5] así como en la documentaci�
 Exploraremos los siguientes aspectos:
 
 1. ¿Cómo separar caracteres en columnas?
-2. ¿Cómo unir múltiples columnas mediante contatenación de caracteres?
-3. ¿Cuál es el proceso para separar caracteres en columnas, transformar y prepapar datos para generar pirámides poblacionales?
+2. ¿Cómo unir múltiples columnas mediante concatenación de caracteres?
+3. ¿Cuál es el proceso para separar caracteres en columnas, transformar y preparar datos para generar pirámides poblacionales?
 4. ¿Cuál es el proceso para visualizar datos a través de pirámides poblacionales? 
 
 :::: {#nte-1-chap-18 .callout-note}
-Para desarrollar el contenido de este capítulo es necesario que hayas exportado y guardado el archivo `poblacion_col_2018_2070_largo.rds` en la carpeta `data`, tal como se señaló en el @lst-write-rds-longer-format. En caso que no lo hayas hecho es necesario que lo descargues y lo incluyas dentro de la carpeta data:
+Para desarrollar el contenido de este capítulo es necesario que hayas exportado y guardado el archivo `poblacion_col_2018_2070_largo.rds` en la carpeta `data`, tal como se señaló en el @lst-write-rds-longer-format. En caso que no lo hayas hecho es necesario que lo descargues y lo incluyas dentro de la carpeta `data`:
    
 ::: {.callout appearance="minimal"}
 ## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [poblacion_col_2018_2070_largo.rds]({{< var url.data.poblacion_rds_2018_2070_largo >}})
@@ -32,29 +32,161 @@ Para desarrollar el contenido de este capítulo es necesario que hayas exportado
 En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `018_separar-unir-caracteres-cols-en-r` y dentro de ella genera el archivo `001_separar-unir-caracteres-cols.R`, siguiendo las pautas de la @sec-package-usage.
 ::::
 
-## Separar caracteres en columnas
+## Separar caracteres en columnas {#sec-separate-characters-cols}
 
+En el @sec-data-tidying se examinaron los problemas más comunes presentes en datos no ordenados, destacando aquel donde múltiples variables se encuentran combinadas dentro de una sola columna (ver @lst-create-tb-sample). Para solucionar este inconveniente y garantizar que cada variable conforme su propia columna, el paquete `tidyr` proporciona la familia de funciones [`separate_wider_*()`]({{< var url.packages.tidyr_split_string_cols >}}), las cuales dividen una columna de caracteres en múltiples columnas rectangulares.
 
+En la @fig-separate-wider se ilustra gráficamente el funcionamiento conceptual de la separación de caracteres en columnas mediante `separate_wider_delim()`.
 
-## Unir múltiples columnas mediante contatenación de caracteres
+![Representación gráfica de la función `separate_wider_delim()`](images/separate-wider.png){#fig-separate-wider fig-alt="Diagrama conceptual que muestra cómo una columna de caracteres se separa en múltiples columnas a partir de un delimitador. A la izquierda se observa una tabla con las columnas id y name, donde name contiene cadenas compuestas como m_014 y f_014. Mediante la operación separate_wider_delim(), a la derecha se genera una nueva tabla donde name se divide en dos columnas independientes: sexo y edad."}
 
+De acuerdo con la [documentación oficial de `tidyr`]({{< var url.packages.tidyr_split_string_cols >}}), la familia de funciones `separate_wider_*()` se compone de 3 alternativas especializadas según el criterio empleado para efectuar la división:
 
+1. `separate_wider_delim()`: separa una columna en múltiples columnas basándose en un delimitador o carácter separador fijo, como por ejemplo un guion bajo `_`, una coma `,` o un guion `-`. Esta es la función que utilizaremos en el caso de estudio de este capítulo debido a que las categorías a separar se encuentran delimitadas por patrones textuales definidos.
+2. `separate_wider_position()`: separa una columna en múltiples columnas basándose en anchos o posiciones numéricas fijas de los caracteres. Esta función resulta idónea cuando los datos provienen de archivos de ancho fijo donde cada variable ocupa un número invariable de caracteres y no existen delimitadores explícitos.
+3. `separate_wider_regex()`: separa una columna en múltiples columnas basándose en patrones de expresiones regulares (en inglés **regular expressions** o **regex**). Esta función ofrece la máxima flexibilidad cuando la estructura interna del texto es variable o compleja, permitiendo extraer patrones específicos.
 
-## Caso de estudio: separar caracteres en columnas, transformar y prepapar datos para generar pirámides poblacionales de Colombia
+::: {#nte-2-chap-18 .callout-note}
+Las expresiones regulares constituyen un lenguaje conciso y formal para describir patrones dentro de cadenas de caracteres. Si bien en este capítulo utilizaremos `separate_wider_delim()` debido a que los datos poseen un delimitador claro, el lector interesado en profundizar en el uso de expresiones regulares y su aplicación con funciones como `separate_wider_regex()` puede consultar [@wickham_r_2023, Cap. 15].
+:::
 
+Al utilizar la función `separate_wider_delim()`, los parámetros principales a especificar son:
 
+* `cols`: especifica la columna o variable que se desea dividir.
+* `delim`: indica la cadena de texto o carácter que actúa como separador.
+* `names`: suministra un vector de caracteres con los nombres de las nuevas columnas resultantes.
+* `too_many`: define la acción a tomar si existen más divisiones de las esperadas por el argumento `names`, permitiendo descartar elementos sobrantes mediante `"drop"` o emitir un mensaje de advertencia o error.
 
-### Separar caracteres en columnas
+## Unir múltiples columnas mediante concatenación de caracteres {#sec-unite-characters-cols}
 
+La función [`unite()`]({{< var url.packages.tidyr_unite_string_cols >}}) del paquete `tidyr` realiza la operación inversa a las funciones de la familia `separate_wider_*()`. Mientras que las funciones de separación toman una única columna compuesta y la descomponen en varias variables independientes, `unite()` toma múltiples columnas y las combina o concatena en una sola columna de caracteres uniendo sus valores mediante un delimitador común.
 
+En la @fig-unite se ilustra gráficamente el funcionamiento de la función `unite()`.
 
-### Transformar variables
+![Representación gráfica de la función `unite()`](images/unite.png){#fig-unite fig-alt="Diagrama conceptual que muestra cómo la función unite() combina múltiples columnas en una sola. A la izquierda se presenta una tabla con las columnas id, sexo y edad. Mediante una flecha con el comando unite, a la derecha se obtiene una nueva tabla donde sexo y edad se fusionan en una única columna denominada name con sus valores unidos por un delimitador."}
 
+De acuerdo con la [documentación oficial de `tidyr`]({{< var url.packages.tidyr_unite_string_cols >}}), los parámetros principales de la función `unite()` son:
 
+* `data`: la tibble u objeto similar sobre el cual se aplicará la transformación.
+* `col`: el nombre de la nueva columna resultante suministrado como una cadena de texto o símbolo sin comillas.
+* `...`: las columnas que se desean unir, las cuales pueden especificarse individualmente o utilizando rangos y funciones auxiliares de selección idénticas a las empleadas en `select()` (ver @sec-column-verbs).
+* `sep`: el separador o delimitador que se insertará entre los valores concatenados de cada columna donde por defecto corresponde a un guion bajo `_`.
+* `remove`: un valor lógico que indica si se deben eliminar de la tabla resultante las columnas originales que fueron unidas (`TRUE` por defecto o si se deben conservar `FALSE`).
+* `na.rm`: un valor lógico que determina si los valores ausentes (`NA`) deben excluirse durante la concatenación (`FALSE` por defecto).
 
-### Preparar datos para visualizarlos
+## Caso de estudio: separar caracteres en columnas, transformar y preparar datos para generar pirámides poblacionales de Colombia {#sec-case-study-separate-transform-prepare}
 
+En el @sec-pivoting se inició la reestructuración de las proyecciones de población nacional para Colombia provenientes del CNPV 2018, transformando las variables demográficas en formato largo y almacenando el resultado en el archivo `poblacion_col_2018_2070_largo.rds`. El propósito de este caso de estudio es completar el procesamiento de dicha información a través de 3 fases:
 
+1. Separar la columna compuesta `genero_edad` en sus variables constituyentes individuales (`genero` y `edad`).
+2. Transformar las variables asociando sus tipos adecuados y calculando la participación porcentual de cada grupo.
+3. Preparar los datos agrupándolos en intervalos etarios quinquenales para consolidar las cohortes necesarias para la construcción de pirámides poblacionales.
+
+Para iniciar con el desarrollo del caso de estudio, es necesario en primera instancia cargar los paquetes requeridos e importar el archivo guardado previamente en la carpeta `data`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-import-data-longer-format
+#| lst-cap: Importación del conjunto de datos en formato largo para desarrollar el caso de estudio
+
+# Cargar paquetes ----
+library(tidyverse)
+
+# Importar datos ----
+poblacion_col_2018_2070_largo <- read_rds(
+  file = "data/poblacion_col_2018_2070_largo.rds"
+)
+```
+
+### Separar caracteres en columnas {#sec-separate-cols-case-study}
+
+Al examinar la columna `genero_edad`, se observa que cada celda contiene etiquetas compuestas como `"hombres_0_anos"` o `"mujeres_100_anos_y_mas"`. En estas cadenas, el primer componente define el género (`"hombres"` o `"mujeres"`) y el segundo la edad numérica (`0`, `1`, ..., `100`) mientras que el resto de palabras (`"anos"`, `"ano"` `"anos_y_mas"`) corresponden a sufijos redundantes.
+
+Para separar esta información en 2 columnas independientes denominadas `genero` y `edad`, se utiliza la función `separate_wider_delim()`. Dado que algunas cadenas poseen múltiples guiones bajos posteriores al número de edad, se emplea el parámetro `too_many = "drop"` para conservar únicamente los 2 primeros elementos extraídos y descartar los fragmentos adicionales sobrantes, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-separate-wider-case-study
+#| lst-cap: Separación de la columna compuesta `genero_edad` mediante `separate_wider_delim()`
+
+# Separar ----
+poblacion_col_2018_2070_separar <- poblacion_col_2018_2070_largo |>
+  separate_wider_delim(
+    cols = genero_edad,
+    delim = "_",
+    names = c("genero", "edad"),
+    too_many = "drop"
+  )
+
+poblacion_col_2018_2070_separar
+```
+
+En el @lst-separate-wider-case-study la función `separate_wider_delim()` divide la variable `genero_edad` utilizando el delimitador `_`. Con `names = c("genero", "edad")` se asignan las 2 nuevas variables resultantes y con `too_many = "drop"` se asegura que expresiones como `"100_anos_y_mas"` asignen únicamente `"100"` a la columna `edad`, omitiendo los segmentos posteriores.
+
+### Transformar variables {#sec-transform-vars-case-study}
+
+Una vez separadas las variables, la columna `edad` queda almacenada como una cadena de caracteres (`<chr>`) y la columna `ano` puede requerir ser convertida a un número entero. Asimismo, para elaborar una pirámide poblacional se requiere analizar la participación de cada cohorte respecto a la población total del país en cada año.
+
+Para llevar a cabo estas transformaciones, se utiliza la función `mutate()` convirtiendo `ano` y `edad` en enteros con `as.integer()` y calculando la variable `poblacion_pct` mediante el cociente entre la población de la cohorte (`poblacion`) y el total nacional (`total`), tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-mutate-case-study
+#| lst-cap: Transformación de tipos de datos y cálculo de la proporción poblacional mediante `mutate()`
+
+# Transformar ----
+poblacion_col_2018_2070_transformar <- poblacion_col_2018_2070_separar |>
+  mutate(
+    ano = as.integer(ano),
+    edad = as.integer(edad),
+    poblacion_pct = poblacion / total
+  )
+
+poblacion_col_2018_2070_transformar
+```
+
+En el @lst-mutate-case-study, el cálculo `poblacion / total` genera una medida estandarizada en el intervalo $[0, 1]$ que permite comparar de forma consistente la estructura demográfica entre distintos años, independientemente del crecimiento del tamaño absoluto de la población.
+
+### Preparar datos para visualizarlos {#sec-prepare-data-case-study}
+
+En el análisis demográfico y la construcción de pirámides poblacionales tradicionales, las edades individuales suelen consolidarse en grupos o intervalos de 5 años a través de cohortes quinquenales `0-4`, `5-9`, ..., `80-84` y un grupo abierto final `85+`. 
+
+Para generar estos rangos se utiliza la función `cut()` de R junto con las funciones `seq.int()` y `str_c()`:
+
+* `breaks = c(seq.int(0, 85, 5), "Inf")`: define los puntos de corte numéricos cada 5 años desde 0 hasta 85, incluyendo el infinito para agrupar todas las edades de 85 años en adelante.
+* `labels`: asigna las etiquetas correspondientes concatenando las secuencias de inicio y fin (`seq(0, 80, 5)` y `seq(4, 85, 5)`) separadas por un guion mediante `str_c()` y añadiendo `"85+"` al final.
+* `right = FALSE`: especifica que los intervalos son cerrados a la izquierda y abiertos a la derecha. Es decir $[0, 5)$, abarcando las edades de 0 a 4 años cumplidos.
+
+Posteriormente, se utiliza `group_by()` junto con `summarize()` para colapsar las filas sumando la población absoluta (`sum(poblacion)`) y la proporción porcentual (`sum(poblacion_pct)`) para cada combinación de año, género y rango de edad, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-prepare-data-case-study
+#| lst-cap: Discretización de edades en intervalos quinquenales y agregación demográfica mediante `cut()`, `group_by()` y `summarize()`
+#| message: false
+
+# Preparar datos ----
+poblacion_col_2018_2070_preparar <- poblacion_col_2018_2070_transformar |>
+  group_by(ano, genero) |>
+  mutate(
+    rango_edad = cut(
+      edad,
+      breaks = c(seq.int(0, 85, 5), "Inf"),
+      labels = c(
+        str_c(seq(0, 80, 5), seq(4, 85, 5), sep = "-"),
+        "85+"
+      ),
+      right = FALSE
+    )
+  ) |>
+  ungroup() |>
+  group_by(ano, genero, rango_edad) |>
+  summarize(
+    poblacion = sum(poblacion),
+    poblacion_pct = sum(poblacion_pct)
+  ) |>
+  ungroup()
+
+poblacion_col_2018_2070_preparar
+```
+
+En el @lst-prepare-data-case-study, los datos quedan consolidados a nivel de cohorte quinquenal para cada año y género. Esta tabla constituye la estructura ordenada y preparada requerida como insumo para generar las pirámides poblacionales en la siguiente sección.
 
 ## Caso de estudio: visualizar datos a través de pirámides poblacionales de Colombia
 

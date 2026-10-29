@@ -61,6 +61,7 @@ Para importar el conjunto de datos ajustado de FAEDIS en formato `.rds` (ver @nt
 ```{r}
 #| lst-label: lst-read-rds
 #| lst-cap: Uso de la función `read_rds()` para importar un archivo de datos en formato `.rds`
+#| message: false
 
 # Cargar paquetes ----
 library(tidyverse)
