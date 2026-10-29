@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -67,7 +102,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-5d82b1d0c18e482852369f18114d791b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-3521284a937db624ab56ed6fcd032a24.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -96,6 +131,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -353,13 +417,13 @@ div.csl-indent {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#separar-caracteres-en-columnas" id="toc-separar-caracteres-en-columnas" class="nav-link active" data-scroll-target="#separar-caracteres-en-columnas"><span class="header-section-number">18.1</span> Separar caracteres en columnas</a></li>
-  <li><a href="#unir-múltiples-columnas-mediante-contatenación-de-caracteres" id="toc-unir-múltiples-columnas-mediante-contatenación-de-caracteres" class="nav-link" data-scroll-target="#unir-múltiples-columnas-mediante-contatenación-de-caracteres"><span class="header-section-number">18.2</span> Unir múltiples columnas mediante contatenación de caracteres</a></li>
-  <li><a href="#caso-de-estudio-separar-caracteres-en-columnas-transformar-y-prepapar-datos-para-generar-pirámides-poblacionales-de-colombia" id="toc-caso-de-estudio-separar-caracteres-en-columnas-transformar-y-prepapar-datos-para-generar-pirámides-poblacionales-de-colombia" class="nav-link" data-scroll-target="#caso-de-estudio-separar-caracteres-en-columnas-transformar-y-prepapar-datos-para-generar-pirámides-poblacionales-de-colombia"><span class="header-section-number">18.3</span> Caso de estudio: separar caracteres en columnas, transformar y prepapar datos para generar pirámides poblacionales de Colombia</a>
+  <li><a href="#sec-separate-characters-cols" id="toc-sec-separate-characters-cols" class="nav-link active" data-scroll-target="#sec-separate-characters-cols"><span class="header-section-number">18.1</span> Separar caracteres en columnas</a></li>
+  <li><a href="#sec-unite-characters-cols" id="toc-sec-unite-characters-cols" class="nav-link" data-scroll-target="#sec-unite-characters-cols"><span class="header-section-number">18.2</span> Unir múltiples columnas mediante concatenación de caracteres</a></li>
+  <li><a href="#sec-case-study-separate-transform-prepare" id="toc-sec-case-study-separate-transform-prepare" class="nav-link" data-scroll-target="#sec-case-study-separate-transform-prepare"><span class="header-section-number">18.3</span> Caso de estudio: separar caracteres en columnas, transformar y preparar datos para generar pirámides poblacionales de Colombia</a>
   <ul class="collapse">
-  <li><a href="#separar-caracteres-en-columnas-1" id="toc-separar-caracteres-en-columnas-1" class="nav-link" data-scroll-target="#separar-caracteres-en-columnas-1"><span class="header-section-number">18.3.1</span> Separar caracteres en columnas</a></li>
-  <li><a href="#transformar-variables" id="toc-transformar-variables" class="nav-link" data-scroll-target="#transformar-variables"><span class="header-section-number">18.3.2</span> Transformar variables</a></li>
-  <li><a href="#preparar-datos-para-visualizarlos" id="toc-preparar-datos-para-visualizarlos" class="nav-link" data-scroll-target="#preparar-datos-para-visualizarlos"><span class="header-section-number">18.3.3</span> Preparar datos para visualizarlos</a></li>
+  <li><a href="#sec-separate-cols-case-study" id="toc-sec-separate-cols-case-study" class="nav-link" data-scroll-target="#sec-separate-cols-case-study"><span class="header-section-number">18.3.1</span> Separar caracteres en columnas</a></li>
+  <li><a href="#sec-transform-vars-case-study" id="toc-sec-transform-vars-case-study" class="nav-link" data-scroll-target="#sec-transform-vars-case-study"><span class="header-section-number">18.3.2</span> Transformar variables</a></li>
+  <li><a href="#sec-prepare-data-case-study" id="toc-sec-prepare-data-case-study" class="nav-link" data-scroll-target="#sec-prepare-data-case-study"><span class="header-section-number">18.3.3</span> Preparar datos para visualizarlos</a></li>
   </ul></li>
   <li><a href="#caso-de-estudio-visualizar-datos-a-través-de-pirámides-poblacionales-de-colombia" id="toc-caso-de-estudio-visualizar-datos-a-través-de-pirámides-poblacionales-de-colombia" class="nav-link" data-scroll-target="#caso-de-estudio-visualizar-datos-a-través-de-pirámides-poblacionales-de-colombia"><span class="header-section-number">18.4</span> Caso de estudio: visualizar datos a través de pirámides poblacionales de Colombia</a>
   <ul class="collapse">
@@ -395,8 +459,8 @@ div.csl-indent {
 <p>Exploraremos los siguientes aspectos:</p>
 <ol type="1">
 <li>¿Cómo separar caracteres en columnas?</li>
-<li>¿Cómo unir múltiples columnas mediante contatenación de caracteres?</li>
-<li>¿Cuál es el proceso para separar caracteres en columnas, transformar y prepapar datos para generar pirámides poblacionales?</li>
+<li>¿Cómo unir múltiples columnas mediante concatenación de caracteres?</li>
+<li>¿Cuál es el proceso para separar caracteres en columnas, transformar y preparar datos para generar pirámides poblacionales?</li>
 <li>¿Cuál es el proceso para visualizar datos a través de pirámides poblacionales?</li>
 </ol>
 <div id="nte-1-chap-18" class="callout callout-style-default callout-note callout-titled">
@@ -409,7 +473,7 @@ Nota&nbsp;18.1
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Para desarrollar el contenido de este capítulo es necesario que hayas exportado y guardado el archivo <code>poblacion_col_2018_2070_largo.rds</code> en la carpeta <code>data</code>, tal como se señaló en el <a href="pivoting.html#lst-write-rds-longer-format" class="quarto-xref">Listado&nbsp;<span>17.6</span></a>. En caso que no lo hayas hecho es necesario que lo descargues y lo incluyas dentro de la carpeta data:</p>
+<p>Para desarrollar el contenido de este capítulo es necesario que hayas exportado y guardado el archivo <code>poblacion_col_2018_2070_largo.rds</code> en la carpeta <code>data</code>, tal como se señaló en el <a href="pivoting.html#lst-write-rds-longer-format" class="quarto-xref">Listado&nbsp;<span>17.6</span></a>. En caso que no lo hayas hecho es necesario que lo descargues y lo incluyas dentro de la carpeta <code>data</code>:</p>
 <div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -426,22 +490,244 @@ Nota&nbsp;18.1
 <p>En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada <code>018_separar-unir-caracteres-cols-en-r</code> y dentro de ella genera el archivo <code>001_separar-unir-caracteres-cols.R</code>, siguiendo las pautas de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>.</p>
 </div>
 </div>
-<section id="separar-caracteres-en-columnas" class="level2" data-number="18.1">
-<h2 data-number="18.1" class="anchored" data-anchor-id="separar-caracteres-en-columnas"><span class="header-section-number">18.1</span> Separar caracteres en columnas</h2>
+<section id="sec-separate-characters-cols" class="level2" data-number="18.1">
+<h2 data-number="18.1" class="anchored" data-anchor-id="sec-separate-characters-cols"><span class="header-section-number">18.1</span> Separar caracteres en columnas</h2>
+<p>En el <a href="tidy_data.html" class="quarto-xref"><span>Capítulo 16</span></a> se examinaron los problemas más comunes presentes en datos no ordenados, destacando aquel donde múltiples variables se encuentran combinadas dentro de una sola columna (ver <a href="tidy_data.html#lst-create-tb-sample" class="quarto-xref">Listado&nbsp;<span>16.3</span></a>). Para solucionar este inconveniente y garantizar que cada variable conforme su propia columna, el paquete <code>tidyr</code> proporciona la familia de funciones <a href="https://tidyr.tidyverse.org/reference/separate_wider_delim.html"><code>separate_wider_*()</code></a>, las cuales dividen una columna de caracteres en múltiples columnas rectangulares.</p>
+<p>En la <a href="#fig-separate-wider" class="quarto-xref">Figura&nbsp;<span>18.1</span></a> se ilustra gráficamente el funcionamiento conceptual de la separación de caracteres en columnas mediante <code>separate_wider_delim()</code>.</p>
+<div id="fig-separate-wider" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que muestra cómo una columna de caracteres se separa en múltiples columnas a partir de un delimitador. A la izquierda se observa una tabla con las columnas id y name, donde name contiene cadenas compuestas como m_014 y f_014. Mediante la operación separate_wider_delim(), a la derecha se genera una nueva tabla donde name se divide en dos columnas independientes: sexo y edad.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-separate-wider-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/separate-wider.png" class="img-fluid figure-img" alt="Diagrama conceptual que muestra cómo una columna de caracteres se separa en múltiples columnas a partir de un delimitador. A la izquierda se observa una tabla con las columnas id y name, donde name contiene cadenas compuestas como m_014 y f_014. Mediante la operación separate_wider_delim(), a la derecha se genera una nueva tabla donde name se divide en dos columnas independientes: sexo y edad.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-separate-wider-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;18.1: Representación gráfica de la función <code>separate_wider_delim()</code>
+</figcaption>
+</figure>
+</div>
+<p>De acuerdo con la <a href="https://tidyr.tidyverse.org/reference/separate_wider_delim.html">documentación oficial de <code>tidyr</code></a>, la familia de funciones <code>separate_wider_*()</code> se compone de 3 alternativas especializadas según el criterio empleado para efectuar la división:</p>
+<ol type="1">
+<li><code>separate_wider_delim()</code>: separa una columna en múltiples columnas basándose en un delimitador o carácter separador fijo, como por ejemplo un guion bajo <code>_</code>, una coma <code>,</code> o un guion <code>-</code>. Esta es la función que utilizaremos en el caso de estudio de este capítulo debido a que las categorías a separar se encuentran delimitadas por patrones textuales definidos.</li>
+<li><code>separate_wider_position()</code>: separa una columna en múltiples columnas basándose en anchos o posiciones numéricas fijas de los caracteres. Esta función resulta idónea cuando los datos provienen de archivos de ancho fijo donde cada variable ocupa un número invariable de caracteres y no existen delimitadores explícitos.</li>
+<li><code>separate_wider_regex()</code>: separa una columna en múltiples columnas basándose en patrones de expresiones regulares (en inglés <strong>regular expressions</strong> o <strong>regex</strong>). Esta función ofrece la máxima flexibilidad cuando la estructura interna del texto es variable o compleja, permitiendo extraer patrones específicos.</li>
+</ol>
+<div id="nte-2-chap-18" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota&nbsp;18.2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Las expresiones regulares constituyen un lenguaje conciso y formal para describir patrones dentro de cadenas de caracteres. Si bien en este capítulo utilizaremos <code>separate_wider_delim()</code> debido a que los datos poseen un delimitador claro, el lector interesado en profundizar en el uso de expresiones regulares y su aplicación con funciones como <code>separate_wider_regex()</code> puede consultar <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 15</a>)</span>.</p>
+</div>
+</div>
+<p>Al utilizar la función <code>separate_wider_delim()</code>, los parámetros principales a especificar son:</p>
+<ul>
+<li><code>cols</code>: especifica la columna o variable que se desea dividir.</li>
+<li><code>delim</code>: indica la cadena de texto o carácter que actúa como separador.</li>
+<li><code>names</code>: suministra un vector de caracteres con los nombres de las nuevas columnas resultantes.</li>
+<li><code>too_many</code>: define la acción a tomar si existen más divisiones de las esperadas por el argumento <code>names</code>, permitiendo descartar elementos sobrantes mediante <code>"drop"</code> o emitir un mensaje de advertencia o error.</li>
+</ul>
 </section>
-<section id="unir-múltiples-columnas-mediante-contatenación-de-caracteres" class="level2" data-number="18.2">
-<h2 data-number="18.2" class="anchored" data-anchor-id="unir-múltiples-columnas-mediante-contatenación-de-caracteres"><span class="header-section-number">18.2</span> Unir múltiples columnas mediante contatenación de caracteres</h2>
+<section id="sec-unite-characters-cols" class="level2" data-number="18.2">
+<h2 data-number="18.2" class="anchored" data-anchor-id="sec-unite-characters-cols"><span class="header-section-number">18.2</span> Unir múltiples columnas mediante concatenación de caracteres</h2>
+<p>La función <a href="https://tidyr.tidyverse.org/reference/unite.html"><code>unite()</code></a> del paquete <code>tidyr</code> realiza la operación inversa a las funciones de la familia <code>separate_wider_*()</code>. Mientras que las funciones de separación toman una única columna compuesta y la descomponen en varias variables independientes, <code>unite()</code> toma múltiples columnas y las combina o concatena en una sola columna de caracteres uniendo sus valores mediante un delimitador común.</p>
+<p>En la <a href="#fig-unite" class="quarto-xref">Figura&nbsp;<span>18.2</span></a> se ilustra gráficamente el funcionamiento de la función <code>unite()</code>.</p>
+<div id="fig-unite" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que muestra cómo la función unite() combina múltiples columnas en una sola. A la izquierda se presenta una tabla con las columnas id, sexo y edad. Mediante una flecha con el comando unite, a la derecha se obtiene una nueva tabla donde sexo y edad se fusionan en una única columna denominada name con sus valores unidos por un delimitador.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unite-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/unite.png" class="img-fluid figure-img" alt="Diagrama conceptual que muestra cómo la función unite() combina múltiples columnas en una sola. A la izquierda se presenta una tabla con las columnas id, sexo y edad. Mediante una flecha con el comando unite, a la derecha se obtiene una nueva tabla donde sexo y edad se fusionan en una única columna denominada name con sus valores unidos por un delimitador.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unite-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;18.2: Representación gráfica de la función <code>unite()</code>
+</figcaption>
+</figure>
+</div>
+<p>De acuerdo con la <a href="https://tidyr.tidyverse.org/reference/unite.html">documentación oficial de <code>tidyr</code></a>, los parámetros principales de la función <code>unite()</code> son:</p>
+<ul>
+<li><code>data</code>: la tibble u objeto similar sobre el cual se aplicará la transformación.</li>
+<li><code>col</code>: el nombre de la nueva columna resultante suministrado como una cadena de texto o símbolo sin comillas.</li>
+<li><code>...</code>: las columnas que se desean unir, las cuales pueden especificarse individualmente o utilizando rangos y funciones auxiliares de selección idénticas a las empleadas en <code>select()</code> (ver <a href="single_table_verbs.html#sec-column-verbs" class="quarto-xref"><span>Sección 10.1.1.2</span></a>).</li>
+<li><code>sep</code>: el separador o delimitador que se insertará entre los valores concatenados de cada columna donde por defecto corresponde a un guion bajo <code>_</code>.</li>
+<li><code>remove</code>: un valor lógico que indica si se deben eliminar de la tabla resultante las columnas originales que fueron unidas (<code>TRUE</code> por defecto o si se deben conservar <code>FALSE</code>).</li>
+<li><code>na.rm</code>: un valor lógico que determina si los valores ausentes (<code>NA</code>) deben excluirse durante la concatenación (<code>FALSE</code> por defecto).</li>
+</ul>
 </section>
-<section id="caso-de-estudio-separar-caracteres-en-columnas-transformar-y-prepapar-datos-para-generar-pirámides-poblacionales-de-colombia" class="level2" data-number="18.3">
-<h2 data-number="18.3" class="anchored" data-anchor-id="caso-de-estudio-separar-caracteres-en-columnas-transformar-y-prepapar-datos-para-generar-pirámides-poblacionales-de-colombia"><span class="header-section-number">18.3</span> Caso de estudio: separar caracteres en columnas, transformar y prepapar datos para generar pirámides poblacionales de Colombia</h2>
-<section id="separar-caracteres-en-columnas-1" class="level3" data-number="18.3.1">
-<h3 data-number="18.3.1" class="anchored" data-anchor-id="separar-caracteres-en-columnas-1"><span class="header-section-number">18.3.1</span> Separar caracteres en columnas</h3>
+<section id="sec-case-study-separate-transform-prepare" class="level2" data-number="18.3">
+<h2 data-number="18.3" class="anchored" data-anchor-id="sec-case-study-separate-transform-prepare"><span class="header-section-number">18.3</span> Caso de estudio: separar caracteres en columnas, transformar y preparar datos para generar pirámides poblacionales de Colombia</h2>
+<p>En el <a href="pivoting.html" class="quarto-xref"><span>Capítulo 17</span></a> se inició la reestructuración de las proyecciones de población nacional para Colombia provenientes del CNPV 2018, transformando las variables demográficas en formato largo y almacenando el resultado en el archivo <code>poblacion_col_2018_2070_largo.rds</code>. El propósito de este caso de estudio es completar el procesamiento de dicha información a través de 3 fases:</p>
+<ol type="1">
+<li>Separar la columna compuesta <code>genero_edad</code> en sus variables constituyentes individuales (<code>genero</code> y <code>edad</code>).</li>
+<li>Transformar las variables asociando sus tipos adecuados y calculando la participación porcentual de cada grupo.</li>
+<li>Preparar los datos agrupándolos en intervalos etarios quinquenales para consolidar las cohortes necesarias para la construcción de pirámides poblacionales.</li>
+</ol>
+<p>Para iniciar con el desarrollo del caso de estudio, es necesario en primera instancia cargar los paquetes requeridos e importar el archivo guardado previamente en la carpeta <code>data</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-import-data-longer-format" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-import-data-longer-format-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;18.1: Importación del conjunto de datos en formato largo para desarrollar el caso de estudio
+</figcaption>
+<div aria-describedby="lst-import-data-longer-format-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar paquetes ----</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar datos ----</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>poblacion_col_2018_2070_largo <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"data/poblacion_col_2018_2070_largo.rds"</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<section id="sec-separate-cols-case-study" class="level3" data-number="18.3.1">
+<h3 data-number="18.3.1" class="anchored" data-anchor-id="sec-separate-cols-case-study"><span class="header-section-number">18.3.1</span> Separar caracteres en columnas</h3>
+<p>Al examinar la columna <code>genero_edad</code>, se observa que cada celda contiene etiquetas compuestas como <code>"hombres_0_anos"</code> o <code>"mujeres_100_anos_y_mas"</code>. En estas cadenas, el primer componente define el género (<code>"hombres"</code> o <code>"mujeres"</code>) y el segundo la edad numérica (<code>0</code>, <code>1</code>, …, <code>100</code>) mientras que el resto de palabras (<code>"anos"</code>, <code>"ano"</code> <code>"anos_y_mas"</code>) corresponden a sufijos redundantes.</p>
+<p>Para separar esta información en 2 columnas independientes denominadas <code>genero</code> y <code>edad</code>, se utiliza la función <code>separate_wider_delim()</code>. Dado que algunas cadenas poseen múltiples guiones bajos posteriores al número de edad, se emplea el parámetro <code>too_many = "drop"</code> para conservar únicamente los 2 primeros elementos extraídos y descartar los fragmentos adicionales sobrantes, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-separate-wider-case-study" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-separate-wider-case-study-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;18.2: Separación de la columna compuesta <code>genero_edad</code> mediante <code>separate_wider_delim()</code>
+</figcaption>
+<div aria-describedby="lst-separate-wider-case-study-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separar ----</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>poblacion_col_2018_2070_separar <span class="ot">&lt;-</span> poblacion_col_2018_2070_largo <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_wider_delim</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> genero_edad,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">delim =</span> <span class="st">"_"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"genero"</span>, <span class="st">"edad"</span>),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">too_many =</span> <span class="st">"drop"</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>poblacion_col_2018_2070_separar</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10,706 × 5
+     ano    total genero  edad  poblacion
+   &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;
+ 1  2018 48258494 hombres 0        379611
+ 2  2018 48258494 hombres 1        384392
+ 3  2018 48258494 hombres 2        389812
+ 4  2018 48258494 hombres 3        395361
+ 5  2018 48258494 hombres 4        400077
+ 6  2018 48258494 hombres 5        405013
+ 7  2018 48258494 hombres 6        410040
+ 8  2018 48258494 hombres 7        415839
+ 9  2018 48258494 hombres 8        421676
+10  2018 48258494 hombres 9        427467
+# ℹ 10,696 more rows</code></pre>
+</div>
+</div>
+<p>En el <a href="#lst-separate-wider-case-study" class="quarto-xref">Listado&nbsp;<span>18.2</span></a> la función <code>separate_wider_delim()</code> divide la variable <code>genero_edad</code> utilizando el delimitador <code>_</code>. Con <code>names = c("genero", "edad")</code> se asignan las 2 nuevas variables resultantes y con <code>too_many = "drop"</code> se asegura que expresiones como <code>"100_anos_y_mas"</code> asignen únicamente <code>"100"</code> a la columna <code>edad</code>, omitiendo los segmentos posteriores.</p>
 </section>
-<section id="transformar-variables" class="level3" data-number="18.3.2">
-<h3 data-number="18.3.2" class="anchored" data-anchor-id="transformar-variables"><span class="header-section-number">18.3.2</span> Transformar variables</h3>
+<section id="sec-transform-vars-case-study" class="level3" data-number="18.3.2">
+<h3 data-number="18.3.2" class="anchored" data-anchor-id="sec-transform-vars-case-study"><span class="header-section-number">18.3.2</span> Transformar variables</h3>
+<p>Una vez separadas las variables, la columna <code>edad</code> queda almacenada como una cadena de caracteres (<code>&lt;chr&gt;</code>) y la columna <code>ano</code> puede requerir ser convertida a un número entero. Asimismo, para elaborar una pirámide poblacional se requiere analizar la participación de cada cohorte respecto a la población total del país en cada año.</p>
+<p>Para llevar a cabo estas transformaciones, se utiliza la función <code>mutate()</code> convirtiendo <code>ano</code> y <code>edad</code> en enteros con <code>as.integer()</code> y calculando la variable <code>poblacion_pct</code> mediante el cociente entre la población de la cohorte (<code>poblacion</code>) y el total nacional (<code>total</code>), tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-mutate-case-study" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-mutate-case-study-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;18.3: Transformación de tipos de datos y cálculo de la proporción poblacional mediante <code>mutate()</code>
+</figcaption>
+<div aria-describedby="lst-mutate-case-study-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Transformar ----</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>poblacion_col_2018_2070_transformar <span class="ot">&lt;-</span> poblacion_col_2018_2070_separar <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">ano =</span> <span class="fu">as.integer</span>(ano),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">edad =</span> <span class="fu">as.integer</span>(edad),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">poblacion_pct =</span> poblacion <span class="sc">/</span> total</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>poblacion_col_2018_2070_transformar</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10,706 × 6
+     ano    total genero   edad poblacion poblacion_pct
+   &lt;int&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;int&gt;     &lt;dbl&gt;         &lt;dbl&gt;
+ 1  2018 48258494 hombres     0    379611       0.00787
+ 2  2018 48258494 hombres     1    384392       0.00797
+ 3  2018 48258494 hombres     2    389812       0.00808
+ 4  2018 48258494 hombres     3    395361       0.00819
+ 5  2018 48258494 hombres     4    400077       0.00829
+ 6  2018 48258494 hombres     5    405013       0.00839
+ 7  2018 48258494 hombres     6    410040       0.00850
+ 8  2018 48258494 hombres     7    415839       0.00862
+ 9  2018 48258494 hombres     8    421676       0.00874
+10  2018 48258494 hombres     9    427467       0.00886
+# ℹ 10,696 more rows</code></pre>
+</div>
+</div>
+<p>En el <a href="#lst-mutate-case-study" class="quarto-xref">Listado&nbsp;<span>18.3</span></a>, el cálculo <code>poblacion / total</code> genera una medida estandarizada en el intervalo <span class="math inline">\([0, 1]\)</span> que permite comparar de forma consistente la estructura demográfica entre distintos años, independientemente del crecimiento del tamaño absoluto de la población.</p>
 </section>
-<section id="preparar-datos-para-visualizarlos" class="level3" data-number="18.3.3">
-<h3 data-number="18.3.3" class="anchored" data-anchor-id="preparar-datos-para-visualizarlos"><span class="header-section-number">18.3.3</span> Preparar datos para visualizarlos</h3>
+<section id="sec-prepare-data-case-study" class="level3" data-number="18.3.3">
+<h3 data-number="18.3.3" class="anchored" data-anchor-id="sec-prepare-data-case-study"><span class="header-section-number">18.3.3</span> Preparar datos para visualizarlos</h3>
+<p>En el análisis demográfico y la construcción de pirámides poblacionales tradicionales, las edades individuales suelen consolidarse en grupos o intervalos de 5 años a través de cohortes quinquenales <code>0-4</code>, <code>5-9</code>, …, <code>80-84</code> y un grupo abierto final <code>85+</code>.</p>
+<p>Para generar estos rangos se utiliza la función <code>cut()</code> de R junto con las funciones <code>seq.int()</code> y <code>str_c()</code>:</p>
+<ul>
+<li><code>breaks = c(seq.int(0, 85, 5), "Inf")</code>: define los puntos de corte numéricos cada 5 años desde 0 hasta 85, incluyendo el infinito para agrupar todas las edades de 85 años en adelante.</li>
+<li><code>labels</code>: asigna las etiquetas correspondientes concatenando las secuencias de inicio y fin (<code>seq(0, 80, 5)</code> y <code>seq(4, 85, 5)</code>) separadas por un guion mediante <code>str_c()</code> y añadiendo <code>"85+"</code> al final.</li>
+<li><code>right = FALSE</code>: especifica que los intervalos son cerrados a la izquierda y abiertos a la derecha. Es decir <span class="math inline">\([0, 5)\)</span>, abarcando las edades de 0 a 4 años cumplidos.</li>
+</ul>
+<p>Posteriormente, se utiliza <code>group_by()</code> junto con <code>summarize()</code> para colapsar las filas sumando la población absoluta (<code>sum(poblacion)</code>) y la proporción porcentual (<code>sum(poblacion_pct)</code>) para cada combinación de año, género y rango de edad, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-prepare-data-case-study" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-prepare-data-case-study-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;18.4: Discretización de edades en intervalos quinquenales y agregación demográfica mediante <code>cut()</code>, <code>group_by()</code> y <code>summarize()</code>
+</figcaption>
+<div aria-describedby="lst-prepare-data-case-study-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Preparar datos ----</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>poblacion_col_2018_2070_preparar <span class="ot">&lt;-</span> poblacion_col_2018_2070_transformar <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ano, genero) <span class="sc">|&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">rango_edad =</span> <span class="fu">cut</span>(</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>      edad,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fu">seq.int</span>(<span class="dv">0</span>, <span class="dv">85</span>, <span class="dv">5</span>), <span class="st">"Inf"</span>),</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">str_c</span>(<span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">80</span>, <span class="dv">5</span>), <span class="fu">seq</span>(<span class="dv">4</span>, <span class="dv">85</span>, <span class="dv">5</span>), <span class="at">sep =</span> <span class="st">"-"</span>),</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"85+"</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">right =</span> <span class="cn">FALSE</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ano, genero, rango_edad) <span class="sc">|&gt;</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">poblacion =</span> <span class="fu">sum</span>(poblacion),</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">poblacion_pct =</span> <span class="fu">sum</span>(poblacion_pct)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>poblacion_col_2018_2070_preparar</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,908 × 5
+     ano genero  rango_edad poblacion poblacion_pct
+   &lt;int&gt; &lt;chr&gt;   &lt;fct&gt;          &lt;dbl&gt;         &lt;dbl&gt;
+ 1  2018 hombres 0-4          1949253        0.0404
+ 2  2018 hombres 5-9          2080035        0.0431
+ 3  2018 hombres 10-14        2192498        0.0454
+ 4  2018 hombres 15-19        2158466        0.0447
+ 5  2018 hombres 20-24        2069100        0.0429
+ 6  2018 hombres 25-29        1902635        0.0394
+ 7  2018 hombres 30-34        1698592        0.0352
+ 8  2018 hombres 35-39        1595799        0.0331
+ 9  2018 hombres 40-44        1397601        0.0290
+10  2018 hombres 45-49        1320949        0.0274
+# ℹ 1,898 more rows</code></pre>
+</div>
+</div>
+<p>En el <a href="#lst-prepare-data-case-study" class="quarto-xref">Listado&nbsp;<span>18.4</span></a>, los datos quedan consolidados a nivel de cohorte quinquenal para cada año y género. Esta tabla constituye la estructura ordenada y preparada requerida como insumo para generar las pirámides poblacionales en la siguiente sección.</p>
 </section>
 </section>
 <section id="caso-de-estudio-visualizar-datos-a-través-de-pirámides-poblacionales-de-colombia" class="level2" data-number="18.4">
