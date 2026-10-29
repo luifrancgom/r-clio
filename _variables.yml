@@ -118,6 +118,7 @@ url:
     nominal_cat_wiki: "https://en.wikipedia.org/wiki/Nominal_category"
     ordinal_data_wiki: "https://en.wikipedia.org/wiki/Ordinal_data"
     xz_utils_wiki: "https://en.wikipedia.org/wiki/XZ_Utils"
+    snake_case_wiki: "https://en.wikipedia.org/wiki/Snake_case"
     dry_wiki: "https://en.wikipedia.org/wiki/Don%27t_repeat_yourself"
     histogram_wiki: "https://en.wikipedia.org/wiki/Histogram"
     histogram_bins_wiki: "https://en.wikipedia.org/wiki/Histogram#Number_of_bins_and_width"

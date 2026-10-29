@@ -39,7 +39,7 @@ Para desarrollar el contenido de este capítulo es necesario que descargues los 
 ## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [programas-pregrado-faedis.rds]({{< var url.data.programas_faedis_rds >}})
 :::
 
-En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `011_verbos-dos-tablas-en-r` y dentro de ella genera el archivo `001_manipular-datos-dos-tabla.R`, siguiendo las pautas de la @sec-package-usage.
+En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `011_verbos-dos-tablas-en-r` y dentro de ella genera el archivo `001_manipular-datos-dos-tablas.R`, siguiendo las pautas de la @sec-package-usage.
 ::::
 
 ## Diagrama Entidad-Relación

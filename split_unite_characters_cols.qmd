@@ -17,8 +17,10 @@ Este capítulo se basa en [@wickham_r_2023, Cap. 5] así como en la documentaci�
 
 Exploraremos los siguientes aspectos:
 
-1.
-2.
+1. ¿Cómo separar caracteres en columnas?
+2. ¿Cómo unir múltiples columnas mediante contatenación de caracteres?
+3. ¿Cuál es el proceso para separar caracteres en columnas, transformar y prepapar datos para generar pirámides poblacionales?
+4. ¿Cuál es el proceso para visualizar datos a través de pirámides poblacionales? 
 
 :::: {#nte-1-chap-18 .callout-note}
 Para desarrollar el contenido de este capítulo es necesario que hayas exportado y guardado el archivo `poblacion_col_2018_2070_largo.rds` en la carpeta `data`, tal como se señaló en el @lst-write-rds-longer-format. En caso que no lo hayas hecho es necesario que lo descargues y lo incluyas dentro de la carpeta data:
@@ -38,7 +40,7 @@ En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta 
 
 
 
-## Caso de estudio: separar caracteres en columnas, transformar y prepapar datos para generar pirámides poblacionales en Colombia
+## Caso de estudio: separar caracteres en columnas, transformar y prepapar datos para generar pirámides poblacionales de Colombia
 
 
 
@@ -54,7 +56,7 @@ En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta 
 
 
 
-## Caso de estudio: visualizar datos a través de pirámides poblacionales en Colombia
+## Caso de estudio: visualizar datos a través de pirámides poblacionales de Colombia
 
 
 ### Creación de variables auxiliares para selección de años de interés

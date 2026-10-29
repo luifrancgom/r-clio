@@ -19,8 +19,10 @@ Este capítulo se basa en [@wickham_r_2023, Cap. 5] así como en la documentaci�
 
 Exploraremos los siguientes aspectos:
 
-1.
-2.
+1. ¿Qué es el formato largo para estructurar datos?
+2. ¿Qué es el formato ancho para estructurar datos?
+3. ¿Cómo realizar limpieza de nombres utilizando el paquete `janitor`?
+4. ¿Cómo estructurar datos para generar pirámides poblaciones?
 
 :::: {#nte-1-chap-17 .callout-note}
 Para desarrollar el contenido de este capítulo es necesario que hayas guardado el archivo `serie-nacional-de-poblacion_area-sexo-edad_2018-2070_2025-07-18.xlsx` en la carpeta `data`, tal como se señaló en la @nte-1-chap-14. En caso que no lo hayas hecho es necesario que lo descargues y lo incluyas dentro de la carpeta `data`:
@@ -81,7 +83,7 @@ poblacion_col_2018_2070_seleccionar <- poblacion_col_2018_2070_filtrar_total |>
   )
 
 # Tidy ----
-poblacion_col_2018_2070_largo <- poblacion_col_2018_2070_filtrar_total |>
+poblacion_col_2018_2070_largo <- poblacion_col_2018_2070_seleccionar |>
   pivot_longer(
     cols = hombres_0_anos:mujeres_100_anos_y_mas,
     names_to = "genero_edad",
@@ -195,34 +197,200 @@ poblacion_col_filtrar |>
   )
 ```
 
-## Formato largo
+## Formato largo {#sec-longer-format}
 
+El formato largo (en inglés **longer format**) reorganiza una tabla aumentando el número de filas y reduciendo el de columnas, un proceso frecuentemente denominado "alargar" los datos. Esta transformación se requiere cuando los nombres de ciertas columnas no corresponden a nombres de variables sino a valores o niveles específicos de una variable.
 
+En el paquete `tidyr`, la función `pivot_longer()` permite transformar este tipo de tablas en una estructura ordenada mediante 3 parámetros principales:
 
-## Formato ancho
+1. `cols`: especifica el conjunto de columnas cuyos nombres representan valores y que deben reestructurarse.
+2. `names_to`: define el nombre de la nueva columna en la que se recopilarán los nombres de las columnas seleccionadas en `cols`.
+3. `values_to`: define el nombre de la nueva columna que incluirá los valores numéricos o caracteres almacenados en las celdas de las columnas seleccionadas.
 
+En la @fig-pivot-longer se ilustra conceptualmente la reestructuración realizada por la función `pivot_longer()`.
 
+![Representación conceptual de la función `pivot_longer()`](images/pivot_longer.png){#fig-pivot-longer fig-alt="Diagrama conceptual que muestra cómo la función pivot_longer transforma una tabla de formato ancho a formato largo. A la izquierda se presenta una tabla de 2 filas con las columnas id, m_014 y f_014. Una flecha central con el comando pivot_longer especifica cols = m_014:f_014, names_to = 'name' y values_to = 'value'. A la derecha se genera una nueva tabla de 4 filas con las columnas id, name y value, donde las columnas m_014 y f_014 se han colapsado en filas y se ha duplicado el identificador id."}
 
-## Caso de estudio: estructurar datos en formato largo para generar pirámides poblacionales en Colombia 
+Tal como se observa en la @fig-pivot-longer, la tabla inicial contiene 2 columnas (`m_014` y `f_014`) asociadas a categorías demográficas de sexo y edad. Al aplicar `pivot_longer()`, los encabezados de estas 2 columnas pasan a formar parte de una única columna de categorías (`name`), mientras que los valores numéricos correspondientes (`20`, `15`, `3` y `5`) se recopilan en la columna `value`. Este proceso preserva el atributo identificador (`id`) duplicando sus filas según sea necesario para "alargar" la tabla de 2 a 4 filas.
 
-### Limpieza de nombres
+::: {#nte-2-chap-17 .callout-note}
+La aplicación en código de la función `pivot_longer()` y su sintaxis básica fueron introducidas en el @sec-data-tidying a través de conjuntos de datos como `relig_income` y `billboard`. En la @sec-case-study-pivoting aplicarás esta función en un escenario práctico de demografía nacional.
+:::
 
+## Formato ancho {#sec-wider-format}
 
+El formato ancho (en inglés **wider format**) corresponde a la operación inversa del formato largo, reorganizando una tabla al aumentar el número de columnas y disminuir el de filas, un proceso comúnmente llamado "ensanchar" los datos. Esta transformación resulta fundamental cuando una observación particular se encuentra fragmentada a lo largo de múltiples filas o cuando se desea preparar una matriz o tabla de presentación donde las categorías de una variable se exhiben como encabezados de columnas independientes.
 
-### Filtrar categoría de interés
+En el paquete `tidyr`, la función `pivot_wider()` implementa esta reestructuración mediante 2 parámetros principales:
 
+1. `names_from`: especifica la columna existente cuyos valores únicos se convertirán en los encabezados de las nuevas columnas.
+2. `values_from`: define la columna existente desde la cual se extraerán los valores de las celdas que poblarán las nuevas columnas generadas.
 
+En la @fig-pivot-wider se ilustra conceptualmente la reestructuración realizada por la función `pivot_wider()`.
 
-### Seleccionar variables de interés
+![Representación conceptual de la función `pivot_wider()`](images/pivot_wider.png){#fig-pivot-wider fig-alt="Diagrama conceptual que muestra cómo la función pivot_wider transforma una tabla de formato largo a formato ancho. A la izquierda se presenta una tabla de 4 filas con columnas id, name y value. Una flecha central con el comando pivot_wider especifica names_from = name y values_from = value. A la derecha se genera una tabla compacta de 2 filas con las columnas id, m_014 y f_014, donde los valores de la columna name se han expandido en encabezados de columna y las celdas se han rellenado con los valores correspondientes."}
 
+Como se observa en la @fig-pivot-wider, la tabla inicial contiene 4 observaciones distribuidas en las columnas `id`, `name` y `value`. Al ejecutar `pivot_wider()`, los valores diferenciados de la columna `name` (`m_014` y `f_014`) se elevan a nuevos encabezados de columna y las celdas correspondientes se rellenan con los registros numéricos de `value`. De este modo, la tabla se consolida pasando de 4 filas a 2 filas agrupando los atributos de cada identificador `id` en una sola fila.
 
+::: {#nte-3-chap-17 .callout-note}
+El uso de `pivot_wider()` en conjunto con `pivot_longer()` se exploró en el @sec-data-tidying mediante el análisis de registros meteorológicos diarios en `clima_muestra`. Aunque en la gran mayoría de los análisis dentro del `tidyverse` se prefiere el formato largo para facilitar la manipulación y visualización, el formato ancho resulta idóneo para reportes tabulares finales o matrices.
+:::
 
-### Ordenar datos en formato largo
+## Caso de estudio: estructurar datos en formato largo para generar pirámides poblacionales de Colombia {#sec-case-study-pivoting}
 
+El propósito de la @sec-case-study-pivoting es aplicar la limpieza de nombres y la transformación hacia formato largo mediante `pivot_longer()` partiendo de los datos oficiales de proyecciones y retroproyecciones de población nacional para Colombia elaborados por el Departamento Administrativo Nacional de Estadística (DANE) para el periodo 2018-2070. 
 
+El objetivo final de este caso de estudio es generar el archivo `poblacion_col_2018_2070_largo.rds`, el cual servirá como insumo fundamental para separar variables compuestas y preparar la visualización de pirámides poblacionales en el @sec-split-unite-characters-cols.
 
-### Exportar datos en formato largo
+### Datos {#sec-data-case-study-pivoting}
 
+Para desarrollar el caso de estudio, en primera instancia se cargan los paquetes `readxl`, `janitor` y `tidyverse` y lueog se importan los datos aplicando lo desarrollado en el @sec-spreadsheets con respecto al archivo `serie-nacional-de-poblacion_area-sexo-edad_2018-2070_2025-07-18.xlsx`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-import-poblacion
+#| lst-cap: Carga de paquetes e importación de datos aplicando lo desarrollado en el @sec-spreadsheets
+#| eval: false
+
+# Cargar paquetes ----
+library(readxl)
+library(janitor)
+library(tidyverse)
+
+# Importar datos ----
+path <- "data/serie-nacional-de-poblacion_area-sexo-edad_2018-2070_2025-07-18.xlsx"
+
+poblacion_col_2018_2070 <- read_excel(
+  path = path,
+  sheet = "PobNacionalxÁreaSexoEdad",
+  skip = 8
+) |>
+  rename(
+    territorio = `...1`,
+    ano = `...2`,
+    area_geografica = `...3`
+  )
+```
+
+Al inspeccionar el objeto importado `poblacion_col_2018_2070` es posible observar la estructura inicial de la tabla, tal como se señala a continuación:
+
+```{r}
+# Inspeccionar datos importados ----
+poblacion_col_2018_2070
+```
+
+La tabla contiene 127 filas y múltiples columnas donde se combinan variables geográficas, temporales y columnas demográficas cuyos nombres contienen espacios, mayúsculas y caracteres especiales como por ejemplo `` `Hombres 0 años` `` o `` `Mujeres 100 años y más` ``.
+
+### Limpieza de nombres {#sec-clean-names}
+
+Trabajar con nombres de columnas que contienen espacios o caracteres especiales en R exige escribir los nombres entre comillas invertidas, como por ejemplo `` `Hombres 0 años` ``. Este aspecto dificulta la escritura de código y puede generar errores tipográficos recurrentes.
+
+Para resolver este inconveniente el paquete `janitor` provee la función `clean_names()`, la cual transforma de forma automatizada los encabezados de cualquier tabla a un estilo consistente en minúsculas y separado por guiones bajos conocido en inglés con el nombre de [**snake case**]({{< var url.education.snake_case_wiki >}}). De esa manera se eliminan tildes y caracteres especiales, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-clean-names
+#| lst-cap: Limpieza de nombres de variables mediante `clean_names()`
+#| eval: false
+
+# Limpiar nombres ----
+poblacion_col_2018_2070_limpiar_nombres <- poblacion_col_2018_2070 |>
+  clean_names()
+```
+
+```{r}
+# Inspeccionar nombres limpios ----
+poblacion_col_2018_2070_limpiar_nombres
+```
+
+Al aplicar `clean_names()`, encabezados como `` `Hombres 0 años` `` y `` `Mujeres 100 años y más` `` se convierten de forma transparente en `hombres_0_anos` y `mujeres_100_anos_y_mas` facilitando su selección y manipulación en los pasos posteriores.
+
+### Filtrar categoría de interés {#sec-filter-area}
+
+El conjunto de datos del DANE clasifica las proyecciones anuales según el área geográfica en 3 niveles: `"Cabecera"`, `"Centros Poblados y Rural Disperso"` y `"Total"`. Dado que el objetivo es analizar la estructura demográfica a nivel nacional, es necesario filtrar únicamente los registros correspondientes al total nacional.
+
+Para lograr este aspecto, se utiliza la función `filter()` (ver @sec-row-verbs) sobre la columna `area_geografica` seleccionando el valor `"Total"`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-filter-total
+#| lst-cap: Filtrar observaciones del total nacional mediante `filter()`
+#| eval: false
+
+# Filtrar ----
+poblacion_col_2018_2070_filtrar_total <- poblacion_col_2018_2070_limpiar_nombres |>
+  filter(
+    area_geografica == "Total"
+  )
+```
+
+```{r}
+# Inspeccionar datos filtrados ----
+poblacion_col_2018_2070_filtrar_total
+```
+
+Mediante esta operación se reducen las observaciones a $53$ filas, correspondientes a los $53$ años comprendidos en el horizonte de proyección 2018 a 2070.
+
+### Seleccionar variables de interés {#sec-select-vars}
+
+La tabla resultante contiene agregados globales (`total`, `hombres` y `mujeres`) así como totales por edad simple junto con las columnas desagregadas por sexo y edad simple desde `hombres_0_anos` hasta `mujeres_100_anos_y_mas`.
+
+Para construir la pirámide poblacional en los capítulos posteriores, se requiere únicamente la variable temporal (`ano`), el total nacional (`total`) para calcular porcentajes poblacionales y las columnas que desglosan la población por sexo y edad. Para seleccionarlas eficientemente se utiliza la función `select()` junto con el operador de rango consecutivo `:` (ver @sec-select-data-case-study-dplyr), tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-select-poblacion
+#| lst-cap: Selección de variables requeridas para la pirámide poblacional mediante `select()`
+#| eval: false
+
+# Seleccionar ----
+poblacion_col_2018_2070_seleccionar <- poblacion_col_2018_2070_filtrar_total |>
+  select(
+    ano,
+    total,
+    hombres_0_anos:mujeres_100_anos_y_mas
+  )
+```
+
+```{r}
+# Inspeccionar variables seleccionadas ----
+poblacion_col_2018_2070_seleccionar
+```
+
+De esta forma, la tabla queda restringida a $204$ columnas: `ano`, `total` y las $202$ categorías demográficas individuales correspondientes a $101$ para hombres y $101$ para mujeres desde 0 hasta 100 años y más.
+
+### Ordenar datos en formato largo {#sec-pivot-longer-case-study}
+
+Aunque la tabla seleccionada contiene toda la información demográfica necesaria, no se encuentra en formato ordenado. Este aspecto se debe a que los encabezados desde `hombres_0_anos` hasta `mujeres_100_anos_y_mas` son en realidad valores de variables demográficas y no nombres de variables.
+
+Para estructurar los datos en formato largo, se aplica la función `pivot_longer()`:
+
+* `cols = hombres_0_anos:mujeres_100_anos_y_mas`: especifica el rango de variables que se colapsarán en filas.
+* `names_to = "genero_edad"`: define el nombre de la nueva columna que almacenará los nombres de las categorías.
+* `values_to = "poblacion"`: define el nombre de la nueva columna que contendrá el conteo de población respectivo.
+
+Este procedimiento se realiza tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-pivot-longer-case-study
+#| lst-cap: Reestructuración de variables demográficas a formato largo mediante `pivot_longer()`
+#| eval: false
+
+# Tidy ----
+poblacion_col_2018_2070_largo <- poblacion_col_2018_2070_seleccionar |>
+  pivot_longer(
+    cols = hombres_0_anos:mujeres_100_anos_y_mas,
+    names_to = "genero_edad",
+    values_to = "poblacion"
+  )
+```
+
+```{r}
+# Inspeccionar datos en formato largo ----
+poblacion_col_2018_2070_largo
+```
+
+El resultado es una tibble en formato largo de $10706$ filas ($53 \text{ años} \times 202 \text{ categorías demográficas}$) y $4$ columnas: `ano`, `total`, `genero_edad` y `poblacion`. En este punto, los datos se encuentran en formato largo y listos para proceder con la separación de la columna `genero_edad` en sus 2 componentes individuales (`genero` y `edad`) en el @sec-split-unite-characters-cols.
+
+### Exportar datos en formato largo {#sec-export-longer-format}
+
+Una vez estructurado el conjunto de datos en formato largo mediante la función `pivot_longer()`, es posible exportar el archivo y guardarlo en la carpeta `data` para utilizarlo posteriormente en el @sec-split-unite-characters-cols, tal como se señala a continuación:
 
 ```{r}
 #| lst-label: lst-write-rds-longer-format

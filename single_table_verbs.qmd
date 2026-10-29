@@ -496,7 +496,7 @@ saber_pro_genericas_2021_2024_faedis
 
 De esa manera, mediante el código del @lst-filter-data-case-study-dplyr es posible obtener inicialmente las $1239$ filas que se indicaron en la @sec-data. 
 
-### Seleccionar (`select()`)
+### Seleccionar (`select()`) {#sec-select-data-case-study-dplyr}
 
 El segundo paso para reconstruir el conjunto de datos `2021-2024_saber-pro-genericas_faedis.rds` comprende seleccionar las columnas relacionadas con las $20$ variables indicadas en la @sec-data. Inicialmente se podría seleccionar nombre por nombre incluyendo cada una de las variables en la función `select()` pero se pueden utilizar [operadores o funciones auxiliares]({{< var url.packages.dplyr_select >}}) para optimizar este proceso. A continuación se señalan algunos de ellos que se utilizarán más adelante en el estudio de caso:
 
@@ -547,10 +547,6 @@ saber_pro_genericas_2021_2024_faedis <- saber_pro_genericas_2021_2024_faedis |>
     .before = fami_educacionmadre
   ) |>
   relocate(
-    fami_estratovivienda,
-    .before = fami_educacionmadre
-  ) |>
-  relocate(
     estu_depto_presentacion,
     .after = estu_cod_depto_presentacion
   ) |>
@@ -578,7 +574,7 @@ En el @lst-relocate-data-case-study-dplyr la reubicación de columnas tiene el o
   - **Ciudadanas**: `mod_competen_ciudada_punt`
   - **Comunicación escrita**: `mod_comuni_escrita_punt`
   - **Inglés**: `mod_ingles_punt` y `mod_ingles_desem`
-  - **Lectura crítica**: `mod_lectura_critica_punt,`
+  - **Lectura crítica**: `mod_lectura_critica_punt`
   - **Razonamiento cuantitativo**: `mod_razona_cuantitat_punt`
   - **Puntaje global**: `punt_global`  
 
@@ -601,7 +597,7 @@ R implementa diferentes tipos de datos que se pueden utilizar para acomodar los 
 
 : Algunos tipos de datos en R {#tbl-some-data-types-in-r}
 
-En el @lst-mutate-data-case-study-dplyr se utilizan las funciones `as.integer()` y `factor()` junto con la función `mutate()` para transformar variables que son inicialmente continuas y caracteres a enteros y factores. La implementación en R de variables nominales y ordinales o en general de variables categóricas se realiza a través del concepto de factor (ver `?factor`). Para definir las categorías que abarca un factor se utiliza el parámetro `level` junto con un vector como argumento donde se puede especificar si existe o no un ordenamiento a través del parámetro `ordered` donde el argumento puede tomar el valor de `FALSE` (si es una variable nominal) o `TRUE` (si es una variable ordinal), tal como se señala a continuación:
+En el @lst-mutate-data-case-study-dplyr se utilizan las funciones `as.integer()` y `factor()` junto con la función `mutate()` para transformar variables que son inicialmente continuas y caracteres a enteros y factores. La implementación en R de variables nominales y ordinales o en general de variables categóricas se realiza a través del concepto de factor (ver `?factor`). Para definir las categorías que abarca un factor se utiliza el parámetro `levels` junto con un vector como argumento donde se puede especificar si existe o no un ordenamiento a través del parámetro `ordered` donde el argumento puede tomar el valor de `FALSE` (si es una variable nominal) o `TRUE` (si es una variable ordinal), tal como se señala a continuación:
 
 ```{r}
 #| lst-label: lst-mutate-data-case-study-dplyr
@@ -690,7 +686,7 @@ saber_pro_genericas_2021_2024_faedis |>
 
 En el @lst-mutate-data-case-study-dplyr las variables `ano` y `estu_snies_prgmacademico` se transforman a enteros teniendo en cuenta la naturaleza de las mismas. Por otro lado, en primera instancia la variable `estu_genero` se codifica como un factor no ordenado teniendo en cuenta que se refiere al género del estudiante mientras que las variables `estu_semestrecursa`, `fami_estratovivienda`, `fami_educacionmadre`, `fami_educacionpadre` y `mod_ingles_desem` se codifican como factores ordenados. Cabe la pena señalar, que algunas categorías de las variables `fami_estratovivienda`, `fami_educacionmadre` y `fami_educacionpadre` como `"Sin Estrato"`, `"No sabe"` y `"No Aplica"` podrían codificarse como valores faltantes (en inglés **Not Available** o **Missing values**), donde R codifica este tipo de casos con la lógica constante `NA` (ver `?NA`), pero en `2021-2024_saber-pro-genericas_faedis.rds` se mantienen estas etiquetas para entender la razón por la cual se presentan estos casos de datos faltantes.
 
-:::: {#nte-3-chap-10 .callout-note}
+:::: {#nte-4-chap-10 .callout-note}
 En este libro no abarcaremos a profundidad el manejo de datos faltantes, codificados en R como `NA`, así como las herramientas disponibles para llevar un análisis adecuado en presencia de este fenómeno, que es bastante común al realizar un análisis de datos.
 
 Si deseas profundizar en este tema más adelante, cuando estés familiarizado con R y Positron, puedes consultar [@buuren_flexible_2018] y la documentación oficial de los paquetes [`mice`]({{< var url.packages.mice >}}) y [`naniar`]({{< var url.packages.naniar >}}).
