@@ -1028,7 +1028,7 @@ Listado&nbsp;13.12: Detección y diagnóstico de problemas de lectura con <code>
 <pre><code># A tibble: 1 × 5
     row   col expected   actual     file                    
   &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;                   
-1     2     1 an integer Sin código /tmp/Rtmp7xLzPR/vroom-c…</code></pre>
+1     2     1 an integer Sin código /tmp/Rtmpvl4Fd8/vroom-c…</code></pre>
 </div>
 </div>
 <div id="wrn-1-chap-13" class="callout callout-style-default callout-warning callout-titled">
@@ -1229,7 +1229,7 @@ Listado&nbsp;13.15: Importación inicial con <code>read_csv2()</code> y consulta
 </section>
 <section id="naturaleza-de-la-variable-y-formato-de-fecha" class="level3" data-number="13.5.2">
 <h3 data-number="13.5.2" class="anchored" data-anchor-id="naturaleza-de-la-variable-y-formato-de-fecha"><span class="header-section-number">13.5.2</span> Naturaleza de la variable y formato de fecha</h3>
-<p>De acuerdo con la documentación oficial de <a href="https://www.icfes.gov.co/investigaciones/data-icfes/">DataIcfes</a>, la variable <code>estu_fechanacimiento</code> corresponde a la fecha de nacimiento de cada individuo que presenta el Saber-Pro. En la <a href="single_table_verbs.html#nte-3-chap-10" class="quarto-xref">Nota&nbsp;<span>10.4</span></a> del <a href="single_table_verbs.html" class="quarto-xref"><span>Capítulo 10</span></a> se indicó que es posible descargar el diccionario de datos oficial publicado en el portal <a href="https://www.icfes.gov.co/investigaciones/data-icfes/">DataIcfes</a>. En dicho documento y al examinar los primeros registros del archivo (p.&nbsp;ej., <code>"05/10/1992"</code>, <code>"02/05/1994"</code>, <code>"09/11/1996"</code>) puedes identificar que las fechas se encuentran registradas en el formato <strong>día/mes/año</strong> (<code>DD/MM/AAAA</code>).</p>
+<p>De acuerdo con la documentación oficial de <a href="https://www.icfes.gov.co/investigaciones/data-icfes/">DataIcfes</a>, la variable <code>estu_fechanacimiento</code> corresponde a la fecha de nacimiento de cada individuo que presenta el Saber-Pro. En la <a href="single_table_verbs.html#nte-3-chap-10" class="quarto-xref">Nota&nbsp;<span>10.3</span></a> del <a href="single_table_verbs.html" class="quarto-xref"><span>Capítulo 10</span></a> se indicó que es posible descargar el diccionario de datos oficial publicado en el portal <a href="https://www.icfes.gov.co/investigaciones/data-icfes/">DataIcfes</a>. En dicho documento y al examinar los primeros registros del archivo (p.&nbsp;ej., <code>"05/10/1992"</code>, <code>"02/05/1994"</code>, <code>"09/11/1996"</code>) puedes identificar que las fechas se encuentran registradas en el formato <strong>día/mes/año</strong> (<code>DD/MM/AAAA</code>).</p>
 <p>Mantener una fecha como cadena de texto (<code>&lt;chr&gt;</code>) dificulta realizar operaciones cronológicas como calcular la edad de los individuos, filtrar por año de nacimiento o agrupar temporalmente los registros. Por ello, lo ideal es transformarla en un tipo fecha (<code>&lt;date&gt;</code>) directamente durante la lectura.</p>
 </section>
 <section id="intento-inicial-con-col_date-y-diagnóstico-con-problems" class="level3" data-number="13.5.3">

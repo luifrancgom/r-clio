@@ -355,13 +355,13 @@ div.csl-indent {
   <ul>
   <li><a href="#separar-caracteres-en-columnas" id="toc-separar-caracteres-en-columnas" class="nav-link active" data-scroll-target="#separar-caracteres-en-columnas"><span class="header-section-number">18.1</span> Separar caracteres en columnas</a></li>
   <li><a href="#unir-múltiples-columnas-mediante-contatenación-de-caracteres" id="toc-unir-múltiples-columnas-mediante-contatenación-de-caracteres" class="nav-link" data-scroll-target="#unir-múltiples-columnas-mediante-contatenación-de-caracteres"><span class="header-section-number">18.2</span> Unir múltiples columnas mediante contatenación de caracteres</a></li>
-  <li><a href="#caso-de-estudio-separar-caracteres-en-columnas-transformar-y-prepapar-datos-para-generar-pirámides-poblacionales-en-colombia" id="toc-caso-de-estudio-separar-caracteres-en-columnas-transformar-y-prepapar-datos-para-generar-pirámides-poblacionales-en-colombia" class="nav-link" data-scroll-target="#caso-de-estudio-separar-caracteres-en-columnas-transformar-y-prepapar-datos-para-generar-pirámides-poblacionales-en-colombia"><span class="header-section-number">18.3</span> Caso de estudio: separar caracteres en columnas, transformar y prepapar datos para generar pirámides poblacionales en Colombia</a>
+  <li><a href="#caso-de-estudio-separar-caracteres-en-columnas-transformar-y-prepapar-datos-para-generar-pirámides-poblacionales-de-colombia" id="toc-caso-de-estudio-separar-caracteres-en-columnas-transformar-y-prepapar-datos-para-generar-pirámides-poblacionales-de-colombia" class="nav-link" data-scroll-target="#caso-de-estudio-separar-caracteres-en-columnas-transformar-y-prepapar-datos-para-generar-pirámides-poblacionales-de-colombia"><span class="header-section-number">18.3</span> Caso de estudio: separar caracteres en columnas, transformar y prepapar datos para generar pirámides poblacionales de Colombia</a>
   <ul class="collapse">
   <li><a href="#separar-caracteres-en-columnas-1" id="toc-separar-caracteres-en-columnas-1" class="nav-link" data-scroll-target="#separar-caracteres-en-columnas-1"><span class="header-section-number">18.3.1</span> Separar caracteres en columnas</a></li>
   <li><a href="#transformar-variables" id="toc-transformar-variables" class="nav-link" data-scroll-target="#transformar-variables"><span class="header-section-number">18.3.2</span> Transformar variables</a></li>
   <li><a href="#preparar-datos-para-visualizarlos" id="toc-preparar-datos-para-visualizarlos" class="nav-link" data-scroll-target="#preparar-datos-para-visualizarlos"><span class="header-section-number">18.3.3</span> Preparar datos para visualizarlos</a></li>
   </ul></li>
-  <li><a href="#caso-de-estudio-visualizar-datos-a-través-de-pirámides-poblacionales-en-colombia" id="toc-caso-de-estudio-visualizar-datos-a-través-de-pirámides-poblacionales-en-colombia" class="nav-link" data-scroll-target="#caso-de-estudio-visualizar-datos-a-través-de-pirámides-poblacionales-en-colombia"><span class="header-section-number">18.4</span> Caso de estudio: visualizar datos a través de pirámides poblacionales en Colombia</a>
+  <li><a href="#caso-de-estudio-visualizar-datos-a-través-de-pirámides-poblacionales-de-colombia" id="toc-caso-de-estudio-visualizar-datos-a-través-de-pirámides-poblacionales-de-colombia" class="nav-link" data-scroll-target="#caso-de-estudio-visualizar-datos-a-través-de-pirámides-poblacionales-de-colombia"><span class="header-section-number">18.4</span> Caso de estudio: visualizar datos a través de pirámides poblacionales de Colombia</a>
   <ul class="collapse">
   <li><a href="#creación-de-variables-auxiliares-para-selección-de-años-de-interés" id="toc-creación-de-variables-auxiliares-para-selección-de-años-de-interés" class="nav-link" data-scroll-target="#creación-de-variables-auxiliares-para-selección-de-años-de-interés"><span class="header-section-number">18.4.1</span> Creación de variables auxiliares para selección de años de interés</a></li>
   <li><a href="#creación-de-pirámides-poblacionales" id="toc-creación-de-pirámides-poblacionales" class="nav-link" data-scroll-target="#creación-de-pirámides-poblacionales"><span class="header-section-number">18.4.2</span> Creación de pirámides poblacionales</a></li>
@@ -394,8 +394,10 @@ div.csl-indent {
 <p>Este capítulo se basa en <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 5</a>)</span> así como en la documentación oficial de <code>tidyr</code> respecto a la familia de funciones <a href="https://tidyr.tidyverse.org/reference/separate_wider_delim.html"><code>separate_wider_*()</code></a> y la función <a href="https://tidyr.tidyverse.org/reference/unite.html"><code>unite()</code></a> donde tiene como propósito introducir la forma de separar caracteres en columnas o unir múltiples columnas en una sola mediante concatenación de caracteres, utilizando el paquete <code>tidyr</code> e información de proyecciones y retroproyecciones de población nacional por área, sexo y edad para el periodo 2018-2070 de Colombia con base en el Censo Nacional de Población y Vivienda (CNPV) 2018.</p>
 <p>Exploraremos los siguientes aspectos:</p>
 <ol type="1">
-<li></li>
-<li></li>
+<li>¿Cómo separar caracteres en columnas?</li>
+<li>¿Cómo unir múltiples columnas mediante contatenación de caracteres?</li>
+<li>¿Cuál es el proceso para separar caracteres en columnas, transformar y prepapar datos para generar pirámides poblacionales?</li>
+<li>¿Cuál es el proceso para visualizar datos a través de pirámides poblacionales?</li>
 </ol>
 <div id="nte-1-chap-18" class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -407,7 +409,7 @@ Nota&nbsp;18.1
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Para desarrollar el contenido de este capítulo es necesario que hayas exportado y guardado el archivo <code>poblacion_col_2018_2070_largo.rds</code> en la carpeta <code>data</code>, tal como se señaló en el <a href="pivoting.html#lst-write-rds-longer-format" class="quarto-xref">Listado&nbsp;<span>17.1</span></a>. En caso que no lo hayas hecho es necesario que lo descargues y lo incluyas dentro de la carpeta data:</p>
+<p>Para desarrollar el contenido de este capítulo es necesario que hayas exportado y guardado el archivo <code>poblacion_col_2018_2070_largo.rds</code> en la carpeta <code>data</code>, tal como se señaló en el <a href="pivoting.html#lst-write-rds-longer-format" class="quarto-xref">Listado&nbsp;<span>17.6</span></a>. En caso que no lo hayas hecho es necesario que lo descargues y lo incluyas dentro de la carpeta data:</p>
 <div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -430,8 +432,8 @@ Nota&nbsp;18.1
 <section id="unir-múltiples-columnas-mediante-contatenación-de-caracteres" class="level2" data-number="18.2">
 <h2 data-number="18.2" class="anchored" data-anchor-id="unir-múltiples-columnas-mediante-contatenación-de-caracteres"><span class="header-section-number">18.2</span> Unir múltiples columnas mediante contatenación de caracteres</h2>
 </section>
-<section id="caso-de-estudio-separar-caracteres-en-columnas-transformar-y-prepapar-datos-para-generar-pirámides-poblacionales-en-colombia" class="level2" data-number="18.3">
-<h2 data-number="18.3" class="anchored" data-anchor-id="caso-de-estudio-separar-caracteres-en-columnas-transformar-y-prepapar-datos-para-generar-pirámides-poblacionales-en-colombia"><span class="header-section-number">18.3</span> Caso de estudio: separar caracteres en columnas, transformar y prepapar datos para generar pirámides poblacionales en Colombia</h2>
+<section id="caso-de-estudio-separar-caracteres-en-columnas-transformar-y-prepapar-datos-para-generar-pirámides-poblacionales-de-colombia" class="level2" data-number="18.3">
+<h2 data-number="18.3" class="anchored" data-anchor-id="caso-de-estudio-separar-caracteres-en-columnas-transformar-y-prepapar-datos-para-generar-pirámides-poblacionales-de-colombia"><span class="header-section-number">18.3</span> Caso de estudio: separar caracteres en columnas, transformar y prepapar datos para generar pirámides poblacionales de Colombia</h2>
 <section id="separar-caracteres-en-columnas-1" class="level3" data-number="18.3.1">
 <h3 data-number="18.3.1" class="anchored" data-anchor-id="separar-caracteres-en-columnas-1"><span class="header-section-number">18.3.1</span> Separar caracteres en columnas</h3>
 </section>
@@ -442,8 +444,8 @@ Nota&nbsp;18.1
 <h3 data-number="18.3.3" class="anchored" data-anchor-id="preparar-datos-para-visualizarlos"><span class="header-section-number">18.3.3</span> Preparar datos para visualizarlos</h3>
 </section>
 </section>
-<section id="caso-de-estudio-visualizar-datos-a-través-de-pirámides-poblacionales-en-colombia" class="level2" data-number="18.4">
-<h2 data-number="18.4" class="anchored" data-anchor-id="caso-de-estudio-visualizar-datos-a-través-de-pirámides-poblacionales-en-colombia"><span class="header-section-number">18.4</span> Caso de estudio: visualizar datos a través de pirámides poblacionales en Colombia</h2>
+<section id="caso-de-estudio-visualizar-datos-a-través-de-pirámides-poblacionales-de-colombia" class="level2" data-number="18.4">
+<h2 data-number="18.4" class="anchored" data-anchor-id="caso-de-estudio-visualizar-datos-a-través-de-pirámides-poblacionales-de-colombia"><span class="header-section-number">18.4</span> Caso de estudio: visualizar datos a través de pirámides poblacionales de Colombia</h2>
 <section id="creación-de-variables-auxiliares-para-selección-de-años-de-interés" class="level3" data-number="18.4.1">
 <h3 data-number="18.4.1" class="anchored" data-anchor-id="creación-de-variables-auxiliares-para-selección-de-años-de-interés"><span class="header-section-number">18.4.1</span> Creación de variables auxiliares para selección de años de interés</h3>
 </section>

@@ -427,7 +427,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#sec-data-case-study-dplyr" id="toc-sec-data-case-study-dplyr" class="nav-link" data-scroll-target="#sec-data-case-study-dplyr"><span class="header-section-number">10.2.1</span> Datos</a></li>
   <li><a href="#filtrar-filter" id="toc-filtrar-filter" class="nav-link" data-scroll-target="#filtrar-filter"><span class="header-section-number">10.2.2</span> Filtrar (<code>filter()</code>)</a></li>
-  <li><a href="#seleccionar-select" id="toc-seleccionar-select" class="nav-link" data-scroll-target="#seleccionar-select"><span class="header-section-number">10.2.3</span> Seleccionar (<code>select()</code>)</a></li>
+  <li><a href="#sec-select-data-case-study-dplyr" id="toc-sec-select-data-case-study-dplyr" class="nav-link" data-scroll-target="#sec-select-data-case-study-dplyr"><span class="header-section-number">10.2.3</span> Seleccionar (<code>select()</code>)</a></li>
   <li><a href="#reubicar-relocate" id="toc-reubicar-relocate" class="nav-link" data-scroll-target="#reubicar-relocate"><span class="header-section-number">10.2.4</span> Reubicar (<code>relocate()</code>)</a></li>
   <li><a href="#sec-mutate-data-case-study-dplyr" id="toc-sec-mutate-data-case-study-dplyr" class="nav-link" data-scroll-target="#sec-mutate-data-case-study-dplyr"><span class="header-section-number">10.2.5</span> Modificar (<code>mutate()</code>)</a></li>
   <li><a href="#sec-collapse-group-ungroup-data-case-study-dplyr" id="toc-sec-collapse-group-ungroup-data-case-study-dplyr" class="nav-link" data-scroll-target="#sec-collapse-group-ungroup-data-case-study-dplyr"><span class="header-section-number">10.2.6</span> Colapsar, agrupar y desagrupar (<code>summarise()</code>, <code>group_by()</code> y <code>ungroup()</code>)</a></li>
@@ -1855,8 +1855,8 @@ Listado&nbsp;10.6: Filtrar filas para obtener las observaciones del conjunto de 
 </div>
 <p>De esa manera, mediante el código del <a href="#lst-filter-data-case-study-dplyr" class="quarto-xref">Listado&nbsp;<span>10.6</span></a> es posible obtener inicialmente las <span class="math inline">\(1239\)</span> filas que se indicaron en la <a href="amounts.html#sec-data" class="quarto-xref"><span>Sección 6.2.1</span></a>.</p>
 </section>
-<section id="seleccionar-select" class="level3" data-number="10.2.3">
-<h3 data-number="10.2.3" class="anchored" data-anchor-id="seleccionar-select"><span class="header-section-number">10.2.3</span> Seleccionar (<code>select()</code>)</h3>
+<section id="sec-select-data-case-study-dplyr" class="level3" data-number="10.2.3">
+<h3 data-number="10.2.3" class="anchored" data-anchor-id="sec-select-data-case-study-dplyr"><span class="header-section-number">10.2.3</span> Seleccionar (<code>select()</code>)</h3>
 <p>El segundo paso para reconstruir el conjunto de datos <code>2021-2024_saber-pro-genericas_faedis.rds</code> comprende seleccionar las columnas relacionadas con las <span class="math inline">\(20\)</span> variables indicadas en la <a href="amounts.html#sec-data" class="quarto-xref"><span>Sección 6.2.1</span></a>. Inicialmente se podría seleccionar nombre por nombre incluyendo cada una de las variables en la función <code>select()</code> pero se pueden utilizar <a href="https://dplyr.tidyverse.org/reference/select.html#overview-of-selection-features">operadores o funciones auxiliares</a> para optimizar este proceso. A continuación se señalan algunos de ellos que se utilizarán más adelante en el estudio de caso:</p>
 <ul>
 <li><code>:</code>: permite seleccionar un rango consecutivo de variables</li>
@@ -1934,23 +1934,19 @@ Listado&nbsp;10.8: Reubicar columnas para obtener el mismo ordenamiento de las v
 <span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">.before =</span> fami_educacionmadre</span>
 <span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(</span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>    fami_estratovivienda,</span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">.before =</span> fami_educacionmadre</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>    estu_depto_presentacion,</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">.after =</span> estu_cod_depto_presentacion</span>
 <span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(</span>
-<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>    estu_depto_presentacion,</span>
-<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">.after =</span> estu_cod_depto_presentacion</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>    estu_mcpio_presentacion,</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">.after =</span> estu_cod_mcpio_presentacion</span>
 <span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(</span>
-<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>    estu_mcpio_presentacion,</span>
-<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">.after =</span> estu_cod_mcpio_presentacion</span>
-<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(</span>
-<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>    mod_ingles_desem,</span>
-<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">.after =</span> mod_ingles_punt</span>
-<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024_faedis</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>    mod_ingles_desem,</span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">.after =</span> mod_ingles_punt</span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024_faedis</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
@@ -1990,7 +1986,7 @@ Listado&nbsp;10.8: Reubicar columnas para obtener el mismo ordenamiento de las v
 <li><strong>Ciudadanas</strong>: <code>mod_competen_ciudada_punt</code></li>
 <li><strong>Comunicación escrita</strong>: <code>mod_comuni_escrita_punt</code></li>
 <li><strong>Inglés</strong>: <code>mod_ingles_punt</code> y <code>mod_ingles_desem</code></li>
-<li><strong>Lectura crítica</strong>: <code>mod_lectura_critica_punt,</code></li>
+<li><strong>Lectura crítica</strong>: <code>mod_lectura_critica_punt</code></li>
 <li><strong>Razonamiento cuantitativo</strong>: <code>mod_razona_cuantitat_punt</code></li>
 <li><strong>Puntaje global</strong>: <code>punt_global</code></li>
 </ul></li>
@@ -2075,7 +2071,7 @@ Tabla&nbsp;10.2: Algunos tipos de datos en R
 </div>
 </figure>
 </div>
-<p>En el <a href="#lst-mutate-data-case-study-dplyr" class="quarto-xref">Listado&nbsp;<span>10.9</span></a> se utilizan las funciones <code>as.integer()</code> y <code>factor()</code> junto con la función <code>mutate()</code> para transformar variables que son inicialmente continuas y caracteres a enteros y factores. La implementación en R de variables nominales y ordinales o en general de variables categóricas se realiza a través del concepto de factor (ver <code>?factor</code>). Para definir las categorías que abarca un factor se utiliza el parámetro <code>level</code> junto con un vector como argumento donde se puede especificar si existe o no un ordenamiento a través del parámetro <code>ordered</code> donde el argumento puede tomar el valor de <code>FALSE</code> (si es una variable nominal) o <code>TRUE</code> (si es una variable ordinal), tal como se señala a continuación:</p>
+<p>En el <a href="#lst-mutate-data-case-study-dplyr" class="quarto-xref">Listado&nbsp;<span>10.9</span></a> se utilizan las funciones <code>as.integer()</code> y <code>factor()</code> junto con la función <code>mutate()</code> para transformar variables que son inicialmente continuas y caracteres a enteros y factores. La implementación en R de variables nominales y ordinales o en general de variables categóricas se realiza a través del concepto de factor (ver <code>?factor</code>). Para definir las categorías que abarca un factor se utiliza el parámetro <code>levels</code> junto con un vector como argumento donde se puede especificar si existe o no un ordenamiento a través del parámetro <code>ordered</code> donde el argumento puede tomar el valor de <code>FALSE</code> (si es una variable nominal) o <code>TRUE</code> (si es una variable ordinal), tal como se señala a continuación:</p>
 <div class="cell">
 <div id="lst-mutate-data-case-study-dplyr" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
@@ -2192,7 +2188,7 @@ $ punt_global                 &lt;dbl&gt; 139, 170, 128, 155, 16…</code></pre>
 </div>
 </div>
 <p>En el <a href="#lst-mutate-data-case-study-dplyr" class="quarto-xref">Listado&nbsp;<span>10.9</span></a> las variables <code>ano</code> y <code>estu_snies_prgmacademico</code> se transforman a enteros teniendo en cuenta la naturaleza de las mismas. Por otro lado, en primera instancia la variable <code>estu_genero</code> se codifica como un factor no ordenado teniendo en cuenta que se refiere al género del estudiante mientras que las variables <code>estu_semestrecursa</code>, <code>fami_estratovivienda</code>, <code>fami_educacionmadre</code>, <code>fami_educacionpadre</code> y <code>mod_ingles_desem</code> se codifican como factores ordenados. Cabe la pena señalar, que algunas categorías de las variables <code>fami_estratovivienda</code>, <code>fami_educacionmadre</code> y <code>fami_educacionpadre</code> como <code>"Sin Estrato"</code>, <code>"No sabe"</code> y <code>"No Aplica"</code> podrían codificarse como valores faltantes (en inglés <strong>Not Available</strong> o <strong>Missing values</strong>), donde R codifica este tipo de casos con la lógica constante <code>NA</code> (ver <code>?NA</code>), pero en <code>2021-2024_saber-pro-genericas_faedis.rds</code> se mantienen estas etiquetas para entender la razón por la cual se presentan estos casos de datos faltantes.</p>
-<div id="nte-3-chap-10" class="callout callout-style-default callout-note callout-titled">
+<div id="nte-4-chap-10" class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>

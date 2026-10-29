@@ -131,6 +131,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -389,15 +418,16 @@ div.csl-indent {
    
   <ul>
   <li><a href="#pirámides-poblacionales" id="toc-pirámides-poblacionales" class="nav-link active" data-scroll-target="#pirámides-poblacionales"><span class="header-section-number">17.1</span> Pirámides poblacionales</a></li>
-  <li><a href="#formato-largo" id="toc-formato-largo" class="nav-link" data-scroll-target="#formato-largo"><span class="header-section-number">17.2</span> Formato largo</a></li>
-  <li><a href="#formato-ancho" id="toc-formato-ancho" class="nav-link" data-scroll-target="#formato-ancho"><span class="header-section-number">17.3</span> Formato ancho</a></li>
-  <li><a href="#caso-de-estudio-estructurar-datos-en-formato-largo-para-generar-pirámides-poblacionales-en-colombia" id="toc-caso-de-estudio-estructurar-datos-en-formato-largo-para-generar-pirámides-poblacionales-en-colombia" class="nav-link" data-scroll-target="#caso-de-estudio-estructurar-datos-en-formato-largo-para-generar-pirámides-poblacionales-en-colombia"><span class="header-section-number">17.4</span> Caso de estudio: estructurar datos en formato largo para generar pirámides poblacionales en Colombia</a>
+  <li><a href="#sec-longer-format" id="toc-sec-longer-format" class="nav-link" data-scroll-target="#sec-longer-format"><span class="header-section-number">17.2</span> Formato largo</a></li>
+  <li><a href="#sec-wider-format" id="toc-sec-wider-format" class="nav-link" data-scroll-target="#sec-wider-format"><span class="header-section-number">17.3</span> Formato ancho</a></li>
+  <li><a href="#sec-case-study-pivoting" id="toc-sec-case-study-pivoting" class="nav-link" data-scroll-target="#sec-case-study-pivoting"><span class="header-section-number">17.4</span> Caso de estudio: estructurar datos en formato largo para generar pirámides poblacionales de Colombia</a>
   <ul class="collapse">
-  <li><a href="#limpieza-de-nombres" id="toc-limpieza-de-nombres" class="nav-link" data-scroll-target="#limpieza-de-nombres"><span class="header-section-number">17.4.1</span> Limpieza de nombres</a></li>
-  <li><a href="#filtrar-categoría-de-interés" id="toc-filtrar-categoría-de-interés" class="nav-link" data-scroll-target="#filtrar-categoría-de-interés"><span class="header-section-number">17.4.2</span> Filtrar categoría de interés</a></li>
-  <li><a href="#seleccionar-variables-de-interés" id="toc-seleccionar-variables-de-interés" class="nav-link" data-scroll-target="#seleccionar-variables-de-interés"><span class="header-section-number">17.4.3</span> Seleccionar variables de interés</a></li>
-  <li><a href="#ordenar-datos-en-formato-largo" id="toc-ordenar-datos-en-formato-largo" class="nav-link" data-scroll-target="#ordenar-datos-en-formato-largo"><span class="header-section-number">17.4.4</span> Ordenar datos en formato largo</a></li>
-  <li><a href="#exportar-datos-en-formato-largo" id="toc-exportar-datos-en-formato-largo" class="nav-link" data-scroll-target="#exportar-datos-en-formato-largo"><span class="header-section-number">17.4.5</span> Exportar datos en formato largo</a></li>
+  <li><a href="#sec-data-case-study-pivoting" id="toc-sec-data-case-study-pivoting" class="nav-link" data-scroll-target="#sec-data-case-study-pivoting"><span class="header-section-number">17.4.1</span> Datos</a></li>
+  <li><a href="#sec-clean-names" id="toc-sec-clean-names" class="nav-link" data-scroll-target="#sec-clean-names"><span class="header-section-number">17.4.2</span> Limpieza de nombres</a></li>
+  <li><a href="#sec-filter-area" id="toc-sec-filter-area" class="nav-link" data-scroll-target="#sec-filter-area"><span class="header-section-number">17.4.3</span> Filtrar categoría de interés</a></li>
+  <li><a href="#sec-select-vars" id="toc-sec-select-vars" class="nav-link" data-scroll-target="#sec-select-vars"><span class="header-section-number">17.4.4</span> Seleccionar variables de interés</a></li>
+  <li><a href="#sec-pivot-longer-case-study" id="toc-sec-pivot-longer-case-study" class="nav-link" data-scroll-target="#sec-pivot-longer-case-study"><span class="header-section-number">17.4.5</span> Ordenar datos en formato largo</a></li>
+  <li><a href="#sec-export-longer-format" id="toc-sec-export-longer-format" class="nav-link" data-scroll-target="#sec-export-longer-format"><span class="header-section-number">17.4.6</span> Exportar datos en formato largo</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/pivoting.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/pivoting.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
@@ -427,8 +457,10 @@ div.csl-indent {
 <p>Este capítulo se basa en <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 5</a>)</span> así como en la documentación oficial de <a href="https://tidyr.tidyverse.org/articles/pivot.html"><code>tidyr</code></a> donde tiene como propósito introducir la forma de estructurar un conjuntos de datos en formato largo y ancho (en inglés <strong>longer</strong> y <strong>wider</strong>) mediante las funciones <code>pivot_longer()</code> y <code>pivot_wider()</code> utilizando el paquete <code>tidyr</code> e información de proyecciones y retroproyecciones de población nacional por área, sexo y edad para el periodo 2018-2070 de Colombia con base en el Censo Nacional de Población y Vivienda (CNPV) 2018.</p>
 <p>Exploraremos los siguientes aspectos:</p>
 <ol type="1">
-<li></li>
-<li></li>
+<li>¿Qué es el formato largo para estructurar datos?</li>
+<li>¿Qué es el formato ancho para estructurar datos?</li>
+<li>¿Cómo realizar limpieza de nombres utilizando el paquete <code>janitor</code>?</li>
+<li>¿Cómo estructurar datos para generar pirámides poblaciones?</li>
 </ol>
 <div id="nte-1-chap-17" class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -477,44 +509,353 @@ Figura&nbsp;17.1: Resultado final de un gráfico de pirámides poblaciones utili
 </div>
 </div>
 </section>
-<section id="formato-largo" class="level2" data-number="17.2">
-<h2 data-number="17.2" class="anchored" data-anchor-id="formato-largo"><span class="header-section-number">17.2</span> Formato largo</h2>
-</section>
-<section id="formato-ancho" class="level2" data-number="17.3">
-<h2 data-number="17.3" class="anchored" data-anchor-id="formato-ancho"><span class="header-section-number">17.3</span> Formato ancho</h2>
-</section>
-<section id="caso-de-estudio-estructurar-datos-en-formato-largo-para-generar-pirámides-poblacionales-en-colombia" class="level2" data-number="17.4">
-<h2 data-number="17.4" class="anchored" data-anchor-id="caso-de-estudio-estructurar-datos-en-formato-largo-para-generar-pirámides-poblacionales-en-colombia"><span class="header-section-number">17.4</span> Caso de estudio: estructurar datos en formato largo para generar pirámides poblacionales en Colombia</h2>
-<section id="limpieza-de-nombres" class="level3" data-number="17.4.1">
-<h3 data-number="17.4.1" class="anchored" data-anchor-id="limpieza-de-nombres"><span class="header-section-number">17.4.1</span> Limpieza de nombres</h3>
-</section>
-<section id="filtrar-categoría-de-interés" class="level3" data-number="17.4.2">
-<h3 data-number="17.4.2" class="anchored" data-anchor-id="filtrar-categoría-de-interés"><span class="header-section-number">17.4.2</span> Filtrar categoría de interés</h3>
-</section>
-<section id="seleccionar-variables-de-interés" class="level3" data-number="17.4.3">
-<h3 data-number="17.4.3" class="anchored" data-anchor-id="seleccionar-variables-de-interés"><span class="header-section-number">17.4.3</span> Seleccionar variables de interés</h3>
-</section>
-<section id="ordenar-datos-en-formato-largo" class="level3" data-number="17.4.4">
-<h3 data-number="17.4.4" class="anchored" data-anchor-id="ordenar-datos-en-formato-largo"><span class="header-section-number">17.4.4</span> Ordenar datos en formato largo</h3>
-</section>
-<section id="exportar-datos-en-formato-largo" class="level3" data-number="17.4.5">
-<h3 data-number="17.4.5" class="anchored" data-anchor-id="exportar-datos-en-formato-largo"><span class="header-section-number">17.4.5</span> Exportar datos en formato largo</h3>
-<div class="cell">
-<div id="lst-write-rds-longer-format" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
-<figure class="quarto-float quarto-float-lst figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-write-rds-longer-format-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listado&nbsp;17.1: Uso de la función <code>write_rds()</code> para exportar y guardar el archivo de datos en formato largo
+<section id="sec-longer-format" class="level2" data-number="17.2">
+<h2 data-number="17.2" class="anchored" data-anchor-id="sec-longer-format"><span class="header-section-number">17.2</span> Formato largo</h2>
+<p>El formato largo (en inglés <strong>longer format</strong>) reorganiza una tabla aumentando el número de filas y reduciendo el de columnas, un proceso frecuentemente denominado “alargar” los datos. Esta transformación se requiere cuando los nombres de ciertas columnas no corresponden a nombres de variables sino a valores o niveles específicos de una variable.</p>
+<p>En el paquete <code>tidyr</code>, la función <code>pivot_longer()</code> permite transformar este tipo de tablas en una estructura ordenada mediante 3 parámetros principales:</p>
+<ol type="1">
+<li><code>cols</code>: especifica el conjunto de columnas cuyos nombres representan valores y que deben reestructurarse.</li>
+<li><code>names_to</code>: define el nombre de la nueva columna en la que se recopilarán los nombres de las columnas seleccionadas en <code>cols</code>.</li>
+<li><code>values_to</code>: define el nombre de la nueva columna que incluirá los valores numéricos o caracteres almacenados en las celdas de las columnas seleccionadas.</li>
+</ol>
+<p>En la <a href="#fig-pivot-longer" class="quarto-xref">Figura&nbsp;<span>17.2</span></a> se ilustra conceptualmente la reestructuración realizada por la función <code>pivot_longer()</code>.</p>
+<div id="fig-pivot-longer" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que muestra cómo la función pivot_longer transforma una tabla de formato ancho a formato largo. A la izquierda se presenta una tabla de 2 filas con las columnas id, m_014 y f_014. Una flecha central con el comando pivot_longer especifica cols = m_014:f_014, names_to = 'name' y values_to = 'value'. A la derecha se genera una nueva tabla de 4 filas con las columnas id, name y value, donde las columnas m_014 y f_014 se han colapsado en filas y se ha duplicado el identificador id.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pivot-longer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/pivot_longer.png" class="img-fluid figure-img" alt="Diagrama conceptual que muestra cómo la función pivot_longer transforma una tabla de formato ancho a formato largo. A la izquierda se presenta una tabla de 2 filas con las columnas id, m_014 y f_014. Una flecha central con el comando pivot_longer especifica cols = m_014:f_014, names_to = 'name' y values_to = 'value'. A la derecha se genera una nueva tabla de 4 filas con las columnas id, name y value, donde las columnas m_014 y f_014 se han colapsado en filas y se ha duplicado el identificador id.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pivot-longer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;17.2: Representación conceptual de la función <code>pivot_longer()</code>
 </figcaption>
-<div aria-describedby="lst-write-rds-longer-format-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>poblacion_col_2018_2070_largo <span class="sc">|&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_rds</span>(</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">file =</span> <span class="st">"data/poblacion_col_2018_2070_largo.rds"</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</figure>
+</div>
+<p>Tal como se observa en la <a href="#fig-pivot-longer" class="quarto-xref">Figura&nbsp;<span>17.2</span></a>, la tabla inicial contiene 2 columnas (<code>m_014</code> y <code>f_014</code>) asociadas a categorías demográficas de sexo y edad. Al aplicar <code>pivot_longer()</code>, los encabezados de estas 2 columnas pasan a formar parte de una única columna de categorías (<code>name</code>), mientras que los valores numéricos correspondientes (<code>20</code>, <code>15</code>, <code>3</code> y <code>5</code>) se recopilan en la columna <code>value</code>. Este proceso preserva el atributo identificador (<code>id</code>) duplicando sus filas según sea necesario para “alargar” la tabla de 2 a 4 filas.</p>
+<div id="nte-2-chap-17" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota&nbsp;17.2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La aplicación en código de la función <code>pivot_longer()</code> y su sintaxis básica fueron introducidas en el <a href="tidy_data.html" class="quarto-xref"><span>Capítulo 16</span></a> a través de conjuntos de datos como <code>relig_income</code> y <code>billboard</code>. En la <a href="#sec-case-study-pivoting" class="quarto-xref"><span>Sección 17.4</span></a> aplicarás esta función en un escenario práctico de demografía nacional.</p>
+</div>
+</div>
+</section>
+<section id="sec-wider-format" class="level2" data-number="17.3">
+<h2 data-number="17.3" class="anchored" data-anchor-id="sec-wider-format"><span class="header-section-number">17.3</span> Formato ancho</h2>
+<p>El formato ancho (en inglés <strong>wider format</strong>) corresponde a la operación inversa del formato largo, reorganizando una tabla al aumentar el número de columnas y disminuir el de filas, un proceso comúnmente llamado “ensanchar” los datos. Esta transformación resulta fundamental cuando una observación particular se encuentra fragmentada a lo largo de múltiples filas o cuando se desea preparar una matriz o tabla de presentación donde las categorías de una variable se exhiben como encabezados de columnas independientes.</p>
+<p>En el paquete <code>tidyr</code>, la función <code>pivot_wider()</code> implementa esta reestructuración mediante 2 parámetros principales:</p>
+<ol type="1">
+<li><code>names_from</code>: especifica la columna existente cuyos valores únicos se convertirán en los encabezados de las nuevas columnas.</li>
+<li><code>values_from</code>: define la columna existente desde la cual se extraerán los valores de las celdas que poblarán las nuevas columnas generadas.</li>
+</ol>
+<p>En la <a href="#fig-pivot-wider" class="quarto-xref">Figura&nbsp;<span>17.3</span></a> se ilustra conceptualmente la reestructuración realizada por la función <code>pivot_wider()</code>.</p>
+<div id="fig-pivot-wider" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que muestra cómo la función pivot_wider transforma una tabla de formato largo a formato ancho. A la izquierda se presenta una tabla de 4 filas con columnas id, name y value. Una flecha central con el comando pivot_wider especifica names_from = name y values_from = value. A la derecha se genera una tabla compacta de 2 filas con las columnas id, m_014 y f_014, donde los valores de la columna name se han expandido en encabezados de columna y las celdas se han rellenado con los valores correspondientes.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pivot-wider-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/pivot_wider.png" class="img-fluid figure-img" alt="Diagrama conceptual que muestra cómo la función pivot_wider transforma una tabla de formato largo a formato ancho. A la izquierda se presenta una tabla de 4 filas con columnas id, name y value. Una flecha central con el comando pivot_wider especifica names_from = name y values_from = value. A la derecha se genera una tabla compacta de 2 filas con las columnas id, m_014 y f_014, donde los valores de la columna name se han expandido en encabezados de columna y las celdas se han rellenado con los valores correspondientes.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pivot-wider-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;17.3: Representación conceptual de la función <code>pivot_wider()</code>
+</figcaption>
+</figure>
+</div>
+<p>Como se observa en la <a href="#fig-pivot-wider" class="quarto-xref">Figura&nbsp;<span>17.3</span></a>, la tabla inicial contiene 4 observaciones distribuidas en las columnas <code>id</code>, <code>name</code> y <code>value</code>. Al ejecutar <code>pivot_wider()</code>, los valores diferenciados de la columna <code>name</code> (<code>m_014</code> y <code>f_014</code>) se elevan a nuevos encabezados de columna y las celdas correspondientes se rellenan con los registros numéricos de <code>value</code>. De este modo, la tabla se consolida pasando de 4 filas a 2 filas agrupando los atributos de cada identificador <code>id</code> en una sola fila.</p>
+<div id="nte-3-chap-17" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota&nbsp;17.3
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>El uso de <code>pivot_wider()</code> en conjunto con <code>pivot_longer()</code> se exploró en el <a href="tidy_data.html" class="quarto-xref"><span>Capítulo 16</span></a> mediante el análisis de registros meteorológicos diarios en <code>clima_muestra</code>. Aunque en la gran mayoría de los análisis dentro del <code>tidyverse</code> se prefiere el formato largo para facilitar la manipulación y visualización, el formato ancho resulta idóneo para reportes tabulares finales o matrices.</p>
+</div>
+</div>
+</section>
+<section id="sec-case-study-pivoting" class="level2" data-number="17.4">
+<h2 data-number="17.4" class="anchored" data-anchor-id="sec-case-study-pivoting"><span class="header-section-number">17.4</span> Caso de estudio: estructurar datos en formato largo para generar pirámides poblacionales de Colombia</h2>
+<p>El propósito de la <a href="#sec-case-study-pivoting" class="quarto-xref"><span>Sección 17.4</span></a> es aplicar la limpieza de nombres y la transformación hacia formato largo mediante <code>pivot_longer()</code> partiendo de los datos oficiales de proyecciones y retroproyecciones de población nacional para Colombia elaborados por el Departamento Administrativo Nacional de Estadística (DANE) para el periodo 2018-2070.</p>
+<p>El objetivo final de este caso de estudio es generar el archivo <code>poblacion_col_2018_2070_largo.rds</code>, el cual servirá como insumo fundamental para separar variables compuestas y preparar la visualización de pirámides poblacionales en el <a href="split_unite_characters_cols.html" class="quarto-xref"><span>Capítulo 18</span></a>.</p>
+<section id="sec-data-case-study-pivoting" class="level3" data-number="17.4.1">
+<h3 data-number="17.4.1" class="anchored" data-anchor-id="sec-data-case-study-pivoting"><span class="header-section-number">17.4.1</span> Datos</h3>
+<p>Para desarrollar el caso de estudio, en primera instancia se cargan los paquetes <code>readxl</code>, <code>janitor</code> y <code>tidyverse</code> y lueog se importan los datos aplicando lo desarrollado en el <a href="spreadsheets.html" class="quarto-xref"><span>Capítulo 14</span></a> con respecto al archivo <code>serie-nacional-de-poblacion_area-sexo-edad_2018-2070_2025-07-18.xlsx</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-import-poblacion" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-import-poblacion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;17.1: Carga de paquetes e importación de datos aplicando lo desarrollado en el <a href="spreadsheets.html" class="quarto-xref"><span>Capítulo 14</span></a>
+</figcaption>
+<div aria-describedby="lst-import-poblacion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar paquetes ----</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar datos ----</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="st">"data/serie-nacional-de-poblacion_area-sexo-edad_2018-2070_2025-07-18.xlsx"</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>poblacion_col_2018_2070 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> path,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">"PobNacionalxÁreaSexoEdad"</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">skip =</span> <span class="dv">8</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">territorio =</span> <span class="st">`</span><span class="at">...1</span><span class="st">`</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">ano =</span> <span class="st">`</span><span class="at">...2</span><span class="st">`</span>,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">area_geografica =</span> <span class="st">`</span><span class="at">...3</span><span class="st">`</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
 </div>
-<p>En el <a href="#lst-write-rds-longer-format" class="quarto-xref">Listado&nbsp;<span>17.1</span></a> se utiliza la función <code>write_rds()</code> junto con el parámetro <code>file</code> asociado con el argumento <code>"data/poblacion_col_2018_2070_largo.rds"</code> para definir tanto la ruta como el nombre del archivo en el que se guardará la información en formato largo.</p>
+<p>Al inspeccionar el objeto importado <code>poblacion_col_2018_2070</code> es posible observar la estructura inicial de la tabla, tal como se señala a continuación:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspeccionar datos importados ----</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>poblacion_col_2018_2070</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 127 × 309
+   territorio     ano area_geografica  Total Hombres Mujeres
+   &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+ 1 Total Nacio…  2018 Cabecera        3.64e7  1.75e7  1.90e7
+ 2 Total Nacio…  2018 Centros Poblad… 1.18e7  6.16e6  5.68e6
+ 3 Total Nacio…  2018 Total           4.83e7  2.36e7  2.46e7
+ 4 Total Nacio…  2019 Cabecera        3.72e7  1.78e7  1.94e7
+ 5 Total Nacio…  2019 Centros Poblad… 1.20e7  6.27e6  5.78e6
+ 6 Total Nacio…  2019 Total           4.93e7  2.41e7  2.51e7
+ 7 Total Nacio…  2020 Cabecera        3.81e7  1.83e7  1.98e7
+ 8 Total Nacio…  2020 Centros Poblad… 1.23e7  6.38e6  5.88e6
+ 9 Total Nacio…  2020 Total           5.04e7  2.47e7  2.57e7
+10 Total Nacio…  2021 Cabecera        3.87e7  1.86e7  2.01e7
+# ℹ 117 more rows
+# ℹ 303 more variables: `Hombres 0 años` &lt;dbl&gt;,
+#   `Hombres 1 año` &lt;dbl&gt;, `Hombres 2 años` &lt;dbl&gt;,
+#   `Hombres 3 años` &lt;dbl&gt;, `Hombres 4 años` &lt;dbl&gt;,
+#   `Hombres 5 años` &lt;dbl&gt;, `Hombres 6 años` &lt;dbl&gt;,
+#   `Hombres 7 años` &lt;dbl&gt;, `Hombres 8 años` &lt;dbl&gt;,
+#   `Hombres 9 años` &lt;dbl&gt;, `Hombres 10 años` &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<p>La tabla contiene 127 filas y múltiples columnas donde se combinan variables geográficas, temporales y columnas demográficas cuyos nombres contienen espacios, mayúsculas y caracteres especiales como por ejemplo <code>`Hombres 0 años`</code> o <code>`Mujeres 100 años y más`</code>.</p>
+</section>
+<section id="sec-clean-names" class="level3" data-number="17.4.2">
+<h3 data-number="17.4.2" class="anchored" data-anchor-id="sec-clean-names"><span class="header-section-number">17.4.2</span> Limpieza de nombres</h3>
+<p>Trabajar con nombres de columnas que contienen espacios o caracteres especiales en R exige escribir los nombres entre comillas invertidas, como por ejemplo <code>`Hombres 0 años`</code>. Este aspecto dificulta la escritura de código y puede generar errores tipográficos recurrentes.</p>
+<p>Para resolver este inconveniente el paquete <code>janitor</code> provee la función <code>clean_names()</code>, la cual transforma de forma automatizada los encabezados de cualquier tabla a un estilo consistente en minúsculas y separado por guiones bajos conocido en inglés con el nombre de <a href="https://en.wikipedia.org/wiki/Snake_case"><strong>snake case</strong></a>. De esa manera se eliminan tildes y caracteres especiales, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-clean-names" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-clean-names-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;17.2: Limpieza de nombres de variables mediante <code>clean_names()</code>
+</figcaption>
+<div aria-describedby="lst-clean-names-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Limpiar nombres ----</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>poblacion_col_2018_2070_limpiar_nombres <span class="ot">&lt;-</span> poblacion_col_2018_2070 <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspeccionar nombres limpios ----</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>poblacion_col_2018_2070_limpiar_nombres</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 127 × 309
+   territorio     ano area_geografica  total hombres mujeres
+   &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+ 1 Total Nacio…  2018 Cabecera        3.64e7  1.75e7  1.90e7
+ 2 Total Nacio…  2018 Centros Poblad… 1.18e7  6.16e6  5.68e6
+ 3 Total Nacio…  2018 Total           4.83e7  2.36e7  2.46e7
+ 4 Total Nacio…  2019 Cabecera        3.72e7  1.78e7  1.94e7
+ 5 Total Nacio…  2019 Centros Poblad… 1.20e7  6.27e6  5.78e6
+ 6 Total Nacio…  2019 Total           4.93e7  2.41e7  2.51e7
+ 7 Total Nacio…  2020 Cabecera        3.81e7  1.83e7  1.98e7
+ 8 Total Nacio…  2020 Centros Poblad… 1.23e7  6.38e6  5.88e6
+ 9 Total Nacio…  2020 Total           5.04e7  2.47e7  2.57e7
+10 Total Nacio…  2021 Cabecera        3.87e7  1.86e7  2.01e7
+# ℹ 117 more rows
+# ℹ 303 more variables: hombres_0_anos &lt;dbl&gt;,
+#   hombres_1_ano &lt;dbl&gt;, hombres_2_anos &lt;dbl&gt;,
+#   hombres_3_anos &lt;dbl&gt;, hombres_4_anos &lt;dbl&gt;,
+#   hombres_5_anos &lt;dbl&gt;, hombres_6_anos &lt;dbl&gt;,
+#   hombres_7_anos &lt;dbl&gt;, hombres_8_anos &lt;dbl&gt;,
+#   hombres_9_anos &lt;dbl&gt;, hombres_10_anos &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<p>Al aplicar <code>clean_names()</code>, encabezados como <code>`Hombres 0 años`</code> y <code>`Mujeres 100 años y más`</code> se convierten de forma transparente en <code>hombres_0_anos</code> y <code>mujeres_100_anos_y_mas</code> facilitando su selección y manipulación en los pasos posteriores.</p>
+</section>
+<section id="sec-filter-area" class="level3" data-number="17.4.3">
+<h3 data-number="17.4.3" class="anchored" data-anchor-id="sec-filter-area"><span class="header-section-number">17.4.3</span> Filtrar categoría de interés</h3>
+<p>El conjunto de datos del DANE clasifica las proyecciones anuales según el área geográfica en 3 niveles: <code>"Cabecera"</code>, <code>"Centros Poblados y Rural Disperso"</code> y <code>"Total"</code>. Dado que el objetivo es analizar la estructura demográfica a nivel nacional, es necesario filtrar únicamente los registros correspondientes al total nacional.</p>
+<p>Para lograr este aspecto, se utiliza la función <code>filter()</code> (ver <a href="single_table_verbs.html#sec-row-verbs" class="quarto-xref"><span>Sección 10.1.1.1</span></a>) sobre la columna <code>area_geografica</code> seleccionando el valor <code>"Total"</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-filter-total" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-filter-total-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;17.3: Filtrar observaciones del total nacional mediante <code>filter()</code>
+</figcaption>
+<div aria-describedby="lst-filter-total-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrar ----</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>poblacion_col_2018_2070_filtrar_total <span class="ot">&lt;-</span> poblacion_col_2018_2070_limpiar_nombres <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    area_geografica <span class="sc">==</span> <span class="st">"Total"</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspeccionar datos filtrados ----</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>poblacion_col_2018_2070_filtrar_total</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 53 × 309
+   territorio     ano area_geografica  total hombres mujeres
+   &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+ 1 Total Nacio…  2018 Total           4.83e7  2.36e7  2.46e7
+ 2 Total Nacio…  2019 Total           4.93e7  2.41e7  2.51e7
+ 3 Total Nacio…  2020 Total           5.04e7  2.47e7  2.57e7
+ 4 Total Nacio…  2021 Total           5.11e7  2.50e7  2.61e7
+ 5 Total Nacio…  2022 Total           5.16e7  2.53e7  2.63e7
+ 6 Total Nacio…  2023 Total           5.21e7  2.55e7  2.66e7
+ 7 Total Nacio…  2024 Total           5.26e7  2.58e7  2.68e7
+ 8 Total Nacio…  2025 Total           5.31e7  2.60e7  2.71e7
+ 9 Total Nacio…  2026 Total           5.34e7  2.62e7  2.72e7
+10 Total Nacio…  2027 Total           5.37e7  2.63e7  2.74e7
+# ℹ 43 more rows
+# ℹ 303 more variables: hombres_0_anos &lt;dbl&gt;,
+#   hombres_1_ano &lt;dbl&gt;, hombres_2_anos &lt;dbl&gt;,
+#   hombres_3_anos &lt;dbl&gt;, hombres_4_anos &lt;dbl&gt;,
+#   hombres_5_anos &lt;dbl&gt;, hombres_6_anos &lt;dbl&gt;,
+#   hombres_7_anos &lt;dbl&gt;, hombres_8_anos &lt;dbl&gt;,
+#   hombres_9_anos &lt;dbl&gt;, hombres_10_anos &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<p>Mediante esta operación se reducen las observaciones a <span class="math inline">\(53\)</span> filas, correspondientes a los <span class="math inline">\(53\)</span> años comprendidos en el horizonte de proyección 2018 a 2070.</p>
+</section>
+<section id="sec-select-vars" class="level3" data-number="17.4.4">
+<h3 data-number="17.4.4" class="anchored" data-anchor-id="sec-select-vars"><span class="header-section-number">17.4.4</span> Seleccionar variables de interés</h3>
+<p>La tabla resultante contiene agregados globales (<code>total</code>, <code>hombres</code> y <code>mujeres</code>) así como totales por edad simple junto con las columnas desagregadas por sexo y edad simple desde <code>hombres_0_anos</code> hasta <code>mujeres_100_anos_y_mas</code>.</p>
+<p>Para construir la pirámide poblacional en los capítulos posteriores, se requiere únicamente la variable temporal (<code>ano</code>), el total nacional (<code>total</code>) para calcular porcentajes poblacionales y las columnas que desglosan la población por sexo y edad. Para seleccionarlas eficientemente se utiliza la función <code>select()</code> junto con el operador de rango consecutivo <code>:</code> (ver <a href="single_table_verbs.html#sec-select-data-case-study-dplyr" class="quarto-xref"><span>Sección 10.2.3</span></a>), tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-select-poblacion" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-select-poblacion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;17.4: Selección de variables requeridas para la pirámide poblacional mediante <code>select()</code>
+</figcaption>
+<div aria-describedby="lst-select-poblacion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Seleccionar ----</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>poblacion_col_2018_2070_seleccionar <span class="ot">&lt;-</span> poblacion_col_2018_2070_filtrar_total <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    ano,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    total,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    hombres_0_anos<span class="sc">:</span>mujeres_100_anos_y_mas</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspeccionar variables seleccionadas ----</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>poblacion_col_2018_2070_seleccionar</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 53 × 204
+     ano   total hombres_0_anos hombres_1_ano hombres_2_anos
+   &lt;dbl&gt;   &lt;dbl&gt;          &lt;dbl&gt;         &lt;dbl&gt;          &lt;dbl&gt;
+ 1  2018  4.83e7         379611        384392         389812
+ 2  2019  4.93e7         379692        386682         391193
+ 3  2020  5.04e7         385600        388121         394740
+ 4  2021  5.11e7         382677        389658         392098
+ 5  2022  5.16e7         379263        384581         391602
+ 6  2023  5.21e7         375915        380514         385906
+ 7  2024  5.26e7         372539        377208         381864
+ 8  2025  5.31e7         367902        373397         378139
+ 9  2026  5.34e7         361692        367778         373403
+10  2027  5.37e7         355501        361449         367664
+# ℹ 43 more rows
+# ℹ 199 more variables: hombres_3_anos &lt;dbl&gt;,
+#   hombres_4_anos &lt;dbl&gt;, hombres_5_anos &lt;dbl&gt;,
+#   hombres_6_anos &lt;dbl&gt;, hombres_7_anos &lt;dbl&gt;,
+#   hombres_8_anos &lt;dbl&gt;, hombres_9_anos &lt;dbl&gt;,
+#   hombres_10_anos &lt;dbl&gt;, hombres_11_anos &lt;dbl&gt;,
+#   hombres_12_anos &lt;dbl&gt;, hombres_13_anos &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<p>De esta forma, la tabla queda restringida a <span class="math inline">\(204\)</span> columnas: <code>ano</code>, <code>total</code> y las <span class="math inline">\(202\)</span> categorías demográficas individuales correspondientes a <span class="math inline">\(101\)</span> para hombres y <span class="math inline">\(101\)</span> para mujeres desde 0 hasta 100 años y más.</p>
+</section>
+<section id="sec-pivot-longer-case-study" class="level3" data-number="17.4.5">
+<h3 data-number="17.4.5" class="anchored" data-anchor-id="sec-pivot-longer-case-study"><span class="header-section-number">17.4.5</span> Ordenar datos en formato largo</h3>
+<p>Aunque la tabla seleccionada contiene toda la información demográfica necesaria, no se encuentra en formato ordenado. Este aspecto se debe a que los encabezados desde <code>hombres_0_anos</code> hasta <code>mujeres_100_anos_y_mas</code> son en realidad valores de variables demográficas y no nombres de variables.</p>
+<p>Para estructurar los datos en formato largo, se aplica la función <code>pivot_longer()</code>:</p>
+<ul>
+<li><code>cols = hombres_0_anos:mujeres_100_anos_y_mas</code>: especifica el rango de variables que se colapsarán en filas.</li>
+<li><code>names_to = "genero_edad"</code>: define el nombre de la nueva columna que almacenará los nombres de las categorías.</li>
+<li><code>values_to = "poblacion"</code>: define el nombre de la nueva columna que contendrá el conteo de población respectivo.</li>
+</ul>
+<p>Este procedimiento se realiza tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-pivot-longer-case-study" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-pivot-longer-case-study-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;17.5: Reestructuración de variables demográficas a formato largo mediante <code>pivot_longer()</code>
+</figcaption>
+<div aria-describedby="lst-pivot-longer-case-study-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tidy ----</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>poblacion_col_2018_2070_largo <span class="ot">&lt;-</span> poblacion_col_2018_2070_seleccionar <span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> hombres_0_anos<span class="sc">:</span>mujeres_100_anos_y_mas,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"genero_edad"</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"poblacion"</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspeccionar datos en formato largo ----</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>poblacion_col_2018_2070_largo</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10,706 × 4
+     ano    total genero_edad    poblacion
+   &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt;
+ 1  2018 48258494 hombres_0_anos    379611
+ 2  2018 48258494 hombres_1_ano     384392
+ 3  2018 48258494 hombres_2_anos    389812
+ 4  2018 48258494 hombres_3_anos    395361
+ 5  2018 48258494 hombres_4_anos    400077
+ 6  2018 48258494 hombres_5_anos    405013
+ 7  2018 48258494 hombres_6_anos    410040
+ 8  2018 48258494 hombres_7_anos    415839
+ 9  2018 48258494 hombres_8_anos    421676
+10  2018 48258494 hombres_9_anos    427467
+# ℹ 10,696 more rows</code></pre>
+</div>
+</div>
+<p>El resultado es una tibble en formato largo de <span class="math inline">\(10706\)</span> filas (<span class="math inline">\(53 \text{ años} \times 202 \text{ categorías demográficas}\)</span>) y <span class="math inline">\(4\)</span> columnas: <code>ano</code>, <code>total</code>, <code>genero_edad</code> y <code>poblacion</code>. En este punto, los datos se encuentran en formato largo y listos para proceder con la separación de la columna <code>genero_edad</code> en sus 2 componentes individuales (<code>genero</code> y <code>edad</code>) en el <a href="split_unite_characters_cols.html" class="quarto-xref"><span>Capítulo 18</span></a>.</p>
+</section>
+<section id="sec-export-longer-format" class="level3" data-number="17.4.6">
+<h3 data-number="17.4.6" class="anchored" data-anchor-id="sec-export-longer-format"><span class="header-section-number">17.4.6</span> Exportar datos en formato largo</h3>
+<p>Una vez estructurado el conjunto de datos en formato largo mediante la función <code>pivot_longer()</code>, es posible exportar el archivo y guardarlo en la carpeta <code>data</code> para utilizarlo posteriormente en el <a href="split_unite_characters_cols.html" class="quarto-xref"><span>Capítulo 18</span></a>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-write-rds-longer-format" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-write-rds-longer-format-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;17.6: Uso de la función <code>write_rds()</code> para exportar y guardar el archivo de datos en formato largo
+</figcaption>
+<div aria-describedby="lst-write-rds-longer-format-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>poblacion_col_2018_2070_largo <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_rds</span>(</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">file =</span> <span class="st">"data/poblacion_col_2018_2070_largo.rds"</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<p>En el <a href="#lst-write-rds-longer-format" class="quarto-xref">Listado&nbsp;<span>17.6</span></a> se utiliza la función <code>write_rds()</code> junto con el parámetro <code>file</code> asociado con el argumento <code>"data/poblacion_col_2018_2070_largo.rds"</code> para definir tanto la ruta como el nombre del archivo en el que se guardará la información en formato largo.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
