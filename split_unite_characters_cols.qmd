@@ -188,26 +188,273 @@ poblacion_col_2018_2070_preparar
 
 En el @lst-prepare-data-case-study, los datos quedan consolidados a nivel de cohorte quinquenal para cada año y género. Esta tabla constituye la estructura ordenada y preparada requerida como insumo para generar las pirámides poblacionales en la siguiente sección.
 
-## Caso de estudio: visualizar datos a través de pirámides poblacionales de Colombia
+## Caso de estudio: visualizar datos a través de pirámides poblacionales de Colombia {#sec-case-study-visualize-population-pyramids}
 
+El ordenamiento, separación y transformación de datos no constituyen un fin en sí mismos. Disponer de datos ordenados debe responder a un propósito claro: facilitar la exploración, el análisis y la comunicación efectiva de los patrones en la información. En este caso de estudio, dicho propósito consiste en visualizar la estructura demográfica de Colombia mediante **pirámides poblacionales**. A través de estas representaciones gráficas es posible analizar la dinámica demográfica del país a lo largo del horizonte 2018-2070, extrayendo conclusiones sobre la evolución de las cohortes generacionales, el descenso en la natalidad y el progresivo proceso de envejecimiento poblacional.
 
-### Creación de variables auxiliares para selección de años de interés
+### Creación de variables auxiliares para selección de años de interés {#sec-aux-vars-years}
 
+El conjunto de datos preparado en el @sec-prepare-data-case-study abarca anualmente las proyecciones demográficas desde 2018 hasta 2070, reuniendo un total de 53 periodos. Graficar las pirámides poblacionales correspondientes a los 53 periodos en una sola visualización saturaría la figura e impediría una comparación visual efectiva entre cohortes.
 
-### Creación de pirámides poblacionales
+Por esta razón, resulta conveniente seleccionar un subconjunto representativo de años a lo largo del periodo de proyección. En lugar de definir dichos años de forma fija o manual, es una buena práctica calcularlos dinámicamente mediante variables auxiliares a partir del propio conjunto de datos:
 
+1. Con la función `pull()` de `dplyr` se extrae el vector numérico correspondiente a la columna `ano`.
+2. Con las funciones `min()` y `max()` se identifican los valores extremos del periodo proyectado: `ano_min` ($2018$) y `ano_max` ($2070$).
+3. Con la función `seq.int()` se define una secuencia de 4 hitos temporales equidistantes especificando `from = ano_min`, `to = ano_max` y `length.out = 4`, convirtiendo el resultado en números enteros mediante `as.integer()` para obtener los años 2018, 2035, 2052 y 2070.
+4. Con la función `filter()` y el operador de pertenencia `%in%` se seleccionan únicamente las observaciones del conjunto de datos preparado cuyos años coincidan con los del vector `filtrar_ano`, asignando el resultado a la tibble `poblacion_col_filtrar`.
 
+Este procedimiento se ejecuta, tal como se señala a continuación:
 
-#### Datos, mapeo y capas
+```{r}
+#| lst-label: lst-aux-vars-years
+#| lst-cap: Creación de variables auxiliares para la selección y filtrado de años de interés mediante `pull()`, `seq.int()` y `filter()`
 
+# Filtrar ----
+## Variables auxiliares ----
+ano <- poblacion_col_2018_2070_preparar |>
+  pull(ano)
 
+ano_min <- min(ano)
+ano_max <- max(ano)
 
-#### Facetas
+filtrar_ano <- seq.int(
+  from = ano_min,
+  to = ano_max,
+  length.out = 4
+) |>
+  as.integer()
 
+poblacion_col_filtrar <- poblacion_col_2018_2070_preparar |>
+  filter(
+    ano %in% filtrar_ano
+  )
 
+poblacion_col_filtrar
+```
 
-#### Escalas
+En el @lst-aux-vars-years, la tabla resultante `poblacion_col_filtrar` conserva únicamente las cohortes quinquenales correspondientes a los 4 años seleccionados, proporcionando el conjunto de datos necesario para construir las pirámides poblacionales en las secciones siguientes.
 
+### Creación de pirámides poblacionales {#sec-create-population-pyramids}
 
+Para construir las pirámides poblacionales utilizaremos el paquete `ggplot2` y los principios de la gramática de gráficos en capas, abordando sucesivamente los componentes de:
 
-#### Tema
+1. **Datos, mapeo y capas**: definición de las coordenadas estéticas y la geometría de columnas para representar la bilateralidad demográfica por género.
+2. **Facetas**: división del gráfico en paneles individuales para comparar los 4 años seleccionados.
+3. **Escalas**: ajuste de los valores absolutos en el eje horizontal, formato porcentual, etiquetas de categorías y textos descriptivos.
+4. **Tema**: ajuste de la posición de la leyenda para optimizar el espacio horizontal de visualización.
+
+#### Datos, mapeo y capas {#sec-pyramid-data-mapping-layers}
+
+Una pirámide poblacional es en esencia una extensión de un gráfico de barras que representa cantidades. En el @sec-amounts se introdujo la función `geom_bar()` para ilustrar la frecuencia o número de observaciones de una variable categórica mediante el parámetro `stat = "count"`, donde `ggplot2` efectúa internamente el conteo de filas a partir de datos individuales no agregados. En contraste, en `poblacion_col_filtrar` la información ya se encuentra resumida previamente, disponiendo de valores numéricos explícitos tanto para las cohortes de edad (`rango_edad`) como para su proporción demográfica (`poblacion_pct`). Por consiguiente, se utiliza la geometría `geom_col()`, la cual opera con `stat = "identity"` representando directamente los valores numéricos suministrados en la tabla.
+
+Para comprender cómo se origina una pirámide poblacional a partir de `geom_col()`, considera un primer mapeo básico donde se asigna la variable continua `poblacion_pct` al eje horizontal (`x`), la variable categórica `rango_edad` al eje vertical (`y`) y el relleno de las barras según el género con `aes(fill = genero)`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-pyramid-geom-col-initial
+#| lst-cap: Mapeo inicial de cantidades mediante `geom_col()` con barras apiladas en dirección positiva
+#| fig-height: 5.5
+
+# Visualización ----
+poblacion_col_filtrar |>
+  ggplot(
+    aes(
+      x = poblacion_pct,
+      y = rango_edad
+    )
+  ) +
+  geom_col(
+    aes(fill = genero)
+  )
+```
+
+En el @lst-pyramid-geom-col-initial, ambas categorías (`"hombres"` y `"mujeres"`) parten desde el valor $0$ y se extienden en la misma dirección positiva sobre el eje horizontal, apilándose una a continuación de la otra debido al ajuste de posición por defecto (`position = "stack"`). Si bien este gráfico permite observar la suma porcentual conjunta de cada cohorte, no refleja la estructura comparativa tradicional de una pirámide demográfica, cuyo rasgo distintivo es la simetría bilateral. Es decir, un género debe situarse a la derecha del eje central y el otro hacia la izquierda.
+
+Para lograr esta disposición bilateral a partir de `geom_col()`, es indispensable que las proporciones de uno de los dos grupos adopten valores negativos, de tal manera que sus barras se extiendan en sentido opuesto hacia la izquierda del origen $0$.
+
+Este comportamiento se consigue directamente dentro de `aes()` mediante la función `ifelse()`: al evaluar `test = genero == "hombres"`, se conserva el valor positivo original `poblacion_pct` (`yes`), mientras que para las mujeres se asigna el valor negativo opuesto `-poblacion_pct` (`no`). Asimismo, en `geom_col()` se añade el parámetro `color = "black"` fuera de `aes()` para delinear con precisión el contorno de cada barra, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-pyramid-data-mapping-layers
+#| lst-cap: Representación base de la pirámide poblacional con simetría bilateral mediante `ifelse()` y `geom_col()`
+#| fig-height: 5.5
+
+poblacion_col_filtrar |>
+  ggplot(
+    aes(
+      x = ifelse(
+        test = genero == "hombres",
+        yes = poblacion_pct,
+        no = -poblacion_pct
+      ),
+      y = rango_edad
+    )
+  ) +
+  geom_col(
+    aes(fill = genero),
+    color = "black"
+  )
+```
+
+En el gráfico generado por el @lst-pyramid-data-mapping-layers se observa con claridad cómo la función `ifelse()` transforma el gráfico de barras convencional en la característica estructura bilateral de una pirámide poblacional. No obstante, al contener los datos correspondientes a los 4 años seleccionados, las barras de los distintos periodos se superponen entre sí impidiendo distinguir la estructura de cada año.
+
+#### Facetas {#sec-pyramid-facets}
+
+Para separar las barras superpuestas y comparar la evolución de la estructura demográfica entre los periodos seleccionados, se incorpora el componente de facetas utilizando la función `facet_wrap()` (ver @sec-x-y-relationships).
+
+Mediante el argumento `facets = vars(ano)`, la función `facet_wrap()` divide el conjunto de datos y genera un panel individual para cada uno de los años de interés (2018, 2035, 2052 y 2070), tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-pyramid-facets
+#| lst-cap: Incorporación de paneles individuales para cada año seleccionado mediante `facet_wrap()`
+#| fig-height: 5.5
+
+poblacion_col_filtrar |>
+  ggplot(
+    aes(
+      x = ifelse(
+        test = genero == "hombres",
+        yes = poblacion_pct,
+        no = -poblacion_pct
+      ),
+      y = rango_edad
+    )
+  ) +
+  geom_col(
+    aes(fill = genero),
+    color = "black"
+  ) +
+  facet_wrap(
+    facets = vars(ano)
+  )
+```
+
+Al examinar el gráfico del @lst-pyramid-facets, los 4 paneles permiten apreciar con claridad cómo la distribución por edades se transforma a lo largo del tiempo. Sin embargo, se identifican aspectos estéticos y de formato que requieren ser modificados mediante el componente de escalas.
+
+#### Escalas {#sec-pyramid-scales}
+
+En el gráfico obtenido en el @lst-pyramid-facets se presentan aspectos a mejorar en relación a las escalas:
+
+1. Debido a la transformación con `-poblacion_pct` para ubicar a las mujeres hacia la izquierda, el eje horizontal presenta valores numéricos negativos (p. ej., `-0.025`), lo cual resulta inadecuado dado que una magnitud poblacional es estrictamente positiva. Asimismo, los valores se muestran en notación decimal en lugar de formato de porcentaje.
+2. Los nombres de las categorías en la leyenda (`"hombres"` y `"mujeres"`) inician en letra minúscula.
+3. Se requiere incorporar títulos, subtítulos y notas explicativas que contextualicen adecuadamente la visualización.
+
+Para solucionar el primer aspecto, se define la variable auxiliar `poblacion_pct_breaks` mediante `seq.int()` con marcas que van desde `-0.04` hasta `0.04` en incrementos de `0.01` ($1\%$). Luego, en la función `scale_x_continuous()` se especifican `breaks = poblacion_pct_breaks` y se formatea el texto del eje mediante el parámetro `labels`.
+
+Para mostrar los valores siempre positivos y con símbolo de porcentaje, se define una **función anónima** con la sintaxis `\(x)`:
+
+$$
+\backslash(x) \text{ label\_percent(accuracy = 1)(abs}(x))
+$$
+
+En el @sec-anonymous-functions se explorará en detalle qué son y cómo operan las funciones anónimas en R. Por el momento, basta señalar que `\(x)` define una función puntual que recibe cada valor `x` del eje, le aplica la función `abs()` para tomar su valor absoluto transformando valores como `-0.04` en `0.04` y finalmente le aplica la función `label_percent()` del paquete `scales` para formatearlo como un porcentaje entero (`4%`).
+
+Para solucionar el segundo aspecto, se emplea la función `scale_fill_discrete()` especificando `labels = str_to_title`. La función `str_to_title()` del paquete `stringr` convierte automáticamente a mayúscula la primera letra de cada categoría, transformando `"hombres"` en `"Hombres"` y `"mujeres"` en `"Mujeres"` sin necesidad de alterar los datos originales.
+
+Por último, se agregan las etiquetas informativas mediante la función `labs()`. Siguiendo el enfoque del @sec-gpkg, se define la variable auxiliar `actualizacion_fecha <- ymd("2025-07-18")` con la función `ymd()` del paquete `lubridate` perteneciente al  `tidyverse` y se incluye dinámicamente en el subtítulo utilizando la función `str_glue()` con: `subtitle = str_glue("Actualización: {actualizacion_fecha}")`. Además, se suprimen las etiquetas redundantes de los ejes y la leyenda asignando `NULL` a `x`, `y` y `fill`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-pyramid-scales
+#| lst-cap: Ajuste de escalas continuas, discretas y adición de textos informativos mediante `scale_x_continuous()`, `scale_fill_discrete()` y `labs()`
+#| fig-height: 5.5
+
+# Visualización ----
+## Variables auxiliares ----
+poblacion_pct_breaks <- seq.int(
+  from = -0.04,
+  to = 0.04,
+  by = 0.01
+)
+
+actualizacion_fecha <- ymd("2025-07-18")
+
+poblacion_col_filtrar |>
+  ggplot(
+    aes(
+      x = ifelse(
+        test = genero == "hombres",
+        yes = poblacion_pct,
+        no = -poblacion_pct
+      ),
+      y = rango_edad
+    )
+  ) +
+  geom_col(
+    aes(fill = genero),
+    color = "black"
+  ) +
+  facet_wrap(
+    facets = vars(ano)
+  ) +
+  scale_x_continuous(
+    breaks = poblacion_pct_breaks,
+    labels = \(x) label_percent(accuracy = 1)(abs(x))
+  ) +
+  scale_fill_discrete(
+    labels = str_to_title
+  ) +
+  labs(
+    x = NULL,
+    y = NULL,
+    fill = NULL,
+    title = "Pirámides poblacionales de Colombia",
+    subtitle = str_glue("Actualización: {actualizacion_fecha}"),
+    caption = "Fuente: Dane - Proyecciones de Población y Estudios Demográficos (PPED)"
+  )
+```
+
+En el @lst-pyramid-scales el gráfico cuenta con escalas legibles, valores en porcentaje positivos en ambos sentidos del eje horizontal, leyenda capitalizada y documentación completa de título, fecha de actualización y fuente oficial.
+
+#### Tema {#sec-pyramid-theme}
+
+Por defecto, `ggplot2` sitúa la leyenda en la parte lateral derecha del gráfico. Al utilizar facetas con múltiples paneles distribuidos en columnas, esta posición lateral reduce el ancho disponible para las pirámides, comprimiendo las barras y dificultando la lectura de los intervalos quinquenales.
+
+Para optimizar el uso del espacio horizontal y otorgar mayor amplitud a cada faceta, se utiliza la función `theme()` ajustando el parámetro `legend.position = "bottom"`. De este modo, la leyenda se reubica en la parte inferior del gráfico para maximizar el área visual asignada a los paneles, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-pyramid-theme
+#| lst-cap: Personalización del tema y reubicación de la leyenda mediante `theme()` para la pirámide poblacional final
+#| fig-height: 6
+
+poblacion_col_filtrar |>
+  ggplot(
+    aes(
+      x = ifelse(
+        test = genero == "hombres",
+        yes = poblacion_pct,
+        no = -poblacion_pct
+      ),
+      y = rango_edad
+    )
+  ) +
+  geom_col(
+    aes(fill = genero),
+    color = "black"
+  ) +
+  facet_wrap(
+    facets = vars(ano)
+  ) +
+  scale_x_continuous(
+    breaks = poblacion_pct_breaks,
+    labels = \(x) label_percent(accuracy = 1)(abs(x))
+  ) +
+  scale_fill_discrete(
+    labels = str_to_title
+  ) +
+  labs(
+    x = NULL,
+    y = NULL,
+    fill = NULL,
+    title = "Pirámides poblacionales de Colombia",
+    subtitle = str_glue("Actualización: {actualizacion_fecha}"),
+    caption = "Fuente: Dane - Proyecciones de Población y Estudios Demográficos (PPED)"
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+El gráfico obtenido en el @lst-pyramid-theme concluye la construcción de la visualización demográfica. Al comparar los 4 paneles temporales se evidencia con claridad la transición demográfica de Colombia proyectada por el DANE:
+
+* En **2018**, la pirámide presenta una base aún moderadamente ancha en las edades jóvenes y productivas (15 a 29 años), con una cúspide reducida en edades avanzadas.
+* Conforme se avanza hacia **2035** y **2052**, la base se contrae progresivamente como consecuencia del descenso en la tasa de natalidad mientras que los grupos de edades intermedias y adultas aumentan su peso relativo.
+* Para **2070**, la pirámide adopta una estructura inversa, característica del envejecimiento poblacional, donde las cohortes de adultos mayores de 60 años concentran una proporción considerablemente mayor en comparación con la población infantil y juvenil.
