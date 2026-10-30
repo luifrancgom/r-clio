@@ -1,3 +1,17 @@
 # Organización y limpieza de datos
 
-Pendiente
+El objetivo de esta parte, es presentar los fundamentos y herramientas para estructurar conjuntos de datos en un formato ordenado (en inglés **tidy data**) en R utilizando el paquete [`tidyr`]({{< var url.packages.tidyr >}}), a través de los siguientes 3 capítulos:
+
+- @sec-data-tidying: introduce el concepto de datos ordenados, los principios que vinculan la semántica con la estructura rectangular de las tablas y los problemas más comunes presentes en datos no ordenados junto con las estrategias para solucionarlos.
+
+- @sec-pivoting: introduce la reestructuración de tablas de datos alternando entre formato ancho y formato largo mediante el uso de las funciones `pivot_longer()` y `pivot_wider()`.
+
+- @sec-split-unite-characters-cols: introduce la separación de caracteres en columnas mediante la familia de funciones `separate_wider_*()` y la combinación de múltiples columnas a través de `unite()`, complementado con la preparación y visualización de pirámides poblacionales.
+
+Una vez se comprenda el funcionamiento básico del paquete `tidyr`, el lector interesado en profundizar en la reestructuración y limpieza avanzada de datos puede consultar la [documentación de referencia de `tidyr`]({{< var url.packages.tidyr_reference >}}), donde se abordan aspectos adicionales tales como:
+
+- **Separación en filas**: la familia de funciones [`separate_longer_*()`]({{< var url.packages.tidyr_separate_longer_delim >}}) como `separate_longer_delim()` y `separate_longer_position()`, que permiten dividir cadenas de caracteres distribuyendo los valores en múltiples filas en lugar de columnas.
+
+- **Aplanamiento de datos** (en inglés **rectangling**) y **anidamiento** (en inglés **nesting**): técnicas y funciones como `unnest_longer()`, `unnest_wider()`, `hoist()`, `nest()` y `unnest()` orientadas a transformar estructuras de datos complejas o profundamente anidadas en tablas rectangulares ordenadas (ver [**Rectangling**]({{< var url.packages.tidyr_rectangling >}}) y [**Nesting**]({{< var url.packages.tidyr_nesting >}})).
+
+- **Valores ausentes y miscelánea**: funciones dedicadas al tratamiento explícito e implícito de datos faltantes como `complete()`, `fill()`, `drop_na()` y `replace_na()`, así como funciones auxiliares para cruces y combinaciones de variables como `expand()` y `crossing()`.
