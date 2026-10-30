@@ -425,10 +425,10 @@ window.Quarto = {
   <li><a href="#sec-transform-vars-case-study" id="toc-sec-transform-vars-case-study" class="nav-link" data-scroll-target="#sec-transform-vars-case-study"><span class="header-section-number">18.3.2</span> Transformar variables</a></li>
   <li><a href="#sec-prepare-data-case-study" id="toc-sec-prepare-data-case-study" class="nav-link" data-scroll-target="#sec-prepare-data-case-study"><span class="header-section-number">18.3.3</span> Preparar datos para visualizarlos</a></li>
   </ul></li>
-  <li><a href="#caso-de-estudio-visualizar-datos-a-través-de-pirámides-poblacionales-de-colombia" id="toc-caso-de-estudio-visualizar-datos-a-través-de-pirámides-poblacionales-de-colombia" class="nav-link" data-scroll-target="#caso-de-estudio-visualizar-datos-a-través-de-pirámides-poblacionales-de-colombia"><span class="header-section-number">18.4</span> Caso de estudio: visualizar datos a través de pirámides poblacionales de Colombia</a>
+  <li><a href="#sec-case-study-visualize-population-pyramids" id="toc-sec-case-study-visualize-population-pyramids" class="nav-link" data-scroll-target="#sec-case-study-visualize-population-pyramids"><span class="header-section-number">18.4</span> Caso de estudio: visualizar datos a través de pirámides poblacionales de Colombia</a>
   <ul class="collapse">
-  <li><a href="#creación-de-variables-auxiliares-para-selección-de-años-de-interés" id="toc-creación-de-variables-auxiliares-para-selección-de-años-de-interés" class="nav-link" data-scroll-target="#creación-de-variables-auxiliares-para-selección-de-años-de-interés"><span class="header-section-number">18.4.1</span> Creación de variables auxiliares para selección de años de interés</a></li>
-  <li><a href="#creación-de-pirámides-poblacionales" id="toc-creación-de-pirámides-poblacionales" class="nav-link" data-scroll-target="#creación-de-pirámides-poblacionales"><span class="header-section-number">18.4.2</span> Creación de pirámides poblacionales</a></li>
+  <li><a href="#sec-aux-vars-years" id="toc-sec-aux-vars-years" class="nav-link" data-scroll-target="#sec-aux-vars-years"><span class="header-section-number">18.4.1</span> Creación de variables auxiliares para selección de años de interés</a></li>
+  <li><a href="#sec-create-population-pyramids" id="toc-sec-create-population-pyramids" class="nav-link" data-scroll-target="#sec-create-population-pyramids"><span class="header-section-number">18.4.2</span> Creación de pirámides poblacionales</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/split_unite_characters_cols.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/split_unite_characters_cols.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
@@ -730,24 +730,335 @@ Listado&nbsp;18.4: Discretización de edades en intervalos quinquenales y agrega
 <p>En el <a href="#lst-prepare-data-case-study" class="quarto-xref">Listado&nbsp;<span>18.4</span></a>, los datos quedan consolidados a nivel de cohorte quinquenal para cada año y género. Esta tabla constituye la estructura ordenada y preparada requerida como insumo para generar las pirámides poblacionales en la siguiente sección.</p>
 </section>
 </section>
-<section id="caso-de-estudio-visualizar-datos-a-través-de-pirámides-poblacionales-de-colombia" class="level2" data-number="18.4">
-<h2 data-number="18.4" class="anchored" data-anchor-id="caso-de-estudio-visualizar-datos-a-través-de-pirámides-poblacionales-de-colombia"><span class="header-section-number">18.4</span> Caso de estudio: visualizar datos a través de pirámides poblacionales de Colombia</h2>
-<section id="creación-de-variables-auxiliares-para-selección-de-años-de-interés" class="level3" data-number="18.4.1">
-<h3 data-number="18.4.1" class="anchored" data-anchor-id="creación-de-variables-auxiliares-para-selección-de-años-de-interés"><span class="header-section-number">18.4.1</span> Creación de variables auxiliares para selección de años de interés</h3>
+<section id="sec-case-study-visualize-population-pyramids" class="level2" data-number="18.4">
+<h2 data-number="18.4" class="anchored" data-anchor-id="sec-case-study-visualize-population-pyramids"><span class="header-section-number">18.4</span> Caso de estudio: visualizar datos a través de pirámides poblacionales de Colombia</h2>
+<p>El ordenamiento, separación y transformación de datos no constituyen un fin en sí mismos. Disponer de datos ordenados debe responder a un propósito claro: facilitar la exploración, el análisis y la comunicación efectiva de los patrones en la información. En este caso de estudio, dicho propósito consiste en visualizar la estructura demográfica de Colombia mediante <strong>pirámides poblacionales</strong>. A través de estas representaciones gráficas es posible analizar la dinámica demográfica del país a lo largo del horizonte 2018-2070, extrayendo conclusiones sobre la evolución de las cohortes generacionales, el descenso en la natalidad y el progresivo proceso de envejecimiento poblacional.</p>
+<section id="sec-aux-vars-years" class="level3" data-number="18.4.1">
+<h3 data-number="18.4.1" class="anchored" data-anchor-id="sec-aux-vars-years"><span class="header-section-number">18.4.1</span> Creación de variables auxiliares para selección de años de interés</h3>
+<p>El conjunto de datos preparado en el <a href="#sec-prepare-data-case-study" class="quarto-xref"><span>Sección 18.3.3</span></a> abarca anualmente las proyecciones demográficas desde 2018 hasta 2070, reuniendo un total de 53 periodos. Graficar las pirámides poblacionales correspondientes a los 53 periodos en una sola visualización saturaría la figura e impediría una comparación visual efectiva entre cohortes.</p>
+<p>Por esta razón, resulta conveniente seleccionar un subconjunto representativo de años a lo largo del periodo de proyección. En lugar de definir dichos años de forma fija o manual, es una buena práctica calcularlos dinámicamente mediante variables auxiliares a partir del propio conjunto de datos:</p>
+<ol type="1">
+<li>Con la función <code>pull()</code> de <code>dplyr</code> se extrae el vector numérico correspondiente a la columna <code>ano</code>.</li>
+<li>Con las funciones <code>min()</code> y <code>max()</code> se identifican los valores extremos del periodo proyectado: <code>ano_min</code> (<span class="math inline">\(2018\)</span>) y <code>ano_max</code> (<span class="math inline">\(2070\)</span>).</li>
+<li>Con la función <code>seq.int()</code> se define una secuencia de 4 hitos temporales equidistantes especificando <code>from = ano_min</code>, <code>to = ano_max</code> y <code>length.out = 4</code>, convirtiendo el resultado en números enteros mediante <code>as.integer()</code> para obtener los años 2018, 2035, 2052 y 2070.</li>
+<li>Con la función <code>filter()</code> y el operador de pertenencia <code>%in%</code> se seleccionan únicamente las observaciones del conjunto de datos preparado cuyos años coincidan con los del vector <code>filtrar_ano</code>, asignando el resultado a la tibble <code>poblacion_col_filtrar</code>.</li>
+</ol>
+<p>Este procedimiento se ejecuta, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-aux-vars-years" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-aux-vars-years-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;18.5: Creación de variables auxiliares para la selección y filtrado de años de interés mediante <code>pull()</code>, <code>seq.int()</code> y <code>filter()</code>
+</figcaption>
+<div aria-describedby="lst-aux-vars-years-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrar ----</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Variables auxiliares ----</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>ano <span class="ot">&lt;-</span> poblacion_col_2018_2070_preparar <span class="sc">|&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(ano)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>ano_min <span class="ot">&lt;-</span> <span class="fu">min</span>(ano)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>ano_max <span class="ot">&lt;-</span> <span class="fu">max</span>(ano)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>filtrar_ano <span class="ot">&lt;-</span> <span class="fu">seq.int</span>(</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> ano_min,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> ano_max,</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">length.out =</span> <span class="dv">4</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.integer</span>()</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>poblacion_col_filtrar <span class="ot">&lt;-</span> poblacion_col_2018_2070_preparar <span class="sc">|&gt;</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    ano <span class="sc">%in%</span> filtrar_ano</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>poblacion_col_filtrar</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 144 × 5
+     ano genero  rango_edad poblacion poblacion_pct
+   &lt;int&gt; &lt;chr&gt;   &lt;fct&gt;          &lt;dbl&gt;         &lt;dbl&gt;
+ 1  2018 hombres 0-4          1949253        0.0404
+ 2  2018 hombres 5-9          2080035        0.0431
+ 3  2018 hombres 10-14        2192498        0.0454
+ 4  2018 hombres 15-19        2158466        0.0447
+ 5  2018 hombres 20-24        2069100        0.0429
+ 6  2018 hombres 25-29        1902635        0.0394
+ 7  2018 hombres 30-34        1698592        0.0352
+ 8  2018 hombres 35-39        1595799        0.0331
+ 9  2018 hombres 40-44        1397601        0.0290
+10  2018 hombres 45-49        1320949        0.0274
+# ℹ 134 more rows</code></pre>
+</div>
+</div>
+<p>En el <a href="#lst-aux-vars-years" class="quarto-xref">Listado&nbsp;<span>18.5</span></a>, la tabla resultante <code>poblacion_col_filtrar</code> conserva únicamente las cohortes quinquenales correspondientes a los 4 años seleccionados, proporcionando el conjunto de datos necesario para construir las pirámides poblacionales en las secciones siguientes.</p>
 </section>
-<section id="creación-de-pirámides-poblacionales" class="level3" data-number="18.4.2">
-<h3 data-number="18.4.2" class="anchored" data-anchor-id="creación-de-pirámides-poblacionales"><span class="header-section-number">18.4.2</span> Creación de pirámides poblacionales</h3>
-<section id="datos-mapeo-y-capas" class="level4" data-number="18.4.2.1">
-<h4 data-number="18.4.2.1" class="anchored" data-anchor-id="datos-mapeo-y-capas"><span class="header-section-number">18.4.2.1</span> Datos, mapeo y capas</h4>
+<section id="sec-create-population-pyramids" class="level3" data-number="18.4.2">
+<h3 data-number="18.4.2" class="anchored" data-anchor-id="sec-create-population-pyramids"><span class="header-section-number">18.4.2</span> Creación de pirámides poblacionales</h3>
+<p>Para construir las pirámides poblacionales utilizaremos el paquete <code>ggplot2</code> y los principios de la gramática de gráficos en capas, abordando sucesivamente los componentes de:</p>
+<ol type="1">
+<li><strong>Datos, mapeo y capas</strong>: definición de las coordenadas estéticas y la geometría de columnas para representar la bilateralidad demográfica por género.</li>
+<li><strong>Facetas</strong>: división del gráfico en paneles individuales para comparar los 4 años seleccionados.</li>
+<li><strong>Escalas</strong>: ajuste de los valores absolutos en el eje horizontal, formato porcentual, etiquetas de categorías y textos descriptivos.</li>
+<li><strong>Tema</strong>: ajuste de la posición de la leyenda para optimizar el espacio horizontal de visualización.</li>
+</ol>
+<section id="sec-pyramid-data-mapping-layers" class="level4" data-number="18.4.2.1">
+<h4 data-number="18.4.2.1" class="anchored" data-anchor-id="sec-pyramid-data-mapping-layers"><span class="header-section-number">18.4.2.1</span> Datos, mapeo y capas</h4>
+<p>Una pirámide poblacional es en esencia una extensión de un gráfico de barras que representa cantidades. En el <a href="amounts.html" class="quarto-xref"><span>Capítulo 6</span></a> se introdujo la función <code>geom_bar()</code> para ilustrar la frecuencia o número de observaciones de una variable categórica mediante el parámetro <code>stat = "count"</code>, donde <code>ggplot2</code> efectúa internamente el conteo de filas a partir de datos individuales no agregados. En contraste, en <code>poblacion_col_filtrar</code> la información ya se encuentra resumida previamente, disponiendo de valores numéricos explícitos tanto para las cohortes de edad (<code>rango_edad</code>) como para su proporción demográfica (<code>poblacion_pct</code>). Por consiguiente, se utiliza la geometría <code>geom_col()</code>, la cual opera con <code>stat = "identity"</code> representando directamente los valores numéricos suministrados en la tabla.</p>
+<p>Para comprender cómo se origina una pirámide poblacional a partir de <code>geom_col()</code>, considera un primer mapeo básico donde se asigna la variable continua <code>poblacion_pct</code> al eje horizontal (<code>x</code>), la variable categórica <code>rango_edad</code> al eje vertical (<code>y</code>) y el relleno de las barras según el género con <code>aes(fill = genero)</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-pyramid-geom-col-initial" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-pyramid-geom-col-initial-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;18.6: Mapeo inicial de cantidades mediante <code>geom_col()</code> con barras apiladas en dirección positiva
+</figcaption>
+<div aria-describedby="lst-pyramid-geom-col-initial-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualización ----</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>poblacion_col_filtrar <span class="sc">|&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> poblacion_pct,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> rango_edad</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> genero)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="split_unite_characters_cols_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>En el <a href="#lst-pyramid-geom-col-initial" class="quarto-xref">Listado&nbsp;<span>18.6</span></a>, ambas categorías (<code>"hombres"</code> y <code>"mujeres"</code>) parten desde el valor <span class="math inline">\(0\)</span> y se extienden en la misma dirección positiva sobre el eje horizontal, apilándose una a continuación de la otra debido al ajuste de posición por defecto (<code>position = "stack"</code>). Si bien este gráfico permite observar la suma porcentual conjunta de cada cohorte, no refleja la estructura comparativa tradicional de una pirámide demográfica, cuyo rasgo distintivo es la simetría bilateral. Es decir, un género debe situarse a la derecha del eje central y el otro hacia la izquierda.</p>
+<p>Para lograr esta disposición bilateral a partir de <code>geom_col()</code>, es indispensable que las proporciones de uno de los dos grupos adopten valores negativos, de tal manera que sus barras se extiendan en sentido opuesto hacia la izquierda del origen <span class="math inline">\(0\)</span>.</p>
+<p>Este comportamiento se consigue directamente dentro de <code>aes()</code> mediante la función <code>ifelse()</code>: al evaluar <code>test = genero == "hombres"</code>, se conserva el valor positivo original <code>poblacion_pct</code> (<code>yes</code>), mientras que para las mujeres se asigna el valor negativo opuesto <code>-poblacion_pct</code> (<code>no</code>). Asimismo, en <code>geom_col()</code> se añade el parámetro <code>color = "black"</code> fuera de <code>aes()</code> para delinear con precisión el contorno de cada barra, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-pyramid-data-mapping-layers" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-pyramid-data-mapping-layers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;18.7: Representación base de la pirámide poblacional con simetría bilateral mediante <code>ifelse()</code> y <code>geom_col()</code>
+</figcaption>
+<div aria-describedby="lst-pyramid-data-mapping-layers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>poblacion_col_filtrar <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="fu">ifelse</span>(</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">test =</span> genero <span class="sc">==</span> <span class="st">"hombres"</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">yes =</span> poblacion_pct,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">no =</span> <span class="sc">-</span>poblacion_pct</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> rango_edad</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> genero),</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="split_unite_characters_cols_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>En el gráfico generado por el <a href="#lst-pyramid-data-mapping-layers" class="quarto-xref">Listado&nbsp;<span>18.7</span></a> se observa con claridad cómo la función <code>ifelse()</code> transforma el gráfico de barras convencional en la característica estructura bilateral de una pirámide poblacional. No obstante, al contener los datos correspondientes a los 4 años seleccionados, las barras de los distintos periodos se superponen entre sí impidiendo distinguir la estructura de cada año.</p>
 </section>
-<section id="facetas" class="level4" data-number="18.4.2.2">
-<h4 data-number="18.4.2.2" class="anchored" data-anchor-id="facetas"><span class="header-section-number">18.4.2.2</span> Facetas</h4>
+<section id="sec-pyramid-facets" class="level4" data-number="18.4.2.2">
+<h4 data-number="18.4.2.2" class="anchored" data-anchor-id="sec-pyramid-facets"><span class="header-section-number">18.4.2.2</span> Facetas</h4>
+<p>Para separar las barras superpuestas y comparar la evolución de la estructura demográfica entre los periodos seleccionados, se incorpora el componente de facetas utilizando la función <code>facet_wrap()</code> (ver <a href="x-y_relationships.html" class="quarto-xref"><span>Capítulo 9</span></a>).</p>
+<p>Mediante el argumento <code>facets = vars(ano)</code>, la función <code>facet_wrap()</code> divide el conjunto de datos y genera un panel individual para cada uno de los años de interés (2018, 2035, 2052 y 2070), tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-pyramid-facets" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-pyramid-facets-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;18.8: Incorporación de paneles individuales para cada año seleccionado mediante <code>facet_wrap()</code>
+</figcaption>
+<div aria-describedby="lst-pyramid-facets-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>poblacion_col_filtrar <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="fu">ifelse</span>(</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">test =</span> genero <span class="sc">==</span> <span class="st">"hombres"</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">yes =</span> poblacion_pct,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">no =</span> <span class="sc">-</span>poblacion_pct</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> rango_edad</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> genero),</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">facets =</span> <span class="fu">vars</span>(ano)</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="split_unite_characters_cols_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Al examinar el gráfico del <a href="#lst-pyramid-facets" class="quarto-xref">Listado&nbsp;<span>18.8</span></a>, los 4 paneles permiten apreciar con claridad cómo la distribución por edades se transforma a lo largo del tiempo. Sin embargo, se identifican aspectos estéticos y de formato que requieren ser modificados mediante el componente de escalas.</p>
 </section>
-<section id="escalas" class="level4" data-number="18.4.2.3">
-<h4 data-number="18.4.2.3" class="anchored" data-anchor-id="escalas"><span class="header-section-number">18.4.2.3</span> Escalas</h4>
+<section id="sec-pyramid-scales" class="level4" data-number="18.4.2.3">
+<h4 data-number="18.4.2.3" class="anchored" data-anchor-id="sec-pyramid-scales"><span class="header-section-number">18.4.2.3</span> Escalas</h4>
+<p>En el gráfico obtenido en el <a href="#lst-pyramid-facets" class="quarto-xref">Listado&nbsp;<span>18.8</span></a> se presentan aspectos a mejorar en relación a las escalas:</p>
+<ol type="1">
+<li>Debido a la transformación con <code>-poblacion_pct</code> para ubicar a las mujeres hacia la izquierda, el eje horizontal presenta valores numéricos negativos (p.&nbsp;ej., <code>-0.025</code>), lo cual resulta inadecuado dado que una magnitud poblacional es estrictamente positiva. Asimismo, los valores se muestran en notación decimal en lugar de formato de porcentaje.</li>
+<li>Los nombres de las categorías en la leyenda (<code>"hombres"</code> y <code>"mujeres"</code>) inician en letra minúscula.</li>
+<li>Se requiere incorporar títulos, subtítulos y notas explicativas que contextualicen adecuadamente la visualización.</li>
+</ol>
+<p>Para solucionar el primer aspecto, se define la variable auxiliar <code>poblacion_pct_breaks</code> mediante <code>seq.int()</code> con marcas que van desde <code>-0.04</code> hasta <code>0.04</code> en incrementos de <code>0.01</code> (<span class="math inline">\(1\%\)</span>). Luego, en la función <code>scale_x_continuous()</code> se especifican <code>breaks = poblacion_pct_breaks</code> y se formatea el texto del eje mediante el parámetro <code>labels</code>.</p>
+<p>Para mostrar los valores siempre positivos y con símbolo de porcentaje, se define una <strong>función anónima</strong> con la sintaxis <code>\(x)</code>:</p>
+<p><span class="math display">\[
+\backslash(x) \text{ label\_percent(accuracy = 1)(abs}(x))
+\]</span></p>
+<p>En el <a href="anonymous_functions.html" class="quarto-xref"><span>Capítulo 19</span></a> se explorará en detalle qué son y cómo operan las funciones anónimas en R. Por el momento, basta señalar que <code>\(x)</code> define una función puntual que recibe cada valor <code>x</code> del eje, le aplica la función <code>abs()</code> para tomar su valor absoluto transformando valores como <code>-0.04</code> en <code>0.04</code> y finalmente le aplica la función <code>label_percent()</code> del paquete <code>scales</code> para formatearlo como un porcentaje entero (<code>4%</code>).</p>
+<p>Para solucionar el segundo aspecto, se emplea la función <code>scale_fill_discrete()</code> especificando <code>labels = str_to_title</code>. La función <code>str_to_title()</code> del paquete <code>stringr</code> convierte automáticamente a mayúscula la primera letra de cada categoría, transformando <code>"hombres"</code> en <code>"Hombres"</code> y <code>"mujeres"</code> en <code>"Mujeres"</code> sin necesidad de alterar los datos originales.</p>
+<p>Por último, se agregan las etiquetas informativas mediante la función <code>labs()</code>. Siguiendo el enfoque del <a href="geopackage_gpkg.html" class="quarto-xref"><span>Capítulo 15</span></a>, se define la variable auxiliar <code>actualizacion_fecha &lt;- ymd("2025-07-18")</code> con la función <code>ymd()</code> del paquete <code>lubridate</code> perteneciente al <code>tidyverse</code> y se incluye dinámicamente en el subtítulo utilizando la función <code>str_glue()</code> con: <code>subtitle = str_glue("Actualización: {actualizacion_fecha}")</code>. Además, se suprimen las etiquetas redundantes de los ejes y la leyenda asignando <code>NULL</code> a <code>x</code>, <code>y</code> y <code>fill</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-pyramid-scales" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-pyramid-scales-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;18.9: Ajuste de escalas continuas, discretas y adición de textos informativos mediante <code>scale_x_continuous()</code>, <code>scale_fill_discrete()</code> y <code>labs()</code>
+</figcaption>
+<div aria-describedby="lst-pyramid-scales-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualización ----</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Variables auxiliares ----</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>poblacion_pct_breaks <span class="ot">&lt;-</span> <span class="fu">seq.int</span>(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="sc">-</span><span class="fl">0.04</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> <span class="fl">0.04</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="fl">0.01</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>actualizacion_fecha <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="st">"2025-07-18"</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>poblacion_col_filtrar <span class="sc">|&gt;</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="fu">ifelse</span>(</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">test =</span> genero <span class="sc">==</span> <span class="st">"hombres"</span>,</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">yes =</span> poblacion_pct,</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">no =</span> <span class="sc">-</span>poblacion_pct</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> rango_edad</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> genero),</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">facets =</span> <span class="fu">vars</span>(ano)</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> poblacion_pct_breaks,</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> \(x) <span class="fu">label_percent</span>(<span class="at">accuracy =</span> <span class="dv">1</span>)(<span class="fu">abs</span>(x))</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(</span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> str_to_title</span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="cn">NULL</span>,</span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="cn">NULL</span>,</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Pirámides poblacionales de Colombia"</span>,</span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">str_glue</span>(<span class="st">"Actualización: {actualizacion_fecha}"</span>),</span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Fuente: Dane - Proyecciones de Población y Estudios Demográficos (PPED)"</span></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="split_unite_characters_cols_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>En el <a href="#lst-pyramid-scales" class="quarto-xref">Listado&nbsp;<span>18.9</span></a> el gráfico cuenta con escalas legibles, valores en porcentaje positivos en ambos sentidos del eje horizontal, leyenda capitalizada y documentación completa de título, fecha de actualización y fuente oficial.</p>
 </section>
-<section id="tema" class="level4" data-number="18.4.2.4">
-<h4 data-number="18.4.2.4" class="anchored" data-anchor-id="tema"><span class="header-section-number">18.4.2.4</span> Tema</h4>
+<section id="sec-pyramid-theme" class="level4" data-number="18.4.2.4">
+<h4 data-number="18.4.2.4" class="anchored" data-anchor-id="sec-pyramid-theme"><span class="header-section-number">18.4.2.4</span> Tema</h4>
+<p>Por defecto, <code>ggplot2</code> sitúa la leyenda en la parte lateral derecha del gráfico. Al utilizar facetas con múltiples paneles distribuidos en columnas, esta posición lateral reduce el ancho disponible para las pirámides, comprimiendo las barras y dificultando la lectura de los intervalos quinquenales.</p>
+<p>Para optimizar el uso del espacio horizontal y otorgar mayor amplitud a cada faceta, se utiliza la función <code>theme()</code> ajustando el parámetro <code>legend.position = "bottom"</code>. De este modo, la leyenda se reubica en la parte inferior del gráfico para maximizar el área visual asignada a los paneles, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-pyramid-theme" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-pyramid-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;18.10: Personalización del tema y reubicación de la leyenda mediante <code>theme()</code> para la pirámide poblacional final
+</figcaption>
+<div aria-describedby="lst-pyramid-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>poblacion_col_filtrar <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="fu">ifelse</span>(</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">test =</span> genero <span class="sc">==</span> <span class="st">"hombres"</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">yes =</span> poblacion_pct,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">no =</span> <span class="sc">-</span>poblacion_pct</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> rango_edad</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> genero),</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">facets =</span> <span class="fu">vars</span>(ano)</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> poblacion_pct_breaks,</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> \(x) <span class="fu">label_percent</span>(<span class="at">accuracy =</span> <span class="dv">1</span>)(<span class="fu">abs</span>(x))</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> str_to_title</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="cn">NULL</span>,</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="cn">NULL</span>,</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Pirámides poblacionales de Colombia"</span>,</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">str_glue</span>(<span class="st">"Actualización: {actualizacion_fecha}"</span>),</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Fuente: Dane - Proyecciones de Población y Estudios Demográficos (PPED)"</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="split_unite_characters_cols_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>El gráfico obtenido en el <a href="#lst-pyramid-theme" class="quarto-xref">Listado&nbsp;<span>18.10</span></a> concluye la construcción de la visualización demográfica. Al comparar los 4 paneles temporales se evidencia con claridad la transición demográfica de Colombia proyectada por el DANE:</p>
+<ul>
+<li>En <strong>2018</strong>, la pirámide presenta una base aún moderadamente ancha en las edades jóvenes y productivas (15 a 29 años), con una cúspide reducida en edades avanzadas.</li>
+<li>Conforme se avanza hacia <strong>2035</strong> y <strong>2052</strong>, la base se contrae progresivamente como consecuencia del descenso en la tasa de natalidad mientras que los grupos de edades intermedias y adultas aumentan su peso relativo.</li>
+<li>Para <strong>2070</strong>, la pirámide adopta una estructura inversa, característica del envejecimiento poblacional, donde las cohortes de adultos mayores de 60 años concentran una proporción considerablemente mayor en comparación con la población infantil y juvenil.</li>
+</ul>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">

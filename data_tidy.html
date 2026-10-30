@@ -353,7 +353,18 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Pendiente</p>
+<p>El objetivo de esta parte, es presentar los fundamentos y herramientas para estructurar conjuntos de datos en un formato ordenado (en inglés <strong>tidy data</strong>) en R utilizando el paquete <a href="https://tidyr.tidyverse.org/index.html"><code>tidyr</code></a>, a través de los siguientes 3 capítulos:</p>
+<ul>
+<li><p><a href="tidy_data.html" class="quarto-xref"><span>16&nbsp; Datos ordenados</span></a>: introduce el concepto de datos ordenados, los principios que vinculan la semántica con la estructura rectangular de las tablas y los problemas más comunes presentes en datos no ordenados junto con las estrategias para solucionarlos.</p></li>
+<li><p><a href="pivoting.html" class="quarto-xref"><span>17&nbsp; Pivoteo</span></a>: introduce la reestructuración de tablas de datos alternando entre formato ancho y formato largo mediante el uso de las funciones <code>pivot_longer()</code> y <code>pivot_wider()</code>.</p></li>
+<li><p><a href="split_unite_characters_cols.html" class="quarto-xref"><span>18&nbsp; Separación y unión de caracteres en columnas</span></a>: introduce la separación de caracteres en columnas mediante la familia de funciones <code>separate_wider_*()</code> y la combinación de múltiples columnas a través de <code>unite()</code>, complementado con la preparación y visualización de pirámides poblacionales.</p></li>
+</ul>
+<p>Una vez se comprenda el funcionamiento básico del paquete <code>tidyr</code>, el lector interesado en profundizar en la reestructuración y limpieza avanzada de datos puede consultar la <a href="https://tidyr.tidyverse.org/reference/index.html">documentación de referencia de <code>tidyr</code></a>, donde se abordan aspectos adicionales tales como:</p>
+<ul>
+<li><p><strong>Separación en filas</strong>: la familia de funciones <a href="https://tidyr.tidyverse.org/reference/separate_longer_delim.html"><code>separate_longer_*()</code></a> como <code>separate_longer_delim()</code> y <code>separate_longer_position()</code>, que permiten dividir cadenas de caracteres distribuyendo los valores en múltiples filas en lugar de columnas.</p></li>
+<li><p><strong>Aplanamiento de datos</strong> (en inglés <strong>rectangling</strong>) y <strong>anidamiento</strong> (en inglés <strong>nesting</strong>): técnicas y funciones como <code>unnest_longer()</code>, <code>unnest_wider()</code>, <code>hoist()</code>, <code>nest()</code> y <code>unnest()</code> orientadas a transformar estructuras de datos complejas o profundamente anidadas en tablas rectangulares ordenadas (ver <a href="https://tidyr.tidyverse.org/articles/rectangle.html"><strong>Rectangling</strong></a> y <a href="https://tidyr.tidyverse.org/articles/nest.html"><strong>Nesting</strong></a>).</p></li>
+<li><p><strong>Valores ausentes y miscelánea</strong>: funciones dedicadas al tratamiento explícito e implícito de datos faltantes como <code>complete()</code>, <code>fill()</code>, <code>drop_na()</code> y <code>replace_na()</code>, así como funciones auxiliares para cruces y combinaciones de variables como <code>expand()</code> y <code>crossing()</code>.</p></li>
+</ul>
 
 
 
