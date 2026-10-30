@@ -9,8 +9,6 @@ source("_common.R")
 #| label: load-r-packages
 #| echo: false
 #| message: false
-library(tidyverse)
-library(scales)
 ```
 
 Este capítulo se basa en [@wickham_r_2023, Cap. 5] así como en la documentación oficial de `tidyr` respecto a la familia de funciones [`separate_wider_*()`]({{< var url.packages.tidyr_split_string_cols >}}) y la función [`unite()`]({{< var url.packages.tidyr_unite_string_cols >}}) donde tiene como propósito introducir la forma de separar caracteres en columnas o unir múltiples columnas en una sola mediante concatenación de caracteres, utilizando el paquete `tidyr` e información de proyecciones y retroproyecciones de población nacional por área, sexo y edad para el periodo 2018-2070 de Colombia con base en el Censo Nacional de Población y Vivienda (CNPV) 2018. 
@@ -87,7 +85,7 @@ Para iniciar con el desarrollo del caso de estudio, es necesario en primera inst
 ```{r}
 #| lst-label: lst-import-data-longer-format
 #| lst-cap: Importación del conjunto de datos en formato largo para desarrollar el caso de estudio
-
+#| message: false
 # Cargar paquetes ----
 library(tidyverse)
 
@@ -130,7 +128,6 @@ Para llevar a cabo estas transformaciones, se utiliza la función `mutate()` con
 ```{r}
 #| lst-label: lst-mutate-case-study
 #| lst-cap: Transformación de tipos de datos y cálculo de la proporción poblacional mediante `mutate()`
-
 # Transformar ----
 poblacion_col_2018_2070_transformar <- poblacion_col_2018_2070_separar |>
   mutate(
@@ -160,7 +157,6 @@ Posteriormente, se utiliza `group_by()` junto con `summarize()` para colapsar la
 #| lst-label: lst-prepare-data-case-study
 #| lst-cap: Discretización de edades en intervalos quinquenales y agregación demográfica mediante `cut()`, `group_by()` y `summarize()`
 #| message: false
-
 # Preparar datos ----
 poblacion_col_2018_2070_preparar <- poblacion_col_2018_2070_transformar |>
   group_by(ano, genero) |>
@@ -208,7 +204,6 @@ Este procedimiento se ejecuta, tal como se señala a continuación:
 ```{r}
 #| lst-label: lst-aux-vars-years
 #| lst-cap: Creación de variables auxiliares para la selección y filtrado de años de interés mediante `pull()`, `seq.int()` y `filter()`
-
 # Filtrar ----
 ## Variables auxiliares ----
 ano <- poblacion_col_2018_2070_preparar |>
@@ -253,6 +248,9 @@ Para comprender cómo se origina una pirámide poblacional a partir de `geom_col
 #| lst-label: lst-pyramid-geom-col-initial
 #| lst-cap: Mapeo inicial de cantidades mediante `geom_col()` con barras apiladas en dirección positiva
 #| fig-height: 5.5
+#| message: false
+# Cargar paquetes ----
+library(scales)
 
 # Visualización ----
 poblacion_col_filtrar |>
