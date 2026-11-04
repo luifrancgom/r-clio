@@ -196,7 +196,7 @@ Para ordenar estos datos:
 #| lst-cap: Reestructuración y separación de variables compuestas en `tb_muestra` con `pivot_longer()` y `separate_wider_delim()`
 tb_muestra |>
   pivot_longer(
-    cols = !c(iso2, year),
+    cols = `m_014`:`f_1524`,
     names_to = "demo",
     values_to = "casos"
   ) |>

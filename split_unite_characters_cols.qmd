@@ -275,7 +275,6 @@ Este comportamiento se consigue directamente dentro de `aes()` mediante la funci
 #| lst-label: lst-pyramid-data-mapping-layers
 #| lst-cap: Representación base de la pirámide poblacional con simetría bilateral mediante `ifelse()` y `geom_col()`
 #| fig-height: 5.5
-
 poblacion_col_filtrar |>
   ggplot(
     aes(
@@ -305,7 +304,6 @@ Mediante el argumento `facets = vars(ano)`, la función `facet_wrap()` divide el
 #| lst-label: lst-pyramid-facets
 #| lst-cap: Incorporación de paneles individuales para cada año seleccionado mediante `facet_wrap()`
 #| fig-height: 5.5
-
 poblacion_col_filtrar |>
   ggplot(
     aes(
@@ -354,7 +352,6 @@ Por último, se agregan las etiquetas informativas mediante la función `labs()`
 #| lst-label: lst-pyramid-scales
 #| lst-cap: Ajuste de escalas continuas, discretas y adición de textos informativos mediante `scale_x_continuous()`, `scale_fill_discrete()` y `labs()`
 #| fig-height: 5.5
-
 # Visualización ----
 ## Variables auxiliares ----
 poblacion_pct_breaks <- seq.int(
@@ -412,7 +409,6 @@ Para optimizar el uso del espacio horizontal y otorgar mayor amplitud a cada fac
 #| lst-label: lst-pyramid-theme
 #| lst-cap: Personalización del tema y reubicación de la leyenda mediante `theme()` para la pirámide poblacional final
 #| fig-height: 6
-
 poblacion_col_filtrar |>
   ggplot(
     aes(
