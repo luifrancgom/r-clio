@@ -25,8 +25,8 @@
      inkscape:document-units="mm"
      inkscape:lockguides="false"
      inkscape:zoom="1"
-     inkscape:cx="404"
-     inkscape:cy="436.5"
+     inkscape:cx="312"
+     inkscape:cy="438.5"
      inkscape:window-width="1854"
      inkscape:window-height="1011"
      inkscape:window-x="1146"
@@ -83,9 +83,9 @@
      id="layer1">
     <g
        id="g5550"
-       inkscape:export-filename="pivot_wider.png"
-       inkscape:export-xdpi="96"
-       inkscape:export-ydpi="96">
+       inkscape:export-filename="../../r-clio-curso-analisis-datos/images/pivot_longer.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600">
       <g
          id="g2423"
          transform="translate(4.2333335,12.700002)">
@@ -152,116 +152,116 @@
            transform="matrix(1.0830494,0,0,0.98369922,-42.564457,-61.177863)"><tspan
              x="123.04583"
              y="84.035141"
-             id="tspan6165"><tspan
+             id="tspan833"><tspan
                dx="0 0 0 0 0 0 0 0 0 0 0 0 -0.26726067 0.26725984 -0.26725852"
                style="stroke-width:0.5"
-               id="tspan6163">pivot_longer (
+               id="tspan831">pivot_longer (
 </tspan></tspan><tspan
              x="123.04583"
              y="85.460514"
-             id="tspan6169"><tspan
+             id="tspan837"><tspan
                style="stroke-width:0.5"
-               id="tspan6167">
+               id="tspan835">
 </tspan></tspan><tspan
              x="123.04583"
              y="86.885891"
-             id="tspan6173"><tspan
+             id="tspan841"><tspan
                style="stroke-width:0.5"
-               id="tspan6171">
+               id="tspan839">
 </tspan></tspan><tspan
              x="123.04583"
              y="88.311268"
-             id="tspan6177"><tspan
+             id="tspan845"><tspan
                style="stroke-width:0.5"
-               id="tspan6175">
+               id="tspan843">
 </tspan></tspan><tspan
              x="123.04583"
              y="89.736645"
-             id="tspan6181"><tspan
+             id="tspan849"><tspan
                style="stroke-width:0.5"
-               id="tspan6179">  
+               id="tspan847">  
 </tspan></tspan><tspan
              x="123.04583"
              y="91.162022"
-             id="tspan6185"><tspan
+             id="tspan853"><tspan
                dx="0 0 0.267259 0 0 0 -0.26725864 0.26725888 -0.26725936 0.26725984 0 0 0 0 0 0 0 0 0 0 0 -0.26726013"
                style="stroke-width:0.5"
-               id="tspan6183">  cols = m_014:f_014,
+               id="tspan851">  cols = m_014:f_014,
 </tspan></tspan><tspan
              x="123.04583"
              y="92.587399"
-             id="tspan6189"><tspan
+             id="tspan857"><tspan
                style="stroke-width:0.5"
-               id="tspan6187">
+               id="tspan855">
 </tspan></tspan><tspan
              x="123.04583"
              y="94.012776"
-             id="tspan6193"><tspan
+             id="tspan861"><tspan
                style="stroke-width:0.5"
-               id="tspan6191">
+               id="tspan859">
 </tspan></tspan><tspan
              x="123.04583"
              y="95.438153"
-             id="tspan6197"><tspan
+             id="tspan865"><tspan
                dx="0 0 0.267259 0 0 0 0 0 0 0 -0.26725912 0.26725984 -0.26726031 0.26725984 0 0 0 0 0 0 -0.26726013"
                style="stroke-width:0.5"
-               id="tspan6195">  names_to = &quot;name&quot;,
+               id="tspan863">  names_to = &quot;name&quot;,
 </tspan></tspan><tspan
              x="123.04583"
              y="96.863529"
-             id="tspan6201"><tspan
+             id="tspan869"><tspan
                style="stroke-width:0.5"
-               id="tspan6199">
+               id="tspan867">
 </tspan></tspan><tspan
              x="123.04583"
              y="98.288906"
-             id="tspan6205"><tspan
+             id="tspan873"><tspan
                style="stroke-width:0.5"
-               id="tspan6203">
+               id="tspan871">
 </tspan></tspan><tspan
              x="123.04583"
              y="99.714283"
-             id="tspan6209"><tspan
+             id="tspan877"><tspan
                style="stroke-width:0.5"
-               id="tspan6207">
+               id="tspan875">
 </tspan></tspan><tspan
              x="123.04583"
              y="101.13966"
-             id="tspan6213"><tspan
+             id="tspan881"><tspan
                dx="0 0 0.267259 0 0 0 0 0 0 0 0 -0.26725912 0.26725984 -0.26725841 0.26725793 0 0 0 0 0 0 -0.26725793"
                style="stroke-width:0.5"
-               id="tspan6211">  values_to = &quot;value&quot;
+               id="tspan879">  values_to = &quot;value&quot;
 </tspan></tspan><tspan
              x="123.04583"
              y="102.56504"
-             id="tspan6217"><tspan
+             id="tspan885"><tspan
                style="stroke-width:0.5"
-               id="tspan6215">
+               id="tspan883">
 </tspan></tspan><tspan
              x="123.04583"
              y="103.99041"
-             id="tspan6221"><tspan
+             id="tspan889"><tspan
                style="stroke-width:0.5"
-               id="tspan6219">
+               id="tspan887">
 </tspan></tspan><tspan
              x="123.04583"
              y="105.41579"
-             id="tspan6225"><tspan
+             id="tspan893"><tspan
                style="stroke-width:0.5"
-               id="tspan6223">       
+               id="tspan891">       
 </tspan></tspan><tspan
              x="123.04583"
              y="106.84117"
-             id="tspan6229"><tspan
+             id="tspan897"><tspan
                dx="0 -0.267259"
                style="stroke-width:0.5"
-               id="tspan6227">)     
+               id="tspan895">)     
 </tspan></tspan><tspan
              x="123.04583"
              y="108.26654"
-             id="tspan6233"><tspan
+             id="tspan901"><tspan
                style="stroke-width:0.5"
-               id="tspan6231">
+               id="tspan899">
 </tspan></tspan></text>
       </g>
       <g
@@ -727,9 +727,9 @@
     </g>
     <g
        id="g5681"
-       inkscape:export-filename="pivot_wider.png"
-       inkscape:export-xdpi="96"
-       inkscape:export-ydpi="96">
+       inkscape:export-filename="../../r-clio-curso-analisis-datos/images/pivot_wider.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600">
       <g
          id="g3455-0"
          transform="translate(-137.39149,106.43013)">
@@ -1213,103 +1213,103 @@
            transform="matrix(1.0830494,0,0,0.98369922,-38.331011,71.339807)"><tspan
              x="123.04583"
              y="84.035141"
-             id="tspan6237"><tspan
+             id="tspan905"><tspan
                dx="0 0 0 0 0 0 0 0 0 0 0 -0.26725876 0.26725793 -0.26725852"
                style="stroke-width:0.5"
-               id="tspan6235">pivot_wider (
+               id="tspan903">pivot_wider (
 </tspan></tspan><tspan
              x="123.04583"
              y="85.460514"
-             id="tspan6241"><tspan
+             id="tspan909"><tspan
                style="stroke-width:0.5"
-               id="tspan6239">
+               id="tspan907">
 </tspan></tspan><tspan
              x="123.04583"
              y="86.885891"
-             id="tspan6245"><tspan
+             id="tspan913"><tspan
                style="stroke-width:0.5"
-               id="tspan6243">
+               id="tspan911">
 </tspan></tspan><tspan
              x="123.04583"
              y="88.311268"
-             id="tspan6249"><tspan
+             id="tspan917"><tspan
                style="stroke-width:0.5"
-               id="tspan6247">
+               id="tspan915">
 </tspan></tspan><tspan
              x="123.04583"
              y="89.736645"
-             id="tspan6253"><tspan
+             id="tspan921"><tspan
                style="stroke-width:0.5"
-               id="tspan6251">
+               id="tspan919">
 </tspan></tspan><tspan
              x="123.04583"
              y="91.162022"
-             id="tspan6257"><tspan
+             id="tspan925"><tspan
                style="stroke-width:0.5"
-               id="tspan6255">
+               id="tspan923">
 </tspan></tspan><tspan
              x="123.04583"
              y="92.587399"
-             id="tspan6261"><tspan
+             id="tspan929"><tspan
                dx="0 0 0.267259 0 0 0 0 0 0 0 0 0 -0.26725912 0.26725984 -0.26726031 0.26725984 0 0 0 0 -0.26725632"
                style="stroke-width:0.5"
-               id="tspan6259">  names_from = name,
+               id="tspan927">  names_from = name,
 </tspan></tspan><tspan
              x="123.04583"
              y="94.012776"
-             id="tspan6265"><tspan
+             id="tspan933"><tspan
                style="stroke-width:0.5"
-               id="tspan6263">
+               id="tspan931">
 </tspan></tspan><tspan
              x="123.04583"
              y="95.438153"
-             id="tspan6269"><tspan
+             id="tspan937"><tspan
                style="stroke-width:0.5"
-               id="tspan6267">
+               id="tspan935">
 </tspan></tspan><tspan
              x="123.04583"
              y="96.863529"
-             id="tspan6273"><tspan
+             id="tspan941"><tspan
                style="stroke-width:0.5"
-               id="tspan6271">
+               id="tspan939">
 </tspan></tspan><tspan
              x="123.04583"
              y="98.288906"
-             id="tspan6277"><tspan
+             id="tspan945"><tspan
                dx="0 0 0.267259 0 0 0 0 0 0 0 0 0 0 -0.26725912 0.26725984 -0.26725841 0.26725793 0 0 0 0 -0.26725602"
                style="stroke-width:0.5"
-               id="tspan6275">  values_from = value
+               id="tspan943">  values_from = value
 </tspan></tspan><tspan
              x="123.04583"
              y="99.714283"
-             id="tspan6281"><tspan
+             id="tspan949"><tspan
                style="stroke-width:0.5"
-               id="tspan6279">
+               id="tspan947">
 </tspan></tspan><tspan
              x="123.04583"
              y="101.13966"
-             id="tspan6285"><tspan
+             id="tspan953"><tspan
                style="stroke-width:0.5"
-               id="tspan6283">
+               id="tspan951">
 </tspan></tspan><tspan
              x="123.04583"
              y="102.56504"
-             id="tspan6289"><tspan
+             id="tspan957"><tspan
                style="stroke-width:0.5"
-               id="tspan6287">       
+               id="tspan955">       
 </tspan></tspan><tspan
              x="123.04583"
              y="103.99041"
-             id="tspan6293"><tspan
+             id="tspan961"><tspan
                dx="0 -0.267259"
                style="stroke-width:0.5"
-               id="tspan6291">)     
+               id="tspan959">)     
 </tspan></tspan><tspan
              x="123.04583"
              y="105.41579"
-             id="tspan6297"><tspan
+             id="tspan965"><tspan
                style="stroke-width:0.5"
-               id="tspan6295">
+               id="tspan963">
 </tspan></tspan></text>
         <g
            id="g5049"
