@@ -9,7 +9,6 @@ source("_common.R")
 #| label: load-r-packages
 #| echo: false
 #| message: false
-library(tidyverse)
 ```
 
 Este capítulo se basa en [@wickham_r_2023, Cap. 5] y [@wickham_tidy_2014] así como en la documentación oficial de [`tidyr`]({{< var url.packages.tidyr_tidy_data >}}) donde tiene como propósito introducir la forma de estructurar conjuntos de datos para facilitar su análisis utilizando el paquete `tidyr`.   
@@ -112,6 +111,11 @@ El paquete `tidyr` incluye el conjunto de datos `relig_income`, derivado de una 
 
 ```{r}
 #| label: view-relig-income
+#| message: false
+# Cargar paquetes ----
+library(tidyverse)
+
+# Import datos ----
 relig_income
 ```
 
