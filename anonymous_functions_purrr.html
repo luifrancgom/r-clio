@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>20&nbsp; Funciones map() – R para análisis de datos</title>
+<title>19&nbsp; Funciones anónimas y purrr – R para análisis de datos</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -36,8 +36,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./data_communication.html" rel="next">
-<link href="./anonymous_functions.html" rel="prev">
+<link href="./map_reduce_list_rbind_functions.html" rel="next">
+<link href="./functional_programming.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
@@ -89,7 +89,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="Hilo de Ariadna"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./functional_programming.html">Programación funcional</a></li><li class="breadcrumb-item"><a href="./map_functions.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Funciones <code>map()</code></span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="Hilo de Ariadna"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./functional_programming.html">Programación funcional</a></li><li class="breadcrumb-item"><a href="./anonymous_functions_purrr.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Funciones anónimas y <code>purrr</code></span></a></li></ol></nav>
         <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -302,14 +302,14 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./anonymous_functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Funciones anónimas</span></span></a>
+  <a href="./anonymous_functions_purrr.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Funciones anónimas y <code>purrr</code></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./map_functions.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Funciones <code>map()</code></span></span></a>
+  <a href="./map_reduce_list_rbind_functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Funciones <code>map()</code>, <code>reduce()</code> y <code>list_rbind()</code></span></span></a>
   </div>
 </li>
       </ul>
@@ -329,15 +329,28 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#purrr" id="toc-purrr" class="nav-link active" data-scroll-target="#purrr"><span class="header-section-number">19.1</span> <code>purrr</code></a></li>
+  <li><a href="#vectores-atómicos" id="toc-vectores-atómicos" class="nav-link" data-scroll-target="#vectores-atómicos"><span class="header-section-number">19.2</span> Vectores atómicos</a></li>
+  <li><a href="#listas" id="toc-listas" class="nav-link" data-scroll-target="#listas"><span class="header-section-number">19.3</span> Listas</a></li>
+  <li><a href="#funciones" id="toc-funciones" class="nav-link" data-scroll-target="#funciones"><span class="header-section-number">19.4</span> Funciones</a></li>
+  <li><a href="#funciones-anónimas" id="toc-funciones-anónimas" class="nav-link" data-scroll-target="#funciones-anónimas"><span class="header-section-number">19.5</span> Funciones anónimas</a></li>
+  <li><a href="#map" id="toc-map" class="nav-link" data-scroll-target="#map"><span class="header-section-number">19.6</span> <code>map()</code></a></li>
+  <li><a href="#reduce" id="toc-reduce" class="nav-link" data-scroll-target="#reduce"><span class="header-section-number">19.7</span> <code>reduce()</code></a></li>
+  <li><a href="#list_rbind" id="toc-list_rbind" class="nav-link" data-scroll-target="#list_rbind"><span class="header-section-number">19.8</span> <code>list_rbind()</code></a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/anonymous_functions_purrr.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/anonymous_functions_purrr.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content" tabindex="-1">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Hilo de Ariadna"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./functional_programming.html">Programación funcional</a></li><li class="breadcrumb-item"><a href="./map_functions.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Funciones <code>map()</code></span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Hilo de Ariadna"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./functional_programming.html">Programación funcional</a></li><li class="breadcrumb-item"><a href="./anonymous_functions_purrr.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Funciones anónimas y <code>purrr</code></span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-map-functions" class="quarto-section-identifier"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Funciones <code>map()</code></span></span></h1>
+<h1 class="title"><span id="sec-anonymous-functions" class="quarto-section-identifier"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Funciones anónimas y <code>purrr</code></span></span></h1>
 </div>
 
 
@@ -354,8 +367,51 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>Este capítulo se basa en … así como en la documentación oficial de <a href="{{< ... >}}"><code>...</code></a> donde tiene como propósito … e información … .</p>
+<p>Exploraremos los siguientes aspectos:</p>
+<ol type="1">
+<li></li>
+<li></li>
+</ol>
+<div id="nte-1-chap-19" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota&nbsp;19.1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para desarrollar el contenido de este capítulo es necesario que crees una nueva carpeta llamada <code>016_funciones-anonimas-purrr-en-r</code> y dentro de ella generes el archivo <code>001_funciones-anonimas-purrr.R</code>, siguiendo las pautas de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>.</p>
+</div>
+</div>
+<section id="purrr" class="level2" data-number="19.1">
+<h2 data-number="19.1" class="anchored" data-anchor-id="purrr"><span class="header-section-number">19.1</span> <code>purrr</code></h2>
+</section>
+<section id="vectores-atómicos" class="level2" data-number="19.2">
+<h2 data-number="19.2" class="anchored" data-anchor-id="vectores-atómicos"><span class="header-section-number">19.2</span> Vectores atómicos</h2>
+</section>
+<section id="listas" class="level2" data-number="19.3">
+<h2 data-number="19.3" class="anchored" data-anchor-id="listas"><span class="header-section-number">19.3</span> Listas</h2>
+</section>
+<section id="funciones" class="level2" data-number="19.4">
+<h2 data-number="19.4" class="anchored" data-anchor-id="funciones"><span class="header-section-number">19.4</span> Funciones</h2>
+</section>
+<section id="funciones-anónimas" class="level2" data-number="19.5">
+<h2 data-number="19.5" class="anchored" data-anchor-id="funciones-anónimas"><span class="header-section-number">19.5</span> Funciones anónimas</h2>
+</section>
+<section id="map" class="level2" data-number="19.6">
+<h2 data-number="19.6" class="anchored" data-anchor-id="map"><span class="header-section-number">19.6</span> <code>map()</code></h2>
+</section>
+<section id="reduce" class="level2" data-number="19.7">
+<h2 data-number="19.7" class="anchored" data-anchor-id="reduce"><span class="header-section-number">19.7</span> <code>reduce()</code></h2>
+</section>
+<section id="list_rbind" class="level2" data-number="19.8">
+<h2 data-number="19.8" class="anchored" data-anchor-id="list_rbind"><span class="header-section-number">19.8</span> <code>list_rbind()</code></h2>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -836,13 +892,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation" aria-label="Página">
   <div class="nav-page nav-page-previous">
-      <a href="./anonymous_functions.html" class="pagination-link" aria-label="Funciones anónimas">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Funciones anónimas</span></span>
+      <a href="./functional_programming.html" class="pagination-link" aria-label="Programación funcional">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Programación funcional</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./data_communication.html" class="pagination-link" aria-label="Comunicación con Quarto">
-        <span class="nav-page-text">Comunicación con Quarto</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./map_reduce_list_rbind_functions.html" class="pagination-link" aria-label="Funciones `map()`, `reduce()` y `list_rbind()`">
+        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Funciones <code>map()</code>, <code>reduce()</code> y <code>list_rbind()</code></span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -851,4 +907,4 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/map_functions.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/map_functions.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/anonymous_functions_purrr.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/anonymous_functions_purrr.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></div></div></footer></body></html>

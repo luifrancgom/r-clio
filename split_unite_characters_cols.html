@@ -386,14 +386,14 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./anonymous_functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Funciones anónimas</span></span></a>
+  <a href="./anonymous_functions_purrr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Funciones anónimas y <code>purrr</code></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./map_functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Funciones <code>map()</code></span></span></a>
+  <a href="./map_reduce_list_rbind_functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Funciones <code>map()</code>, <code>reduce()</code> y <code>list_rbind()</code></span></span></a>
   </div>
 </li>
       </ul>
@@ -933,7 +933,7 @@ Listado&nbsp;18.8: Incorporación de paneles individuales para cada año selecci
 <p><span class="math display">\[
 \backslash(x) \text{ label\_percent(accuracy = 1)(abs}(x))
 \]</span></p>
-<p>En el <a href="anonymous_functions.html" class="quarto-xref"><span>Capítulo 19</span></a> se explorará en detalle qué son y cómo operan las funciones anónimas en R. Por el momento, basta señalar que <code>\(x)</code> define una función puntual que recibe cada valor <code>x</code> del eje, le aplica la función <code>abs()</code> para tomar su valor absoluto transformando valores como <code>-0.04</code> en <code>0.04</code> y finalmente le aplica la función <code>label_percent()</code> del paquete <code>scales</code> para formatearlo como un porcentaje entero (<code>4%</code>).</p>
+<p>En el <a href="anonymous_functions_purrr.html" class="quarto-xref"><span>Capítulo 19</span></a> se explorará en detalle qué son y cómo operan las funciones anónimas en R. Por el momento, basta señalar que <code>\(x)</code> define una función puntual que recibe cada valor <code>x</code> del eje, le aplica la función <code>abs()</code> para tomar su valor absoluto transformando valores como <code>-0.04</code> en <code>0.04</code> y finalmente le aplica la función <code>label_percent()</code> del paquete <code>scales</code> para formatearlo como un porcentaje entero (<code>4%</code>).</p>
 <p>Para solucionar el segundo aspecto, se emplea la función <code>scale_fill_discrete()</code> especificando <code>labels = str_to_title</code>. La función <code>str_to_title()</code> del paquete <code>stringr</code> convierte automáticamente a mayúscula la primera letra de cada categoría, transformando <code>"hombres"</code> en <code>"Hombres"</code> y <code>"mujeres"</code> en <code>"Mujeres"</code> sin necesidad de alterar los datos originales.</p>
 <p>Por último, se agregan las etiquetas informativas mediante la función <code>labs()</code>. Siguiendo el enfoque del <a href="geopackage_gpkg.html" class="quarto-xref"><span>Capítulo 15</span></a>, se define la variable auxiliar <code>actualizacion_fecha &lt;- ymd("2025-07-18")</code> con la función <code>ymd()</code> del paquete <code>lubridate</code> perteneciente al <code>tidyverse</code> y se incluye dinámicamente en el subtítulo utilizando la función <code>str_glue()</code> con: <code>subtitle = str_glue("Actualización: {actualizacion_fecha}")</code>. Además, se suprimen las etiquetas redundantes de los ejes y la leyenda asignando <code>NULL</code> a <code>x</code>, <code>y</code> y <code>fill</code>, tal como se señala a continuación:</p>
 <div class="cell">
