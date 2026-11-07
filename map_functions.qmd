@@ -1,1 +1,0 @@
-# Funciones `map()` {#sec-map-functions}

@@ -1,0 +1,54 @@
+# Funciones anónimas y `purrr` {#sec-anonymous-functions}
+
+```{r}
+#| echo: false
+source("_common.R")
+```
+
+```{r}
+#| label: load-r-packages
+#| echo: false
+#| message: false
+
+```
+
+Este capítulo se basa en ... así como en la documentación oficial de [`...`]({{< ... >}}) donde tiene como propósito ... e información ... .
+
+Exploraremos los siguientes aspectos:
+
+1. 
+2.
+
+:::: {#nte-1-chap-19 .callout-note}
+Para desarrollar el contenido de este capítulo es necesario que crees una nueva carpeta llamada `016_funciones-anonimas-purrr-en-r` y dentro de ella generes el archivo `001_funciones-anonimas-purrr.R`, siguiendo las pautas de la @sec-package-usage.
+::::
+
+## `purrr`
+
+
+
+## Vectores atómicos
+
+
+
+## Listas
+
+
+
+## Funciones
+
+
+
+## Funciones anónimas
+
+
+
+## `map()`
+
+
+
+## `reduce()`
+
+
+
+## ``list_rbind()``

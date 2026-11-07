@@ -1,0 +1,54 @@
+# Funciones `map()`, `reduce()` y `list_rbind()` {#sec-map-functions}
+
+```{r}
+#| echo: false
+source("_common.R")
+```
+
+```{r}
+#| label: load-r-packages
+#| echo: false
+#| message: false
+
+```
+
+Este capítulo se basa en ... así como en la documentación oficial de [`...`]({{< ... >}}) donde tiene como propósito ... e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Universidad Militar Nueva Granada (UMNG).
+
+Exploraremos los siguientes aspectos:
+
+1. 
+2.
+
+:::: {#nte-1-chap-20 .callout-note}
+Para desarrollar el contenido de este capítulo es necesario que crees una nueva carpeta llamada `020_funciones-anonimas-purrr-en-r` y dentro de ella generes el archivo `001_funciones-anonimas-purrr.R`, siguiendo las pautas de la @sec-package-usage.
+::::
+
+## Importación
+
+
+
+## Unión por filas
+
+
+
+## Separación de caracteres en columnas
+
+
+
+## Corrección códigos departamentos y municipios
+
+
+
+## Caso de estudio: consolidación resultados Saber-pro para UMNG
+
+
+
+### Limpiar y filtar
+
+
+
+### Transformar
+
+
+
+### Exportar

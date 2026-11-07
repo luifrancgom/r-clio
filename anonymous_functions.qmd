@@ -1,1 +1,0 @@
-# Funciones anónimas {#sec-anonymous-functions}

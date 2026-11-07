@@ -60,8 +60,8 @@ book:
         - split_unite_characters_cols.qmd
     - part: functional_programming.qmd
       chapters:
-        - anonymous_functions.qmd
-        - map_functions.qmd 
+        - anonymous_functions_purrr.qmd
+        - map_reduce_list_rbind_functions.qmd 
     - part: data_communication.qmd
     - references.qmd
 
