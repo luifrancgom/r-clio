@@ -12,15 +12,17 @@ source("_common.R")
 
 ```
 
-Este capítulo se basa en ... así como en la documentación oficial de [`...`]({{< ... >}}) donde tiene como propósito ... e información ... .
+Este capítulo se basa en [@grolemund_hands-programming_2014, Cap. 1], [@wickham_r_2023, Cap. 26] y [@wickham_advanced_2019, Cap. 9] así como en la documentación oficial de [`purrr`]({{< var url.packages.purrr_get_started >}}) donde tiene como propósito introducir los requisitos necesarios para entender como utilizar el paquete `purrr` para manipular archivos en un directorio respecto a lo que se expondrá en el @sec-map-functions.
 
 Exploraremos los siguientes aspectos:
 
-1. 
-2.
+1. ¿Qué es el paquete `purrr`? 
+2. ¿Cómo se utiliza el paquete `purrr` con vectores atómicos y listas?
+3. ¿Cuál es la estructura de las funciones y en particular de las funciones anónimas en R?
+4. ¿Cómo funcionan las funciones `map()`, `reduce()` y `list_rbind()` del paquete `purrr`? 
 
 :::: {#nte-1-chap-19 .callout-note}
-Para desarrollar el contenido de este capítulo es necesario que crees una nueva carpeta llamada `016_funciones-anonimas-purrr-en-r` y dentro de ella generes el archivo `001_funciones-anonimas-purrr.R`, siguiendo las pautas de la @sec-package-usage.
+Para desarrollar el contenido de este capítulo es necesario que crees una nueva carpeta llamada `019_funciones-anonimas-purrr-en-r` y dentro de ella genera el archivo `001_funciones-anonimas-purrr.R`, siguiendo las pautas de la @sec-package-usage.
 ::::
 
 ## `purrr`

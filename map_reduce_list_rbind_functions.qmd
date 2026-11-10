@@ -12,15 +12,36 @@ source("_common.R")
 
 ```
 
-Este capítulo se basa en ... así como en la documentación oficial de [`...`]({{< ... >}}) donde tiene como propósito ... e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Universidad Militar Nueva Granada (UMNG).
+Este capítulo se basa en [@wickham_r_2023, Cap. 26] así como en la documentación oficial de [`purrr`]({{< var url.packages.purrr >}}) donde tiene como propósito introducir la forma de consolidar multipleas archivos que se encuentran en un directorio en un solo archivo, utilizando el paquete `purrr` e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Universidad Militar Nueva Granada (UMNG).
 
 Exploraremos los siguientes aspectos:
 
-1. 
-2.
+1. ¿Cómo importar múltiples archivos en un directorio utilizando el paquete `purrr`? 
+2. ¿Cómo consolidar múltiples tablas de datos por filas en un solo archivo utilizando el paquete `purrr`?
+3. ¿Cómo utilizar la gramática de manipulación de datos (ver @sec-two-table-verbs) para limpiar y exportar un archivo consolidado? 
 
 :::: {#nte-1-chap-20 .callout-note}
-Para desarrollar el contenido de este capítulo es necesario que crees una nueva carpeta llamada `020_funciones-anonimas-purrr-en-r` y dentro de ella generes el archivo `001_funciones-anonimas-purrr.R`, siguiendo las pautas de la @sec-package-usage.
+Para desarrollar el contenido de este capítulo es necesario que hayas guardado el archivo `2021-saber_pro-genericas.txt.xz` en la carpeta `data`, tal como se señaló en la @nte-1-chap-13. En caso que no lo hayas hecho es necesario que lo descargues y lo incluyas dentro de la carpeta `data`:
+
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2021-saber_pro-genericas.txt.xz]({{< var url.data.saber_pro_txt_xz_2021 >}})
+:::
+
+Adicionalmente, es necesario que hayas descargado los archivos señalados a continuación y lo incluyas dentro de la carpeta `data`, respecto a los descrito en la @nte-1-chap-6:
+
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2022-saber_pro-genericas.txt.xz]({{< var url.data.saber_pro_txt_xz_2022 >}})
+:::
+
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2023-saber_pro-genericas.txt.xz]({{< var url.data.saber_pro_txt_xz_2023 >}})
+:::
+
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2024-saber_pro-genericas.txt.xz]({{< var url.data.saber_pro_txt_xz_2024 >}})
+:::
+
+En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `020_funciones-anonimas-purrr-en-r` y dentro de ella genera el archivo `001_funciones-anonimas-purrr.R`, siguiendo las pautas de la @sec-package-usage.
 ::::
 
 ## Importación
