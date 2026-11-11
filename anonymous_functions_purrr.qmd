@@ -9,10 +9,10 @@ source("_common.R")
 #| label: load-r-packages
 #| echo: false
 #| message: false
-
+library(tidyverse)
 ```
 
-Este capítulo se basa en [@grolemund_hands-programming_2014, Cap. 1], [@wickham_r_2023, Cap. 26] y [@wickham_advanced_2019, Cap. 9] así como en la documentación oficial de [`purrr`]({{< var url.packages.purrr_get_started >}}) donde tiene como propósito introducir los requisitos necesarios para entender como utilizar el paquete `purrr` para manipular archivos en un directorio respecto a lo que se expondrá en el @sec-map-functions.
+Este capítulo se basa en [@grolemund_hands-programming_2014, Cap. 1], [@wickham_r_2023, Cap. 26] y [@wickham_advanced_2019, Cap. 9] así como en la documentación oficial de [`purrr`]({{< var url.packages.purrr_get_started >}}) donde tiene como propósito introducir los requisitos necesarios para entender cómo utilizar el paquete `purrr` para manipular archivos en un directorio respecto a lo que se expondrá en el @sec-map-functions.
 
 Exploraremos los siguientes aspectos:
 
@@ -25,34 +25,361 @@ Exploraremos los siguientes aspectos:
 Para desarrollar el contenido de este capítulo es necesario que crees una nueva carpeta llamada `019_funciones-anonimas-purrr-en-r` y dentro de ella genera el archivo `001_funciones-anonimas-purrr.R`, siguiendo las pautas de la @sec-package-usage.
 ::::
 
-## `purrr`
+## `purrr` {#sec-purrr}
 
+El paquete [`purrr`]({{< var url.packages.purrr_get_started >}}) es el componente del `tidyverse` diseñado para facilitar la programación funcional en R [@wickham_r_2023, Cap. 26]. En el análisis de datos es habitual enfrentarse a tareas repetitivas donde se debe aplicar la misma operación a múltiples elementos independientes, tales como importar decenas de archivos desde una carpeta o transformar varias columnas de manera simultánea.
 
+Tradicionalmente, la repetición de tareas en programación se resuelve mediante bucles imperativos como `for` o `while`. Aunque los bucles son válidos, suelen requerir una considerable cantidad de código repetitivo, como inicializar previamente estructuras vacías para almacenar los resultados, gestionar manualmente variables de índice y controlar los límites de la iteración.
 
-## Vectores atómicos
+En contraste, la **programación funcional** implementada en `purrr` sustituye los bucles tradicionales por **funcionales** (en inglés **functionals**). Es decir, funciones de orden superior que reciben una función como argumento y la aplican de forma sistemática a cada uno de los elementos de una estructura de datos [@wickham_advanced_2019, Cap. 9]. Esto permite expresar directamente **qué** transformación se desea realizar sobre cada elemento en lugar de especificar **cómo** administrar los pasos del ciclo, dando lugar a un código más conciso, legible, expresivo y fácil de depurar.
 
+## Vectores {#sec-vectors}
 
+Para comprender las herramientas de iteración que ofrece `purrr`, es indispensable profundizar en las estructuras de datos sobre las cuales opera: los **vectores**. En R, los vectores constituyen la estructura de datos más básica e importante y prácticamente cualquier objeto más complejo se fundamenta en ellos [@wickham_advanced_2019, Cap. 3].
 
-## Listas
+Los vectores en R se dividen en 2 categorías:
 
+1. **Vectores atómicos** (en inglés **atomic vectors**): colecciones unidimensionales y homogéneas donde la totalidad de sus elementos debe pertenecer obligatoriamente al mismo tipo de datos básico.
 
+2. **Listas** (en inglés **lists**): colecciones unidimensionales pero heterogéneas donde cada elemento puede poseer un tipo de datos diferente y albergar objetos de cualquier longitud y complejidad.
 
-## Funciones
+En el @sec-mutate-data-case-study-dplyr se presentó la @tbl-some-data-types-in-r, en la cual se expusieron algunos de los tipos de datos más comunes utilizados en R, diferenciando entre vectores atómicos (`logical`, `integer`, `double`, `character`), listas (`list`) y objetos integrados como factores y fechas (`factor`, `ordered`, `Date`).
 
-![Estructura de una función [@grolemund_hands-programming_2014, Cap. 1]](images/function_structure.png){#fig-function-structure}
+### Vectores atómicos {#sec-atomic-vectors}
 
-## Funciones anónimas
+Los vectores atómicos son estrictamente homogéneos donde R no permite almacenar elementos de distinta naturaleza en un mismo vector atómico. En R existen 6 tipos de vectores atómicos: `logical`, `integer`, `double` (cuyo sinónimo habitual en R es `numeric`), `character`, `complex` y `raw`. 
 
+::: {#nte-2-chap-19 .callout-note}
+En la @tbl-some-data-types-in-r del @sec-mutate-data-case-study-dplyr únicamente se incluyeron los tipos `logical`, `integer`, `double` y `character`. Los tipos `complex` (como por ejemplo números complejos `1 + 2i`) y `raw` (relacionados con el almacenamiento de bytes binarios puros) no fueron mencionados allí debido a que corresponden a tipos de datos especializados, y donde no es necesario utilizar los tipos `complex` y `raw` para comprender la lógica del análisis de datos respecto a los temas expuestos en este libro.
+:::
 
+Cuando se combinan elementos para conformar un vector atómico mediante la función básica `c()`, R exige homogeneidad. Si se intentan combinar valores de tipos diferentes, R aplica una regla de coerción implícita transformando automáticamente todos los elementos al tipo más flexible. Por ejemplo, convirtiendo enteros a caracteres.
 
-## `map()`
+### Listas {#sec-lists}
 
-![Representación gráfica de la función `map()`](images/map.png){#fig-map}
+A diferencia de los vectores atómicos, las **listas** son vectores heterogéneos y genéricos. Cada elemento de una lista no está restringido a un solo escalar de tipo primitivo. En ese sentido puede ser un vector, una función o una tabla de datos rectangular como una `tibble`.
 
-## `reduce()`
+Esta flexibilidad hace que la introducción de las listas sea estrictamente necesaria al realizar análisis de datos e iteración funcional. En muchas ocasiones se requiere manipular y conservar colecciones de objetos que no pueden incluirse dentro de un vector atómico sin perder su estructura.
 
-![Representación gráfica de la función `reduce()`](images/reduce.png){#fig-reduce}
+Para ilustrar esta necesidad fundamental, supongamos que se dispone de 2 tablas de datos en `tibble`s independientes y se busca agruparlas en un solo contenedor para su posterior procesamiento, tal como se señala en el @lst-list-tibbles:
 
-## `list_rbind()`
+```{r}
+#| lst-label: lst-list-tibbles
+#| lst-cap: Creación de una lista para almacenar tibbles independientes
+# Cargar paquetes ----
+library(tidyverse)
 
-![Representación gráfica de la función `list_rbind()`](images/list_rbind.png){#fig-list-rbind}
+# Lista de tibbles ----
+list(
+  tibble(x = "a", y = "b"),
+  tibble(y = "c", z = "d")
+)
+```
+
+Al utilizar la función `list()`, tal como se observa en el @lst-list-tibbles, R genera una lista con 2 componentes independientes: `[[1]]` y `[[2]]`. Cada uno de estos componentes conserva íntegramente su condición y estructura de `tibble` con sus respectivas dimensiones y columnas rectangulares.
+
+En contraste, si se intentara utilizar la función `c()` para agrupar estas 2 tablas de datos, el resultado no conservará las tablas como entidades independientes, tal como se señala en el @lst-c-tibbles:
+
+```{r}
+#| lst-label: lst-c-tibbles
+#| lst-cap: Pérdida de la estructura tabular al utilizar la función `c()` con tibbles
+# Intento de combinación con c() ----
+c(
+  tibble(x = "a", y = "b"),
+  tibble(y = "c", z = "d")
+)
+```
+
+Tal como se aprecia en el resultado del @lst-c-tibbles, la función `c()` no crea una colección de 2 `tibble`s. En su lugar, R descompone internamente cada tabla en sus columnas y las concatena en una única lista "aplanada" de 4 vectores columna: `$x`, `$y`, `$y`, `$z`. Con ello se pierde por completo la identidad tabular rectangular de cada conjunto de datos original.
+
+Por esta razón, las listas son el contenedor en R para almacenar tablas de datos múltiples y otros objetos. El paquete `purrr` utiliza tanto vectores atómicos como listas para iterar [@wickham_r_2023, Cap. 26]. En cualquier flujo de trabajo funcional para análisis de datos, se identifica el vector sobre el cual se desea operar, como por ejemplo un vector atómico de caracteres con las rutas de varios archivos o una lista con las tablas importadas, y luego se itera a través de cada uno de sus elementos mediante una función.
+
+## Funciones {#sec-functions}
+
+Para llevar a cabo una iteración funcional con `purrr`, no basta con disponer de un vector sobre el cual iterar. También se requiere una **función** que determine la acción que se ejecutará sobre cada elemento [@wickham_advanced_2019, Cap. 9]. Las funciones permiten en R encapsular un conjunto de instrucciones reutilizables para automatizar cálculos repetitivos, evitar la duplicación de código y disminuir la probabilidad de cometer errores [@grolemund_hands-programming_2014, Cap. 1].
+
+Para comprender cómo se construye una función en R, considera un ejemplo clásico de probabilidad en relación a la simulación del lanzamiento de una moneda donde existen 2 posibles resultados excluyentes, cara o cruz, tal como se ilustra en la @fig-coin-head-tail.
+
+![Dos caras de una moneda](images/coin_head_tail.png){#fig-coin-head-tail fig-alt="Fotografía de las dos caras de una moneda que ilustra los dos resultados posibles de un lanzamiento: cara y cruz."}
+
+En R, es posible simular este experimento mediante la función `sample()`, la cual extrae una muestra aleatoria a partir de los elementos provistos en el parámetro `x`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-sample-coin-single
+#| lst-cap: Simulación de un lanzamiento de moneda mediante la función `sample()`
+# Simulación de lanzamiento ----
+moneda <- c("cara", "cruz")
+
+sample(x = moneda, size = 1)
+```
+
+En el @lst-sample-coin-single, la función `sample()` selecciona aleatoriamente un único elemento (`size = 1`) del vector `moneda`. Si se deseara simular más de 2 lanzamientos con esta moneda de 2 caras, no es posible hacerlo sin permitir la repetición de los elementos. Este aspecto se debe a que por defecto la función `sample()` realiza un muestreo sin reemplazo (`replace = FALSE`). Por lo tanto, para simular múltiples lanzamientos independientes es indispensable habilitar el muestreo con reemplazo mediante `replace = TRUE`, tal como se señala en el @lst-sample-coin-multiple:
+
+```{r}
+#| lst-label: lst-sample-coin-multiple
+#| lst-cap: Simulación de múltiples lanzamientos de una moneda con reemplazo mediante `sample()`
+# Múltiples lanzamientos con reemplazo ----
+sample(
+  x = moneda,
+  size = 3,
+  replace = TRUE
+)
+```
+
+Para aplicar a esta rutina una mayor flexibilidad, es posible parametrizar cada una de las opciones del experimento vinculándolas a nombres de variables independientes como `lados`, `n_lanzamientos`, `con_reemplazo`, antes de utilizar `sample()`, tal como se señala en el @lst-coin-parameters:
+
+```{r}
+#| lst-label: lst-coin-parameters
+#| lst-cap: Parametrización de las instrucciones para simular el lanzamiento de una moneda
+# Variables auxiliares ----
+lados <- c("cara", "cruz")
+n_lanzamientos <- 4
+con_reemplazo <- TRUE
+
+# Ejecución del experimento ----
+lanzamientos <- sample(
+  x = lados,
+  size = n_lanzamientos,
+  replace = con_reemplazo
+)
+
+lanzamientos
+```
+
+Aunque el código presentado en el @lst-coin-parameters cumple su propósito, si se requiriera simular lanzamientos en distintas partes de un flujo de trabajo sería necesario copiar y pegar este bloque de código una y otra vez, modificando los valores manualmente. Este procedimiento resulta ineficiente y susceptible a inconsistencias donde la solución consiste en encapsular estas instrucciones dentro de una **función**. 
+
+En la @fig-function-structure se ilustran los componentes conceptuales y la anatomía estructural de una función en R [@grolemund_hands-programming_2014, Cap. 1] encapsulando estas instrucciones dentro de una función denominada `lanzar_moneda`.
+
+![Estructura de una función [@grolemund_hands-programming_2014, Cap. 1]](images/function_structure.png){#fig-function-structure fig-alt="Diagrama conceptual que detalla la estructura y componentes de una función en R a partir del ejemplo lanzar_moneda. Se identifican el nombre de la función, los parámetros definidos en function(), los argumentos por defecto, el cuerpo delimitado por llaves que alberga las instrucciones a ejecutar, la salida generada como última expresión evaluada, y las definiciones de argumento y parámetro."}
+
+Tal como se detalla en la @fig-function-structure, una función en R se compone esencialmente de los siguientes elementos:
+
+1. **Nombre**: el identificador asignado a la función mediante el operador `<-` para almacenarla en el entorno y poder utilizarla posteriormente. Siguiendo las convenciones de estilo de R, los nombres de funciones deben ser verbos concisos que indiquen con claridad la acción realizada como por ejemplo `lanzar_moneda`.
+
+2. **Parámetros**: las variables declaradas dentro del paréntesis de `function(...)` corresponden a los valores que la función espera recibir para operar.
+
+3. **Argumento**: el valor específico asignado a un parámetro al momento de invocar la función.
+
+4. **Argumento por defecto**: valor predeterminado asignado a un parámetro en la definición de la función como por ejemplo, `= c("cara", "cruz")`. Si al llamar la función no se suministra un argumento para dicho parámetro, R utilizará automáticamente este valor predeterminado.
+
+5. **Cuerpo** (en inglés **body**): el bloque de código encerrado entre llaves `{ ... }` que contiene las instrucciones que se ejecutarán secuencialmente cada vez que se invoque la función.
+
+6. **Salida de la función** (en inglés **return value**): el objeto o resultado que la función entrega a quien la llamó. En R no es obligatorio emplear una sentencia explícita de retorno como `return()` que utilizan otros lenguajes de programación. Por defecto, R retorna automáticamente el resultado de la última expresión evaluada dentro del cuerpo donde en este caso corresponde a `lanzamientos`.
+
+De manera general, la sintaxis para construir una función en R responde al siguiente esquema:
+
+```r
+nombre <- function(parametros) {
+  cuerpo
+}
+```
+
+A partir de esta estructura, en el @lst-function-coin-basic se encapsulan las instrucciones de simulación dentro de la función `lanzar_moneda()` sin definir parámetros iniciales, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-function-coin-basic
+#| lst-cap: Definición de una función básica sin parámetros en R
+# Función básica ----
+lanzar_moneda <- function() {
+  # Variables auxiliares
+  lados <- c("cara", "cruz")
+  n_lanzamientos <- 4
+  con_reemplazo <- TRUE
+
+  lanzamientos <- sample(
+    x = lados,
+    size = n_lanzamientos,
+    replace = con_reemplazo
+  )
+
+  # Salida
+  lanzamientos
+}
+```
+
+Para hacer que `lanzar_moneda()` sea verdaderamente reutilizable y adaptable a diferentes escenarios, en el @lst-function-coin-parameters se agregan los parámetros `n_lanzamientos` y `lados` al asignarles argumentos por defecto, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-function-coin-parameters
+#| lst-cap: Definición de la función `lanzar_moneda()` con parámetros y argumentos por defecto
+# Función parametrizada ----
+lanzar_moneda <- function(
+  n_lanzamientos = 1,
+  lados = c("cara", "cruz")
+) {
+  # Variable auxiliar
+  con_reemplazo <- TRUE
+
+  lanzamientos <- sample(
+    x = lados,
+    size = n_lanzamientos,
+    replace = con_reemplazo
+  )
+
+  # Salida
+  lanzamientos
+}
+```
+
+Una vez definida la función `lanzar_moneda()` con sus parámetros, es posible invocarla especificando el número de lanzamientos deseado mediante el argumento `n_lanzamientos`, tal como se señala en el @lst-function-coin-call:
+
+```{r}
+#| lst-label: lst-function-coin-call
+#| lst-cap: Invocación de la función `lanzar_moneda()` especificando el argumento `n_lanzamientos`
+# Invocación de la función ----
+lanzar_moneda(n_lanzamientos = 5)
+```
+
+## Funciones anónimas {#sec-anonymous-functions-intro}
+
+En el @lst-function-coin-parameters creaste una función formal a la cual se le asignó el nombre `lanzar_moneda`. Nombrar una función es indispensable cuando se trata de una operación compleja o cuando el objetivo es reutilizarla recurrentemente a lo largo de un flujo de trabajo.
+
+Sin embargo, en los flujos de iteración funcional con `purrr` es muy común requerir funciones breves y que se utilizan exclusivamente en un único paso de transformación y que no vuelven a emplearse en el resto del análisis. En tales circunstancias, tener que inventar un nombre para cada función de un solo uso resulta contraproducente ya que sobrecarga el entorno global con variables innecesarias.
+
+Para solucionar este inconveniente se introducen las **funciones anónimas**, que se conocen también como funciones **lambda** en otros lenguajes de programación. Una función anónima es una función que no tiene un nombre asignado [@wickham_advanced_2019, Cap. 9]. A partir de la versión `4.1.0` de R, el lenguaje incorporó una sintaxis nativa y concisa para definir funciones anónimas mediante la barra diagonal inversa `\(...) { ... }`, la cual constituye una forma abreviada y equivalente a escribir `function(...) { ... }`, tal como se señala en el @lst-anonymous-function-definition:
+
+```{r}
+#| lst-label: lst-anonymous-function-definition
+#| lst-cap: Definición de una función anónima en R mediante la sintaxis nativa `\(...) { ... }`
+#| eval: false
+# Función anónima nativa ----
+\(x) {
+  sample(
+    x = c("cara", "cruz"),
+    size = x,
+    replace = TRUE
+  )
+}
+```
+
+En el @lst-anonymous-function-definition, la expresión define una función anónima que recibe el parámetro `x` y que representa el número de lanzamientos a realizar donde devuelve los resultados muestreados con reemplazo. Como no está vinculada a ningún nombre mediante el operador `<-`, esta función existe únicamente en la expresión donde se evalúa. 
+
+Si bien es posible ejecutar una función anónima de forma inmediata rodeándola de paréntesis como por ejemplo `(\(x) { sample(c("cara", "cruz"), x, replace = TRUE) })(3)`, su verdadero potencial se despliega al suministrarla como argumento `.f` a las funciones de iteración del paquete `purrr`, tal como se examinará en la @sec-map.
+
+## `map()` {#sec-map}
+
+La función `map()` es la pieza central del paquete `purrr` [@wickham_r_2023, Cap. 26]. Su propósito fundamental es transformar un vector de entrada aplicando una función a cada uno de sus elementos de manera independiente. En la @fig-map se ilustra la representación gráfica del funcionamiento de la función `map()`.
+
+![Representación gráfica de la función `map()`](images/map.png){#fig-map fig-alt="Diagrama conceptual que ilustra el funcionamiento de la función map(). A la izquierda se presenta un vector de 4 elementos. La función map() toma dicho vector y una función f, aplicando f de forma individual e independiente a cada elemento. A la derecha se genera una lista de salida de 4 elementos donde cada posición contiene el resultado correspondiente f(x)."}
+
+Tal como se aprecia en la @fig-map, la función `map()` recibe 2 argumentos principales:
+
+1. `.x`: un vector atómico o lista que contiene los elementos sobre los cuales se iterará.
+
+2. `.f`: la función que se aplicará a cada elemento individual de `.x`.
+
+Durante la ejecución, `map()` recorre ordenadamente cada elemento $x_i$ del vector `.x`, evalúa $f(x_i)$ y almacena el resultado en una posición correspondiente. La propiedad distintiva de `map()` es que **siempre retorna una lista** cuya longitud es exactamente igual a la cantidad de elementos presentes en el vector de entrada `.x`.
+
+Para ilustrar este comportamiento, supongamos que deseamos simular experimentos de lanzamientos de monedas donde la cantidad de lanzamientos varía sucesivamente de 1 a 3, es decir el vector atómico `1:3`. En el @lst-map-named-function se utiliza `map()` pasando como argumento `.f` la función nombrada `lanzar_moneda`:
+
+```{r}
+#| lst-label: lst-map-named-function
+#| lst-cap: Aplicación de la función `map()` junto con una función nombrada
+# Iteración con función nombrada ----
+map(
+  .x = 1:3,
+  .f = lanzar_moneda
+)
+```
+
+En el @lst-map-named-function, `map()` toma el vector `1:3` y pasa sucesivamente el valor `1` a `lanzar_moneda(n_lanzamientos = 1)`, el valor `2` a `lanzar_moneda(n_lanzamientos = 2)` y el valor `3` a `lanzar_moneda(n_lanzamientos = 3)`. El resultado es una lista de 3 elementos señalados con las posiciones `[[1]]`, `[[2]]` y `[[3]]`, donde cada elemento alberga un vector de caracteres con el resultado de sus respectivos lanzamientos.
+
+De forma completamente análoga, es posible alcanzar este mismo resultado sin necesidad de definir previamente la función `lanzar_moneda`, suministrando directamente una función anónima como argumento `.f`, tal como se señala en el @lst-map-anonymous-function:
+
+```{r}
+#| lst-label: lst-map-anonymous-function
+#| lst-cap: Aplicación de la función `map()` junto con una función anónima
+# Iteración con función anónima ----
+map(
+  .x = 1:3,
+  .f = \(x) {
+    sample(
+      x = c("cara", "cruz"),
+      size = x,
+      replace = TRUE
+    )
+  }
+)
+```
+
+Tal como se evidencia al comparar el @lst-map-named-function y el @lst-map-anonymous-function, ambas alternativas generan una lista con idéntica estructura. La ventaja de la función anónima en este contexto radica en que toda la lógica requerida se encuentra autocontenida dentro de la propia invocación de `map()`. Este patrón resulta útil para tareas como la lectura secuencial de múltiples archivos en un directorio, donde el vector de entrada corresponde a las rutas de los archivos y la función anónima ejecuta la importación de cada uno de ellos, tal como se implementará en el @sec-map-functions.
+
+## `reduce()` {#sec-reduce}
+
+Mientras que `map()` aplica una transformación independiente a cada elemento y devuelve una lista con la misma cantidad de elementos de entrada, la función `reduce()` del paquete `purrr` tiene como finalidad combinar progresivamente todos los elementos de un vector o lista hasta consolidarlos en un único objeto final [@wickham_r_2023, Cap. 26]. En la @fig-reduce se ilustra la representación gráfica del funcionamiento de la función `reduce()`.
+
+![Representación gráfica de la función `reduce()`](images/reduce.png){#fig-reduce fig-alt="Diagrama conceptual que ilustra el funcionamiento de la función reduce(). Se presentan 4 elementos iniciales a, b, c y d. La función reduce() toma dichos elementos y una función binaria f aplicando la operación de manera secuencial y acumulativa: primero combina a y b mediante f(a, b); luego combina dicho resultado con c mediante f(f(a, b), c); y finalmente combina ese resultado con d produciendo un único resultado final."}
+
+Como se observa en la @fig-reduce, `reduce()` requiere:
+
+1. `.x`: un vector o lista que contiene los elementos a consolidar.
+
+2. `.f`: una **función binaria**, es decir, una función que acepta 2 argumentos y retorna un único valor como por ejemplo operaciones matemáticas de suma o producto o funciones de teoría de conjuntos como `intersect()` o `union()`.
+
+El mecanismo operativo de `reduce()` es acumulativo:
+
+1. Toma el primer elemento (`a`) y el segundo elemento (`b`), y evalúa $f(a, b)$.
+
+2. Toma el resultado intermedio obtenido en el paso anterior y el tercer elemento (`c`), y evalúa $f(f(a, b), c)$.
+
+3. Continúa este proceso de manera recursiva hasta agotar todos los elementos de la colección, devolviendo un único valor consolidado.
+
+Para ilustrar la utilidad práctica de `reduce()`, supongamos que se dispone de una lista con 3 vectores de caracteres denominados `conjuntos` y se desea encontrar cuáles elementos son comunes a los 3 vectores. Es decir, la intersección múltiple entre ellos. Aunque la función base `intersect()` únicamente puede comparar 2 vectores a la vez, combinarla con `reduce()` permite resolver esta operación para cualquier cantidad de conjuntos, tal como se señala en el @lst-reduce-intersect:
+
+```{r}
+#| lst-label: lst-reduce-intersect
+#| lst-cap: Identificación de elementos comunes en una lista de vectores mediante `reduce()` e `intersect`
+# Lista de conjuntos ----
+conjuntos <- list(
+  c("A", "B", "C"),
+  c("B", "C", "D"),
+  c("C", "D", "E")
+)
+
+# Intersección acumulativa ----
+reduce(
+  .x = conjuntos,
+  .f = intersect
+)
+```
+
+En el @lst-reduce-intersect, `reduce()` opera secuencialmente de la siguiente manera:
+
+1. Aplica `intersect()` entre el primer y segundo elemento, `intersect(c("A", "B", "C"), c("B", "C", "D"))`, obteniendo como resultado intermedio `c("B", "C")`.
+
+2. Aplica `intersect()` entre dicho resultado intermedio y el tercer elemento, `intersect(c("B", "C"), c("C", "D", "E"))`.
+
+El resultado final devuelto es `"C"`, el único elemento presente simultáneamente en los 3 vectores de la lista. Esta técnica resulta fundamental para el análisis de datos reales. En el @sec-map-functions utilizaremos esta misma lógica combinando `map()` y `reduce()` para identificar con exactitud cuáles columnas se encuentran presentes en la totalidad de los archivos anuales del examen Saber Pro antes de unificarlos.
+
+## `list_rbind()` {#sec-list-rbind}
+
+Al procesar múltiples archivos mediante `map()`, el resultado obtenido es una lista en la que cada elemento es una tabla de datos independiente dentro de una `tibble`. Sin embargo, para realizar tareas de exploración, filtrado, modelado o visualización, es necesario reunir todas esas tablas individuales en un único conjunto de datos rectangular consolidado.
+
+Para llevar a cabo esta tarea, el paquete `purrr` proporciona la función `list_rbind()`, la cual toma una lista de tablas de datos y las une o apila verticalmente por filas [@wickham_r_2023, Cap. 26]. En la @fig-list-rbind se ilustra la representación gráfica del funcionamiento de la función `list_rbind()`.
+
+![Representación gráfica de la función `list_rbind()`](images/list_rbind.png){#fig-list-rbind fig-alt="Diagrama conceptual que ilustra el funcionamiento de la función list_rbind(). A la izquierda se presentan 2 tablas de datos independientes dentro de una lista: la primera con columnas x e y (valores a y b), y la segunda con columnas y y z (valores c y d). La función list_rbind() apila ambas tablas por filas alineando la columna común y, generando a la derecha una tabla única consolidada con columnas x, y y z, e imputando valores NA en las celdas correspondientes a variables no observadas en cada tabla original."}
+
+Tal como se detalla en la @fig-list-rbind, la ventaja de `list_rbind()` radica en que alinea automáticamente las columnas basándose en sus **nombres** y no en su orden posicional:
+
+- Si una columna está presente en todas las tablas, como la columna `y` en @fig-list-rbind, sus valores se concatenan verticalmente en una sola columna.
+
+- Si una columna existe únicamente en algunas tablas pero no en otras, como las columnas `x` y `z` en @fig-list-rbind, `list_rbind()` preserva dichas variables e imputa automáticamente el valor especial de datos faltantes `NA` en las filas de las tablas donde la columna no existía originalmente.
+
+Para comprobar este comportamiento, consideremos una lista denominada `tablas_datos` compuesta por 2 `tibble`s con columnas parcialmente superpuestas, tal como se señala en el @lst-list-rbind-tables:
+
+```{r}
+#| lst-label: lst-list-rbind-tables
+#| lst-cap: Consolidación vertical de una lista de tibbles mediante la función `list_rbind()`
+# Lista de tablas con columnas parcialmente coincidentes ----
+tablas_datos <- list(
+  tibble(x = "a", y = "b"),
+  tibble(y = "c", z = "d")
+)
+
+# Unión por filas ----
+list_rbind(tablas_datos)
+```
+
+En el resultado del @lst-list-rbind-tables, `list_rbind()` consolida ambas tablas en una única `tibble` de 2 filas y 3 columnas. La primera fila conserva `x = "a"` e `y = "b"` asignando `NA` a `z`, mientras que la segunda fila incorpora `y = "c"` y `z = "d"` asignando `NA` a `x`.
+
+Esta operación completa el ciclo fundamental de importación y consolidación de archivos múltiples que se desarrollará en el @sec-map-functions. Primero se empleará `map()` junto con una función de lectura para importar cada archivo en una lista de tablas de datos. Luego se utilizará la función `reduce()` para identificar las variables comunes en las diferentes tablas de datos importadas. Posteriormente se utilizará `list_rbind()` para apilar todas las filas en un único conjunto de datos estructurado para realizar un análisis posterior.

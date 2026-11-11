@@ -25,8 +25,8 @@
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
      inkscape:zoom="0.84296733"
-     inkscape:cx="610.34394"
-     inkscape:cy="222.42855"
+     inkscape:cx="591.36337"
+     inkscape:cy="166.67313"
      inkscape:window-width="1854"
      inkscape:window-height="1011"
      inkscape:window-x="1146"
@@ -55,19 +55,19 @@
   <!-- Anotación: Valor por defecto -->
   <!-- Anotación: Salida de la función -->
   <g
-     id="g1987"
+     id="g2040"
      inkscape:export-filename="function_structure.png"
      inkscape:export-xdpi="96"
      inkscape:export-ydpi="96">
     <line
        id="conn_nombre"
-       x1="249.00"
-       y1="123.70"
+       x1="249"
+       y1="123.7"
        x2="277.66"
-       y2="123.70"
-       stroke="#1F78B4"
+       y2="123.7"
+       stroke="#1f78b4"
        stroke-width="1.5"
-       stroke-opacity="0.50" />
+       stroke-opacity="0.5" />
     <line
        id="conn_argumento"
        x1="563.0481"
@@ -89,22 +89,22 @@
        style="stroke:#cab2d6;stroke-opacity:0.301961" />
     <line
        id="conn_cuerpo"
-       x1="249.00"
-       y1="279.70"
-       x2="291.74"
-       y2="279.70"
-       stroke="#CCBE93"
+       x1="249"
+       y1="279.70001"
+       x2="291.73999"
+       y2="279.70001"
+       stroke="#ccbe93"
        stroke-width="1.5"
-       stroke-opacity="0.50" />
+       stroke-opacity="0.5" />
     <line
        id="conn_defecto"
-       x1="808.00"
-       y1="154.50"
-       x2="870.00"
-       y2="154.50"
-       stroke="#CAB2D6"
+       x1="808"
+       y1="154.5"
+       x2="870"
+       y2="154.5"
+       stroke="#cab2d6"
        stroke-width="1.5"
-       stroke-opacity="0.50" />
+       stroke-opacity="0.5" />
     <line
        id="conn_salida"
        x1="423.31387"
@@ -116,24 +116,24 @@
        stroke-opacity="0.5" />
     <rect
        id="hl_cuerpo"
-       x="291.74"
+       x="291.73999"
        y="186.77"
-       width="543.22"
-       height="187.54"
+       width="543.21997"
+       height="187.53999"
        rx="18"
        ry="18"
-       fill="#CCBE93"
-       fill-opacity="0.30" />
+       fill="#ccbe93"
+       fill-opacity="0.3" />
     <rect
        id="hl_nombre"
        x="277.66"
        y="107.99"
-       width="138.00"
+       width="138"
        height="31.42"
        rx="6"
        ry="6"
-       fill="#1F78B4"
-       fill-opacity="0.30" />
+       fill="#1f78b4"
+       fill-opacity="0.3" />
     <rect
        id="hl_argumento"
        x="544.9353"
@@ -181,7 +181,7 @@
     <text
        id="code_line0"
        x="277.66"
-       y="130.00"
+       y="130"
        xml:space="preserve"><tspan
          class="code-font"
          id="tspan14">lanzar_moneda </tspan><tspan
@@ -201,8 +201,8 @@
          id="tspan28">,</tspan></text>
     <text
        id="code_line1"
-       x="535.00"
-       y="158.50"
+       x="535"
+       y="158.5"
        xml:space="preserve"><tspan
          class="code-font"
          id="tspan31">lados </tspan><tspan
@@ -217,24 +217,11 @@
          class="str"
          id="tspan41">&quot;cruz&quot;</tspan><tspan
          class="code-font"
-         id="tspan43">),</tspan></text>
-    <text
-       id="code_line2"
-       x="535"
-       y="181"
-       xml:space="preserve"><tspan
-         class="code-font"
-         id="tspan46">con_reemplazo </tspan><tspan
-         class="op"
-         id="tspan48">= </tspan><tspan
-         class="kw"
-         id="tspan50">TRUE</tspan><tspan
-         class="code-font"
-         id="tspan52">) {</tspan></text>
+         id="tspan43">)</tspan></text>
     <text
        id="code_line3"
-       x="302.00"
-       y="215.50"
+       x="300"
+       y="239.5"
        xml:space="preserve"><tspan
          class="code-font"
          id="tspan55">lanzamientos </tspan><tspan
@@ -248,8 +235,8 @@
          id="tspan63">lados,</tspan></text>
     <text
        id="code_line4"
-       x="535.00"
-       y="244.00"
+       x="533"
+       y="268"
        xml:space="preserve"><tspan
          class="code-font"
          id="tspan66">size </tspan><tspan
@@ -259,8 +246,8 @@
          id="tspan70">n_lanzamientos,</tspan></text>
     <text
        id="code_line5"
-       x="535.00"
-       y="272.50"
+       x="533"
+       y="296.5"
        xml:space="preserve"><tspan
          class="code-font"
          id="tspan73">replace </tspan><tspan
@@ -276,35 +263,35 @@
        style="font-size:18.6667px">lanzamientos</text>
     <text
        id="code_line7"
-       x="277.66"
-       y="386.5"
+       x="291.66"
+       y="390.5"
        class="code-font">}</text>
     <rect
        id="box_nombre"
-       x="7.44"
+       x="7.4400001"
        y="105.99"
        width="241.56"
-       height="80.78"
+       height="80.779999"
        rx="6"
        ry="6"
-       fill="#1F78B4"
-       fill-opacity="0.30" />
+       fill="#1f78b4"
+       fill-opacity="0.3" />
     <text
        id="text_nombre_l1"
-       x="16.90"
+       x="16.9"
        y="132.06"><tspan
          class="title-font"
-         id="tspan91">Nombre: </tspan><tspan
+         id="tspan91">Nombre:</tspan><tspan
          class="desc-font"
          id="tspan93">Para nombrar</tspan></text>
     <text
        id="text_nombre_l2"
-       x="16.90"
-       y="155.00"
+       x="16.9"
+       y="155"
        class="desc-font">funciones, procura</text>
     <text
        id="text_nombre_l3"
-       x="16.90"
+       x="16.9"
        y="177.41"
        class="desc-font">usar verbos</text>
     <rect
@@ -338,42 +325,42 @@
          y="48.98">definidas en una función</tspan></text>
     <rect
        id="box_cuerpo"
-       x="0.00"
-       y="237.99"
-       width="249.00"
-       height="80.78"
+       x="0"
+       y="237.99001"
+       width="249"
+       height="80.779999"
        rx="6"
        ry="6"
-       fill="#CCBE93"
-       fill-opacity="0.30" />
+       fill="#ccbe93"
+       fill-opacity="0.3" />
     <text
        id="text_cuerpo_l1"
-       x="9.42"
-       y="264.04"><tspan
+       x="9.4200001"
+       y="264.04001"><tspan
          class="title-font"
-         id="tspan107">Cuerpo: </tspan><tspan
+         id="tspan107">Cuerpo:</tspan><tspan
          class="desc-font"
          id="tspan109">Código que se</tspan></text>
     <text
        id="text_cuerpo_l2"
-       x="9.42"
-       y="286.98"
+       x="9.4200001"
+       y="286.98001"
        class="desc-font">ejecutará al llamar</text>
     <text
        id="text_cuerpo_l3"
-       x="9.42"
-       y="309.39"
+       x="9.4200001"
+       y="309.39001"
        class="desc-font">a la función</text>
     <rect
        id="box_defecto"
-       x="870.00"
+       x="870"
        y="113.27"
-       width="249.00"
-       height="80.78"
+       width="249"
+       height="80.779999"
        rx="6"
        ry="6"
-       fill="#CAB2D6"
-       fill-opacity="0.30" />
+       fill="#cab2d6"
+       fill-opacity="0.3" />
     <rect
        id="box_defecto-7"
        x="673.65588"
@@ -392,33 +379,33 @@
        class="title-font">Argumento por defecto:</text>
     <text
        id="text_defecto_l2"
-       x="879.43"
-       y="162.26"
+       x="879.42999"
+       y="162.25999"
        class="desc-font">Valores usados si no</text>
     <text
        id="text_defecto_l3"
-       x="879.43"
+       x="879.42999"
        y="184.67"
        class="desc-font">se proporciona ninguno</text>
     <rect
        id="box_salida"
-       x="870.48"
-       y="322.32"
-       width="249.00"
+       x="870.47998"
+       y="322.32001"
+       width="249"
        height="79.68"
        rx="6"
        ry="6"
-       fill="#E31A1C"
-       fill-opacity="0.30" />
+       fill="#e31a1c"
+       fill-opacity="0.3" />
     <text
        id="text_salida_l1"
        x="879.88"
-       y="348.36"
+       y="348.35999"
        class="title-font">Salida de la función:</text>
     <text
        id="text_salida_l2"
        x="879.88"
-       y="371.30"
+       y="371.29999"
        class="desc-font">Objeto que genera</text>
     <text
        id="text_salida_l3"
@@ -443,5 +430,42 @@
        y="72.237137"
        class="desc-font"
        style="font-size:18.67px;font-family:Consolas, 'Liberation Mono', 'DejaVu Sans Mono', monospace;fill:#333333">a un parámetro</text>
+    <text
+       id="code_line3-3"
+       x="302"
+       y="211.82994"
+       xml:space="preserve"><tspan
+         class="code-font"
+         id="tspan55-6">con_reemplazo </tspan><tspan
+         class="op"
+         id="tspan57-7">&lt;- TRUE</tspan><tspan
+         class="code-font"
+         id="tspan59-5"> </tspan><tspan
+         class="op"
+         id="tspan61-3"> </tspan><tspan
+         class="code-font"
+         id="tspan63-5" /></text>
+    <g
+       id="g1953"
+       transform="translate(-212,-2)">
+      <text
+         id="code_line7-2"
+         x="520.48035"
+         y="181.52908"
+         class="code-font"
+         style="font-size:18.67px;font-family:Consolas, 'Liberation Mono', 'DejaVu Sans Mono', monospace;fill:#333333">}</text>
+      <text
+         xml:space="preserve"
+         style="font-size:24.316px;line-height:1.2;font-family:Montserrat;-inkscape-font-specification:Montserrat;letter-spacing:0.729479px;word-spacing:0.729479px;fill:#333333;fill-opacity:1;stroke:none;stroke-width:0.907999;stroke-linecap:round;stroke-dasharray:none"
+         x="353.2778"
+         y="260.41733"
+         id="text665"
+         transform="scale(1.4398894,0.69449779)"><tspan
+           sodipodi:role="line"
+           id="tspan663"
+           x="353.2778"
+           y="260.41733"
+           style="fill:#333333;fill-opacity:1;stroke:none;stroke-width:0.907999;stroke-dasharray:none">)</tspan></text>
+    </g>
   </g>
 </svg>
