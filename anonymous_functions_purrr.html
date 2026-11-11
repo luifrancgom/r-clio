@@ -26,7 +26,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -367,11 +387,13 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Este capítulo se basa en … así como en la documentación oficial de <a href="{{< ... >}}"><code>...</code></a> donde tiene como propósito … e información … .</p>
+<p>Este capítulo se basa en <span class="citation" data-cites="grolemund_hands-programming_2014">(<a href="references.html#ref-grolemund_hands-programming_2014" role="doc-biblioref">Grolemund, 2014, Capítulo 1</a>)</span>, <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 26</a>)</span> y <span class="citation" data-cites="wickham_advanced_2019">(<a href="references.html#ref-wickham_advanced_2019" role="doc-biblioref">Wickham, 2019, Capítulo 9</a>)</span> así como en la documentación oficial de <a href="https://purrr.tidyverse.org/articles/purrr.html"><code>purrr</code></a> donde tiene como propósito introducir los requisitos necesarios para entender como utilizar el paquete <code>purrr</code> para manipular archivos en un directorio respecto a lo que se expondrá en el <a href="map_reduce_list_rbind_functions.html" class="quarto-xref"><span>Capítulo 20</span></a>.</p>
 <p>Exploraremos los siguientes aspectos:</p>
 <ol type="1">
-<li></li>
-<li></li>
+<li>¿Qué es el paquete <code>purrr</code>?</li>
+<li>¿Cómo se utiliza el paquete <code>purrr</code> con vectores atómicos y listas?</li>
+<li>¿Cuál es la estructura de las funciones y en particular de las funciones anónimas en R?</li>
+<li>¿Cómo funcionan las funciones <code>map()</code>, <code>reduce()</code> y <code>list_rbind()</code> del paquete <code>purrr</code>?</li>
 </ol>
 <div id="nte-1-chap-19" class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -383,7 +405,7 @@ Nota&nbsp;19.1
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Para desarrollar el contenido de este capítulo es necesario que crees una nueva carpeta llamada <code>016_funciones-anonimas-purrr-en-r</code> y dentro de ella generes el archivo <code>001_funciones-anonimas-purrr.R</code>, siguiendo las pautas de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>.</p>
+<p>Para desarrollar el contenido de este capítulo es necesario que crees una nueva carpeta llamada <code>019_funciones-anonimas-purrr-en-r</code> y dentro de ella genera el archivo <code>001_funciones-anonimas-purrr.R</code>, siguiendo las pautas de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>.</p>
 </div>
 </div>
 <section id="purrr" class="level2" data-number="19.1">
@@ -397,20 +419,71 @@ Nota&nbsp;19.1
 </section>
 <section id="funciones" class="level2" data-number="19.4">
 <h2 data-number="19.4" class="anchored" data-anchor-id="funciones"><span class="header-section-number">19.4</span> Funciones</h2>
+<div id="fig-function-structure" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-function-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/function_structure.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-function-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;19.1: Estructura de una función <span class="citation" data-cites="grolemund_hands-programming_2014">(<a href="references.html#ref-grolemund_hands-programming_2014" role="doc-biblioref">Grolemund, 2014, Capítulo 1</a>)</span>
+</figcaption>
+</figure>
+</div>
 </section>
 <section id="funciones-anónimas" class="level2" data-number="19.5">
 <h2 data-number="19.5" class="anchored" data-anchor-id="funciones-anónimas"><span class="header-section-number">19.5</span> Funciones anónimas</h2>
 </section>
 <section id="map" class="level2" data-number="19.6">
 <h2 data-number="19.6" class="anchored" data-anchor-id="map"><span class="header-section-number">19.6</span> <code>map()</code></h2>
+<div id="fig-map" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/map.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;19.2: Representación gráfica de la función <code>map()</code>
+</figcaption>
+</figure>
+</div>
 </section>
 <section id="reduce" class="level2" data-number="19.7">
 <h2 data-number="19.7" class="anchored" data-anchor-id="reduce"><span class="header-section-number">19.7</span> <code>reduce()</code></h2>
+<div id="fig-reduce" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-reduce-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/reduce.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-reduce-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;19.3: Representación gráfica de la función <code>reduce()</code>
+</figcaption>
+</figure>
+</div>
 </section>
 <section id="list_rbind" class="level2" data-number="19.8">
 <h2 data-number="19.8" class="anchored" data-anchor-id="list_rbind"><span class="header-section-number">19.8</span> <code>list_rbind()</code></h2>
+<div id="fig-list-rbind" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-list-rbind-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/list_rbind.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-list-rbind-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;19.4: Representación gráfica de la función <code>list_rbind()</code>
+</figcaption>
+</figure>
+</div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-grolemund_hands-programming_2014" class="csl-entry" role="listitem">
+Grolemund, G. (2014). <em>Hands-on programming with <span>R</span></em> (First edition). O’Reilly. <a href="https://jjallaire.github.io/hopr/">https://jjallaire.github.io/hopr/</a>
+</div>
+<div id="ref-wickham_advanced_2019" class="csl-entry" role="listitem">
+Wickham, H. (2019). <em>Advanced <span>R</span></em> (Second edition). CRC Press/Taylor &amp; Francis Group. <a href="https://adv-r.hadley.nz/">https://adv-r.hadley.nz/</a>
+</div>
+<div id="ref-wickham_r_2023" class="csl-entry" role="listitem">
+Wickham, H. (2023). <em>R for <span>Data</span> <span>Science</span></em> (2.ª ed.). O’Reilly Media, Incorporated. <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a>
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

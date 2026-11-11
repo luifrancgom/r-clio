@@ -26,7 +26,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -369,11 +389,12 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Este capítulo se basa en … así como en la documentación oficial de <a href="{{< ... >}}"><code>...</code></a> donde tiene como propósito … e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Universidad Militar Nueva Granada (UMNG).</p>
+<p>Este capítulo se basa en <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 26</a>)</span> así como en la documentación oficial de <a href="https://purrr.tidyverse.org/index.html"><code>purrr</code></a> donde tiene como propósito introducir la forma de consolidar multipleas archivos que se encuentran en un directorio en un solo archivo, utilizando el paquete <code>purrr</code> e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Universidad Militar Nueva Granada (UMNG).</p>
 <p>Exploraremos los siguientes aspectos:</p>
 <ol type="1">
-<li></li>
-<li></li>
+<li>¿Cómo importar múltiples archivos en un directorio utilizando el paquete <code>purrr</code>?</li>
+<li>¿Cómo consolidar múltiples tablas de datos por filas en un solo archivo utilizando el paquete <code>purrr</code>?</li>
+<li>¿Cómo utilizar la gramática de manipulación de datos (ver <a href="two_table_verbs.html" class="quarto-xref"><span>Capítulo 11</span></a>) para limpiar y exportar un archivo consolidado?</li>
 </ol>
 <div id="nte-1-chap-20" class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -385,7 +406,61 @@ Nota&nbsp;20.1
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Para desarrollar el contenido de este capítulo es necesario que crees una nueva carpeta llamada <code>020_funciones-anonimas-purrr-en-r</code> y dentro de ella generes el archivo <code>001_funciones-anonimas-purrr.R</code>, siguiendo las pautas de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>.</p>
+<p>Para desarrollar el contenido de este capítulo es necesario que hayas guardado el archivo <code>2021-saber_pro-genericas.txt.xz</code> en la carpeta <code>data</code>, tal como se señaló en la <a href="plain_text.html#nte-1-chap-13" class="quarto-xref">Nota&nbsp;<span>13.1</span></a>. En caso que no lo hayas hecho es necesario que lo descargues y lo incluyas dentro de la carpeta <code>data</code>:</p>
+<div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span><img src="images/download-solid-full.png" alt="Ícono del explorador de archivos" height="25"> <a href="https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/2021-saber_pro-genericas.txt.xz">2021-saber_pro-genericas.txt.xz</a>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<p>Adicionalmente, es necesario que hayas descargado los archivos señalados a continuación y lo incluyas dentro de la carpeta <code>data</code>, respecto a los descrito en la <a href="amounts.html#nte-1-chap-6" class="quarto-xref">Nota&nbsp;<span>6.1</span></a>:</p>
+<div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span><img src="images/download-solid-full.png" alt="Ícono del explorador de archivos" height="25"> <a href="https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/2022-saber_pro-genericas.txt.xz">2022-saber_pro-genericas.txt.xz</a>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span><img src="images/download-solid-full.png" alt="Ícono del explorador de archivos" height="25"> <a href="https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/2023-saber_pro-genericas.txt.xz">2023-saber_pro-genericas.txt.xz</a>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span><img src="images/download-solid-full.png" alt="Ícono del explorador de archivos" height="25"> <a href="https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/2024-saber_pro-genericas.txt.xz">2024-saber_pro-genericas.txt.xz</a>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<p>En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada <code>020_funciones-anonimas-purrr-en-r</code> y dentro de ella genera el archivo <code>001_funciones-anonimas-purrr.R</code>, siguiendo las pautas de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>.</p>
 </div>
 </div>
 <section id="importación" class="level2" data-number="20.1">
@@ -412,6 +487,11 @@ Nota&nbsp;20.1
 <h3 data-number="20.5.3" class="anchored" data-anchor-id="exportar"><span class="header-section-number">20.5.3</span> Exportar</h3>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-wickham_r_2023" class="csl-entry" role="listitem">
+Wickham, H. (2023). <em>R for <span>Data</span> <span>Science</span></em> (2.ª ed.). O’Reilly Media, Incorporated. <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a>
+</div>
+</div>
 </section>
 </section>
 
