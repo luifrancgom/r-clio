@@ -39,7 +39,7 @@ Para desarrollar el contenido de este capítulo es necesario que crees una nueva
 
 ## Funciones
 
-
+![Estructura de una función [@grolemund_hands-programming_2014, Cap. 1]](images/function_structure.png){#fig-function-structure}
 
 ## Funciones anónimas
 
@@ -47,10 +47,12 @@ Para desarrollar el contenido de este capítulo es necesario que crees una nueva
 
 ## `map()`
 
-
+![Representación gráfica de la función `map()`](images/map.png){#fig-map}
 
 ## `reduce()`
 
+![Representación gráfica de la función `reduce()`](images/reduce.png){#fig-reduce}
 
+## `list_rbind()`
 
-## ``list_rbind()``
+![Representación gráfica de la función `list_rbind()`](images/list_rbind.png){#fig-list-rbind}
