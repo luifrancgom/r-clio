@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -97,6 +132,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -354,14 +418,17 @@ div.csl-indent {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#purrr" id="toc-purrr" class="nav-link active" data-scroll-target="#purrr"><span class="header-section-number">19.1</span> <code>purrr</code></a></li>
-  <li><a href="#vectores-atómicos" id="toc-vectores-atómicos" class="nav-link" data-scroll-target="#vectores-atómicos"><span class="header-section-number">19.2</span> Vectores atómicos</a></li>
-  <li><a href="#listas" id="toc-listas" class="nav-link" data-scroll-target="#listas"><span class="header-section-number">19.3</span> Listas</a></li>
-  <li><a href="#funciones" id="toc-funciones" class="nav-link" data-scroll-target="#funciones"><span class="header-section-number">19.4</span> Funciones</a></li>
-  <li><a href="#funciones-anónimas" id="toc-funciones-anónimas" class="nav-link" data-scroll-target="#funciones-anónimas"><span class="header-section-number">19.5</span> Funciones anónimas</a></li>
-  <li><a href="#map" id="toc-map" class="nav-link" data-scroll-target="#map"><span class="header-section-number">19.6</span> <code>map()</code></a></li>
-  <li><a href="#reduce" id="toc-reduce" class="nav-link" data-scroll-target="#reduce"><span class="header-section-number">19.7</span> <code>reduce()</code></a></li>
-  <li><a href="#list_rbind" id="toc-list_rbind" class="nav-link" data-scroll-target="#list_rbind"><span class="header-section-number">19.8</span> <code>list_rbind()</code></a></li>
+  <li><a href="#sec-purrr" id="toc-sec-purrr" class="nav-link active" data-scroll-target="#sec-purrr"><span class="header-section-number">19.1</span> <code>purrr</code></a></li>
+  <li><a href="#sec-vectors" id="toc-sec-vectors" class="nav-link" data-scroll-target="#sec-vectors"><span class="header-section-number">19.2</span> Vectores</a>
+  <ul class="collapse">
+  <li><a href="#sec-atomic-vectors" id="toc-sec-atomic-vectors" class="nav-link" data-scroll-target="#sec-atomic-vectors"><span class="header-section-number">19.2.1</span> Vectores atómicos</a></li>
+  <li><a href="#sec-lists" id="toc-sec-lists" class="nav-link" data-scroll-target="#sec-lists"><span class="header-section-number">19.2.2</span> Listas</a></li>
+  </ul></li>
+  <li><a href="#sec-functions" id="toc-sec-functions" class="nav-link" data-scroll-target="#sec-functions"><span class="header-section-number">19.3</span> Funciones</a></li>
+  <li><a href="#sec-anonymous-functions-intro" id="toc-sec-anonymous-functions-intro" class="nav-link" data-scroll-target="#sec-anonymous-functions-intro"><span class="header-section-number">19.4</span> Funciones anónimas</a></li>
+  <li><a href="#sec-map" id="toc-sec-map" class="nav-link" data-scroll-target="#sec-map"><span class="header-section-number">19.5</span> <code>map()</code></a></li>
+  <li><a href="#sec-reduce" id="toc-sec-reduce" class="nav-link" data-scroll-target="#sec-reduce"><span class="header-section-number">19.6</span> <code>reduce()</code></a></li>
+  <li><a href="#sec-list-rbind" id="toc-sec-list-rbind" class="nav-link" data-scroll-target="#sec-list-rbind"><span class="header-section-number">19.7</span> <code>list_rbind()</code></a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/anonymous_functions_purrr.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/anonymous_functions_purrr.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
@@ -387,7 +454,7 @@ div.csl-indent {
 </header>
 
 
-<p>Este capítulo se basa en <span class="citation" data-cites="grolemund_hands-programming_2014">(<a href="references.html#ref-grolemund_hands-programming_2014" role="doc-biblioref">Grolemund, 2014, Capítulo 1</a>)</span>, <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 26</a>)</span> y <span class="citation" data-cites="wickham_advanced_2019">(<a href="references.html#ref-wickham_advanced_2019" role="doc-biblioref">Wickham, 2019, Capítulo 9</a>)</span> así como en la documentación oficial de <a href="https://purrr.tidyverse.org/articles/purrr.html"><code>purrr</code></a> donde tiene como propósito introducir los requisitos necesarios para entender como utilizar el paquete <code>purrr</code> para manipular archivos en un directorio respecto a lo que se expondrá en el <a href="map_reduce_list_rbind_functions.html" class="quarto-xref"><span>Capítulo 20</span></a>.</p>
+<p>Este capítulo se basa en <span class="citation" data-cites="grolemund_hands-programming_2014">(<a href="references.html#ref-grolemund_hands-programming_2014" role="doc-biblioref">Grolemund, 2014, Capítulo 1</a>)</span>, <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 26</a>)</span> y <span class="citation" data-cites="wickham_advanced_2019">(<a href="references.html#ref-wickham_advanced_2019" role="doc-biblioref">Wickham, 2019, Capítulo 9</a>)</span> así como en la documentación oficial de <a href="https://purrr.tidyverse.org/articles/purrr.html"><code>purrr</code></a> donde tiene como propósito introducir los requisitos necesarios para entender cómo utilizar el paquete <code>purrr</code> para manipular archivos en un directorio respecto a lo que se expondrá en el <a href="map_reduce_list_rbind_functions.html" class="quarto-xref"><span>Capítulo 20</span></a>.</p>
 <p>Exploraremos los siguientes aspectos:</p>
 <ol type="1">
 <li>¿Qué es el paquete <code>purrr</code>?</li>
@@ -408,69 +475,508 @@ Nota&nbsp;19.1
 <p>Para desarrollar el contenido de este capítulo es necesario que crees una nueva carpeta llamada <code>019_funciones-anonimas-purrr-en-r</code> y dentro de ella genera el archivo <code>001_funciones-anonimas-purrr.R</code>, siguiendo las pautas de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>.</p>
 </div>
 </div>
-<section id="purrr" class="level2" data-number="19.1">
-<h2 data-number="19.1" class="anchored" data-anchor-id="purrr"><span class="header-section-number">19.1</span> <code>purrr</code></h2>
+<section id="sec-purrr" class="level2" data-number="19.1">
+<h2 data-number="19.1" class="anchored" data-anchor-id="sec-purrr"><span class="header-section-number">19.1</span> <code>purrr</code></h2>
+<p>El paquete <a href="https://purrr.tidyverse.org/articles/purrr.html"><code>purrr</code></a> es el componente del <code>tidyverse</code> diseñado para facilitar la programación funcional en R <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 26</a>)</span>. En el análisis de datos es habitual enfrentarse a tareas repetitivas donde se debe aplicar la misma operación a múltiples elementos independientes, tales como importar decenas de archivos desde una carpeta o transformar varias columnas de manera simultánea.</p>
+<p>Tradicionalmente, la repetición de tareas en programación se resuelve mediante bucles imperativos como <code>for</code> o <code>while</code>. Aunque los bucles son válidos, suelen requerir una considerable cantidad de código repetitivo, como inicializar previamente estructuras vacías para almacenar los resultados, gestionar manualmente variables de índice y controlar los límites de la iteración.</p>
+<p>En contraste, la <strong>programación funcional</strong> implementada en <code>purrr</code> sustituye los bucles tradicionales por <strong>funcionales</strong> (en inglés <strong>functionals</strong>). Es decir, funciones de orden superior que reciben una función como argumento y la aplican de forma sistemática a cada uno de los elementos de una estructura de datos <span class="citation" data-cites="wickham_advanced_2019">(<a href="references.html#ref-wickham_advanced_2019" role="doc-biblioref">Wickham, 2019, Capítulo 9</a>)</span>. Esto permite expresar directamente <strong>qué</strong> transformación se desea realizar sobre cada elemento en lugar de especificar <strong>cómo</strong> administrar los pasos del ciclo, dando lugar a un código más conciso, legible, expresivo y fácil de depurar.</p>
 </section>
-<section id="vectores-atómicos" class="level2" data-number="19.2">
-<h2 data-number="19.2" class="anchored" data-anchor-id="vectores-atómicos"><span class="header-section-number">19.2</span> Vectores atómicos</h2>
+<section id="sec-vectors" class="level2" data-number="19.2">
+<h2 data-number="19.2" class="anchored" data-anchor-id="sec-vectors"><span class="header-section-number">19.2</span> Vectores</h2>
+<p>Para comprender las herramientas de iteración que ofrece <code>purrr</code>, es indispensable profundizar en las estructuras de datos sobre las cuales opera: los <strong>vectores</strong>. En R, los vectores constituyen la estructura de datos más básica e importante y prácticamente cualquier objeto más complejo se fundamenta en ellos <span class="citation" data-cites="wickham_advanced_2019">(<a href="references.html#ref-wickham_advanced_2019" role="doc-biblioref">Wickham, 2019, Capítulo 3</a>)</span>.</p>
+<p>Los vectores en R se dividen en 2 categorías:</p>
+<ol type="1">
+<li><p><strong>Vectores atómicos</strong> (en inglés <strong>atomic vectors</strong>): colecciones unidimensionales y homogéneas donde la totalidad de sus elementos debe pertenecer obligatoriamente al mismo tipo de datos básico.</p></li>
+<li><p><strong>Listas</strong> (en inglés <strong>lists</strong>): colecciones unidimensionales pero heterogéneas donde cada elemento puede poseer un tipo de datos diferente y albergar objetos de cualquier longitud y complejidad.</p></li>
+</ol>
+<p>En el <a href="single_table_verbs.html#sec-mutate-data-case-study-dplyr" class="quarto-xref"><span>Sección 10.2.5</span></a> se presentó la <a href="single_table_verbs.html#tbl-some-data-types-in-r" class="quarto-xref">Tabla&nbsp;<span>10.2</span></a>, en la cual se expusieron algunos de los tipos de datos más comunes utilizados en R, diferenciando entre vectores atómicos (<code>logical</code>, <code>integer</code>, <code>double</code>, <code>character</code>), listas (<code>list</code>) y objetos integrados como factores y fechas (<code>factor</code>, <code>ordered</code>, <code>Date</code>).</p>
+<section id="sec-atomic-vectors" class="level3" data-number="19.2.1">
+<h3 data-number="19.2.1" class="anchored" data-anchor-id="sec-atomic-vectors"><span class="header-section-number">19.2.1</span> Vectores atómicos</h3>
+<p>Los vectores atómicos son estrictamente homogéneos donde R no permite almacenar elementos de distinta naturaleza en un mismo vector atómico. En R existen 6 tipos de vectores atómicos: <code>logical</code>, <code>integer</code>, <code>double</code> (cuyo sinónimo habitual en R es <code>numeric</code>), <code>character</code>, <code>complex</code> y <code>raw</code>.</p>
+<div id="nte-2-chap-19" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota&nbsp;19.2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En la <a href="single_table_verbs.html#tbl-some-data-types-in-r" class="quarto-xref">Tabla&nbsp;<span>10.2</span></a> del <a href="single_table_verbs.html#sec-mutate-data-case-study-dplyr" class="quarto-xref"><span>Sección 10.2.5</span></a> únicamente se incluyeron los tipos <code>logical</code>, <code>integer</code>, <code>double</code> y <code>character</code>. Los tipos <code>complex</code> (como por ejemplo números complejos <code>1 + 2i</code>) y <code>raw</code> (relacionados con el almacenamiento de bytes binarios puros) no fueron mencionados allí debido a que corresponden a tipos de datos especializados, y donde no es necesario utilizar los tipos <code>complex</code> y <code>raw</code> para comprender la lógica del análisis de datos respecto a los temas expuestos en este libro.</p>
+</div>
+</div>
+<p>Cuando se combinan elementos para conformar un vector atómico mediante la función básica <code>c()</code>, R exige homogeneidad. Si se intentan combinar valores de tipos diferentes, R aplica una regla de coerción implícita transformando automáticamente todos los elementos al tipo más flexible. Por ejemplo, convirtiendo enteros a caracteres.</p>
 </section>
-<section id="listas" class="level2" data-number="19.3">
-<h2 data-number="19.3" class="anchored" data-anchor-id="listas"><span class="header-section-number">19.3</span> Listas</h2>
+<section id="sec-lists" class="level3" data-number="19.2.2">
+<h3 data-number="19.2.2" class="anchored" data-anchor-id="sec-lists"><span class="header-section-number">19.2.2</span> Listas</h3>
+<p>A diferencia de los vectores atómicos, las <strong>listas</strong> son vectores heterogéneos y genéricos. Cada elemento de una lista no está restringido a un solo escalar de tipo primitivo. En ese sentido puede ser un vector, una función o una tabla de datos rectangular como una <code>tibble</code>.</p>
+<p>Esta flexibilidad hace que la introducción de las listas sea estrictamente necesaria al realizar análisis de datos e iteración funcional. En muchas ocasiones se requiere manipular y conservar colecciones de objetos que no pueden incluirse dentro de un vector atómico sin perder su estructura.</p>
+<p>Para ilustrar esta necesidad fundamental, supongamos que se dispone de 2 tablas de datos en <code>tibble</code>s independientes y se busca agruparlas en un solo contenedor para su posterior procesamiento, tal como se señala en el <a href="#lst-list-tibbles" class="quarto-xref">Listado&nbsp;<span>19.1</span></a>:</p>
+<div class="cell">
+<div id="lst-list-tibbles" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-list-tibbles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;19.1: Creación de una lista para almacenar tibbles independientes
+</figcaption>
+<div aria-describedby="lst-list-tibbles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar paquetes ----</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Lista de tibbles ----</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">x =</span> <span class="st">"a"</span>, <span class="at">y =</span> <span class="st">"b"</span>),</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">y =</span> <span class="st">"c"</span>, <span class="at">z =</span> <span class="st">"d"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+# A tibble: 1 × 2
+  x     y    
+  &lt;chr&gt; &lt;chr&gt;
+1 a     b    
+
+[[2]]
+# A tibble: 1 × 2
+  y     z    
+  &lt;chr&gt; &lt;chr&gt;
+1 c     d    </code></pre>
+</div>
+</div>
+<p>Al utilizar la función <code>list()</code>, tal como se observa en el <a href="#lst-list-tibbles" class="quarto-xref">Listado&nbsp;<span>19.1</span></a>, R genera una lista con 2 componentes independientes: <code>[[1]]</code> y <code>[[2]]</code>. Cada uno de estos componentes conserva íntegramente su condición y estructura de <code>tibble</code> con sus respectivas dimensiones y columnas rectangulares.</p>
+<p>En contraste, si se intentara utilizar la función <code>c()</code> para agrupar estas 2 tablas de datos, el resultado no conservará las tablas como entidades independientes, tal como se señala en el <a href="#lst-c-tibbles" class="quarto-xref">Listado&nbsp;<span>19.2</span></a>:</p>
+<div class="cell">
+<div id="lst-c-tibbles" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-c-tibbles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;19.2: Pérdida de la estructura tabular al utilizar la función <code>c()</code> con tibbles
+</figcaption>
+<div aria-describedby="lst-c-tibbles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Intento de combinación con c() ----</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">x =</span> <span class="st">"a"</span>, <span class="at">y =</span> <span class="st">"b"</span>),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">y =</span> <span class="st">"c"</span>, <span class="at">z =</span> <span class="st">"d"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$x
+[1] "a"
+
+$y
+[1] "b"
+
+$y
+[1] "c"
+
+$z
+[1] "d"</code></pre>
+</div>
+</div>
+<p>Tal como se aprecia en el resultado del <a href="#lst-c-tibbles" class="quarto-xref">Listado&nbsp;<span>19.2</span></a>, la función <code>c()</code> no crea una colección de 2 <code>tibble</code>s. En su lugar, R descompone internamente cada tabla en sus columnas y las concatena en una única lista “aplanada” de 4 vectores columna: <code>$x</code>, <code>$y</code>, <code>$y</code>, <code>$z</code>. Con ello se pierde por completo la identidad tabular rectangular de cada conjunto de datos original.</p>
+<p>Por esta razón, las listas son el contenedor en R para almacenar tablas de datos múltiples y otros objetos. El paquete <code>purrr</code> utiliza tanto vectores atómicos como listas para iterar <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 26</a>)</span>. En cualquier flujo de trabajo funcional para análisis de datos, se identifica el vector sobre el cual se desea operar, como por ejemplo un vector atómico de caracteres con las rutas de varios archivos o una lista con las tablas importadas, y luego se itera a través de cada uno de sus elementos mediante una función.</p>
 </section>
-<section id="funciones" class="level2" data-number="19.4">
-<h2 data-number="19.4" class="anchored" data-anchor-id="funciones"><span class="header-section-number">19.4</span> Funciones</h2>
-<div id="fig-function-structure" class="quarto-float quarto-figure quarto-figure-center anchored">
+</section>
+<section id="sec-functions" class="level2" data-number="19.3">
+<h2 data-number="19.3" class="anchored" data-anchor-id="sec-functions"><span class="header-section-number">19.3</span> Funciones</h2>
+<p>Para llevar a cabo una iteración funcional con <code>purrr</code>, no basta con disponer de un vector sobre el cual iterar. También se requiere una <strong>función</strong> que determine la acción que se ejecutará sobre cada elemento <span class="citation" data-cites="wickham_advanced_2019">(<a href="references.html#ref-wickham_advanced_2019" role="doc-biblioref">Wickham, 2019, Capítulo 9</a>)</span>. Las funciones permiten en R encapsular un conjunto de instrucciones reutilizables para automatizar cálculos repetitivos, evitar la duplicación de código y disminuir la probabilidad de cometer errores <span class="citation" data-cites="grolemund_hands-programming_2014">(<a href="references.html#ref-grolemund_hands-programming_2014" role="doc-biblioref">Grolemund, 2014, Capítulo 1</a>)</span>.</p>
+<p>Para comprender cómo se construye una función en R, considera un ejemplo clásico de probabilidad en relación a la simulación del lanzamiento de una moneda donde existen 2 posibles resultados excluyentes, cara o cruz, tal como se ilustra en la <a href="#fig-coin-head-tail" class="quarto-xref">Figura&nbsp;<span>19.1</span></a>.</p>
+<div id="fig-coin-head-tail" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Fotografía de las dos caras de una moneda que ilustra los dos resultados posibles de un lanzamiento: cara y cruz.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-coin-head-tail-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/coin_head_tail.png" class="img-fluid figure-img" alt="Fotografía de las dos caras de una moneda que ilustra los dos resultados posibles de un lanzamiento: cara y cruz.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-coin-head-tail-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;19.1: Dos caras de una moneda
+</figcaption>
+</figure>
+</div>
+<p>En R, es posible simular este experimento mediante la función <code>sample()</code>, la cual extrae una muestra aleatoria a partir de los elementos provistos en el parámetro <code>x</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-sample-coin-single" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-sample-coin-single-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;19.3: Simulación de un lanzamiento de moneda mediante la función <code>sample()</code>
+</figcaption>
+<div aria-describedby="lst-sample-coin-single-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulación de lanzamiento ----</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>moneda <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"cara"</span>, <span class="st">"cruz"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="at">x =</span> moneda, <span class="at">size =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "cruz"</code></pre>
+</div>
+</div>
+<p>En el <a href="#lst-sample-coin-single" class="quarto-xref">Listado&nbsp;<span>19.3</span></a>, la función <code>sample()</code> selecciona aleatoriamente un único elemento (<code>size = 1</code>) del vector <code>moneda</code>. Si se deseara simular más de 2 lanzamientos con esta moneda de 2 caras, no es posible hacerlo sin permitir la repetición de los elementos. Este aspecto se debe a que por defecto la función <code>sample()</code> realiza un muestreo sin reemplazo (<code>replace = FALSE</code>). Por lo tanto, para simular múltiples lanzamientos independientes es indispensable habilitar el muestreo con reemplazo mediante <code>replace = TRUE</code>, tal como se señala en el <a href="#lst-sample-coin-multiple" class="quarto-xref">Listado&nbsp;<span>19.4</span></a>:</p>
+<div class="cell">
+<div id="lst-sample-coin-multiple" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-sample-coin-multiple-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;19.4: Simulación de múltiples lanzamientos de una moneda con reemplazo mediante <code>sample()</code>
+</figcaption>
+<div aria-describedby="lst-sample-coin-multiple-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Múltiples lanzamientos con reemplazo ----</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> moneda,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">replace =</span> <span class="cn">TRUE</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "cruz" "cruz" "cruz"</code></pre>
+</div>
+</div>
+<p>Para aplicar a esta rutina una mayor flexibilidad, es posible parametrizar cada una de las opciones del experimento vinculándolas a nombres de variables independientes como <code>lados</code>, <code>n_lanzamientos</code>, <code>con_reemplazo</code>, antes de utilizar <code>sample()</code>, tal como se señala en el <a href="#lst-coin-parameters" class="quarto-xref">Listado&nbsp;<span>19.5</span></a>:</p>
+<div class="cell">
+<div id="lst-coin-parameters" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-coin-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;19.5: Parametrización de las instrucciones para simular el lanzamiento de una moneda
+</figcaption>
+<div aria-describedby="lst-coin-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variables auxiliares ----</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>lados <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"cara"</span>, <span class="st">"cruz"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>n_lanzamientos <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>con_reemplazo <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Ejecución del experimento ----</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>lanzamientos <span class="ot">&lt;-</span> <span class="fu">sample</span>(</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> lados,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> n_lanzamientos,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">replace =</span> con_reemplazo</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>lanzamientos</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "cara" "cruz" "cara" "cara"</code></pre>
+</div>
+</div>
+<p>Aunque el código presentado en el <a href="#lst-coin-parameters" class="quarto-xref">Listado&nbsp;<span>19.5</span></a> cumple su propósito, si se requiriera simular lanzamientos en distintas partes de un flujo de trabajo sería necesario copiar y pegar este bloque de código una y otra vez, modificando los valores manualmente. Este procedimiento resulta ineficiente y susceptible a inconsistencias donde la solución consiste en encapsular estas instrucciones dentro de una <strong>función</strong>.</p>
+<p>En la <a href="#fig-function-structure" class="quarto-xref">Figura&nbsp;<span>19.2</span></a> se ilustran los componentes conceptuales y la anatomía estructural de una función en R <span class="citation" data-cites="grolemund_hands-programming_2014">(<a href="references.html#ref-grolemund_hands-programming_2014" role="doc-biblioref">Grolemund, 2014, Capítulo 1</a>)</span> encapsulando estas instrucciones dentro de una función denominada <code>lanzar_moneda</code>.</p>
+<div id="fig-function-structure" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que detalla la estructura y componentes de una función en R a partir del ejemplo lanzar_moneda. Se identifican el nombre de la función, los parámetros definidos en function(), los argumentos por defecto, el cuerpo delimitado por llaves que alberga las instrucciones a ejecutar, la salida generada como última expresión evaluada, y las definiciones de argumento y parámetro.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-function-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/function_structure.png" class="img-fluid figure-img">
+<img src="images/function_structure.png" class="img-fluid figure-img" alt="Diagrama conceptual que detalla la estructura y componentes de una función en R a partir del ejemplo lanzar_moneda. Se identifican el nombre de la función, los parámetros definidos en function(), los argumentos por defecto, el cuerpo delimitado por llaves que alberga las instrucciones a ejecutar, la salida generada como última expresión evaluada, y las definiciones de argumento y parámetro.">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-function-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;19.1: Estructura de una función <span class="citation" data-cites="grolemund_hands-programming_2014">(<a href="references.html#ref-grolemund_hands-programming_2014" role="doc-biblioref">Grolemund, 2014, Capítulo 1</a>)</span>
+Figura&nbsp;19.2: Estructura de una función <span class="citation" data-cites="grolemund_hands-programming_2014">(<a href="references.html#ref-grolemund_hands-programming_2014" role="doc-biblioref">Grolemund, 2014, Capítulo 1</a>)</span>
 </figcaption>
 </figure>
 </div>
+<p>Tal como se detalla en la <a href="#fig-function-structure" class="quarto-xref">Figura&nbsp;<span>19.2</span></a>, una función en R se compone esencialmente de los siguientes elementos:</p>
+<ol type="1">
+<li><p><strong>Nombre</strong>: el identificador asignado a la función mediante el operador <code>&lt;-</code> para almacenarla en el entorno y poder utilizarla posteriormente. Siguiendo las convenciones de estilo de R, los nombres de funciones deben ser verbos concisos que indiquen con claridad la acción realizada como por ejemplo <code>lanzar_moneda</code>.</p></li>
+<li><p><strong>Parámetros</strong>: las variables declaradas dentro del paréntesis de <code>function(...)</code> corresponden a los valores que la función espera recibir para operar.</p></li>
+<li><p><strong>Argumento</strong>: el valor específico asignado a un parámetro al momento de invocar la función.</p></li>
+<li><p><strong>Argumento por defecto</strong>: valor predeterminado asignado a un parámetro en la definición de la función como por ejemplo, <code>= c("cara", "cruz")</code>. Si al llamar la función no se suministra un argumento para dicho parámetro, R utilizará automáticamente este valor predeterminado.</p></li>
+<li><p><strong>Cuerpo</strong> (en inglés <strong>body</strong>): el bloque de código encerrado entre llaves <code>{ ... }</code> que contiene las instrucciones que se ejecutarán secuencialmente cada vez que se invoque la función.</p></li>
+<li><p><strong>Salida de la función</strong> (en inglés <strong>return value</strong>): el objeto o resultado que la función entrega a quien la llamó. En R no es obligatorio emplear una sentencia explícita de retorno como <code>return()</code> que utilizan otros lenguajes de programación. Por defecto, R retorna automáticamente el resultado de la última expresión evaluada dentro del cuerpo donde en este caso corresponde a <code>lanzamientos</code>.</p></li>
+</ol>
+<p>De manera general, la sintaxis para construir una función en R responde al siguiente esquema:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>nombre <span class="ot">&lt;-</span> <span class="cf">function</span>(parametros) {</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  cuerpo</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A partir de esta estructura, en el <a href="#lst-function-coin-basic" class="quarto-xref">Listado&nbsp;<span>19.6</span></a> se encapsulan las instrucciones de simulación dentro de la función <code>lanzar_moneda()</code> sin definir parámetros iniciales, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-function-coin-basic" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-function-coin-basic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;19.6: Definición de una función básica sin parámetros en R
+</figcaption>
+<div aria-describedby="lst-function-coin-basic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Función básica ----</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>lanzar_moneda <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Variables auxiliares</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  lados <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"cara"</span>, <span class="st">"cruz"</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  n_lanzamientos <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  con_reemplazo <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  lanzamientos <span class="ot">&lt;-</span> <span class="fu">sample</span>(</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> lados,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> n_lanzamientos,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">replace =</span> con_reemplazo</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Salida</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  lanzamientos</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<p>Para hacer que <code>lanzar_moneda()</code> sea verdaderamente reutilizable y adaptable a diferentes escenarios, en el <a href="#lst-function-coin-parameters" class="quarto-xref">Listado&nbsp;<span>19.7</span></a> se agregan los parámetros <code>n_lanzamientos</code> y <code>lados</code> al asignarles argumentos por defecto, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-function-coin-parameters" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-function-coin-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;19.7: Definición de la función <code>lanzar_moneda()</code> con parámetros y argumentos por defecto
+</figcaption>
+<div aria-describedby="lst-function-coin-parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Función parametrizada ----</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>lanzar_moneda <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_lanzamientos =</span> <span class="dv">1</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">lados =</span> <span class="fu">c</span>(<span class="st">"cara"</span>, <span class="st">"cruz"</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>) {</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Variable auxiliar</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  con_reemplazo <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  lanzamientos <span class="ot">&lt;-</span> <span class="fu">sample</span>(</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> lados,</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> n_lanzamientos,</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">replace =</span> con_reemplazo</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Salida</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  lanzamientos</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<p>Una vez definida la función <code>lanzar_moneda()</code> con sus parámetros, es posible invocarla especificando el número de lanzamientos deseado mediante el argumento <code>n_lanzamientos</code>, tal como se señala en el <a href="#lst-function-coin-call" class="quarto-xref">Listado&nbsp;<span>19.8</span></a>:</p>
+<div class="cell">
+<div id="lst-function-coin-call" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-function-coin-call-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;19.8: Invocación de la función <code>lanzar_moneda()</code> especificando el argumento <code>n_lanzamientos</code>
+</figcaption>
+<div aria-describedby="lst-function-coin-call-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Invocación de la función ----</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lanzar_moneda</span>(<span class="at">n_lanzamientos =</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "cara" "cruz" "cruz" "cruz" "cruz"</code></pre>
+</div>
+</div>
 </section>
-<section id="funciones-anónimas" class="level2" data-number="19.5">
-<h2 data-number="19.5" class="anchored" data-anchor-id="funciones-anónimas"><span class="header-section-number">19.5</span> Funciones anónimas</h2>
+<section id="sec-anonymous-functions-intro" class="level2" data-number="19.4">
+<h2 data-number="19.4" class="anchored" data-anchor-id="sec-anonymous-functions-intro"><span class="header-section-number">19.4</span> Funciones anónimas</h2>
+<p>En el <a href="#lst-function-coin-parameters" class="quarto-xref">Listado&nbsp;<span>19.7</span></a> creaste una función formal a la cual se le asignó el nombre <code>lanzar_moneda</code>. Nombrar una función es indispensable cuando se trata de una operación compleja o cuando el objetivo es reutilizarla recurrentemente a lo largo de un flujo de trabajo.</p>
+<p>Sin embargo, en los flujos de iteración funcional con <code>purrr</code> es muy común requerir funciones breves y que se utilizan exclusivamente en un único paso de transformación y que no vuelven a emplearse en el resto del análisis. En tales circunstancias, tener que inventar un nombre para cada función de un solo uso resulta contraproducente ya que sobrecarga el entorno global con variables innecesarias.</p>
+<p>Para solucionar este inconveniente se introducen las <strong>funciones anónimas</strong>, que se conocen también como funciones <strong>lambda</strong> en otros lenguajes de programación. Una función anónima es una función que no tiene un nombre asignado <span class="citation" data-cites="wickham_advanced_2019">(<a href="references.html#ref-wickham_advanced_2019" role="doc-biblioref">Wickham, 2019, Capítulo 9</a>)</span>. A partir de la versión <code>4.1.0</code> de R, el lenguaje incorporó una sintaxis nativa y concisa para definir funciones anónimas mediante la barra diagonal inversa <code>\(...) { ... }</code>, la cual constituye una forma abreviada y equivalente a escribir <code>function(...) { ... }</code>, tal como se señala en el <a href="#lst-anonymous-function-definition" class="quarto-xref">Listado&nbsp;<span>19.9</span></a>:</p>
+<div class="cell">
+<div id="lst-anonymous-function-definition" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-anonymous-function-definition-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;19.9: Definición de una función anónima en R mediante la sintaxis nativa <code>(...) { ... }</code>
+</figcaption>
+<div aria-describedby="lst-anonymous-function-definition-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Función anónima nativa ----</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>\(x) {</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">c</span>(<span class="st">"cara"</span>, <span class="st">"cruz"</span>),</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> x,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">replace =</span> <span class="cn">TRUE</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<p>En el <a href="#lst-anonymous-function-definition" class="quarto-xref">Listado&nbsp;<span>19.9</span></a>, la expresión define una función anónima que recibe el parámetro <code>x</code> y que representa el número de lanzamientos a realizar donde devuelve los resultados muestreados con reemplazo. Como no está vinculada a ningún nombre mediante el operador <code>&lt;-</code>, esta función existe únicamente en la expresión donde se evalúa.</p>
+<p>Si bien es posible ejecutar una función anónima de forma inmediata rodeándola de paréntesis como por ejemplo <code>(\(x) { sample(c("cara", "cruz"), x, replace = TRUE) })(3)</code>, su verdadero potencial se despliega al suministrarla como argumento <code>.f</code> a las funciones de iteración del paquete <code>purrr</code>, tal como se examinará en la <a href="#sec-map" class="quarto-xref"><span>Sección 19.5</span></a>.</p>
 </section>
-<section id="map" class="level2" data-number="19.6">
-<h2 data-number="19.6" class="anchored" data-anchor-id="map"><span class="header-section-number">19.6</span> <code>map()</code></h2>
-<div id="fig-map" class="quarto-float quarto-figure quarto-figure-center anchored">
+<section id="sec-map" class="level2" data-number="19.5">
+<h2 data-number="19.5" class="anchored" data-anchor-id="sec-map"><span class="header-section-number">19.5</span> <code>map()</code></h2>
+<p>La función <code>map()</code> es la pieza central del paquete <code>purrr</code> <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 26</a>)</span>. Su propósito fundamental es transformar un vector de entrada aplicando una función a cada uno de sus elementos de manera independiente. En la <a href="#fig-map" class="quarto-xref">Figura&nbsp;<span>19.3</span></a> se ilustra la representación gráfica del funcionamiento de la función <code>map()</code>.</p>
+<div id="fig-map" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que ilustra el funcionamiento de la función map(). A la izquierda se presenta un vector de 4 elementos. La función map() toma dicho vector y una función f, aplicando f de forma individual e independiente a cada elemento. A la derecha se genera una lista de salida de 4 elementos donde cada posición contiene el resultado correspondiente f(x).">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/map.png" class="img-fluid figure-img">
+<img src="images/map.png" class="img-fluid figure-img" alt="Diagrama conceptual que ilustra el funcionamiento de la función map(). A la izquierda se presenta un vector de 4 elementos. La función map() toma dicho vector y una función f, aplicando f de forma individual e independiente a cada elemento. A la derecha se genera una lista de salida de 4 elementos donde cada posición contiene el resultado correspondiente f(x).">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;19.2: Representación gráfica de la función <code>map()</code>
+Figura&nbsp;19.3: Representación gráfica de la función <code>map()</code>
 </figcaption>
 </figure>
 </div>
+<p>Tal como se aprecia en la <a href="#fig-map" class="quarto-xref">Figura&nbsp;<span>19.3</span></a>, la función <code>map()</code> recibe 2 argumentos principales:</p>
+<ol type="1">
+<li><p><code>.x</code>: un vector atómico o lista que contiene los elementos sobre los cuales se iterará.</p></li>
+<li><p><code>.f</code>: la función que se aplicará a cada elemento individual de <code>.x</code>.</p></li>
+</ol>
+<p>Durante la ejecución, <code>map()</code> recorre ordenadamente cada elemento <span class="math inline">\(x_i\)</span> del vector <code>.x</code>, evalúa <span class="math inline">\(f(x_i)\)</span> y almacena el resultado en una posición correspondiente. La propiedad distintiva de <code>map()</code> es que <strong>siempre retorna una lista</strong> cuya longitud es exactamente igual a la cantidad de elementos presentes en el vector de entrada <code>.x</code>.</p>
+<p>Para ilustrar este comportamiento, supongamos que deseamos simular experimentos de lanzamientos de monedas donde la cantidad de lanzamientos varía sucesivamente de 1 a 3, es decir el vector atómico <code>1:3</code>. En el <a href="#lst-map-named-function" class="quarto-xref">Listado&nbsp;<span>19.10</span></a> se utiliza <code>map()</code> pasando como argumento <code>.f</code> la función nombrada <code>lanzar_moneda</code>:</p>
+<div class="cell">
+<div id="lst-map-named-function" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-map-named-function-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;19.10: Aplicación de la función <code>map()</code> junto con una función nombrada
+</figcaption>
+<div aria-describedby="lst-map-named-function-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Iteración con función nombrada ----</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">.x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">.f =</span> lanzar_moneda</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] "cara"
+
+[[2]]
+[1] "cruz" "cruz"
+
+[[3]]
+[1] "cruz" "cara" "cruz"</code></pre>
+</div>
+</div>
+<p>En el <a href="#lst-map-named-function" class="quarto-xref">Listado&nbsp;<span>19.10</span></a>, <code>map()</code> toma el vector <code>1:3</code> y pasa sucesivamente el valor <code>1</code> a <code>lanzar_moneda(n_lanzamientos = 1)</code>, el valor <code>2</code> a <code>lanzar_moneda(n_lanzamientos = 2)</code> y el valor <code>3</code> a <code>lanzar_moneda(n_lanzamientos = 3)</code>. El resultado es una lista de 3 elementos señalados con las posiciones <code>[[1]]</code>, <code>[[2]]</code> y <code>[[3]]</code>, donde cada elemento alberga un vector de caracteres con el resultado de sus respectivos lanzamientos.</p>
+<p>De forma completamente análoga, es posible alcanzar este mismo resultado sin necesidad de definir previamente la función <code>lanzar_moneda</code>, suministrando directamente una función anónima como argumento <code>.f</code>, tal como se señala en el <a href="#lst-map-anonymous-function" class="quarto-xref">Listado&nbsp;<span>19.11</span></a>:</p>
+<div class="cell">
+<div id="lst-map-anonymous-function" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-map-anonymous-function-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;19.11: Aplicación de la función <code>map()</code> junto con una función anónima
+</figcaption>
+<div aria-describedby="lst-map-anonymous-function-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Iteración con función anónima ----</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">.x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">.f =</span> \(x) {</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample</span>(</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="fu">c</span>(<span class="st">"cara"</span>, <span class="st">"cruz"</span>),</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">size =</span> x,</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">replace =</span> <span class="cn">TRUE</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] "cruz"
+
+[[2]]
+[1] "cruz" "cruz"
+
+[[3]]
+[1] "cruz" "cruz" "cruz"</code></pre>
+</div>
+</div>
+<p>Tal como se evidencia al comparar el <a href="#lst-map-named-function" class="quarto-xref">Listado&nbsp;<span>19.10</span></a> y el <a href="#lst-map-anonymous-function" class="quarto-xref">Listado&nbsp;<span>19.11</span></a>, ambas alternativas generan una lista con idéntica estructura. La ventaja de la función anónima en este contexto radica en que toda la lógica requerida se encuentra autocontenida dentro de la propia invocación de <code>map()</code>. Este patrón resulta útil para tareas como la lectura secuencial de múltiples archivos en un directorio, donde el vector de entrada corresponde a las rutas de los archivos y la función anónima ejecuta la importación de cada uno de ellos, tal como se implementará en el <a href="map_reduce_list_rbind_functions.html" class="quarto-xref"><span>Capítulo 20</span></a>.</p>
 </section>
-<section id="reduce" class="level2" data-number="19.7">
-<h2 data-number="19.7" class="anchored" data-anchor-id="reduce"><span class="header-section-number">19.7</span> <code>reduce()</code></h2>
-<div id="fig-reduce" class="quarto-float quarto-figure quarto-figure-center anchored">
+<section id="sec-reduce" class="level2" data-number="19.6">
+<h2 data-number="19.6" class="anchored" data-anchor-id="sec-reduce"><span class="header-section-number">19.6</span> <code>reduce()</code></h2>
+<p>Mientras que <code>map()</code> aplica una transformación independiente a cada elemento y devuelve una lista con la misma cantidad de elementos de entrada, la función <code>reduce()</code> del paquete <code>purrr</code> tiene como finalidad combinar progresivamente todos los elementos de un vector o lista hasta consolidarlos en un único objeto final <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 26</a>)</span>. En la <a href="#fig-reduce" class="quarto-xref">Figura&nbsp;<span>19.4</span></a> se ilustra la representación gráfica del funcionamiento de la función <code>reduce()</code>.</p>
+<div id="fig-reduce" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que ilustra el funcionamiento de la función reduce(). Se presentan 4 elementos iniciales a, b, c y d. La función reduce() toma dichos elementos y una función binaria f aplicando la operación de manera secuencial y acumulativa: primero combina a y b mediante f(a, b); luego combina dicho resultado con c mediante f(f(a, b), c); y finalmente combina ese resultado con d produciendo un único resultado final.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-reduce-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/reduce.png" class="img-fluid figure-img">
+<img src="images/reduce.png" class="img-fluid figure-img" alt="Diagrama conceptual que ilustra el funcionamiento de la función reduce(). Se presentan 4 elementos iniciales a, b, c y d. La función reduce() toma dichos elementos y una función binaria f aplicando la operación de manera secuencial y acumulativa: primero combina a y b mediante f(a, b); luego combina dicho resultado con c mediante f(f(a, b), c); y finalmente combina ese resultado con d produciendo un único resultado final.">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-reduce-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;19.3: Representación gráfica de la función <code>reduce()</code>
+Figura&nbsp;19.4: Representación gráfica de la función <code>reduce()</code>
 </figcaption>
 </figure>
 </div>
+<p>Como se observa en la <a href="#fig-reduce" class="quarto-xref">Figura&nbsp;<span>19.4</span></a>, <code>reduce()</code> requiere:</p>
+<ol type="1">
+<li><p><code>.x</code>: un vector o lista que contiene los elementos a consolidar.</p></li>
+<li><p><code>.f</code>: una <strong>función binaria</strong>, es decir, una función que acepta 2 argumentos y retorna un único valor como por ejemplo operaciones matemáticas de suma o producto o funciones de teoría de conjuntos como <code>intersect()</code> o <code>union()</code>.</p></li>
+</ol>
+<p>El mecanismo operativo de <code>reduce()</code> es acumulativo:</p>
+<ol type="1">
+<li><p>Toma el primer elemento (<code>a</code>) y el segundo elemento (<code>b</code>), y evalúa <span class="math inline">\(f(a, b)\)</span>.</p></li>
+<li><p>Toma el resultado intermedio obtenido en el paso anterior y el tercer elemento (<code>c</code>), y evalúa <span class="math inline">\(f(f(a, b), c)\)</span>.</p></li>
+<li><p>Continúa este proceso de manera recursiva hasta agotar todos los elementos de la colección, devolviendo un único valor consolidado.</p></li>
+</ol>
+<p>Para ilustrar la utilidad práctica de <code>reduce()</code>, supongamos que se dispone de una lista con 3 vectores de caracteres denominados <code>conjuntos</code> y se desea encontrar cuáles elementos son comunes a los 3 vectores. Es decir, la intersección múltiple entre ellos. Aunque la función base <code>intersect()</code> únicamente puede comparar 2 vectores a la vez, combinarla con <code>reduce()</code> permite resolver esta operación para cualquier cantidad de conjuntos, tal como se señala en el <a href="#lst-reduce-intersect" class="quarto-xref">Listado&nbsp;<span>19.12</span></a>:</p>
+<div class="cell">
+<div id="lst-reduce-intersect" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-reduce-intersect-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;19.12: Identificación de elementos comunes en una lista de vectores mediante <code>reduce()</code> e <code>intersect</code>
+</figcaption>
+<div aria-describedby="lst-reduce-intersect-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lista de conjuntos ----</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>conjuntos <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>),</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>),</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"C"</span>, <span class="st">"D"</span>, <span class="st">"E"</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Intersección acumulativa ----</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="fu">reduce</span>(</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">.x =</span> conjuntos,</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">.f =</span> intersect</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "C"</code></pre>
+</div>
+</div>
+<p>En el <a href="#lst-reduce-intersect" class="quarto-xref">Listado&nbsp;<span>19.12</span></a>, <code>reduce()</code> opera secuencialmente de la siguiente manera:</p>
+<ol type="1">
+<li><p>Aplica <code>intersect()</code> entre el primer y segundo elemento, <code>intersect(c("A", "B", "C"), c("B", "C", "D"))</code>, obteniendo como resultado intermedio <code>c("B", "C")</code>.</p></li>
+<li><p>Aplica <code>intersect()</code> entre dicho resultado intermedio y el tercer elemento, <code>intersect(c("B", "C"), c("C", "D", "E"))</code>.</p></li>
+</ol>
+<p>El resultado final devuelto es <code>"C"</code>, el único elemento presente simultáneamente en los 3 vectores de la lista. Esta técnica resulta fundamental para el análisis de datos reales. En el <a href="map_reduce_list_rbind_functions.html" class="quarto-xref"><span>Capítulo 20</span></a> utilizaremos esta misma lógica combinando <code>map()</code> y <code>reduce()</code> para identificar con exactitud cuáles columnas se encuentran presentes en la totalidad de los archivos anuales del examen Saber Pro antes de unificarlos.</p>
 </section>
-<section id="list_rbind" class="level2" data-number="19.8">
-<h2 data-number="19.8" class="anchored" data-anchor-id="list_rbind"><span class="header-section-number">19.8</span> <code>list_rbind()</code></h2>
-<div id="fig-list-rbind" class="quarto-float quarto-figure quarto-figure-center anchored">
+<section id="sec-list-rbind" class="level2" data-number="19.7">
+<h2 data-number="19.7" class="anchored" data-anchor-id="sec-list-rbind"><span class="header-section-number">19.7</span> <code>list_rbind()</code></h2>
+<p>Al procesar múltiples archivos mediante <code>map()</code>, el resultado obtenido es una lista en la que cada elemento es una tabla de datos independiente dentro de una <code>tibble</code>. Sin embargo, para realizar tareas de exploración, filtrado, modelado o visualización, es necesario reunir todas esas tablas individuales en un único conjunto de datos rectangular consolidado.</p>
+<p>Para llevar a cabo esta tarea, el paquete <code>purrr</code> proporciona la función <code>list_rbind()</code>, la cual toma una lista de tablas de datos y las une o apila verticalmente por filas <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 26</a>)</span>. En la <a href="#fig-list-rbind" class="quarto-xref">Figura&nbsp;<span>19.5</span></a> se ilustra la representación gráfica del funcionamiento de la función <code>list_rbind()</code>.</p>
+<div id="fig-list-rbind" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama conceptual que ilustra el funcionamiento de la función list_rbind(). A la izquierda se presentan 2 tablas de datos independientes dentro de una lista: la primera con columnas x e y (valores a y b), y la segunda con columnas y y z (valores c y d). La función list_rbind() apila ambas tablas por filas alineando la columna común y, generando a la derecha una tabla única consolidada con columnas x, y y z, e imputando valores NA en las celdas correspondientes a variables no observadas en cada tabla original.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-list-rbind-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/list_rbind.png" class="img-fluid figure-img">
+<img src="images/list_rbind.png" class="img-fluid figure-img" alt="Diagrama conceptual que ilustra el funcionamiento de la función list_rbind(). A la izquierda se presentan 2 tablas de datos independientes dentro de una lista: la primera con columnas x e y (valores a y b), y la segunda con columnas y y z (valores c y d). La función list_rbind() apila ambas tablas por filas alineando la columna común y, generando a la derecha una tabla única consolidada con columnas x, y y z, e imputando valores NA en las celdas correspondientes a variables no observadas en cada tabla original.">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-list-rbind-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;19.4: Representación gráfica de la función <code>list_rbind()</code>
+Figura&nbsp;19.5: Representación gráfica de la función <code>list_rbind()</code>
 </figcaption>
 </figure>
 </div>
+<p>Tal como se detalla en la <a href="#fig-list-rbind" class="quarto-xref">Figura&nbsp;<span>19.5</span></a>, la ventaja de <code>list_rbind()</code> radica en que alinea automáticamente las columnas basándose en sus <strong>nombres</strong> y no en su orden posicional:</p>
+<ul>
+<li><p>Si una columna está presente en todas las tablas, como la columna <code>y</code> en <a href="#fig-list-rbind" class="quarto-xref">Figura&nbsp;<span>19.5</span></a>, sus valores se concatenan verticalmente en una sola columna.</p></li>
+<li><p>Si una columna existe únicamente en algunas tablas pero no en otras, como las columnas <code>x</code> y <code>z</code> en <a href="#fig-list-rbind" class="quarto-xref">Figura&nbsp;<span>19.5</span></a>, <code>list_rbind()</code> preserva dichas variables e imputa automáticamente el valor especial de datos faltantes <code>NA</code> en las filas de las tablas donde la columna no existía originalmente.</p></li>
+</ul>
+<p>Para comprobar este comportamiento, consideremos una lista denominada <code>tablas_datos</code> compuesta por 2 <code>tibble</code>s con columnas parcialmente superpuestas, tal como se señala en el <a href="#lst-list-rbind-tables" class="quarto-xref">Listado&nbsp;<span>19.13</span></a>:</p>
+<div class="cell">
+<div id="lst-list-rbind-tables" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-list-rbind-tables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;19.13: Consolidación vertical de una lista de tibbles mediante la función <code>list_rbind()</code>
+</figcaption>
+<div aria-describedby="lst-list-rbind-tables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lista de tablas con columnas parcialmente coincidentes ----</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>tablas_datos <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">x =</span> <span class="st">"a"</span>, <span class="at">y =</span> <span class="st">"b"</span>),</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">y =</span> <span class="st">"c"</span>, <span class="at">z =</span> <span class="st">"d"</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Unión por filas ----</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="fu">list_rbind</span>(tablas_datos)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  x     y     z    
+  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+1 a     b     &lt;NA&gt; 
+2 &lt;NA&gt;  c     d    </code></pre>
+</div>
+</div>
+<p>En el resultado del <a href="#lst-list-rbind-tables" class="quarto-xref">Listado&nbsp;<span>19.13</span></a>, <code>list_rbind()</code> consolida ambas tablas en una única <code>tibble</code> de 2 filas y 3 columnas. La primera fila conserva <code>x = "a"</code> e <code>y = "b"</code> asignando <code>NA</code> a <code>z</code>, mientras que la segunda fila incorpora <code>y = "c"</code> y <code>z = "d"</code> asignando <code>NA</code> a <code>x</code>.</p>
+<p>Esta operación completa el ciclo fundamental de importación y consolidación de archivos múltiples que se desarrollará en el <a href="map_reduce_list_rbind_functions.html" class="quarto-xref"><span>Capítulo 20</span></a>. Primero se empleará <code>map()</code> junto con una función de lectura para importar cada archivo en una lista de tablas de datos. Luego se utilizará la función <code>reduce()</code> para identificar las variables comunes en las diferentes tablas de datos importadas. Posteriormente se utilizará <code>list_rbind()</code> para apilar todas las filas en un único conjunto de datos estructurado para realizar un análisis posterior.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">

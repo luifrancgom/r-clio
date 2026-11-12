@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -354,15 +389,15 @@ div.csl-indent {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#importación" id="toc-importación" class="nav-link active" data-scroll-target="#importación"><span class="header-section-number">20.1</span> Importación</a></li>
-  <li><a href="#unión-por-filas" id="toc-unión-por-filas" class="nav-link" data-scroll-target="#unión-por-filas"><span class="header-section-number">20.2</span> Unión por filas</a></li>
-  <li><a href="#separación-de-caracteres-en-columnas" id="toc-separación-de-caracteres-en-columnas" class="nav-link" data-scroll-target="#separación-de-caracteres-en-columnas"><span class="header-section-number">20.3</span> Separación de caracteres en columnas</a></li>
-  <li><a href="#corrección-códigos-departamentos-y-municipios" id="toc-corrección-códigos-departamentos-y-municipios" class="nav-link" data-scroll-target="#corrección-códigos-departamentos-y-municipios"><span class="header-section-number">20.4</span> Corrección códigos departamentos y municipios</a></li>
-  <li><a href="#caso-de-estudio-consolidación-resultados-saber-pro-para-umng" id="toc-caso-de-estudio-consolidación-resultados-saber-pro-para-umng" class="nav-link" data-scroll-target="#caso-de-estudio-consolidación-resultados-saber-pro-para-umng"><span class="header-section-number">20.5</span> Caso de estudio: consolidación resultados Saber-pro para UMNG</a>
+  <li><a href="#sec-import-multiple-files" id="toc-sec-import-multiple-files" class="nav-link active" data-scroll-target="#sec-import-multiple-files"><span class="header-section-number">20.1</span> Importación</a></li>
+  <li><a href="#sec-row-binding" id="toc-sec-row-binding" class="nav-link" data-scroll-target="#sec-row-binding"><span class="header-section-number">20.2</span> Unión por filas</a></li>
+  <li><a href="#sec-separate-periodo" id="toc-sec-separate-periodo" class="nav-link" data-scroll-target="#sec-separate-periodo"><span class="header-section-number">20.3</span> Separación de caracteres en columnas</a></li>
+  <li><a href="#sec-correction-divipola-codes" id="toc-sec-correction-divipola-codes" class="nav-link" data-scroll-target="#sec-correction-divipola-codes"><span class="header-section-number">20.4</span> Corrección códigos departamentos y municipios</a></li>
+  <li><a href="#sec-case-study-umng" id="toc-sec-case-study-umng" class="nav-link" data-scroll-target="#sec-case-study-umng"><span class="header-section-number">20.5</span> Caso de estudio: consolidación de resultados Saber Pro para UMNG</a>
   <ul class="collapse">
-  <li><a href="#limpiar-y-filtar" id="toc-limpiar-y-filtar" class="nav-link" data-scroll-target="#limpiar-y-filtar"><span class="header-section-number">20.5.1</span> Limpiar y filtar</a></li>
-  <li><a href="#transformar" id="toc-transformar" class="nav-link" data-scroll-target="#transformar"><span class="header-section-number">20.5.2</span> Transformar</a></li>
-  <li><a href="#exportar" id="toc-exportar" class="nav-link" data-scroll-target="#exportar"><span class="header-section-number">20.5.3</span> Exportar</a></li>
+  <li><a href="#sec-clean-filter-umng" id="toc-sec-clean-filter-umng" class="nav-link" data-scroll-target="#sec-clean-filter-umng"><span class="header-section-number">20.5.1</span> Limpiar y filtrar</a></li>
+  <li><a href="#sec-transform-umng" id="toc-sec-transform-umng" class="nav-link" data-scroll-target="#sec-transform-umng"><span class="header-section-number">20.5.2</span> Transformar</a></li>
+  <li><a href="#sec-export-umng" id="toc-sec-export-umng" class="nav-link" data-scroll-target="#sec-export-umng"><span class="header-section-number">20.5.3</span> Exportar</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/map_reduce_list_rbind_functions.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/map_reduce_list_rbind_functions.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
@@ -389,12 +424,12 @@ div.csl-indent {
 </header>
 
 
-<p>Este capítulo se basa en <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 26</a>)</span> así como en la documentación oficial de <a href="https://purrr.tidyverse.org/index.html"><code>purrr</code></a> donde tiene como propósito introducir la forma de consolidar multipleas archivos que se encuentran en un directorio en un solo archivo, utilizando el paquete <code>purrr</code> e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Universidad Militar Nueva Granada (UMNG).</p>
+<p>Este capítulo se basa en <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 26</a>)</span> así como en la documentación oficial de <a href="https://purrr.tidyverse.org/index.html"><code>purrr</code></a> donde tiene como propósito introducir la forma de consolidar múltiples archivos que se encuentran en un directorio, utilizando el paquete <code>purrr</code> e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Universidad Militar Nueva Granada (UMNG).</p>
 <p>Exploraremos los siguientes aspectos:</p>
 <ol type="1">
 <li>¿Cómo importar múltiples archivos en un directorio utilizando el paquete <code>purrr</code>?</li>
 <li>¿Cómo consolidar múltiples tablas de datos por filas en un solo archivo utilizando el paquete <code>purrr</code>?</li>
-<li>¿Cómo utilizar la gramática de manipulación de datos (ver <a href="two_table_verbs.html" class="quarto-xref"><span>Capítulo 11</span></a>) para limpiar y exportar un archivo consolidado?</li>
+<li>¿Cómo utilizar la gramática de manipulación de datos (ver <a href="single_table_verbs.html" class="quarto-xref"><span>Capítulo 10</span></a> y <a href="two_table_verbs.html" class="quarto-xref"><span>Capítulo 11</span></a>) para limpiar y exportar un archivo consolidado?</li>
 </ol>
 <div id="nte-1-chap-20" class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -406,7 +441,7 @@ Nota&nbsp;20.1
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Para desarrollar el contenido de este capítulo es necesario que hayas guardado el archivo <code>2021-saber_pro-genericas.txt.xz</code> en la carpeta <code>data</code>, tal como se señaló en la <a href="plain_text.html#nte-1-chap-13" class="quarto-xref">Nota&nbsp;<span>13.1</span></a>. En caso que no lo hayas hecho es necesario que lo descargues y lo incluyas dentro de la carpeta <code>data</code>:</p>
+<p>Para desarrollar el contenido de este capítulo es necesario que hayas guardado el archivo <code>2021-saber_pro-genericas.txt.xz</code> en la carpeta <code>data</code>, tal como se señaló en la <a href="plain_text.html#nte-1-chap-13" class="quarto-xref">Nota&nbsp;<span>13.1</span></a>. En caso que no lo hayas hecho, es necesario que lo descargues y lo incluyas dentro de la carpeta <code>data</code>:</p>
 <div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -420,7 +455,7 @@ Nota&nbsp;20.1
 
 </div>
 </div>
-<p>Adicionalmente, es necesario que hayas descargado los archivos señalados a continuación y lo incluyas dentro de la carpeta <code>data</code>, respecto a los descrito en la <a href="amounts.html#nte-1-chap-6" class="quarto-xref">Nota&nbsp;<span>6.1</span></a>:</p>
+<p>Adicionalmente, es necesario que hayas descargado los archivos señalados a continuación y los incluyas dentro de la carpeta <code>data</code>, respecto a lo descrito en la <a href="amounts.html#nte-1-chap-6" class="quarto-xref">Nota&nbsp;<span>6.1</span></a>:</p>
 <div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -460,31 +495,599 @@ Nota&nbsp;20.1
 
 </div>
 </div>
-<p>En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada <code>020_funciones-anonimas-purrr-en-r</code> y dentro de ella genera el archivo <code>001_funciones-anonimas-purrr.R</code>, siguiendo las pautas de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>.</p>
+<p>En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada <code>020_funciones-map-reduce-list-rbind-en-r</code> y dentro de ella genera el archivo <code>001_funciones-map-reduce-list-rbind.R</code>, siguiendo las pautas de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a>.</p>
 </div>
 </div>
-<section id="importación" class="level2" data-number="20.1">
-<h2 data-number="20.1" class="anchored" data-anchor-id="importación"><span class="header-section-number">20.1</span> Importación</h2>
+<section id="sec-import-multiple-files" class="level2" data-number="20.1">
+<h2 data-number="20.1" class="anchored" data-anchor-id="sec-import-multiple-files"><span class="header-section-number">20.1</span> Importación</h2>
+<p>Cuando se trabaja con datos históricos, es común que la información se encuentre fragmentada en múltiples archivos dentro de un mismo directorio donde cada archivo corresponde a un año o periodo determinado. Para procesar estos archivos sin necesidad de repetir manualmente las instrucciones de importación una y otra vez, es posible combinar herramientas de exploración del sistema de archivos con funciones de iteración del paquete <code>purrr</code>.</p>
+<p>Para gestionar rutas y archivos en un sistema operativo, utilizarás el paquete <a href="https://fs.r-lib.org/"><code>fs</code></a>. El paquete <code>fs</code> ofrece una interfaz homogénea, consistente e independiente del sistema operativo, que se integra de manera natural con el operador <code>|&gt;</code> y las funciones del <code>tidyverse</code>.</p>
+<p>En particular, la función <code>dir_ls()</code> del paquete <code>fs</code> lista los contenidos de un directorio aplicando criterios específicos de filtrado (ver <a href="#lst-paths-fs" class="quarto-xref">Listado&nbsp;<span>20.1</span></a>). Sus parámetros principales son:</p>
+<ol type="1">
+<li><p><code>path</code>: la ruta del directorio que se desea explorar, como por ejemplo <code>"data/"</code>.</p></li>
+<li><p><code>type</code>: el tipo de elemento a buscar. Al especificar por ejemplo <code>type = "file"</code> se restringe la búsqueda exclusivamente a archivos, descartando posibles subcarpetas.</p></li>
+<li><p><code>glob</code>: un patrón de texto basado en caracteres comodín (en inglés <strong>wildcards</strong>) para seleccionar los archivos que cumplen con un patrón determinado. Por ejemplo, en el patrón <code>"*.txt.xz$"</code>:</p>
+<ul>
+<li>El asterisco <code>*</code> actúa como comodín para representar cualquier secuencia de caracteres de longitud variable como por ejemplo <code>2021-saber_pro-genericas</code>.</li>
+<li><code>.txt.xz</code> señala la extensión compuesta de los archivos comprimidos de texto plano.</li>
+<li>El símbolo <code>$</code> ancla la búsqueda garantizando que únicamente se seleccionen archivos cuya denominación termine con esa extensión exacta.</li>
+</ul></li>
+</ol>
+<p>En el <a href="#lst-paths-fs" class="quarto-xref">Listado&nbsp;<span>20.1</span></a> se cargan los paquetes necesarios y se identifican las rutas de los 4 archivos del examen Saber Pro, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-paths-fs" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-paths-fs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;20.1: Identificación de rutas de archivos en el directorio con <code>dir_ls()</code> del paquete <code>fs</code>
+</figcaption>
+<div aria-describedby="lst-paths-fs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar paquetes ----</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fs)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Rutas ----</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>paths <span class="ot">&lt;-</span> <span class="fu">dir_ls</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">"data/"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"file"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">glob =</span> <span class="st">"*.txt.xz$"</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>paths</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>data/2021-saber_pro-genericas.txt.xz
+data/2022-saber_pro-genericas.txt.xz
+data/2023-saber_pro-genericas.txt.xz
+data/2024-saber_pro-genericas.txt.xz</code></pre>
+</div>
+</div>
+<p>Una vez obtenido el vector atómico de rutas <code>paths</code>, se realiza una importación inicial aplicando la función <code>map()</code> junto con una función anónima, tal como se estudió en el <a href="anonymous_functions_purrr.html" class="quarto-xref"><span>Capítulo 19</span></a>. Como se examinó en el <a href="plain_text.html" class="quarto-xref"><span>Capítulo 13</span></a>, los microdatos del ICFES utilizan el punto y coma (<code>;</code>) como delimitador, por lo que la función adecuada de lectura es <code>read_csv2()</code>, tal como se señala en el <a href="#lst-initial-import-map" class="quarto-xref">Listado&nbsp;<span>20.2</span></a>:</p>
+<div class="cell">
+<div id="lst-initial-import-map" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-initial-import-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;20.2: Importación inicial de múltiples archivos mediante <code>map()</code> y <code>read_csv2()</code>
+</figcaption>
+<div aria-describedby="lst-initial-import-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importación inicial ----</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024 <span class="ot">&lt;-</span> paths <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">.f =</span> \(x) {</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">read_csv2</span>(</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">file =</span> x</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<p>Al finalizar la ejecución del <a href="#lst-initial-import-map" class="quarto-xref">Listado&nbsp;<span>20.2</span></a>, <code>saber_pro_genericas_2021_2024</code> es una lista con 4 <strong>tibbles</strong>, correspondientes a los años 2021, 2022, 2023 y 2024. Sin embargo, si inspeccionas la cantidad de columnas de cada tabla se evidencia que no todas contienen el mismo número de variables. Por ejemplo, el archivo de 2021 posee 95 variables, el del 2022 tiene 100, el del 2023 contiene 96 y el de 2024 abarca 90.</p>
+<p>Estas discrepancias obedecen a actualizaciones o modificaciones en los cuestionarios socioeconómicos aplicados por el ICFES a lo largo del tiempo. Para poder unificar estas tablas en una sola estructura homogénea, es indispensable identificar cuáles columnas están presentes en la totalidad de los archivos anuales.</p>
+<p>Aplicando lo aprendido en el <a href="anonymous_functions_purrr.html" class="quarto-xref"><span>Capítulo 19</span></a>, puedes extraer primero los nombres de las variables de cada tabla con <code>map(.f = names)</code> y luego aplicar la función <code>reduce()</code> junto con <code>intersect</code> para encontrar la intersección de todas las listas de nombres, tal como se señala en el <a href="#lst-identify-variables-reduce" class="quarto-xref">Listado&nbsp;<span>20.3</span></a>:</p>
+<div class="cell">
+<div id="lst-identify-variables-reduce" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-identify-variables-reduce-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;20.3: Identificación de variables comunes en todos los archivos con <code>map()</code> y <code>reduce()</code>
+</figcaption>
+<div aria-describedby="lst-identify-variables-reduce-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Identificación variables completas ----</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>variables_completas <span class="ot">&lt;-</span> saber_pro_genericas_2021_2024 <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">.f =</span> names</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reduce</span>(</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.f =</span> intersect</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<p>Al evaluar el <a href="#lst-identify-variables-reduce" class="quarto-xref">Listado&nbsp;<span>20.3</span></a>, se obtiene el vector <code>variables_completas</code> que contiene 82 variables comunes a los 4 años. Con este insumo, puedes proceder a realizar una segunda importación seleccionando únicamente las columnas comunes mediante el argumento <code>col_select = all_of(variables_completas)</code> de la función <code>read_csv2()</code>, tal como se señala en el <a href="#lst-reimport-selected-vars" class="quarto-xref">Listado&nbsp;<span>20.4</span></a>:</p>
+<div class="cell">
+<div id="lst-reimport-selected-vars" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-reimport-selected-vars-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;20.4: Importación filtrando únicamente las columnas comunes con <code>col_select</code>
+</figcaption>
+<div aria-describedby="lst-reimport-selected-vars-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importación variables completas ----</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024 <span class="ot">&lt;-</span> paths <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">.f =</span> \(x) {</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">read_csv2</span>(</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">file =</span> x,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">col_select =</span> <span class="fu">all_of</span>(variables_completas)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<p>En el <a href="#lst-reimport-selected-vars" class="quarto-xref">Listado&nbsp;<span>20.4</span></a> conviene destacar el uso de la función auxiliar <code>all_of()</code>, perteneciente al paquete <code>tidyselect</code> (integrado en el <code>tidyverse</code> y utilizado por <code>readr</code> en argumentos como <code>col_select</code>). Su empleo cumple dos propósitos fundamentales:</p>
+<ol type="1">
+<li><p><strong>Resolución explícita de variables de entorno:</strong> El argumento <code>col_select</code> opera mediante evaluación ordenada (<em>tidy selection</em>), lo que permite seleccionar columnas directamente por su nombre o mediante expresiones de selección. Cuando se suministra un vector de caracteres definido en el entorno de trabajo como <code>variables_completas</code>, envolverlo en <code>all_of()</code> le indica a R de forma inequívoca que debe evaluar el contenido de dicho vector como los nombres de las columnas a seleccionar. Esto evita advertencias y previene ambigüedades entre las variables de los datos (<em>data-variables</em>) y las variables del entorno (<em>env-variables</em>).</p></li>
+<li><p><strong>Validación estricta de columnas:</strong> <code>all_of()</code> exige que <strong>todas</strong> las columnas especificadas en el vector existan en el archivo que se está leyendo; si falta alguna, la función interrumpe la ejecución y emite un error. Esta rigurosidad garantiza la integridad del proceso de importación frente a su alternativa <code>any_of()</code>, que selecciona las columnas coincidentes e ignora silenciosamente las ausentes. Al usar <code>all_of(variables_completas)</code>, aseguras que las 82 variables comunes identificadas se carguen efectivamente en la totalidad de los archivos anuales.</p></li>
+</ol>
+<p>Antes de proceder a la unión de las tablas, es necesario revisar también las especificaciones de tipos de datos inferidas por <code>readr</code> mediante la función <code>spec()</code>, tal como se señala en el <a href="#lst-check-spec" class="quarto-xref">Listado&nbsp;<span>20.5</span></a>:</p>
+<div class="cell">
+<div id="lst-check-spec" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-check-spec-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;20.5: Inspección de las especificaciones de columnas inferidas con <code>spec()</code> y <code>map()</code>
+</figcaption>
+<div aria-describedby="lst-check-spec-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Revisión especificación variables ----</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024 <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">.f =</span> spec</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<p>Al examinar la especificación de las variables con detalle puedes identificar las siguientes necesidades de ajuste:</p>
+<ol type="1">
+<li><code>periodo</code>: es inferida como una variable numérica continua (<code>col_double()</code>), pero corresponde a un código cronológico compuesto, como por ejemplo <code>"20212"</code>, que posteriormente debe separarse en año y periodo. Por ende, debe importarse como texto (<code>col_character()</code>).</li>
+<li>Códigos geográficos e institucionales como <code>estu_cod_depto_presentacion</code>, <code>estu_cod_mcpio_presentacion</code>, <code>estu_inst_codmunicipio</code> y <code>estu_prgm_codmunicipio</code>: son inferidos como numéricos (<code>col_double()</code>), lo cual provoca la pérdida de los ceros a la izquierda. Por ejemplo, el código <code>"05"</code> de Antioquia se convierte en el número <code>5</code>, alterando la codificación de la División Político-Administrativa de Colombia (DIVIPOLA) del DANE. En ese sentido deben importarse como texto (<code>col_character()</code>).</li>
+<li><code>estu_fechanacimiento</code>: contiene fechas expresadas en formato <code>"día/mes/año"</code> (<code>DD/MM/AAAA</code>). Como se examinó en el <a href="plain_text.html" class="quarto-xref"><span>Capítulo 13</span></a>, deben convertirse explícitamente mediante <code>col_date(format = "%d/%m/%Y")</code>.</li>
+<li><code>estu_snies_prgmacademico</code> e <code>inst_cod_institucion</code>: son identificadores numéricos enteros discretos, por lo que es preferible importarlos como <code>col_integer()</code>.</li>
+</ol>
+<p>Para ajustar estos tipos de datos de forma compacta y eficiente, la función <code>cols()</code> del paquete <code>readr</code> permite sobreescribir únicamente las 8 columnas de interés, dejando que <code>read_csv2()</code> infiera automáticamente el tipo de las 74 variables restantes. En el <a href="#lst-adjust-spec" class="quarto-xref">Listado&nbsp;<span>20.6</span></a> se realiza la importación definitiva incorporando esta especificación ajustada, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-adjust-spec" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-adjust-spec-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;20.6: Importación definitiva con ajuste compacto de tipos de columna mediante <code>cols()</code>
+</figcaption>
+<div aria-describedby="lst-adjust-spec-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajuste especificación variables ----</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024 <span class="ot">&lt;-</span> paths <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">.f =</span> \(x) {</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">read_csv2</span>(</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">file =</span> x,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">periodo =</span> <span class="fu">col_character</span>(),</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">estu_cod_depto_presentacion =</span> <span class="fu">col_character</span>(),</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">estu_cod_mcpio_presentacion =</span> <span class="fu">col_character</span>(),</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">estu_fechanacimiento =</span> <span class="fu">col_date</span>(<span class="at">format =</span> <span class="st">"%d/%m/%Y"</span>),</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">estu_inst_codmunicipio =</span> <span class="fu">col_character</span>(),</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">estu_prgm_codmunicipio =</span> <span class="fu">col_character</span>(),</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">estu_snies_prgmacademico =</span> <span class="fu">col_integer</span>(),</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>          <span class="at">inst_cod_institucion =</span> <span class="fu">col_integer</span>()</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">col_select =</span> <span class="fu">all_of</span>(variables_completas),</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<p>Finalmente, se utiliza la función <code>problems()</code> en combinación con <code>map()</code> para verificar que la lectura se haya ejecutado sin advertencias ni inconsistencias de conversión, tal como se señala en el <a href="#lst-check-problems" class="quarto-xref">Listado&nbsp;<span>20.7</span></a>:</p>
+<div class="cell">
+<div id="lst-check-problems" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-check-problems-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;20.7: Verificación de problemas de importación mediante <code>problems()</code> y <code>map()</code>
+</figcaption>
+<div aria-describedby="lst-check-problems-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Chequeo problemas ----</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024 <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">.f =</span> problems</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$`data/2021-saber_pro-genericas.txt.xz`
+# A tibble: 0 × 5
+# ℹ 5 variables: row &lt;int&gt;, col &lt;int&gt;, expected &lt;chr&gt;,
+#   actual &lt;chr&gt;, file &lt;chr&gt;
+
+$`data/2022-saber_pro-genericas.txt.xz`
+# A tibble: 0 × 5
+# ℹ 5 variables: row &lt;int&gt;, col &lt;int&gt;, expected &lt;chr&gt;,
+#   actual &lt;chr&gt;, file &lt;chr&gt;
+
+$`data/2023-saber_pro-genericas.txt.xz`
+# A tibble: 0 × 5
+# ℹ 5 variables: row &lt;int&gt;, col &lt;int&gt;, expected &lt;chr&gt;,
+#   actual &lt;chr&gt;, file &lt;chr&gt;
+
+$`data/2024-saber_pro-genericas.txt.xz`
+# A tibble: 0 × 5
+# ℹ 5 variables: row &lt;int&gt;, col &lt;int&gt;, expected &lt;chr&gt;,
+#   actual &lt;chr&gt;, file &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>Al verificar el resultado del <a href="#lst-check-problems" class="quarto-xref">Listado&nbsp;<span>20.7</span></a> puedes confirmar que las 4 tablas retornan <strong>tibbles</strong> vacías de 0 filas. Es decir, cada una de ellas indica que todos los registros se importaron exitosamente con los tipos de datos requeridos.</p>
 </section>
-<section id="unión-por-filas" class="level2" data-number="20.2">
-<h2 data-number="20.2" class="anchored" data-anchor-id="unión-por-filas"><span class="header-section-number">20.2</span> Unión por filas</h2>
+<section id="sec-row-binding" class="level2" data-number="20.2">
+<h2 data-number="20.2" class="anchored" data-anchor-id="sec-row-binding"><span class="header-section-number">20.2</span> Unión por filas</h2>
+<p>Una vez importados los 4 archivos con idéntica estructura de columnas y tipos de datos correctos, el objeto <code>saber_pro_genericas_2021_2024</code> consiste en una lista con 4 tablas independientes. Para poder realizar análisis consolidados sobre el periodo 2021-2024, se deben unir verticalmente todas las filas en un único conjunto de datos rectangular.</p>
+<p>Como se expuso en la <a href="anonymous_functions_purrr.html#sec-list-rbind" class="quarto-xref"><span>Sección 19.7</span></a> del <a href="anonymous_functions_purrr.html" class="quarto-xref"><span>Capítulo 19</span></a>, el paquete <code>purrr</code> proporciona la función <code>list_rbind()</code> para concatenar por filas una lista de tablas de datos. En el <a href="#lst-list-rbind-consolidation" class="quarto-xref">Listado&nbsp;<span>20.8</span></a> se aplica esta función sobre la lista importada, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-list-rbind-consolidation" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-list-rbind-consolidation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;20.8: Consolidación de la lista de tablas de datos en una sola estructura rectangular con <code>list_rbind()</code>
+</figcaption>
+<div aria-describedby="lst-list-rbind-consolidation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Unión filas ----</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024 <span class="ot">&lt;-</span> saber_pro_genericas_2021_2024 <span class="sc">|&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<p>Al ejecutar <code>list_rbind()</code>, la totalidad de observaciones correspondientes a los 4 años quedan consolidadas en una única <strong>tibble</strong> de 82 columnas para que pueda ser manipulada.</p>
 </section>
-<section id="separación-de-caracteres-en-columnas" class="level2" data-number="20.3">
-<h2 data-number="20.3" class="anchored" data-anchor-id="separación-de-caracteres-en-columnas"><span class="header-section-number">20.3</span> Separación de caracteres en columnas</h2>
+<section id="sec-separate-periodo" class="level2" data-number="20.3">
+<h2 data-number="20.3" class="anchored" data-anchor-id="sec-separate-periodo"><span class="header-section-number">20.3</span> Separación de caracteres en columnas</h2>
+<p>En la tabla consolidada, la variable <code>periodo</code> almacena códigos de 5 dígitos, como por ejemplo <code>"20212"</code>, <code>"20224"</code>, <code>"20231"</code> o <code>"20241"</code>, donde los primeros 4 dígitos corresponden al año del examen y el último dígito indica la convocatoria semestral respectiva. Al encontrarse fusionadas estas 2 variables en una sola cadena de caracteres, se dificulta realizar agrupaciones o filtros temporales independientes por año o por periodo.</p>
+<p>Aplicando lo estudiado en el <a href="split_unite_characters_cols.html" class="quarto-xref"><span>Capítulo 18</span></a>, puedes emplear la función <code>separate_wider_position()</code> del paquete <code>tidyr</code> para dividir esta variable a partir de anchos fijos de posición con 4 caracteres para el año (<code>ano</code>) y 1 carácter para el semestre (<code>periodo</code>), tal como se señala en el <a href="#lst-separate-periodo" class="quarto-xref">Listado&nbsp;<span>20.9</span></a>:</p>
+<div class="cell">
+<div id="lst-separate-periodo" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-separate-periodo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;20.9: Separación de la columna <code>periodo</code> en año y semestre mediante <code>separate_wider_position()</code>
+</figcaption>
+<div aria-describedby="lst-separate-periodo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separación periodo ----</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024 <span class="ot">&lt;-</span> saber_pro_genericas_2021_2024 <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_wider_position</span>(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> periodo,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fu">c</span>(<span class="at">ano =</span> <span class="dv">4</span>, <span class="at">periodo =</span> <span class="dv">1</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
+<p>Al aplicar <code>separate_wider_position()</code>, la variable compuesta <code>periodo</code> se descompone en 2 columnas independientes: <code>ano</code> y <code>periodo</code>. De esa manera se facilita posteriormente el análisis de datos.</p>
 </section>
-<section id="corrección-códigos-departamentos-y-municipios" class="level2" data-number="20.4">
-<h2 data-number="20.4" class="anchored" data-anchor-id="corrección-códigos-departamentos-y-municipios"><span class="header-section-number">20.4</span> Corrección códigos departamentos y municipios</h2>
+<section id="sec-correction-divipola-codes" class="level2" data-number="20.4">
+<h2 data-number="20.4" class="anchored" data-anchor-id="sec-correction-divipola-codes"><span class="header-section-number">20.4</span> Corrección códigos departamentos y municipios</h2>
+<p>De acuerdo con el estándar de codificación DIVIPOLA establecido por el DANE, los códigos de departamento deben poseer exactamente 2 dígitos, por ejemplo, <code>"05"</code> para Antioquia u <code>"11"</code> para Bogotá D.C., mientras que los códigos de municipio deben contar exactamente con 5 dígitos, por ejemplo <code>"05001"</code> para Medellín.</p>
+<p>No obstante, al consultar la longitud en caracteres de las variables geográficas mediante la función <code>str_length()</code> del paquete <code>stringr</code> y la función <code>count()</code> de <code>dplyr</code>, se identifica que algunos registros presentan longitudes inferiores a las reglamentarias, tal como se señala en el <a href="#lst-check-divipola-lengths" class="quarto-xref">Listado&nbsp;<span>20.11</span></a>:</p>
+<div class="cell">
+<div id="lst-check-divipola-lengths" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-check-divipola-lengths-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;20.10: Diagnóstico de longitudes en caracteres para códigos de departamento y municipio
+</figcaption>
+<div aria-describedby="lst-check-divipola-lengths-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Conteo de caracteres en departamentos ----</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024 <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(<span class="at">n_depto =</span> <span class="fu">str_length</span>(estu_cod_depto_presentacion))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  n_depto      n
+    &lt;int&gt;  &lt;int&gt;
+1       1 114007
+2       2 901249
+3      NA     39</code></pre>
+</div>
+<div id="lst-check-divipola-lengths" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-check-divipola-lengths-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;20.11: Diagnóstico de longitudes en caracteres para códigos de departamento y municipio
+</figcaption>
+<div aria-describedby="lst-check-divipola-lengths-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Conteo de caracteres en municipios ----</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024 <span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(<span class="at">n_mcpio_pres =</span> <span class="fu">str_length</span>(estu_cod_mcpio_presentacion))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  n_mcpio_pres      n
+         &lt;int&gt;  &lt;int&gt;
+1            4 114007
+2            5 901249
+3           NA     39</code></pre>
+</div>
+</div>
+<p>Al inspeccionar los resultados del <a href="#lst-check-divipola-lengths" class="quarto-xref">Listado&nbsp;<span>20.11</span></a>, se observa que existen departamentos con longitud 1 en lugar de 2 y municipios con longitud 4 en lugar de 5. Para confirmar el origen de este comportamiento, en el <a href="#lst-filter-divipola-short" class="quarto-xref">Listado&nbsp;<span>20.13</span></a> se filtran las primeras filas con longitudes reducidas:</p>
+<div class="cell">
+<div id="lst-filter-divipola-short" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-filter-divipola-short-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;20.12: Inspección de registros con longitudes reducidas en códigos DIVIPOLA
+</figcaption>
+<div aria-describedby="lst-filter-divipola-short-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspección departamento con 1 carácter ----</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024 <span class="sc">|&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_length</span>(estu_cod_depto_presentacion) <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(estu_cod_depto_presentacion) <span class="sc">|&gt;</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 1
+  estu_cod_depto_presentacion
+  &lt;chr&gt;                      
+1 5                          
+2 8                          
+3 5                          
+4 8                          
+5 5                          
+6 5                          </code></pre>
+</div>
+<div id="lst-filter-divipola-short" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-filter-divipola-short-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;20.13: Inspección de registros con longitudes reducidas en códigos DIVIPOLA
+</figcaption>
+<div aria-describedby="lst-filter-divipola-short-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspección municipio con 4 caracteres ----</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024 <span class="sc">|&gt;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_length</span>(estu_cod_mcpio_presentacion) <span class="sc">==</span> <span class="dv">4</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(estu_cod_mcpio_presentacion) <span class="sc">|&gt;</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 1
+  estu_cod_mcpio_presentacion
+  &lt;chr&gt;                      
+1 5001                       
+2 8001                       
+3 5001                       
+4 8001                       
+5 5001                       
+6 5001                       </code></pre>
+</div>
+</div>
+<p>El resultado del <a href="#lst-filter-divipola-short" class="quarto-xref">Listado&nbsp;<span>20.13</span></a> demuestra que la discrepancia radica en la pérdida del cero a la izquierda en aquellos departamentos con códigos entre <code>"01"</code> y <code>"09"</code> registrados erróneamente como por ejemplo <code>5</code> en vez de <code>"05"</code> y municipios asociados registrados como por ejemplo <code>5001</code> en vez de <code>"05001"</code>.</p>
+<p>Para corregir esta anomalía y restablecer los ceros a la izquierda se utiliza la función <code>str_pad()</code> del paquete <code>stringr</code>. En manipulación de texto y cadenas de caracteres, el término <strong>padding</strong> (en español <strong>relleno</strong>) hace referencia a la acción de añadir caracteres a una cadena hasta alcanzar una longitud o ancho total deseado. Si el texto original ya cuenta con dicha longitud o la supera, <code>str_pad()</code> lo deja inalterado sin modificarlo.</p>
+<p>La función <code>str_pad()</code> se compone de 4 argumentos clave:</p>
+<ol type="1">
+<li><p><code>string</code>: el vector o columna de texto que se desea rellenar.</p></li>
+<li><p><code>width</code>: el ancho total mínimo o número de caracteres deseado para la cadena resultante. Por ejemplo, en los códigos de departamento DIVIPOLA se define <code>width = 2</code>, mientras que para los códigos municipales se especifica <code>width = 5</code>.</p></li>
+<li><p><code>side</code>: el extremo o lado de la cadena donde se insertarán los caracteres de relleno para alcanzar el ancho definido en <code>width</code>. Este parámetro contempla 3 opciones:</p>
+<ul>
+<li><code>"left"</code>: inserta el relleno a la izquierda donde antepone caracteres. Esta opción es la indicada cuando se requiere restituir ceros a la izquierda en variables numéricas o códigos estandarizados, como por ejemplo transformar <code>"5"</code> en <code>"05"</code> o <code>"5001"</code> en <code>"05001"</code>.</li>
+<li><code>"right"</code>: inserta el relleno a la derecha donde añade caracteres al final.</li>
+<li><code>"both"</code>: distribuye el relleno de manera equilibrada a ambos lados, centrando el texto original.</li>
+</ul></li>
+<li><p><code>pad</code>: el carácter individual con el que se rellenará el espacio faltante. Por defecto, <code>str_pad()</code> utiliza un espacio en blanco (<code>pad = " "</code>), pero en este contexto se define <code>pad = "0"</code> para restituir el formato numérico oficial.</p></li>
+</ol>
+<p>De esta manera, al evaluar <code>str_pad(string = "5", width = 2, side = "left", pad = "0")</code> se obtiene <code>"05"</code>, mientras que un código como <code>"11"</code> permanece intacto porque ya satisface el ancho mínimo de 2 caracteres. Análogamente, para los municipios con <code>width = 5</code>, un código incompleto como <code>"5001"</code> pasa a ser <code>"05001"</code>, mientras que <code>"11001"</code> no sufre alteraciones.</p>
+<p>Asimismo, para no repetir la misma instrucción en cada una de las columnas de municipio se recurre a la función <code>across()</code>, tal como se introdujo en el <a href="single_table_verbs.html" class="quarto-xref"><span>Capítulo 10</span></a>. Mediante <code>across()</code>, se aplica simultáneamente una función anónima con <code>str_pad(width = 5, side = "left", pad = "0")</code> a las 3 variables de municipio (<code>estu_cod_mcpio_presentacion</code>, <code>estu_inst_codmunicipio</code> y <code>estu_prgm_codmunicipio</code>), tal como se señala en el <a href="#lst-pad-divipola-codes" class="quarto-xref">Listado&nbsp;<span>20.14</span></a>:</p>
+<div class="cell">
+<div id="lst-pad-divipola-codes" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-pad-divipola-codes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;20.14: Corrección de códigos DIVIPOLA mediante <code>str_pad()</code> y <code>across()</code>
+</figcaption>
+<div aria-describedby="lst-pad-divipola-codes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Corregir códigos departamento y municipio ----</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024 <span class="ot">&lt;-</span> saber_pro_genericas_2021_2024 <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">estu_cod_depto_presentacion =</span> <span class="fu">str_pad</span>(</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">string =</span> estu_cod_depto_presentacion,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">width =</span> <span class="dv">2</span>,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">side =</span> <span class="st">"left"</span>,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">pad =</span> <span class="st">"0"</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">.cols =</span> <span class="fu">c</span>(</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>        estu_cod_mcpio_presentacion,</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>        estu_inst_codmunicipio,</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>        estu_prgm_codmunicipio</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">.fns =</span> \(x) {</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>        <span class="fu">str_pad</span>(</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>          <span class="at">string =</span> x,</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>          <span class="at">width =</span> <span class="dv">5</span>,</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>          <span class="at">side =</span> <span class="st">"left"</span>,</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>          <span class="at">pad =</span> <span class="st">"0"</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
 </section>
-<section id="caso-de-estudio-consolidación-resultados-saber-pro-para-umng" class="level2" data-number="20.5">
-<h2 data-number="20.5" class="anchored" data-anchor-id="caso-de-estudio-consolidación-resultados-saber-pro-para-umng"><span class="header-section-number">20.5</span> Caso de estudio: consolidación resultados Saber-pro para UMNG</h2>
-<section id="limpiar-y-filtar" class="level3" data-number="20.5.1">
-<h3 data-number="20.5.1" class="anchored" data-anchor-id="limpiar-y-filtar"><span class="header-section-number">20.5.1</span> Limpiar y filtar</h3>
+<section id="sec-case-study-umng" class="level2" data-number="20.5">
+<h2 data-number="20.5" class="anchored" data-anchor-id="sec-case-study-umng"><span class="header-section-number">20.5</span> Caso de estudio: consolidación de resultados Saber Pro para UMNG</h2>
+<p>Habiendo unificado y normalizado el conjunto de datos para el orden nacional, el propósito de este caso de estudio es construir el subconjunto consolidado correspondiente a los programas de pregrado de la Universidad Militar Nueva Granada (UMNG) aplicando la <strong>gramática de manipulación de datos</strong> (ver <a href="single_table_verbs.html" class="quarto-xref"><span>Capítulo 10</span></a>).</p>
+<section id="sec-clean-filter-umng" class="level3" data-number="20.5.1">
+<h3 data-number="20.5.1" class="anchored" data-anchor-id="sec-clean-filter-umng"><span class="header-section-number">20.5.1</span> Limpiar y filtrar</h3>
+<p>El primer paso comprende la gestión de los exámenes presentados fuera del país y la delimitación de la población objetivo:</p>
+<ol type="1">
+<li><p><strong>Estudiantes en el exterior</strong>: cuando un estudiante presenta la prueba en el exterior (<code>estu_exterior == "SI"</code>), los códigos de departamento y municipio colombianos no resultan aplicables. Mediante la función <code>replace_when()</code> en combinación con <code>across()</code>, se asigna el valor ausente <code>NA</code> a las columnas <code>estu_cod_depto_presentacion</code> y <code>estu_cod_mcpio_presentacion</code> cuando se cumple dicha condición.</p></li>
+<li><p><strong>Población agregada oficial</strong>: se aplica <code>filter(estu_agregado == "S")</code> para conservar únicamente a los estudiantes evaluados formalmente como parte de la población agregada institucional válida para indicadores de calidad.</p></li>
+<li><p><strong>Filtro institucional UMNG</strong>: se utiliza <code>filter(inst_cod_institucion == 1117)</code> para seleccionar exclusivamente los registros de la Universidad Militar Nueva Granada (UMNG) cuyo código oficial asignado por el SNIES es <code>1117</code>.</p></li>
+</ol>
+<p>En el <a href="#lst-umng-clean-filter" class="quarto-xref">Listado&nbsp;<span>20.15</span></a> se implementan estas operaciones, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-umng-clean-filter" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-umng-clean-filter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;20.15: Limpieza de registros y filtrado de la población oficial para la UMNG
+</figcaption>
+<div aria-describedby="lst-umng-clean-filter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Limpiar y filtrar ----</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024_umng <span class="ot">&lt;-</span> saber_pro_genericas_2021_2024 <span class="sc">|&gt;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">.cols =</span> <span class="fu">c</span>(</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>        estu_cod_depto_presentacion,</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>        estu_cod_mcpio_presentacion</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">.fns =</span> \(x) {</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">replace_when</span>(</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">x =</span> x,</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>          estu_exterior <span class="sc">==</span> <span class="st">"SI"</span> <span class="sc">~</span> <span class="cn">NA</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(estu_agregado <span class="sc">==</span> <span class="st">"S"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(inst_cod_institucion <span class="sc">==</span> <span class="dv">1117</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
 </section>
-<section id="transformar" class="level3" data-number="20.5.2">
-<h3 data-number="20.5.2" class="anchored" data-anchor-id="transformar"><span class="header-section-number">20.5.2</span> Transformar</h3>
+<section id="sec-transform-umng" class="level3" data-number="20.5.2">
+<h3 data-number="20.5.2" class="anchored" data-anchor-id="sec-transform-umng"><span class="header-section-number">20.5.2</span> Transformar</h3>
+<p>El segundo paso consiste en asociar el tipo de datos adecuado a cada variable mediante <code>mutate()</code> y la función <code>factor()</code>, de forma análoga a lo desarrollado en el <a href="single_table_verbs.html" class="quarto-xref"><span>Capítulo 10</span></a>:</p>
+<ul>
+<li>Las variables temporales <code>ano</code> y <code>periodo</code> se transforman a números enteros utilizando <code>as.integer()</code>.</li>
+<li>La variable nominal <code>estu_genero</code> se codifica como un factor no ordenado con <code>ordered = FALSE</code>.</li>
+<li>Las variables ordinales <code>estu_semestrecursa</code>, <code>fami_estratovivienda</code>, <code>fami_educacionmadre</code>, <code>fami_educacionpadre</code> y <code>mod_ingles_desem</code> se convierten en factores ordenados con <code>ordered = TRUE</code>, especificando de manera jerárquica la secuencia de sus niveles mediante el parámetro <code>levels</code>.</li>
+</ul>
+<p>En el <a href="#lst-umng-transform" class="quarto-xref">Listado&nbsp;<span>20.16</span></a> se llevan a cabo estas transformaciones, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-umng-transform" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-umng-transform-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;20.16: Transformación de tipos de columna a enteros y factores ordenados para la UMNG
+</figcaption>
+<div aria-describedby="lst-umng-transform-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Transformar ----</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024_umng <span class="ot">&lt;-</span> saber_pro_genericas_2021_2024_umng <span class="sc">|&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">ano =</span> <span class="fu">as.integer</span>(ano),</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">periodo =</span> <span class="fu">as.integer</span>(periodo)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">estu_genero =</span> <span class="fu">factor</span>(</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> estu_genero,</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">ordered =</span> <span class="cn">FALSE</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">estu_semestrecursa =</span> <span class="fu">factor</span>(</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> estu_semestrecursa,</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"02"</span>, <span class="st">"03"</span>, <span class="st">"06"</span>, <span class="st">"07"</span>, <span class="st">"08"</span>, <span class="st">"09"</span>, <span class="st">"10"</span>, <span class="st">"11"</span>, <span class="st">"12 o más"</span>),</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">fami_estratovivienda =</span> <span class="fu">factor</span>(</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> fami_estratovivienda,</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Sin Estrato"</span>,</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Estrato 1"</span>,</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Estrato 2"</span>,</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Estrato 3"</span>,</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Estrato 4"</span>,</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Estrato 5"</span>,</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Estrato 6"</span></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>      <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">fami_educacionmadre =</span> <span class="fu">factor</span>(</span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> fami_educacionmadre,</span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(</span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>        <span class="st">"No sabe"</span>,</span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>        <span class="st">"No Aplica"</span>,</span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Ninguno"</span>,</span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Primaria incompleta"</span>,</span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Primaria completa"</span>,</span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Secundaria (Bachillerato) incompleta"</span>,</span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Secundaria (Bachillerato) completa"</span>,</span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Técnica o tecnológica incompleta"</span>,</span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Técnica o tecnológica completa"</span>,</span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Educación profesional incompleta"</span>,</span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Educación profesional completa"</span>,</span>
+<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Postgrado"</span></span>
+<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a>      <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">fami_educacionpadre =</span> <span class="fu">factor</span>(</span>
+<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> fami_educacionpadre,</span>
+<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(</span>
+<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a>        <span class="st">"No sabe"</span>,</span>
+<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a>        <span class="st">"No Aplica"</span>,</span>
+<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Ninguno"</span>,</span>
+<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Primaria incompleta"</span>,</span>
+<span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Primaria completa"</span>,</span>
+<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Secundaria (Bachillerato) incompleta"</span>,</span>
+<span id="cb22-57"><a href="#cb22-57" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Secundaria (Bachillerato) completa"</span>,</span>
+<span id="cb22-58"><a href="#cb22-58" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Técnica o tecnológica incompleta"</span>,</span>
+<span id="cb22-59"><a href="#cb22-59" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Técnica o tecnológica completa"</span>,</span>
+<span id="cb22-60"><a href="#cb22-60" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Educación profesional incompleta"</span>,</span>
+<span id="cb22-61"><a href="#cb22-61" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Educación profesional completa"</span>,</span>
+<span id="cb22-62"><a href="#cb22-62" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Postgrado"</span></span>
+<span id="cb22-63"><a href="#cb22-63" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb22-64"><a href="#cb22-64" aria-hidden="true" tabindex="-1"></a>      <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb22-65"><a href="#cb22-65" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb22-66"><a href="#cb22-66" aria-hidden="true" tabindex="-1"></a>    <span class="at">mod_ingles_desem =</span> <span class="fu">factor</span>(</span>
+<span id="cb22-67"><a href="#cb22-67" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> mod_ingles_desem,</span>
+<span id="cb22-68"><a href="#cb22-68" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(</span>
+<span id="cb22-69"><a href="#cb22-69" aria-hidden="true" tabindex="-1"></a>        <span class="st">"A1"</span>,</span>
+<span id="cb22-70"><a href="#cb22-70" aria-hidden="true" tabindex="-1"></a>        <span class="st">"A2"</span>,</span>
+<span id="cb22-71"><a href="#cb22-71" aria-hidden="true" tabindex="-1"></a>        <span class="st">"B1"</span>,</span>
+<span id="cb22-72"><a href="#cb22-72" aria-hidden="true" tabindex="-1"></a>        <span class="st">"B2"</span></span>
+<span id="cb22-73"><a href="#cb22-73" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb22-74"><a href="#cb22-74" aria-hidden="true" tabindex="-1"></a>      <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb22-75"><a href="#cb22-75" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb22-76"><a href="#cb22-76" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb22-77"><a href="#cb22-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-78"><a href="#cb22-78" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024_umng</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9,328 × 83
+     ano periodo estu_consecutivo estu_estudiante
+   &lt;int&gt;   &lt;int&gt; &lt;chr&gt;            &lt;chr&gt;          
+ 1  2021       2 EK202120262469   ESTUDIANTE     
+ 2  2021       2 EK202120101505   ESTUDIANTE     
+ 3  2021       2 EK202120101600   ESTUDIANTE     
+ 4  2021       2 EK202120183856   ESTUDIANTE     
+ 5  2021       2 EK202120163038   ESTUDIANTE     
+ 6  2021       2 EK202120257595   ESTUDIANTE     
+ 7  2021       2 EK202120116785   ESTUDIANTE     
+ 8  2021       2 EK202120140627   ESTUDIANTE     
+ 9  2021       2 EK202120116868   ESTUDIANTE     
+10  2021       2 EK202120140778   ESTUDIANTE     
+# ℹ 9,318 more rows
+# ℹ 79 more variables: estu_tipodocumento &lt;chr&gt;,
+#   estu_nacionalidad &lt;chr&gt;,
+#   estu_actividadrefuerzoareas &lt;chr&gt;,
+#   estu_actividadrefuerzogeneric &lt;chr&gt;,
+#   estu_agregado &lt;chr&gt;, estu_cod_depto_presentacion &lt;chr&gt;,
+#   estu_cod_mcpio_presentacion &lt;chr&gt;, …</code></pre>
+</div>
+</div>
 </section>
-<section id="exportar" class="level3" data-number="20.5.3">
-<h3 data-number="20.5.3" class="anchored" data-anchor-id="exportar"><span class="header-section-number">20.5.3</span> Exportar</h3>
+<section id="sec-export-umng" class="level3" data-number="20.5.3">
+<h3 data-number="20.5.3" class="anchored" data-anchor-id="sec-export-umng"><span class="header-section-number">20.5.3</span> Exportar</h3>
+<p>Una vez culminado el procesamiento, la tabla depurada y estructurada contiene los registros de los estudiantes de la Universidad Militar Nueva Granada evaluados entre 2021 y 2024. Para guardar esta información y poder utilizarla en análisis posteriores, sin necesidad de repetir todo el flujo de importación, el lector puede exportar el objeto resultante en extensión <code>.rds</code> mediante la función <code>write_rds()</code> del paquete <code>readr</code>, tal como se señala a continuación:</p>
+<div class="cell">
+<div id="lst-umng-export" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-umng-export-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listado&nbsp;20.17: Exportación del conjunto consolidado depurado para la UMNG en extensión <code>.rds</code>
+</figcaption>
+<div aria-describedby="lst-umng-export-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exportar datos consolidados ----</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>saber_pro_genericas_2021_2024_umng <span class="sc">|&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_rds</span>(</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">file =</span> <span class="st">"data/2021-2024_saber-pro-genericas_umng.rds"</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
