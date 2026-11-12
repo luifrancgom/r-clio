@@ -78,6 +78,8 @@ url:
     stringr: "https://stringr.tidyverse.org/"
     purrr: "https://purrr.tidyverse.org/index.html"
     purrr_get_started: "https://purrr.tidyverse.org/articles/purrr.html"
+    purrr_reference: "https://purrr.tidyverse.org/reference/index.html"
+    purrr_cheatsheet: "https://github.com/rstudio/cheatsheets/blob/main/purrr.pdf"
     scales: "https://scales.r-lib.org/index.html"
     scales_axis_labels: "https://scales.r-lib.org/reference/index.html#axis-labels"
     magrittr: "https://magrittr.tidyverse.org/"
@@ -90,6 +92,7 @@ url:
     readxl: "https://readxl.tidyverse.org/"
     sf: "https://r-spatial.github.io/sf/"
     rio: "https://gesistsa.github.io/rio/"
+    fs: "https://fs.r-lib.org/"
 
   tools:
     gemini: "https://gemini.google.com/"

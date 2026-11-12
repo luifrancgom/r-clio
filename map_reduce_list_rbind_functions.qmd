@@ -9,25 +9,26 @@ source("_common.R")
 #| label: load-r-packages
 #| echo: false
 #| message: false
-
+library(tidyverse)
+library(fs)
 ```
 
-Este capítulo se basa en [@wickham_r_2023, Cap. 26] así como en la documentación oficial de [`purrr`]({{< var url.packages.purrr >}}) donde tiene como propósito introducir la forma de consolidar multipleas archivos que se encuentran en un directorio en un solo archivo, utilizando el paquete `purrr` e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Universidad Militar Nueva Granada (UMNG).
+Este capítulo se basa en [@wickham_r_2023, Cap. 26] así como en la documentación oficial de [`purrr`]({{< var url.packages.purrr >}}) donde tiene como propósito introducir la forma de consolidar múltiples archivos que se encuentran en un directorio, utilizando el paquete `purrr` e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Universidad Militar Nueva Granada (UMNG).
 
 Exploraremos los siguientes aspectos:
 
 1. ¿Cómo importar múltiples archivos en un directorio utilizando el paquete `purrr`? 
 2. ¿Cómo consolidar múltiples tablas de datos por filas en un solo archivo utilizando el paquete `purrr`?
-3. ¿Cómo utilizar la gramática de manipulación de datos (ver @sec-two-table-verbs) para limpiar y exportar un archivo consolidado? 
+3. ¿Cómo utilizar la gramática de manipulación de datos (ver @sec-single-table-verbs y @sec-two-table-verbs) para limpiar y exportar un archivo consolidado? 
 
 :::: {#nte-1-chap-20 .callout-note}
-Para desarrollar el contenido de este capítulo es necesario que hayas guardado el archivo `2021-saber_pro-genericas.txt.xz` en la carpeta `data`, tal como se señaló en la @nte-1-chap-13. En caso que no lo hayas hecho es necesario que lo descargues y lo incluyas dentro de la carpeta `data`:
+Para desarrollar el contenido de este capítulo es necesario que hayas guardado el archivo `2021-saber_pro-genericas.txt.xz` en la carpeta `data`, tal como se señaló en la @nte-1-chap-13. En caso que no lo hayas hecho, es necesario que lo descargues y lo incluyas dentro de la carpeta `data`:
 
 ::: {.callout appearance="minimal"}
 ## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2021-saber_pro-genericas.txt.xz]({{< var url.data.saber_pro_txt_xz_2021 >}})
 :::
 
-Adicionalmente, es necesario que hayas descargado los archivos señalados a continuación y lo incluyas dentro de la carpeta `data`, respecto a los descrito en la @nte-1-chap-6:
+Adicionalmente, es necesario que hayas descargado los archivos señalados a continuación y los incluyas dentro de la carpeta `data`, respecto a lo descrito en la @nte-1-chap-6:
 
 ::: {.callout appearance="minimal"}
 ## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2022-saber_pro-genericas.txt.xz]({{< var url.data.saber_pro_txt_xz_2022 >}})
@@ -41,35 +42,436 @@ Adicionalmente, es necesario que hayas descargado los archivos señalados a cont
 ## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2024-saber_pro-genericas.txt.xz]({{< var url.data.saber_pro_txt_xz_2024 >}})
 :::
 
-En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `020_funciones-anonimas-purrr-en-r` y dentro de ella genera el archivo `001_funciones-anonimas-purrr.R`, siguiendo las pautas de la @sec-package-usage.
+En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `020_funciones-map-reduce-list-rbind-en-r` y dentro de ella genera el archivo `001_funciones-map-reduce-list-rbind.R`, siguiendo las pautas de la @sec-package-usage.
 ::::
 
-## Importación
+## Importación {#sec-import-multiple-files}
 
+Cuando se trabaja con datos históricos, es común que la información se encuentre fragmentada en múltiples archivos dentro de un mismo directorio donde cada archivo corresponde a un año o periodo determinado. Para procesar estos archivos sin necesidad de repetir manualmente las instrucciones de importación una y otra vez, es posible combinar herramientas de exploración del sistema de archivos con funciones de iteración del paquete `purrr`.
 
+Para gestionar rutas y archivos en un sistema operativo, utilizarás el paquete [`fs`]({{< var url.packages.fs >}}). El paquete `fs` ofrece una interfaz homogénea, consistente e independiente del sistema operativo, que se integra de manera natural con el operador `|>` y las funciones del `tidyverse`.
 
-## Unión por filas
+En particular, la función `dir_ls()` del paquete `fs` lista los contenidos de un directorio aplicando criterios específicos de filtrado (ver @lst-paths-fs). Sus parámetros principales son:
 
+1. `path`: la ruta del directorio que se desea explorar, como por ejemplo `"data/"`.
 
+2. `type`: el tipo de elemento a buscar. Al especificar por ejemplo `type = "file"` se restringe la búsqueda exclusivamente a archivos, descartando posibles subcarpetas.
 
-## Separación de caracteres en columnas
+3. `glob`: un patrón de texto basado en caracteres comodín (en inglés **wildcards**) para seleccionar los archivos que cumplen con un patrón determinado. Por ejemplo, en el patrón `"*.txt.xz$"`:
 
+   - El asterisco `*` actúa como comodín para representar cualquier secuencia de caracteres de longitud variable como por ejemplo `2021-saber_pro-genericas`.
+   - `.txt.xz` señala la extensión compuesta de los archivos comprimidos de texto plano.
+   - El símbolo `$` ancla la búsqueda garantizando que únicamente se seleccionen archivos cuya denominación termine con esa extensión exacta.
 
+En el @lst-paths-fs se cargan los paquetes necesarios y se identifican las rutas de los 4 archivos del examen Saber Pro, tal como se señala a continuación:
 
-## Corrección códigos departamentos y municipios
+```{r}
+#| lst-label: lst-paths-fs
+#| lst-cap: Identificación de rutas de archivos en el directorio con `dir_ls()` del paquete `fs`
+# Cargar paquetes ----
+library(tidyverse)
+library(fs)
 
+# Rutas ----
+paths <- dir_ls(
+  path = "data/",
+  type = "file",
+  glob = "*.txt.xz$"
+)
 
+paths
+```
 
-## Caso de estudio: consolidación resultados Saber-pro para UMNG
+Una vez obtenido el vector atómico de rutas `paths`, se realiza una importación inicial aplicando la función `map()` junto con una función anónima, tal como se estudió en el @sec-anonymous-functions. Como se examinó en el @sec-plain-text, los microdatos del ICFES utilizan el punto y coma (`;`) como delimitador, por lo que la función adecuada de lectura es `read_csv2()`, tal como se señala en el @lst-initial-import-map:
 
+```{r}
+#| lst-label: lst-initial-import-map
+#| lst-cap: Importación inicial de múltiples archivos mediante `map()` y `read_csv2()`
+#| message: false
+# Importación inicial ----
+saber_pro_genericas_2021_2024 <- paths |>
+  map(
+    .f = \(x) {
+      read_csv2(
+        file = x
+      )
+    }
+  )
+```
 
+Al finalizar la ejecución del @lst-initial-import-map, `saber_pro_genericas_2021_2024` es una lista con 4 **tibbles**, correspondientes a los años 2021, 2022, 2023 y 2024. Sin embargo, si inspeccionas la cantidad de columnas de cada tabla se evidencia que no todas contienen el mismo número de variables. Por ejemplo, el archivo de 2021 posee 95 variables, el del 2022 tiene 100, el del 2023 contiene 96 y el de 2024 abarca 90.
 
-### Limpiar y filtar
+Estas discrepancias obedecen a actualizaciones o modificaciones en los cuestionarios socioeconómicos aplicados por el ICFES a lo largo del tiempo. Para poder unificar estas tablas en una sola estructura homogénea, es indispensable identificar cuáles columnas están presentes en la totalidad de los archivos anuales. 
 
+Aplicando lo aprendido en el @sec-anonymous-functions, puedes extraer primero los nombres de las variables de cada tabla con `map(.f = names)` y luego aplicar la función `reduce()` junto con `intersect` para encontrar la intersección de todas las listas de nombres, tal como se señala en el @lst-identify-variables-reduce:
 
+```{r}
+#| lst-label: lst-identify-variables-reduce
+#| lst-cap: Identificación de variables comunes en todos los archivos con `map()` y `reduce()`
+# Identificación variables completas ----
+variables_completas <- saber_pro_genericas_2021_2024 |>
+  map(
+    .f = names
+  ) |>
+  reduce(
+    .f = intersect
+  )
+```
 
-### Transformar
+Al evaluar el @lst-identify-variables-reduce, se obtiene el vector `variables_completas` que contiene 82 variables comunes a los 4 años. Con este insumo, puedes proceder a realizar una segunda importación seleccionando únicamente las columnas comunes mediante el argumento `col_select = all_of(variables_completas)` de la función `read_csv2()`, tal como se señala en el @lst-reimport-selected-vars:
 
+```{r}
+#| lst-label: lst-reimport-selected-vars
+#| lst-cap: Importación filtrando únicamente las columnas comunes con `col_select`
+#| message: false
+# Importación variables completas ----
+saber_pro_genericas_2021_2024 <- paths |>
+  map(
+    .f = \(x) {
+      read_csv2(
+        file = x,
+        col_select = all_of(variables_completas)
+      )
+    }
+  )
+```
 
+En el @lst-reimport-selected-vars conviene destacar el uso de la función auxiliar `all_of()`, perteneciente al paquete `tidyselect` (integrado en el `tidyverse` y utilizado por `readr` en argumentos como `col_select`). Su empleo cumple dos propósitos fundamentales:
 
-### Exportar
+1. **Resolución explícita de variables de entorno:** El argumento `col_select` opera mediante evaluación ordenada (*tidy selection*), lo que permite seleccionar columnas directamente por su nombre o mediante expresiones de selección. Cuando se suministra un vector de caracteres definido en el entorno de trabajo como `variables_completas`, envolverlo en `all_of()` le indica a R de forma inequívoca que debe evaluar el contenido de dicho vector como los nombres de las columnas a seleccionar. Esto evita advertencias y previene ambigüedades entre las variables de los datos (*data-variables*) y las variables del entorno (*env-variables*).
+
+2. **Validación estricta de columnas:** `all_of()` exige que **todas** las columnas especificadas en el vector existan en el archivo que se está leyendo; si falta alguna, la función interrumpe la ejecución y emite un error. Esta rigurosidad garantiza la integridad del proceso de importación frente a su alternativa `any_of()`, que selecciona las columnas coincidentes e ignora silenciosamente las ausentes. Al usar `all_of(variables_completas)`, aseguras que las 82 variables comunes identificadas se carguen efectivamente en la totalidad de los archivos anuales.
+
+Antes de proceder a la unión de las tablas, es necesario revisar también las especificaciones de tipos de datos inferidas por `readr` mediante la función `spec()`, tal como se señala en el @lst-check-spec:
+
+```{r}
+#| lst-label: lst-check-spec
+#| lst-cap: Inspección de las especificaciones de columnas inferidas con `spec()` y `map()`
+#| eval: false
+# Revisión especificación variables ----
+saber_pro_genericas_2021_2024 |>
+  map(
+    .f = spec
+  )
+```
+
+Al examinar la especificación de las variables con detalle puedes identificar las siguientes necesidades de ajuste:
+
+1. `periodo`: es inferida como una variable numérica continua (`col_double()`), pero corresponde a un código cronológico compuesto, como por ejemplo `"20212"`, que posteriormente debe separarse en año y periodo. Por ende, debe importarse como texto (`col_character()`).
+2. Códigos geográficos e institucionales como `estu_cod_depto_presentacion`, `estu_cod_mcpio_presentacion`, `estu_inst_codmunicipio` y `estu_prgm_codmunicipio`: son inferidos como numéricos (`col_double()`), lo cual provoca la pérdida de los ceros a la izquierda. Por ejemplo, el código `"05"` de Antioquia se convierte en el número `5`, alterando la codificación de la División Político-Administrativa de Colombia (DIVIPOLA) del DANE. En ese sentido deben importarse como texto (`col_character()`).
+3. `estu_fechanacimiento`: contiene fechas expresadas en formato `"día/mes/año"` (`DD/MM/AAAA`). Como se examinó en el @sec-plain-text, deben convertirse explícitamente mediante `col_date(format = "%d/%m/%Y")`.
+4. `estu_snies_prgmacademico` e `inst_cod_institucion`: son identificadores numéricos enteros discretos, por lo que es preferible importarlos como `col_integer()`.
+
+Para ajustar estos tipos de datos de forma compacta y eficiente, la función `cols()` del paquete `readr` permite sobreescribir únicamente las 8 columnas de interés, dejando que `read_csv2()` infiera automáticamente el tipo de las 74 variables restantes. En el @lst-adjust-spec se realiza la importación definitiva incorporando esta especificación ajustada, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-adjust-spec
+#| lst-cap: Importación definitiva con ajuste compacto de tipos de columna mediante `cols()`
+#| message: false
+# Ajuste especificación variables ----
+saber_pro_genericas_2021_2024 <- paths |>
+  map(
+    .f = \(x) {
+      read_csv2(
+        file = x,
+        col_types = cols(
+          periodo = col_character(),
+          estu_cod_depto_presentacion = col_character(),
+          estu_cod_mcpio_presentacion = col_character(),
+          estu_fechanacimiento = col_date(format = "%d/%m/%Y"),
+          estu_inst_codmunicipio = col_character(),
+          estu_prgm_codmunicipio = col_character(),
+          estu_snies_prgmacademico = col_integer(),
+          inst_cod_institucion = col_integer()
+        ),
+        col_select = all_of(variables_completas),
+      )
+    }
+  )
+```
+
+Finalmente, se utiliza la función `problems()` en combinación con `map()` para verificar que la lectura se haya ejecutado sin advertencias ni inconsistencias de conversión, tal como se señala en el @lst-check-problems:
+
+```{r}
+#| lst-label: lst-check-problems
+#| lst-cap: Verificación de problemas de importación mediante `problems()` y `map()`
+# Chequeo problemas ----
+saber_pro_genericas_2021_2024 |>
+  map(
+    .f = problems
+  )
+```
+
+Al verificar el resultado del @lst-check-problems puedes confirmar que las 4 tablas retornan **tibbles** vacías de 0 filas. Es decir, cada una de ellas indica que todos los registros se importaron exitosamente con los tipos de datos requeridos.
+
+## Unión por filas {#sec-row-binding}
+
+Una vez importados los 4 archivos con idéntica estructura de columnas y tipos de datos correctos, el objeto `saber_pro_genericas_2021_2024` consiste en una lista con 4 tablas independientes. Para poder realizar análisis consolidados sobre el periodo 2021-2024, se deben unir verticalmente todas las filas en un único conjunto de datos rectangular.
+
+Como se expuso en la @sec-list-rbind del @sec-anonymous-functions, el paquete `purrr` proporciona la función `list_rbind()` para concatenar por filas una lista de tablas de datos. En el @lst-list-rbind-consolidation se aplica esta función sobre la lista importada, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-list-rbind-consolidation
+#| lst-cap: Consolidación de la lista de tablas de datos en una sola estructura rectangular con `list_rbind()`
+# Unión filas ----
+saber_pro_genericas_2021_2024 <- saber_pro_genericas_2021_2024 |>
+  list_rbind()
+```
+
+Al ejecutar `list_rbind()`, la totalidad de observaciones correspondientes a los 4 años quedan consolidadas en una única **tibble** de 82 columnas para que pueda ser manipulada.
+
+## Separación de caracteres en columnas {#sec-separate-periodo}
+
+En la tabla consolidada, la variable `periodo` almacena códigos de 5 dígitos, como por ejemplo `"20212"`, `"20224"`, `"20231"` o `"20241"`, donde los primeros 4 dígitos corresponden al año del examen y el último dígito indica la convocatoria semestral respectiva. Al encontrarse fusionadas estas 2 variables en una sola cadena de caracteres, se dificulta realizar agrupaciones o filtros temporales independientes por año o por periodo.
+
+Aplicando lo estudiado en el @sec-split-unite-characters-cols, puedes emplear la función `separate_wider_position()` del paquete `tidyr` para dividir esta variable a partir de anchos fijos de posición con 4 caracteres para el año (`ano`) y 1 carácter para el semestre (`periodo`), tal como se señala en el @lst-separate-periodo:
+
+```{r}
+#| lst-label: lst-separate-periodo
+#| lst-cap: Separación de la columna `periodo` en año y semestre mediante `separate_wider_position()`
+# Separación periodo ----
+saber_pro_genericas_2021_2024 <- saber_pro_genericas_2021_2024 |>
+  separate_wider_position(
+    cols = periodo,
+    width = c(ano = 4, periodo = 1)
+  )
+```
+
+Al aplicar `separate_wider_position()`, la variable compuesta `periodo` se descompone en 2 columnas independientes: `ano` y `periodo`. De esa manera se facilita posteriormente el análisis de datos.
+
+## Corrección códigos departamentos y municipios {#sec-correction-divipola-codes}
+
+De acuerdo con el estándar de codificación DIVIPOLA establecido por el DANE, los códigos de departamento deben poseer exactamente 2 dígitos, por ejemplo, `"05"` para Antioquia u `"11"` para Bogotá D.C., mientras que los códigos de municipio deben contar exactamente con 5 dígitos, por ejemplo `"05001"` para Medellín.
+
+No obstante, al consultar la longitud en caracteres de las variables geográficas mediante la función `str_length()` del paquete `stringr` y la función `count()` de `dplyr`, se identifica que algunos registros presentan longitudes inferiores a las reglamentarias, tal como se señala en el @lst-check-divipola-lengths:
+
+```{r}
+#| lst-label: lst-check-divipola-lengths
+#| lst-cap: Diagnóstico de longitudes en caracteres para códigos de departamento y municipio
+# Conteo de caracteres en departamentos ----
+saber_pro_genericas_2021_2024 |>
+  count(n_depto = str_length(estu_cod_depto_presentacion))
+
+# Conteo de caracteres en municipios ----
+saber_pro_genericas_2021_2024 |>
+  count(n_mcpio_pres = str_length(estu_cod_mcpio_presentacion))
+```
+
+Al inspeccionar los resultados del @lst-check-divipola-lengths, se observa que existen departamentos con longitud 1 en lugar de 2 y municipios con longitud 4 en lugar de 5. Para confirmar el origen de este comportamiento, en el @lst-filter-divipola-short se filtran las primeras filas con longitudes reducidas:
+
+```{r}
+#| lst-label: lst-filter-divipola-short
+#| lst-cap: Inspección de registros con longitudes reducidas en códigos DIVIPOLA
+# Inspección departamento con 1 carácter ----
+saber_pro_genericas_2021_2024 |>
+  filter(str_length(estu_cod_depto_presentacion) == 1) |>
+  select(estu_cod_depto_presentacion) |>
+  head()
+
+# Inspección municipio con 4 caracteres ----
+saber_pro_genericas_2021_2024 |>
+  filter(str_length(estu_cod_mcpio_presentacion) == 4) |>
+  select(estu_cod_mcpio_presentacion) |>
+  head()
+```
+
+El resultado del @lst-filter-divipola-short demuestra que la discrepancia radica en la pérdida del cero a la izquierda en aquellos departamentos con códigos entre `"01"` y `"09"` registrados erróneamente como por ejemplo `5` en vez de `"05"` y municipios asociados registrados como por ejemplo `5001` en vez de `"05001"`.
+
+Para corregir esta anomalía y restablecer los ceros a la izquierda se utiliza la función `str_pad()` del paquete `stringr`. En manipulación de texto y cadenas de caracteres, el término **padding** (en español **relleno**) hace referencia a la acción de añadir caracteres a una cadena hasta alcanzar una longitud o ancho total deseado. Si el texto original ya cuenta con dicha longitud o la supera, `str_pad()` lo deja inalterado sin modificarlo.
+
+La función `str_pad()` se compone de 4 argumentos clave:
+
+1. `string`: el vector o columna de texto que se desea rellenar.
+
+2. `width`: el ancho total mínimo o número de caracteres deseado para la cadena resultante. Por ejemplo, en los códigos de departamento DIVIPOLA se define `width = 2`, mientras que para los códigos municipales se especifica `width = 5`.
+
+3. `side`: el extremo o lado de la cadena donde se insertarán los caracteres de relleno para alcanzar el ancho definido en `width`. Este parámetro contempla 3 opciones:
+
+   - `"left"`: inserta el relleno a la izquierda donde antepone caracteres. Esta opción es la indicada cuando se requiere restituir ceros a la izquierda en variables numéricas o códigos estandarizados, como por ejemplo transformar `"5"` en `"05"` o `"5001"` en `"05001"`.
+   - `"right"`: inserta el relleno a la derecha donde añade caracteres al final.
+   - `"both"`: distribuye el relleno de manera equilibrada a ambos lados, centrando el texto original.
+
+4. `pad`: el carácter individual con el que se rellenará el espacio faltante. Por defecto, `str_pad()` utiliza un espacio en blanco (`pad = " "`), pero en este contexto se define `pad = "0"` para restituir el formato numérico oficial.
+
+De esta manera, al evaluar `str_pad(string = "5", width = 2, side = "left", pad = "0")` se obtiene `"05"`, mientras que un código como `"11"` permanece intacto porque ya satisface el ancho mínimo de 2 caracteres. Análogamente, para los municipios con `width = 5`, un código incompleto como `"5001"` pasa a ser `"05001"`, mientras que `"11001"` no sufre alteraciones.
+
+Asimismo, para no repetir la misma instrucción en cada una de las columnas de municipio se recurre a la función `across()`, tal como se introdujo en el @sec-single-table-verbs. Mediante `across()`, se aplica simultáneamente una función anónima con `str_pad(width = 5, side = "left", pad = "0")` a las 3 variables de municipio (`estu_cod_mcpio_presentacion`, `estu_inst_codmunicipio` y `estu_prgm_codmunicipio`), tal como se señala en el @lst-pad-divipola-codes:
+
+```{r}
+#| lst-label: lst-pad-divipola-codes
+#| lst-cap: Corrección de códigos DIVIPOLA mediante `str_pad()` y `across()`
+# Corregir códigos departamento y municipio ----
+saber_pro_genericas_2021_2024 <- saber_pro_genericas_2021_2024 |>
+  mutate(
+    estu_cod_depto_presentacion = str_pad(
+      string = estu_cod_depto_presentacion,
+      width = 2,
+      side = "left",
+      pad = "0"
+    )
+  ) |>
+  mutate(
+    across(
+      .cols = c(
+        estu_cod_mcpio_presentacion,
+        estu_inst_codmunicipio,
+        estu_prgm_codmunicipio
+      ),
+      .fns = \(x) {
+        str_pad(
+          string = x,
+          width = 5,
+          side = "left",
+          pad = "0"
+        )
+      }
+    )
+  )
+```
+
+## Caso de estudio: consolidación de resultados Saber Pro para UMNG {#sec-case-study-umng}
+
+Habiendo unificado y normalizado el conjunto de datos para el orden nacional, el propósito de este caso de estudio es construir el subconjunto consolidado correspondiente a los programas de pregrado de la Universidad Militar Nueva Granada (UMNG) aplicando la **gramática de manipulación de datos** (ver @sec-single-table-verbs).
+
+### Limpiar y filtrar {#sec-clean-filter-umng}
+
+El primer paso comprende la gestión de los exámenes presentados fuera del país y la delimitación de la población objetivo:
+
+1. **Estudiantes en el exterior**: cuando un estudiante presenta la prueba en el exterior (`estu_exterior == "SI"`), los códigos de departamento y municipio colombianos no resultan aplicables. Mediante la función `replace_when()` en combinación con `across()`, se asigna el valor ausente `NA` a las columnas `estu_cod_depto_presentacion` y `estu_cod_mcpio_presentacion` cuando se cumple dicha condición.
+
+2. **Población agregada oficial**: se aplica `filter(estu_agregado == "S")` para conservar únicamente a los estudiantes evaluados formalmente como parte de la población agregada institucional válida para indicadores de calidad.
+
+3. **Filtro institucional UMNG**: se utiliza `filter(inst_cod_institucion == 1117)` para seleccionar exclusivamente los registros de la Universidad Militar Nueva Granada (UMNG) cuyo código oficial asignado por el SNIES es `1117`.
+
+En el @lst-umng-clean-filter se implementan estas operaciones, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-umng-clean-filter
+#| lst-cap: Limpieza de registros y filtrado de la población oficial para la UMNG
+# Limpiar y filtrar ----
+saber_pro_genericas_2021_2024_umng <- saber_pro_genericas_2021_2024 |>
+  mutate(
+    across(
+      .cols = c(
+        estu_cod_depto_presentacion,
+        estu_cod_mcpio_presentacion
+      ),
+      .fns = \(x) {
+        replace_when(
+          x = x,
+          estu_exterior == "SI" ~ NA
+        )
+      }
+    )
+  ) |>
+  filter(estu_agregado == "S") |>
+  filter(inst_cod_institucion == 1117)
+```
+
+### Transformar {#sec-transform-umng}
+
+El segundo paso consiste en asociar el tipo de datos adecuado a cada variable mediante `mutate()` y la función `factor()`, de forma análoga a lo desarrollado en el @sec-single-table-verbs:
+
+- Las variables temporales `ano` y `periodo` se transforman a números enteros utilizando `as.integer()`.
+- La variable nominal `estu_genero` se codifica como un factor no ordenado con `ordered = FALSE`.
+- Las variables ordinales `estu_semestrecursa`, `fami_estratovivienda`, `fami_educacionmadre`, `fami_educacionpadre` y `mod_ingles_desem` se convierten en factores ordenados con `ordered = TRUE`, especificando de manera jerárquica la secuencia de sus niveles mediante el parámetro `levels`.
+
+En el @lst-umng-transform se llevan a cabo estas transformaciones, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-umng-transform
+#| lst-cap: Transformación de tipos de columna a enteros y factores ordenados para la UMNG
+# Transformar ----
+saber_pro_genericas_2021_2024_umng <- saber_pro_genericas_2021_2024_umng |>
+  mutate(
+    ano = as.integer(ano),
+    periodo = as.integer(periodo)
+  ) |>
+  mutate(
+    estu_genero = factor(
+      x = estu_genero,
+      ordered = FALSE
+    ),
+    estu_semestrecursa = factor(
+      x = estu_semestrecursa,
+      levels = c("02", "03", "06", "07", "08", "09", "10", "11", "12 o más"),
+      ordered = TRUE
+    ),
+    fami_estratovivienda = factor(
+      x = fami_estratovivienda,
+      levels = c(
+        "Sin Estrato",
+        "Estrato 1",
+        "Estrato 2",
+        "Estrato 3",
+        "Estrato 4",
+        "Estrato 5",
+        "Estrato 6"
+      ),
+      ordered = TRUE
+    ),
+    fami_educacionmadre = factor(
+      x = fami_educacionmadre,
+      levels = c(
+        "No sabe",
+        "No Aplica",
+        "Ninguno",
+        "Primaria incompleta",
+        "Primaria completa",
+        "Secundaria (Bachillerato) incompleta",
+        "Secundaria (Bachillerato) completa",
+        "Técnica o tecnológica incompleta",
+        "Técnica o tecnológica completa",
+        "Educación profesional incompleta",
+        "Educación profesional completa",
+        "Postgrado"
+      ),
+      ordered = TRUE
+    ),
+    fami_educacionpadre = factor(
+      x = fami_educacionpadre,
+      levels = c(
+        "No sabe",
+        "No Aplica",
+        "Ninguno",
+        "Primaria incompleta",
+        "Primaria completa",
+        "Secundaria (Bachillerato) incompleta",
+        "Secundaria (Bachillerato) completa",
+        "Técnica o tecnológica incompleta",
+        "Técnica o tecnológica completa",
+        "Educación profesional incompleta",
+        "Educación profesional completa",
+        "Postgrado"
+      ),
+      ordered = TRUE
+    ),
+    mod_ingles_desem = factor(
+      x = mod_ingles_desem,
+      levels = c(
+        "A1",
+        "A2",
+        "B1",
+        "B2"
+      ),
+      ordered = TRUE
+    )
+  )
+
+saber_pro_genericas_2021_2024_umng
+```
+
+### Exportar {#sec-export-umng}
+
+Una vez culminado el procesamiento, la tabla depurada y estructurada contiene los registros de los estudiantes de la Universidad Militar Nueva Granada evaluados entre 2021 y 2024. Para guardar esta información y poder utilizarla en análisis posteriores, sin necesidad de repetir todo el flujo de importación, el lector puede exportar el objeto resultante en extensión `.rds` mediante la función `write_rds()` del paquete `readr`, tal como se señala a continuación:
+
+```{r}
+#| lst-label: lst-umng-export
+#| lst-cap: Exportación del conjunto consolidado depurado para la UMNG en extensión `.rds`
+#| eval: false
+# Exportar datos consolidados ----
+saber_pro_genericas_2021_2024_umng |>
+  write_rds(
+    file = "data/2021-2024_saber-pro-genericas_umng.rds"
+  )
+```
