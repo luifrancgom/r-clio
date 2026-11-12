@@ -1,3 +1,23 @@
 # Programación funcional
 
-Pendiente
+El objetivo de esta parte, es presentar los fundamentos y aplicaciones de la **programación funcional** (en inglés **functional programming**) para automatizar tareas repetitivas y manipular conjuntos de datos en R utilizando el paquete [`purrr`]({{< var url.packages.purrr >}}), a través de los siguientes 2 capítulos:
+
+- @sec-anonymous-functions: introduce los conceptos y requisitos indispensables para comprender la iteración funcional en R, incluyendo la distinción entre vectores atómicos y listas, la definición y anatomía de funciones anónimas y el funcionamiento básico de `map()`, `reduce()` y `list_rbind()`.
+
+- @sec-map-functions: introduce la aplicación práctica de `map()`, `reduce()` y `list_rbind()` en combinación con el paquete `fs` para importar múltiples archivos desde un directorio, identificar y seleccionar variables comunes, verificar especificaciones de columnas y consolidar los datos en una sola estructura rectangular.
+
+Una vez se comprenda el funcionamiento básico del paquete `purrr`, el lector interesado en profundizar puede consultar la [documentación de referencia de `purrr`]({{< var url.packages.purrr_reference >}}) y la [hoja de referencia de `purrr`]({{< var url.packages.purrr_cheatsheet >}}), donde se abordan otras familias de funciones tales como:
+
+- **Variantes de mapeo por tipo de salida** (en inglés **type-specific map variants**): funciones como `map_lgl()`, `map_int()`, `map_dbl()`, `map_chr()` y `map_vec()`, diseñadas para devolver vectores atómicos homogéneos en lugar de listas, así como `walk()` para ejecutar funciones orientadas exclusivamente a efectos secundarios sin modificar los datos de entrada.
+
+- **Mapeo con múltiples argumentos e iteración paralela** (en inglés **multi-argument and parallel map**): la familia de funciones `map2()` para iterar sobre 2 vectores de manera simultánea, y `pmap()` (junto con su variante para efectos secundarios `pwalk()`) para aplicar una función a un número arbitrario de argumentos suministrados en una lista o en las columnas de una tabla de datos.
+
+- **Mapeo indexado y condicional** (en inglés **indexed and conditional map**): funciones como `imap()` e `iwalk()` para iterar sobre elementos junto con sus nombres o índices de posición, así como `map_if()` y `map_at()` para aplicar transformaciones únicamente a los elementos que cumplen con un predicado lógico o se encuentran en posiciones determinadas.
+
+- **Funciones de predicado, filtrado e inspección** (en inglés **predicate and filtering functions**): herramientas para examinar colecciones de datos como `some()`, `every()` y `none()` para evaluar si algún, todos o ningún elemento satisface una condición lógica, `keep()` y `discard()` para conservar o descartar elementos con base en un predicado y `detect()` o `detect_index()` para localizar el primer elemento o posición que cumple con un criterio.
+
+- **Reducción acumulativa** (en inglés **accumulate**): la función `accumulate()`, la cual complementa a `reduce()` al conservar de manera secuencial los resultados intermedios de cada etapa de la iteración.
+
+- **Operadores de funciones y control de errores** (en inglés **adverbs and function operators**): modificadores o "adverbios" como `possibly()`, `safely()` y `quietly()`, que envuelven funciones ordinarias para capturar errores, advertencias y mensajes sin interrumpir la ejecución de un flujo de procesamiento, junto con utilidades como `compose()` para encadenar funciones y `negate()` para invertir el resultado lógico de una función de predicado.
+
+- **Manipulación, extracción y transformación de listas** (en inglés **list manipulation**): utilidades para navegar, extraer y reestructurar elementos en listas y jerarquías anidadas como `pluck()`, `chuck()`, `list_flatten()`, `list_c()`, `list_cbind()`, `list_transpose()` y la familia `modify()`.
