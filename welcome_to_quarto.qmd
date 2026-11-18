@@ -19,37 +19,68 @@ Exploraremos los siguientes aspectos:
 2. ¿Cuál es la anatomía de un documento en extensión `.qmd`?
 
 :::: {#nte-1-chap-21 .callout-note}
+Para desarrollar el contenido de este capítulo es necesario que descargues el archivo en extensión `.qmd` señalado a continuación:
 
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [reporte_pinguinos.qmd]({{< var url.report.report_penguins >}}){download="reporte_pinguinos.qmd"}
+:::
 
+Luego, genera una carpeta con el nombre `reports` y dentro de esta carpeta incluye el archivo `reporte_pinguinos.qmd`.
+
+Además, es necesario que descargues los archivos en extensión `.png` señalados a continuación: 
+
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [culmen_depth_es.png]({{< var url.image.culmen_depth_es >}}){download="culmen_depth_es.png"}
+:::
+
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [penguins.png]({{< var url.image.penguins >}}){download="penguins.png"}
+:::
+
+Luego, genera una carpeta con el nombre `images` y dentro de esta carpeta incluye los archivos `culmen_depth_es.png` y `penguins.png`.
+
+Adicionalmente, es necesario que descargues los archivos en extensión `.bib` y `.csl` señalados a continuación:
+
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [reporte-pinguinos.bib]({{< var url.reference.reporte-pinguinos >}}){download="reporte-pinguinos.bib"}
+:::
+
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [apa.csl]({{< var url.reference.apa >}}){download="apa.csl"}
+:::
+
+Luego, genera una carpeta con el nombre `references` y dentro de esta carpeta incluye los archivos `reporte-pinguinos.bib` y `apa.csl`.
+
+En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada `021_intro-quarto-r` y dentro de ella genera el archivo `001_intro-quarto.qmd`, siguiendo las pautas de la @sec-package-usage pero con un archivo en extensión `.qmd`.
 
 ::::
 
-# ¿Qué es Quarto?
+## ¿Qué es Quarto?
 
 
 
-## Problemas que resuelve
+### Problemas que resuelve
 
 
 
-## Renderizar un documento
+### Renderizar un documento
 
 
 
-## Formatos de salida para documentos
+### Formatos de salida para documentos
 
 
 
-# Anatomía de un documento de Quarto
+## Anatomía de un documento de Quarto
 
 
 
-## Encabezado YAML
+### Encabezado YAML
 
 
 
-## Texto Markdown
+### Texto Markdown
 
 
 
-## Celdas de código
+### Celdas de código

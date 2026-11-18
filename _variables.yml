@@ -158,3 +158,14 @@ url:
 
   media:
     muse_klio_artwork: "https://commons.wikimedia.org/wiki/File:Christian_Bernhard_Rode_-_Die_Muse_Klio.jpg"
+
+  report:
+    report_penguins: "reports/reporte_pinguinos.qmd"
+
+  image:
+    culmen_depth_es: "images/culmen_depth_es.png"
+    penguins: "images/penguins.png"
+
+  reference:
+    reporte-pinguinos: "references/reporte-pinguinos.bib"
+    apa: "references/apa.csl"

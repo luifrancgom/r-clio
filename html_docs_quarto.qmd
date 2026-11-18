@@ -1,4 +1,4 @@
-# Documentos HTML con quarto {#sec-html-docs-quarto}
+# Documentos HTML con Quarto {#sec-html-docs-quarto}
 
 ```{r}
 #| echo: false
