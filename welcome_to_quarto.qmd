@@ -1,0 +1,55 @@
+# Bienvenidos a Quarto {#sec-welcome-to-quarto}
+
+```{r}
+#| echo: false
+source("_common.R")
+```
+
+```{r}
+#| label: load-r-packages
+#| echo: false
+#| message: false
+```
+
+Este capítulo se basa en [@posit_introduction_2026], [@wickham_r_2023, Cap. 28] y [@m_horst_palmer_2022] así como en la documentación oficial de [`quarto`]({{< var url.software.quarto_positron >}}) donde tiene como propósito introducir la forma de comunicar resultados a través del uso de [**Quarto**]({{< var url.software.quarto >}}) e información de la base de datos `penguins` disponible en [@kaye_preparing_2025] así como en el paquete `datasets` de base R.
+
+Exploraremos los siguientes aspectos:
+
+1. ¿Qué es Quarto?
+2. ¿Cuál es la anatomía de un documento en extensión `.qmd`?
+
+:::: {#nte-1-chap-21 .callout-note}
+
+
+
+::::
+
+# ¿Qué es Quarto?
+
+
+
+## Problemas que resuelve
+
+
+
+## Renderizar un documento
+
+
+
+## Formatos de salida para documentos
+
+
+
+# Anatomía de un documento de Quarto
+
+
+
+## Encabezado YAML
+
+
+
+## Texto Markdown
+
+
+
+## Celdas de código

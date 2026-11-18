@@ -1,0 +1,12 @@
+# Documentos HTML con quarto {#sec-html-docs-quarto}
+
+```{r}
+#| echo: false
+source("_common.R")
+```
+
+```{r}
+#| label: load-r-packages
+#| echo: false
+#| message: false
+```

@@ -3,6 +3,9 @@ project:
   output-dir: _book
   resources:
     - data/
+    - reports/
+    - images/
+    - references/
 
 book:
   # book
@@ -63,6 +66,9 @@ book:
         - anonymous_functions_purrr.qmd
         - map_reduce_list_rbind_functions.qmd 
     - part: data_communication.qmd
+      chapters:
+        - welcome_to_quarto.qmd
+        - html_docs_quarto.qmd
     - references.qmd
 
 bibliography: references/r-clio.bib

@@ -1,0 +1,150 @@
+---
+title: "Paradoja de Simpson: dimensiones del pico en pingüinos"
+author:
+  - Allison M. Horst
+  - Alison Presmanes Hill
+  - Kristen B. Gorman
+date: 2026-11-17
+toc: true
+number-sections: true
+format: 
+  html:
+    code-fold: true
+    embed-resources: true
+lang: es
+engine: knitr
+bibliography: ../references/reporte-pinguinos.bib
+csl: ../references/apa.csl
+---
+
+::: {.callout-note}
+El presente reporte tiene como objetivo ilustrar el uso de **Quarto** para comunicar resultados con fines pedagógicos a través de la base de datos `penguins` del paquete `datasets` en R base y la **Paradoja de Simpson**. 
+:::
+
+```{r}
+#| label: cargar-paquetes
+#| message: false
+library(tidyverse)
+```
+
+```{=html}
+<style>
+  p { 
+    text-align: justify;
+  }
+</style>
+```
+
+# Introducción
+
+La **paradoja de Simpson** es un fenómeno estadístico en el cual una asociación observada entre 2 variables a nivel agregado se atenúa, desaparece o se invierte cuando la población se analiza por subgrupos [@simpson_interpretation_1951; @sprenger_simpsons_2026]. En este reporte se examina este fenómeno en variables cuantitativas continuas utilizando las dimensiones del pico de los pingüinos del archipiélago Palmer [@m_horst_palmer_2022].
+
+# Datos
+
+Los datos analizados proceden de estudios ecológicos realizados en la Antártida sobre 3 especies de pingüinos del género *Pygoscelis* (*Adélie*, *Chinstrap* y *Gentoo*), ilustradas en la @fig-pinguinos [@gorman_ecological_2014; @m_horst_palmer_2022]. El conjunto de datos `penguins` está incorporado de forma nativa en R base dentro del paquete `datasets`.
+
+![Especies de pingüinos del archipiélago Palmer: Barbijo (*Chinstrap*), Papúa (*Gentoo*) y Adelia (*Adélie*). Ilustración de Allison Horst [@m_horst_palmer_2022].](../images/penguins.png){#fig-pinguinos fig-alt="Ilustración de las tres especies de pingüinos: Chinstrap, Gentoo y Adélie" fig-align="center" width="70%"}
+
+El análisis se enfoca en 2 medidas morfométricas del pico (ver @fig-culmen): la longitud (`bill_len`) y la altura (`bill_dep`). Ambas medidas se encuentran expresadas en milímetros [@gorman_ecological_2014].
+
+![Dimensiones anatómicas del culmen: longitud (`bill_len`) y altura (`bill_dep`) del pico. Ilustración de Allison Horst [@m_horst_palmer_2022].](../images/culmen_depth_es.png){#fig-culmen fig-alt="Diagrama anatómico indicando la longitud y altura del pico de un pingüino" fig-align="center" width="60%"}
+
+En la @tbl-variables se presenta la descripción de las variables que conforman el conjunto de datos `penguins`.
+
+| Variable | Descripción | Valores ausentes (`NA`) |
+| :--- | :--- | :---: |
+| `species` | Especie de pingüino (*Adélie*, *Chinstrap*, *Gentoo*) | 0 |
+| `island` | Isla del archipiélago Palmer (*Biscoe*, *Dream*, *Torgersen*) | 0 |
+| `bill_len` | Longitud del culmen o pico (milímetros - mm) | 2 |
+| `bill_dep` | Altura del culmen o pico (milímetros - mm) | 2 |
+| `flipper_len` | Longitud de la aleta (milímetros - mm) | 2 |
+| `body_mass` | Masa corporal (gramos - g) | 2 |
+| `sex` | Sexo del individuo (*female*, *male*) | 11 |
+| `year` | Año de estudio (2007, 2008, 2009) | 0 |
+
+: Variables del conjunto de datos `penguins` {#tbl-variables}
+
+# Paradoja de Simpson
+
+El análisis de las dimensiones del pico permite ilustrar la paradoja de Simpson comparando la relación bivariada a nivel global frente al comportamiento dentro de cada especie [@m_horst_palmer_2022].
+
+## Asociación global
+
+Al analizar la relación entre la longitud (`bill_len`) y la altura (`bill_dep`) del pico sobre el total de pingüinos sin discriminar por especie (ver @fig-asociacion-global)[^asociacion-global], se observa una **pendiente negativa** estimada ($\hat{\beta}_1 = -0.0850$, $p\text{-valor} = 1.12 \times 10^{-5}$), lo que sugeriría erróneamente que a mayor longitud del pico corresponde una menor altura [@m_horst_palmer_2022].
+
+[^asociacion-global]: Se eliminan 2 observaciones del gráfico porque contienen 2 valores ausentes (`NA`) en las variables `bill_len` y `bill_dep`, tal como se indica en la @tbl-variables.
+
+```{r}
+#| label: fig-asociacion-global
+#| fig-cap: "Asociación global entre longitud y altura del pico en pingüinos sin desagregar por especie."
+#| warning: false
+penguins |>
+  ggplot(
+    mapping = aes(
+      x = bill_len,
+      y = bill_dep
+    )
+  ) +
+  geom_point() +
+  geom_smooth(
+    method = "lm"
+  ) +
+  labs(
+    x = "Longitud pico (mm)",
+    y = "Altura pico (mm)"
+  )
+```
+
+## Asociación por especie
+
+Sin embargo, al desagregar los datos considerando la variable `species` (ver @fig-asociacion-especie)[^asociacion-especie], la tendencia se **invierte**: dentro de cada especie individual, la relación es claramente **positiva** con pendientes estimadas:
+
+1. *Adélie*: $\hat{\beta}_1 = 0.219$, $p\text{-valor} = 1.67 \times 10^{-6}$
+2. *Chinstrap*: $\hat{\beta}_1 = 0.222$, $p\text{-valor} = 1.53 \times 10^{-8}$
+3. *Gentoo*: $\hat{\beta}_1 = 0.205$, $p\text{-valor} = 1.02 \times 10^{-13}$
+
+[^asociacion-especie]: Al igual que en la asociación global, se eliminan 2 observaciones del gráfico debido a los 2 valores ausentes (`NA`) presentes en `bill_len` y `bill_dep`, de acuerdo con lo reportado en la @tbl-variables.
+
+```{r}
+#| label: fig-asociacion-especie
+#| fig-cap: "Asociación entre longitud y altura del pico desagregada por especie (*Adélie*, *Chinstrap*, *Gentoo*)."
+#| warning: false
+penguins |>
+  ggplot(
+    mapping = aes(
+      x = bill_len,
+      y = bill_dep,
+      color = species,
+      group = species
+    )
+  ) +
+  geom_point() +
+  geom_smooth(
+    method = "lm"
+  ) +
+  scale_color_brewer(
+    type = "qual",
+    palette = "Dark2"
+  ) +
+  labs(
+    x = "Longitud pico (mm)",
+    y = "Altura pico (mm)",
+    color = "Especie"
+  ) +
+  theme(
+    legend.position = "bottom"
+  )
+```
+
+Esta reversión ocurre porque la especie actúa como una **variable de confusión** (en inglés *confounder*) que influye simultáneamente en ambas dimensiones del pico [@gorman_ecological_2014; @sprenger_simpsons_2026]. Los pingüinos *Adélie* poseen picos cortos y altos, mientras que los *Gentoo* tienen picos largos y de menor altura. Al omitir la especie, la recta global une los centroides de ambos grupos, generando una asociación negativa artificial [@simpson_interpretation_1951].
+
+# Conclusión
+
+El análisis de las dimensiones del pico en los pingüinos ilustra los riesgos del análisis agregado sin estratificación [@m_horst_palmer_2022]. El **riesgo de agregación** demuestra que omitir variables de agrupación clave puede invertir los patrones biológicos reales de los datos y conducir a conclusiones erróneas [@simpson_interpretation_1951]. 
+
+Por lo tanto, el **control por subgrupos** mediante la estratificación por variables estructurales, como la especie en el caso de `penguins`, es indispensable para una adecuada inferencia causal y modelado estadístico [@sprenger_simpsons_2026].
+
+# Referencias
+
+::: {#refs}
+:::

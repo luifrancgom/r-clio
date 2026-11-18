@@ -25,8 +25,8 @@
      inkscape:document-units="mm"
      inkscape:lockguides="false"
      inkscape:zoom="0.70710678"
-     inkscape:cx="607.40472"
-     inkscape:cy="358.50314"
+     inkscape:cx="415.07168"
+     inkscape:cy="359.91735"
      inkscape:window-width="1854"
      inkscape:window-height="1011"
      inkscape:window-x="1146"
@@ -107,9 +107,9 @@
      id="layer1">
     <g
        id="g9052"
-       inkscape:export-filename="map.png"
-       inkscape:export-xdpi="96"
-       inkscape:export-ydpi="96">
+       inkscape:export-filename="../../r-clio-curso-analisis-datos/images/map.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600">
       <g
          id="g586">
         <rect
@@ -218,27 +218,27 @@
          transform="matrix(0.98999013,0,0,0.98999013,-53.53589,5.216513)"><tspan
            x="123.04583"
            y="84.035141"
-           id="tspan9139"><tspan
+           id="tspan419"><tspan
              dx="0 0 0 -0.26725864 0.26725888 -0.26725948"
-             id="tspan9137">map (
+             id="tspan417">map (
 </tspan></tspan><tspan
            x="123.04583"
            y="84.03514"
-           id="tspan9141">
+           id="tspan421">
 </tspan><tspan
            x="123.04583"
            y="84.03514"
-           id="tspan9143">
+           id="tspan423">
 </tspan><tspan
            x="123.04583"
            y="84.03514"
-           id="tspan9145">       
+           id="tspan425">       
 </tspan><tspan
            x="123.04583"
            y="84.03514"
-           id="tspan9149"><tspan
+           id="tspan429"><tspan
              dx="0 0 0 0 0 0 0 0 0 0 0 0 0.26725984 -0.26726013 0 0.26725793 0 -0.26725888 0.26725984 -0.26726031 0.26725984 -0.26725888 0.26725984"
-             id="tspan9147">            ,  .f = f )</tspan></tspan></text>
+             id="tspan427">            ,  .f = f )</tspan></tspan></text>
       <text
          xml:space="preserve"
          transform="matrix(0.26458333,0,0,0.26458333,-50.716153,9.7053063)"
@@ -246,10 +246,10 @@
          style="font-size:33.3333px;line-height:0;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, ';letter-spacing:1px;word-spacing:1px;white-space:pre;shape-inside:url(#rect776);display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.87087;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"><tspan
            x="649.11719"
            y="221.66483"
-           id="tspan9153"><tspan
+           id="tspan433"><tspan
              dx="0 0 -0.99999905 0 0 0 0 0 0 0 1.0000029"
              style="font-family:Montserrat;-inkscape-font-specification:Montserrat"
-             id="tspan9151">f(        )</tspan></tspan></text>
+             id="tspan431">f(        )</tspan></tspan></text>
       <text
          xml:space="preserve"
          transform="matrix(0.26458333,0,0,0.26458333,-50.716153,28.856231)"
@@ -257,10 +257,10 @@
          style="font-size:33.3333px;line-height:0;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, ';letter-spacing:1px;word-spacing:1px;white-space:pre;shape-inside:url(#rect776-2);display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.87087;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"><tspan
            x="649.11719"
            y="221.66483"
-           id="tspan9157"><tspan
+           id="tspan437"><tspan
              dx="0 0 -0.99999905 0 0 0 0 0 0 0 1.0000029"
              style="font-family:Montserrat;-inkscape-font-specification:Montserrat"
-             id="tspan9155">f(        )</tspan></tspan></text>
+             id="tspan435">f(        )</tspan></tspan></text>
       <text
          xml:space="preserve"
          transform="matrix(0.26458333,0,0,0.26458333,-50.716153,48.71334)"
@@ -268,10 +268,10 @@
          style="font-size:33.3333px;line-height:0;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, ';letter-spacing:1px;word-spacing:1px;white-space:pre;shape-inside:url(#rect776-2-8);display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.87087;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"><tspan
            x="649.11719"
            y="221.66483"
-           id="tspan9161"><tspan
+           id="tspan441"><tspan
              dx="0 0 -0.99999905 0 0 0 0 0 0 0 1.0000029"
              style="font-family:Montserrat;-inkscape-font-specification:Montserrat"
-             id="tspan9159">f(        )</tspan></tspan></text>
+             id="tspan439">f(        )</tspan></tspan></text>
       <text
          xml:space="preserve"
          transform="matrix(0.26458333,0,0,0.26458333,-50.716153,68.474473)"
@@ -279,10 +279,10 @@
          style="font-size:33.3333px;line-height:0;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, ';letter-spacing:1px;word-spacing:1px;white-space:pre;shape-inside:url(#rect776-2-8-7);display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.87087;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"><tspan
            x="649.11719"
            y="221.66483"
-           id="tspan9165"><tspan
+           id="tspan445"><tspan
              dx="0 0 -0.99999905 0 0 0 0 0 0 0 1.0000029"
              style="font-family:Montserrat;-inkscape-font-specification:Montserrat"
-             id="tspan9163">f(        )</tspan></tspan></text>
+             id="tspan443">f(        )</tspan></tspan></text>
       <rect
          style="display:inline;fill:#0570b0;fill-opacity:1;stroke:#000000;stroke-width:0.389176;stroke-linecap:round;stroke-opacity:1"
          id="rect37-63-12"
