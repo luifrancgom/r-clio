@@ -352,7 +352,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./html_docs_quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Documentos HTML con quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Documentos HTML con Quarto</span></span></a>
   </div>
 </li>
       </ul>
@@ -373,17 +373,17 @@ div.csl-indent {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#qué-es-quarto" id="toc-qué-es-quarto" class="nav-link active" data-scroll-target="#qué-es-quarto"><span class="header-section-number">22</span> ¿Qué es Quarto?</a>
+  <li><a href="#qué-es-quarto" id="toc-qué-es-quarto" class="nav-link active" data-scroll-target="#qué-es-quarto"><span class="header-section-number">21.1</span> ¿Qué es Quarto?</a>
   <ul class="collapse">
-  <li><a href="#problemas-que-resuelve" id="toc-problemas-que-resuelve" class="nav-link" data-scroll-target="#problemas-que-resuelve"><span class="header-section-number">22.1</span> Problemas que resuelve</a></li>
-  <li><a href="#renderizar-un-documento" id="toc-renderizar-un-documento" class="nav-link" data-scroll-target="#renderizar-un-documento"><span class="header-section-number">22.2</span> Renderizar un documento</a></li>
-  <li><a href="#formatos-de-salida-para-documentos" id="toc-formatos-de-salida-para-documentos" class="nav-link" data-scroll-target="#formatos-de-salida-para-documentos"><span class="header-section-number">22.3</span> Formatos de salida para documentos</a></li>
+  <li><a href="#problemas-que-resuelve" id="toc-problemas-que-resuelve" class="nav-link" data-scroll-target="#problemas-que-resuelve"><span class="header-section-number">21.1.1</span> Problemas que resuelve</a></li>
+  <li><a href="#renderizar-un-documento" id="toc-renderizar-un-documento" class="nav-link" data-scroll-target="#renderizar-un-documento"><span class="header-section-number">21.1.2</span> Renderizar un documento</a></li>
+  <li><a href="#formatos-de-salida-para-documentos" id="toc-formatos-de-salida-para-documentos" class="nav-link" data-scroll-target="#formatos-de-salida-para-documentos"><span class="header-section-number">21.1.3</span> Formatos de salida para documentos</a></li>
   </ul></li>
-  <li><a href="#anatomía-de-un-documento-de-quarto" id="toc-anatomía-de-un-documento-de-quarto" class="nav-link" data-scroll-target="#anatomía-de-un-documento-de-quarto"><span class="header-section-number">23</span> Anatomía de un documento de Quarto</a>
+  <li><a href="#anatomía-de-un-documento-de-quarto" id="toc-anatomía-de-un-documento-de-quarto" class="nav-link" data-scroll-target="#anatomía-de-un-documento-de-quarto"><span class="header-section-number">21.2</span> Anatomía de un documento de Quarto</a>
   <ul class="collapse">
-  <li><a href="#encabezado-yaml" id="toc-encabezado-yaml" class="nav-link" data-scroll-target="#encabezado-yaml"><span class="header-section-number">23.1</span> Encabezado YAML</a></li>
-  <li><a href="#texto-markdown" id="toc-texto-markdown" class="nav-link" data-scroll-target="#texto-markdown"><span class="header-section-number">23.2</span> Texto Markdown</a></li>
-  <li><a href="#celdas-de-código" id="toc-celdas-de-código" class="nav-link" data-scroll-target="#celdas-de-código"><span class="header-section-number">23.3</span> Celdas de código</a></li>
+  <li><a href="#encabezado-yaml" id="toc-encabezado-yaml" class="nav-link" data-scroll-target="#encabezado-yaml"><span class="header-section-number">21.2.1</span> Encabezado YAML</a></li>
+  <li><a href="#texto-markdown" id="toc-texto-markdown" class="nav-link" data-scroll-target="#texto-markdown"><span class="header-section-number">21.2.2</span> Texto Markdown</a></li>
+  <li><a href="#celdas-de-código" id="toc-celdas-de-código" class="nav-link" data-scroll-target="#celdas-de-código"><span class="header-section-number">21.2.3</span> Celdas de código</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/welcome_to_quarto.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/welcome_to_quarto.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
@@ -416,7 +416,7 @@ div.csl-indent {
 <li>¿Qué es Quarto?</li>
 <li>¿Cuál es la anatomía de un documento en extensión <code>.qmd</code>?</li>
 </ol>
-<div id="nte-1-chap-21" class="callout callout-style-default callout-note callout-empty-content callout-titled">
+<div id="nte-1-chap-21" class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -426,31 +426,102 @@ Nota&nbsp;21.1
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<p>Para desarrollar el contenido de este capítulo es necesario que descargues el archivo en extensión <code>.qmd</code> señalado a continuación:</p>
+<div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span><img src="images/download-solid-full.png" alt="Ícono del explorador de archivos" height="25"> <a href="reports/reporte_pinguinos.qmd" download="reporte_pinguinos.qmd">reporte_pinguinos.qmd</a>
+</div>
+</div>
+<div class="callout-body-container callout-body">
 
 </div>
 </div>
-<section id="qué-es-quarto" class="level1" data-number="22">
-<h1 data-number="22"><span class="header-section-number">22</span> ¿Qué es Quarto?</h1>
-<section id="problemas-que-resuelve" class="level2" data-number="22.1">
-<h2 data-number="22.1" class="anchored" data-anchor-id="problemas-que-resuelve"><span class="header-section-number">22.1</span> Problemas que resuelve</h2>
+<p>Luego, genera una carpeta con el nombre <code>reports</code> y dentro de esta carpeta incluye el archivo <code>reporte_pinguinos.qmd</code>.</p>
+<p>Además, es necesario que descargues los archivos en extensión <code>.png</code> señalados a continuación:</p>
+<div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span><img src="images/download-solid-full.png" alt="Ícono del explorador de archivos" height="25"> <a href="images/culmen_depth_es.png" download="culmen_depth_es.png">culmen_depth_es.png</a>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span><img src="images/download-solid-full.png" alt="Ícono del explorador de archivos" height="25"> <a href="images/penguins.png" download="penguins.png">penguins.png</a>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<p>Luego, genera una carpeta con el nombre <code>images</code> y dentro de esta carpeta incluye los archivos <code>culmen_depth_es.png</code> y <code>penguins.png</code>.</p>
+<p>Adicionalmente, es necesario que descargues los archivos en extensión <code>.bib</code> y <code>.csl</code> señalados a continuación:</p>
+<div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span><img src="images/download-solid-full.png" alt="Ícono del explorador de archivos" height="25"> <a href="references/reporte-pinguinos.bib" download="reporte-pinguinos.bib">reporte-pinguinos.bib</a>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span><img src="images/download-solid-full.png" alt="Ícono del explorador de archivos" height="25"> <a href="references/apa.csl" download="apa.csl">apa.csl</a>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<p>Luego, genera una carpeta con el nombre <code>references</code> y dentro de esta carpeta incluye los archivos <code>reporte-pinguinos.bib</code> y <code>apa.csl</code>.</p>
+<p>En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta llamada <code>021_intro-quarto-r</code> y dentro de ella genera el archivo <code>001_intro-quarto.qmd</code>, siguiendo las pautas de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a> pero con un archivo en extensión <code>.qmd</code>.</p>
+</div>
+</div>
+<section id="qué-es-quarto" class="level2" data-number="21.1">
+<h2 data-number="21.1" class="anchored" data-anchor-id="qué-es-quarto"><span class="header-section-number">21.1</span> ¿Qué es Quarto?</h2>
+<section id="problemas-que-resuelve" class="level3" data-number="21.1.1">
+<h3 data-number="21.1.1" class="anchored" data-anchor-id="problemas-que-resuelve"><span class="header-section-number">21.1.1</span> Problemas que resuelve</h3>
 </section>
-<section id="renderizar-un-documento" class="level2" data-number="22.2">
-<h2 data-number="22.2" class="anchored" data-anchor-id="renderizar-un-documento"><span class="header-section-number">22.2</span> Renderizar un documento</h2>
+<section id="renderizar-un-documento" class="level3" data-number="21.1.2">
+<h3 data-number="21.1.2" class="anchored" data-anchor-id="renderizar-un-documento"><span class="header-section-number">21.1.2</span> Renderizar un documento</h3>
 </section>
-<section id="formatos-de-salida-para-documentos" class="level2" data-number="22.3">
-<h2 data-number="22.3" class="anchored" data-anchor-id="formatos-de-salida-para-documentos"><span class="header-section-number">22.3</span> Formatos de salida para documentos</h2>
+<section id="formatos-de-salida-para-documentos" class="level3" data-number="21.1.3">
+<h3 data-number="21.1.3" class="anchored" data-anchor-id="formatos-de-salida-para-documentos"><span class="header-section-number">21.1.3</span> Formatos de salida para documentos</h3>
 </section>
 </section>
-<section id="anatomía-de-un-documento-de-quarto" class="level1" data-number="23">
-<h1 data-number="23"><span class="header-section-number">23</span> Anatomía de un documento de Quarto</h1>
-<section id="encabezado-yaml" class="level2" data-number="23.1">
-<h2 data-number="23.1" class="anchored" data-anchor-id="encabezado-yaml"><span class="header-section-number">23.1</span> Encabezado YAML</h2>
+<section id="anatomía-de-un-documento-de-quarto" class="level2" data-number="21.2">
+<h2 data-number="21.2" class="anchored" data-anchor-id="anatomía-de-un-documento-de-quarto"><span class="header-section-number">21.2</span> Anatomía de un documento de Quarto</h2>
+<section id="encabezado-yaml" class="level3" data-number="21.2.1">
+<h3 data-number="21.2.1" class="anchored" data-anchor-id="encabezado-yaml"><span class="header-section-number">21.2.1</span> Encabezado YAML</h3>
 </section>
-<section id="texto-markdown" class="level2" data-number="23.2">
-<h2 data-number="23.2" class="anchored" data-anchor-id="texto-markdown"><span class="header-section-number">23.2</span> Texto Markdown</h2>
+<section id="texto-markdown" class="level3" data-number="21.2.2">
+<h3 data-number="21.2.2" class="anchored" data-anchor-id="texto-markdown"><span class="header-section-number">21.2.2</span> Texto Markdown</h3>
 </section>
-<section id="celdas-de-código" class="level2" data-number="23.3">
-<h2 data-number="23.3" class="anchored" data-anchor-id="celdas-de-código"><span class="header-section-number">23.3</span> Celdas de código</h2>
+<section id="celdas-de-código" class="level3" data-number="21.2.3">
+<h3 data-number="21.2.3" class="anchored" data-anchor-id="celdas-de-código"><span class="header-section-number">21.2.3</span> Celdas de código</h3>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
@@ -954,8 +1025,8 @@ Wickham, H. (2023). <em>R for <span>Data</span> <span>Science</span></em> (2.ª 
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./html_docs_quarto.html" class="pagination-link" aria-label="Documentos HTML con quarto">
-        <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Documentos HTML con quarto</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./html_docs_quarto.html" class="pagination-link" aria-label="Documentos HTML con Quarto">
+        <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Documentos HTML con Quarto</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
