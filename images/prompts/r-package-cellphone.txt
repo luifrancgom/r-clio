@@ -1,0 +1,14 @@
+{
+  "image_request": {
+    "prompt": "A close-up photograph without a background, capturing the screen of a newly activated, modern smartphone. The device displays an organized home screen with default operating system icons neatly arranged in rows. These icons include a Phone, Message, Clock, Calculator, Calendar, and a basic Browser.",
+    "parameters": {
+      "aspect_ratio": "16:9",
+      "guidance_scale": 7.5,
+      "style": "photorealistic"
+    },
+    "metadata": {
+      "subject": "cellphone with default apps",
+      "focus": "only screen and apps"
+    }
+  }
+}

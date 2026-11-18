@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="297mm"
+   height="210mm"
+   viewBox="0 0 297 210"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   sodipodi:docname="data-science-venn-diagram.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.7349537"
+     inkscape:cx="517.03937"
+     inkscape:cy="418.3937"
+     inkscape:window-width="1854"
+     inkscape:window-height="1011"
+     inkscape:window-x="1146"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <rect
+       x="379.61576"
+       y="523.84252"
+       width="181.64409"
+       height="50.343307"
+       id="rect1" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <circle
+       style="opacity:0.5;fill:#d8b365;fill-opacity:1;stroke:#000000;stroke-width:0.499999;stroke-linecap:round"
+       id="path1"
+       cx="98.323334"
+       cy="71.639999"
+       r="52.920002" />
+    <circle
+       style="opacity:0.5;fill:#f5f5f5;fill-opacity:1;stroke:#000000;stroke-width:0.499999;stroke-linecap:round"
+       id="path1-3"
+       cx="151.23053"
+       cy="71.639999"
+       r="52.920002" />
+    <circle
+       style="opacity:0.5;fill:#5ab4ac;fill-opacity:1;stroke:#000000;stroke-width:0.499999;stroke-linecap:round"
+       id="path1-3-3"
+       cx="124.31076"
+       cy="124.81"
+       r="52.920002" />
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text1"
+       style="font-weight:100;font-size:13.3333px;line-height:0;font-family:Montserrat;-inkscape-font-specification:'Montserrat Thin';letter-spacing:1px;word-spacing:1px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect1);opacity:0.5;fill:#5ab4ac;fill-opacity:1;stroke:#000000;stroke-width:1.88976;stroke-linecap:round" />
+    <text
+       xml:space="preserve"
+       style="font-weight:100;font-size:6.35px;line-height:1;font-family:Montserrat;-inkscape-font-specification:'Montserrat Thin';text-align:center;letter-spacing:0.264583px;word-spacing:0.264583px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;opacity:0.5;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.499999;stroke-linecap:round"
+       x="124.99303"
+       y="141.12"
+       id="text2"><tspan
+         sodipodi:role="line"
+         id="tspan2"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.35px;line-height:1;font-family:Montserrat;-inkscape-font-specification:Montserrat;stroke-width:0.5"
+         x="124.99303"
+         y="141.12">Experticia en </tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.35px;line-height:1;font-family:Montserrat;-inkscape-font-specification:Montserrat;stroke-width:0.5"
+         x="125.12532"
+         y="147.47"
+         id="tspan4">un campo</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:100;font-size:5.64444px;line-height:1;font-family:Montserrat;-inkscape-font-specification:'Montserrat Thin';text-align:center;letter-spacing:0.264583px;word-spacing:0.264583px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;opacity:0.5;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.499999;stroke-linecap:round"
+       x="7.4976606"
+       y="93.264862"
+       id="text2-6"
+       transform="rotate(-48.713187)"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.35px;line-height:1;font-family:Montserrat;-inkscape-font-specification:Montserrat;letter-spacing:0.264583px;writing-mode:lr-tb;stroke-width:0.5"
+         x="7.4976621"
+         y="93.264862"
+         sodipodi:role="line"
+         id="tspan10">Habilidades de</tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.35px;line-height:1;font-family:Montserrat;-inkscape-font-specification:Montserrat;letter-spacing:0.264583px;writing-mode:lr-tb;stroke-width:0.5"
+         x="7.4976611"
+         y="99.614861"
+         sodipodi:role="line"
+         id="tspan12">programación</tspan><tspan
+         style="line-height:1;letter-spacing:0.264583px;writing-mode:lr-tb;stroke-width:0.5"
+         x="7.4976606"
+         y="105.40458"
+         id="tspan3-8"
+         sodipodi:role="line" /><tspan
+         style="line-height:1;letter-spacing:0.264583px;writing-mode:lr-tb;stroke-width:0.5"
+         x="7.4976606"
+         y="111.04902"
+         id="tspan4-7"
+         sodipodi:role="line" /></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:100;font-size:4.23333px;line-height:1.5;font-family:Montserrat;-inkscape-font-specification:'Montserrat Thin';text-align:center;letter-spacing:0.264583px;word-spacing:0.264583px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;opacity:0.5;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.499999;stroke-linecap:round"
+       x="-20.768608"
+       y="134.43417"
+       id="text2-6-2"
+       transform="rotate(-48.713187)"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;line-height:1.5;font-family:Montserrat;-inkscape-font-specification:Montserrat;letter-spacing:0.264583px;writing-mode:lr-tb;stroke-width:0.5"
+         x="-20.768608"
+         y="134.43417"
+         sodipodi:role="line"
+         id="tspan18">Análisis sin</tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;line-height:1.5;font-family:Montserrat;-inkscape-font-specification:Montserrat;letter-spacing:0.264583px;writing-mode:lr-tb;stroke-width:0.5"
+         x="-20.768608"
+         y="140.78416"
+         sodipodi:role="line"
+         id="tspan19">conocimiento</tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;line-height:1.5;font-family:Montserrat;-inkscape-font-specification:Montserrat;letter-spacing:0.264583px;writing-mode:lr-tb;stroke-width:0.5"
+         x="-20.636316"
+         y="147.13417"
+         sodipodi:role="line"
+         id="tspan20">estadístico</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:100;font-size:6.35px;line-height:1;font-family:Montserrat;-inkscape-font-specification:'Montserrat Thin';text-align:center;letter-spacing:0.264583px;word-spacing:0.264583px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;opacity:0.5;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.499999;stroke-linecap:round"
+       x="160.1322"
+       y="-95.428253"
+       id="text2-3"
+       transform="rotate(48.608124)"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.35px;line-height:1;font-family:Montserrat;-inkscape-font-specification:Montserrat;stroke-width:0.5"
+         x="160.1322"
+         y="-95.428253"
+         id="tspan4-5">Conocimiento en</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.35px;line-height:1;font-family:Montserrat;-inkscape-font-specification:Montserrat;stroke-width:0.5"
+         x="160.1322"
+         y="-89.078255"
+         id="tspan13">matemáticas y</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.35px;line-height:1;font-family:Montserrat;-inkscape-font-specification:Montserrat;stroke-width:0.5"
+         x="160.2645"
+         y="-82.728256"
+         id="tspan14">estadística</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:100;font-size:4.23333px;line-height:1.5;font-family:Montserrat;-inkscape-font-specification:'Montserrat Thin';text-align:center;letter-spacing:0.264583px;word-spacing:0.264583px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;opacity:0.5;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.499999;stroke-linecap:round"
+       x="185.71524"
+       y="-48.618134"
+       id="text2-3-3"
+       transform="rotate(48.608124)"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;line-height:1.5;font-family:Montserrat;-inkscape-font-specification:Montserrat;stroke-width:0.5"
+         x="185.71524"
+         y="-48.618134"
+         id="tspan14-4">Investigación</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;line-height:1.5;font-family:Montserrat;-inkscape-font-specification:Montserrat;stroke-width:0.5"
+         x="185.84753"
+         y="-42.268139"
+         id="tspan16">tradicional</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:100;font-size:4.23333333px;line-height:1.5;font-family:Montserrat;-inkscape-font-specification:'Montserrat Thin';text-align:center;letter-spacing:0.264583px;word-spacing:0.264583px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;opacity:0.5;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.499999;stroke-linecap:round"
+       x="124.99303"
+       y="55.312458"
+       id="text2-9"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:1.5;font-family:Montserrat;-inkscape-font-specification:Montserrat;stroke-width:0.5;font-size:4.23333333px"
+         x="124.99303"
+         y="55.312458"
+         id="tspan4-3">Modelado</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:1.5;font-family:Montserrat;-inkscape-font-specification:Montserrat;stroke-width:0.5;font-size:4.23333333px"
+         x="125.12532"
+         y="62.191624"
+         id="tspan15">de datos</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:100;font-size:5.64444px;line-height:1.5;font-family:Montserrat;-inkscape-font-specification:'Montserrat Thin';text-align:center;letter-spacing:0.264583px;word-spacing:0.264583px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;opacity:0.5;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.499999;stroke-linecap:round"
+       x="124.28712"
+       y="88.955284"
+       id="text2-9-0"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:5.64444px;line-height:1.5;font-family:Montserrat;-inkscape-font-specification:'Montserrat Bold';stroke-width:0.5"
+         x="124.28712"
+         y="88.955284"
+         id="tspan15-6">Ciencia de</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:5.64444px;line-height:1.5;font-family:Montserrat;-inkscape-font-specification:'Montserrat Bold';stroke-width:0.5"
+         x="124.41941"
+         y="97.421944"
+         id="tspan17">datos</tspan></text>
+  </g>
+</svg>

@@ -1,0 +1,14 @@
+{
+  "image_request": {
+    "prompt": "A close-up photograph capturing the interface of an online app store displayed on the screen of a modern smartphone. The screen shows a vibrant, diverse list of downloadable application icons arranged in neat rows. These icons are stylized and represent advanced tools: complex data visualization charts, interactive world maps, a sophisticated photo editor with filters, and a secure financial analytics app. Each icon has a clear, functional title and a prominent, blue 'Install' or 'Download' button. ",
+    "parameters": {
+      "aspect_ratio": "16:9",
+      "guidance_scale": 7.5,
+      "style": "photorealistic"
+    },
+    "metadata": {
+      "subject": "app store",
+      "focus": "only screen and apps"
+    }
+  }
+}

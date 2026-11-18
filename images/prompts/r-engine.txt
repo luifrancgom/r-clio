@@ -1,0 +1,14 @@
+ {
+  "image_request": {
+    "prompt": "Car engine, detailed chrome and carbon fiber components, intricate wiring and cooling hoses, polished intake manifold, realistic lighting, photorealistic automotive photography style.",
+    "parameters": {
+      "aspect_ratio": "16:9",
+      "guidance_scale": 7.5,
+      "style": "photorealistic"
+    },
+    "metadata": {
+      "subject": "car engine",
+      "focus": "mechanical detail"
+    }
+  }
+} 

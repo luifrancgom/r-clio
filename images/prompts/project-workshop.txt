@@ -1,0 +1,14 @@
+{
+  "image_request": {
+    "prompt": "An organized professional woodworking workshop, a clean and large workbench with two distinct wooden crates sitting on it. One crate is labeled 'PROYECTO SILLA' and contains chair legs and a rolled blueprint; the other crate is closed and labeled 'PROYECTO CAMA'. The workbench surface is mostly clear, showing only a few essential tools like a chisel and a ruler neatly placed. Cinematic lighting, realistic wood textures, high detail, top-down perspective showing a professional and efficient workspace.",
+    "parameters": {
+      "aspect_ratio": "16:9",
+      "guidance_scale": 7.5,
+      "style": "photorealistic"
+    },
+    "metadata": {
+      "subject": "organized woodworking workshop",
+      "focus": "clean workbench with project-based crates"
+    }
+  }
+}
