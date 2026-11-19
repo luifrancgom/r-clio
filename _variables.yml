@@ -47,6 +47,7 @@ url:
     quarto_cli: "https://quarto.org/docs/cli/index.html"
     quarto_positron: "https://quarto.org/docs/get-started/hello/positron.html"
     quarto_vscode: "https://open-vsx.org/extension/quarto/quarto"
+    markdown_pandoc: "https://quarto.org/docs/authoring/markdown-basics.html"
     air_vscode: "https://open-vsx.org/extension/posit/air-vscode"
     git_scm: "https://git-scm.com/"
     github: "https://github.com/"
@@ -155,6 +156,7 @@ url:
     choropleth_map_wiki: "https://en.wikipedia.org/wiki/Choropleth_map"
     crs_wiki: "https://en.wikipedia.org/wiki/Spatial_reference_system"
     colorbrewer_wiki: "https://en.wikipedia.org/wiki/ColorBrewer"
+    literate_programming_wiki: "https://en.wikipedia.org/wiki/Literate_programming"
 
   media:
     muse_klio_artwork: "https://commons.wikimedia.org/wiki/File:Christian_Bernhard_Rode_-_Die_Muse_Klio.jpg"

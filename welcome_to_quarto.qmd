@@ -57,15 +57,46 @@ En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta 
 
 ## ¿Qué es Quarto?
 
+[**Quarto**]({{< var url.software.quarto >}}) es un sistema de publicación científica y técnica de código abierto que proporciona un marco unificado para el análisis de datos. Su propósito es combinar en un único archivo de texto plano 3 componentes [@posit_introduction_2026]:
 
+1. **Texto narrativo:** Redactado mediante [**Markdown**]({{< var url.software.markdown_pandoc >}}).
+2. **Código ejecutable:** Escrito en lenguajes de programación como R, Python, Julia u Observable.
+3. **Resultados dinámicos:** Gráficos, tablas y estimaciones generados directamente al ejecutar el código.
+
+Esta integración se basa en la idea de [**literate programming**]({{< var url.education.literate_programming_wiki >}}) (en español **programación literaria**). En lugar de mantener un archivo, como por ejemplo en extensión `.R`, con comentarios dispersos o copiar y pegar resultados manualmente entre herramientas, el código y la narrativa se integran para que el documento se lea de principio a fin. De esa manera, se logra que los resultados se actualicen automáticamente y permanezcan siempre en sincronía con los datos [@posit_introduction_2026; @wickham_r_2023, Cap. 28].
 
 ### Problemas que resuelve
 
+En algunos flujos de trabajo, el análisis suele terminar copiando y pegando manualmente gráficos y valores desde el entorno de programación hacia un procesador de texto o diapositivas [@posit_introduction_2026]. Este proceso manual es propenso a errores y resulta ineficiente ya que si los datos cambian, es necesario repetir todo el procedimiento [@wickham_r_2023, Cap. 28].
 
+Quarto soluciona esta dificultad al mantener el texto, el código y los resultados integrados en un único archivo así como aportando 3 beneficios [@posit_introduction_2026]:
+
+1. **Reproducibilidad:** los resultados provienen directamente de ejecutar el código. En ese sentido, otro individuo puede reconstruir el documento y obtener los mismos resultados.
+2. **Actualización permanente:** si se incorporan nuevos datos o se ajusta el código, solo se requiere volver a compilar el documento para que cada tabla, gráfico y valor se actualice.
+3. **Archivos de texto plano:** los documentos `.qmd` son texto plano, lo que facilita editarlos y realizar seguimiento a los cambios mediante sistemas de control de versiones como [**Git**]({{< var url.software.git_scm >}}).
 
 ### Renderizar un documento
 
+El proceso de transformar un archivo que combina texto y código en un producto final se conoce como **renderizar** (en inglés **render**) [@posit_introduction_2026]. Al renderizar, el archivo original en extensión `.qmd` permanece intacto, generando un nuevo archivo de salida con los resultados incorporados. En la @fig-render-qmd-flow se describe la secuencia de pasos que Quarto realiza durante este proceso [@quarto_core_team_tutorial_2026]:
 
+![Flujo de renderizado en Quarto desde un archivo `.qmd` hasta los formatos finales](images/render-qmd_how-it-works.png){#fig-render-qmd-flow fig-alt="Diagrama de flujo de Quarto: archivo .qmd pasando por knitr hacia .md, luego procesado por pandoc hacia formatos PDF, MS Word o HTML" fig-align="center"}
+
+1. `.qmd`: es el archivo fuente en texto plano que contiene la combinación de texto narrativo en Markdown y los bloques de código.
+2. `knitr`: es el "motor" encargado de ejecutar secuencialmente cada una de las celdas de código presentes en el documento.
+3. `.md`: a partir de la ejecución, se genera un archivo intermedio en formato Markdown que integra el texto original junto con las salidas generadas por el código, como por ejemplo tablas, figuras y valores numéricos.
+4. `pandoc`: es el conversor de documentos que toma el archivo `.md` intermedio y lo traduce al formato final especificado, como por ejemplo páginas web HTML, documentos PDF o archivos de Microsoft Word y OpenDocument.
+
+Para renderizar un documento de Quarto de acuerdo a lo descrito en la @fig-render-qmd-flow selecciona el ícono de archivos ![](images/file-regular-full.png){fig-alt="Ícono del explorador de archivos" height=25} en la **Barra de actividades** y abre el archivo `reporte_pinguinos.qmd` utilizando la **Barra lateral primaria** (ver @fig-positron-layout-outline) en la carpeta `reports`. En el **Editor** puedes renderizar el documento utilizado la opción **Preview**, tal como se señala en la @fig-render-qmd-preview. 
+
+![Opción **Preview** en el **Editor** de Positron para renderizar un documento de Quarto](images/fig-2-chap-21.png){#fig-render-qmd-preview fig-alt="Captura de pantalla del Editor en Positron resaltando la opción Preview en la barra de herramientas superior para renderizar el archivo reporte_pinguinos.qmd" fig-align="center"}
+
+También puedes situar el cursor (**|**) sobre alguna parte del documento y presionar la combinación de teclas {{< kbd mac=Command-Shift-K win=Ctrl-Shift-K linux=Ctrl-Shift-K >}} o utilizar el **Terminal** en el **Panel** ejecutando el siguiente comando, tal como se señala a continuación:
+
+```bash
+quarto render reports/reporte_pinguinos.qmd
+```
+
+De esa manera, en la **Barra lateral primaria** encontrarás que se crea un archivo adicional dentro de la carpeta `reports` con el nombre `reporte_pinguinos.html`. En ese sentido, se crea un archivo con extensión `.html` manteniendo intacto el archivo de texto plano `reporte_pinguinos.qmd` donde se completa el proceso señalado en la @fig-render-qmd-preview. 
 
 ### Formatos de salida para documentos
 
