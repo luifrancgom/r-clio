@@ -66,7 +66,7 @@ En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta 
 Esta integración se basa en la idea de [**literate programming**]({{< var url.education.literate_programming_wiki >}}) (en español **programación literaria**). En lugar de mantener un archivo, como por ejemplo en extensión `.R`, con comentarios dispersos o copiar y pegar resultados manualmente entre herramientas, el código y la narrativa se integran para que el documento se lea de principio a fin. De esa manera, se logra que los resultados se actualicen automáticamente y permanezcan siempre en sincronía con los datos [@posit_introduction_2026; @wickham_r_2023, Cap. 28].
 
 ::: {#nte-2-chap-21 .callout-note}
-Ten en cuenta que Quarto es una herramienta independiente de R. Es decir, no es un paquete de R como por ejemplo `tidyverse` y puede ser utilizada de forma autónoma con respecto a cualquier otro lenguaje de programación, como R, Python o Julia. Por lo tanto, no encontrarás la documentación de Quarto en la **Consola** (en inglés **Console**) de R en el **Panel** (ver @fig-positron-layout-outline) utilizando el operador de ayuda `?` dentro del. Para consultar la documentación oficial, sintaxis y opciones de configuración, debes recurrir a la documentación señalada en [**Quarto**]({{< var url.software.quarto >}}).
+Ten en cuenta que Quarto es una herramienta independiente de R. Es decir, no es un paquete de R como por ejemplo `tidyverse` y puede ser utilizada de forma autónoma con respecto a cualquier otro lenguaje de programación, como R, Python o Julia. Por lo tanto, no encontrarás la documentación de Quarto en la **Consola** (en inglés **Console**) de R en el **Panel** (ver @fig-positron-layout-outline) utilizando el operador de ayuda `?` dentro de ella. Para consultar la documentación oficial, sintaxis y opciones de configuración, debes recurrir a la documentación señalada en [**Quarto**]({{< var url.software.quarto >}}).
 :::
 
 ### Problemas que resuelve
@@ -90,7 +90,7 @@ El proceso de transformar un archivo que combina texto y código en un producto 
 3. `.md`: a partir de la ejecución, se genera un archivo intermedio en formato Markdown que integra el texto original junto con las salidas generadas por el código, como por ejemplo tablas, figuras y valores numéricos.
 4. `pandoc`: es el conversor de documentos que toma el archivo `.md` intermedio y lo traduce al formato final especificado, como por ejemplo páginas web HTML, documentos PDF o archivos de Microsoft Word y OpenDocument.
 
-Para renderizar un documento de Quarto de acuerdo a lo descrito en la @fig-render-qmd-flow selecciona el ícono de archivos ![](images/file-regular-full.png){fig-alt="Ícono del explorador de archivos" height=25} en la **Barra de actividades** y abre el archivo `reporte_pinguinos.qmd` utilizando la **Barra lateral primaria** (ver @fig-positron-layout-outline) en la carpeta `reports`. En el **Editor** puedes renderizar el documento utilizado la opción **Preview**, tal como se señala en la @fig-render-qmd-preview. 
+Para renderizar un documento de Quarto de acuerdo a lo descrito en la @fig-render-qmd-flow selecciona el ícono de archivos ![](images/file-regular-full.png){fig-alt="Ícono del explorador de archivos" height=25} en la **Barra de actividades** y abre el archivo `reporte_pinguinos.qmd` utilizando la **Barra lateral primaria** (ver @fig-positron-layout-outline) en la carpeta `reports`. En el **Editor** puedes renderizar el documento utilizando la opción **Preview**, tal como se señala en la @fig-render-qmd-preview. 
 
 ![Opción **Preview** en el **Editor** de Positron para renderizar un documento de Quarto](images/fig-2-chap-21.png){#fig-render-qmd-preview fig-alt="Captura de pantalla del Editor en Positron resaltando la opción Preview en la barra de herramientas superior para renderizar el archivo reporte_pinguinos.qmd" fig-align="center"}
 
@@ -118,7 +118,7 @@ Quarto incluye la posibilidad de renderizar documentos a [múltiples formatos]({
 : Formatos de salida para documentos en Quarto {#tbl-quarto-document-formats}
 
 ::: {#cau-1-chap-21 .callout-caution}
-Para renderizar documentos en formato `pdf` es necesario contar con una distribución reciente de [LaTeX]({{< var url.software.latex >}}). El equipo principal de Quarto sugiere utilizar [TinyTeX]({{< var url.software.tinytex >}}), una distribución ligera basada en TeX Live. En caso de que no tengas una distribución de LaTeX instalada en tu sistema, puedes instalar TinyTeX utilizando el **Terminal** del **Panel** (ver @fig-positron-layout-outline) en Positron mediante la ejecuciónb del siguiente comando:
+Para renderizar documentos en formato `pdf` es necesario contar con una distribución reciente de [LaTeX]({{< var url.software.latex >}}). El equipo principal de Quarto sugiere utilizar [TinyTeX]({{< var url.software.tinytex >}}), una distribución ligera basada en TeX Live. En caso de que no tengas una distribución de LaTeX instalada en tu sistema, puedes instalar TinyTeX utilizando el **Terminal** del **Panel** (ver @fig-positron-layout-outline) en Positron mediante la ejecución del siguiente comando:
 
 ```bash
 quarto install tinytex
@@ -141,7 +141,44 @@ En la @sec-yaml-header explorarás la posibilidad de renderizar un documento en 
 
 ## Anatomía de un documento de Quarto
 
+Un archivo con extensión `.qmd` está compuesto de 3 elementos. A continuación se señala una versión reducida de `reporte_pinguinos.qmd` para ilustrar cada uno de estos aspectos:
 
+````qmd
+---
+title: "Paradoja de Simpson: dimensiones del pico en pingüinos"
+author:
+  - Allison M. Horst
+  - Alison Presmanes Hill
+  - Kristen B. Gorman
+date: 2026-11-17
+format:
+  html:
+    code-fold: true
+    embed-resources: true
+---
+
+```{{r}}
+#| label: cargar-paquetes
+#| message: false
+library(tidyverse)
+```
+
+# Introducción
+
+La **paradoja de Simpson** es un fenómeno estadístico en el cual una ... 
+````
+
+Al principio existen diferentes símbolos que puede que no comprendas pero estos se pueden separar en 3 elementos, tal como se muestra en la @tbl-elements-doc-quarto [@posit_introduction_2026]:
+
+| Elemento | Símbolo | Función |
+|:---|:---|:---|
+| Encabezado YAML | El primer bloque entre las 2 líneas `---` | Fija las opciones que se aplican de manera global al documento como el título, los autores, la fecha, el formato y las opciones específicas de ese formato tales como `code-fold: true` y `embed-resources: true` |
+| Texto Markdown | Texto como "es un fenómeno estadístico en el cual una ..." con símbolos como `#` y `**` | Estructura y da formato al texto narrativo para comunicar y contextualizar los resultados |
+| Celdas de código | Bloque que empieza con ```` ```{r} ```` y termina con ```` ``` ```` | Genera la renderización de los resultados como producto de la ejecución del código de acuerdo a las opciones fijadas como por ejemplo `#| message: false` y la aplicación de un identificador como `#| label: cargar-paquetes` |
+
+: Elementos de un documento de Quarto {#tbl-elements-doc-quarto}
+
+Si deseas puedes copiar el código mencionado anteriormente en `001_intro-quarto.qmd` teniendo en cuenta lo mencionado en la @nte-1-chap-21 para experimentar mediante la modificación del título, los autores o la fecha. En las siguientes secciones se explorará con más detalle otros aspectos de cada uno de los 3 elementos mencionados en la @tbl-elements-doc-quarto. 
 
 ### Encabezado YAML {#sec-yaml-header}
 

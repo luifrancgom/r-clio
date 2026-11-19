@@ -10,3 +10,17 @@ source("_common.R")
 #| echo: false
 #| message: false
 ```
+
+## Escritura con Markdown
+
+
+
+## Control del documento con YAML
+
+
+
+## Incorporación de celdas de código
+
+
+
+## Callouts, referencias cruzadas y más
