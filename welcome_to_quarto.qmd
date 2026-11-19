@@ -65,6 +65,10 @@ En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta 
 
 Esta integración se basa en la idea de [**literate programming**]({{< var url.education.literate_programming_wiki >}}) (en español **programación literaria**). En lugar de mantener un archivo, como por ejemplo en extensión `.R`, con comentarios dispersos o copiar y pegar resultados manualmente entre herramientas, el código y la narrativa se integran para que el documento se lea de principio a fin. De esa manera, se logra que los resultados se actualicen automáticamente y permanezcan siempre en sincronía con los datos [@posit_introduction_2026; @wickham_r_2023, Cap. 28].
 
+::: {#nte-2-chap-21 .callout-note}
+Ten en cuenta que Quarto es una herramienta independiente de R. Es decir, no es un paquete de R como por ejemplo `tidyverse` y puede ser utilizada de forma autónoma con respecto a cualquier otro lenguaje de programación, como R, Python o Julia. Por lo tanto, no encontrarás la documentación de Quarto en la **Consola** (en inglés **Console**) de R en el **Panel** (ver @fig-positron-layout-outline) utilizando el operador de ayuda `?` dentro del. Para consultar la documentación oficial, sintaxis y opciones de configuración, debes recurrir a la documentación señalada en [**Quarto**]({{< var url.software.quarto >}}).
+:::
+
 ### Problemas que resuelve
 
 En algunos flujos de trabajo, el análisis suele terminar copiando y pegando manualmente gráficos y valores desde el entorno de programación hacia un procesador de texto o diapositivas [@posit_introduction_2026]. Este proceso manual es propenso a errores y resulta ineficiente ya que si los datos cambian, es necesario repetir todo el procedimiento [@wickham_r_2023, Cap. 28].
@@ -75,11 +79,11 @@ Quarto soluciona esta dificultad al mantener el texto, el código y los resultad
 2. **Actualización permanente:** si se incorporan nuevos datos o se ajusta el código, solo se requiere volver a compilar el documento para que cada tabla, gráfico y valor se actualice.
 3. **Archivos de texto plano:** los documentos `.qmd` son texto plano, lo que facilita editarlos y realizar seguimiento a los cambios mediante sistemas de control de versiones como [**Git**]({{< var url.software.git_scm >}}).
 
-### Renderizar un documento
+### Renderizar un documento {#sec-quarto-render}
 
-El proceso de transformar un archivo que combina texto y código en un producto final se conoce como **renderizar** (en inglés **render**) [@posit_introduction_2026]. Al renderizar, el archivo original en extensión `.qmd` permanece intacto, generando un nuevo archivo de salida con los resultados incorporados. En la @fig-render-qmd-flow se describe la secuencia de pasos que Quarto realiza durante este proceso [@quarto_core_team_tutorial_2026]:
+El proceso de transformar un archivo que combina texto y código en un producto final se conoce como **renderizar** (en inglés **render**) [@posit_introduction_2026]. Al renderizar, el archivo original en extensión `.qmd` permanece intacto, generando un nuevo archivo de salida con los resultados incorporados. En la @fig-render-qmd-flow se describe la secuencia de pasos que Quarto realiza durante este proceso:
 
-![Flujo de renderizado en Quarto desde un archivo `.qmd` hasta los formatos finales](images/render-qmd_how-it-works.png){#fig-render-qmd-flow fig-alt="Diagrama de flujo de Quarto: archivo .qmd pasando por knitr hacia .md, luego procesado por pandoc hacia formatos PDF, MS Word o HTML" fig-align="center"}
+![Flujo de renderizado en Quarto desde un archivo `.qmd` hasta los formatos finales [@quarto_core_team_tutorial_2026]](images/render-qmd_how-it-works.png){#fig-render-qmd-flow fig-alt="Diagrama de flujo de Quarto: archivo .qmd pasando por knitr hacia .md, luego procesado por pandoc hacia formatos PDF, MS Word o HTML" fig-align="center"}
 
 1. `.qmd`: es el archivo fuente en texto plano que contiene la combinación de texto narrativo en Markdown y los bloques de código.
 2. `knitr`: es el "motor" encargado de ejecutar secuencialmente cada una de las celdas de código presentes en el documento.
@@ -96,17 +100,50 @@ También puedes situar el cursor (**|**) sobre alguna parte del documento y pres
 quarto render reports/reporte_pinguinos.qmd
 ```
 
-De esa manera, en la **Barra lateral primaria** encontrarás que se crea un archivo adicional dentro de la carpeta `reports` con el nombre `reporte_pinguinos.html`. En ese sentido, se crea un archivo con extensión `.html` manteniendo intacto el archivo de texto plano `reporte_pinguinos.qmd` donde se completa el proceso señalado en la @fig-render-qmd-preview. 
+De esa manera, en la **Barra lateral primaria** encontrarás que se crea un archivo adicional dentro de la carpeta `reports` con el nombre `reporte_pinguinos.html`. En ese sentido, se crea un archivo con extensión `.html` manteniendo intacto el archivo de texto plano `reporte_pinguinos.qmd` donde se completa el proceso señalado en la @fig-render-qmd-flow. 
 
 ### Formatos de salida para documentos
 
+Quarto incluye la posibilidad de renderizar documentos a [múltiples formatos]({{< var url.software.quarto_formats >}}). Por el momento, en relación a `reporte_pinguinos.qmd` respecto a la @sec-quarto-render se ha utilizado únicamente el formato `html`. Sin embargo, para la elaboración de documentos Quarto ofrece una amplia variedad de opciones de salida como `html`, `pdf`, `docx`, `typst`, `odt` y `epub`. En la @tbl-quarto-document-formats se presentan estos formatos junto con su descripción:
 
+| Formato | Descripción |
+|:---:|:---|
+| [`html`]({{< var url.software.quarto_format_html >}}) | Páginas y documentos web basados en el estándar [HTML5]({{< var url.education.html_wiki >}}). Es el formato predeterminado en Quarto para publicar contenidos interactivos en línea. |
+| [`pdf`]({{< var url.software.quarto_format_pdf >}}) | Documentos basados en [PDF]({{< var url.education.pdf_wiki >}}) y generados a través de [LaTeX]({{< var url.software.latex >}}) con control preciso de tipografía, márgenes, encabezados y citas bibliográficas. |
+| [`docx`]({{< var url.software.quarto_format_docx >}}) | Documentos de procesamiento de texto para Microsoft Word basados en el estándar abierto [Office Open XML]({{< var url.education.open_xml_wiki >}}) (`.docx`). |
+| [`typst`]({{< var url.software.quarto_format_typst >}}) | Sistema de composición tipográfica moderno y de código abierto desarrollado mediante [Typst]({{< var url.software.typst >}}). Diseñado como una alternativa a LaTeX donde genera archivos PDF con tiempos de renderizado más rápido sin requerir una instalación previa de LaTeX. |
+| [`odt`]({{< var url.software.quarto_format_odt >}}) | Documentos de texto basados en el estándar abierto [OpenDocument]({{< var url.education.open_document_wiki >}}) (`.odt`) compatibles con procesadores de texto como LibreOffice Writer. |
+| [`epub`]({{< var url.software.quarto_format_epub >}}) | Libros electrónicos en formato estándar [EPUB]({{< var url.education.epud_wiki >}}) diseñados para la lectura en dispositivos móviles, tabletas y lectores digitales. |
+
+: Formatos de salida para documentos en Quarto {#tbl-quarto-document-formats}
+
+::: {#cau-1-chap-21 .callout-caution}
+Para renderizar documentos en formato `pdf` es necesario contar con una distribución reciente de [LaTeX]({{< var url.software.latex >}}). El equipo principal de Quarto sugiere utilizar [TinyTeX]({{< var url.software.tinytex >}}), una distribución ligera basada en TeX Live. En caso de que no tengas una distribución de LaTeX instalada en tu sistema, puedes instalar TinyTeX utilizando el **Terminal** del **Panel** (ver @fig-positron-layout-outline) en Positron mediante la ejecuciónb del siguiente comando:
+
+```bash
+quarto install tinytex
+```
+:::
+
+En la @sec-yaml-header explorarás la posibilidad de renderizar un documento en diversos formatos donde en particular para el formato `pdf` se debe tener en cuenta la @cau-1-chap-21. Por ahora, puedes descargar a continuación los reportes asociados con `reporte_pinguinos.qmd` en formatos `docx`, `odt` y `pdf` para examinar el resultado final respecto a otras opciones de acuerdo a lo señalado en @fig-render-qmd-flow:
+
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [reporte_pinguinos.docx]({{< var url.report.report_penguins_docx >}}){download="reporte_pinguinos.docx"}
+:::
+
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [reporte_pinguinos.odt]({{< var url.report.report_penguins_odt >}}){download="reporte_pinguinos.odt"}
+:::
+
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [reporte_pinguinos.pdf]({{< var url.report.report_penguins_pdf >}}){download="reporte_pinguinos.pdf"}
+:::
 
 ## Anatomía de un documento de Quarto
 
 
 
-### Encabezado YAML
+### Encabezado YAML {#sec-yaml-header}
 
 
 

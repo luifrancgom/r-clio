@@ -78,6 +78,7 @@ language:
   crossref-nte-prefix: "Nota"
   crossref-imp-prefix: "Importante"
   crossref-wrn-prefix: "Advertencia"
+  crossref-cau-prefix: "Precaución"
 editor: source
 
 format:

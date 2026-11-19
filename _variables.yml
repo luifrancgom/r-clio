@@ -45,10 +45,20 @@ url:
     rspm_binary_ecosystem: "https://docs.posit.co/rspm/admin/appendix/package-ecosystem.html#binary"
     quarto: "https://quarto.org/"
     quarto_cli: "https://quarto.org/docs/cli/index.html"
+    quarto_formats: "https://quarto.org/docs/output-formats/all-formats.html"
+    quarto_format_html: "https://quarto.org/docs/reference/formats/html.html"
+    quarto_format_pdf: "https://quarto.org/docs/reference/formats/pdf.html"
+    quarto_format_docx: "https://quarto.org/docs/reference/formats/docx.html"
+    quarto_format_typst: "https://quarto.org/docs/reference/formats/typst.html"
+    quarto_format_odt: "https://quarto.org/docs/reference/formats/odt.html"
+    quarto_format_epub: "https://quarto.org/docs/reference/formats/epub.html"
     quarto_positron: "https://quarto.org/docs/get-started/hello/positron.html"
     quarto_vscode: "https://open-vsx.org/extension/quarto/quarto"
     markdown_pandoc: "https://quarto.org/docs/authoring/markdown-basics.html"
     air_vscode: "https://open-vsx.org/extension/posit/air-vscode"
+    latex: "https://www.latex-project.org/"
+    tinytex: "https://yihui.org/tinytex/"
+    typst: "https://typst.app/"
     git_scm: "https://git-scm.com/"
     github: "https://github.com/"
 
@@ -157,12 +167,21 @@ url:
     crs_wiki: "https://en.wikipedia.org/wiki/Spatial_reference_system"
     colorbrewer_wiki: "https://en.wikipedia.org/wiki/ColorBrewer"
     literate_programming_wiki: "https://en.wikipedia.org/wiki/Literate_programming"
+    html_wiki: "https://en.wikipedia.org/wiki/HTML5"
+    pdf_wiki: "https://en.wikipedia.org/wiki/PDF"
+    open_xml_wiki: "https://en.wikipedia.org/wiki/Office_Open_XML"
+    open_document_wiki: "https://en.wikipedia.org/wiki/OpenDocument"
+    epud_wiki: "https://en.wikipedia.org/wiki/EPUB"
+    epub_wiki: "https://en.wikipedia.org/wiki/EPUB"
 
   media:
     muse_klio_artwork: "https://commons.wikimedia.org/wiki/File:Christian_Bernhard_Rode_-_Die_Muse_Klio.jpg"
 
   report:
     report_penguins: "reports/reporte_pinguinos.qmd"
+    report_penguins_docx: "reports/reporte_pinguinos.docx"
+    report_penguins_odt: "reports/reporte_pinguinos.odt"
+    report_penguins_pdf: "reports/reporte_pinguinos.pdf"
 
   image:
     culmen_depth_es: "images/culmen_depth_es.png"
