@@ -103,7 +103,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-2e3f24e872334162e18e711c094d1017.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-15174c85d115b6f17ef0ce5706661f39.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/kbd/kbd.js"></script>
 <link href="site_libs/quarto-contrib/kbd/kbd.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -556,7 +556,7 @@ Nota&nbsp;21.2
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Ten en cuenta que Quarto es una herramienta independiente de R. Es decir, no es un paquete de R como por ejemplo <code>tidyverse</code> y puede ser utilizada de forma autónoma con respecto a cualquier otro lenguaje de programación, como R, Python o Julia. Por lo tanto, no encontrarás la documentación de Quarto en la <strong>Consola</strong> (en inglés <strong>Console</strong>) de R en el <strong>Panel</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) utilizando el operador de ayuda <code>?</code> dentro del. Para consultar la documentación oficial, sintaxis y opciones de configuración, debes recurrir a la documentación señalada en <a href="https://quarto.org/"><strong>Quarto</strong></a>.</p>
+<p>Ten en cuenta que Quarto es una herramienta independiente de R. Es decir, no es un paquete de R como por ejemplo <code>tidyverse</code> y puede ser utilizada de forma autónoma con respecto a cualquier otro lenguaje de programación, como R, Python o Julia. Por lo tanto, no encontrarás la documentación de Quarto en la <strong>Consola</strong> (en inglés <strong>Console</strong>) de R en el <strong>Panel</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) utilizando el operador de ayuda <code>?</code> dentro de ella. Para consultar la documentación oficial, sintaxis y opciones de configuración, debes recurrir a la documentación señalada en <a href="https://quarto.org/"><strong>Quarto</strong></a>.</p>
 </div>
 </div>
 <section id="problemas-que-resuelve" class="level3" data-number="21.1.1">
@@ -588,7 +588,7 @@ Figura&nbsp;21.1: Flujo de renderizado en Quarto desde un archivo <code>.qmd</co
 <li><code>.md</code>: a partir de la ejecución, se genera un archivo intermedio en formato Markdown que integra el texto original junto con las salidas generadas por el código, como por ejemplo tablas, figuras y valores numéricos.</li>
 <li><code>pandoc</code>: es el conversor de documentos que toma el archivo <code>.md</code> intermedio y lo traduce al formato final especificado, como por ejemplo páginas web HTML, documentos PDF o archivos de Microsoft Word y OpenDocument.</li>
 </ol>
-<p>Para renderizar un documento de Quarto de acuerdo a lo descrito en la <a href="#fig-render-qmd-flow" class="quarto-xref">Figura&nbsp;<span>21.1</span></a> selecciona el ícono de archivos <img src="images/file-regular-full.png" alt="Ícono del explorador de archivos" height="25"> en la <strong>Barra de actividades</strong> y abre el archivo <code>reporte_pinguinos.qmd</code> utilizando la <strong>Barra lateral primaria</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) en la carpeta <code>reports</code>. En el <strong>Editor</strong> puedes renderizar el documento utilizado la opción <strong>Preview</strong>, tal como se señala en la <a href="#fig-render-qmd-preview" class="quarto-xref">Figura&nbsp;<span>21.2</span></a>.</p>
+<p>Para renderizar un documento de Quarto de acuerdo a lo descrito en la <a href="#fig-render-qmd-flow" class="quarto-xref">Figura&nbsp;<span>21.1</span></a> selecciona el ícono de archivos <img src="images/file-regular-full.png" alt="Ícono del explorador de archivos" height="25"> en la <strong>Barra de actividades</strong> y abre el archivo <code>reporte_pinguinos.qmd</code> utilizando la <strong>Barra lateral primaria</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) en la carpeta <code>reports</code>. En el <strong>Editor</strong> puedes renderizar el documento utilizando la opción <strong>Preview</strong>, tal como se señala en la <a href="#fig-render-qmd-preview" class="quarto-xref">Figura&nbsp;<span>21.2</span></a>.</p>
 <div id="fig-render-qmd-preview" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Captura de pantalla del Editor en Positron resaltando la opción Preview en la barra de herramientas superior para renderizar el archivo reporte_pinguinos.qmd">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-render-qmd-preview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -659,7 +659,7 @@ Precaución&nbsp;21.1
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Para renderizar documentos en formato <code>pdf</code> es necesario contar con una distribución reciente de <a href="https://www.latex-project.org/">LaTeX</a>. El equipo principal de Quarto sugiere utilizar <a href="https://yihui.org/tinytex/">TinyTeX</a>, una distribución ligera basada en TeX Live. En caso de que no tengas una distribución de LaTeX instalada en tu sistema, puedes instalar TinyTeX utilizando el <strong>Terminal</strong> del <strong>Panel</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) en Positron mediante la ejecuciónb del siguiente comando:</p>
+<p>Para renderizar documentos en formato <code>pdf</code> es necesario contar con una distribución reciente de <a href="https://www.latex-project.org/">LaTeX</a>. El equipo principal de Quarto sugiere utilizar <a href="https://yihui.org/tinytex/">TinyTeX</a>, una distribución ligera basada en TeX Live. En caso de que no tengas una distribución de LaTeX instalada en tu sistema, puedes instalar TinyTeX utilizando el <strong>Terminal</strong> del <strong>Panel</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) en Positron mediante la ejecución del siguiente comando:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> install tinytex</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
@@ -707,6 +707,71 @@ Precaución&nbsp;21.1
 </section>
 <section id="anatomía-de-un-documento-de-quarto" class="level2" data-number="21.2">
 <h2 data-number="21.2" class="anchored" data-anchor-id="anatomía-de-un-documento-de-quarto"><span class="header-section-number">21.2</span> Anatomía de un documento de Quarto</h2>
+<p>Un archivo con extensión <code>.qmd</code> está compuesto de 3 elementos. A continuación se señala una versión reducida de <code>reporte_pinguinos.qmd</code> para ilustrar cada uno de estos aspectos:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode markdown qmd code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Paradoja de Simpson: dimensiones del pico en pingüinos"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">  - Allison M. Horst</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">  - Alison Presmanes Hill</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">  - Kristen B. Gorman</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2026-11-17</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">    embed-resources: true</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: cargar-paquetes</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="fu"># Introducción</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>La **paradoja de Simpson** es un fenómeno estadístico en el cual una ... </span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Al principio existen diferentes símbolos que puede que no comprendas pero estos se pueden separar en 3 elementos, tal como se muestra en la <a href="#tbl-elements-doc-quarto" class="quarto-xref">Tabla&nbsp;<span>21.2</span></a>:</p>
+<div id="tbl-elements-doc-quarto" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-elements-doc-quarto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;21.2: Elementos de un documento de Quarto
+</figcaption>
+<div aria-describedby="tbl-elements-doc-quarto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Elemento</th>
+<th style="text-align: left;">Símbolo</th>
+<th style="text-align: left;">Función</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Encabezado YAML</td>
+<td style="text-align: left;">El primer bloque entre las 2 líneas <code>---</code></td>
+<td style="text-align: left;">Fija las opciones que se aplican de manera global al documento como el título, los autores, la fecha, el formato y las opciones específicas de ese formato tales como <code>code-fold: true</code> y <code>embed-resources: true</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Texto Markdown</td>
+<td style="text-align: left;">Texto como “es un fenómeno estadístico en el cual una …” con símbolos como <code>#</code> y <code>**</code></td>
+<td style="text-align: left;">Estructura y da formato al texto narrativo para comunicar y contextualizar los resultados</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Celdas de código</td>
+<td style="text-align: left;">Bloque que empieza con <code>```{r}</code> y termina con <code>```</code></td>
+<td style="text-align: left;">Genera la renderización de los resultados como producto de la ejecución del código de acuerdo a las opciones fijadas como por ejemplo <code>#| message: false</code> y la aplicación de un identificador como <code>#| label: cargar-paquetes</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Si deseas puedes copiar el código mencionado anteriormente en <code>001_intro-quarto.qmd</code> teniendo en cuenta lo mencionado en la <a href="#nte-1-chap-21" class="quarto-xref">Nota&nbsp;<span>21.1</span></a> para experimentar mediante la modificación del título, los autores o la fecha. En las siguientes secciones se explorará con más detalle otros aspectos de cada uno de los 3 elementos mencionados en la <a href="#tbl-elements-doc-quarto" class="quarto-xref">Tabla&nbsp;<span>21.2</span></a>.</p>
 <section id="sec-yaml-header" class="level3" data-number="21.2.1">
 <h3 data-number="21.2.1" class="anchored" data-anchor-id="sec-yaml-header"><span class="header-section-number">21.2.1</span> Encabezado YAML</h3>
 </section>
