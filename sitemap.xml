@@ -2,130 +2,130 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://luifrancgom.github.io/r-clio/index.html</loc>
-    <lastmod>2026-11-19T23:28:18.305Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.834Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/preface.html</loc>
-    <lastmod>2026-11-19T23:28:18.306Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.835Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/first_steps_r.html</loc>
-    <lastmod>2026-11-19T23:28:18.137Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.666Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/welcome_to_r.html</loc>
-    <lastmod>2026-11-19T23:28:18.334Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.862Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/project-oriented_workflow.html</loc>
-    <lastmod>2026-11-19T23:28:18.306Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.835Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/r_packages.html</loc>
-    <lastmod>2026-11-19T23:28:18.306Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.835Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/how_to_code_in_r.html</loc>
-    <lastmod>2026-11-19T23:28:18.137Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.666Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/data_visualization.html</loc>
-    <lastmod>2026-11-19T23:28:18.113Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.642Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/amounts.html</loc>
-    <lastmod>2026-11-19T23:28:17.799Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.319Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/distributions.html</loc>
-    <lastmod>2026-11-19T23:28:18.114Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.643Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/proportions.html</loc>
-    <lastmod>2026-11-19T23:28:18.306Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.835Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/x-y_relationships.html</loc>
-    <lastmod>2026-11-19T23:28:18.334Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.863Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/data_wrangling.html</loc>
-    <lastmod>2026-11-19T23:28:18.114Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.642Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/single_table_verbs.html</loc>
-    <lastmod>2026-11-19T23:28:18.333Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.862Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/two_table_verbs.html</loc>
-    <lastmod>2026-11-19T23:28:18.333Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.862Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/data_import.html</loc>
-    <lastmod>2026-11-19T23:28:18.113Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.642Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/r_data_serialization.html</loc>
-    <lastmod>2026-11-19T23:28:18.306Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.835Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/plain_text.html</loc>
-    <lastmod>2026-11-19T23:28:18.306Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.835Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/spreadsheets.html</loc>
-    <lastmod>2026-11-19T23:28:18.333Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.862Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/geopackage_gpkg.html</loc>
-    <lastmod>2026-11-19T23:28:18.137Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.666Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/data_tidy.html</loc>
-    <lastmod>2026-11-19T23:28:18.113Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.642Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/tidy_data.html</loc>
-    <lastmod>2026-11-19T23:28:18.333Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.862Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/pivoting.html</loc>
-    <lastmod>2026-11-19T23:28:18.306Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.835Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/split_unite_characters_cols.html</loc>
-    <lastmod>2026-11-19T23:28:18.333Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.862Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/functional_programming.html</loc>
-    <lastmod>2026-11-19T23:28:18.137Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.666Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/anonymous_functions_purrr.html</loc>
-    <lastmod>2026-11-19T23:28:17.799Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.319Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/map_reduce_list_rbind_functions.html</loc>
-    <lastmod>2026-11-19T23:28:18.306Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.834Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/data_communication.html</loc>
-    <lastmod>2026-11-19T23:28:18.113Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.642Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/welcome_to_quarto.html</loc>
-    <lastmod>2026-11-19T23:28:18.333Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.862Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/html_docs_quarto.html</loc>
-    <lastmod>2026-11-19T23:28:18.137Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.666Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/references.html</loc>
-    <lastmod>2026-11-19T23:28:18.306Z</lastmod>
+    <lastmod>2026-11-20T05:45:15.835Z</lastmod>
   </url>
   <url>
     <loc>https://luifrancgom.github.io/r-clio/R-para-análisis-de-datos.pdf</loc>
-    <lastmod>2026-11-19T23:39:17.013Z</lastmod>
+    <lastmod>2026-11-20T05:58:07.938Z</lastmod>
   </url>
 </urlset>

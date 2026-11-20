@@ -572,7 +572,7 @@ Nota&nbsp;21.2
 <section id="sec-quarto-render" class="level3" data-number="21.1.2">
 <h3 data-number="21.1.2" class="anchored" data-anchor-id="sec-quarto-render"><span class="header-section-number">21.1.2</span> Renderizar un documento</h3>
 <p>El proceso de transformar un archivo que combina texto y código en un producto final se conoce como <strong>renderizar</strong> (en inglés <strong>render</strong>) <span class="citation" data-cites="posit_introduction_2026">(<a href="references.html#ref-posit_introduction_2026" role="doc-biblioref">Posit, 2026</a>)</span>. Al renderizar, el archivo original en extensión <code>.qmd</code> permanece intacto, generando un nuevo archivo de salida con los resultados incorporados. En la <a href="#fig-render-qmd-flow" class="quarto-xref">Figura&nbsp;<span>21.1</span></a> se describe la secuencia de pasos que Quarto realiza durante este proceso:</p>
-<div id="fig-render-qmd-flow" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Diagrama de flujo de Quarto: archivo .qmd pasando por knitr hacia .md, luego procesado por pandoc hacia formatos PDF, MS Word o HTML">
+<div id="fig-render-qmd-flow" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama de flujo de Quarto: archivo .qmd pasando por knitr hacia .md, luego procesado por pandoc hacia formatos PDF, MS Word o HTML" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-render-qmd-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/render-qmd_how-it-works.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Diagrama de flujo de Quarto: archivo .qmd pasando por knitr hacia .md, luego procesado por pandoc hacia formatos PDF, MS Word o HTML">
@@ -589,7 +589,7 @@ Figura&nbsp;21.1: Flujo de renderizado en Quarto desde un archivo <code>.qmd</co
 <li><code>pandoc</code>: es el conversor de documentos que toma el archivo <code>.md</code> intermedio y lo traduce al formato final especificado, como por ejemplo páginas web HTML, documentos PDF o archivos de Microsoft Word y OpenDocument.</li>
 </ol>
 <p>Para renderizar un documento de Quarto de acuerdo a lo descrito en la <a href="#fig-render-qmd-flow" class="quarto-xref">Figura&nbsp;<span>21.1</span></a> selecciona el ícono de archivos <img src="images/file-regular-full.png" alt="Ícono del explorador de archivos" height="25"> en la <strong>Barra de actividades</strong> y abre el archivo <code>reporte_pinguinos.qmd</code> utilizando la <strong>Barra lateral primaria</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) en la carpeta <code>reports</code>. En el <strong>Editor</strong> puedes renderizar el documento utilizando la opción <strong>Preview</strong>, tal como se señala en la <a href="#fig-render-qmd-preview" class="quarto-xref">Figura&nbsp;<span>21.2</span></a>.</p>
-<div id="fig-render-qmd-preview" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Captura de pantalla del Editor en Positron resaltando la opción Preview en la barra de herramientas superior para renderizar el archivo reporte_pinguinos.qmd">
+<div id="fig-render-qmd-preview" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Captura de pantalla del Editor en Positron resaltando la opción Preview en la barra de herramientas superior para renderizar el archivo reporte_pinguinos.qmd" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-render-qmd-preview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/fig-2-chap-21.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Captura de pantalla del Editor en Positron resaltando la opción Preview en la barra de herramientas superior para renderizar el archivo reporte_pinguinos.qmd">
@@ -734,7 +734,7 @@ Precaución&nbsp;21.1
 <div id="tbl-elements-doc-quarto" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-elements-doc-quarto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Tabla&nbsp;21.2: Elementos de un documento de Quarto
+Tabla&nbsp;21.2: Elementos de un documento de Quarto <span class="citation" data-cites="posit_introduction_2026">(<a href="references.html#ref-posit_introduction_2026" role="doc-biblioref">Posit, 2026</a>)</span>
 </figcaption>
 <div aria-describedby="tbl-elements-doc-quarto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -774,6 +774,108 @@ Tabla&nbsp;21.2: Elementos de un documento de Quarto
 <p>Si deseas puedes copiar el código mencionado anteriormente en <code>001_intro-quarto.qmd</code> teniendo en cuenta lo mencionado en la <a href="#nte-1-chap-21" class="quarto-xref">Nota&nbsp;<span>21.1</span></a> para experimentar mediante la modificación del título, los autores o la fecha. En las siguientes secciones se explorará con más detalle otros aspectos de cada uno de los 3 elementos mencionados en la <a href="#tbl-elements-doc-quarto" class="quarto-xref">Tabla&nbsp;<span>21.2</span></a>.</p>
 <section id="sec-yaml-header" class="level3" data-number="21.2.1">
 <h3 data-number="21.2.1" class="anchored" data-anchor-id="sec-yaml-header"><span class="header-section-number">21.2.1</span> Encabezado YAML</h3>
+<p><a href="https://yaml.org/spec/1.2.2/"><strong>YAML</strong></a> es un formato estándar de serialización de datos diseñado para ser legible para personas. En los documentos de Quarto, YAML se emplea para configurar los metadatos y las opciones globales del archivo mediante un bloque denominado encabezado (en inglés <strong>front matter</strong>), el cual se ubica al comienzo del documento.</p>
+<p>En <code>reporte_pinguinos.qmd</code> (ver <a href="#nte-1-chap-21" class="quarto-xref">Nota&nbsp;<span>21.1</span></a>) el encabezado YAML se define, tal como se señala a continuación:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Paradoja de Simpson: dimensiones del pico en pingüinos"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> Allison M. Horst</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> Alison Presmanes Hill</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> Kristen B. Gorman</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> 2026-11-17</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">number-sections</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">code-fold</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">embed-resources</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">lang</span><span class="kw">:</span><span class="at"> es</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">engine</span><span class="kw">:</span><span class="at"> knitr</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> ../references/reporte-pinguinos.bib</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="fu">csl</span><span class="kw">:</span><span class="at"> ../references/apa.csl</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Este bloque se rige por las siguientes reglas de sintaxis en YAML:</p>
+<ol type="1">
+<li><strong>Delimitadores (<code>---</code>):</strong> El encabezado siempre inicia y finaliza con 3 guiones consecutivos (<code>---</code>) en líneas separadas. Todo contenido situado entre estos delimitadores es interpretado como configuración y metadatos por Quarto, separándolo del cuerpo del documento.</li>
+<li><strong>Pares clave-valor (<code>clave: valor</code>):</strong> La estructura básica consiste en asociar un nombre o clave con un valor determinado, separados por 2 puntos y un espacio obligatorio (<code>:</code>).</li>
+<li><strong>Secuencias de escalares:</strong> Cuando una clave contiene múltiples elementos ordenados, como los autores en <code>author:</code>, cada elemento se especifica en una nueva línea antecedido por un guion y un espacio (<code>-</code>).</li>
+<li><strong>Estructura jerárquica e indentación:</strong> YAML define la anidación y subordinación mediante sangrías de <strong>2 espacios</strong> por nivel. Es importante señalar que no se permite el uso de tabuladores ya que pueden generar errores de sintaxis en el procesamiento del archivo.</li>
+<li><strong>Tipos de valores:</strong>
+<ul>
+<li><strong>Cadenas explícitas</strong> (en inglés <strong>explicit strings</strong>): Texto delimitado por comillas dobles o simples donde es necesario cuando el texto incluye caracteres especiales o dos puntos (<code>:</code>), como en <code>title: "Paradoja de Simpson: dimensiones del pico en pingüinos"</code>.</li>
+<li><strong>Cadenas implícitas</strong> (en inglés <strong>implicit strings</strong>): Texto sin comillas reconocido automáticamente como cadena cuando no presenta ambigüedades, como <code>es</code> en <code>lang:</code> o <code>knitr</code> en <code>engine:</code>.</li>
+<li><strong>Booleanos</strong> (en inglés <strong>booleans</strong>): Valores lógicos representados por <code>true</code> o <code>false</code> como en <code>toc: true</code> o <code>number-sections: true</code>.</li>
+<li><strong>Marcas de tiempo</strong> (en inglés <strong>timestamps</strong>): Fechas expresadas en formato estándar ISO 8601 (<code>AAAA-MM-DD</code>) como <code>2026-11-17</code> en <code>date:</code>.</li>
+</ul></li>
+</ol>
+<section id="opciones-globales-y-específicas-de-formato" class="level4" data-number="21.2.1.1">
+<h4 data-number="21.2.1.1" class="anchored" data-anchor-id="opciones-globales-y-específicas-de-formato"><span class="header-section-number">21.2.1.1</span> Opciones globales y específicas de formato</h4>
+<p>Es fundamental distinguir el alcance de las opciones dentro del encabezado YAML:</p>
+<ul>
+<li><p><strong>Opciones fuera de <code>format:</code></strong> Se aplican de manera global a cualquier formato de salida en el que se compile el documento.</p></li>
+<li><p><strong>Opciones dentro de <code>format:</code></strong> Se aplican de manera exclusiva al formato específico en el cual se encuentran anidadas. Por ejemplo, dentro de:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">code-fold</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">embed-resources</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ul>
+<p>Las opciones <code>code-fold: true</code> que pliega las celdas de código de forma interactiva y <code>embed-resources: true</code> que “empaqueta” todas las imágenes, hojas de estilo y dependencias en un único archivo HTML independiente, se ejecutan únicamente cuando la salida es un documento HTML.</p>
+</section>
+<section id="descripción-de-los-campos-del-encabezado" class="level4" data-number="21.2.1.2">
+<h4 data-number="21.2.1.2" class="anchored" data-anchor-id="descripción-de-los-campos-del-encabezado"><span class="header-section-number">21.2.1.2</span> Descripción de los campos del encabezado</h4>
+<p>A continuación se detalla la función de cada uno de los campos utilizados en <code>reporte_pinguinos.qmd</code>:</p>
+<ul>
+<li><code>title</code>: Título principal del documento que se mostrará en el encabezado del reporte.</li>
+<li><code>author</code>: Secuencia con los nombres de las autoras o autores del documento.</li>
+<li><code>date</code>: Fecha de publicación del reporte.</li>
+<li><code>toc</code>: Acrónimo de <strong>T</strong>able <strong>o</strong>f <strong>C</strong>ontents done al fijarse en <code>true</code> genera automáticamente una tabla de contenidos interactiva.</li>
+<li><code>number-sections</code>: Al fijarse en <code>true</code> numera secuencialmente cada una de las secciones y encabezados del reporte.</li>
+<li><code>lang</code>: Establece el idioma del documento, por ejemplo <code>es</code> para español, traduciendo automáticamente los textos fijos generados por Quarto como “Figura”, “Tabla” o “Tabla de Contenidos”.</li>
+<li><code>engine</code>: Especifica el “motor” de cómputo para procesar el código. En el caso del reporte <code>knitr</code> para ejecutar código de R (ver <a href="#fig-render-qmd-flow" class="quarto-xref">Figura&nbsp;<span>21.1</span></a>).</li>
+<li><code>bibliography</code>: Ruta relativa hacia el archivo de referencias bibliográficas en formato BibTeX (<code>.bib</code>).</li>
+<li><code>csl</code>: Ruta relativa hacia el archivo de estilo de citación en formato Citation Style Language (<code>.csl</code>). En el caso del reporte se aplican normas APA para las referencias.</li>
+</ul>
+<div id="nte-3-chap-21" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota&nbsp;21.3
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En los campos <code>bibliography: ../references/reporte-pinguinos.bib</code> y <code>csl: ../references/apa.csl</code>, el uso del prefijo <code>../</code> es indispensable debido a la estructura de directorios del proyecto. El archivo <code>reporte_pinguinos.qmd</code> se encuentra alojado dentro de la carpeta <code>reports/</code>, mientras que los archivos <code>.bib</code> y <code>.csl</code> están guardados en la carpeta <code>references/</code>.</p>
+<p>El prefijo <code>../</code> le indica a Quarto que debe retroceder un nivel en la jerarquía de carpetas, es decir salir de <code>reports/</code>, para luego ingresar a la carpeta <code>references/</code>. Si omitieras <code>../</code>, Quarto intentaría buscar la ruta <code>reports/references/</code> la cual no existe, ocasionando un error durante el renderizado.</p>
+</div>
+</div>
+</section>
+<section id="renderizado-en-múltiples-formatos" class="level4" data-number="21.2.1.3">
+<h4 data-number="21.2.1.3" class="anchored" data-anchor-id="renderizado-en-múltiples-formatos"><span class="header-section-number">21.2.1.3</span> Renderizado en múltiples formatos</h4>
+<p>Una de las ventajas de Quarto es la posibilidad de definir múltiples formatos de salida dentro de la sección <code>format:</code>. Por ejemplo, puedes modificar el encabezado de <code>reporte_pinguinos.qmd</code> incorporando las opciones <code>pdf</code>, <code>docx</code> y <code>odt</code> con la palabra clave <code>default</code> para utilizar sus configuraciones predeterminadas:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">code-fold</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">embed-resources</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pdf</span><span class="kw">:</span><span class="at"> default</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">docx</span><span class="kw">:</span><span class="at"> default</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">odt</span><span class="kw">:</span><span class="at"> default</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ten en cuenta de todas maneras que para compilar a formato <code>pdf</code> es indispensable contar con una instalación funcional de LaTeX, tal como se indicó en la <a href="#cau-1-chap-21" class="quarto-xref">Precaución&nbsp;<span>21.1</span></a>.</p>
+<p>Para renderizar el documento a estos formatos de manera similar a lo explicado en la <a href="#sec-quarto-render" class="quarto-xref"><span>Sección 21.1.2</span></a>, dispones de 2 mecanismos:</p>
+<ol type="1">
+<li><p><strong>Desde el Editor de Positron:</strong> Puedes hacer clic en el menú desplegable junto a la opción <strong>Preview</strong> en la barra de herramientas superior del <strong>Editor</strong> (ver <a href="#fig-render-qmd-preview" class="quarto-xref">Figura&nbsp;<span>21.2</span></a>) y seleccionar el formato específico que deseas compilar (<code>html</code>, <code>pdf</code>, <code>docx</code> o <code>odt</code>).</p></li>
+<li><p><strong>Desde el Terminal:</strong> Puedes abrir el <strong>Terminal</strong> en el <strong>Panel</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) y ejecutar el comando <code>quarto render</code> indicando el formato deseado mediante el argumento <code>--to</code> de 2 posibles formas, tal como se señala a continuación:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Renderizar a todos los formatos definidos simultáneamente</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render reports/reporte_pinguinos.qmd <span class="at">--to</span> all</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Rßenderizar a un formato específico</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render reports/reporte_pinguinos.qmd <span class="at">--to</span> pdf</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render reports/reporte_pinguinos.qmd <span class="at">--to</span> docx</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render reports/reporte_pinguinos.qmd <span class="at">--to</span> odt</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render reports/reporte_pinguinos.qmd <span class="at">--to</span> html</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ol>
+<p>Al ejecutar estos comandos, Quarto procesará <code>reporte_pinguinos.qmd</code> y generará los archivos correspondientes <code>reporte_pinguinos.pdf</code>, <code>reporte_pinguinos.docx</code>, <code>reporte_pinguinos.odt</code> o <code>reporte_pinguinos.html</code> dentro de la carpeta <code>reports/</code>.</p>
+</section>
 </section>
 <section id="texto-markdown" class="level3" data-number="21.2.2">
 <h3 data-number="21.2.2" class="anchored" data-anchor-id="texto-markdown"><span class="header-section-number">21.2.2</span> Texto Markdown</h3>
