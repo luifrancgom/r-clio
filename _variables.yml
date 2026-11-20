@@ -55,6 +55,7 @@ url:
     quarto_positron: "https://quarto.org/docs/get-started/hello/positron.html"
     quarto_vscode: "https://open-vsx.org/extension/quarto/quarto"
     markdown_pandoc: "https://quarto.org/docs/authoring/markdown-basics.html"
+    yaml: "https://yaml.org/spec/1.2.2/"
     air_vscode: "https://open-vsx.org/extension/posit/air-vscode"
     latex: "https://www.latex-project.org/"
     tinytex: "https://yihui.org/tinytex/"

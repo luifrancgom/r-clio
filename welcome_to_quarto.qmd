@@ -168,7 +168,7 @@ library(tidyverse)
 La **paradoja de Simpson** es un fenómeno estadístico en el cual una ... 
 ````
 
-Al principio existen diferentes símbolos que puede que no comprendas pero estos se pueden separar en 3 elementos, tal como se muestra en la @tbl-elements-doc-quarto [@posit_introduction_2026]:
+Al principio existen diferentes símbolos que puede que no comprendas pero estos se pueden separar en 3 elementos, tal como se muestra en la @tbl-elements-doc-quarto:
 
 | Elemento | Símbolo | Función |
 |:---|:---|:---|
@@ -176,13 +176,118 @@ Al principio existen diferentes símbolos que puede que no comprendas pero estos
 | Texto Markdown | Texto como "es un fenómeno estadístico en el cual una ..." con símbolos como `#` y `**` | Estructura y da formato al texto narrativo para comunicar y contextualizar los resultados |
 | Celdas de código | Bloque que empieza con ```` ```{r} ```` y termina con ```` ``` ```` | Genera la renderización de los resultados como producto de la ejecución del código de acuerdo a las opciones fijadas como por ejemplo `#| message: false` y la aplicación de un identificador como `#| label: cargar-paquetes` |
 
-: Elementos de un documento de Quarto {#tbl-elements-doc-quarto}
+: Elementos de un documento de Quarto [@posit_introduction_2026] {#tbl-elements-doc-quarto}
 
 Si deseas puedes copiar el código mencionado anteriormente en `001_intro-quarto.qmd` teniendo en cuenta lo mencionado en la @nte-1-chap-21 para experimentar mediante la modificación del título, los autores o la fecha. En las siguientes secciones se explorará con más detalle otros aspectos de cada uno de los 3 elementos mencionados en la @tbl-elements-doc-quarto. 
 
 ### Encabezado YAML {#sec-yaml-header}
 
+[**YAML**]({{< var url.software.yaml >}}) es un formato estándar de serialización de datos diseñado para ser legible para personas. En los documentos de Quarto, YAML se emplea para configurar los metadatos y las opciones globales del archivo mediante un bloque denominado encabezado (en inglés **front matter**), el cual se ubica al comienzo del documento.
 
+En `reporte_pinguinos.qmd` (ver @nte-1-chap-21) el encabezado YAML se define, tal como se señala a continuación:
+
+```yaml
+---
+title: "Paradoja de Simpson: dimensiones del pico en pingüinos"
+author:
+  - Allison M. Horst
+  - Alison Presmanes Hill
+  - Kristen B. Gorman
+date: 2026-11-17
+toc: true
+number-sections: true
+format:
+  html:
+    code-fold: true
+    embed-resources: true
+lang: es
+engine: knitr
+bibliography: ../references/reporte-pinguinos.bib
+csl: ../references/apa.csl
+---
+```
+
+Este bloque se rige por las siguientes reglas de sintaxis en YAML:
+
+1. **Delimitadores (`---`):** El encabezado siempre inicia y finaliza con 3 guiones consecutivos (`---`) en líneas separadas. Todo contenido situado entre estos delimitadores es interpretado como configuración y metadatos por Quarto, separándolo del cuerpo del documento.
+2. **Pares clave-valor (`clave: valor`):** La estructura básica consiste en asociar un nombre o clave con un valor determinado, separados por 2 puntos y un espacio obligatorio (`:`).
+3. **Secuencias de escalares:** Cuando una clave contiene múltiples elementos ordenados, como los autores en `author:`, cada elemento se especifica en una nueva línea antecedido por un guion y un espacio (`- `).
+4. **Estructura jerárquica e indentación:** YAML define la anidación y subordinación mediante sangrías de **2 espacios** por nivel. Es importante señalar que no se permite el uso de tabuladores ya que pueden generar errores de sintaxis en el procesamiento del archivo.
+5. **Tipos de valores:**
+   - **Cadenas explícitas** (en inglés **explicit strings**): Texto delimitado por comillas dobles o simples donde es necesario cuando el texto incluye caracteres especiales o dos puntos (`:`), como en `title: "Paradoja de Simpson: dimensiones del pico en pingüinos"`.
+   - **Cadenas implícitas** (en inglés **implicit strings**): Texto sin comillas reconocido automáticamente como cadena cuando no presenta ambigüedades, como `es` en `lang:` o `knitr` en `engine:`.
+   - **Booleanos** (en inglés **booleans**): Valores lógicos representados por `true` o `false` como en `toc: true` o `number-sections: true`.
+   - **Marcas de tiempo** (en inglés **timestamps**): Fechas expresadas en formato estándar ISO 8601 (`AAAA-MM-DD`) como `2026-11-17` en `date:`.
+
+#### Opciones globales y específicas de formato
+
+Es fundamental distinguir el alcance de las opciones dentro del encabezado YAML:
+
+- **Opciones fuera de `format:`** Se aplican de manera global a cualquier formato de salida en el que se compile el documento.
+- **Opciones dentro de `format:`** Se aplican de manera exclusiva al formato específico en el cual se encuentran anidadas. Por ejemplo, dentro de:
+
+  ```yaml
+  format:
+    html:
+      code-fold: true
+      embed-resources: true
+  ```
+
+Las opciones `code-fold: true` que pliega las celdas de código de forma interactiva y `embed-resources: true` que "empaqueta" todas las imágenes, hojas de estilo y dependencias en un único archivo HTML independiente, se ejecutan únicamente cuando la salida es un documento HTML.
+
+#### Descripción de los campos del encabezado
+
+A continuación se detalla la función de cada uno de los campos utilizados en `reporte_pinguinos.qmd`:
+
+- `title`: Título principal del documento que se mostrará en el encabezado del reporte.
+- `author`: Secuencia con los nombres de las autoras o autores del documento.
+- `date`: Fecha de publicación del reporte.
+- `toc`: Acrónimo de **T**able **o**f **C**ontents done al fijarse en `true` genera automáticamente una tabla de contenidos interactiva.
+- `number-sections`: Al fijarse en `true` numera secuencialmente cada una de las secciones y encabezados del reporte.
+- `lang`: Establece el idioma del documento, por ejemplo `es` para español, traduciendo automáticamente los textos fijos generados por Quarto como "Figura", "Tabla" o "Tabla de Contenidos".
+- `engine`: Especifica el "motor" de cómputo para procesar el código. En el caso del reporte `knitr` para ejecutar código de R (ver @fig-render-qmd-flow).
+- `bibliography`: Ruta relativa hacia el archivo de referencias bibliográficas en formato BibTeX (`.bib`).
+- `csl`: Ruta relativa hacia el archivo de estilo de citación en formato Citation Style Language (`.csl`). En el caso del reporte se aplican normas APA para las referencias.
+
+::: {#nte-3-chap-21 .callout-note}
+En los campos `bibliography: ../references/reporte-pinguinos.bib` y `csl: ../references/apa.csl`, el uso del prefijo `../` es indispensable debido a la estructura de directorios del proyecto. El archivo `reporte_pinguinos.qmd` se encuentra alojado dentro de la carpeta `reports/`, mientras que los archivos `.bib` y `.csl` están guardados en la carpeta `references/`. 
+
+El prefijo `../` le indica a Quarto que debe retroceder un nivel en la jerarquía de carpetas, es decir salir de `reports/`, para luego ingresar a la carpeta `references/`. Si omitieras `../`, Quarto intentaría buscar la ruta `reports/references/` la cual no existe, ocasionando un error durante el renderizado.
+:::
+
+#### Renderizado en múltiples formatos
+
+Una de las ventajas de Quarto es la posibilidad de definir múltiples formatos de salida dentro de la sección `format:`. Por ejemplo, puedes modificar el encabezado de `reporte_pinguinos.qmd` incorporando las opciones `pdf`, `docx` y `odt` con la palabra clave `default` para utilizar sus configuraciones predeterminadas:
+
+```yaml
+format:
+  html:
+    code-fold: true
+    embed-resources: true
+  pdf: default
+  docx: default
+  odt: default
+```
+
+Ten en cuenta de todas maneras que para compilar a formato `pdf` es indispensable contar con una instalación funcional de LaTeX, tal como se indicó en la @cau-1-chap-21.
+
+Para renderizar el documento a estos formatos de manera similar a lo explicado en la @sec-quarto-render, dispones de 2 mecanismos:
+
+1. **Desde el Editor de Positron:** Puedes hacer clic en el menú desplegable junto a la opción **Preview** en la barra de herramientas superior del **Editor** (ver @fig-render-qmd-preview) y seleccionar el formato específico que deseas compilar (`html`, `pdf`, `docx` o `odt`).
+2. **Desde el Terminal:** Puedes abrir el **Terminal** en el **Panel** (ver @fig-positron-layout-outline) y ejecutar el comando `quarto render` indicando el formato deseado mediante el argumento `--to` de 2 posibles formas, tal como se señala a continuación:
+
+   ```bash
+   # Renderizar a todos los formatos definidos simultáneamente
+   quarto render reports/reporte_pinguinos.qmd --to all
+
+   # Rßenderizar a un formato específico
+   quarto render reports/reporte_pinguinos.qmd --to pdf
+   quarto render reports/reporte_pinguinos.qmd --to docx
+   quarto render reports/reporte_pinguinos.qmd --to odt
+   quarto render reports/reporte_pinguinos.qmd --to html
+   ```
+
+Al ejecutar estos comandos, Quarto procesará `reporte_pinguinos.qmd` y generará los archivos correspondientes `reporte_pinguinos.pdf`, `reporte_pinguinos.docx`, `reporte_pinguinos.odt` o `reporte_pinguinos.html` dentro de la carpeta `reports/`.
 
 ### Texto Markdown
 
