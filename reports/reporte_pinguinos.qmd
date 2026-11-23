@@ -145,6 +145,3 @@ El análisis de las dimensiones del pico en los pingüinos ilustra los riesgos d
 Por lo tanto, el **control por subgrupos** mediante la estratificación por variables estructurales, como la especie en el caso de `penguins`, es indispensable para una adecuada inferencia causal y modelado estadístico [@sprenger_simpsons_2026].
 
 # Referencias
-
-::: {#refs}
-:::

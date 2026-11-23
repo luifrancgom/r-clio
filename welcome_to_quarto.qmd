@@ -63,21 +63,21 @@ En caso que hayas seguido estas indicaciones, procede a crear una nueva carpeta 
 2. **Código ejecutable:** Escrito en lenguajes de programación como R, Python, Julia u Observable.
 3. **Resultados dinámicos:** Gráficos, tablas y estimaciones generados directamente al ejecutar el código.
 
-Esta integración se basa en la idea de [**literate programming**]({{< var url.education.literate_programming_wiki >}}) (en español **programación literaria**). En lugar de mantener un archivo, como por ejemplo en extensión `.R`, con comentarios dispersos o copiar y pegar resultados manualmente entre herramientas, el código y la narrativa se integran para que el documento se lea de principio a fin. De esa manera, se logra que los resultados se actualicen automáticamente y permanezcan siempre en sincronía con los datos [@posit_introduction_2026; @wickham_r_2023, Cap. 28].
+Esta integración se basa en la idea de [**literate programming**]({{< var url.education.literate_programming_wiki >}}) (en español **programación literaria**). En lugar de mantener un archivo, como por ejemplo con extensión `.R`, con comentarios dispersos o copiar y pegar resultados manualmente entre herramientas, el código y la narrativa se integran para que el documento se lea de principio a fin. De esa manera, se logra que los resultados se actualicen automáticamente y permanezcan siempre en sincronía con los datos [@posit_introduction_2026; @wickham_r_2023, Cap. 28].
 
 ::: {#nte-2-chap-21 .callout-note}
-Ten en cuenta que Quarto es una herramienta independiente de R. Es decir, no es un paquete de R como por ejemplo `tidyverse` y puede ser utilizada de forma autónoma con respecto a cualquier otro lenguaje de programación, como R, Python o Julia. Por lo tanto, no encontrarás la documentación de Quarto en la **Consola** (en inglés **Console**) de R en el **Panel** (ver @fig-positron-layout-outline) utilizando el operador de ayuda `?` dentro de ella. Para consultar la documentación oficial, sintaxis y opciones de configuración, debes recurrir a la documentación señalada en [**Quarto**]({{< var url.software.quarto >}}).
+Ten en cuenta que Quarto es una herramienta independiente de R. Es decir, no es un paquete de R como por ejemplo `tidyverse`, y puede ser utilizada de forma autónoma con respecto a cualquier otro lenguaje de programación, como R, Python, Julia u Observable. Por lo tanto, no encontrarás la documentación de Quarto en la **Consola** (en inglés **Console**) de R en el **Panel** (ver @fig-positron-layout-outline) utilizando el operador de ayuda `?` dentro de ella. Para consultar la documentación oficial, sintaxis y opciones de configuración, debes recurrir a la documentación señalada en [**Quarto**]({{< var url.software.quarto >}}).
 :::
 
 ### Problemas que resuelve
 
-En algunos flujos de trabajo, el análisis suele terminar copiando y pegando manualmente gráficos y valores desde el entorno de programación hacia un procesador de texto o diapositivas [@posit_introduction_2026]. Este proceso manual es propenso a errores y resulta ineficiente ya que si los datos cambian, es necesario repetir todo el procedimiento [@wickham_r_2023, Cap. 28].
+En algunos flujos de trabajo, el análisis suele terminar copiando y pegando manualmente gráficos y valores desde el entorno de programación hacia un procesador de texto o diapositivas [@posit_introduction_2026]. Este proceso manual es propenso a errores y resulta ineficiente, ya que si los datos cambian, es necesario repetir todo el procedimiento [@wickham_r_2023, Cap. 28].
 
-Quarto soluciona esta dificultad al mantener el texto, el código y los resultados integrados en un único archivo así como aportando 3 beneficios [@posit_introduction_2026]:
+Quarto soluciona esta dificultad al mantener el texto, el código y los resultados integrados en un único archivo, aportando 3 beneficios [@posit_introduction_2026]:
 
 1. **Reproducibilidad:** los resultados provienen directamente de ejecutar el código. En ese sentido, otro individuo puede reconstruir el documento y obtener los mismos resultados.
 2. **Actualización permanente:** si se incorporan nuevos datos o se ajusta el código, solo se requiere volver a compilar el documento para que cada tabla, gráfico y valor se actualice.
-3. **Archivos de texto plano:** los documentos `.qmd` son texto plano, lo que facilita editarlos y realizar seguimiento a los cambios mediante sistemas de control de versiones como [**Git**]({{< var url.software.git_scm >}}).
+3. **Archivos de texto plano:** los documentos `.qmd` son texto plano, lo que facilita editarlos y realizar seguimiento a los cambios mediante sistemas de control de versiones como [**Git**]({{< var url.software.git_scm >}}) (ver @nte-3-chap-3).
 
 ### Renderizar un documento {#sec-quarto-render}
 
@@ -100,18 +100,18 @@ También puedes situar el cursor (**|**) sobre alguna parte del documento y pres
 quarto render reports/reporte_pinguinos.qmd
 ```
 
-De esa manera, en la **Barra lateral primaria** encontrarás que se crea un archivo adicional dentro de la carpeta `reports` con el nombre `reporte_pinguinos.html`. En ese sentido, se crea un archivo con extensión `.html` manteniendo intacto el archivo de texto plano `reporte_pinguinos.qmd` donde se completa el proceso señalado en la @fig-render-qmd-flow. 
+De esa manera, en la **Barra lateral primaria** encontrarás que se crea un archivo adicional dentro de la carpeta `reports` con el nombre `reporte_pinguinos.html`. En ese sentido, se crea un archivo con extensión `.html` manteniendo intacto el archivo de texto plano `reporte_pinguinos.qmd`, con lo cual se completa el proceso señalado en la @fig-render-qmd-flow. 
 
 ### Formatos de salida para documentos
 
-Quarto incluye la posibilidad de renderizar documentos a [múltiples formatos]({{< var url.software.quarto_formats >}}). Por el momento, en relación a `reporte_pinguinos.qmd` respecto a la @sec-quarto-render se ha utilizado únicamente el formato `html`. Sin embargo, para la elaboración de documentos Quarto ofrece una amplia variedad de opciones de salida como `html`, `pdf`, `docx`, `typst`, `odt` y `epub`. En la @tbl-quarto-document-formats se presentan estos formatos junto con su descripción:
+Quarto incluye la posibilidad de renderizar documentos a [múltiples formatos]({{< var url.software.quarto_formats >}}). Por el momento, en relación con `reporte_pinguinos.qmd` respecto a la @sec-quarto-render, se ha utilizado únicamente el formato `html`. Sin embargo, para la elaboración de documentos Quarto ofrece una amplia variedad de opciones de salida como `html`, `pdf`, `docx`, `typst`, `odt` y `epub`. En la @tbl-quarto-document-formats se presentan estos formatos junto con su descripción:
 
 | Formato | Descripción |
 |:---:|:---|
 | [`html`]({{< var url.software.quarto_format_html >}}) | Páginas y documentos web basados en el estándar [HTML5]({{< var url.education.html_wiki >}}). Es el formato predeterminado en Quarto para publicar contenidos interactivos en línea. |
 | [`pdf`]({{< var url.software.quarto_format_pdf >}}) | Documentos basados en [PDF]({{< var url.education.pdf_wiki >}}) y generados a través de [LaTeX]({{< var url.software.latex >}}) con control preciso de tipografía, márgenes, encabezados y citas bibliográficas. |
 | [`docx`]({{< var url.software.quarto_format_docx >}}) | Documentos de procesamiento de texto para Microsoft Word basados en el estándar abierto [Office Open XML]({{< var url.education.open_xml_wiki >}}) (`.docx`). |
-| [`typst`]({{< var url.software.quarto_format_typst >}}) | Sistema de composición tipográfica moderno y de código abierto desarrollado mediante [Typst]({{< var url.software.typst >}}). Diseñado como una alternativa a LaTeX donde genera archivos PDF con tiempos de renderizado más rápido sin requerir una instalación previa de LaTeX. |
+| [`typst`]({{< var url.software.quarto_format_typst >}}) | Sistema de composición tipográfica moderno y de código abierto desarrollado mediante [Typst]({{< var url.software.typst >}}). Diseñado como una alternativa a LaTeX que genera archivos PDF con tiempos de renderizado más rápidos sin requerir una instalación previa de LaTeX. |
 | [`odt`]({{< var url.software.quarto_format_odt >}}) | Documentos de texto basados en el estándar abierto [OpenDocument]({{< var url.education.open_document_wiki >}}) (`.odt`) compatibles con procesadores de texto como LibreOffice Writer. |
 | [`epub`]({{< var url.software.quarto_format_epub >}}) | Libros electrónicos en formato estándar [EPUB]({{< var url.education.epud_wiki >}}) diseñados para la lectura en dispositivos móviles, tabletas y lectores digitales. |
 
@@ -168,13 +168,13 @@ library(tidyverse)
 La **paradoja de Simpson** es un fenómeno estadístico en el cual una ... 
 ````
 
-Al principio existen diferentes símbolos que puede que no comprendas pero estos se pueden separar en 3 elementos, tal como se muestra en la @tbl-elements-doc-quarto:
+Al principio existen diferentes símbolos que puede que no comprendas, pero estos se pueden separar en 3 elementos, tal como se muestra en la @tbl-elements-doc-quarto:
 
 | Elemento | Símbolo | Función |
 |:---|:---|:---|
 | Encabezado YAML | El primer bloque entre las 2 líneas `---` | Fija las opciones que se aplican de manera global al documento como el título, los autores, la fecha, el formato y las opciones específicas de ese formato tales como `code-fold: true` y `embed-resources: true` |
 | Texto Markdown | Texto como "es un fenómeno estadístico en el cual una ..." con símbolos como `#` y `**` | Estructura y da formato al texto narrativo para comunicar y contextualizar los resultados |
-| Celdas de código | Bloque que empieza con ```` ```{r} ```` y termina con ```` ``` ```` | Genera la renderización de los resultados como producto de la ejecución del código de acuerdo a las opciones fijadas como por ejemplo `#| message: false` y la aplicación de un identificador como `#| label: cargar-paquetes` |
+| Celdas de código | Bloque que empieza con ```` ```{r} ```` y termina con ```` ``` ```` | Genera la renderización de los resultados como producto de la ejecución del código de acuerdo con las opciones fijadas, como por ejemplo `#| message: false` y la aplicación de un identificador como `#| label: cargar-paquetes` |
 
 : Elementos de un documento de Quarto [@posit_introduction_2026] {#tbl-elements-doc-quarto}
 
@@ -212,9 +212,9 @@ Este bloque se rige por las siguientes reglas de sintaxis en YAML:
 1. **Delimitadores (`---`):** El encabezado siempre inicia y finaliza con 3 guiones consecutivos (`---`) en líneas separadas. Todo contenido situado entre estos delimitadores es interpretado como configuración y metadatos por Quarto, separándolo del cuerpo del documento.
 2. **Pares clave-valor (`clave: valor`):** La estructura básica consiste en asociar un nombre o clave con un valor determinado, separados por 2 puntos y un espacio obligatorio (`:`).
 3. **Secuencias de escalares:** Cuando una clave contiene múltiples elementos ordenados, como los autores en `author:`, cada elemento se especifica en una nueva línea antecedido por un guion y un espacio (`- `).
-4. **Estructura jerárquica e indentación:** YAML define la anidación y subordinación mediante sangrías de **2 espacios** por nivel. Es importante señalar que no se permite el uso de tabuladores ya que pueden generar errores de sintaxis en el procesamiento del archivo.
+4. **Estructura jerárquica e indentación:** YAML define la anidación y subordinación mediante sangrías de **2 espacios** por nivel. Es importante señalar que no se permite el uso de tabuladores, ya que pueden generar errores de sintaxis en el procesamiento del archivo.
 5. **Tipos de valores:**
-   - **Cadenas explícitas** (en inglés **explicit strings**): Texto delimitado por comillas dobles o simples donde es necesario cuando el texto incluye caracteres especiales o dos puntos (`:`), como en `title: "Paradoja de Simpson: dimensiones del pico en pingüinos"`.
+   - **Cadenas explícitas** (en inglés **explicit strings**): Texto delimitado por comillas dobles o simples, necesario cuando el texto incluye caracteres especiales o dos puntos (`:`), como en `title: "Paradoja de Simpson: dimensiones del pico en pingüinos"`.
    - **Cadenas implícitas** (en inglés **implicit strings**): Texto sin comillas reconocido automáticamente como cadena cuando no presenta ambigüedades, como `es` en `lang:` o `knitr` en `engine:`.
    - **Booleanos** (en inglés **booleans**): Valores lógicos representados por `true` o `false` como en `toc: true` o `number-sections: true`.
    - **Marcas de tiempo** (en inglés **timestamps**): Fechas expresadas en formato estándar ISO 8601 (`AAAA-MM-DD`) como `2026-11-17` en `date:`.
@@ -242,7 +242,7 @@ A continuación se detalla la función de cada uno de los campos utilizados en `
 - `title`: Título principal del documento que se mostrará en el encabezado del reporte.
 - `author`: Secuencia con los nombres de las autoras o autores del documento.
 - `date`: Fecha de publicación del reporte.
-- `toc`: Acrónimo de **T**able **o**f **C**ontents done al fijarse en `true` genera automáticamente una tabla de contenidos interactiva.
+- `toc`: Acrónimo de **T**able **o**f **C**ontents que, al fijarse en `true`, genera automáticamente una tabla de contenidos interactiva.
 - `number-sections`: Al fijarse en `true` numera secuencialmente cada una de las secciones y encabezados del reporte.
 - `lang`: Establece el idioma del documento, por ejemplo `es` para español, traduciendo automáticamente los textos fijos generados por Quarto como "Figura", "Tabla" o "Tabla de Contenidos".
 - `engine`: Especifica el "motor" de cómputo para procesar el código. En el caso del reporte `knitr` para ejecutar código de R (ver @fig-render-qmd-flow).
@@ -252,7 +252,7 @@ A continuación se detalla la función de cada uno de los campos utilizados en `
 ::: {#nte-3-chap-21 .callout-note}
 En los campos `bibliography: ../references/reporte-pinguinos.bib` y `csl: ../references/apa.csl`, el uso del prefijo `../` es indispensable debido a la estructura de directorios del proyecto. El archivo `reporte_pinguinos.qmd` se encuentra alojado dentro de la carpeta `reports/`, mientras que los archivos `.bib` y `.csl` están guardados en la carpeta `references/`. 
 
-El prefijo `../` le indica a Quarto que debe retroceder un nivel en la jerarquía de carpetas, es decir salir de `reports/`, para luego ingresar a la carpeta `references/`. Si omitieras `../`, Quarto intentaría buscar la ruta `reports/references/` la cual no existe, ocasionando un error durante el renderizado.
+El prefijo `../` le indica a Quarto que debe retroceder un nivel en la jerarquía de carpetas, es decir salir de `reports/`, para luego ingresar a la carpeta `references/`. Si omitieras `../`, Quarto intentaría buscar la ruta `reports/references/`, la cual no existe, ocasionando un error durante el renderizado.
 :::
 
 #### Renderizado en múltiples formatos
@@ -269,7 +269,7 @@ format:
   odt: default
 ```
 
-Ten en cuenta de todas maneras que para compilar a formato `pdf` es indispensable contar con una instalación funcional de LaTeX, tal como se indicó en la @cau-1-chap-21.
+Ten en cuenta, de todas maneras, que para compilar a formato `pdf` es indispensable contar con una instalación funcional de LaTeX, tal como se indicó en la @cau-1-chap-21.
 
 Para renderizar el documento a estos formatos de manera similar a lo explicado en la @sec-quarto-render, dispones de 2 mecanismos:
 
@@ -280,7 +280,7 @@ Para renderizar el documento a estos formatos de manera similar a lo explicado e
    # Renderizar a todos los formatos definidos simultáneamente
    quarto render reports/reporte_pinguinos.qmd --to all
 
-   # Rßenderizar a un formato específico
+   # O renderizar a un formato específico
    quarto render reports/reporte_pinguinos.qmd --to pdf
    quarto render reports/reporte_pinguinos.qmd --to docx
    quarto render reports/reporte_pinguinos.qmd --to odt
@@ -289,8 +289,298 @@ Para renderizar el documento a estos formatos de manera similar a lo explicado e
 
 Al ejecutar estos comandos, Quarto procesará `reporte_pinguinos.qmd` y generará los archivos correspondientes `reporte_pinguinos.pdf`, `reporte_pinguinos.docx`, `reporte_pinguinos.odt` o `reporte_pinguinos.html` dentro de la carpeta `reports/`.
 
+::: {#tip-1-chap-21 .callout-tip}
+Al definir formatos de salida en el encabezado YAML, puedes utilizar la palabra clave `default`, como por ejemplo `pdf: default`, `docx: default` u `odt: default`, para renderizar con las opciones predeterminadas de Quarto. 
+
+Sin embargo, al igual que se personalizó `html` incorporando opciones como `code-fold: true` y `embed-resources: true`, cada formato admite diversas opciones para controlar su diseño, fuentes, márgenes o estructura.
+
+En la siguiente tabla puedes consultar los enlaces a la documentación de referencia oficial de Quarto para cada uno de estos formatos:
+
+| Formato | Documentación de referencia |
+|:--- |:---|
+| `html` | [Referencia HTML]({{< var url.software.quarto_ref_html >}}) |
+| `pdf` | [Referencia PDF]({{< var url.software.quarto_ref_pdf >}}) |
+| `docx` | [Referencia Word (DOCX)]({{< var url.software.quarto_ref_docx >}}) |
+| `odt` | [Referencia OpenDocument (ODT)]({{< var url.software.quarto_ref_odt >}}) |
+
+: Enlaces a la documentación de Quarto para examinar las opciones aplicables a cada formato {#tbl-quarto-document-references}
+:::
+
 ### Texto Markdown
 
+El texto narrativo en Quarto se redacta utilizando una variante extendida de Markdown conocida como [**Pandoc Markdown**]({{< var url.software.markdown_pandoc >}}). Markdown permite escribir texto plano legible y estructurado sin necesidad de recurrir a etiquetas complejas, facilitando su posterior conversión a formatos como HTML, PDF, Word u OpenDocument.
 
+A continuación, se examinan las principales características y usos de Markdown presentes en el archivo `reporte_pinguinos.qmd` (ver @nte-1-chap-21).
+
+#### Encabezados
+
+Los encabezados permiten estructurar jerárquicamente el contenido del documento. En Markdown, los encabezados se crean anteponiendo uno o más símbolos numerales (`#`) seguidos de un espacio obligatorio al inicio de la línea. El número de símbolos `#` determina el nivel del encabezado, desde `#` para el nivel 1 (`<h1>`) hasta `######` para el nivel 6 (`<h6>`).
+
+En `reporte_pinguinos.qmd` la estructura general del documento se define de la siguiente manera:
+
+````qmd
+# Introducción
+
+# Datos
+
+# Paradoja de Simpson
+
+## Asociación global
+
+## Asociación por especie
+
+# Conclusión
+
+# Referencias
+
+````
+
+Como se puede observar:
+
+- Los títulos principales (`# Introducción`, `# Datos`, `# Paradoja de Simpson`, `# Conclusión` y `# Referencias`) corresponden a encabezados de nivel 1.
+- Las secciones internas dentro de la paradoja (`## Asociación global` y `## Asociación por especie`) corresponden a encabezados de nivel 2, subordinados a `# Paradoja de Simpson`.
+- Quarto utiliza estos encabezados para construir de forma automática la tabla de contenidos interactiva (`toc: true`) y para numerar secuencialmente las secciones (`number-sections: true`), tal como se configuró en el encabezado YAML (ver @sec-yaml-header).
+
+#### Formato de texto
+
+Markdown ofrece una sintaxis sencilla para aplicar estilos tipográficos básicos al texto:
+
+- **Negrita (`**texto**`):** Se delimita el texto entre dos asteriscos consecutivos (`**`) sin espacios interiores. En `reporte_pinguinos.qmd` se utiliza para destacar conceptos clave como `**paradoja de Simpson**`, `**pendiente negativa**`, `**invierte**` y `**positiva**`, `**variable de confusión**` y `**riesgo de agregación**`.
+- **Cursiva (`*texto*`):** Se delimita el texto entre un solo asterisco (`*`) a cada lado. En el reporte se emplea para nombres científicos en latín como `*Pygoscelis*`, `*Adélie*`, `*Chinstrap*` y `*Gentoo*`, nombres geográficos como `*Biscoe*`, `*Dream*` y `*Torgersen*`, categorías de sexo como `*female*` y `*male*` o vocablos en inglés como `*confounder*`.
+- **Código en línea / texto literal (`` `código` ``):** Se delimita mediante acentos graves simples (`` ` ``). Se utiliza para citar textualmente nombres de paquetes, conjuntos de datos o variables en el texto, evitando que se confundan con la narrativa. En el reporte se emplea en `penguins`, `datasets`, `bill_len` y `bill_dep`, `flipper_len`, `body_mass`, `sex`, `year` y para identificar valores ausentes `NA`.
+
+#### Imágenes
+
+Para incorporar imágenes estáticas en un documento de Quarto se emplea la siguiente sintaxis general:
+
+```markdown
+![Texto de la leyenda](ruta/a/la/imagen){atributos}
+```
+
+En `reporte_pinguinos.qmd` se incluye, por ejemplo, la ilustración de las especies de pingüinos:
+
+```markdown
+![Especies ... (*Chinstrap*), ... [@m_horst_palmer_2022].](../images/penguins.png){#fig-pinguinos fig-alt="Ilustración ..." fig-align="center" width="70%"}
+```
+
+En esta declaración se distinguen 3 componentes:
+
+1. **Leyenda del gráfico (`[...]`):** El texto dentro de los corchetes funciona como la descripción visible bajo la figura. Este texto admite formato Markdown completo, como cursivas (`*Chinstrap*`) y citas bibliográficas (`[@m_horst_palmer_2022]`).
+2. **Ruta del archivo (`(...)`):** La ruta relativa hacia el archivo de la imagen. Al estar `reporte_pinguinos.qmd` dentro de `reports/`, se utiliza `../images/penguins.png` para retroceder un nivel e ingresar a la carpeta `images/` (ver @nte-3-chap-21).
+3. **Atributos (`{...}`):**
+   - `{#fig-pinguinos}`: Asigna una etiqueta o identificador único con el prefijo `fig-` que permite crear referencias cruzadas automáticas en el texto mediante `@fig-pinguinos`.
+   - `fig-alt="..."`: Proporciona un texto alternativo accesible para lectores de pantalla.
+   - `fig-align="center"`: Centra horizontalmente la figura en el documento.
+   - `width="70%"`: Controla el ancho relativo de la imagen en la salida final.
+
+De forma análoga, en el reporte se incorpora la imagen `culmen_depth_es.png` con la etiqueta `{#fig-culmen}` y un ancho del 60%.
+
+#### Listas
+
+Markdown permite crear listas ordenadas y no ordenadas. Para las listas ordenadas se antepone un número seguido de un punto y un espacio obligatorio, como por ejemplo `1. `.
+
+En `reporte_pinguinos.qmd` se presenta una lista ordenada con las pendientes estimadas para cada especie de pingüino:
+
+```markdown
+1. *Adélie*: ...
+2. *Chinstrap*: ...
+3. *Gentoo*: ...
+```
+
+Quarto numera automáticamente los elementos de la lista en la salida final, incluso si en el archivo fuente se repitiera el número `1.` en cada línea. Las listas no ordenadas, por su parte, se generan utilizando guiones (`-`) o asteriscos (`*`).
+
+#### Notas al pie
+
+Las notas al pie permiten agregar aclaraciones metodológicas o explicaciones complementarias sin interrumpir el flujo de la lectura del documento. Se estructuran en 2 partes:
+
+1. **Llamada a la nota:** Se inserta en el lugar exacto del texto donde se desea la referencia mediante la sintaxis `[^identificador]`.
+2. **Definición de la nota:** Se escribe en un párrafo independiente mediante `[^identificador]: Texto explicativo...`.
+
+En `reporte_pinguinos.qmd` se utiliza este mecanismo, por ejemplo, para justificar la exclusión de observaciones con datos faltantes, tal como se señala a continuación:
+
+```markdown
+Sin embargo, ... `species` (ver @fig-asociacion-especie)[^asociacion-especie], ...
+
+[^asociacion-especie]: Al igual ... en la `@tbl-variables`.
+```
+
+#### Tablas
+
+En Markdown de Quarto, las tablas en texto plano se construyen mediante la sintaxis de **tablas de barras** (en inglés **pipe tables**), empleando barras verticales (`|`) para delimitar columnas y guiones (`-`) para separar la fila de encabezados del cuerpo de datos.
+
+En `reporte_pinguinos.qmd`, por ejemplo, se documentan las variables del conjunto de datos `penguins`, tal como se señala a continuación:
+
+```markdown
+| Variable | Descripción | Valores ausentes (`NA`) |
+| :--- | :--- | :---: |
+| `species` | Especie de pingüino (*Adélie*, *Chinstrap*, *Gentoo*) | 0 |
+| `island` | Isla del archipiélago Palmer (*Biscoe*, *Dream*, *Torgersen*) | 0 |
+| `bill_len` | Longitud del culmen o pico (milímetros - mm) | 2 |
+| `bill_dep` | Altura del culmen o pico (milímetros - mm) | 2 |
+| `flipper_len` | Longitud de la aleta (milímetros - mm) | 2 |
+| `body_mass` | Masa corporal (gramos - g) | 2 |
+| `sex` | Sexo del individuo (*female*, *male*) | 11 |
+| `year` | Año de estudio (2007, 2008, 2009) | 0 |
+
+: Variables del conjunto de datos `penguins` {#tbl-variables}
+```
+
+En esta estructura se destacan los siguientes aspectos:
+
+- **Alineación de columnas:** Se define en la línea delimitadora mediante la posición de los 2 puntos (`:`):
+  - `:---`: Alineación a la izquierda, empleada en las columnas `Variable` y `Descripción`.
+  - `:---:`: Alineación centrada, empleada en `Valores ausentes (NA)`.
+  - `---:`: Alineación a la derecha.
+- **Leyenda e identificador:** La línea posterior que inicia con 2 puntos, `: Variables del conjunto de datos `penguins` {#tbl-variables}`, asigna el título de la tabla y una etiqueta con el prefijo `tbl-` que permite referenciar la tabla en el texto mediante `@tbl-variables`.
+
+#### Contenido sin formato (en inglés **raw content**)
+
+Cuando se requiere aplicar configuraciones o estilos específicos de un formato que no forman parte del estándar de Markdown, Quarto permite incluir bloques de **contenido sin formato** (en inglés **raw attribute blocks**) utilizando la sintaxis ```` ```{=formato} ````.
+
+En `reporte_pinguinos.qmd` se incluye el siguiente bloque:
+
+````markdown
+```{=html}
+<style>
+  p { 
+    text-align: justify;
+  }
+</style>
+```
+````
+
+Este bloque le indica a Pandoc que el fragmento `<style> p { text-align: justify; } </style>` debe transmitirse intacto y sin interpretar directamente al archivo HTML final para justificar el texto de los párrafos. Si el documento se compila hacia otro formato como PDF, Word u OpenDocument, Pandoc ignora este bloque por completo. De esa manera, se garantiza que el documento no genere errores de incompatibilidad en otros entornos.
+
+#### Ecuaciones matemáticas
+
+Quarto ofrece soporte nativo para la composición tipográfica de ecuaciones matemáticas utilizando la sintaxis estándar de [LaTeX]({{< var url.software.latex >}}):
+
+- **Ecuaciones en línea** (en inglés **inline math**): Se encierran entre signos de dólar simples (`$ ... $`). Es indispensable que no existan espacios en blanco entre el signo de dólar y el contenido matemático. Por ejemplo, `$x$` y no `$ x $`.
+- **Ecuaciones en bloque** (en inglés **display math**): Se encierran entre dos signos de dólar (`$$ ... $$`) en párrafos separados para mostrar ecuaciones destacadas y centradas.
+
+En `reporte_pinguinos.qmd` se utiliza la notación en línea para presentar la pendiente estimada y su significancia estadística:
+
+```markdown
+... $\hat{\beta}_1 = -0.0850$, ... 
+```
+
+De igual forma, se emplea la misma notación dentro de la lista ordenada para cada especie:
+
+- `\hat{\beta}_1`: Representa el parámetro beta con un sombrero (`^`) y un subíndice (`_1`).
+- `\text{valor}`: Permite incluir texto en tipografía normal dentro del modo matemático.
+- `\times 10^{-5}`: Genera el símbolo de multiplicación ($\times$) con el exponente superíndice correspondiente (`^{-5}`).
+
+#### Bloques de llamada
+
+Los bloques de llamada (en inglés **callout blocks**) son recuadros visuales destacados que sirven para llamar la atención del lector sobre notas, avisos, advertencias o consejos metodológicos. Se definen mediante la sintaxis de divisiones de Pandoc con 3 signos de dos puntos seguidos (`::: {.callout-<tipo>}`) y se cierran con `:::`.
+
+En `reporte_pinguinos.qmd`, por ejemplo, se incluye una nota introductoria:
+
+```markdown
+::: {.callout-note}
+El presente reporte tiene como objetivo ilustrar ...  
+:::
+```
+
+Quarto admite 5 tipos estándar de bloques de llamada:
+
+1. `.callout-note`: Para notas y aclaraciones generales, como la empleada en el reporte.
+2. `.callout-tip`: Para consejos útiles o buenas prácticas.
+3. `.callout-warning`: Para advertencias sobre posibles problemas o consideraciones importantes.
+4. `.callout-caution`: Para precauciones ante acciones que puedan generar errores.
+5. `.callout-important`: Para información crucial o requisitos indispensables.
+
+Opcionalmente, los callouts pueden incluir títulos personalizados mediante un encabezado interno, como por ejemplo `## Propósito del reporte`, así como propiedades `collapse="true"` para que aparezcan plegados por defecto o `appearance="minimal"` para simplificar su diseño visual.
+
+#### Citas y referencias bibliográficas
+
+La gestión de citas y bibliografía en Quarto se basa en el motor de citas de Pandoc, documentado detalladamente en [**Citations in Quarto**]({{< var url.software.quarto_citations >}}). Para citar una fuente dentro del texto se utiliza el carácter arroba (`@`) seguido de la clave de citación (en inglés **citation key**) definida en un archivo de bibliografía en formato BibTeX (`.bib`).
+
+En `reporte_pinguinos.qmd` se encuentran diversos ejemplos de citas bibliográficas:
+
+- **Citas entre corchetes:** Se encierran entre corchetes `[@clave]`. Por ejemplo, `[@m_horst_palmer_2022]` genera la cita entre paréntesis (Horst et al., 2022).
+- **Múltiples citas simultáneas:** Se separan mediante punto y coma dentro de los mismos corchetes. Por ejemplo:
+  
+  ```markdown
+  ... [@simpson_interpretation_1951; @sprenger_simpsons_2026]
+  ```
+  
+  Lo anterior compila como (Simpson, 1951; Sprenger & Stegenga, 2026).
+- **Citas en el texto (narrativas):** Si se omite el corchete exterior y se escribe directamente `@clave`, el nombre de los autores queda integrado en la narrativa y solo el año se muestra entre paréntesis.
+- **Localizadores o números de página:** Se pueden añadir páginas, capítulos o secciones tras una coma, como en `[@wickham_r_2023, Cap. 28]`.
+
+##### Conexión con el encabezado YAML
+
+Para que las citas funcionen de manera integrada en el documento, es indispensable vincular las claves bibliográficas y las normas tipográficas en el **encabezado YAML** (ver @sec-yaml-header). En `reporte_pinguinos.qmd` esta configuración se realiza mediante los campos:
+
+```yaml
+bibliography: ../references/reporte-pinguinos.bib
+csl: ../references/apa.csl
+```
+
+Donde `bibliography` le indica a Quarto la ruta relativa (ver @nte-1-chap-21) hacia el archivo de referencias BibTeX que contiene las claves citadas, como por ejemplo `@simpson_interpretation_1951` o `@m_horst_palmer_2022`, y `csl` define el archivo de estilo en formato Citation Style Language, aplicando en este caso las normas internacionales de la American Psychological Association (APA).
 
 ### Celdas de código
+
+Las **celdas de código** (en inglés **code cells**) constituyen el tercer componente de un documento de Quarto (ver @tbl-elements-doc-quarto). Estas permiten intercalar código ejecutable con la narrativa del documento, garantizando la reproducibilidad del análisis.
+
+#### Estructura y motor de cómputo
+
+Una celda de código se delimita abriendo con 3 acentos graves y el identificador del lenguaje entre llaves (```` ```{r} ````) y cerrando con 3 acentos graves (```` ``` ````).
+
+Tal como se configuró en el encabezado YAML (ver @sec-yaml-header) mediante el campo global:
+
+```yaml
+engine: knitr
+```
+
+Quarto delega la ejecución del código en R al "motor" [**knitr**]({{< var url.packages.knitr >}}). Dado que instalaste previamente el metapaquete `tidyverse` (ver @sec-installing-packages), este contiene al paquete `knitr`, por lo que cuentas con el "motor" necesario para evaluar las celdas de código. 
+
+En el entorno de desarrollo **Positron**, puedes ejecutar las celdas de forma interactiva o renderizar el documento. En este último caso, Quarto ejecuta secuencialmente todas las celdas en una sesión limpia y controlada de acuerdo con el flujo descrito en la @fig-render-qmd-flow (ver [**Computations with R**]({{< var url.software.quarto_computations_r >}})).
+
+#### Sintaxis de opciones de celda (`#|`)
+
+Quarto estandariza la configuración de celdas mediante la sintaxis **hashpipe** (`#|`). Las opciones se especifican en las primeras líneas de la celda utilizando pares `clave: valor` propios de YAML (ver [**Knitr Options Reference**]({{< var url.software.quarto_cells_knitr >}})):
+
+````qmd
+```{{r}}
+#| label: cargar-paquetes
+#| message: false
+library(tidyverse)
+```
+````
+
+Esta separación entre los metadatos de la celda y las instrucciones ejecutables de R mejora sustancialmente la legibilidad y el mantenimiento del código.
+
+#### Opciones comunes en `reporte_pinguinos.qmd`
+
+En `reporte_pinguinos.qmd` se ilustran las opciones de celda más habituales:
+
+1. **Identificadores y referencias cruzadas (`#| label`):** 
+   - `#| label: cargar-paquetes`: Asigna una etiqueta única para identificar la celda en el esquema de navegación del editor en Positron y en los registros de compilación.
+   - `#| label: fig-asociacion-global` y `#| label: fig-asociacion-especie`: Al anteponer el prefijo reservado `fig-`, Quarto reconoce que el resultado gráfico de la celda debe registrarse como una figura numerada automáticamente, habilitando su referenciación cruzada en el texto (`@fig-asociacion-global` y `@fig-asociacion-especie`).
+2. **Leyendas de figuras (`#| fig-cap`):** Define el texto descriptivo al pie del gráfico. Por ejemplo:
+
+   ```qmd
+   #| fig-cap: "Asociación global ..."
+   ```
+3. **Control de mensajes (`#| message: false`):** Suprime los mensajes informativos emitidos por R en la consola, como por ejemplo al ejecutar `library(tidyverse)`, evitando que aparezcan los mensajes en el documento final (ver @sec-messages).
+4. **Control de advertencias (`#| warning: false`):** Evita la impresión de advertencias (ver @sec-warnings). En las celdas de graficación con `ggplot2`, oculta el aviso estándar que advierte la remoción de observaciones con datos faltantes (`NA`) en `bill_len` y `bill_dep`.
+
+#### Conexión con la opción `code-fold` del encabezado YAML
+
+En la @sec-yaml-header se estableció para el formato HTML la opción:
+
+```yaml
+format:
+  html:
+    code-fold: true
+```
+
+Esta directiva global instruye a Quarto a generar el código R plegado dentro de un elemento interactivo en HTML mostrando un botón desplegable con la etiqueta **Código**, de modo que los gráficos y resultados numéricos destaquen sin saturar visualmente el reporte.
+
+No obstante, las opciones de celda tienen **precedencia local** sobre las opciones globales del YAML. En cualquier celda individual es posible personalizar este comportamiento según el propósito comunicativo (ver [**Knitr Options Reference**]({{< var url.software.quarto_cells_knitr >}}) y [**Computations with R**]({{< var url.software.quarto_computations_r >}})):
+
+- `#| echo: false`: Oculta completamente el código fuente, por lo que no muestra el botón desplegable, dejando visible únicamente la salida, que puede ser un gráfico, tabla o valor.
+- `#| code-fold: false`: Fuerza la visualización permanente del código sin posibilidad de plegarlo.
+- `#| code-fold: show`: Muestra el código desplegado al abrir el documento, pero conservando el botón interactivo para quien desee contraerlo.
