@@ -134,6 +134,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -545,7 +574,7 @@ Nota&nbsp;21.1
 <li><strong>Código ejecutable:</strong> Escrito en lenguajes de programación como R, Python, Julia u Observable.</li>
 <li><strong>Resultados dinámicos:</strong> Gráficos, tablas y estimaciones generados directamente al ejecutar el código.</li>
 </ol>
-<p>Esta integración se basa en la idea de <a href="https://en.wikipedia.org/wiki/Literate_programming"><strong>literate programming</strong></a> (en español <strong>programación literaria</strong>). En lugar de mantener un archivo, como por ejemplo en extensión <code>.R</code>, con comentarios dispersos o copiar y pegar resultados manualmente entre herramientas, el código y la narrativa se integran para que el documento se lea de principio a fin. De esa manera, se logra que los resultados se actualicen automáticamente y permanezcan siempre en sincronía con los datos <span class="citation" data-cites="posit_introduction_2026 wickham_r_2023">(<a href="references.html#ref-posit_introduction_2026" role="doc-biblioref">Posit, 2026</a>; <a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 28</a>)</span>.</p>
+<p>Esta integración se basa en la idea de <a href="https://en.wikipedia.org/wiki/Literate_programming"><strong>literate programming</strong></a> (en español <strong>programación literaria</strong>). En lugar de mantener un archivo, como por ejemplo con extensión <code>.R</code>, con comentarios dispersos o copiar y pegar resultados manualmente entre herramientas, el código y la narrativa se integran para que el documento se lea de principio a fin. De esa manera, se logra que los resultados se actualicen automáticamente y permanezcan siempre en sincronía con los datos <span class="citation" data-cites="posit_introduction_2026 wickham_r_2023">(<a href="references.html#ref-posit_introduction_2026" role="doc-biblioref">Posit, 2026</a>; <a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 28</a>)</span>.</p>
 <div id="nte-2-chap-21" class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -556,17 +585,17 @@ Nota&nbsp;21.2
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Ten en cuenta que Quarto es una herramienta independiente de R. Es decir, no es un paquete de R como por ejemplo <code>tidyverse</code> y puede ser utilizada de forma autónoma con respecto a cualquier otro lenguaje de programación, como R, Python o Julia. Por lo tanto, no encontrarás la documentación de Quarto en la <strong>Consola</strong> (en inglés <strong>Console</strong>) de R en el <strong>Panel</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) utilizando el operador de ayuda <code>?</code> dentro de ella. Para consultar la documentación oficial, sintaxis y opciones de configuración, debes recurrir a la documentación señalada en <a href="https://quarto.org/"><strong>Quarto</strong></a>.</p>
+<p>Ten en cuenta que Quarto es una herramienta independiente de R. Es decir, no es un paquete de R como por ejemplo <code>tidyverse</code>, y puede ser utilizada de forma autónoma con respecto a cualquier otro lenguaje de programación, como R, Python, Julia u Observable. Por lo tanto, no encontrarás la documentación de Quarto en la <strong>Consola</strong> (en inglés <strong>Console</strong>) de R en el <strong>Panel</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) utilizando el operador de ayuda <code>?</code> dentro de ella. Para consultar la documentación oficial, sintaxis y opciones de configuración, debes recurrir a la documentación señalada en <a href="https://quarto.org/"><strong>Quarto</strong></a>.</p>
 </div>
 </div>
 <section id="problemas-que-resuelve" class="level3" data-number="21.1.1">
 <h3 data-number="21.1.1" class="anchored" data-anchor-id="problemas-que-resuelve"><span class="header-section-number">21.1.1</span> Problemas que resuelve</h3>
-<p>En algunos flujos de trabajo, el análisis suele terminar copiando y pegando manualmente gráficos y valores desde el entorno de programación hacia un procesador de texto o diapositivas <span class="citation" data-cites="posit_introduction_2026">(<a href="references.html#ref-posit_introduction_2026" role="doc-biblioref">Posit, 2026</a>)</span>. Este proceso manual es propenso a errores y resulta ineficiente ya que si los datos cambian, es necesario repetir todo el procedimiento <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 28</a>)</span>.</p>
-<p>Quarto soluciona esta dificultad al mantener el texto, el código y los resultados integrados en un único archivo así como aportando 3 beneficios <span class="citation" data-cites="posit_introduction_2026">(<a href="references.html#ref-posit_introduction_2026" role="doc-biblioref">Posit, 2026</a>)</span>:</p>
+<p>En algunos flujos de trabajo, el análisis suele terminar copiando y pegando manualmente gráficos y valores desde el entorno de programación hacia un procesador de texto o diapositivas <span class="citation" data-cites="posit_introduction_2026">(<a href="references.html#ref-posit_introduction_2026" role="doc-biblioref">Posit, 2026</a>)</span>. Este proceso manual es propenso a errores y resulta ineficiente, ya que si los datos cambian, es necesario repetir todo el procedimiento <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 28</a>)</span>.</p>
+<p>Quarto soluciona esta dificultad al mantener el texto, el código y los resultados integrados en un único archivo, aportando 3 beneficios <span class="citation" data-cites="posit_introduction_2026">(<a href="references.html#ref-posit_introduction_2026" role="doc-biblioref">Posit, 2026</a>)</span>:</p>
 <ol type="1">
 <li><strong>Reproducibilidad:</strong> los resultados provienen directamente de ejecutar el código. En ese sentido, otro individuo puede reconstruir el documento y obtener los mismos resultados.</li>
 <li><strong>Actualización permanente:</strong> si se incorporan nuevos datos o se ajusta el código, solo se requiere volver a compilar el documento para que cada tabla, gráfico y valor se actualice.</li>
-<li><strong>Archivos de texto plano:</strong> los documentos <code>.qmd</code> son texto plano, lo que facilita editarlos y realizar seguimiento a los cambios mediante sistemas de control de versiones como <a href="https://git-scm.com/"><strong>Git</strong></a>.</li>
+<li><strong>Archivos de texto plano:</strong> los documentos <code>.qmd</code> son texto plano, lo que facilita editarlos y realizar seguimiento a los cambios mediante sistemas de control de versiones como <a href="https://git-scm.com/"><strong>Git</strong></a> (ver <a href="project-oriented_workflow.html#nte-3-chap-3" class="quarto-xref">Nota&nbsp;<span>3.3</span></a>).</li>
 </ol>
 </section>
 <section id="sec-quarto-render" class="level3" data-number="21.1.2">
@@ -601,11 +630,11 @@ Figura&nbsp;21.2: Opción <strong>Preview</strong> en el <strong>Editor</strong>
 </div>
 <p>También puedes situar el cursor (<strong>|</strong>) sobre alguna parte del documento y presionar la combinación de teclas <kbd title="linux: Ctrl-Shift-K, mac: Command-Shift-K, windows: Ctrl-Shift-K" aria-hidden="true" data-linux="Ctrl-Shift-K" data-mac="Command-Shift-K" data-windows="Ctrl-Shift-K"></kbd><span class="visually-hidden"></span> o utilizar el <strong>Terminal</strong> en el <strong>Panel</strong> ejecutando el siguiente comando, tal como se señala a continuación:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render reports/reporte_pinguinos.qmd</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>De esa manera, en la <strong>Barra lateral primaria</strong> encontrarás que se crea un archivo adicional dentro de la carpeta <code>reports</code> con el nombre <code>reporte_pinguinos.html</code>. En ese sentido, se crea un archivo con extensión <code>.html</code> manteniendo intacto el archivo de texto plano <code>reporte_pinguinos.qmd</code> donde se completa el proceso señalado en la <a href="#fig-render-qmd-flow" class="quarto-xref">Figura&nbsp;<span>21.1</span></a>.</p>
+<p>De esa manera, en la <strong>Barra lateral primaria</strong> encontrarás que se crea un archivo adicional dentro de la carpeta <code>reports</code> con el nombre <code>reporte_pinguinos.html</code>. En ese sentido, se crea un archivo con extensión <code>.html</code> manteniendo intacto el archivo de texto plano <code>reporte_pinguinos.qmd</code>, con lo cual se completa el proceso señalado en la <a href="#fig-render-qmd-flow" class="quarto-xref">Figura&nbsp;<span>21.1</span></a>.</p>
 </section>
 <section id="formatos-de-salida-para-documentos" class="level3" data-number="21.1.3">
 <h3 data-number="21.1.3" class="anchored" data-anchor-id="formatos-de-salida-para-documentos"><span class="header-section-number">21.1.3</span> Formatos de salida para documentos</h3>
-<p>Quarto incluye la posibilidad de renderizar documentos a <a href="https://quarto.org/docs/output-formats/all-formats.html">múltiples formatos</a>. Por el momento, en relación a <code>reporte_pinguinos.qmd</code> respecto a la <a href="#sec-quarto-render" class="quarto-xref"><span>Sección 21.1.2</span></a> se ha utilizado únicamente el formato <code>html</code>. Sin embargo, para la elaboración de documentos Quarto ofrece una amplia variedad de opciones de salida como <code>html</code>, <code>pdf</code>, <code>docx</code>, <code>typst</code>, <code>odt</code> y <code>epub</code>. En la <a href="#tbl-quarto-document-formats" class="quarto-xref">Tabla&nbsp;<span>21.1</span></a> se presentan estos formatos junto con su descripción:</p>
+<p>Quarto incluye la posibilidad de renderizar documentos a <a href="https://quarto.org/docs/output-formats/all-formats.html">múltiples formatos</a>. Por el momento, en relación con <code>reporte_pinguinos.qmd</code> respecto a la <a href="#sec-quarto-render" class="quarto-xref"><span>Sección 21.1.2</span></a>, se ha utilizado únicamente el formato <code>html</code>. Sin embargo, para la elaboración de documentos Quarto ofrece una amplia variedad de opciones de salida como <code>html</code>, <code>pdf</code>, <code>docx</code>, <code>typst</code>, <code>odt</code> y <code>epub</code>. En la <a href="#tbl-quarto-document-formats" class="quarto-xref">Tabla&nbsp;<span>21.1</span></a> se presentan estos formatos junto con su descripción:</p>
 <div id="tbl-quarto-document-formats" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-quarto-document-formats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -634,7 +663,7 @@ Tabla&nbsp;21.1: Formatos de salida para documentos en Quarto
 </tr>
 <tr class="even">
 <td style="text-align: center;"><a href="https://quarto.org/docs/reference/formats/typst.html"><code>typst</code></a></td>
-<td style="text-align: left;">Sistema de composición tipográfica moderno y de código abierto desarrollado mediante <a href="https://typst.app/">Typst</a>. Diseñado como una alternativa a LaTeX donde genera archivos PDF con tiempos de renderizado más rápido sin requerir una instalación previa de LaTeX.</td>
+<td style="text-align: left;">Sistema de composición tipográfica moderno y de código abierto desarrollado mediante <a href="https://typst.app/">Typst</a>. Diseñado como una alternativa a LaTeX que genera archivos PDF con tiempos de renderizado más rápidos sin requerir una instalación previa de LaTeX.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><a href="https://quarto.org/docs/reference/formats/odt.html"><code>odt</code></a></td>
@@ -730,7 +759,7 @@ Precaución&nbsp;21.1
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="fu"># Introducción</span></span>
 <span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>La **paradoja de Simpson** es un fenómeno estadístico en el cual una ... </span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Al principio existen diferentes símbolos que puede que no comprendas pero estos se pueden separar en 3 elementos, tal como se muestra en la <a href="#tbl-elements-doc-quarto" class="quarto-xref">Tabla&nbsp;<span>21.2</span></a>:</p>
+<p>Al principio existen diferentes símbolos que puede que no comprendas, pero estos se pueden separar en 3 elementos, tal como se muestra en la <a href="#tbl-elements-doc-quarto" class="quarto-xref">Tabla&nbsp;<span>21.2</span></a>:</p>
 <div id="tbl-elements-doc-quarto" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-elements-doc-quarto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -764,7 +793,7 @@ Tabla&nbsp;21.2: Elementos de un documento de Quarto <span class="citation" data
 <tr class="odd">
 <td style="text-align: left;">Celdas de código</td>
 <td style="text-align: left;">Bloque que empieza con <code>```{r}</code> y termina con <code>```</code></td>
-<td style="text-align: left;">Genera la renderización de los resultados como producto de la ejecución del código de acuerdo a las opciones fijadas como por ejemplo <code>#| message: false</code> y la aplicación de un identificador como <code>#| label: cargar-paquetes</code></td>
+<td style="text-align: left;">Genera la renderización de los resultados como producto de la ejecución del código de acuerdo con las opciones fijadas, como por ejemplo <code>#| message: false</code> y la aplicación de un identificador como <code>#| label: cargar-paquetes</code></td>
 </tr>
 </tbody>
 </table>
@@ -799,10 +828,10 @@ Tabla&nbsp;21.2: Elementos de un documento de Quarto <span class="citation" data
 <li><strong>Delimitadores (<code>---</code>):</strong> El encabezado siempre inicia y finaliza con 3 guiones consecutivos (<code>---</code>) en líneas separadas. Todo contenido situado entre estos delimitadores es interpretado como configuración y metadatos por Quarto, separándolo del cuerpo del documento.</li>
 <li><strong>Pares clave-valor (<code>clave: valor</code>):</strong> La estructura básica consiste en asociar un nombre o clave con un valor determinado, separados por 2 puntos y un espacio obligatorio (<code>:</code>).</li>
 <li><strong>Secuencias de escalares:</strong> Cuando una clave contiene múltiples elementos ordenados, como los autores en <code>author:</code>, cada elemento se especifica en una nueva línea antecedido por un guion y un espacio (<code>-</code>).</li>
-<li><strong>Estructura jerárquica e indentación:</strong> YAML define la anidación y subordinación mediante sangrías de <strong>2 espacios</strong> por nivel. Es importante señalar que no se permite el uso de tabuladores ya que pueden generar errores de sintaxis en el procesamiento del archivo.</li>
+<li><strong>Estructura jerárquica e indentación:</strong> YAML define la anidación y subordinación mediante sangrías de <strong>2 espacios</strong> por nivel. Es importante señalar que no se permite el uso de tabuladores, ya que pueden generar errores de sintaxis en el procesamiento del archivo.</li>
 <li><strong>Tipos de valores:</strong>
 <ul>
-<li><strong>Cadenas explícitas</strong> (en inglés <strong>explicit strings</strong>): Texto delimitado por comillas dobles o simples donde es necesario cuando el texto incluye caracteres especiales o dos puntos (<code>:</code>), como en <code>title: "Paradoja de Simpson: dimensiones del pico en pingüinos"</code>.</li>
+<li><strong>Cadenas explícitas</strong> (en inglés <strong>explicit strings</strong>): Texto delimitado por comillas dobles o simples, necesario cuando el texto incluye caracteres especiales o dos puntos (<code>:</code>), como en <code>title: "Paradoja de Simpson: dimensiones del pico en pingüinos"</code>.</li>
 <li><strong>Cadenas implícitas</strong> (en inglés <strong>implicit strings</strong>): Texto sin comillas reconocido automáticamente como cadena cuando no presenta ambigüedades, como <code>es</code> en <code>lang:</code> o <code>knitr</code> en <code>engine:</code>.</li>
 <li><strong>Booleanos</strong> (en inglés <strong>booleans</strong>): Valores lógicos representados por <code>true</code> o <code>false</code> como en <code>toc: true</code> o <code>number-sections: true</code>.</li>
 <li><strong>Marcas de tiempo</strong> (en inglés <strong>timestamps</strong>): Fechas expresadas en formato estándar ISO 8601 (<code>AAAA-MM-DD</code>) como <code>2026-11-17</code> en <code>date:</code>.</li>
@@ -828,7 +857,7 @@ Tabla&nbsp;21.2: Elementos de un documento de Quarto <span class="citation" data
 <li><code>title</code>: Título principal del documento que se mostrará en el encabezado del reporte.</li>
 <li><code>author</code>: Secuencia con los nombres de las autoras o autores del documento.</li>
 <li><code>date</code>: Fecha de publicación del reporte.</li>
-<li><code>toc</code>: Acrónimo de <strong>T</strong>able <strong>o</strong>f <strong>C</strong>ontents done al fijarse en <code>true</code> genera automáticamente una tabla de contenidos interactiva.</li>
+<li><code>toc</code>: Acrónimo de <strong>T</strong>able <strong>o</strong>f <strong>C</strong>ontents que, al fijarse en <code>true</code>, genera automáticamente una tabla de contenidos interactiva.</li>
 <li><code>number-sections</code>: Al fijarse en <code>true</code> numera secuencialmente cada una de las secciones y encabezados del reporte.</li>
 <li><code>lang</code>: Establece el idioma del documento, por ejemplo <code>es</code> para español, traduciendo automáticamente los textos fijos generados por Quarto como “Figura”, “Tabla” o “Tabla de Contenidos”.</li>
 <li><code>engine</code>: Especifica el “motor” de cómputo para procesar el código. En el caso del reporte <code>knitr</code> para ejecutar código de R (ver <a href="#fig-render-qmd-flow" class="quarto-xref">Figura&nbsp;<span>21.1</span></a>).</li>
@@ -846,7 +875,7 @@ Nota&nbsp;21.3
 </div>
 <div class="callout-body-container callout-body">
 <p>En los campos <code>bibliography: ../references/reporte-pinguinos.bib</code> y <code>csl: ../references/apa.csl</code>, el uso del prefijo <code>../</code> es indispensable debido a la estructura de directorios del proyecto. El archivo <code>reporte_pinguinos.qmd</code> se encuentra alojado dentro de la carpeta <code>reports/</code>, mientras que los archivos <code>.bib</code> y <code>.csl</code> están guardados en la carpeta <code>references/</code>.</p>
-<p>El prefijo <code>../</code> le indica a Quarto que debe retroceder un nivel en la jerarquía de carpetas, es decir salir de <code>reports/</code>, para luego ingresar a la carpeta <code>references/</code>. Si omitieras <code>../</code>, Quarto intentaría buscar la ruta <code>reports/references/</code> la cual no existe, ocasionando un error durante el renderizado.</p>
+<p>El prefijo <code>../</code> le indica a Quarto que debe retroceder un nivel en la jerarquía de carpetas, es decir salir de <code>reports/</code>, para luego ingresar a la carpeta <code>references/</code>. Si omitieras <code>../</code>, Quarto intentaría buscar la ruta <code>reports/references/</code>, la cual no existe, ocasionando un error durante el renderizado.</p>
 </div>
 </div>
 </section>
@@ -860,7 +889,7 @@ Nota&nbsp;21.3
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pdf</span><span class="kw">:</span><span class="at"> default</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">docx</span><span class="kw">:</span><span class="at"> default</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">odt</span><span class="kw">:</span><span class="at"> default</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Ten en cuenta de todas maneras que para compilar a formato <code>pdf</code> es indispensable contar con una instalación funcional de LaTeX, tal como se indicó en la <a href="#cau-1-chap-21" class="quarto-xref">Precaución&nbsp;<span>21.1</span></a>.</p>
+<p>Ten en cuenta, de todas maneras, que para compilar a formato <code>pdf</code> es indispensable contar con una instalación funcional de LaTeX, tal como se indicó en la <a href="#cau-1-chap-21" class="quarto-xref">Precaución&nbsp;<span>21.1</span></a>.</p>
 <p>Para renderizar el documento a estos formatos de manera similar a lo explicado en la <a href="#sec-quarto-render" class="quarto-xref"><span>Sección 21.1.2</span></a>, dispones de 2 mecanismos:</p>
 <ol type="1">
 <li><p><strong>Desde el Editor de Positron:</strong> Puedes hacer clic en el menú desplegable junto a la opción <strong>Preview</strong> en la barra de herramientas superior del <strong>Editor</strong> (ver <a href="#fig-render-qmd-preview" class="quarto-xref">Figura&nbsp;<span>21.2</span></a>) y seleccionar el formato específico que deseas compilar (<code>html</code>, <code>pdf</code>, <code>docx</code> o <code>odt</code>).</p></li>
@@ -868,20 +897,287 @@ Nota&nbsp;21.3
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Renderizar a todos los formatos definidos simultáneamente</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render reports/reporte_pinguinos.qmd <span class="at">--to</span> all</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Rßenderizar a un formato específico</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># O renderizar a un formato específico</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render reports/reporte_pinguinos.qmd <span class="at">--to</span> pdf</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render reports/reporte_pinguinos.qmd <span class="at">--to</span> docx</span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render reports/reporte_pinguinos.qmd <span class="at">--to</span> odt</span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render reports/reporte_pinguinos.qmd <span class="at">--to</span> html</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></li>
 </ol>
 <p>Al ejecutar estos comandos, Quarto procesará <code>reporte_pinguinos.qmd</code> y generará los archivos correspondientes <code>reporte_pinguinos.pdf</code>, <code>reporte_pinguinos.docx</code>, <code>reporte_pinguinos.odt</code> o <code>reporte_pinguinos.html</code> dentro de la carpeta <code>reports/</code>.</p>
+<div id="tip-1-chap-21" class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip&nbsp;21.1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Al definir formatos de salida en el encabezado YAML, puedes utilizar la palabra clave <code>default</code>, como por ejemplo <code>pdf: default</code>, <code>docx: default</code> u <code>odt: default</code>, para renderizar con las opciones predeterminadas de Quarto.</p>
+<p>Sin embargo, al igual que se personalizó <code>html</code> incorporando opciones como <code>code-fold: true</code> y <code>embed-resources: true</code>, cada formato admite diversas opciones para controlar su diseño, fuentes, márgenes o estructura.</p>
+<p>En la siguiente tabla puedes consultar los enlaces a la documentación de referencia oficial de Quarto para cada uno de estos formatos:</p>
+<div id="tbl-quarto-document-references" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-quarto-document-references-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;21.3: Enlaces a la documentación de Quarto para examinar las opciones aplicables a cada formato
+</figcaption>
+<div aria-describedby="tbl-quarto-document-references-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Formato</th>
+<th style="text-align: left;">Documentación de referencia</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>html</code></td>
+<td style="text-align: left;"><a href="https://quarto.org/docs/reference/formats/html.html">Referencia HTML</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>pdf</code></td>
+<td style="text-align: left;"><a href="https://quarto.org/docs/reference/formats/pdf.html">Referencia PDF</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>docx</code></td>
+<td style="text-align: left;"><a href="https://quarto.org/docs/reference/formats/docx.html">Referencia Word (DOCX)</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>odt</code></td>
+<td style="text-align: left;"><a href="https://quarto.org/docs/reference/formats/odt.html">Referencia OpenDocument (ODT)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="texto-markdown" class="level3" data-number="21.2.2">
 <h3 data-number="21.2.2" class="anchored" data-anchor-id="texto-markdown"><span class="header-section-number">21.2.2</span> Texto Markdown</h3>
+<p>El texto narrativo en Quarto se redacta utilizando una variante extendida de Markdown conocida como <a href="https://quarto.org/docs/authoring/markdown-basics.html"><strong>Pandoc Markdown</strong></a>. Markdown permite escribir texto plano legible y estructurado sin necesidad de recurrir a etiquetas complejas, facilitando su posterior conversión a formatos como HTML, PDF, Word u OpenDocument.</p>
+<p>A continuación, se examinan las principales características y usos de Markdown presentes en el archivo <code>reporte_pinguinos.qmd</code> (ver <a href="#nte-1-chap-21" class="quarto-xref">Nota&nbsp;<span>21.1</span></a>).</p>
+<section id="encabezados" class="level4" data-number="21.2.2.1">
+<h4 data-number="21.2.2.1" class="anchored" data-anchor-id="encabezados"><span class="header-section-number">21.2.2.1</span> Encabezados</h4>
+<p>Los encabezados permiten estructurar jerárquicamente el contenido del documento. En Markdown, los encabezados se crean anteponiendo uno o más símbolos numerales (<code>#</code>) seguidos de un espacio obligatorio al inicio de la línea. El número de símbolos <code>#</code> determina el nivel del encabezado, desde <code>#</code> para el nivel 1 (<code>&lt;h1&gt;</code>) hasta <code>######</code> para el nivel 6 (<code>&lt;h6&gt;</code>).</p>
+<p>En <code>reporte_pinguinos.qmd</code> la estructura general del documento se define de la siguiente manera:</p>
+<pre class="qmd"><code># Introducción
+
+# Datos
+
+# Paradoja de Simpson
+
+## Asociación global
+
+## Asociación por especie
+
+# Conclusión
+
+# Referencias
+</code></pre>
+<p>Como se puede observar:</p>
+<ul>
+<li>Los títulos principales (<code># Introducción</code>, <code># Datos</code>, <code># Paradoja de Simpson</code>, <code># Conclusión</code> y <code># Referencias</code>) corresponden a encabezados de nivel 1.</li>
+<li>Las secciones internas dentro de la paradoja (<code>## Asociación global</code> y <code>## Asociación por especie</code>) corresponden a encabezados de nivel 2, subordinados a <code># Paradoja de Simpson</code>.</li>
+<li>Quarto utiliza estos encabezados para construir de forma automática la tabla de contenidos interactiva (<code>toc: true</code>) y para numerar secuencialmente las secciones (<code>number-sections: true</code>), tal como se configuró en el encabezado YAML (ver <a href="#sec-yaml-header" class="quarto-xref"><span>Sección 21.2.1</span></a>).</li>
+</ul>
+</section>
+<section id="formato-de-texto" class="level4" data-number="21.2.2.2">
+<h4 data-number="21.2.2.2" class="anchored" data-anchor-id="formato-de-texto"><span class="header-section-number">21.2.2.2</span> Formato de texto</h4>
+<p>Markdown ofrece una sintaxis sencilla para aplicar estilos tipográficos básicos al texto:</p>
+<ul>
+<li><strong>Negrita (<code>**texto**</code>):</strong> Se delimita el texto entre dos asteriscos consecutivos (<code>**</code>) sin espacios interiores. En <code>reporte_pinguinos.qmd</code> se utiliza para destacar conceptos clave como <code>**paradoja de Simpson**</code>, <code>**pendiente negativa**</code>, <code>**invierte**</code> y <code>**positiva**</code>, <code>**variable de confusión**</code> y <code>**riesgo de agregación**</code>.</li>
+<li><strong>Cursiva (<code>*texto*</code>):</strong> Se delimita el texto entre un solo asterisco (<code>*</code>) a cada lado. En el reporte se emplea para nombres científicos en latín como <code>*Pygoscelis*</code>, <code>*Adélie*</code>, <code>*Chinstrap*</code> y <code>*Gentoo*</code>, nombres geográficos como <code>*Biscoe*</code>, <code>*Dream*</code> y <code>*Torgersen*</code>, categorías de sexo como <code>*female*</code> y <code>*male*</code> o vocablos en inglés como <code>*confounder*</code>.</li>
+<li><strong>Código en línea / texto literal (<code>`código`</code>):</strong> Se delimita mediante acentos graves simples (<code>`</code>). Se utiliza para citar textualmente nombres de paquetes, conjuntos de datos o variables en el texto, evitando que se confundan con la narrativa. En el reporte se emplea en <code>penguins</code>, <code>datasets</code>, <code>bill_len</code> y <code>bill_dep</code>, <code>flipper_len</code>, <code>body_mass</code>, <code>sex</code>, <code>year</code> y para identificar valores ausentes <code>NA</code>.</li>
+</ul>
+</section>
+<section id="imágenes" class="level4" data-number="21.2.2.3">
+<h4 data-number="21.2.2.3" class="anchored" data-anchor-id="imágenes"><span class="header-section-number">21.2.2.3</span> Imágenes</h4>
+<p>Para incorporar imágenes estáticas en un documento de Quarto se emplea la siguiente sintaxis general:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Texto de la leyenda](ruta/a/la/imagen)</span>{atributos}</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>En <code>reporte_pinguinos.qmd</code> se incluye, por ejemplo, la ilustración de las especies de pingüinos:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>!<span class="co">[</span><span class="ot">Especies ... (*Chinstrap*), ... [@m_horst_palmer_2022].</span><span class="co">](../images/penguins.png)</span>{#fig-pinguinos fig-alt="Ilustración ..." fig-align="center" width="70%"}</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>En esta declaración se distinguen 3 componentes:</p>
+<ol type="1">
+<li><strong>Leyenda del gráfico (<code>[...]</code>):</strong> El texto dentro de los corchetes funciona como la descripción visible bajo la figura. Este texto admite formato Markdown completo, como cursivas (<code>*Chinstrap*</code>) y citas bibliográficas (<code>[@m_horst_palmer_2022]</code>).</li>
+<li><strong>Ruta del archivo (<code>(...)</code>):</strong> La ruta relativa hacia el archivo de la imagen. Al estar <code>reporte_pinguinos.qmd</code> dentro de <code>reports/</code>, se utiliza <code>../images/penguins.png</code> para retroceder un nivel e ingresar a la carpeta <code>images/</code> (ver <a href="#nte-3-chap-21" class="quarto-xref">Nota&nbsp;<span>21.3</span></a>).</li>
+<li><strong>Atributos (<code>{...}</code>):</strong>
+<ul>
+<li><code>{#fig-pinguinos}</code>: Asigna una etiqueta o identificador único con el prefijo <code>fig-</code> que permite crear referencias cruzadas automáticas en el texto mediante <code>@fig-pinguinos</code>.</li>
+<li><code>fig-alt="..."</code>: Proporciona un texto alternativo accesible para lectores de pantalla.</li>
+<li><code>fig-align="center"</code>: Centra horizontalmente la figura en el documento.</li>
+<li><code>width="70%"</code>: Controla el ancho relativo de la imagen en la salida final.</li>
+</ul></li>
+</ol>
+<p>De forma análoga, en el reporte se incorpora la imagen <code>culmen_depth_es.png</code> con la etiqueta <code>{#fig-culmen}</code> y un ancho del 60%.</p>
+</section>
+<section id="listas" class="level4" data-number="21.2.2.4">
+<h4 data-number="21.2.2.4" class="anchored" data-anchor-id="listas"><span class="header-section-number">21.2.2.4</span> Listas</h4>
+<p>Markdown permite crear listas ordenadas y no ordenadas. Para las listas ordenadas se antepone un número seguido de un punto y un espacio obligatorio, como por ejemplo <code>1.</code>.</p>
+<p>En <code>reporte_pinguinos.qmd</code> se presenta una lista ordenada con las pendientes estimadas para cada especie de pingüino:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>*Adélie*: ...</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>*Chinstrap*: ...</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>*Gentoo*: ...</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Quarto numera automáticamente los elementos de la lista en la salida final, incluso si en el archivo fuente se repitiera el número <code>1.</code> en cada línea. Las listas no ordenadas, por su parte, se generan utilizando guiones (<code>-</code>) o asteriscos (<code>*</code>).</p>
+</section>
+<section id="notas-al-pie" class="level4" data-number="21.2.2.5">
+<h4 data-number="21.2.2.5" class="anchored" data-anchor-id="notas-al-pie"><span class="header-section-number">21.2.2.5</span> Notas al pie</h4>
+<p>Las notas al pie permiten agregar aclaraciones metodológicas o explicaciones complementarias sin interrumpir el flujo de la lectura del documento. Se estructuran en 2 partes:</p>
+<ol type="1">
+<li><strong>Llamada a la nota:</strong> Se inserta en el lugar exacto del texto donde se desea la referencia mediante la sintaxis <code>[^identificador]</code>.</li>
+<li><strong>Definición de la nota:</strong> Se escribe en un párrafo independiente mediante <code>[^identificador]: Texto explicativo...</code>.</li>
+</ol>
+<p>En <code>reporte_pinguinos.qmd</code> se utiliza este mecanismo, por ejemplo, para justificar la exclusión de observaciones con datos faltantes, tal como se señala a continuación:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Sin embargo, ... <span class="in">`species`</span> (ver @fig-asociacion-especie)<span class="ot">[^asociacion-especie]</span>, ...</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="ot">[^asociacion-especie]: </span>Al igual ... en la <span class="in">`@tbl-variables`</span>.</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="tablas" class="level4" data-number="21.2.2.6">
+<h4 data-number="21.2.2.6" class="anchored" data-anchor-id="tablas"><span class="header-section-number">21.2.2.6</span> Tablas</h4>
+<p>En Markdown de Quarto, las tablas en texto plano se construyen mediante la sintaxis de <strong>tablas de barras</strong> (en inglés <strong>pipe tables</strong>), empleando barras verticales (<code>|</code>) para delimitar columnas y guiones (<code>-</code>) para separar la fila de encabezados del cuerpo de datos.</p>
+<p>En <code>reporte_pinguinos.qmd</code>, por ejemplo, se documentan las variables del conjunto de datos <code>penguins</code>, tal como se señala a continuación:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Variable <span class="pp">|</span> Descripción <span class="pp">|</span> Valores ausentes (<span class="in">`NA`</span>) <span class="pp">|</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="pp">| :---</span> <span class="pp">| :---</span> <span class="pp">| :---:</span> <span class="pp">|</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`species`</span> <span class="pp">|</span> Especie de pingüino (*Adélie*, *Chinstrap*, *Gentoo*) <span class="pp">|</span> 0 <span class="pp">|</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`island`</span> <span class="pp">|</span> Isla del archipiélago Palmer (*Biscoe*, *Dream*, *Torgersen*) <span class="pp">|</span> 0 <span class="pp">|</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`bill_len`</span> <span class="pp">|</span> Longitud del culmen o pico (milímetros - mm) <span class="pp">|</span> 2 <span class="pp">|</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`bill_dep`</span> <span class="pp">|</span> Altura del culmen o pico (milímetros - mm) <span class="pp">|</span> 2 <span class="pp">|</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`flipper_len`</span> <span class="pp">|</span> Longitud de la aleta (milímetros - mm) <span class="pp">|</span> 2 <span class="pp">|</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`body_mass`</span> <span class="pp">|</span> Masa corporal (gramos - g) <span class="pp">|</span> 2 <span class="pp">|</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`sex`</span> <span class="pp">|</span> Sexo del individuo (*female*, *male*) <span class="pp">|</span> 11 <span class="pp">|</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`year`</span> <span class="pp">|</span> Año de estudio (2007, 2008, 2009) <span class="pp">|</span> 0 <span class="pp">|</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>: Variables del conjunto de datos <span class="in">`penguins`</span> {#tbl-variables}</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>En esta estructura se destacan los siguientes aspectos:</p>
+<ul>
+<li><strong>Alineación de columnas:</strong> Se define en la línea delimitadora mediante la posición de los 2 puntos (<code>:</code>):
+<ul>
+<li><code>:---</code>: Alineación a la izquierda, empleada en las columnas <code>Variable</code> y <code>Descripción</code>.</li>
+<li><code>:---:</code>: Alineación centrada, empleada en <code>Valores ausentes (NA)</code>.</li>
+<li><code>---:</code>: Alineación a la derecha.</li>
+</ul></li>
+<li><strong>Leyenda e identificador:</strong> La línea posterior que inicia con 2 puntos, <code>: Variables del conjunto de datos</code>penguins<code>{#tbl-variables}</code>, asigna el título de la tabla y una etiqueta con el prefijo <code>tbl-</code> que permite referenciar la tabla en el texto mediante <code>@tbl-variables</code>.</li>
+</ul>
+</section>
+<section id="contenido-sin-formato-en-inglés-raw-content" class="level4" data-number="21.2.2.7">
+<h4 data-number="21.2.2.7" class="anchored" data-anchor-id="contenido-sin-formato-en-inglés-raw-content"><span class="header-section-number">21.2.2.7</span> Contenido sin formato (en inglés <strong>raw content</strong>)</h4>
+<p>Cuando se requiere aplicar configuraciones o estilos específicos de un formato que no forman parte del estándar de Markdown, Quarto permite incluir bloques de <strong>contenido sin formato</strong> (en inglés <strong>raw attribute blocks</strong>) utilizando la sintaxis <code>```{=formato}</code>.</p>
+<p>En <code>reporte_pinguinos.qmd</code> se incluye el siguiente bloque:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{=html}</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;style&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="in">  p { </span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="in">    text-align: justify;</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/style&gt;</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Este bloque le indica a Pandoc que el fragmento <code>&lt;style&gt; p { text-align: justify; } &lt;/style&gt;</code> debe transmitirse intacto y sin interpretar directamente al archivo HTML final para justificar el texto de los párrafos. Si el documento se compila hacia otro formato como PDF, Word u OpenDocument, Pandoc ignora este bloque por completo. De esa manera, se garantiza que el documento no genere errores de incompatibilidad en otros entornos.</p>
+</section>
+<section id="ecuaciones-matemáticas" class="level4" data-number="21.2.2.8">
+<h4 data-number="21.2.2.8" class="anchored" data-anchor-id="ecuaciones-matemáticas"><span class="header-section-number">21.2.2.8</span> Ecuaciones matemáticas</h4>
+<p>Quarto ofrece soporte nativo para la composición tipográfica de ecuaciones matemáticas utilizando la sintaxis estándar de <a href="https://www.latex-project.org/">LaTeX</a>:</p>
+<ul>
+<li><strong>Ecuaciones en línea</strong> (en inglés <strong>inline math</strong>): Se encierran entre signos de dólar simples (<code>$ ... $</code>). Es indispensable que no existan espacios en blanco entre el signo de dólar y el contenido matemático. Por ejemplo, <code>$x$</code> y no <code>$ x $</code>.</li>
+<li><strong>Ecuaciones en bloque</strong> (en inglés <strong>display math</strong>): Se encierran entre dos signos de dólar (<code>$$ ... $$</code>) en párrafos separados para mostrar ecuaciones destacadas y centradas.</li>
+</ul>
+<p>En <code>reporte_pinguinos.qmd</code> se utiliza la notación en línea para presentar la pendiente estimada y su significancia estadística:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>... $\hat{\beta}_1 = -0.0850$, ... </span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>De igual forma, se emplea la misma notación dentro de la lista ordenada para cada especie:</p>
+<ul>
+<li><code>\hat{\beta}_1</code>: Representa el parámetro beta con un sombrero (<code>^</code>) y un subíndice (<code>_1</code>).</li>
+<li><code>\text{valor}</code>: Permite incluir texto en tipografía normal dentro del modo matemático.</li>
+<li><code>\times 10^{-5}</code>: Genera el símbolo de multiplicación (<span class="math inline">\(\times\)</span>) con el exponente superíndice correspondiente (<code>^{-5}</code>).</li>
+</ul>
+</section>
+<section id="bloques-de-llamada" class="level4" data-number="21.2.2.9">
+<h4 data-number="21.2.2.9" class="anchored" data-anchor-id="bloques-de-llamada"><span class="header-section-number">21.2.2.9</span> Bloques de llamada</h4>
+<p>Los bloques de llamada (en inglés <strong>callout blocks</strong>) son recuadros visuales destacados que sirven para llamar la atención del lector sobre notas, avisos, advertencias o consejos metodológicos. Se definen mediante la sintaxis de divisiones de Pandoc con 3 signos de dos puntos seguidos (<code>::: {.callout-&lt;tipo&gt;}</code>) y se cierran con <code>:::</code>.</p>
+<p>En <code>reporte_pinguinos.qmd</code>, por ejemplo, se incluye una nota introductoria:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>El presente reporte tiene como objetivo ilustrar ...  </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Quarto admite 5 tipos estándar de bloques de llamada:</p>
+<ol type="1">
+<li><code>.callout-note</code>: Para notas y aclaraciones generales, como la empleada en el reporte.</li>
+<li><code>.callout-tip</code>: Para consejos útiles o buenas prácticas.</li>
+<li><code>.callout-warning</code>: Para advertencias sobre posibles problemas o consideraciones importantes.</li>
+<li><code>.callout-caution</code>: Para precauciones ante acciones que puedan generar errores.</li>
+<li><code>.callout-important</code>: Para información crucial o requisitos indispensables.</li>
+</ol>
+<p>Opcionalmente, los callouts pueden incluir títulos personalizados mediante un encabezado interno, como por ejemplo <code>## Propósito del reporte</code>, así como propiedades <code>collapse="true"</code> para que aparezcan plegados por defecto o <code>appearance="minimal"</code> para simplificar su diseño visual.</p>
+</section>
+<section id="citas-y-referencias-bibliográficas" class="level4" data-number="21.2.2.10">
+<h4 data-number="21.2.2.10" class="anchored" data-anchor-id="citas-y-referencias-bibliográficas"><span class="header-section-number">21.2.2.10</span> Citas y referencias bibliográficas</h4>
+<p>La gestión de citas y bibliografía en Quarto se basa en el motor de citas de Pandoc, documentado detalladamente en <a href="https://quarto.org/docs/authoring/citations.html"><strong>Citations in Quarto</strong></a>. Para citar una fuente dentro del texto se utiliza el carácter arroba (<code>@</code>) seguido de la clave de citación (en inglés <strong>citation key</strong>) definida en un archivo de bibliografía en formato BibTeX (<code>.bib</code>).</p>
+<p>En <code>reporte_pinguinos.qmd</code> se encuentran diversos ejemplos de citas bibliográficas:</p>
+<ul>
+<li><p><strong>Citas entre corchetes:</strong> Se encierran entre corchetes <code>[@clave]</code>. Por ejemplo, <code>[@m_horst_palmer_2022]</code> genera la cita entre paréntesis (Horst et al., 2022).</p></li>
+<li><p><strong>Múltiples citas simultáneas:</strong> Se separan mediante punto y coma dentro de los mismos corchetes. Por ejemplo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>... <span class="co">[</span><span class="ot">@simpson_interpretation_1951; @sprenger_simpsons_2026</span><span class="co">]</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Lo anterior compila como (Simpson, 1951; Sprenger &amp; Stegenga, 2026).</p></li>
+<li><p><strong>Citas en el texto (narrativas):</strong> Si se omite el corchete exterior y se escribe directamente <code>@clave</code>, el nombre de los autores queda integrado en la narrativa y solo el año se muestra entre paréntesis.</p></li>
+<li><p><strong>Localizadores o números de página:</strong> Se pueden añadir páginas, capítulos o secciones tras una coma, como en <code>[@wickham_r_2023, Cap. 28]</code>.</p></li>
+</ul>
+<section id="conexión-con-el-encabezado-yaml" class="level5" data-number="21.2.2.10.1">
+<h5 data-number="21.2.2.10.1" class="anchored" data-anchor-id="conexión-con-el-encabezado-yaml"><span class="header-section-number">21.2.2.10.1</span> Conexión con el encabezado YAML</h5>
+<p>Para que las citas funcionen de manera integrada en el documento, es indispensable vincular las claves bibliográficas y las normas tipográficas en el <strong>encabezado YAML</strong> (ver <a href="#sec-yaml-header" class="quarto-xref"><span>Sección 21.2.1</span></a>). En <code>reporte_pinguinos.qmd</code> esta configuración se realiza mediante los campos:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> ../references/reporte-pinguinos.bib</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">csl</span><span class="kw">:</span><span class="at"> ../references/apa.csl</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Donde <code>bibliography</code> le indica a Quarto la ruta relativa (ver <a href="#nte-1-chap-21" class="quarto-xref">Nota&nbsp;<span>21.1</span></a>) hacia el archivo de referencias BibTeX que contiene las claves citadas, como por ejemplo <code>@simpson_interpretation_1951</code> o <code>@m_horst_palmer_2022</code>, y <code>csl</code> define el archivo de estilo en formato Citation Style Language, aplicando en este caso las normas internacionales de la American Psychological Association (APA).</p>
+</section>
+</section>
 </section>
 <section id="celdas-de-código" class="level3" data-number="21.2.3">
 <h3 data-number="21.2.3" class="anchored" data-anchor-id="celdas-de-código"><span class="header-section-number">21.2.3</span> Celdas de código</h3>
+<p>Las <strong>celdas de código</strong> (en inglés <strong>code cells</strong>) constituyen el tercer componente de un documento de Quarto (ver <a href="#tbl-elements-doc-quarto" class="quarto-xref">Tabla&nbsp;<span>21.2</span></a>). Estas permiten intercalar código ejecutable con la narrativa del documento, garantizando la reproducibilidad del análisis.</p>
+<section id="estructura-y-motor-de-cómputo" class="level4" data-number="21.2.3.1">
+<h4 data-number="21.2.3.1" class="anchored" data-anchor-id="estructura-y-motor-de-cómputo"><span class="header-section-number">21.2.3.1</span> Estructura y motor de cómputo</h4>
+<p>Una celda de código se delimita abriendo con 3 acentos graves y el identificador del lenguaje entre llaves (<code>```{r}</code>) y cerrando con 3 acentos graves (<code>```</code>).</p>
+<p>Tal como se configuró en el encabezado YAML (ver <a href="#sec-yaml-header" class="quarto-xref"><span>Sección 21.2.1</span></a>) mediante el campo global:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">engine</span><span class="kw">:</span><span class="at"> knitr</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Quarto delega la ejecución del código en R al “motor” <a href="https://yihui.org/knitr/"><strong>knitr</strong></a>. Dado que instalaste previamente el metapaquete <code>tidyverse</code> (ver <a href="r_packages.html#sec-installing-packages" class="quarto-xref"><span>Sección 4.2</span></a>), este contiene al paquete <code>knitr</code>, por lo que cuentas con el “motor” necesario para evaluar las celdas de código.</p>
+<p>En el entorno de desarrollo <strong>Positron</strong>, puedes ejecutar las celdas de forma interactiva o renderizar el documento. En este último caso, Quarto ejecuta secuencialmente todas las celdas en una sesión limpia y controlada de acuerdo con el flujo descrito en la <a href="#fig-render-qmd-flow" class="quarto-xref">Figura&nbsp;<span>21.1</span></a> (ver <a href="https://quarto.org/docs/computations/r.html"><strong>Computations with R</strong></a>).</p>
+</section>
+<section id="sintaxis-de-opciones-de-celda" class="level4" data-number="21.2.3.2">
+<h4 data-number="21.2.3.2" class="anchored" data-anchor-id="sintaxis-de-opciones-de-celda"><span class="header-section-number">21.2.3.2</span> Sintaxis de opciones de celda (<code>#|</code>)</h4>
+<p>Quarto estandariza la configuración de celdas mediante la sintaxis <strong>hashpipe</strong> (<code>#|</code>). Las opciones se especifican en las primeras líneas de la celda utilizando pares <code>clave: valor</code> propios de YAML (ver <a href="https://quarto.org/docs/reference/cells/cells-knitr.html"><strong>Knitr Options Reference</strong></a>):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode markdown qmd code-with-copy"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: cargar-paquetes</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Esta separación entre los metadatos de la celda y las instrucciones ejecutables de R mejora sustancialmente la legibilidad y el mantenimiento del código.</p>
+</section>
+<section id="opciones-comunes-en-reporte_pinguinos.qmd" class="level4" data-number="21.2.3.3">
+<h4 data-number="21.2.3.3" class="anchored" data-anchor-id="opciones-comunes-en-reporte_pinguinos.qmd"><span class="header-section-number">21.2.3.3</span> Opciones comunes en <code>reporte_pinguinos.qmd</code></h4>
+<p>En <code>reporte_pinguinos.qmd</code> se ilustran las opciones de celda más habituales:</p>
+<ol type="1">
+<li><p><strong>Identificadores y referencias cruzadas (<code>#| label</code>):</strong></p>
+<ul>
+<li><code>#| label: cargar-paquetes</code>: Asigna una etiqueta única para identificar la celda en el esquema de navegación del editor en Positron y en los registros de compilación.</li>
+<li><code>#| label: fig-asociacion-global</code> y <code>#| label: fig-asociacion-especie</code>: Al anteponer el prefijo reservado <code>fig-</code>, Quarto reconoce que el resultado gráfico de la celda debe registrarse como una figura numerada automáticamente, habilitando su referenciación cruzada en el texto (<code>@fig-asociacion-global</code> y <code>@fig-asociacion-especie</code>).</li>
+</ul></li>
+<li><p><strong>Leyendas de figuras (<code>#| fig-cap</code>):</strong> Define el texto descriptivo al pie del gráfico. Por ejemplo:</p>
+<pre class="qmd"><code>#| fig-cap: "Asociación global ..."</code></pre></li>
+<li><p><strong>Control de mensajes (<code>#| message: false</code>):</strong> Suprime los mensajes informativos emitidos por R en la consola, como por ejemplo al ejecutar <code>library(tidyverse)</code>, evitando que aparezcan los mensajes en el documento final (ver <a href="how_to_code_in_r.html#sec-messages" class="quarto-xref"><span>Sección 5.3.1</span></a>).</p></li>
+<li><p><strong>Control de advertencias (<code>#| warning: false</code>):</strong> Evita la impresión de advertencias (ver <a href="how_to_code_in_r.html#sec-warnings" class="quarto-xref"><span>Sección 5.3.2</span></a>). En las celdas de graficación con <code>ggplot2</code>, oculta el aviso estándar que advierte la remoción de observaciones con datos faltantes (<code>NA</code>) en <code>bill_len</code> y <code>bill_dep</code>.</p></li>
+</ol>
+</section>
+<section id="conexión-con-la-opción-code-fold-del-encabezado-yaml" class="level4" data-number="21.2.3.4">
+<h4 data-number="21.2.3.4" class="anchored" data-anchor-id="conexión-con-la-opción-code-fold-del-encabezado-yaml"><span class="header-section-number">21.2.3.4</span> Conexión con la opción <code>code-fold</code> del encabezado YAML</h4>
+<p>En la <a href="#sec-yaml-header" class="quarto-xref"><span>Sección 21.2.1</span></a> se estableció para el formato HTML la opción:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">code-fold</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Esta directiva global instruye a Quarto a generar el código R plegado dentro de un elemento interactivo en HTML mostrando un botón desplegable con la etiqueta <strong>Código</strong>, de modo que los gráficos y resultados numéricos destaquen sin saturar visualmente el reporte.</p>
+<p>No obstante, las opciones de celda tienen <strong>precedencia local</strong> sobre las opciones globales del YAML. En cualquier celda individual es posible personalizar este comportamiento según el propósito comunicativo (ver <a href="https://quarto.org/docs/reference/cells/cells-knitr.html"><strong>Knitr Options Reference</strong></a> y <a href="https://quarto.org/docs/computations/r.html"><strong>Computations with R</strong></a>):</p>
+<ul>
+<li><code>#| echo: false</code>: Oculta completamente el código fuente, por lo que no muestra el botón desplegable, dejando visible únicamente la salida, que puede ser un gráfico, tabla o valor.</li>
+<li><code>#| code-fold: false</code>: Fuerza la visualización permanente del código sin posibilidad de plegarlo.</li>
+<li><code>#| code-fold: show</code>: Muestra el código desplegado al abrir el documento, pero conservando el botón interactivo para quien desee contraerlo.</li>
+</ul>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
@@ -901,6 +1197,7 @@ Posit. (2026). Introduction to <span>Quarto</span>. En <em>Posit Academy</em>. <
 Wickham, H. (2023). <em>R for <span>Data</span> <span>Science</span></em> (2.ª ed.). O’Reilly Media, Incorporated. <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a>
 </div>
 </div>
+</section>
 </section>
 </section>
 
