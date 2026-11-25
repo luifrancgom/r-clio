@@ -125,7 +125,11 @@ quarto install tinytex
 ```
 :::
 
-En la @sec-yaml-header explorarás la posibilidad de renderizar un documento en diversos formatos donde en particular para el formato `pdf` se debe tener en cuenta la @cau-1-chap-21. Por ahora, puedes descargar a continuación los reportes asociados con `reporte_pinguinos.qmd` en formatos `docx`, `odt` y `pdf` para examinar el resultado final respecto a otras opciones de acuerdo a lo señalado en @fig-render-qmd-flow:
+En la @sec-yaml-header explorarás la posibilidad de renderizar un documento en diversos formatos donde en particular para el formato `pdf` se debe tener en cuenta la @cau-1-chap-21. Por ahora, puedes descargar a continuación los reportes asociados con `reporte_pinguinos.qmd` en formatos `html`, `docx`, `odt` y `pdf` para examinar el resultado final respecto a otras opciones de acuerdo a lo señalado en @fig-render-qmd-flow:
+
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [reporte_pinguinos.html]({{< var url.report.report_penguins_html >}}){download="reporte_pinguinos.html"}
+:::
 
 ::: {.callout appearance="minimal"}
 ## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [reporte_pinguinos.docx]({{< var url.report.report_penguins_docx >}}){download="reporte_pinguinos.docx"}

@@ -189,6 +189,7 @@ url:
 
   report:
     report_penguins: "reports/reporte_pinguinos.qmd"
+    report_penguins_html: "reports/reporte_pinguinos.html"
     report_penguins_docx: "reports/reporte_pinguinos.docx"
     report_penguins_odt: "reports/reporte_pinguinos.odt"
     report_penguins_pdf: "reports/reporte_pinguinos.pdf"
