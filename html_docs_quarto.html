@@ -26,7 +26,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -356,7 +376,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#escritura-con-markdown" id="toc-escritura-con-markdown" class="nav-link active" data-scroll-target="#escritura-con-markdown"><span class="header-section-number">22.1</span> Escritura con Markdown</a></li>
   <li><a href="#control-del-documento-con-yaml" id="toc-control-del-documento-con-yaml" class="nav-link" data-scroll-target="#control-del-documento-con-yaml"><span class="header-section-number">22.2</span> Control del documento con YAML</a></li>
   <li><a href="#incorporación-de-celdas-de-código" id="toc-incorporación-de-celdas-de-código" class="nav-link" data-scroll-target="#incorporación-de-celdas-de-código"><span class="header-section-number">22.3</span> Incorporación de celdas de código</a></li>
-  <li><a href="#callouts-referencias-cruzadas-y-más" id="toc-callouts-referencias-cruzadas-y-más" class="nav-link" data-scroll-target="#callouts-referencias-cruzadas-y-más"><span class="header-section-number">22.4</span> Callouts, referencias cruzadas y más</a></li>
+  <li><a href="#bloques-de-llamada-referencias-cruzadas-y-más" id="toc-bloques-de-llamada-referencias-cruzadas-y-más" class="nav-link" data-scroll-target="#bloques-de-llamada-referencias-cruzadas-y-más"><span class="header-section-number">22.4</span> Bloques de llamada, referencias cruzadas y más</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/html_docs_quarto.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/html_docs_quarto.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
@@ -382,6 +402,83 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>Este capítulo se basa en <span class="citation" data-cites="posit_introduction_2026">(<a href="references.html#ref-posit_introduction_2026" role="doc-biblioref">Posit, 2026</a>)</span> y <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 28</a>)</span> así como en la documentación oficial de <a href="https://quarto.org/docs/get-started/hello/positron.html"><code>quarto</code></a> donde tiene como propósito introducir la forma de generar reportes a través del uso de <a href="https://quarto.org/"><strong>Quarto</strong></a> en formato <a href="https://quarto.org/docs/reference/formats/html.html">HTML</a> e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Universidad Militar Nueva Granada (UMNG).</p>
+<p>Exploraremos los siguientes aspectos:</p>
+<ol type="1">
+<li>¿Cómo escribir un reporte en Markdown?</li>
+<li>¿Cómo controlar los aspectos globales del reporte utilizando YAML?</li>
+<li>¿Cómo incorporar celdas de código en un reporte?</li>
+<li>¿Cómo incluir bloques de llamada, referencias cruzadas y otros elementos adicionales en un reporte?</li>
+</ol>
+<div id="nte-1-chap-22" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota&nbsp;22.1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para desarrollar el contenido de este capítulo es necesario que hayas exportado y guardado el archivo <code>2021-2024_saber-pro-genericas_faedis_ajustado.rds</code> en la carpeta <code>data</code>, tal como se señaló en el <a href="map_reduce_list_rbind_functions.html#lst-umng-export" class="quarto-xref">Listado&nbsp;<span>20.17</span></a>. En caso que no lo hayas hecho es necesario que lo descargues y lo incluyas dentro de la carpeta <code>data</code>:</p>
+<div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span><img src="images/download-solid-full.png" alt="Ícono del explorador de archivos" height="25"> <a href="https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/2021-2024_saber-pro-genericas_umng.rds">2021-2024_saber-pro-genericas_umng.rds</a>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<p>Además, es necesario que descargues los archivos en extensión <code>.png</code> señalados a continuación:</p>
+<div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span><img src="images/download-solid-full.png" alt="Ícono del explorador de archivos" height="25"> <a href="images/benefits-foreign-language-learning.png" download="benefits-foreign-language-learning.png">benefits-foreign-language-learning.png</a>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span><img src="images/download-solid-full.png" alt="Ícono del explorador de archivos" height="25"> <a href="images/plan-improvement-opportunities.png" download="plan-improvement-opportunities.png">plan-improvement-opportunities.png</a>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<p>Luego, incluye los archivos <code>benefits-foreign-language-learning.png</code> y <code>plan-improvement-opportunities.png</code> dentro de la carpeta <code>images</code> (ver <a href="welcome_to_quarto.html#nte-1-chap-21" class="quarto-xref">Nota&nbsp;<span>21.1</span></a>).</p>
+<p>Adicionalmente, es necesario que descargues el archivo en extensión <code>.bib</code> señalado a continuación:</p>
+<div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span><img src="images/download-solid-full.png" alt="Ícono del explorador de archivos" height="25"> <a href="references/reporte-umng.bib" download="reporte-umng.bib">reporte-umng.bib</a>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<p>En caso que hayas seguido estas indicaciones, procede a crear el archivo <code>reporte_umng-ingles.qmd</code> dentro de la carpeta <code>reports</code> (ver <a href="welcome_to_quarto.html#nte-1-chap-21" class="quarto-xref">Nota&nbsp;<span>21.1</span></a>).</p>
+</div>
+</div>
 <section id="escritura-con-markdown" class="level2" data-number="22.1">
 <h2 data-number="22.1" class="anchored" data-anchor-id="escritura-con-markdown"><span class="header-section-number">22.1</span> Escritura con Markdown</h2>
 </section>
@@ -391,10 +488,18 @@ ul.task-list li input[type="checkbox"] {
 <section id="incorporación-de-celdas-de-código" class="level2" data-number="22.3">
 <h2 data-number="22.3" class="anchored" data-anchor-id="incorporación-de-celdas-de-código"><span class="header-section-number">22.3</span> Incorporación de celdas de código</h2>
 </section>
-<section id="callouts-referencias-cruzadas-y-más" class="level2" data-number="22.4">
-<h2 data-number="22.4" class="anchored" data-anchor-id="callouts-referencias-cruzadas-y-más"><span class="header-section-number">22.4</span> Callouts, referencias cruzadas y más</h2>
+<section id="bloques-de-llamada-referencias-cruzadas-y-más" class="level2" data-number="22.4">
+<h2 data-number="22.4" class="anchored" data-anchor-id="bloques-de-llamada-referencias-cruzadas-y-más"><span class="header-section-number">22.4</span> Bloques de llamada, referencias cruzadas y más</h2>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-posit_introduction_2026" class="csl-entry" role="listitem">
+Posit. (2026). Introduction to <span>Quarto</span>. En <em>Posit Academy</em>. <a href="https://academy.posit.co/introduction-to-quarto">https://academy.posit.co/introduction-to-quarto</a>
+</div>
+<div id="ref-wickham_r_2023" class="csl-entry" role="listitem">
+Wickham, H. (2023). <em>R for <span>Data</span> <span>Science</span></em> (2.ª ed.). O’Reilly Media, Incorporated. <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a>
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
