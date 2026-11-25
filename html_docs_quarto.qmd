@@ -45,6 +45,8 @@ Adicionalmente, es necesario que descargues el archivo en extensión `.bib` señ
 ## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [reporte-umng.bib]({{< var url.reference.reporte-umng >}}){download="reporte-umng.bib"}
 :::
 
+Luego, incluye el archivo `reporte-umng.bib` dentro de la carpeta `references` (ver @nte-1-chap-21).
+
 En caso que hayas seguido estas indicaciones, procede a crear el archivo `reporte_umng-ingles.qmd` dentro de la carpeta `reports` (ver @nte-1-chap-21).
 ::::
 
