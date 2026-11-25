@@ -1,0 +1,34 @@
+flowchart TD
+    %% Nivel 1: Tema Principal
+    ROOT["Beneficios del Aprendizaje<br/>de Lenguas Extranjeras"]
+
+    %% Nivel 2: Categorías
+    IU["Comprensión Intercultural"]
+    EB["Beneficios Económicos"]
+    CB["Beneficios Cognitivos"]
+
+    %% Nivel 3: Descripciones con líneas equilibradas simétricamente (~36-39 caracteres)
+    IU_DESC["• Entender y valorar otras culturas<br/>• Reconocer la propia identidad cultural<br/>• Convivir y participar en un mundo global"]
+    EB_DESC["• Acceder a mejores empleos y salarios<br/>• Facilitar ascensos y movilidad laboral<br/>• Impulsar los negocios internacionales"]
+    CB_DESC["• Aumentar creatividad y concentración<br/>• Resolver problemas de mayor complejidad<br/>• Aprender otros idiomas con facilidad"]
+
+    %% Relaciones
+    ROOT --> IU
+    ROOT --> EB
+    ROOT --> CB
+
+    IU --> IU_DESC
+    EB --> EB_DESC
+    CB --> CB_DESC
+
+    %% Estilos basados en la Paleta Primaria UMNG
+    %% Consistencia total: Fondo amarillo #fdc600 y Borde/Texto azul #043074
+    classDef rootStyle fill:#fdc600,stroke:#043074,stroke-width:3px,color:#043074,font-weight:bold;
+    classDef catStyle fill:#fdc600,stroke:#043074,stroke-width:2px,color:#043074,font-weight:bold;
+    classDef descStyle fill:#fdc600,stroke:#043074,stroke-width:1.5px,color:#043074,font-weight:normal,text-align:left;
+
+    class ROOT rootStyle;
+    class IU,EB,CB catStyle;
+    class IU_DESC,EB_DESC,CB_DESC descStyle;
+
+    linkStyle default stroke:#043074,stroke-width:2px;

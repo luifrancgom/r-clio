@@ -11,6 +11,43 @@ source("_common.R")
 #| message: false
 ```
 
+Este capítulo se basa en [@posit_introduction_2026] y [@wickham_r_2023, Cap. 28] así como en la documentación oficial de [`quarto`]({{< var url.software.quarto_positron >}}) donde tiene como propósito introducir la forma de generar reportes a través del uso de [**Quarto**]({{< var url.software.quarto >}}) en formato [HTML]({{< var url.software.quarto_format_html >}}) e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Universidad Militar Nueva Granada (UMNG).
+
+Exploraremos los siguientes aspectos:
+
+1. ¿Cómo escribir un reporte en Markdown? 
+2. ¿Cómo controlar los aspectos globales del reporte utilizando YAML?
+3. ¿Cómo incorporar celdas de código en un reporte? 
+4. ¿Cómo incluir bloques de llamada, referencias cruzadas y otros elementos adicionales en un reporte?
+
+:::: {#nte-1-chap-22 .callout-note}
+Para desarrollar el contenido de este capítulo es necesario que hayas exportado y guardado el archivo `2021-2024_saber-pro-genericas_faedis_ajustado.rds` en la carpeta `data`, tal como se señaló en el @lst-umng-export. En caso que no lo hayas hecho es necesario que lo descargues y lo incluyas dentro de la carpeta `data`:
+
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [2021-2024_saber-pro-genericas_umng.rds]({{< var url.data.saber_pro_umng_rds >}})
+:::
+
+Además, es necesario que descargues los archivos en extensión `.png` señalados a continuación: 
+
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [benefits-foreign-language-learning.png]({{< var url.image.benefits-foreign-language-learning >}}){download="benefits-foreign-language-learning.png"}
+:::
+
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [plan-improvement-opportunities.png]({{< var url.image.plan-improvement-opportunities >}}){download="plan-improvement-opportunities.png"}
+:::
+
+Luego, incluye los archivos `benefits-foreign-language-learning.png` y `plan-improvement-opportunities.png` dentro de la carpeta `images` (ver @nte-1-chap-21).
+
+Adicionalmente, es necesario que descargues el archivo en extensión `.bib` señalado a continuación:
+
+::: {.callout appearance="minimal"}
+## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [reporte-umng.bib]({{< var url.reference.reporte-umng >}}){download="reporte-umng.bib"}
+:::
+
+En caso que hayas seguido estas indicaciones, procede a crear el archivo `reporte_umng-ingles.qmd` dentro de la carpeta `reports` (ver @nte-1-chap-21).
+::::
+
 ## Escritura con Markdown
 
 
@@ -23,4 +60,4 @@ source("_common.R")
 
 
 
-## Callouts, referencias cruzadas y más
+## Bloques de llamada, referencias cruzadas y más

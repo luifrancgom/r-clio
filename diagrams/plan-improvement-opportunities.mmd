@@ -1,0 +1,18 @@
+flowchart LR
+    %% Orientación de izquierda a derecha (LR) con las 3 Fases Estudiantiles
+    F1["<b>Fase 1: Ingreso (1.er Semestre)</b><br/>• Examen de clasificación obligatorio<br/>• Costo integrado en la matrícula"]
+    
+    F2["<b>Fase 2: Mitad de Carrera</b><br/>• Requisito de lectura en segunda lengua<br/>• Suficiencia en comprensión lectora"]
+    
+    F3["<b>Fase 3: Último Semestre / Grado</b><br/>• Dominio de lengua extranjera<br/>• Comprensión y expresión oral y escrita"]
+
+    %% Flujo secuencial entre las 3 fases
+    F1 -->|"Avance curricular"| F2
+    F2 -->|"Cierre formativo"| F3
+
+    %% Estilos basados en la Paleta Primaria UMNG
+    classDef nodeStyle fill:#fdc600,stroke:#043074,stroke-width:2px,color:#043074,font-weight:normal,text-align:left;
+
+    class F1,F2,F3 nodeStyle;
+
+    linkStyle default stroke:#043074,stroke-width:2px;

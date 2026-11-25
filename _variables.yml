@@ -131,6 +131,7 @@ url:
     saber_pro_programas_rds: "https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/2021-2024_saber-pro-genericas_faedis_programas.rds"
     saber_pro_faedis_ajustado_csv: "data/2021-2024_saber-pro-genericas_faedis_ajustado.csv"
     saber_pro_faedis_ajustado_rds: "https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/2021-2024_saber-pro-genericas_faedis_ajustado.rds"
+    saber_pro_umng_rds: "https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/2021-2024_saber-pro-genericas_umng.rds"
     divipola_deptos_rds: "https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/divipola-departamentos.rds"
     divipola_mpios_rds: "https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/divipola-municipios.rds"
     programas_faedis_rds: "https://github.com/luifrancgom/r-clio/raw/refs/heads/main/data/programas-pregrado-faedis.rds"
@@ -191,11 +192,16 @@ url:
     report_penguins_docx: "reports/reporte_pinguinos.docx"
     report_penguins_odt: "reports/reporte_pinguinos.odt"
     report_penguins_pdf: "reports/reporte_pinguinos.pdf"
+    report_umng_ingles: "reports/reporte_umng-ingles.qmd"
+    report_umng_ingles_html: "reports/reporte_umng-ingles.html"
 
   image:
     culmen_depth_es: "images/culmen_depth_es.png"
     penguins: "images/penguins.png"
+    benefits-foreign-language-learning: "images/benefits-foreign-language-learning.png"
+    plan-improvement-opportunities: "images/plan-improvement-opportunities.png"
 
   reference:
     reporte-pinguinos: "references/reporte-pinguinos.bib"
+    reporte-umng: "references/reporte-umng.bib"
     apa: "references/apa.csl"
