@@ -49,7 +49,7 @@ El aprendizaje de una segunda lengua trasciende la adquisición de destrezas com
 
 1. **Comprensión intercultural:** Promueve la conciencia y el aprecio de la diversidad cultural, profundiza en la complejidad de los valores sociales y permite resignificar la propia identidad a través del contraste con otras perspectivas globales, favoreciendo una ciudadanía democrática y activa.
 2. **Beneficios económicos:** Confiere ventajas competitivas tangibles en el mercado de trabajo mediante mayor empleabilidad, oportunidades de ascenso y primas salariales positivas. En el plano macroeconómico, estimula el comercio exterior, la inversión extranjera directa y la transferencia tecnológica transfronteriza.
-3. **Beneficios cognitivos:** Desarrolla el pensamiento creativo, la flexibilidad cognitiva y la resolución de problemas de alta complejidad. Asimismo, potencia la atención mental sostenida, afianza la comprensión metalingüística y genera efectos facilitadores sobre la lectoescritura en la lengua materna.
+3. **Beneficios cognitivos:** Desarrolla el pensamiento creativo, la flexibilidad cognitiva y la resolución de problemas. Asimismo, potencia la atención mental sostenida, afianza la comprensión metalingüística y genera efectos facilitadores sobre la lectoescritura en la lengua materna.
 
 ![Beneficios formativos, económicos y cognitivos del aprendizaje de lenguas extranjeras adaptado de @oecd_pisa_2021.](../images/benefits-foreign-language-learning.png){#fig-beneficios fig-align="center" width="60%"}
 
@@ -117,7 +117,7 @@ saber_pro_ingles_2021_2024_umng |>
 
 ## Estimación de Estadísticos Descriptivos Agregados
 
-Para modelar formalmente la agregación temporal de los resultados, se define $x_{ij} \in [0, 300]$ como el puntaje obtenido en el módulo de inglés por el estudiante $i$ evaluado en el año $j$, donde el índice $j \in \{2021, 2022, 2023, 2024\}$ especifica el año de la cohorte, el índice $i \in \{1, 2, \dots, n_j\}$ identifica al estudiante individual dentro de dicha cohorte, y $n_j$ representa el número total de evaluados en el año $j$.
+Para generar la agregación temporal de los resultados, se define $x_{ij} \in [0, 300]$ como el puntaje obtenido en el módulo de inglés por el estudiante $i$ evaluado en el año $j$, donde el índice $j \in \{2021, 2022, 2023, 2024\}$ especifica el año de la cohorte, el índice $i \in \{1, 2, \dots, n_j\}$ identifica al estudiante individual dentro de dicha cohorte y $n_j$ representa el número total de evaluados en el año $j$.
 
 Con el propósito de resumir la tendencia central y la dispersión por cohorte anual preservando valores enteros, se estiman la media muestral truncada mediante la @eq-media-piso y la desviación estándar truncada mediante la @eq-desviacion-piso, aplicando en ambos casos la función piso ($\lfloor \cdot \rfloor$):
 

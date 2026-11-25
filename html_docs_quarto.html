@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -373,10 +408,32 @@ div.csl-indent {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#escritura-con-markdown" id="toc-escritura-con-markdown" class="nav-link active" data-scroll-target="#escritura-con-markdown"><span class="header-section-number">22.1</span> Escritura con Markdown</a></li>
-  <li><a href="#control-del-documento-con-yaml" id="toc-control-del-documento-con-yaml" class="nav-link" data-scroll-target="#control-del-documento-con-yaml"><span class="header-section-number">22.2</span> Control del documento con YAML</a></li>
-  <li><a href="#incorporación-de-celdas-de-código" id="toc-incorporación-de-celdas-de-código" class="nav-link" data-scroll-target="#incorporación-de-celdas-de-código"><span class="header-section-number">22.3</span> Incorporación de celdas de código</a></li>
-  <li><a href="#bloques-de-llamada-referencias-cruzadas-y-más" id="toc-bloques-de-llamada-referencias-cruzadas-y-más" class="nav-link" data-scroll-target="#bloques-de-llamada-referencias-cruzadas-y-más"><span class="header-section-number">22.4</span> Bloques de llamada, referencias cruzadas y más</a></li>
+  <li><a href="#sec-markdown-writing" id="toc-sec-markdown-writing" class="nav-link active" data-scroll-target="#sec-markdown-writing"><span class="header-section-number">22.1</span> Escritura con Markdown</a>
+  <ul class="collapse">
+  <li><a href="#introducción" id="toc-introducción" class="nav-link" data-scroll-target="#introducción"><span class="header-section-number">22.1.1</span> Introducción</a></li>
+  <li><a href="#marco-de-evaluación-de-la-competencia" id="toc-marco-de-evaluación-de-la-competencia" class="nav-link" data-scroll-target="#marco-de-evaluación-de-la-competencia"><span class="header-section-number">22.1.2</span> Marco de Evaluación de la Competencia</a></li>
+  <li><a href="#beneficios-del-aprendizaje-de-lenguas-extranjeras" id="toc-beneficios-del-aprendizaje-de-lenguas-extranjeras" class="nav-link" data-scroll-target="#beneficios-del-aprendizaje-de-lenguas-extranjeras"><span class="header-section-number">22.1.3</span> Beneficios del Aprendizaje de Lenguas Extranjeras</a></li>
+  <li><a href="#resultados-saber-pro-umng-2021-2024" id="toc-resultados-saber-pro-umng-2021-2024" class="nav-link" data-scroll-target="#resultados-saber-pro-umng-2021-2024"><span class="header-section-number">22.1.4</span> Resultados Saber Pro UMNG (2021-2024)</a></li>
+  <li><a href="#estimación-de-estadísticos-descriptivos-agregados" id="toc-estimación-de-estadísticos-descriptivos-agregados" class="nav-link" data-scroll-target="#estimación-de-estadísticos-descriptivos-agregados"><span class="header-section-number">22.1.5</span> Estimación de Estadísticos Descriptivos Agregados</a></li>
+  <li><a href="#oportunidades-de-mejora-para-pregrado" id="toc-oportunidades-de-mejora-para-pregrado" class="nav-link" data-scroll-target="#oportunidades-de-mejora-para-pregrado"><span class="header-section-number">22.1.6</span> Oportunidades de Mejora para Pregrado</a></li>
+  </ul></li>
+  <li><a href="#sec-document-control-yaml" id="toc-sec-document-control-yaml" class="nav-link" data-scroll-target="#sec-document-control-yaml"><span class="header-section-number">22.2</span> Control del documento con YAML</a></li>
+  <li><a href="#sec-code-cells-inclusion" id="toc-sec-code-cells-inclusion" class="nav-link" data-scroll-target="#sec-code-cells-inclusion"><span class="header-section-number">22.3</span> Incorporación de celdas de código</a>
+  <ul class="collapse">
+  <li><a href="#carga-de-paquetes" id="toc-carga-de-paquetes" class="nav-link" data-scroll-target="#carga-de-paquetes"><span class="header-section-number">22.3.1</span> Carga de paquetes</a></li>
+  <li><a href="#importación-y-selección-de-datos" id="toc-importación-y-selección-de-datos" class="nav-link" data-scroll-target="#importación-y-selección-de-datos"><span class="header-section-number">22.3.2</span> Importación y selección de datos</a></li>
+  <li><a href="#visualización-con-ggplot2" id="toc-visualización-con-ggplot2" class="nav-link" data-scroll-target="#visualización-con-ggplot2"><span class="header-section-number">22.3.3</span> Visualización con ggplot2</a></li>
+  <li><a href="#transformación-y-resumen-estadístico" id="toc-transformación-y-resumen-estadístico" class="nav-link" data-scroll-target="#transformación-y-resumen-estadístico"><span class="header-section-number">22.3.4</span> Transformación y resumen estadístico</a></li>
+  <li><a href="#construcción-de-tablas-con-knitr-y-la-función-kable" id="toc-construcción-de-tablas-con-knitr-y-la-función-kable" class="nav-link" data-scroll-target="#construcción-de-tablas-con-knitr-y-la-función-kable"><span class="header-section-number">22.3.5</span> Construcción de tablas con knitr y la función kable</a></li>
+  </ul></li>
+  <li><a href="#sec-callouts-crossreferences-citations" id="toc-sec-callouts-crossreferences-citations" class="nav-link" data-scroll-target="#sec-callouts-crossreferences-citations"><span class="header-section-number">22.4</span> Bloques de llamada, referencias cruzadas y más</a>
+  <ul class="collapse">
+  <li><a href="#bloques-de-llamada" id="toc-bloques-de-llamada" class="nav-link" data-scroll-target="#bloques-de-llamada"><span class="header-section-number">22.4.1</span> Bloques de llamada</a></li>
+  <li><a href="#referencias-cruzadas-automáticas" id="toc-referencias-cruzadas-automáticas" class="nav-link" data-scroll-target="#referencias-cruzadas-automáticas"><span class="header-section-number">22.4.2</span> Referencias cruzadas automáticas</a></li>
+  <li><a href="#gestor-bibliográfico-zotero-y-estilos-csl" id="toc-gestor-bibliográfico-zotero-y-estilos-csl" class="nav-link" data-scroll-target="#gestor-bibliográfico-zotero-y-estilos-csl"><span class="header-section-number">22.4.3</span> Gestor bibliográfico Zotero y estilos CSL</a></li>
+  <li><a href="#estilo-css-personalizado-para-justificar-texto" id="toc-estilo-css-personalizado-para-justificar-texto" class="nav-link" data-scroll-target="#estilo-css-personalizado-para-justificar-texto"><span class="header-section-number">22.4.4</span> Estilo CSS personalizado para justificar texto</a></li>
+  <li><a href="#descarga-del-código-fuente-final" id="toc-descarga-del-código-fuente-final" class="nav-link" data-scroll-target="#descarga-del-código-fuente-final"><span class="header-section-number">22.4.5</span> Descarga del código fuente final</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/luifrancgom/r-clio/edit/main/html_docs_quarto.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/luifrancgom/r-clio/blob/main/html_docs_quarto.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li><li><a href="https://github.com/luifrancgom/r-clio/issues" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
@@ -402,7 +459,7 @@ div.csl-indent {
 </header>
 
 
-<p>Este capítulo se basa en <span class="citation" data-cites="posit_introduction_2026">(<a href="references.html#ref-posit_introduction_2026" role="doc-biblioref">Posit, 2026</a>)</span> y <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 28</a>)</span> así como en la documentación oficial de <a href="https://quarto.org/docs/get-started/hello/positron.html"><code>quarto</code></a> donde tiene como propósito introducir la forma de generar reportes a través del uso de <a href="https://quarto.org/"><strong>Quarto</strong></a> en formato <a href="https://quarto.org/docs/reference/formats/html.html">HTML</a> e información de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Universidad Militar Nueva Granada (UMNG).</p>
+<p>Este capítulo se basa en <span class="citation" data-cites="posit_introduction_2026">(<a href="references.html#ref-posit_introduction_2026" role="doc-biblioref">Posit, 2026</a>)</span> y <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 28</a>)</span> así como en la documentación oficial de <a href="https://quarto.org/docs/get-started/hello/positron.html"><code>quarto</code></a> donde tiene como propósito introducir la forma de generar reportes a través del uso de <a href="https://quarto.org/"><strong>Quarto</strong></a> en formato <a href="https://quarto.org/docs/reference/formats/html.html">HTML</a> mediante la recreación del reporte <code>reporte_umng-ingles.html</code> a partir de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Universidad Militar Nueva Granada (UMNG).</p>
 <p>Exploraremos los siguientes aspectos:</p>
 <ol type="1">
 <li>¿Cómo escribir un reporte en Markdown?</li>
@@ -420,7 +477,21 @@ Nota&nbsp;22.1
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Para desarrollar el contenido de este capítulo es necesario que hayas exportado y guardado el archivo <code>2021-2024_saber-pro-genericas_faedis_ajustado.rds</code> en la carpeta <code>data</code>, tal como se señaló en el <a href="map_reduce_list_rbind_functions.html#lst-umng-export" class="quarto-xref">Listado&nbsp;<span>20.17</span></a>. En caso que no lo hayas hecho es necesario que lo descargues y lo incluyas dentro de la carpeta <code>data</code>:</p>
+<p>Para desarrollar el contenido de este capítulo, la meta central consiste en recrear el reporte <code>reporte_umng-ingles.html</code>. Puedes descargar a continuación dicho archivo en formato HTML para que lo abras en tu navegador web y examines con anticipación el producto que estructuraremos a lo largo de este capítulo:</p>
+<div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span><img src="images/download-solid-full.png" alt="Ícono del explorador de archivos" height="25"> <a href="reports/reporte_umng-ingles.html" download="reporte_umng-ingles.html">reporte_umng-ingles.html</a>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<p>Asimismo, es necesario que hayas exportado y guardado el archivo <code>2021-2024_saber-pro-genericas_faedis_ajustado.rds</code> en la carpeta <code>data</code>, tal como se señaló en el <a href="map_reduce_list_rbind_functions.html#lst-umng-export" class="quarto-xref">Listado&nbsp;<span>20.17</span></a>. En caso que no lo hayas hecho es necesario que lo descargues y lo incluyas dentro de la carpeta <code>data</code>:</p>
 <div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -477,30 +548,455 @@ Nota&nbsp;22.1
 </div>
 </div>
 <p>Luego, incluye el archivo <code>reporte-umng.bib</code> dentro de la carpeta <code>references</code> (ver <a href="welcome_to_quarto.html#nte-1-chap-21" class="quarto-xref">Nota&nbsp;<span>21.1</span></a>).</p>
-<p>En caso que hayas seguido estas indicaciones, procede a crear el archivo <code>reporte_umng-ingles.qmd</code> dentro de la carpeta <code>reports</code> (ver <a href="welcome_to_quarto.html#nte-1-chap-21" class="quarto-xref">Nota&nbsp;<span>21.1</span></a>).</p>
+<p>En caso que hayas seguido estas indicaciones, procede a crear el archivo <code>reporte_umng-ingles-draft.qmd</code> dentro de la carpeta <code>reports</code> (ver <a href="welcome_to_quarto.html#nte-1-chap-21" class="quarto-xref">Nota&nbsp;<span>21.1</span></a>) para que puedas recrear, a partir del código fuente, el archivo <code>reporte_umng-ingles.html</code>.</p>
 </div>
 </div>
-<section id="escritura-con-markdown" class="level2" data-number="22.1">
-<h2 data-number="22.1" class="anchored" data-anchor-id="escritura-con-markdown"><span class="header-section-number">22.1</span> Escritura con Markdown</h2>
+<section id="sec-markdown-writing" class="level2" data-number="22.1">
+<h2 data-number="22.1" class="anchored" data-anchor-id="sec-markdown-writing"><span class="header-section-number">22.1</span> Escritura con Markdown</h2>
+<p>Al estructurar un reporte técnico o científico en Quarto, una práctica recomendada consiste en diseñar primero el esquema general y la narrativa mediante texto en formato <a href="https://quarto.org/docs/authoring/markdown-basics.html"><strong>Markdown</strong></a>, postergando temporalmente la inclusión de celdas de código, fórmulas matemáticas complejas y referencias cruzadas automatizadas <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 28</a>)</span>.</p>
+<p>Para iniciar el archivo <code>reporte_umng-ingles.qmd</code> dentro de la carpeta <code>reports</code>, establece un encabezado YAML mínimo y define los encabezados principales del documento de acuerdo con la siguiente estructura inicial:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Resultados Saber Pro: Competencia Genérica en Inglés (UMNG 2021-2024)"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> 2026-11-25</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">code-fold</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">embed-resources</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lang</span><span class="kw">:</span><span class="at"> es</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">engine</span><span class="kw">:</span><span class="at"> knitr</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Introducción</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Marco de Evaluación de la Competencia</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Beneficios del Aprendizaje de Lenguas Extranjeras</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Resultados Saber Pro UMNG (2021-2024)</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co">## Estimación de Estadísticos Descriptivos Agregados</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Oportunidades de Mejora para Pregrado</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>En este punto inicial, el documento cuenta con un encabezado YAML básico que define el título, la fecha, el formato de salida HTML con plegado de código (<code>code-fold: true</code>), la integración de recursos en un único archivo (<code>embed-resources: true</code>), el idioma español (<code>lang: es</code>) y el motor de evaluación (<code>engine: knitr</code>).</p>
+<p>A continuación, se procede a redactar únicamente la narrativa en Markdown para cada una de las secciones, sin incorporar aún bloques de código ejecutable, ecuaciones matemáticas ni referencias cruzadas con la sintaxis de Quarto (<code>@fig-...</code>, <code>@tbl-...</code> o <code>@eq-...</code>). En su lugar, cualquier alusión a figuras o tablas se escribe en texto plano simple (por ejemplo, redactando explícitamente “Figura 1”, “Figura 2” o “Tabla 1”), como se suele hacer en una primera versión narrativa antes de automatizar los enlaces. Asimismo, para visualizar los bloques de texto extenso sin necesidad de desplazarse horizontalmente, se puede aplicar la clase CSS <code>.code-overflow-wrap</code> al bloque de código estático (por ejemplo, mediante <code>```{.markdown .code-overflow-wrap}</code>).</p>
+<section id="introducción" class="level3" data-number="22.1.1">
+<h3 data-number="22.1.1" class="anchored" data-anchor-id="introducción"><span class="header-section-number">22.1.1</span> Introducción</h3>
+<p>En la sección inicial <code># Introducción</code>, redacta los párrafos introductorios que describen el propósito del informe y contextualizan el diagnóstico institucional sobre el módulo de inglés:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-overflow-wrap code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Introducción</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>Este informe analiza el desempeño de los estudiantes de pregrado de la Universidad Militar Nueva Granada (UMNG) en el módulo de inglés de las pruebas Saber Pro (2021-2024), examinando la evolución de sus puntajes y niveles de desempeño.</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>A partir de este diagnóstico, se plantea una ruta de mejoramiento estructurada en 3 fases formativas desde el ingreso hasta la graduación para fortalecer de manera continua las competencias en una segunda lengua.</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="control-del-documento-con-yaml" class="level2" data-number="22.2">
-<h2 data-number="22.2" class="anchored" data-anchor-id="control-del-documento-con-yaml"><span class="header-section-number">22.2</span> Control del documento con YAML</h2>
+<section id="marco-de-evaluación-de-la-competencia" class="level3" data-number="22.1.2">
+<h3 data-number="22.1.2" class="anchored" data-anchor-id="marco-de-evaluación-de-la-competencia"><span class="header-section-number">22.1.2</span> Marco de Evaluación de la Competencia</h3>
+<p>En la sección <code># Marco de Evaluación de la Competencia</code>, redacta la descripción del instrumento de evaluación del ICFES y la clasificación del Marco Común Europeo de Referencia (MCER). En esta etapa, incluye las fuentes bibliográficas en texto simple como parte de la redacción:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-overflow-wrap code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Marco de Evaluación de la Competencia</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>De acuerdo con la guía de orientación del examen Saber Pro (ICFES, 2024, p. 57), el módulo de inglés evalúa la competencia para comunicarse efectivamente en lengua inglesa mediante tareas de lectura y uso de la lengua. Alineado con las directrices del Marco Común Europeo de Referencia (MCER), clasifica el desempeño de los evaluados en 4 niveles: A1, A2, B1 y B2. El instrumento está integrado por 7 partes, cada una orientada a una habilidad específica y con una ponderación porcentual definida: Parte 1 (11%), Parte 2 (11%), Parte 3 (11%), Parte 4 (18%), Parte 5 (16%), Parte 6 (11%) y Parte 7 (22%) (ICFES, 2024, p. 57).</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="incorporación-de-celdas-de-código" class="level2" data-number="22.3">
-<h2 data-number="22.3" class="anchored" data-anchor-id="incorporación-de-celdas-de-código"><span class="header-section-number">22.3</span> Incorporación de celdas de código</h2>
+<section id="beneficios-del-aprendizaje-de-lenguas-extranjeras" class="level3" data-number="22.1.3">
+<h3 data-number="22.1.3" class="anchored" data-anchor-id="beneficios-del-aprendizaje-de-lenguas-extranjeras"><span class="header-section-number">22.1.3</span> Beneficios del Aprendizaje de Lenguas Extranjeras</h3>
+<p>En la sección <code># Beneficios del Aprendizaje de Lenguas Extranjeras</code>, se incorporan elementos enriquecidos de Markdown:</p>
+<ol type="1">
+<li><strong>Texto en negrita:</strong> delimitado con doble asterisco (<code>**texto**</code>) para destacar las dimensiones clave (<strong>Comprensión intercultural:</strong>, <strong>Beneficios económicos:</strong> y <strong>Beneficios cognitivos:</strong>).</li>
+<li><strong>Listas numeradas:</strong> mediante números seguidos de un punto (<code>1.</code>, <code>2.</code>, <code>3.</code>).</li>
+<li><strong>Imágenes externas:</strong> mediante la sintaxis <code>![Texto alternativo](ruta/imagen.png){atributos}</code>, especificando su alineación y ancho relativo.</li>
+<li><strong>Referencias en texto simple:</strong> la mención a la imagen se redacta en texto simple como <code>(ver Figura 1)</code>, sin utilizar todavía la sintaxis de referencias cruzadas automáticas de Quarto.</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-overflow-wrap code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Beneficios del Aprendizaje de Lenguas Extranjeras</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>El aprendizaje de una segunda lengua trasciende la adquisición de destrezas comunicativas básicas, constituyéndose en un habilitador integral del desarrollo humano, académico y laboral. De acuerdo con el marco de evaluación de lenguas extranjeras de PISA (OECD, 2021, pp. 10-11), los beneficios derivados de esta competencia se agrupan en 3 dimensiones (ver Figura 1):</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Comprensión intercultural:** Promueve la conciencia y el aprecio de la diversidad cultural, profundiza en la complejidad de los valores sociales y permite resignificar la propia identidad a través del contraste con otras perspectivas globales, favoreciendo una ciudadanía democrática y activa.</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Beneficios económicos:** Confiere ventajas competitivas tangibles en el mercado de trabajo mediante mayor empleabilidad, oportunidades de ascenso y primas salariales positivas. En el plano macroeconómico, estimula el comercio exterior, la inversión extranjera directa y la transferencia tecnológica transfronteriza.</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Beneficios cognitivos:** Desarrolla el pensamiento creativo, la flexibilidad cognitiva y la resolución de problemas. Asimismo, potencia la atención mental sostenida, afianza la comprensión metalingüística y genera efectos facilitadores sobre la lectoescritura en la lengua materna.</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="al">![Beneficios formativos, económicos y cognitivos del aprendizaje de lenguas extranjeras adaptado de OECD (2021).](../images/benefits-foreign-language-learning.png)</span>{fig-align="center" width="60%"}</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="bloques-de-llamada-referencias-cruzadas-y-más" class="level2" data-number="22.4">
-<h2 data-number="22.4" class="anchored" data-anchor-id="bloques-de-llamada-referencias-cruzadas-y-más"><span class="header-section-number">22.4</span> Bloques de llamada, referencias cruzadas y más</h2>
+<section id="resultados-saber-pro-umng-2021-2024" class="level3" data-number="22.1.4">
+<h3 data-number="22.1.4" class="anchored" data-anchor-id="resultados-saber-pro-umng-2021-2024"><span class="header-section-number">22.1.4</span> Resultados Saber Pro UMNG (2021-2024)</h3>
+<p>En la sección <code># Resultados Saber Pro UMNG (2021-2024)</code>, se presenta la narrativa que introduce la distribución anual de puntajes. En esta fase de escritura con Markdown, <strong>no se incluye ningún bloque de código R</strong>: únicamente se redacta el texto introductorio aludiendo al gráfico en texto simple:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-overflow-wrap code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Resultados Saber Pro UMNG (2021-2024)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>En la Figura 2 se presenta la distribución anual de los puntajes individuales (valores entre 0 y 300) obtenidos por los estudiantes de la UMNG, desagregada según el nivel de desempeño alcanzado en el módulo.</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="estimación-de-estadísticos-descriptivos-agregados" class="level3" data-number="22.1.5">
+<h3 data-number="22.1.5" class="anchored" data-anchor-id="estimación-de-estadísticos-descriptivos-agregados"><span class="header-section-number">22.1.5</span> Estimación de Estadísticos Descriptivos Agregados</h3>
+<p>En la subsección <code>## Estimación de Estadísticos Descriptivos Agregados</code>, se describe el procedimiento metodológico para agregar las cohortes y calcular la media y desviación estándar truncadas al piso. En esta primera fase, se redacta la descripción en texto plano sin fórmulas en LaTeX ni celdas de código, haciendo referencia en texto simple a la tabla resumen:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-overflow-wrap code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Estimación de Estadísticos Descriptivos Agregados</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>Para generar la agregación temporal de los resultados, se define el puntaje obtenido en el módulo de inglés por cada estudiante evaluado en el respectivo año (2021, 2022, 2023 o 2024), donde se identifica al estudiante individual dentro de cada cohorte anual y el total de evaluados por año.</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>Con el propósito de resumir la tendencia central y la dispersión por cohorte anual preservando valores enteros, se estiman la media muestral truncada y la desviación estándar truncada, aplicando en ambos casos la función piso.</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>Al aplicar este procedimiento de agregación a los microdatos institucionales, se obtienen las estimaciones anuales reportadas en la Tabla 1. En dicha tabla, cada fila identifica el año, la segunda columna consolida la media redondeada al piso, mientras que la tercera columna reporta la dispersión muestral.</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="oportunidades-de-mejora-para-pregrado" class="level3" data-number="22.1.6">
+<h3 data-number="22.1.6" class="anchored" data-anchor-id="oportunidades-de-mejora-para-pregrado"><span class="header-section-number">22.1.6</span> Oportunidades de Mejora para Pregrado</h3>
+<p>En la sección <code># Oportunidades de Mejora para Pregrado</code>, se describe la propuesta estratégica estructurada en fases, combinando listas numeradas, texto en negrita, una referencia a la figura en texto simple <code>(ver Figura 3)</code> y la inserción de la imagen correspondiente:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-overflow-wrap code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Oportunidades de Mejora para Pregrado</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>Para elevar de manera progresiva los niveles de suficiencia y mitigar las asimetrías formativas identificadas, se plantea un plan de oportunidades de mejora estructurado en 3 fases secuenciales para los estudiantes de pregrado (ver Figura 3):</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Fase 1 (Ingreso - 1.er Semestre):** Aplicación obligatoria de un examen de clasificación, integrando dicho valor dentro de los derechos de matrícula para contar con un diagnóstico temprano.</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Fase 2 (Mitad de Carrera):** Exigencia formal de cumplimiento de un requisito de lectura comprensiva en segunda lengua, verificando la suficiencia instrumental requerida para abordar bibliografía disciplinar.</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Fase 3 (Último Semestre / Grado):** Verificación obligatoria del dominio integral de la segunda lengua en 4 competencias clave (comprensión auditiva, lectura, producción oral y expresión escrita) como condición para la graduación.</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="al">![Ruta secuencial de oportunidades de mejora en 3 fases para estudiantes de pregrado de la UMNG.](../images/plan-improvement-opportunities.png)</span>{fig-align="center" width="95%"}</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="nte-markdown-simplicity" class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip&nbsp;22.2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Escribir primero la narrativa en Markdown permite validar la claridad conceptual del mensaje y estructurar el flujo de lectura antes de lidiar con aspectos técnicos de importación de datos, graficación, ecuaciones y dependencias de paquetes. Además, la aplicación de la clase <code>.code-overflow-wrap</code> en los bloques de código estáticos facilita la lectura y el copiado de párrafos extensos al evitar barras de desplazamiento horizontal.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-document-control-yaml" class="level2" data-number="22.2">
+<h2 data-number="22.2" class="anchored" data-anchor-id="sec-document-control-yaml"><span class="header-section-number">22.2</span> Control del documento con YAML</h2>
+<p>Una vez estructurado el cuerpo narrativo del informe, el encabezado YAML permite configurar de forma global el comportamiento del documento, los metadatos bibliográficos, la navegación y las opciones de renderizado <span class="citation" data-cites="posit_introduction_2026">(<a href="references.html#ref-posit_introduction_2026" role="doc-biblioref">Posit, 2026</a>)</span>.</p>
+<p>A continuación se presenta el encabezado YAML completo utilizado en <code>reporte_umng-ingles.qmd</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Resultados Saber Pro: Competencia Genérica en Inglés (UMNG 2021-2024)"</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> 2026-11-25</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">number-sections</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">code-fold</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">embed-resources</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lang</span><span class="kw">:</span><span class="at"> es</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">engine</span><span class="kw">:</span><span class="at"> knitr</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> ../references/reporte-umng.bib</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="fu">csl</span><span class="kw">:</span><span class="at"> ../references/apa.csl</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Cada una de estas opciones cumple una función específica dentro de la publicación del reporte:</p>
+<ol type="1">
+<li><strong><code>title</code> y <code>date</code>:</strong> Especifican los metadatos principales del documento. La fecha se define preferentemente en formato ISO estándar (<code>AAAA-MM-DD</code>, por ejemplo <code>2026-11-25</code>) o mediante la instrucción dinámica <code>last-modified</code>, lo cual garantiza que la fecha refleje la última compilación del archivo.</li>
+<li><strong><code>toc: true</code> (Table of Contents):</strong> Activa la tabla de contenido interactiva. En documentos HTML de Quarto, esta tabla se ubica de forma flotante en el margen lateral derecho, permitiendo al lector desplazarse de manera ágil entre los encabezados y subencabezados del informe.</li>
+<li><strong><code>number-sections: true</code>:</strong> Numera automáticamente las secciones y subsecciones del reporte de forma jerárquica (<code>1</code>, <code>1.1</code>, <code>2</code>, <code>3</code>, etc.), garantizando coherencia estructural a lo largo de todo el documento.</li>
+<li><strong><code>format: html:</code></strong> Define las opciones específicas para el formato web:
+<ul>
+<li><strong><code>code-fold: true</code>:</strong> Pliega automáticamente todos los bloques de código R al compilar el documento. En la vista HTML, cada bloque se muestra contraído bajo un botón interactivo rotulado como <strong>Código</strong>, permitiendo al usuario inspeccionar las instrucciones solo si así lo desea, sin interrumpir la lectura del texto y los gráficos.</li>
+<li><strong><code>embed-resources: true</code>:</strong> Consolida todos los archivos CSS, bibliotecas de JavaScript e imágenes dentro del propio archivo <code>.html</code>. De esta forma se genera un reporte web completamente autónomo e independiente, ideal para compartir por correo electrónico o subir a plataformas de aprendizaje sin preocuparse por rutas rotas o carpetas complementarias faltantes.</li>
+</ul></li>
+<li><strong><code>lang: es</code>:</strong> Establece el idioma del documento en español. Quarto utiliza esta directiva para traducir automáticamente las etiquetas predeterminadas del sistema, tales como “Tabla de contenidos”, “Figura”, “Tabla” y “Código”.</li>
+<li><strong><code>engine: knitr</code>:</strong> Especifica explícitamente a <code>knitr</code> como el motor de evaluación computacional para las celdas de código en R.</li>
+<li><strong><code>bibliography: ../references/reporte-umng.bib</code>:</strong> Establece la ruta relativa hacia el archivo en formato BibTeX que almacena las entradas bibliográficas del informe.</li>
+<li><strong><code>csl: ../references/apa.csl</code>:</strong> Vincula el archivo de estilo de citación (<em>Citation Style Language</em>), en este caso correspondiente a la 7.ª edición de las normas APA, el cual gobierna la presentación formal de las citas dentro del texto y el listado de referencias final.</li>
+</ol>
+</section>
+<section id="sec-code-cells-inclusion" class="level2" data-number="22.3">
+<h2 data-number="22.3" class="anchored" data-anchor-id="sec-code-cells-inclusion"><span class="header-section-number">22.3</span> Incorporación de celdas de código</h2>
+<p>Las celdas de código permiten intercalar instrucciones reproducibles de R directamente con la narrativa en Markdown <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 28</a>)</span>. En Quarto, la configuración de cada celda se realiza mediante la sintaxis <em>hashpipe</em> (<code>#|</code>), ubicando las opciones en pares <code>clave: valor</code> al inicio del bloque de código.</p>
+<p>A continuación, se describen las 5 celdas de código necesarias para generar el análisis empírico de <code>reporte_umng-ingles.qmd</code>, haciendo especial énfasis en la creación de tablas profesionales con el paquete <code>knitr</code> y la función <code>kable()</code>.</p>
+<section id="carga-de-paquetes" class="level3" data-number="22.3.1">
+<h3 data-number="22.3.1" class="anchored" data-anchor-id="carga-de-paquetes"><span class="header-section-number">22.3.1</span> Carga de paquetes</h3>
+<p>Al inicio del documento, antes de la primera sección narrativa, se inserta una celda de código para cargar las librerías necesarias:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode markdown qmd code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: cargar-paquetes</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>En esta celda:</p>
+<ul>
+<li><code>#| label: cargar-paquetes</code>: asigna una etiqueta identificadora única para la celda.</li>
+<li><code>#| message: false</code>: suprime los mensajes informativos emitidos por R al cargar las librerías en la consola, evitando ensuciar el reporte final.</li>
+<li>Se cargan el metapaquete <code>tidyverse</code> (para manipulación de datos con <code>dplyr</code> y graficación con <code>ggplot2</code>) y el paquete <code>knitr</code> (para generar tablas estilizadas).</li>
+</ul>
+</section>
+<section id="importación-y-selección-de-datos" class="level3" data-number="22.3.2">
+<h3 data-number="22.3.2" class="anchored" data-anchor-id="importación-y-selección-de-datos"><span class="header-section-number">22.3.2</span> Importación y selección de datos</h3>
+<p>Debajo del título de la sección <code># Resultados Saber Pro UMNG (2021-2024)</code>, se incorpora la celda encargada de cargar los datos procesados y filtrar las variables de interés:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode markdown qmd code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: importar-seleccionar</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>saber_pro_ingles_2021_2024_umng <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"../data/2021-2024_saber-pro-genericas_umng.rds"</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    ano,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    estu_consecutivo,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    mod_ingles_desem,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    mod_ingles_punt</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Esta celda lee el archivo binario optimizado <code>.rds</code> ubicado en la carpeta <code>data</code> y selecciona el año de evaluación (<code>ano</code>), el identificador del evaluado (<code>estu_consecutivo</code>), el nivel de desempeño cualitativo (<code>mod_ingles_desem</code>) y el puntaje continuo obtenido (<code>mod_ingles_punt</code>).</p>
+</section>
+<section id="visualización-con-ggplot2" class="level3" data-number="22.3.3">
+<h3 data-number="22.3.3" class="anchored" data-anchor-id="visualización-con-ggplot2"><span class="header-section-number">22.3.3</span> Visualización con ggplot2</h3>
+<p>Inmediatamente después del texto que introduce la distribución de los puntajes, se incluye la celda que genera el histograma facetado por año:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode markdown qmd code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-distribucion</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Distribución del puntaje en el módulo de inglés en la UMNG desagregado por nivel de desempeño (2021-2024)."</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 7</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Paleta primaria UMNG ----</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>paleta_primaria_umng <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#043074"</span>,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#fdc600"</span>,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#0d5e30"</span>,</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#ee2a24"</span>,</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#000000"</span>,</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#ffffff"</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Histograma ---</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>saber_pro_ingles_2021_2024_umng <span class="sc">|&gt;</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> mod_ingles_punt)</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">fill =</span> mod_ingles_desem),</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">boundary =</span> <span class="dv">0</span>,</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">bins =</span> <span class="dv">40</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> paleta_primaria_umng[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">facets =</span> <span class="fu">vars</span>(ano),</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">4</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Puntaje (rango [0, 300])"</span>,</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Frecuencia"</span>,</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Nivel de desempeño"</span>,</span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribución de puntajes en inglés - UMNG"</span>,</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Fuente: ICFES Saber Pro (2021-2024)"</span></span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Opciones clave de esta celda:</p>
+<ul>
+<li><code>#| label: fig-distribucion</code>: al emplear el prefijo reservado <code>fig-</code>, Quarto reconoce que el gráfico resultante debe registrarse como una figura numerada automáticamente, habilitando su referencia cruzada en el texto.</li>
+<li><code>#| fig-cap</code>: define el título descriptivo o leyenda al pie de la figura.</li>
+<li><code>#| fig-height: 7</code>: ajusta la altura del gráfico en pulgadas, garantizando espacio suficiente para visualizar las 4 facetas anuales sin solapamientos.</li>
+<li><code>#| warning: false</code>: suprime posibles advertencias emitidas por <code>ggplot2</code> durante el cálculo de los intervalos del histograma.</li>
+</ul>
+</section>
+<section id="transformación-y-resumen-estadístico" class="level3" data-number="22.3.4">
+<h3 data-number="22.3.4" class="anchored" data-anchor-id="transformación-y-resumen-estadístico"><span class="header-section-number">22.3.4</span> Transformación y resumen estadístico</h3>
+<p>En la subsección <code>## Estimación de Estadísticos Descriptivos Agregados</code>, se agrega la celda que ejecuta la agregación temporal:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode markdown qmd code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: agrupar-colapsar</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>saber_pro_ingles_agrupado_2021_2024_umng <span class="ot">&lt;-</span> saber_pro_ingles_2021_2024_umng <span class="sc">|&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ano) <span class="sc">|&gt;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_floor =</span> <span class="fu">as.integer</span>(<span class="fu">mean</span>(mod_ingles_punt)),</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_floor =</span> <span class="fu">as.integer</span>(<span class="fu">sd</span>(mod_ingles_punt))</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Esta celda agrupa las observaciones por año mediante <code>group_by(ano)</code> y calcula la media y desviación estándar muestrales, aplicando la coerción <code>as.integer()</code> para truncar los valores al entero inmediatamente inferior según la función piso.</p>
+</section>
+<section id="construcción-de-tablas-con-knitr-y-la-función-kable" class="level3" data-number="22.3.5">
+<h3 data-number="22.3.5" class="anchored" data-anchor-id="construcción-de-tablas-con-knitr-y-la-función-kable"><span class="header-section-number">22.3.5</span> Construcción de tablas con knitr y la función kable</h3>
+<p>A diferencia de un script interactivo en el que se imprime un <em>data frame</em> o <em>tibble</em> en texto plano en la consola, en un documento científico de Quarto se debe convertir el objeto de R en una tabla tipográfica formateada <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 28</a>)</span>. La función <code>kable()</code> del paquete <code>knitr</code> proporciona el mecanismo estándar para lograr este resultado.</p>
+<p>A continuación de la celda de agregación, se inserta la celda que genera la tabla resumen:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode markdown qmd code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-resumen</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "Media y desviación estándar truncadas (piso) del puntaje del módulo de inglés por año en la UMNG según las @eq-media-piso y @eq-desviacion-piso."</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>saber_pro_ingles_agrupado_2021_2024_umng <span class="sc">|&gt;</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">format =</span> <span class="st">"pipe"</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">c</span>(</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">"**Año ($j$)**"</span>,</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">"**Media ($</span><span class="sc">\\</span><span class="st">bar{x}_{j, </span><span class="sc">\\</span><span class="st">text{piso}}$)**"</span>,</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>      <span class="st">"**Desviación estándar ($s_{j, </span><span class="sc">\\</span><span class="st">text{piso}}$)**"</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">align =</span> <span class="fu">c</span>(<span class="st">"c"</span>, <span class="st">"c"</span>, <span class="st">"c"</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Analicemos los componentes esenciales de esta celda:</p>
+<ol type="1">
+<li><strong><code>#| label: tbl-resumen</code>:</strong> Al comenzar con el prefijo reservado <code>tbl-</code>, Quarto interpreta la salida como una tabla numerada que podrá ser referenciada en cualquier punto del documento mediante <code>@tbl-resumen</code>.</li>
+<li><strong><code>#| tbl-cap: "..."</code>:</strong> Especifica el título descriptivo de la tabla que se mostrará en el encabezado de la misma.</li>
+<li><strong><code>format = "pipe"</code>:</strong> Instruye a <code>kable()</code> para construir la tabla utilizando la sintaxis de tablas de tubería de Markdown (<code>| col1 | col2 |</code>), facilitando que Pandoc la procese y aplique el estilo visual óptimo en HTML.</li>
+<li><strong><code>col.names = c(...)</code>:</strong> Permite renombrar los encabezados de las columnas utilizando formato enriquecido de Markdown (como negrita <code>**...**</code>) e incluso expresiones matemáticas en LaTeX (como <code>$j$</code> o <code>$\bar{x}_{j, \text{piso}}$</code>). Ten en cuenta que en cadenas de caracteres de R se debe utilizar la doble barra invertida <code>\\</code> para escapar los comandos de LaTeX (por ejemplo, <code>\\text{piso}</code> y <code>\\bar{x}</code>).</li>
+<li><strong><code>align = c("c", "c", "c")</code>:</strong> Controla la alineación horizontal del contenido de cada columna. En este caso, el vector indica que las 3 columnas deben estar centradas (<code>"c"</code> para centro, <code>"l"</code> para izquierda y <code>"r"</code> para derecha).</li>
+</ol>
+</section>
+</section>
+<section id="sec-callouts-crossreferences-citations" class="level2" data-number="22.4">
+<h2 data-number="22.4" class="anchored" data-anchor-id="sec-callouts-crossreferences-citations"><span class="header-section-number">22.4</span> Bloques de llamada, referencias cruzadas y más</h2>
+<p>Con la narrativa y las celdas de código definidas, se procede a incorporar los elementos avanzados que elevan la calidad formal del reporte: bloques de llamada (<em>callouts</em>), referencias cruzadas dinámicas, ecuaciones matemáticas y gestión automatizada de citas y bibliografía con Zotero y estilos CSL.</p>
+<section id="bloques-de-llamada" class="level3" data-number="22.4.1">
+<h3 data-number="22.4.1" class="anchored" data-anchor-id="bloques-de-llamada"><span class="header-section-number">22.4.1</span> Bloques de llamada</h3>
+<p>Los bloques de llamada (<em>callouts</em>) permiten destacar información complementaria, advertencias, notas metodológicas o consejos sin romper el flujo de lectura <span class="citation" data-cites="quarto_core_team_tutorial_2026">(<a href="references.html#ref-quarto_core_team_tutorial_2026" role="doc-biblioref"><span class="nocase">team</span>, 2026</a>)</span>. Quarto admite 5 tipos estándar de bloques de llamada: <code>.callout-note</code>, <code>.callout-tip</code>, <code>.callout-warning</code>, <code>.callout-caution</code> y <code>.callout-important</code>.</p>
+<p>En <code>reporte_umng-ingles.qmd</code>, justo antes de la carga de paquetes, se inserta un bloque de llamada de advertencia para aclarar el carácter del análisis:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode markdown code-overflow-wrap code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">### Aviso preliminar</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>El presente reporte constituye un ejercicio analítico preliminar y no representa un documento oficial ni una versión definitiva.</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Al renderizar en HTML, este bloque se presenta con un borde visual distintivo, un ícono de advertencia y un encabezado destacado, alertando de inmediato al lector.</p>
+</section>
+<section id="referencias-cruzadas-automáticas" class="level3" data-number="22.4.2">
+<h3 data-number="22.4.2" class="anchored" data-anchor-id="referencias-cruzadas-automáticas"><span class="header-section-number">22.4.2</span> Referencias cruzadas automáticas</h3>
+<p>En lugar de escribir manualmente “Figura 1” o “Tabla 1” en texto estático —lo cual resulta propenso a desincronizaciones si se modifica el orden de los elementos—, Quarto proporciona un sistema unificado de referencias cruzadas basado en prefijos reservados <span class="citation" data-cites="wickham_r_2023">(<a href="references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham, 2023, Capítulo 28</a>)</span>.</p>
+<p>Para habilitar una referencia cruzada:</p>
+<ol type="1">
+<li>Se asigna una etiqueta identificadora con el prefijo correspondiente al elemento:
+<ul>
+<li><code>fig-</code> para figuras e imágenes.</li>
+<li><code>tbl-</code> para tablas.</li>
+<li><code>eq-</code> para ecuaciones matemáticas.</li>
+<li><code>sec-</code> para títulos y secciones.</li>
+</ul></li>
+<li>En el texto narrativo, se hace referencia al identificador anteponiendo el símbolo <code>@</code> (por ejemplo, <code>@fig-beneficios</code> o <code>@tbl-resumen</code>). Quarto sustituye dinámicamente este identificador por el texto localizado correspondiente (por ejemplo, “Figura 1” o “Tabla 1”) y genera un enlace hipertextual navegable.</li>
+</ol>
+<p>En <code>reporte_umng-ingles.qmd</code>, las referencias cruzadas se configuran de la siguiente manera:</p>
+<section id="imágenes-estáticas" class="level4" data-number="22.4.2.1">
+<h4 data-number="22.4.2.1" class="anchored" data-anchor-id="imágenes-estáticas"><span class="header-section-number">22.4.2.1</span> Imágenes estáticas</h4>
+<p>Para la imagen de beneficios del aprendizaje de lenguas, se añade el identificador <code>{#fig-beneficios}</code> en los atributos de la figura:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode markdown code-overflow-wrap code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Beneficios formativos, económicos y cognitivos del aprendizaje de lenguas extranjeras adaptado de @oecd_pisa_2021.](../images/benefits-foreign-language-learning.png)</span>{#fig-beneficios fig-align="center" width="60%"}</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Y en el párrafo anterior se referencia dinámicamente:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>... los beneficios derivados de esta competencia se agrupan en 3 dimensiones (ver @fig-beneficios):</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>De igual forma, para la ruta de oportunidades de mejora, se define <code>{#fig-plan}</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode markdown code-overflow-wrap code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Ruta secuencial de oportunidades de mejora en 3 fases para estudiantes de pregrado de la UMNG.](../images/plan-improvement-opportunities.png)</span>{#fig-plan fig-align="center" width="95%"}</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Y se referencia en el texto con <code>(ver @fig-plan)</code>.</p>
+</section>
+<section id="gráficos-y-tablas-generados-con-código" class="level4" data-number="22.4.2.2">
+<h4 data-number="22.4.2.2" class="anchored" data-anchor-id="gráficos-y-tablas-generados-con-código"><span class="header-section-number">22.4.2.2</span> Gráficos y tablas generados con código</h4>
+<p>En los bloques de código R, el identificador se declara en la opción <code>#| label:</code>:</p>
+<ul>
+<li><p>En el histograma, <code>#| label: fig-distribucion</code> permite referenciar el gráfico en el texto con:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>En la @fig-distribucion se presenta la distribución anual de los puntajes individuales...</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>En la tabla de resumen, <code>#| label: tbl-resumen</code> permite referenciar la tabla con:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>... se obtienen las estimaciones anuales reportadas en la @tbl-resumen.</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ul>
+</section>
+<section id="ecuaciones-matemáticas" class="level4" data-number="22.4.2.3">
+<h4 data-number="22.4.2.3" class="anchored" data-anchor-id="ecuaciones-matemáticas"><span class="header-section-number">22.4.2.3</span> Ecuaciones matemáticas</h4>
+<p>Quarto permite formular ecuaciones en LaTeX y etiquetarlas con el prefijo <code>{#eq-...}</code>. En la subsección <code>## Estimación de Estadísticos Descriptivos Agregados</code>, se incorporan las fórmulas de la media truncada y de la desviación estándar truncada:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>\bar{x}_{j, \text{piso}} = \left\lfloor \frac{1}{n_j} \sum_{i=1}^{n_j} x_{ij} \right\rfloor</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>$$ {#eq-media-piso}</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>s_{j, \text{piso}} = \left\lfloor \sqrt{\frac{1}{n_j - 1} \sum_{i=1}^{n_j} (x_{ij} - \bar{x}_j)^2} \right\rfloor</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>$$ {#eq-desviacion-piso}</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>En la narrativa, estas expresiones se referencian fluidamente utilizando <code>@eq-media-piso</code> y <code>@eq-desviacion-piso</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>... se estiman la media muestral truncada mediante la @eq-media-piso y la desviación estándar truncada mediante la @eq-desviacion-piso...</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="gestor-bibliográfico-zotero-y-estilos-csl" class="level3" data-number="22.4.3">
+<h3 data-number="22.4.3" class="anchored" data-anchor-id="gestor-bibliográfico-zotero-y-estilos-csl"><span class="header-section-number">22.4.3</span> Gestor bibliográfico Zotero y estilos CSL</h3>
+<p>El manejo riguroso de fuentes en Quarto se apoya en dos herramientas fundamentales: los archivos BibTeX (<code>.bib</code>) y los archivos de estilo de citación (<em>Citation Style Language</em>, <code>.csl</code>).</p>
+<section id="creación-del-archivo-.bib-con-zotero" class="level4" data-number="22.4.3.1">
+<h4 data-number="22.4.3.1" class="anchored" data-anchor-id="creación-del-archivo-.bib-con-zotero"><span class="header-section-number">22.4.3.1</span> Creación del archivo <code>.bib</code> con Zotero</h4>
+<p><a href="https://www.zotero.org/"><strong>Zotero</strong></a> es un gestor de referencias bibliográficas de código abierto y gratuito. Permite capturar referencias desde navegadores web, bases de datos académicas o catálogos bibliográficos, organizarlas en colecciones y exportarlas en formato BibTeX.</p>
+<p>Para generar un archivo <code>.bib</code> utilizable en Quarto:</p>
+<ol type="1">
+<li>Selecciona en Zotero la colección de documentos correspondiente a tu investigación.</li>
+<li>Haz clic derecho sobre la colección y elige la opción <strong>Exportar colección…</strong> (o <strong>Export Collection…</strong>).</li>
+<li>Selecciona el formato <strong>BibTeX</strong> (o <strong>Better BibTeX</strong> si tienes instalada dicha extensión).</li>
+<li>Guarda el archivo con el nombre <code>reporte-umng.bib</code> dentro de la carpeta <code>references/</code> de tu proyecto.</li>
+</ol>
+<p>Cada registro exportado cuenta con una clave de citación única (por ejemplo, <code>icfes_guiorientacion_2024</code> u <code>oecd_pisa_2021</code>), como se aprecia en el contenido de <code>references/reporte-umng.bib</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bibtex code-with-copy"><code class="sourceCode bibtex"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="va">@book</span>{<span class="ot">oecd_pisa_2021</span>,</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">series</span> = {{PISA}},</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">title</span> = {{PISA} 2025 {Foreign} {Language} {Assessment}},</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">url</span> = {https://www.oecd.org/content/dam/oecd/en/topics/policy-sub-issues/foreign-language-learning/PISA-2025-FLA-Framework.pdf},</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">language</span> = {en},</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">urldate</span> = {2026-11-24},</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">publisher</span> = {OECD Publishing},</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">author</span> = {{OECD}},</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">year</span> = {2021},</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="va">@misc</span>{<span class="ot">icfes_guiorientacion_2024</span>,</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">title</span> = {Guía de orientación del examen {Saber} {Pro} {Aplicación} 2024-2 {Módulo} de competencias genéricas},</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">url</span> = {https://www.icfes.gov.co/wp-content/uploads/2024/11/10-Mayo_GDO-Mo%CC%81dulos-Gene%CC%81ricos-Saber-Pro-2024-2-1.pdf},</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">language</span> = {es},</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">urldate</span> = {2026-11-24},</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">author</span> = {ICFES},</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">year</span> = {2024},</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="aplicación-de-estilos-con-citation-style-language-csl" class="level4" data-number="22.4.3.2">
+<h4 data-number="22.4.3.2" class="anchored" data-anchor-id="aplicación-de-estilos-con-citation-style-language-csl"><span class="header-section-number">22.4.3.2</span> Aplicación de estilos con Citation Style Language (CSL)</h4>
+<p>El estándar <a href="https://citationstyles.org/"><strong>Citation Style Language (CSL)</strong></a> permite dar formato a las citas y a la bibliografía según las pautas de miles de revistas y manuales de estilo internacionales.</p>
+<p>En el repositorio oficial <a href="https://www.zotero.org/styles"><strong>Zotero Style Repository</strong></a>, puedes buscar y descargar libremente más de 10.000 estilos bibliográficos (como <em>American Psychological Association 7th edition</em>, <em>IEEE</em>, <em>Vancouver</em>, <em>Chicago</em>, entre otros). Para aplicar el estilo APA 7.ª edición en tu reporte:</p>
+<ol type="1">
+<li>Ingresa a <a href="https://www.zotero.org/styles">https://www.zotero.org/styles</a>.</li>
+<li>Busca “American Psychological Association 7th edition”.</li>
+<li>Descarga el archivo <code>apa.csl</code> y ubícalo en la carpeta <code>references/</code>.</li>
+<li>Enlaza este archivo en el encabezado YAML mediante la propiedad <code>csl: ../references/apa.csl</code>.</li>
+</ol>
+</section>
+<section id="sintaxis-para-insertar-citas-en-el-reporte" class="level4" data-number="22.4.3.3">
+<h4 data-number="22.4.3.3" class="anchored" data-anchor-id="sintaxis-para-insertar-citas-en-el-reporte"><span class="header-section-number">22.4.3.3</span> Sintaxis para insertar citas en el reporte</h4>
+<p>En Quarto, las citas se incorporan en el texto utilizando la clave de citación del archivo <code>.bib</code>:</p>
+<ul>
+<li><strong>Cita parentética:</strong> <code>[@clave]</code> produce <code>(Autor, Año)</code>. Por ejemplo, <code>[@icfes_guiorientacion_2024, p. 57]</code> genera <code>(ICFES, 2024, p. 57)</code>.</li>
+<li><strong>Cita narrativa o en el texto:</strong> <code>@clave</code> produce <code>Autor (Año)</code>. Por ejemplo, <code>@oecd_pisa_2021</code> genera <code>OECD (2021)</code>.</li>
+<li><strong>Múltiples citas:</strong> separadas por punto y coma <code>[@clave1; @clave2]</code>.</li>
+</ul>
+<p>Al final del documento, Quarto genera automáticamente el listado de referencias bibliográficas formateado bajo el encabezado final <code># Referencias</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Referencias</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="estilo-css-personalizado-para-justificar-texto" class="level3" data-number="22.4.4">
+<h3 data-number="22.4.4" class="anchored" data-anchor-id="estilo-css-personalizado-para-justificar-texto"><span class="header-section-number">22.4.4</span> Estilo CSS personalizado para justificar texto</h3>
+<p>De forma predeterminada, los navegadores alinean el texto hacia la izquierda. Si deseas justificar los párrafos para dar una apariencia editorial más sobria al reporte HTML, puedes insertar un bloque de código HTML puro con reglas CSS directamente después de la celda de carga de paquetes:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode markdown qmd code-with-copy"><code class="sourceCode markdown"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{=html}</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;style&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="in">  p { </span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="in">    text-align: justify;</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/style&gt;</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="descarga-del-código-fuente-final" class="level3" data-number="22.4.5">
+<h3 data-number="22.4.5" class="anchored" data-anchor-id="descarga-del-código-fuente-final"><span class="header-section-number">22.4.5</span> Descarga del código fuente final</h3>
+<p>En caso de que requieras verificar tu archivo frente al resultado final consolidado o necesites orientación paso a paso, puedes descargar a continuación el código fuente completo en <code>reporte_umng-ingles.qmd</code>:</p>
+<div class="callout callout-style-simple callout-none no-icon callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span><img src="images/download-solid-full.png" alt="Ícono del explorador de archivos" height="25"> <a href="reports/reporte_umng-ingles.qmd" download="reporte_umng-ingles.qmd">reporte_umng-ingles.qmd</a>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
 <div id="ref-posit_introduction_2026" class="csl-entry" role="listitem">
 Posit. (2026). Introduction to <span>Quarto</span>. En <em>Posit Academy</em>. <a href="https://academy.posit.co/introduction-to-quarto">https://academy.posit.co/introduction-to-quarto</a>
 </div>
+<div id="ref-quarto_core_team_tutorial_2026" class="csl-entry" role="listitem">
+<span class="nocase">team, Q. core</span>. (2026). Tutorial: <span>Hello</span>, <span>Quarto</span>. En <em>Quarto</em>. <a href="https://quarto.org/docs/get-started/hello/positron.html">https://quarto.org/docs/get-started/hello/positron.html</a>
+</div>
 <div id="ref-wickham_r_2023" class="csl-entry" role="listitem">
 Wickham, H. (2023). <em>R for <span>Data</span> <span>Science</span></em> (2.ª ed.). O’Reilly Media, Incorporated. <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a>
 </div>
 </div>
+</section>
 </section>
 
 </main> <!-- /main -->
