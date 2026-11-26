@@ -601,7 +601,7 @@ Nota&nbsp;21.2
 <section id="sec-quarto-render" class="level3" data-number="21.1.2">
 <h3 data-number="21.1.2" class="anchored" data-anchor-id="sec-quarto-render"><span class="header-section-number">21.1.2</span> Renderizar un documento</h3>
 <p>El proceso de transformar un archivo que combina texto y código en un producto final se conoce como <strong>renderizar</strong> (en inglés <strong>render</strong>) <span class="citation" data-cites="posit_introduction_2026">(<a href="references.html#ref-posit_introduction_2026" role="doc-biblioref">Posit, 2026</a>)</span>. Al renderizar, el archivo original en extensión <code>.qmd</code> permanece intacto, generando un nuevo archivo de salida con los resultados incorporados. En la <a href="#fig-render-qmd-flow" class="quarto-xref">Figura&nbsp;<span>21.1</span></a> se describe la secuencia de pasos que Quarto realiza durante este proceso:</p>
-<div id="fig-render-qmd-flow" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Diagrama de flujo de Quarto: archivo .qmd pasando por knitr hacia .md, luego procesado por pandoc hacia formatos PDF, MS Word o HTML">
+<div id="fig-render-qmd-flow" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama de flujo de Quarto: archivo .qmd pasando por knitr hacia .md, luego procesado por pandoc hacia formatos PDF, MS Word o HTML" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-render-qmd-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/render-qmd_how-it-works.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Diagrama de flujo de Quarto: archivo .qmd pasando por knitr hacia .md, luego procesado por pandoc hacia formatos PDF, MS Word o HTML">
@@ -618,7 +618,7 @@ Figura&nbsp;21.1: Flujo de renderizado en Quarto desde un archivo <code>.qmd</co
 <li><code>pandoc</code>: es el conversor de documentos que toma el archivo <code>.md</code> intermedio y lo traduce al formato final especificado, como por ejemplo páginas web HTML, documentos PDF o archivos de Microsoft Word y OpenDocument.</li>
 </ol>
 <p>Para renderizar un documento de Quarto de acuerdo a lo descrito en la <a href="#fig-render-qmd-flow" class="quarto-xref">Figura&nbsp;<span>21.1</span></a> selecciona el ícono de archivos <img src="images/file-regular-full.png" alt="Ícono del explorador de archivos" height="25"> en la <strong>Barra de actividades</strong> y abre el archivo <code>reporte_pinguinos.qmd</code> utilizando la <strong>Barra lateral primaria</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) en la carpeta <code>reports</code>. En el <strong>Editor</strong> puedes renderizar el documento utilizando la opción <strong>Preview</strong>, tal como se señala en la <a href="#fig-render-qmd-preview" class="quarto-xref">Figura&nbsp;<span>21.2</span></a>.</p>
-<div id="fig-render-qmd-preview" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Captura de pantalla del Editor en Positron resaltando la opción Preview en la barra de herramientas superior para renderizar el archivo reporte_pinguinos.qmd">
+<div id="fig-render-qmd-preview" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Captura de pantalla del Editor en Positron resaltando la opción Preview en la barra de herramientas superior para renderizar el archivo reporte_pinguinos.qmd" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-render-qmd-preview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/fig-2-chap-21.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Captura de pantalla del Editor en Positron resaltando la opción Preview en la barra de herramientas superior para renderizar el archivo reporte_pinguinos.qmd">
@@ -977,20 +977,19 @@ Tabla&nbsp;21.3: Enlaces a la documentación de Quarto para examinar las opcione
 <h4 data-number="21.2.2.1" class="anchored" data-anchor-id="encabezados"><span class="header-section-number">21.2.2.1</span> Encabezados</h4>
 <p>Los encabezados permiten estructurar jerárquicamente el contenido del documento. En Markdown, los encabezados se crean anteponiendo uno o más símbolos numerales (<code>#</code>) seguidos de un espacio obligatorio al inicio de la línea. El número de símbolos <code>#</code> determina el nivel del encabezado, desde <code>#</code> para el nivel 1 (<code>&lt;h1&gt;</code>) hasta <code>######</code> para el nivel 6 (<code>&lt;h6&gt;</code>).</p>
 <p>En <code>reporte_pinguinos.qmd</code> la estructura general del documento se define de la siguiente manera:</p>
-<pre class="qmd"><code># Introducción
-
-# Datos
-
-# Paradoja de Simpson
-
-## Asociación global
-
-## Asociación por especie
-
-# Conclusión
-
-# Referencias
-</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Introducción</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu"># Datos</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu"># Paradoja de Simpson</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Asociación global</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Asociación por especie</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu"># Conclusión</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="fu"># Referencias</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Como se puede observar:</p>
 <ul>
 <li>Los títulos principales (<code># Introducción</code>, <code># Datos</code>, <code># Paradoja de Simpson</code>, <code># Conclusión</code> y <code># Referencias</code>) corresponden a encabezados de nivel 1.</li>
