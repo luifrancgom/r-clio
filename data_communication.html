@@ -26,7 +26,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -373,9 +393,27 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Pendiente</p>
+<p>El objetivo de esta parte, es presentar las herramientas y conceptos fundamentales para comunicar resultados de manera reproducible a través de <a href="https://quarto.org/"><strong>Quarto</strong></a>, un sistema de publicación técnica y científica de código abierto que combina texto narrativo, código ejecutable y resultados en diversos formatos de salida, a través de los siguientes 2 capítulos:</p>
+<ul>
+<li><p><a href="welcome_to_quarto.html" class="quarto-xref"><span>21&nbsp; Bienvenidos a Quarto</span></a>: introduce el concepto de Quarto y su rol en la investigación reproducible y la programación literaria, así como la anatomía de un documento con extensión <code>.qmd</code>, examinando la interacción entre el encabezado YAML, el texto narrativo en Markdown y las celdas de código a través de un reporte reproducible.</p></li>
+<li><p><a href="html_docs_quarto.html" class="quarto-xref"><span>22&nbsp; Documentos HTML con Quarto</span></a>: introduce la estructuración paso a paso de un reporte reproducible en formato <a href="https://quarto.org/docs/reference/formats/html.html">HTML</a> autónomo e interactivo, abordando la redacción inicial en Markdown, el control del documento mediante opciones de YAML, la incorporación de celdas de código con <code>knitr</code> para la generación de gráficos y tablas con <code>kable()</code>, así como la integración de bloques de llamada, ecuaciones matemáticas, referencias cruzadas y citas bibliográficas mediante Zotero y estilos CSL.</p></li>
+</ul>
+<p>Además de reportes, Quarto está diseñado para publicar artículos científicos, presentaciones interactivas, tableros de control (en inglés <strong>dashboards</strong>), sitios web, blogs y libros en una amplia gama de formatos como <a href="https://quarto.org/docs/reference/formats/html.html">HTML</a>, <a href="https://quarto.org/docs/reference/formats/pdf.html">PDF</a>, <a href="https://quarto.org/docs/reference/formats/docx.html">MS Word</a>, <a href="https://quarto.org/docs/reference/formats/epub.html">ePub</a>, <a href="https://quarto.org/docs/reference/formats/typst.html">Typst</a> y <a href="https://quarto.org/docs/reference/formats/odt.html">OpenDocument</a>. Para explorar en profundidad la creación de cada uno de estos artefactos y sus opciones de configuración, puedes consultar la <a href="https://quarto.org/docs/guide/">Guía completa de Quarto</a>.</p>
+<p>Por otra parte, debido a que muchos de los productos finales generados por Quarto se fundamentan en estándares web, comprender los principios básicos de <a href="https://en.wikipedia.org/wiki/HTML5">HTML</a>, CSS y JavaScript resulta de gran utilidad para personalizar y extender sus capacidades:</p>
+<ul>
+<li><a href="https://www.w3schools.com/html/"><strong>HTML</strong></a> (en inglés <strong>HyperText Markup Language</strong>): define la estructura y semántica de los elementos del documento.</li>
+<li><a href="https://www.w3schools.com/css/default.asp"><strong>CSS</strong></a> (en inglés <strong>Cascading Style Sheets</strong>): controla la apariencia visual del reporte.</li>
+<li><a href="https://www.w3schools.com/js/default.asp"><strong>JavaScript</strong></a>: permite agregar interactividad avanzada y dinamismo.</li>
+</ul>
+<p>Si deseas adquirir o fortalecer tus conocimientos en estas tecnologías, los recursos educativos de <a href="https://www.w3schools.com/">W3Schools</a> ofrecen excelentes introducciones prácticas a través del <a href="https://www.w3schools.com/html/">tutorial de HTML</a>, el <a href="https://www.w3schools.com/css/default.asp">tutorial de CSS</a> y el <a href="https://www.w3schools.com/js/default.asp">tutorial de JavaScript</a>.</p>
+<p>Finalmente, aunque Quarto facilita la estructura de los reportes, no determina qué escribir en concreto para comunicar con claridad y eficacia los resultados de un análisis. Para perfeccionar tu escritura puedes apoyarte en <span class="citation" data-cites="hoyos_restrepo_manual_2022">(<a href="references.html#ref-hoyos_restrepo_manual_2022" role="doc-biblioref">Hoyos Restrepo, 2022</a>)</span>, quien recuerda que escribir bien no es un don divino ni un privilegio de genios, sino un oficio que se aprende con la lectura, la práctica y la adopción de buenos hábitos. No se requiere ser un gramático erudito: basta con tener algo que decir y expresarlo en lenguaje llano con gracia y elocuencia, dominando las reglas esenciales para luego saber utilizarlas.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-hoyos_restrepo_manual_2022" class="csl-entry" role="listitem">
+Hoyos Restrepo, A. (2022). <em>Manual de <span>Escritura</span></em> (1.ª ed.). Editorial el Malpensante S.A.
+</div>
+</div>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
