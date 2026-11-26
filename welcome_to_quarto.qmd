@@ -322,7 +322,7 @@ Los encabezados permiten estructurar jerárquicamente el contenido del documento
 
 En `reporte_pinguinos.qmd` la estructura general del documento se define de la siguiente manera:
 
-````qmd
+```markdown
 # Introducción
 
 # Datos
@@ -337,7 +337,7 @@ En `reporte_pinguinos.qmd` la estructura general del documento se define de la s
 
 # Referencias
 
-````
+```
 
 Como se puede observar:
 
