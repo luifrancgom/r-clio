@@ -113,7 +113,7 @@ Quarto incluye la posibilidad de renderizar documentos a [múltiples formatos]({
 | [`docx`]({{< var url.software.quarto_format_docx >}}) | Documentos de procesamiento de texto para Microsoft Word basados en el estándar abierto [Office Open XML]({{< var url.education.open_xml_wiki >}}) (`.docx`). |
 | [`typst`]({{< var url.software.quarto_format_typst >}}) | Sistema de composición tipográfica moderno y de código abierto desarrollado mediante [Typst]({{< var url.software.typst >}}). Diseñado como una alternativa a LaTeX que genera archivos PDF con tiempos de renderizado más rápidos sin requerir una instalación previa de LaTeX. |
 | [`odt`]({{< var url.software.quarto_format_odt >}}) | Documentos de texto basados en el estándar abierto [OpenDocument]({{< var url.education.open_document_wiki >}}) (`.odt`) compatibles con procesadores de texto como LibreOffice Writer. |
-| [`epub`]({{< var url.software.quarto_format_epub >}}) | Libros electrónicos en formato estándar [EPUB]({{< var url.education.epud_wiki >}}) diseñados para la lectura en dispositivos móviles, tabletas y lectores digitales. |
+| [`epub`]({{< var url.software.quarto_format_epub >}}) | Libros electrónicos en formato estándar [EPUB]({{< var url.education.epub_wiki >}}) diseñados para la lectura en dispositivos móviles, tabletas y lectores digitales. |
 
 : Formatos de salida para documentos en Quarto {#tbl-quarto-document-formats}
 
@@ -302,10 +302,10 @@ En la siguiente tabla puedes consultar los enlaces a la documentación de refere
 
 | Formato | Documentación de referencia |
 |:--- |:---|
-| `html` | [Referencia HTML]({{< var url.software.quarto_ref_html >}}) |
-| `pdf` | [Referencia PDF]({{< var url.software.quarto_ref_pdf >}}) |
-| `docx` | [Referencia Word (DOCX)]({{< var url.software.quarto_ref_docx >}}) |
-| `odt` | [Referencia OpenDocument (ODT)]({{< var url.software.quarto_ref_odt >}}) |
+| `html` | [Referencia HTML]({{< var url.software.quarto_format_html >}}) |
+| `pdf` | [Referencia PDF]({{< var url.software.quarto_format_pdf >}}) |
+| `docx` | [Referencia Word (DOCX)]({{< var url.software.quarto_format_docx >}}) |
+| `odt` | [Referencia OpenDocument (ODT)]({{< var url.software.quarto_format_odt >}}) |
 
 : Enlaces a la documentación de Quarto para examinar las opciones aplicables a cada formato {#tbl-quarto-document-references}
 :::
@@ -400,7 +400,7 @@ Las notas al pie permiten agregar aclaraciones metodológicas o explicaciones co
 1. **Llamada a la nota:** Se inserta en el lugar exacto del texto donde se desea la referencia mediante la sintaxis `[^identificador]`.
 2. **Definición de la nota:** Se escribe en un párrafo independiente mediante `[^identificador]: Texto explicativo...`.
 
-En `reporte_pinguinos.qmd` se utiliza este mecanismo, por ejemplo, para justificar la exclusión de observaciones con datos faltantes, tal como se señala a continuación:
+En `reporte_pinguinos.qmd` se utiliza este mecanismo, por ejemplo, para justificar la exclusión de observaciones con valores ausentes, tal como se señala a continuación:
 
 ```markdown
 Sin embargo, ... `species` (ver @fig-asociacion-especie)[^asociacion-especie], ...
@@ -408,7 +408,7 @@ Sin embargo, ... `species` (ver @fig-asociacion-especie)[^asociacion-especie], .
 [^asociacion-especie]: Al igual ... en la `@tbl-variables`.
 ```
 
-#### Tablas
+#### Tablas {#sec-tables-markdown}
 
 En Markdown de Quarto, las tablas en texto plano se construyen mediante la sintaxis de **tablas de barras** (en inglés **pipe tables**), empleando barras verticales (`|`) para delimitar columnas y guiones (`-`) para separar la fila de encabezados del cuerpo de datos.
 
@@ -496,7 +496,7 @@ Quarto admite 5 tipos estándar de bloques de llamada:
 
 Opcionalmente, los callouts pueden incluir títulos personalizados mediante un encabezado interno, como por ejemplo `## Propósito del reporte`, así como propiedades `collapse="true"` para que aparezcan plegados por defecto o `appearance="minimal"` para simplificar su diseño visual.
 
-#### Citas y referencias bibliográficas
+#### Citas y referencias bibliográficas {#sec-citations}
 
 La gestión de citas y bibliografía en Quarto se basa en el motor de citas de Pandoc, documentado detalladamente en [**Citations in Quarto**]({{< var url.software.quarto_citations >}}). Para citar una fuente dentro del texto se utiliza el carácter arroba (`@`) seguido de la clave de citación (en inglés **citation key**) definida en un archivo de bibliografía en formato BibTeX (`.bib`).
 
@@ -569,7 +569,7 @@ En `reporte_pinguinos.qmd` se ilustran las opciones de celda más habituales:
    #| fig-cap: "Asociación global ..."
    ```
 3. **Control de mensajes (`#| message: false`):** Suprime los mensajes informativos emitidos por R en la consola, como por ejemplo al ejecutar `library(tidyverse)`, evitando que aparezcan los mensajes en el documento final (ver @sec-messages).
-4. **Control de advertencias (`#| warning: false`):** Evita la impresión de advertencias (ver @sec-warnings). En las celdas de graficación con `ggplot2`, oculta el aviso estándar que advierte la remoción de observaciones con datos faltantes (`NA`) en `bill_len` y `bill_dep`.
+4. **Control de advertencias (`#| warning: false`):** Evita la impresión de advertencias (ver @sec-warnings). En las celdas de graficación con `ggplot2`, oculta el aviso estándar que advierte la remoción de observaciones con valores ausentes (`NA`) en `bill_len` y `bill_dep`.
 
 #### Conexión con la opción `code-fold` del encabezado YAML
 

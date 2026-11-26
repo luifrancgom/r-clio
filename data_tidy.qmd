@@ -14,4 +14,4 @@ Una vez se comprenda el funcionamiento básico del paquete `tidyr`, el lector in
 
 - **Aplanamiento de datos** (en inglés **rectangling**) y **anidamiento** (en inglés **nesting**): técnicas y funciones como `unnest_longer()`, `unnest_wider()`, `hoist()`, `nest()` y `unnest()` orientadas a transformar estructuras de datos complejas o profundamente anidadas en tablas rectangulares ordenadas (ver [**Rectangling**]({{< var url.packages.tidyr_rectangling >}}) y [**Nesting**]({{< var url.packages.tidyr_nesting >}})).
 
-- **Valores ausentes y miscelánea**: funciones dedicadas al tratamiento explícito e implícito de datos faltantes como `complete()`, `fill()`, `drop_na()` y `replace_na()`, así como funciones auxiliares para cruces y combinaciones de variables como `expand()` y `crossing()`.
+- **Valores ausentes y miscelánea**: funciones dedicadas al tratamiento explícito e implícito de valores ausentes como `complete()`, `fill()`, `drop_na()` y `replace_na()`, así como funciones auxiliares para cruces y combinaciones de variables como `expand()` y `crossing()`.

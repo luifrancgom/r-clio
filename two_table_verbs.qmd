@@ -313,7 +313,7 @@ left_join(
 
 En el @lst-left-join, al igual que en el @lst-inner-join, a través de la función auxiliar `join_by()` en el argumento `by`, se especifica directamente la variable `key` debido a que ambas tablas comparten el mismo nombre para dicho atributo.
 
-Al aplicar la función sobre el ejemplo ilustrativo, la tabla resultante conserva las 2 filas de la tabla `x` (`key = 1` y `key = 2`). Para la fila con `key = 1`, al existir una coincidencia en `y`, se agregan los valores correspondientes de las columnas `a` (`10`) y `b` (`"s"`). Por el contrario, para la fila con `key = 2`, como no existe una coincidencia en `y`, las variables `a` y `b` se rellenan automáticamente con valores faltantes (`NA`). Por su parte, la observación con `key = 3` de la tabla `y` se descarta al no estar presente en `x`.
+Al aplicar la función sobre el ejemplo ilustrativo, la tabla resultante conserva las 2 filas de la tabla `x` (`key = 1` y `key = 2`). Para la fila con `key = 1`, al existir una coincidencia en `y`, se agregan los valores correspondientes de las columnas `a` (`10`) y `b` (`"s"`). Por el contrario, para la fila con `key = 2`, como no existe una coincidencia en `y`, las variables `a` y `b` se rellenan automáticamente con valores ausentes (`NA`). Por su parte, la observación con `key = 3` de la tabla `y` se descarta al no estar presente en `x`.
 
 En la @fig-left-join se ilustra gráficamente este comportamiento. A la derecha se ubican las tablas de entrada `x` (arriba) y `y` (abajo), donde la fila con `key = 1` se enlaza con su coincidencia en `y`, mientras que la fila con `key = 2` se vincula con un registro de valores `NA`, generando a la izquierda la tabla resultante de 2 filas con las 4 variables consolidadas.
 
@@ -336,7 +336,7 @@ right_join(
 
 En el @lst-right-join, al igual que en el @lst-inner-join, a través de la función auxiliar `join_by()` en el argumento `by`, se especifica directamente la variable `key` debido a que ambas tablas comparten el mismo nombre para dicho atributo.
 
-Al aplicar la función sobre el ejemplo ilustrativo, la tabla resultante conserva las 2 filas de la tabla `y` (`key = 3` y `key = 1`). Para la fila con `key = 3`, como no existe una coincidencia en `x`, la variable `z` se rellena automáticamente con un valor faltante (`NA`). Por el contrario, para la fila con `key = 1`, al existir una coincidencia en `x`, se agrega el valor correspondiente de la columna `z` (`3`). Por su parte, la observación con `key = 2` de la tabla `x` se descarta al no estar presente en `y`.
+Al aplicar la función sobre el ejemplo ilustrativo, la tabla resultante conserva las 2 filas de la tabla `y` (`key = 3` y `key = 1`). Para la fila con `key = 3`, como no existe una coincidencia en `x`, la variable `z` se rellena automáticamente con un valor ausente (`NA`). Por el contrario, para la fila con `key = 1`, al existir una coincidencia en `x`, se agrega el valor correspondiente de la columna `z` (`3`). Por su parte, la observación con `key = 2` de la tabla `x` se descarta al no estar presente en `y`.
 
 En la @fig-right-join se ilustra gráficamente este comportamiento. A la derecha se ubican las tablas de entrada `x` (arriba) y `y` (abajo), donde la fila con `key = 3` se vincula con un registro de valor `NA`, mientras que la fila con `key = 1` se enlaza con su coincidencia en `x`, generando a la izquierda la tabla resultante de 2 filas con las 4 variables consolidadas.
 
@@ -359,7 +359,7 @@ full_join(
 
 En el @lst-full-join, al igual que en el @lst-inner-join, a través de la función auxiliar `join_by()` en el argumento `by`, se especifica directamente la variable `key` debido a que ambas tablas comparten el mismo nombre para dicho atributo.
 
-Al aplicar la función sobre el ejemplo ilustrativo, la tabla resultante conserva las 3 filas correspondientes a todas las claves presentes (`key = 1`, `key = 2` y `key = 3`). Para la fila con `key = 1`, al existir una coincidencia mutua, se integran las columnas `key` y `z` de `x` junto con las columnas `a` (`10`) y `b` (`"s"`) de `y`. En el caso de la fila con `key = 2`, como no existe una coincidencia en `y`, las variables `a` y `b` se rellenan automáticamente con valores faltantes (`NA`). Por su parte, para la fila con `key = 3`, al no existir una coincidencia en `x`, la variable `z` se completa con un valor faltante (`NA`).
+Al aplicar la función sobre el ejemplo ilustrativo, la tabla resultante conserva las 3 filas correspondientes a todas las claves presentes (`key = 1`, `key = 2` y `key = 3`). Para la fila con `key = 1`, al existir una coincidencia mutua, se integran las columnas `key` y `z` de `x` junto con las columnas `a` (`10`) y `b` (`"s"`) de `y`. En el caso de la fila con `key = 2`, como no existe una coincidencia en `y`, las variables `a` y `b` se rellenan automáticamente con valores ausentes (`NA`). Por su parte, para la fila con `key = 3`, al no existir una coincidencia en `x`, la variable `z` se completa con un valor ausente (`NA`).
 
 En la @fig-full-join se ilustra gráficamente este comportamiento. A la derecha se ubican las tablas de entrada `x` (arriba) y `y` (abajo), donde la fila con `key = 1` se enlaza con su coincidencia mutua, mientras que las filas no coincidentes (`key = 2` en `x` y `key = 3` en `y`) se vinculan con sus respectivos registros de valores `NA`, generando a la izquierda la tabla resultante de 3 filas con las 4 variables consolidadas.
 
@@ -433,7 +433,7 @@ resultado_saber_pro |>
   glimpse()
 ```
 
-Para corregir esta situación y asegurar la coherencia con el modelo relacional de la @fig-erd, es necesario reemplazar los códigos de departamento y municipio por valores faltantes (`NA`) cuando `estu_exterior == "SI"`. 
+Para corregir esta situación y asegurar la coherencia con el modelo relacional de la @fig-erd, es necesario reemplazar los códigos de departamento y municipio por valores ausentes (`NA`) cuando `estu_exterior == "SI"`. 
 
 En el paquete `dplyr`, la función `replace_when()` permite actualizar de forma condicional los valores de un vector o columna existente. Para realizar este proceso, la función `replace_when()` utiliza los parámetros `x` y `...`, tal como se señala a continuación:
 

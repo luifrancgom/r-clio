@@ -336,7 +336,7 @@ En el @lst-auxiliary-vars-labels, se utiliza la función `pull()`, la cual se in
 
 - Al aplicar `resultado_saber_pro_ajustado |> pull(n)`, se extrae la columna con los conteos en forma de vector numérico.
 
-- La función `last()` extrae el último elemento de dicho vector. Dado que `count()` ubica por defecto los valores faltantes (`NA`) en la última fila del conteo, `last()` recupera directamente el número de estudiantes inscritos en el exterior (`n_na`).
+- La función `last()` extrae el último elemento de dicho vector. Dado que `count()` ubica por defecto los valores ausentes (`NA`) en la última fila del conteo, `last()` recupera directamente el número de estudiantes inscritos en el exterior (`n_na`).
 
 - Por su parte, la función `sum()` suma todos los elementos del vector numérico obtenido con `pull(n)`, permitiendo calcular el total de estudiantes inscritos (`n_total`).
 

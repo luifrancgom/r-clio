@@ -11,7 +11,7 @@ source("_common.R")
 #| message: false
 ```
 
-Este capítulo se basa en [@posit_introduction_2026] y [@wickham_r_2023, Cap. 28] así como en la documentación oficial de [`quarto`]({{< var url.software.quarto_positron >}}) donde tiene como propósito introducir la forma de generar reportes a través del uso de [**Quarto**]({{< var url.software.quarto >}}) en formato [HTML]({{< var url.software.quarto_format_html >}}) mediante la recreación del reporte `reporte_umng-ingles.html` a partir de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Universidad Militar Nueva Granada (UMNG).
+Este capítulo se basa en [@posit_introduction_2026] y [@wickham_r_2023, Cap. 28] así como en la documentación oficial de [`quarto`]({{< var url.software.quarto_positron >}}) donde tiene como propósito introducir la forma de generar reportes a través del uso de [**Quarto**]({{< var url.software.quarto >}}) en formato [HTML]({{< var url.software.quarto_format_html >}}) mediante la recreación del reporte `reporte_umng-ingles.html` (ver @nte-1-chap-22) a partir de los resultados del examen Saber Pro del grupo de competencias genéricas correspondientes a programas de pregrado de la Universidad Militar Nueva Granada (UMNG).
 
 Exploraremos los siguientes aspectos:
 
@@ -21,7 +21,7 @@ Exploraremos los siguientes aspectos:
 4. ¿Cómo incluir bloques de llamada, referencias cruzadas y otros elementos adicionales en un reporte?
 
 :::: {#nte-1-chap-22 .callout-note}
-Para desarrollar el contenido de este capítulo, la meta central consiste en recrear el reporte `reporte_umng-ingles.html`. Puedes descargar a continuación dicho archivo en formato HTML para que lo abras en tu navegador web y examines con anticipación el producto que estructuraremos a lo largo de este capítulo:
+Para desarrollar el contenido de este capítulo, la meta central consiste en recrear el reporte `reporte_umng-ingles.html`. Puedes descargar a continuación dicho archivo en formato HTML para que lo abras en tu navegador web y examines con anticipación el producto que estructuraras a lo largo de este capítulo:
 
 ::: {.callout appearance="minimal"}
 ## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [reporte_umng-ingles.html]({{< var url.report.report_umng_ingles_html >}}){download="reporte_umng-ingles.html"}
@@ -58,9 +58,9 @@ En caso que hayas seguido estas indicaciones, procede a crear el archivo `report
 
 ## Escritura con Markdown {#sec-markdown-writing}
 
-Al estructurar un reporte técnico o científico en Quarto, una práctica recomendada consiste en diseñar primero el esquema general y la narrativa mediante texto en formato [**Markdown**]({{< var url.software.markdown_pandoc >}}), postergando temporalmente la inclusión de celdas de código, fórmulas matemáticas complejas y referencias cruzadas automatizadas [@wickham_r_2023, Cap. 28].
+Al estructurar un reporte en Quarto, una práctica recomendada consiste en diseñar primero el esquema general y la narrativa mediante texto en formato [**Markdown**]({{< var url.software.markdown_pandoc >}}), postergando temporalmente la inclusión de celdas de código, ecuaciones y referencias cruzadas.
 
-Para iniciar el archivo `reporte_umng-ingles.qmd` dentro de la carpeta `reports`, establece un encabezado YAML mínimo y define los encabezados principales del documento de acuerdo con la siguiente estructura inicial:
+Para iniciar el archivo `reporte_umng-ingles-draft.qmd` dentro de la carpeta `reports`, establece un encabezado YAML mínimo y define los encabezados principales del documento de acuerdo con la siguiente estructura inicial:
 
 ```yaml
 ---
@@ -97,9 +97,9 @@ engine: knitr
 # Oportunidades de Mejora para Pregrado
 ```
 
-En este punto inicial, el documento cuenta con un encabezado YAML básico que define el título, la fecha, el formato de salida HTML con plegado de código (`code-fold: true`), la integración de recursos en un único archivo (`embed-resources: true`), el idioma español (`lang: es`) y el motor de evaluación (`engine: knitr`).
+En este punto inicial, el documento cuenta con un encabezado YAML básico que define el título, la fecha, el formato de salida HTML con plegado de código (`code-fold: true`), la integración de recursos en un único archivo (`embed-resources: true`), el idioma español (`lang: es`) y el "motor" (`engine: knitr`).
 
-A continuación, se procede a redactar únicamente la narrativa en Markdown para cada una de las secciones, sin incorporar aún bloques de código ejecutable, ecuaciones matemáticas ni referencias cruzadas con la sintaxis de Quarto (`@fig-...`, `@tbl-...` o `@eq-...`). En su lugar, cualquier alusión a figuras o tablas se escribe en texto plano simple (por ejemplo, redactando explícitamente "Figura 1", "Figura 2" o "Tabla 1"), como se suele hacer en una primera versión narrativa antes de automatizar los enlaces. Asimismo, para visualizar los bloques de texto extenso sin necesidad de desplazarse horizontalmente, se puede aplicar la clase CSS `.code-overflow-wrap` al bloque de código estático (por ejemplo, mediante ```` ```{.markdown .code-overflow-wrap} ````).
+A continuación, se procede a redactar únicamente la narrativa en Markdown para cada una de las secciones, sin incorporar aún bloques de código ejecutable, ecuaciones o referencias cruzadas con la sintaxis de Quarto. En su lugar, cualquier alusión a figuras, tablas o ecuaciones se escribe en texto plano simple, por ejemplo redactando explícitamente "Figura 1", "Figura 2", "Tabla 1", "Ecuación 1" o "Ecuación 2", como se suele hacer en una primera versión narrativa antes de automatizar los enlaces y añadir las fórmulas matemáticas definitivas.
 
 ### Introducción
 
@@ -146,7 +146,7 @@ El aprendizaje de una segunda lengua trasciende la adquisición de destrezas com
 
 ### Resultados Saber Pro UMNG (2021-2024)
 
-En la sección `# Resultados Saber Pro UMNG (2021-2024)`, se presenta la narrativa que introduce la distribución anual de puntajes. En esta fase de escritura con Markdown, **no se incluye ningún bloque de código R**: únicamente se redacta el texto introductorio aludiendo al gráfico en texto simple:
+En la sección `# Resultados Saber Pro UMNG (2021-2024)`, se presenta la narrativa que introduce la distribución anual de puntajes. En esta fase de escritura con Markdown, no se incluye ningún bloque de código R sino  únicamente se redacta el texto introductorio aludiendo al gráfico en texto simple:
 
 ``` {.markdown .code-overflow-wrap}
 # Resultados Saber Pro UMNG (2021-2024)
@@ -156,16 +156,18 @@ En la Figura 2 se presenta la distribución anual de los puntajes individuales (
 
 ### Estimación de Estadísticos Descriptivos Agregados
 
-En la subsección `## Estimación de Estadísticos Descriptivos Agregados`, se describe el procedimiento metodológico para agregar las cohortes y calcular la media y desviación estándar truncadas al piso. En esta primera fase, se redacta la descripción en texto plano sin fórmulas en LaTeX ni celdas de código, haciendo referencia en texto simple a la tabla resumen:
+En la subsección `## Estimación de Estadísticos Descriptivos Agregados`, se describe el procedimiento metodológico para agregar las cohortes y calcular la media y desviación estándar truncadas al piso. En esta primera fase, se redacta la descripción en texto plano sin bloques de ecuaciones destacadas (`$$`) ni delimitadores de fórmulas en línea (`$`), dejando las expresiones de LaTeX directamente en texto plano para que el lector las reconozca antes de activarlas como ecuaciones renderizadas, e incluyendo referencias directas en texto simple a las ecuaciones (`Ecuación 1` y `Ecuación 2`) y a la tabla resumen (`Tabla 1`):
 
 ``` {.markdown .code-overflow-wrap}
 ## Estimación de Estadísticos Descriptivos Agregados
 
-Para generar la agregación temporal de los resultados, se define el puntaje obtenido en el módulo de inglés por cada estudiante evaluado en el respectivo año (2021, 2022, 2023 o 2024), donde se identifica al estudiante individual dentro de cada cohorte anual y el total de evaluados por año.
+Para generar la agregación temporal de los resultados, se define x_{ij} \in [0, 300] como el puntaje obtenido en el módulo de inglés por el estudiante i evaluado en el año j, donde el índice j \in \{2021, 2022, 2023, 2024\} especifica el año de la cohorte, el índice i \in \{1, 2, \dots, n_j\} identifica al estudiante individual dentro de dicha cohorte y n_j representa el número total de evaluados en el año j.
 
-Con el propósito de resumir la tendencia central y la dispersión por cohorte anual preservando valores enteros, se estiman la media muestral truncada y la desviación estándar truncada, aplicando en ambos casos la función piso.
+Con el propósito de resumir la tendencia central y la dispersión por cohorte anual preservando valores enteros, se estiman la media muestral truncada mediante la Ecuación 1 y la desviación estándar truncada mediante la Ecuación 2, aplicando en ambos casos la función piso (\lfloor \cdot \rfloor):
 
-Al aplicar este procedimiento de agregación a los microdatos institucionales, se obtienen las estimaciones anuales reportadas en la Tabla 1. En dicha tabla, cada fila identifica el año, la segunda columna consolida la media redondeada al piso, mientras que la tercera columna reporta la dispersión muestral.
+donde \bar{x}_j = \frac{1}{n_j} \sum_{i=1}^{n_j} x_{ij} corresponde a la media aritmética del año j antes del truncamiento.
+
+Al aplicar este procedimiento de agregación a los microdatos institucionales, se obtienen las estimaciones anuales reportadas en la Tabla 1. En dicha tabla, cada fila identifica el año j, la segunda columna consolida la media redondeada al piso (\bar{x}_{j, \text{piso}}) conforme a la Ecuación 1, mientras que la tercera columna reporta la dispersión muestral (s_{j, \text{piso}}) obtenida según la Ecuación 2.
 ```
 
 ### Oportunidades de Mejora para Pregrado
@@ -184,15 +186,13 @@ Para elevar de manera progresiva los niveles de suficiencia y mitigar las asimet
 ![Ruta secuencial de oportunidades de mejora en 3 fases para estudiantes de pregrado de la UMNG.](../images/plan-improvement-opportunities.png){fig-align="center" width="95%"}
 ```
 
-::: {#nte-markdown-simplicity .callout-tip}
-Escribir primero la narrativa en Markdown permite validar la claridad conceptual del mensaje y estructurar el flujo de lectura antes de lidiar con aspectos técnicos de importación de datos, graficación, ecuaciones y dependencias de paquetes. Además, la aplicación de la clase `.code-overflow-wrap` en los bloques de código estáticos facilita la lectura y el copiado de párrafos extensos al evitar barras de desplazamiento horizontal.
+::: {#tip-1-chap-22 .callout-tip}
+Escribir primero la narrativa en Markdown permite validar la claridad conceptual del mensaje y estructurar el flujo de lectura antes de incluir aspectos relacionados con importación de datos, graficación, ecuaciones y dependencias de paquetes.
 :::
 
 ## Control del documento con YAML {#sec-document-control-yaml}
 
-Una vez estructurado el cuerpo narrativo del informe, el encabezado YAML permite configurar de forma global el comportamiento del documento, los metadatos bibliográficos, la navegación y las opciones de renderizado [@posit_introduction_2026].
-
-A continuación se presenta el encabezado YAML completo utilizado en `reporte_umng-ingles.qmd`:
+Una vez estructurado el cuerpo narrativo del informe, el encabezado YAML permite configurar de forma global el comportamiento del documento, los metadatos bibliográficos, la navegación y las opciones de renderizado [@posit_introduction_2026]. A continuación se presenta el encabezado YAML completo que puedes utilizar en `reporte_umng-ingles-draft.qmd`:
 
 ```yaml
 ---
@@ -213,22 +213,26 @@ csl: ../references/apa.csl
 
 Cada una de estas opciones cumple una función específica dentro de la publicación del reporte:
 
-1. **`title` y `date`:** Especifican los metadatos principales del documento. La fecha se define preferentemente en formato ISO estándar (`AAAA-MM-DD`, por ejemplo `2026-11-25`) o mediante la instrucción dinámica `last-modified`, lo cual garantiza que la fecha refleje la última compilación del archivo.
-2. **`toc: true` (Table of Contents):** Activa la tabla de contenido interactiva. En documentos HTML de Quarto, esta tabla se ubica de forma flotante en el margen lateral derecho, permitiendo al lector desplazarse de manera ágil entre los encabezados y subencabezados del informe.
-3. **`number-sections: true`:** Numera automáticamente las secciones y subsecciones del reporte de forma jerárquica (`1`, `1.1`, `2`, `3`, etc.), garantizando coherencia estructural a lo largo de todo el documento.
-4. **`format: html:`** Define las opciones específicas para el formato web:
-   - **`code-fold: true`:** Pliega automáticamente todos los bloques de código R al compilar el documento. En la vista HTML, cada bloque se muestra contraído bajo un botón interactivo rotulado como **Código**, permitiendo al usuario inspeccionar las instrucciones solo si así lo desea, sin interrumpir la lectura del texto y los gráficos.
-   - **`embed-resources: true`:** Consolida todos los archivos CSS, bibliotecas de JavaScript e imágenes dentro del propio archivo `.html`. De esta forma se genera un reporte web completamente autónomo e independiente, ideal para compartir por correo electrónico o subir a plataformas de aprendizaje sin preocuparse por rutas rotas o carpetas complementarias faltantes.
-5. **`lang: es`:** Establece el idioma del documento en español. Quarto utiliza esta directiva para traducir automáticamente las etiquetas predeterminadas del sistema, tales como "Tabla de contenidos", "Figura", "Tabla" y "Código".
-6. **`engine: knitr`:** Especifica explícitamente a `knitr` como el motor de evaluación computacional para las celdas de código en R.
-7. **`bibliography: ../references/reporte-umng.bib`:** Establece la ruta relativa hacia el archivo en formato BibTeX que almacena las entradas bibliográficas del informe.
-8. **`csl: ../references/apa.csl`:** Vincula el archivo de estilo de citación (*Citation Style Language*), en este caso correspondiente a la 7.ª edición de las normas APA, el cual gobierna la presentación formal de las citas dentro del texto y el listado de referencias final.
+1. `title` y `date`: Especifican los metadatos principales del documento. La fecha se define en formato ISO estándar (`AAAA-MM-DD`), como por ejemplo `2026-11-25`.
+2. `toc: true`: Activa la tabla de contenido interactiva. En documentos HTML de Quarto, esta tabla se ubica de forma flotante en el margen lateral derecho, permitiendo al lector desplazarse de manera ágil entre los encabezados y subencabezados del informe.
+3. `number-sections: true`: Numera automáticamente las secciones y subsecciones del reporte de forma jerárquica, garantizando coherencia estructural a lo largo de todo el documento.
+4. `format: html:` Define las opciones específicas para el formato web:
+   - `code-fold: true`: Pliega automáticamente todos los bloques de código R al compilar el documento. En la vista HTML, cada bloque se muestra contraído bajo un botón interactivo rotulado como **Código**, permitiendo al usuario inspeccionar las instrucciones solo si así lo desea, sin interrumpir la lectura del texto y los gráficos.
+   - `embed-resources: true`: Consolida todos los archivos CSS, bibliotecas de JavaScript e imágenes dentro del propio archivo `.html`. De esta forma se genera un reporte web completamente autónomo e independiente, ideal para compartir por correo electrónico o subir a plataformas de aprendizaje sin preocuparse por rutas o carpetas complementarias faltantes.
+5. `lang: es`: Establece el idioma del documento en español. Quarto utiliza esta directiva para traducir automáticamente las etiquetas predeterminadas del sistema, tales como "Tabla de contenidos", "Figura", "Tabla" y "Código".
+6. **`engine: knitr`:** Especifica explícitamente a `knitr` como el "motor" de evaluación para las celdas de código en R.
+7. `bibliography: ../references/reporte-umng.bib`: Establece la ruta relativa hacia el archivo en formato BibTeX que almacena las entradas bibliográficas del informe.
+8. `csl: ../references/apa.csl`: Vincula el archivo de estilo de citación (en inglés **Citation Style Language**), en este caso correspondiente a la 7 edición de las normas APA, el cual establece la presentación de las citas dentro del texto y el listado de referencias.
 
 ## Incorporación de celdas de código {#sec-code-cells-inclusion}
 
-Las celdas de código permiten intercalar instrucciones reproducibles de R directamente con la narrativa en Markdown [@wickham_r_2023, Cap. 28]. En Quarto, la configuración de cada celda se realiza mediante la sintaxis *hashpipe* (`#|`), ubicando las opciones en pares `clave: valor` al inicio del bloque de código.
+Las celdas de código permiten intercalar instrucciones reproducibles de R directamente con la narrativa en Markdown [@wickham_r_2023, Cap. 28]. En Quarto, la configuración de cada celda se realiza mediante la sintaxis **hashpipe** (`#|`), ubicando las opciones en pares `clave: valor` al inicio del bloque de código.
 
-A continuación, se describen las 5 celdas de código necesarias para generar el análisis empírico de `reporte_umng-ingles.qmd`, haciendo especial énfasis en la creación de tablas profesionales con el paquete `knitr` y la función `kable()`.
+::: {#tip-2-chap-22 .callout-tip}
+En lugar de digitar manualmente los delimitadores de inicio y cierre de una celda (```` ```{r} ```` y ```` ``` ````), puedes insertar de forma rápida una nueva celda de código R situando el cursor (**|**) en el editor y presionando la combinación de teclas {{< kbd mac=Command-Shift-I win=Ctrl-Shift-I linux=Ctrl-Shift-I >}}
+:::
+
+A continuación, se describen las 5 celdas de código necesarias para generar el análisis en `reporte_umng-ingles-draft.qmd`, haciendo especial énfasis en la creación de tablas con el paquete `knitr` y la función `kable()`.
 
 ### Carga de paquetes
 
@@ -246,12 +250,12 @@ library(knitr)
 En esta celda:
 
 - `#| label: cargar-paquetes`: asigna una etiqueta identificadora única para la celda.
-- `#| message: false`: suprime los mensajes informativos emitidos por R al cargar las librerías en la consola, evitando ensuciar el reporte final.
-- Se cargan el metapaquete `tidyverse` (para manipulación de datos con `dplyr` y graficación con `ggplot2`) y el paquete `knitr` (para generar tablas estilizadas).
+- `#| message: false`: suprime los mensajes emitidos por R al cargar las librerías en la consola (ver @sec-messages), evitando que sean incluidos en el reporte.
+- Se cargan los paquetes `tidyverse` y `knitr`, donde este último se utiliza para generar tablas.
 
 ### Importación y selección de datos
 
-Debajo del título de la sección `# Resultados Saber Pro UMNG (2021-2024)`, se incorpora la celda encargada de cargar los datos procesados y filtrar las variables de interés:
+Debajo del título de la sección `# Resultados Saber Pro UMNG (2021-2024)`, se incorpora la celda encargada de cargar los datos procesados y seleccionar las variables de interés:
 
 ````qmd
 ```{{r}}
@@ -268,7 +272,9 @@ saber_pro_ingles_2021_2024_umng <- read_rds(
 ```
 ````
 
-Esta celda lee el archivo binario optimizado `.rds` ubicado en la carpeta `data` y selecciona el año de evaluación (`ano`), el identificador del evaluado (`estu_consecutivo`), el nivel de desempeño cualitativo (`mod_ingles_desem`) y el puntaje continuo obtenido (`mod_ingles_punt`).
+Esta celda lee el archivo binario `.rds` ubicado en la carpeta `data` y selecciona el año de evaluación (`ano`), el identificador del evaluado (`estu_consecutivo`), el nivel de desempeño cualitativo (`mod_ingles_desem`) y el puntaje obtenido (`mod_ingles_punt`).
+
+Ten en cuenta que en el argumento `file = "../data/2021-2024_saber-pro-genericas_umng.rds"` el uso del prefijo `../` es indispensable. Dado que el archivo `reporte_umng-ingles-draft.qmd` se encuentra ubicado dentro de la carpeta `reports/`, el motor de cómputo ejecuta el código tomando como directorio de trabajo dicha carpeta. En ese sentido, tal como se señaló en la @nte-3-chap-21, para el caso de las rutas relativas en Quarto, el prefijo `../` permite retroceder un nivel en la estructura de carpetas, es decir salir de `reports/`, para luego ingresar a `data/`. Si omitieras `../`, se produciría un error durante la ejecución al intentar buscar la ruta inexistente `reports/data/`.
 
 ### Visualización con ggplot2
 
@@ -321,12 +327,12 @@ saber_pro_ingles_2021_2024_umng |>
 ```
 ````
 
-Opciones clave de esta celda:
+Las opciones clave de esta celda son:
 
 - `#| label: fig-distribucion`: al emplear el prefijo reservado `fig-`, Quarto reconoce que el gráfico resultante debe registrarse como una figura numerada automáticamente, habilitando su referencia cruzada en el texto.
 - `#| fig-cap`: define el título descriptivo o leyenda al pie de la figura.
-- `#| fig-height: 7`: ajusta la altura del gráfico en pulgadas, garantizando espacio suficiente para visualizar las 4 facetas anuales sin solapamientos.
-- `#| warning: false`: suprime posibles advertencias emitidas por `ggplot2` durante el cálculo de los intervalos del histograma.
+- `#| fig-height: 7`: ajusta la altura del gráfico en pulgadas, garantizando espacio suficiente para visualizar las 4 facetas anuales.
+- `#| warning: false`: suprime posibles advertencias (ver @sec-warnings) emitidas por `ggplot2` durante el cálculo de los intervalos del histograma.
 
 ### Transformación y resumen estadístico
 
@@ -344,11 +350,11 @@ saber_pro_ingles_agrupado_2021_2024_umng <- saber_pro_ingles_2021_2024_umng |>
 ```
 ````
 
-Esta celda agrupa las observaciones por año mediante `group_by(ano)` y calcula la media y desviación estándar muestrales, aplicando la coerción `as.integer()` para truncar los valores al entero inmediatamente inferior según la función piso.
+Esta celda agrupa las observaciones por año mediante `group_by(ano)` y calcula la media y desviación estándar muestrales, aplicando la coerción `as.integer()`, para truncar los valores al entero inmediatamente inferior según la función piso.
 
-### Construcción de tablas con knitr y la función kable
+### Construcción de tablas con knitr y la función `kable()`
 
-A diferencia de un script interactivo en el que se imprime un *data frame* o *tibble* en texto plano en la consola, en un documento científico de Quarto se debe convertir el objeto de R en una tabla tipográfica formateada [@wickham_r_2023, Cap. 28]. La función `kable()` del paquete `knitr` proporciona el mecanismo estándar para lograr este resultado.
+A diferencia de un script interactivo en el que se imprime una **tibble** en texto plano en la consola, en un documento de Quarto se debe convertir el objeto de R en una tabla formateada. La función `kable()` del paquete `knitr` proporciona el mecanismo estándar para lograr este resultado.
 
 A continuación de la celda de agregación, se inserta la celda que genera la tabla resumen:
 
@@ -369,23 +375,23 @@ saber_pro_ingles_agrupado_2021_2024_umng |>
 ```
 ````
 
-Analicemos los componentes esenciales de esta celda:
+Los componentes clave de esta celda son:
 
-1. **`#| label: tbl-resumen`:** Al comenzar con el prefijo reservado `tbl-`, Quarto interpreta la salida como una tabla numerada que podrá ser referenciada en cualquier punto del documento mediante `@tbl-resumen`.
-2. **`#| tbl-cap: "..."`:** Especifica el título descriptivo de la tabla que se mostrará en el encabezado de la misma.
-3. **`format = "pipe"`:** Instruye a `kable()` para construir la tabla utilizando la sintaxis de tablas de tubería de Markdown (`| col1 | col2 |`), facilitando que Pandoc la procese y aplique el estilo visual óptimo en HTML.
-4. **`col.names = c(...)`:** Permite renombrar los encabezados de las columnas utilizando formato enriquecido de Markdown (como negrita `**...**`) e incluso expresiones matemáticas en LaTeX (como `$j$` o `$\bar{x}_{j, \text{piso}}$`). Ten en cuenta que en cadenas de caracteres de R se debe utilizar la doble barra invertida `\\` para escapar los comandos de LaTeX (por ejemplo, `\\text{piso}` y `\\bar{x}`).
-5. **`align = c("c", "c", "c")`:** Controla la alineación horizontal del contenido de cada columna. En este caso, el vector indica que las 3 columnas deben estar centradas (`"c"` para centro, `"l"` para izquierda y `"r"` para derecha).
+1. `#| label: tbl-resumen`: Al comenzar con el prefijo reservado `tbl-`, Quarto interpreta la salida como una tabla numerada que podrá ser referenciada en cualquier punto del documento mediante `@tbl-resumen`.
+2. `#| tbl-cap: "..."`: Especifica el título descriptivo de la tabla que se mostrará en el encabezado de la misma.
+3. `format = "pipe"`: Instruye a `kable()` para construir la tabla utilizando la sintaxis de tablas de Markdown (ver @sec-tables-markdown), facilitando que Pandoc la procese y aplique el estilo visual en HTML.
+4. `col.names = c(...)`: Permite renombrar los encabezados de las columnas utilizando formato de Markdown como negrita `**...**` e incluso expresiones matemáticas en LaTeX como `$j$` o `$\bar{x}_{j, \text{piso}}$`. Ten en cuenta que en cadenas de caracteres de R se debe utilizar la doble barra invertida `\\` para escapar los comandos de LaTeX, como por ejemplo `\\text{piso}` y `\\bar{x}`.
+5. `align = c("c", "c", "c")`: Controla la alineación horizontal del contenido de cada columna. En este caso, el vector indica que las 3 columnas deben estar centradas. Las opciones que se pueden utilizar son `"c"` para centro, `"l"` para izquierda y `"r"` para derecha.
 
 ## Bloques de llamada, referencias cruzadas y más {#sec-callouts-crossreferences-citations}
 
-Con la narrativa y las celdas de código definidas, se procede a incorporar los elementos avanzados que elevan la calidad formal del reporte: bloques de llamada (*callouts*), referencias cruzadas dinámicas, ecuaciones matemáticas y gestión automatizada de citas y bibliografía con Zotero y estilos CSL.
+Con la narrativa y las celdas de código definidas, es posible incluir elementos adicionales al reporte como bloques de llamada (en inglés **callouts**), referencias cruzadas, ecuaciones y gestión automatizada de citas y bibliografía.
 
 ### Bloques de llamada
 
-Los bloques de llamada (*callouts*) permiten destacar información complementaria, advertencias, notas metodológicas o consejos sin romper el flujo de lectura [@quarto_core_team_tutorial_2026]. Quarto admite 5 tipos estándar de bloques de llamada: `.callout-note`, `.callout-tip`, `.callout-warning`, `.callout-caution` y `.callout-important`.
+Los bloques de llamada permiten destacar información complementaria, advertencias, notas metodológicas o consejos sin romper el flujo de lectura [@quarto_core_team_tutorial_2026]. Quarto admite 5 tipos estándar de bloques de llamada: `.callout-note`, `.callout-tip`, `.callout-warning`, `.callout-caution` y `.callout-important`.
 
-En `reporte_umng-ingles.qmd`, justo antes de la carga de paquetes, se inserta un bloque de llamada de advertencia para aclarar el carácter del análisis:
+En `reporte_umng-ingles-draft.qmd`, justo antes de la carga de paquetes, se inserta un bloque de llamada de advertencia para aclarar el carácter del análisis:
 
 ``` {.markdown .code-overflow-wrap}
 ::: {.callout-warning}
@@ -398,7 +404,7 @@ Al renderizar en HTML, este bloque se presenta con un borde visual distintivo, u
 
 ### Referencias cruzadas automáticas
 
-En lugar de escribir manualmente "Figura 1" o "Tabla 1" en texto estático —lo cual resulta propenso a desincronizaciones si se modifica el orden de los elementos—, Quarto proporciona un sistema unificado de referencias cruzadas basado en prefijos reservados [@wickham_r_2023, Cap. 28].
+En lugar de escribir manualmente "Figura 1" o "Tabla 1" en el texto estático, lo cual resulta propenso a desincronizaciones si se modifica el orden de los elementos, Quarto proporciona un sistema unificado de referencias cruzadas basado en prefijos reservados.
 
 Para habilitar una referencia cruzada:
 
@@ -407,9 +413,9 @@ Para habilitar una referencia cruzada:
    - `tbl-` para tablas.
    - `eq-` para ecuaciones matemáticas.
    - `sec-` para títulos y secciones.
-2. En el texto narrativo, se hace referencia al identificador anteponiendo el símbolo `@` (por ejemplo, `@fig-beneficios` o `@tbl-resumen`). Quarto sustituye dinámicamente este identificador por el texto localizado correspondiente (por ejemplo, "Figura 1" o "Tabla 1") y genera un enlace hipertextual navegable.
+2. En el texto narrativo, se hace referencia al identificador anteponiendo el símbolo `@`, como por ejemplo `@fig-beneficios` `@tbl-resumen`. Quarto sustituye dinámicamente este identificador por el texto localizado correspondiente, como por ejemplo "Figura 1" o "Tabla 1" y genera un enlace hipertextual navegable.
 
-En `reporte_umng-ingles.qmd`, las referencias cruzadas se configuran de la siguiente manera:
+En `reporte_umng-ingles-draft.qmd`, puedes configurar las referencias cruzadas de la siguiente manera:
 
 #### Imágenes estáticas
 
@@ -419,38 +425,53 @@ Para la imagen de beneficios del aprendizaje de lenguas, se añade el identifica
 ![Beneficios formativos, económicos y cognitivos del aprendizaje de lenguas extranjeras adaptado de @oecd_pisa_2021.](../images/benefits-foreign-language-learning.png){#fig-beneficios fig-align="center" width="60%"}
 ```
 
-Y en el párrafo anterior se referencia dinámicamente:
+Donde en el párrafo anterior se sustituye el texto estático `(ver Figura 1)` por la referencia cruzada dinámica:
 
-```markdown
+```{.markdown .code-overflow-wrap}
 ... los beneficios derivados de esta competencia se agrupan en 3 dimensiones (ver @fig-beneficios):
 ```
 
-De igual forma, para la ruta de oportunidades de mejora, se define `{#fig-plan}`:
+De igual forma, en la sección `# Oportunidades de Mejora para Pregrado`, se define `{#fig-plan}` en los atributos de la imagen correspondiente a la ruta estratégica:
 
 ``` {.markdown .code-overflow-wrap}
 ![Ruta secuencial de oportunidades de mejora en 3 fases para estudiantes de pregrado de la UMNG.](../images/plan-improvement-opportunities.png){#fig-plan fig-align="center" width="95%"}
 ```
 
-Y se referencia en el texto con `(ver @fig-plan)`.
+Donde en el párrafo introductorio de dicha sección se reemplaza la mención manual `(ver Figura 3)` por la referencia cruzada dinámica:
+
+``` {.markdown .code-overflow-wrap}
+... se plantea un plan de oportunidades de mejora estructurado en 3 fases secuenciales para los estudiantes de pregrado (ver @fig-plan):
+```
 
 #### Gráficos y tablas generados con código
 
 En los bloques de código R, el identificador se declara en la opción `#| label:`:
 
-- En el histograma, `#| label: fig-distribucion` permite referenciar el gráfico en el texto con:
-  ```markdown
+- En la sección `# Resultados Saber Pro UMNG (2021-2024)`, la opción `#| label: fig-distribucion` del bloque del histograma permite reemplazar el texto manual `Figura 2` por la referencia cruzada automática:
+  ``` {.markdown .code-overflow-wrap}
   En la @fig-distribucion se presenta la distribución anual de los puntajes individuales...
   ```
-- En la tabla de resumen, `#| label: tbl-resumen` permite referenciar la tabla con:
-  ```markdown
-  ... se obtienen las estimaciones anuales reportadas en la @tbl-resumen.
+- En la subsección `## Estimación de Estadísticos Descriptivos Agregados`, la opción `#| label: tbl-resumen` del bloque de la tabla permite sustituir la mención manual `Tabla 1` por la referencia dinámica:
+  ``` {.markdown .code-overflow-wrap}
+  ... se obtienen las estimaciones anuales reportadas en la @tbl-resumen. En dicha tabla, cada fila identifica el año...
   ```
 
-#### Ecuaciones matemáticas
+#### Ecuaciones
 
-Quarto permite formular ecuaciones en LaTeX y etiquetarlas con el prefijo `{#eq-...}`. En la subsección `## Estimación de Estadísticos Descriptivos Agregados`, se incorporan las fórmulas de la media truncada y de la desviación estándar truncada:
+Quarto ofrece soporte nativo para la composición tipográfica de expresiones matemáticas mediante sintaxis de LaTeX, distinguiendo entre dos modalidades según su delimitador:
 
-```markdown
+- **Ecuaciones en línea** (en inglés **inline math**): Se encierran entre signos de dólar simples (`$ ... $`). Permiten insertar fórmulas dentro de la narrativa continua de un párrafo sin interrumpir el flujo del texto. Para que el procesador matemático las interprete correctamente, es indispensable que no existan espacios en blanco inmediatamente después del signo de dólar de apertura o antes del signo de cierre (por ejemplo, `$x_{ij}$` y no `$ x_{ij} $`). De esta manera, comandos como `\in` ($\in$), subíndices `_{...}`, conjuntos `\{...\}` o letras con barra como `\bar{x}` se renderizan fluidamente.
+- **Ecuaciones en bloque** (en inglés **display math**): Se encierran entre dos signos de dólar (`$$ ... $$`) en párrafos separados para presentar fórmulas destacadas y centradas. Al añadir una etiqueta con el prefijo `{#eq-...}`, Quarto les asigna un número secuencial y permite referenciarlas en cualquier lugar del documento.
+
+En la subsección `## Estimación de Estadísticos Descriptivos Agregados`, se actualiza el borrador inicial presentado en texto plano (ver @sec-markdown-writing), delimitando las expresiones matemáticas en línea con signos de dólar (`$ ... $`), incorporando las 2 ecuaciones en bloque numeradas (`{#eq-media-piso}` y `{#eq-desviacion-piso}`) y sustituyendo las menciones manuales `Ecuación 1` y `Ecuación 2` por las referencias cruzadas dinámicas `@eq-media-piso` y `@eq-desviacion-piso`:
+
+``` {.markdown .code-overflow-wrap}
+## Estimación de Estadísticos Descriptivos Agregados
+
+Para generar la agregación temporal de los resultados, se define $x_{ij} \in [0, 300]$ como el puntaje obtenido en el módulo de inglés por el estudiante $i$ evaluado en el año $j$, donde el índice $j \in \{2021, 2022, 2023, 2024\}$ especifica el año de la cohorte, el índice $i \in \{1, 2, \dots, n_j\}$ identifica al estudiante individual dentro de dicha cohorte y $n_j$ representa el número total de evaluados en el año $j$.
+
+Con el propósito de resumir la tendencia central y la dispersión por cohorte anual preservando valores enteros, se estiman la media muestral truncada mediante la @eq-media-piso y la desviación estándar truncada mediante la @eq-desviacion-piso, aplicando en ambos casos la función piso ($\lfloor \cdot \rfloor$):
+
 $$
 \bar{x}_{j, \text{piso}} = \left\lfloor \frac{1}{n_j} \sum_{i=1}^{n_j} x_{ij} \right\rfloor
 $$ {#eq-media-piso}
@@ -458,32 +479,34 @@ $$ {#eq-media-piso}
 $$
 s_{j, \text{piso}} = \left\lfloor \sqrt{\frac{1}{n_j - 1} \sum_{i=1}^{n_j} (x_{ij} - \bar{x}_j)^2} \right\rfloor
 $$ {#eq-desviacion-piso}
+
+donde $\bar{x}_j = \frac{1}{n_j} \sum_{i=1}^{n_j} x_{ij}$ corresponde a la media aritmética del año $j$ antes del truncamiento.
+
+Al aplicar este procedimiento de agregación a los microdatos institucionales, se obtienen las estimaciones anuales reportadas en la @tbl-resumen. En dicha tabla, cada fila identifica el año $j$, la segunda columna consolida la media redondeada al piso ($\bar{x}_{j, \text{piso}}$) conforme a la @eq-media-piso, mientras que la tercera columna reporta la dispersión muestral ($s_{j, \text{piso}}$) obtenida según la @eq-desviacion-piso.
 ```
 
-En la narrativa, estas expresiones se referencian fluidamente utilizando `@eq-media-piso` y `@eq-desviacion-piso`:
+::: {#nte-2-chap-22 .callout-note}
+Al compilar hacia documentos HTML, Quarto utiliza de forma predeterminada [**MathJax**]({{< var url.software.mathjax >}}) para interpretar la sintaxis de LaTeX y representarla en el navegador web. Si deseas consultar el conjuntos de símbolos, comandos y macros admitidos por este "motor", puedes revisar la documentación oficial de [macros TeX de MathJax]({{< var url.software.mathjax_tex_macros >}}).
 
-```markdown
-... se estiman la media muestral truncada mediante la @eq-media-piso y la desviación estándar truncada mediante la @eq-desviacion-piso...
-```
+Por otra parte, si necesitas utilizar un símbolo matemático específico pero no recuerdas o desconoces su comando en LaTeX, la herramienta interactiva [**Detexify**]({{< var url.tools.detexify >}}) te permite dibujarlo a mano alzada para identificar rápidamente el comando correspondiente junto con los paquetes de LaTeX necesarios para su compilación.
+:::
 
 ### Gestor bibliográfico Zotero y estilos CSL
 
-El manejo riguroso de fuentes en Quarto se apoya en dos herramientas fundamentales: los archivos BibTeX (`.bib`) y los archivos de estilo de citación (*Citation Style Language*, `.csl`).
+El manejo de fuentes en Quarto se apoya en 2 herramientas: archivos BibTeX (`.bib`) y archivos de estilo de citación (`.csl`, en inglés **Citation Style Language**).
 
 #### Creación del archivo `.bib` con Zotero
 
-[**Zotero**](https://www.zotero.org/) es un gestor de referencias bibliográficas de código abierto y gratuito. Permite capturar referencias desde navegadores web, bases de datos académicas o catálogos bibliográficos, organizarlas en colecciones y exportarlas en formato BibTeX.
-
-Para generar un archivo `.bib` utilizable en Quarto:
+[**Zotero**]({{< var url.software.zotero >}}) es un gestor de referencias bibliográficas de código abierto y gratuito. Permite capturar referencias desde navegadores web, bases de datos académicas o catálogos bibliográficos, organizarlas en colecciones y exportarlas en formato BibTeX. Para generar un archivo `.bib` utilizable en Quarto con Zotero:
 
 1. Selecciona en Zotero la colección de documentos correspondiente a tu investigación.
-2. Haz clic derecho sobre la colección y elige la opción **Exportar colección...** (o **Export Collection...**).
-3. Selecciona el formato **BibTeX** (o **Better BibTeX** si tienes instalada dicha extensión).
+2. Haz clic derecho sobre la colección y elige la opción **Exportar...** (en inglés **Export...**).
+3. Selecciona el formato **BibTeX**.
 4. Guarda el archivo con el nombre `reporte-umng.bib` dentro de la carpeta `references/` de tu proyecto.
 
-Cada registro exportado cuenta con una clave de citación única (por ejemplo, `icfes_guiorientacion_2024` u `oecd_pisa_2021`), como se aprecia en el contenido de `references/reporte-umng.bib`:
+Cada registro exportado cuenta con una clave de citación única, como por ejemplo `icfes_guiorientacion_2024` u `oecd_pisa_2021`, como se aprecia en el contenido de `references/reporte-umng.bib`:
 
-```bibtex
+``` {.bibtex .code-overflow-wrap}
 @book{oecd_pisa_2021,
 	series = {{PISA}},
 	title = {{PISA} 2025 {Foreign} {Language} {Assessment}},
@@ -507,22 +530,32 @@ Cada registro exportado cuenta con una clave de citación única (por ejemplo, `
 
 #### Aplicación de estilos con Citation Style Language (CSL)
 
-El estándar [**Citation Style Language (CSL)**](https://citationstyles.org/) permite dar formato a las citas y a la bibliografía según las pautas de miles de revistas y manuales de estilo internacionales.
+El estándar [**Citation Style Language (CSL)**]({{< var url.software.csl >}}) permite dar formato a las citas y a la bibliografía según las pautas de miles de revistas y manuales de estilo internacionales.
 
-En el repositorio oficial [**Zotero Style Repository**](https://www.zotero.org/styles), puedes buscar y descargar libremente más de 10.000 estilos bibliográficos (como *American Psychological Association 7th edition*, *IEEE*, *Vancouver*, *Chicago*, entre otros). Para aplicar el estilo APA 7.ª edición en tu reporte:
+En el repositorio oficial [**Zotero Style Repository**]({{< var url.software.zotero_styles >}}), puedes buscar y descargar libremente más de 10.000 estilos bibliográficos como *American Psychological Association 7th edition*, *IEEE*, *Vancouver*, *Chicago*, entre otros. Para aplicar por ejemplo el estilo APA 7 edición en tu reporte puedes seguir los siguientes pasos:
 
-1. Ingresa a [https://www.zotero.org/styles](https://www.zotero.org/styles).
+1. Ingresa a [Zotero Style Repository]({{< var url.software.zotero_styles >}}).
 2. Busca "American Psychological Association 7th edition".
 3. Descarga el archivo `apa.csl` y ubícalo en la carpeta `references/`.
 4. Enlaza este archivo en el encabezado YAML mediante la propiedad `csl: ../references/apa.csl`.
 
-#### Sintaxis para insertar citas en el reporte
+#### Inserción de citas bibliográficas en el reporte
 
-En Quarto, las citas se incorporan en el texto utilizando la clave de citación del archivo `.bib`:
+La tipología y sintaxis para incorporar citas bibliográficas se abordaron en detalle en la @sec-citations. En `reporte_umng-ingles-draft.qmd`, puedes sustituir las menciones en texto simple en la fase inicial de Markdown (ver @sec-markdown-writing) por las citas bibliográficas correspondientes vinculadas a las claves del archivo `reporte-umng.bib`:
 
-- **Cita parentética:** `[@clave]` produce `(Autor, Año)`. Por ejemplo, `[@icfes_guiorientacion_2024, p. 57]` genera `(ICFES, 2024, p. 57)`.
-- **Cita narrativa o en el texto:** `@clave` produce `Autor (Año)`. Por ejemplo, `@oecd_pisa_2021` genera `OECD (2021)`.
-- **Múltiples citas:** separadas por punto y coma `[@clave1; @clave2]`.
+1. En la sección `# Marco de Evaluación de la Competencia`:
+   Sustituye en sus **2 apariciones** la mención en texto simple `(ICFES, 2024, p. 57)` por la cita bibliográfica con localizador de página `[@icfes_guiorientacion_2024, p. 57]`:
+
+   ``` {.markdown .code-overflow-wrap}
+   De acuerdo con la guía de orientación del examen Saber Pro [@icfes_guiorientacion_2024, p. 57], el módulo de inglés evalúa la competencia para comunicarse efectivamente en lengua inglesa mediante tareas de lectura y uso de la lengua. Alineado con las directrices del Marco Común Europeo de Referencia (MCER), clasifica el desempeño de los evaluados en 4 niveles: A1, A2, B1 y B2. El instrumento está integrado por 7 partes, cada una orientada a una habilidad específica y con una ponderación porcentual definida: Parte 1 (11%), Parte 2 (11%), Parte 3 (11%), Parte 4 (18%), Parte 5 (16%), Parte 6 (11%) y Parte 7 (22%) [@icfes_guiorientacion_2024, p. 57].
+   ```
+
+2. En la sección `# Beneficios del Aprendizaje de Lenguas Extranjeras`:
+   Sustituye la mención manual `(OECD, 2021, pp. 10-11)` (**1 aparición**) por la cita bibliográfica con rango de páginas `[@oecd_pisa_2021, pp. 10-11]`:
+
+   ``` {.markdown .code-overflow-wrap}
+   El aprendizaje de una segunda lengua trasciende la adquisición de destrezas comunicativas básicas, constituyéndose en un habilitador integral del desarrollo humano, académico y laboral. De acuerdo con el marco de evaluación de lenguas extranjeras de PISA [@oecd_pisa_2021, pp. 10-11], los beneficios derivados de esta competencia se agrupan en 3 dimensiones (ver @fig-beneficios):
+   ```
 
 Al final del documento, Quarto genera automáticamente el listado de referencias bibliográficas formateado bajo el encabezado final `# Referencias`:
 
@@ -532,7 +565,7 @@ Al final del documento, Quarto genera automáticamente el listado de referencias
 
 ### Estilo CSS personalizado para justificar texto
 
-De forma predeterminada, los navegadores alinean el texto hacia la izquierda. Si deseas justificar los párrafos para dar una apariencia editorial más sobria al reporte HTML, puedes insertar un bloque de código HTML puro con reglas CSS directamente después de la celda de carga de paquetes:
+De forma predeterminada, los navegadores alinean el texto hacia la izquierda. Si deseas justificar los párrafos para dar una más adecuada al reporte HTML, puedes insertar un bloque de código HTML con reglas CSS directamente después de la celda de carga de paquetes, tal como se señala a continuación:
 
 ````qmd
 ```{{=html}}
@@ -546,7 +579,7 @@ De forma predeterminada, los navegadores alinean el texto hacia la izquierda. Si
 
 ### Descarga del código fuente final
 
-En caso de que requieras verificar tu archivo frente al resultado final consolidado o necesites orientación paso a paso, puedes descargar a continuación el código fuente completo en `reporte_umng-ingles.qmd`:
+En caso de que requieras verificar tu archivo frente al resultado final consolidado o necesites orientación paso a paso, puedes descargar a continuación el código fuente completo de `reporte_umng-ingles.qmd` para compararlo con `reporte_umng-ingles-draft.qmd`:
 
 ::: {.callout appearance="minimal"}
 ## ![](images/download-solid-full.png){fig-alt="Ícono del explorador de archivos" height=25} [reporte_umng-ingles.qmd]({{< var url.report.report_umng_ingles >}}){download="reporte_umng-ingles.qmd"}

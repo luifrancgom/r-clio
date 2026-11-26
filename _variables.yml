@@ -52,10 +52,6 @@ url:
     quarto_format_typst: "https://quarto.org/docs/reference/formats/typst.html"
     quarto_format_odt: "https://quarto.org/docs/reference/formats/odt.html"
     quarto_format_epub: "https://quarto.org/docs/reference/formats/epub.html"
-    quarto_ref_html: "https://quarto.org/docs/reference/formats/html.html"
-    quarto_ref_pdf: "https://quarto.org/docs/reference/formats/pdf.html"
-    quarto_ref_docx: "https://quarto.org/docs/reference/formats/docx.html"
-    quarto_ref_odt: "https://quarto.org/docs/reference/formats/odt.html"
     quarto_positron: "https://quarto.org/docs/get-started/hello/positron.html"
     quarto_vscode: "https://open-vsx.org/extension/quarto/quarto"
     markdown_pandoc: "https://quarto.org/docs/authoring/markdown-basics.html"
@@ -67,8 +63,13 @@ url:
     latex: "https://www.latex-project.org/"
     tinytex: "https://yihui.org/tinytex/"
     typst: "https://typst.app/"
+    mathjax: "https://www.mathjax.org/"
+    mathjax_tex_macros: "https://docs.mathjax.org/en/latest/input/tex/macros/index.html"
     git_scm: "https://git-scm.com/"
     github: "https://github.com/"
+    zotero: "https://www.zotero.org/"
+    zotero_styles: "https://www.zotero.org/styles"
+    csl: "https://citationstyles.org/"
 
   packages:
     knitr: "https://yihui.org/knitr/"
@@ -119,6 +120,7 @@ url:
     inkscape: "https://inkscape.org/"
     lucidchart: "https://lucid.co/lucidchart"
     fontawesome: "https://fontawesome.com/"
+    detexify: "https://detexify.kirelabs.org/"
     antigravity_cli: "https://antigravity.google/product/antigravity-cli"
 
   data:
@@ -171,7 +173,6 @@ url:
     csv_wiki: "https://en.wikipedia.org/wiki/Comma-separated_values"
     heuristic_wiki: "https://en.wikipedia.org/wiki/Heuristic"
     excel_file_formats_wiki: "https://en.wikipedia.org/wiki/Microsoft_Excel#File_formats"
-    excel_binary_format_wiki: "https://en.wikipedia.org/wiki/Microsoft_Excel#File_formats"
     gpkg_wiki: "https://en.wikipedia.org/wiki/GeoPackage"
     choropleth_map_wiki: "https://en.wikipedia.org/wiki/Choropleth_map"
     crs_wiki: "https://en.wikipedia.org/wiki/Spatial_reference_system"
@@ -181,7 +182,6 @@ url:
     pdf_wiki: "https://en.wikipedia.org/wiki/PDF"
     open_xml_wiki: "https://en.wikipedia.org/wiki/Office_Open_XML"
     open_document_wiki: "https://en.wikipedia.org/wiki/OpenDocument"
-    epud_wiki: "https://en.wikipedia.org/wiki/EPUB"
     epub_wiki: "https://en.wikipedia.org/wiki/EPUB"
 
   media:

@@ -363,7 +363,7 @@ Tal como se detalla en la @fig-list-rbind, la ventaja de `list_rbind()` radica e
 
 - Si una columna está presente en todas las tablas, como la columna `y` en @fig-list-rbind, sus valores se concatenan verticalmente en una sola columna.
 
-- Si una columna existe únicamente en algunas tablas pero no en otras, como las columnas `x` y `z` en @fig-list-rbind, `list_rbind()` preserva dichas variables e imputa automáticamente el valor especial de datos faltantes `NA` en las filas de las tablas donde la columna no existía originalmente.
+- Si una columna existe únicamente en algunas tablas pero no en otras, como las columnas `x` y `z` en @fig-list-rbind, `list_rbind()` preserva dichas variables e imputa automáticamente el valor ausente `NA` en las filas de las tablas donde la columna no existía originalmente.
 
 Para comprobar este comportamiento, consideremos una lista denominada `tablas_datos` compuesta por 2 `tibble`s con columnas parcialmente superpuestas, tal como se señala en el @lst-list-rbind-tables:
 

@@ -146,11 +146,11 @@ Los archivos de texto plano pueden contener metadatos, comentarios o estructuras
    )
    ```
 
-4. **`na`**: define qué valores de texto deben interpretarse como datos faltantes (`NA`), por defecto `na = c("", "NA")`. Si un archivo representa los valores ausentes con expresiones como `"Sin dato"` o `"N/D"`, pueden indicarse explícitamente mediante `na = c("", "NA", "Sin dato", "N/D")`.
+4. **`na`**: define qué valores de texto deben interpretarse como valores ausentes (`NA`), por defecto `na = c("", "NA")`. Si un archivo representa los valores ausentes con expresiones como `"Sin dato"` o `"N/D"`, pueden indicarse explícitamente mediante `na = c("", "NA", "Sin dato", "N/D")`.
 
    ```{r}
    #| lst-label: lst-read-csv-na
-   #| lst-cap: Uso del parámetro `na` para archivos con datos faltantes y con expresiones personalizadas
+   #| lst-cap: Uso del parámetro `na` para archivos con valores ausentes y con expresiones personalizadas
 
    # Archivo sin fila de encabezado ----
    pregrado_no_header_csv <- "codigo_snies,nombre_programa
@@ -333,7 +333,7 @@ Los parámetros más relevantes al exportar datos son:
 
 - **`x`**: el objeto de R (usualmente una tibble o un objeto similar) que se desea guardar.
 - **`file`**: la ruta y nombre del archivo de destino con su correspondiente extensión.
-- **`na`**: la cadena de texto utilizada para escribir los valores faltantes (por defecto `"NA"`).
+- **`na`**: la cadena de texto utilizada para escribir los valores ausentes (por defecto `"NA"`).
 - **`col_names`**: valor lógico que indica si se escriben los encabezados de columna en la primera línea (por defecto `TRUE`).
 
 ```{r}
