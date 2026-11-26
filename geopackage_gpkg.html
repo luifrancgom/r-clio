@@ -763,7 +763,7 @@ Listado&nbsp;15.4: Creación de variables auxiliares para generar parte del tít
 <p>En el <a href="#lst-auxiliary-vars-labels" class="quarto-xref">Listado&nbsp;<span>15.4</span></a>, se utiliza la función <code>pull()</code>, la cual se introdujo al final de la <a href="r_packages.html#sec-package-usage" class="quarto-xref"><span>Sección 4.4</span></a> con el propósito de extraer una columna de una tabla de datos y convertirla en un vector atómico de R. La lógica detrás del uso de <code>last()</code> y <code>sum()</code> junto con <code>pull()</code> comprende los siguientes aspectos:</p>
 <ul>
 <li><p>Al aplicar <code>resultado_saber_pro_ajustado |&gt; pull(n)</code>, se extrae la columna con los conteos en forma de vector numérico.</p></li>
-<li><p>La función <code>last()</code> extrae el último elemento de dicho vector. Dado que <code>count()</code> ubica por defecto los valores faltantes (<code>NA</code>) en la última fila del conteo, <code>last()</code> recupera directamente el número de estudiantes inscritos en el exterior (<code>n_na</code>).</p></li>
+<li><p>La función <code>last()</code> extrae el último elemento de dicho vector. Dado que <code>count()</code> ubica por defecto los valores ausentes (<code>NA</code>) en la última fila del conteo, <code>last()</code> recupera directamente el número de estudiantes inscritos en el exterior (<code>n_na</code>).</p></li>
 <li><p>Por su parte, la función <code>sum()</code> suma todos los elementos del vector numérico obtenido con <code>pull(n)</code>, permitiendo calcular el total de estudiantes inscritos (<code>n_total</code>).</p></li>
 </ul>
 </section>

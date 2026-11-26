@@ -601,7 +601,7 @@ Nota&nbsp;21.2
 <section id="sec-quarto-render" class="level3" data-number="21.1.2">
 <h3 data-number="21.1.2" class="anchored" data-anchor-id="sec-quarto-render"><span class="header-section-number">21.1.2</span> Renderizar un documento</h3>
 <p>El proceso de transformar un archivo que combina texto y código en un producto final se conoce como <strong>renderizar</strong> (en inglés <strong>render</strong>) <span class="citation" data-cites="posit_introduction_2026">(<a href="references.html#ref-posit_introduction_2026" role="doc-biblioref">Posit, 2026</a>)</span>. Al renderizar, el archivo original en extensión <code>.qmd</code> permanece intacto, generando un nuevo archivo de salida con los resultados incorporados. En la <a href="#fig-render-qmd-flow" class="quarto-xref">Figura&nbsp;<span>21.1</span></a> se describe la secuencia de pasos que Quarto realiza durante este proceso:</p>
-<div id="fig-render-qmd-flow" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Diagrama de flujo de Quarto: archivo .qmd pasando por knitr hacia .md, luego procesado por pandoc hacia formatos PDF, MS Word o HTML">
+<div id="fig-render-qmd-flow" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama de flujo de Quarto: archivo .qmd pasando por knitr hacia .md, luego procesado por pandoc hacia formatos PDF, MS Word o HTML" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-render-qmd-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/render-qmd_how-it-works.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Diagrama de flujo de Quarto: archivo .qmd pasando por knitr hacia .md, luego procesado por pandoc hacia formatos PDF, MS Word o HTML">
@@ -618,7 +618,7 @@ Figura&nbsp;21.1: Flujo de renderizado en Quarto desde un archivo <code>.qmd</co
 <li><code>pandoc</code>: es el conversor de documentos que toma el archivo <code>.md</code> intermedio y lo traduce al formato final especificado, como por ejemplo páginas web HTML, documentos PDF o archivos de Microsoft Word y OpenDocument.</li>
 </ol>
 <p>Para renderizar un documento de Quarto de acuerdo a lo descrito en la <a href="#fig-render-qmd-flow" class="quarto-xref">Figura&nbsp;<span>21.1</span></a> selecciona el ícono de archivos <img src="images/file-regular-full.png" alt="Ícono del explorador de archivos" height="25"> en la <strong>Barra de actividades</strong> y abre el archivo <code>reporte_pinguinos.qmd</code> utilizando la <strong>Barra lateral primaria</strong> (ver <a href="welcome_to_r.html#fig-positron-layout-outline" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>) en la carpeta <code>reports</code>. En el <strong>Editor</strong> puedes renderizar el documento utilizando la opción <strong>Preview</strong>, tal como se señala en la <a href="#fig-render-qmd-preview" class="quarto-xref">Figura&nbsp;<span>21.2</span></a>.</p>
-<div id="fig-render-qmd-preview" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Captura de pantalla del Editor en Positron resaltando la opción Preview en la barra de herramientas superior para renderizar el archivo reporte_pinguinos.qmd">
+<div id="fig-render-qmd-preview" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Captura de pantalla del Editor en Positron resaltando la opción Preview en la barra de herramientas superior para renderizar el archivo reporte_pinguinos.qmd" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-render-qmd-preview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/fig-2-chap-21.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Captura de pantalla del Editor en Positron resaltando la opción Preview en la barra de herramientas superior para renderizar el archivo reporte_pinguinos.qmd">
@@ -1043,13 +1043,13 @@ Tabla&nbsp;21.3: Enlaces a la documentación de Quarto para examinar las opcione
 <li><strong>Llamada a la nota:</strong> Se inserta en el lugar exacto del texto donde se desea la referencia mediante la sintaxis <code>[^identificador]</code>.</li>
 <li><strong>Definición de la nota:</strong> Se escribe en un párrafo independiente mediante <code>[^identificador]: Texto explicativo...</code>.</li>
 </ol>
-<p>En <code>reporte_pinguinos.qmd</code> se utiliza este mecanismo, por ejemplo, para justificar la exclusión de observaciones con datos faltantes, tal como se señala a continuación:</p>
+<p>En <code>reporte_pinguinos.qmd</code> se utiliza este mecanismo, por ejemplo, para justificar la exclusión de observaciones con valores ausentes, tal como se señala a continuación:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Sin embargo, ... <span class="in">`species`</span> (ver @fig-asociacion-especie)<span class="ot">[^asociacion-especie]</span>, ...</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="ot">[^asociacion-especie]: </span>Al igual ... en la <span class="in">`@tbl-variables`</span>.</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="tablas" class="level4" data-number="21.2.2.6">
-<h4 data-number="21.2.2.6" class="anchored" data-anchor-id="tablas"><span class="header-section-number">21.2.2.6</span> Tablas</h4>
+<section id="sec-tables-markdown" class="level4" data-number="21.2.2.6">
+<h4 data-number="21.2.2.6" class="anchored" data-anchor-id="sec-tables-markdown"><span class="header-section-number">21.2.2.6</span> Tablas</h4>
 <p>En Markdown de Quarto, las tablas en texto plano se construyen mediante la sintaxis de <strong>tablas de barras</strong> (en inglés <strong>pipe tables</strong>), empleando barras verticales (<code>|</code>) para delimitar columnas y guiones (<code>-</code>) para separar la fila de encabezados del cuerpo de datos.</p>
 <p>En <code>reporte_pinguinos.qmd</code>, por ejemplo, se documentan las variables del conjunto de datos <code>penguins</code>, tal como se señala a continuación:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Variable <span class="pp">|</span> Descripción <span class="pp">|</span> Valores ausentes (<span class="in">`NA`</span>) <span class="pp">|</span></span>
@@ -1121,8 +1121,8 @@ Tabla&nbsp;21.3: Enlaces a la documentación de Quarto para examinar las opcione
 </ol>
 <p>Opcionalmente, los callouts pueden incluir títulos personalizados mediante un encabezado interno, como por ejemplo <code>## Propósito del reporte</code>, así como propiedades <code>collapse="true"</code> para que aparezcan plegados por defecto o <code>appearance="minimal"</code> para simplificar su diseño visual.</p>
 </section>
-<section id="citas-y-referencias-bibliográficas" class="level4" data-number="21.2.2.10">
-<h4 data-number="21.2.2.10" class="anchored" data-anchor-id="citas-y-referencias-bibliográficas"><span class="header-section-number">21.2.2.10</span> Citas y referencias bibliográficas</h4>
+<section id="sec-citations" class="level4" data-number="21.2.2.10">
+<h4 data-number="21.2.2.10" class="anchored" data-anchor-id="sec-citations"><span class="header-section-number">21.2.2.10</span> Citas y referencias bibliográficas</h4>
 <p>La gestión de citas y bibliografía en Quarto se basa en el motor de citas de Pandoc, documentado detalladamente en <a href="https://quarto.org/docs/authoring/citations.html"><strong>Citations in Quarto</strong></a>. Para citar una fuente dentro del texto se utiliza el carácter arroba (<code>@</code>) seguido de la clave de citación (en inglés <strong>citation key</strong>) definida en un archivo de bibliografía en formato BibTeX (<code>.bib</code>).</p>
 <p>En <code>reporte_pinguinos.qmd</code> se encuentran diversos ejemplos de citas bibliográficas:</p>
 <ul>
@@ -1175,7 +1175,7 @@ Tabla&nbsp;21.3: Enlaces a la documentación de Quarto para examinar las opcione
 <li><p><strong>Leyendas de figuras (<code>#| fig-cap</code>):</strong> Define el texto descriptivo al pie del gráfico. Por ejemplo:</p>
 <pre class="qmd"><code>#| fig-cap: "Asociación global ..."</code></pre></li>
 <li><p><strong>Control de mensajes (<code>#| message: false</code>):</strong> Suprime los mensajes informativos emitidos por R en la consola, como por ejemplo al ejecutar <code>library(tidyverse)</code>, evitando que aparezcan los mensajes en el documento final (ver <a href="how_to_code_in_r.html#sec-messages" class="quarto-xref"><span>Sección 5.3.1</span></a>).</p></li>
-<li><p><strong>Control de advertencias (<code>#| warning: false</code>):</strong> Evita la impresión de advertencias (ver <a href="how_to_code_in_r.html#sec-warnings" class="quarto-xref"><span>Sección 5.3.2</span></a>). En las celdas de graficación con <code>ggplot2</code>, oculta el aviso estándar que advierte la remoción de observaciones con datos faltantes (<code>NA</code>) en <code>bill_len</code> y <code>bill_dep</code>.</p></li>
+<li><p><strong>Control de advertencias (<code>#| warning: false</code>):</strong> Evita la impresión de advertencias (ver <a href="how_to_code_in_r.html#sec-warnings" class="quarto-xref"><span>Sección 5.3.2</span></a>). En las celdas de graficación con <code>ggplot2</code>, oculta el aviso estándar que advierte la remoción de observaciones con valores ausentes (<code>NA</code>) en <code>bill_len</code> y <code>bill_dep</code>.</p></li>
 </ol>
 </section>
 <section id="conexión-con-la-opción-code-fold-del-encabezado-yaml" class="level4" data-number="21.2.3.4">

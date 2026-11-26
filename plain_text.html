@@ -720,12 +720,12 @@ dbl (1): codigo_snies
 7        10963 Relaciones Internacionales y Estudios Políti…</code></pre>
 </div>
 </div></li>
-<li><p><strong><code>na</code></strong>: define qué valores de texto deben interpretarse como datos faltantes (<code>NA</code>), por defecto <code>na = c("", "NA")</code>. Si un archivo representa los valores ausentes con expresiones como <code>"Sin dato"</code> o <code>"N/D"</code>, pueden indicarse explícitamente mediante <code>na = c("", "NA", "Sin dato", "N/D")</code>.</p>
+<li><p><strong><code>na</code></strong>: define qué valores de texto deben interpretarse como valores ausentes (<code>NA</code>), por defecto <code>na = c("", "NA")</code>. Si un archivo representa los valores ausentes con expresiones como <code>"Sin dato"</code> o <code>"N/D"</code>, pueden indicarse explícitamente mediante <code>na = c("", "NA", "Sin dato", "N/D")</code>.</p>
 <div class="cell">
 <div id="lst-read-csv-na" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-read-csv-na-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listado&nbsp;13.5: Uso del parámetro <code>na</code> para archivos con datos faltantes y con expresiones personalizadas
+Listado&nbsp;13.5: Uso del parámetro <code>na</code> para archivos con valores ausentes y con expresiones personalizadas
 </figcaption>
 <div aria-describedby="lst-read-csv-na-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Archivo sin fila de encabezado ----</span></span>
@@ -1048,7 +1048,7 @@ Listado&nbsp;13.12: Detección y diagnóstico de problemas de lectura con <code>
 <pre><code># A tibble: 1 × 5
     row   col expected   actual     file                    
   &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;                   
-1     2     1 an integer Sin código /tmp/Rtmpk6rkk4/vroom-c…</code></pre>
+1     2     1 an integer Sin código /tmp/RtmpUGQ4NN/vroom-c…</code></pre>
 </div>
 </div>
 <div id="wrn-1-chap-13" class="callout callout-style-default callout-warning callout-titled">
@@ -1074,7 +1074,7 @@ Advertencia&nbsp;13.1
 <ul>
 <li><strong><code>x</code></strong>: el objeto de R (usualmente una tibble o un objeto similar) que se desea guardar.</li>
 <li><strong><code>file</code></strong>: la ruta y nombre del archivo de destino con su correspondiente extensión.</li>
-<li><strong><code>na</code></strong>: la cadena de texto utilizada para escribir los valores faltantes (por defecto <code>"NA"</code>).</li>
+<li><strong><code>na</code></strong>: la cadena de texto utilizada para escribir los valores ausentes (por defecto <code>"NA"</code>).</li>
 <li><strong><code>col_names</code></strong>: valor lógico que indica si se escriben los encabezados de columna en la primera línea (por defecto <code>TRUE</code>).</li>
 </ul>
 <div class="cell">

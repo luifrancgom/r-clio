@@ -965,7 +965,7 @@ Figura&nbsp;19.5: Representación gráfica de la función <code>list_rbind()</co
 <p>Tal como se detalla en la <a href="#fig-list-rbind" class="quarto-xref">Figura&nbsp;<span>19.5</span></a>, la ventaja de <code>list_rbind()</code> radica en que alinea automáticamente las columnas basándose en sus <strong>nombres</strong> y no en su orden posicional:</p>
 <ul>
 <li><p>Si una columna está presente en todas las tablas, como la columna <code>y</code> en <a href="#fig-list-rbind" class="quarto-xref">Figura&nbsp;<span>19.5</span></a>, sus valores se concatenan verticalmente en una sola columna.</p></li>
-<li><p>Si una columna existe únicamente en algunas tablas pero no en otras, como las columnas <code>x</code> y <code>z</code> en <a href="#fig-list-rbind" class="quarto-xref">Figura&nbsp;<span>19.5</span></a>, <code>list_rbind()</code> preserva dichas variables e imputa automáticamente el valor especial de datos faltantes <code>NA</code> en las filas de las tablas donde la columna no existía originalmente.</p></li>
+<li><p>Si una columna existe únicamente en algunas tablas pero no en otras, como las columnas <code>x</code> y <code>z</code> en <a href="#fig-list-rbind" class="quarto-xref">Figura&nbsp;<span>19.5</span></a>, <code>list_rbind()</code> preserva dichas variables e imputa automáticamente el valor ausente <code>NA</code> en las filas de las tablas donde la columna no existía originalmente.</p></li>
 </ul>
 <p>Para comprobar este comportamiento, consideremos una lista denominada <code>tablas_datos</code> compuesta por 2 <code>tibble</code>s con columnas parcialmente superpuestas, tal como se señala en el <a href="#lst-list-rbind-tables" class="quarto-xref">Listado&nbsp;<span>19.13</span></a>:</p>
 <div class="cell">
