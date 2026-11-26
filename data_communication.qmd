@@ -1,3 +1,19 @@
 # Comunicación con Quarto
 
-Pendiente
+El objetivo de esta parte, es presentar las herramientas y conceptos fundamentales para comunicar resultados de manera reproducible a través de [**Quarto**]({{< var url.software.quarto >}}), un sistema de publicación técnica y científica de código abierto que combina texto narrativo, código ejecutable y resultados en diversos formatos de salida, a través de los siguientes 2 capítulos:
+
+- @sec-welcome-to-quarto: introduce el concepto de Quarto y su rol en la investigación reproducible y la programación literaria, así como la anatomía de un documento con extensión `.qmd`, examinando la interacción entre el encabezado YAML, el texto narrativo en Markdown y las celdas de código a través de un reporte reproducible.
+
+- @sec-html-docs-quarto: introduce la estructuración paso a paso de un reporte reproducible en formato [HTML]({{< var url.software.quarto_format_html >}}) autónomo e interactivo, abordando la redacción inicial en Markdown, el control del documento mediante opciones de YAML, la incorporación de celdas de código con `knitr` para la generación de gráficos y tablas con `kable()`, así como la integración de bloques de llamada, ecuaciones matemáticas, referencias cruzadas y citas bibliográficas mediante Zotero y estilos CSL.
+
+Además de reportes, Quarto está diseñado para publicar artículos científicos, presentaciones interactivas, tableros de control (en inglés **dashboards**), sitios web, blogs y libros en una amplia gama de formatos como [HTML]({{< var url.software.quarto_format_html >}}), [PDF]({{< var url.software.quarto_format_pdf >}}), [MS Word]({{< var url.software.quarto_format_docx >}}), [ePub]({{< var url.software.quarto_format_epub >}}), [Typst]({{< var url.software.quarto_format_typst >}}) y [OpenDocument]({{< var url.software.quarto_format_odt >}}). Para explorar en profundidad la creación de cada uno de estos artefactos y sus opciones de configuración, puedes consultar la [Guía completa de Quarto]({{< var url.software.quarto_guide >}}).
+
+Por otra parte, debido a que muchos de los productos finales generados por Quarto se fundamentan en estándares web, comprender los principios básicos de [HTML]({{< var url.education.html_wiki >}}), CSS y JavaScript resulta de gran utilidad para personalizar y extender sus capacidades:
+
+- [**HTML**]({{< var url.education.w3schools_html >}}) (en inglés **HyperText Markup Language**): define la estructura y semántica de los elementos del documento.
+- [**CSS**]({{< var url.education.w3schools_css >}}) (en inglés **Cascading Style Sheets**): controla la apariencia visual del reporte.
+- [**JavaScript**]({{< var url.education.w3schools_javascript >}}): permite agregar interactividad avanzada y dinamismo.
+
+Si deseas adquirir o fortalecer tus conocimientos en estas tecnologías, los recursos educativos de [W3Schools]({{< var url.education.w3schools >}}) ofrecen excelentes introducciones prácticas a través del [tutorial de HTML]({{< var url.education.w3schools_html >}}), el [tutorial de CSS]({{< var url.education.w3schools_css >}}) y el [tutorial de JavaScript]({{< var url.education.w3schools_javascript >}}).
+
+Finalmente, aunque Quarto facilita la estructura de los reportes, no determina qué escribir en concreto para comunicar con claridad y eficacia los resultados de un análisis. Para perfeccionar tu escritura puedes apoyarte en [@hoyos_restrepo_manual_2022], quien recuerda que escribir bien no es un don divino ni un privilegio de genios, sino un oficio que se aprende con la lectura, la práctica y la adopción de buenos hábitos. No se requiere ser un gramático erudito: basta con tener algo que decir y expresarlo en lenguaje llano con gracia y elocuencia, dominando las reglas esenciales para luego saber utilizarlas.
